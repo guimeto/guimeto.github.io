@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="1.1 Variables A variable is an identifier or name to store information or results. All python programs use variables. It is important to remember that each type of information is stored in a special type of variable. A type of variable is an information about the contents of the variable. The type of variable will tell the python interpreter what it can do or not with this variable.
+ Python can make the difference between upper and lower case letters You can not start a variable with a number Do not use accents in variable names Function : type() give you informations on the type of our variable  m=3.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/tutorial_python/1-python_basics/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/tutorial_python/1-python_basics/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/tutorial_python/1-python_basics/">
+  <meta property="og:title" content="1 Basic data types | GDueymes">
+  <meta property="og:description" content="1.1 Variables A variable is an identifier or name to store information or results. All python programs use variables. It is important to remember that each type of information is stored in a special type of variable. A type of variable is an information about the contents of the variable. The type of variable will tell the python interpreter what it can do or not with this variable.
+ Python can make the difference between upper and lower case letters You can not start a variable with a number Do not use accents in variable names Function : type() give you informations on the type of our variable  m=3."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>1 Basic data types | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/tutorial_python/">Python tutorial</a>
+    <ul class="nav docs-sidenav">
+      
+      <li class="active">
+        <a href="/courses/tutorial_python/1-python_basics/">1 Basic data types</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/2-lists_in_python/">2 List in Python</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/3-flow_control/">3 Flow control</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/4-functions/">4 Functions</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/5-dictionaries/">5 Dictionaries</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/6-numpy_library/">6 Numpy library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/7-pandas_library/">7 Pandas library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/8-matplotlib_library/">8 Matplotlib library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/project1-eccc_temperature/">Project 1 ECCC temperature data</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/project2-eccc_precipitation/">Project 2 ECCC precipitation data</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/tutorial_python_netcdf/">Python Netcdf</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/1-netcdf_tutorial/">1 Netcdf Part 1</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/2-netcdf_tutorial_2/">2 Netcdf Part 2</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/3-cartopy_library/">3 Cartopy</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/4-xarray_library/">4 Xarray</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-variables">1.1 Variables</a>
+      <ul>
+        <li><a href="#111-numeric-type">1.1.1 Numeric type:</a></li>
+        <li><a href="#112-booleans">1.1.2 Booleans:</a></li>
+        <li><a href="#113-strings">1.1.3 Strings:</a></li>
+      </ul>
+    </li>
+    <li><a href="#12-python-arithmetic-operators">1.2 Python Arithmetic Operators</a></li>
+    <li><a href="#13-python-comparison-operators">1.3 Python Comparison Operators</a></li>
+    <li><a href="#14-python-logical-operators">1.4 Python Logical Operators</a></li>
+    <li><a href="#15-python-assignment-operators">1.5 Python Assignment Operators</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>1 Basic data types</h1>
+
+          <div class="article-style">
+            <p><img src="/img/pylogo.png" alt="image0"></p>
+<h2 id="11-variables">1.1 Variables</h2>
+<p>A variable is an identifier or name to store information or results.
+All python programs use variables. It is important to remember that each type of information is stored in a special type of variable.
+A type of variable is an information about the contents of the variable. The type of variable will tell the python interpreter what it can do or not with this variable.</p>
+<ul>
+<li>Python can make the difference between upper and lower case letters</li>
+<li>You can not start a variable with a number</li>
+<li>Do not use accents in variable names</li>
+<li>Function : type() give you informations on the type of our variable</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">m<span style="color:#f92672">=</span><span style="color:#ae81ff">3.2</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">int(m)
+</code></pre></div><pre><code>3
+</code></pre>
+<h3 id="111-numeric-type">1.1.1 Numeric type:</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer: int()</td>
+<td>1 is an integer, 1.0 is not an integer</td>
+</tr>
+<tr>
+<td>Float: float()</td>
+<td>Number that includes a decimal part</td>
+</tr>
+<tr>
+<td>Complex numbers</td>
+<td>Association between a real number and an imaginary number</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">type(m)
+</code></pre></div><pre><code>float
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">int(<span style="color:#ae81ff">3</span>)
+</code></pre></div><pre><code>3
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">int(<span style="color:#ae81ff">3.5</span>)
+</code></pre></div><pre><code>3
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">float(<span style="color:#ae81ff">3</span>)
+</code></pre></div><pre><code>3.0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">3</span><span style="color:#f92672">+</span><span style="color:#ae81ff">5</span>
+</code></pre></div><pre><code>8
+</code></pre>
+<h3 id="112-booleans">1.1.2 Booleans:</h3>
+<ul>
+<li>variable storing binary values: True or False</li>
+<li>data types result from logical operations</li>
+</ul>
+<p>Very useful in if() conditional structures.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">5</span>
+</code></pre></div><pre><code>False
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">3</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">5</span>
+</code></pre></div><pre><code>True
+</code></pre>
+<h3 id="113-strings">1.1.3 Strings:</h3>
+<p>Python can also manipulate strings, which can be expressed in several ways. They can be enclosed in single quotes ('&hellip;') or double quotes (&quot;&hellip;&quot;)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Hello</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><pre><code>Hello
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">type(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Hello</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>str
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">type(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">15</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><pre><code>str
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">15</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> 
+</code></pre></div><pre><code>---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-13-3fe5846cb1c2&gt; in &lt;module&gt;
+----&gt; 1 &quot;15&quot; + 2
+TypeError: can only concatenate str (not &quot;int&quot;) to str
+----------------------------------------------------------------------------
+</code></pre>
+<p>But we can concatenate two strings together.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">15</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">56</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><pre><code>'1556'
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">str(<span style="color:#ae81ff">15</span>)
+</code></pre></div><pre><code>'15'
+</code></pre>
+<p>String objects have a bunch of useful methods; for example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>capitalize())  <span style="color:#75715e"># Capitalize a string; prints &#34;Hello&#34;</span>
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>upper())       <span style="color:#75715e"># Convert a string to uppercase; prints &#34;HELLO&#34;</span>
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>rjust(<span style="color:#ae81ff">7</span>))      <span style="color:#75715e"># Right-justify a string, padding with spaces; prints &#34;  hello&#34;</span>
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>center(<span style="color:#ae81ff">7</span>))     <span style="color:#75715e"># Center a string, padding with spaces; prints &#34; hello &#34;</span>
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">l</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(ell)</span><span style="color:#e6db74">&#39;</span>))  <span style="color:#75715e"># Replace all instances of one substring with another;</span>
+                           <span style="color:#75715e"># prints &#34;he(ell)(ell)o&#34;</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">  world </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>strip())  <span style="color:#75715e"># Strip leading and trailing whitespace; prints &#34;world&#34;</span>
+</code></pre></div><pre><code>Hello
+HELLO
+  hello
+ hello 
+he(ell)(ell)o
+world
+</code></pre>
+<h2 id="12-python-arithmetic-operators">1.2 Python Arithmetic Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>Adds values</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Subtracts right hand operand from left hand operand</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Multiplies values on either side of the operator</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Divides left hand operand by right hand operand</td>
+</tr>
+<tr>
+<td>%</td>
+<td>Divides left hand operand by right hand operand and returns remainder (modulus)</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>Performs exponential (power) calculation on operators</td>
+</tr>
+<tr>
+<td>//</td>
+<td>Floor Division - The division of operands where the result is the quotient in which the digits after the decimal point are removed. But if one of the operands is negative, the result is floored, i.e., rounded away from zero (towards negative infinity)</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">5</span><span style="color:#f92672">-</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># Subtraction </span>
+</code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">5</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># Addition </span>
+</code></pre></div><pre><code>8
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">5</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># Multiplication</span>
+</code></pre></div><pre><code>15
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">5</span><span style="color:#f92672">/</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># division  </span>
+</code></pre></div><pre><code>1.6666666666666667
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">5</span><span style="color:#f92672">/</span><span style="color:#f92672">/</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># Floor Division </span>
+</code></pre></div><pre><code>1
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">5</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># Modulus  </span>
+</code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">5</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># power</span>
+</code></pre></div><pre><code>125
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ma_variable1<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
+ma_variable2<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>
+ma_variable1<span style="color:#f92672">*</span>ma_variable2
+</code></pre></div><pre><code>200
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ma_variable1<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>
+</code></pre></div><pre><code>100
+</code></pre>
+<p>We cannot apply arithmetic operators on text.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mon texte</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">-</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mon texte</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><pre><code>---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-26-5483fafb4a74&gt; in &lt;module&gt;
+----&gt; 1 &quot;mon texte&quot; - &quot;mon texte&quot; 
+TypeError: unsupported operand type(s) for -: 'str' and 'str'
+----------------------------------------------------------------------------
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Hi</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> how are you ?</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><pre><code>'Hi how are you ?'
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Hi </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span>
+</code></pre></div><pre><code>'Hi Hi Hi Hi Hi '
+</code></pre>
+<h2 id="13-python-comparison-operators">1.3 Python Comparison Operators</h2>
+<p>These operators compare the values on either sides of them and decide the relation among them. They are also called Relational operators.
+The true value of relationships is often used to make decisions by ensuring that conditions are met to perform a certain task.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>==</td>
+<td>If the values of two operands are equal, then the condition becomes true</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>If values of two operands are not equal, then condition becomes true</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>If the value of left operand is greater than the value of right operand, then condition becomes true</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>If the value of left operand is less than the value of right operand, then condition becomes true</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>If the value of left operand is greater than or equal to the value of right operand, then condition becomes true</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>If the value of left operand is less than or equal to the value of right operand, then condition becomes true</td>
+</tr>
+<tr>
+<td>is</td>
+<td>Identity operators compare the memory locations of two objects. Evaluates to true if the variables on either side of the operator point to the same object and false otherwise</td>
+</tr>
+<tr>
+<td>is not</td>
+<td>Identity operators compare the memory locations of two objects. Evaluates to false if the variables on either side of the operator point to the same object and true otherwise</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1</span><span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>
+</code></pre></div><pre><code>False
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1</span><span style="color:#f92672">!=</span><span style="color:#ae81ff">2</span>
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">2</span>
+</code></pre></div><pre><code>False
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>
+</code></pre></div><pre><code>False
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#75715e"># Warning !!!! this is an assignment  operator</span>
+a
+</code></pre></div><pre><code>1
+</code></pre>
+<h2 id="14-python-logical-operators">1.4 Python Logical Operators</h2>
+<p>Logical operators compare Boolean expressions instead of values as in the previous point.</p>
+<p>They are used to create Boolean expressions that help us know if a certain task should be performed or not.
+Operator| Description   |
+|&mdash;&mdash;|&mdash;&mdash;|
+|  and| If both operands are true then condition becomes true|
+|  or| If any of the two operands are non-zero then condition becomes true|
+|  not| Used to reverse the logical state of its operand|</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># and</span>
+(<span style="color:#ae81ff">3</span><span style="color:#f92672">==</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">and</span> (<span style="color:#ae81ff">4</span><span style="color:#f92672">==</span><span style="color:#ae81ff">4</span>)
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(<span style="color:#ae81ff">3</span><span style="color:#f92672">==</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">and</span> (<span style="color:#ae81ff">4</span><span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>False
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># or</span>
+(<span style="color:#ae81ff">3</span><span style="color:#f92672">==</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">or</span> (<span style="color:#ae81ff">4</span><span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>True
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(<span style="color:#ae81ff">3</span><span style="color:#f92672">!=</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">or</span> (<span style="color:#ae81ff">4</span><span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>False
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#  not</span>
+<span style="color:#f92672">not</span>((<span style="color:#ae81ff">3</span><span style="color:#f92672">!=</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">or</span> (<span style="color:#ae81ff">4</span><span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>))
+</code></pre></div><pre><code>True
+</code></pre>
+<h2 id="15-python-assignment-operators">1.5 Python Assignment Operators</h2>
+<p>Assignment operators store a value in a variable. We have already seen the simplest case (=), but python offers many other operators of this type, in particular to perform an arithmetic operation at the same time as the assignment.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>Assigns values from right side operands to left side operand</td>
+</tr>
+<tr>
+<td>+=</td>
+<td>It adds right operand to the left operand and assign the result to left operand</td>
+</tr>
+<tr>
+<td>-=</td>
+<td>It subtracts right operand from the left operand and assign the result to left operand</td>
+</tr>
+<tr>
+<td>*=</td>
+<td>It multiplies right operand with the left operand and assign the result to left operand</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>It divides left operand with the right operand and assign the result to left operand</td>
+</tr>
+<tr>
+<td>%=</td>
+<td>It takes modulus using two operands and assign the result to left operand</td>
+</tr>
+<tr>
+<td>**=</td>
+<td>Performs exponential (power) calculation on operators and assign value to the left operande</td>
+</tr>
+<tr>
+<td>//=</td>
+<td>It performs floor division on operators and assign value to the left operand</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> 
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+Mavariable
+</code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> 
+Mavariable <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> 
+Mavariable
+</code></pre></div><pre><code>7
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> 
+Mavariable <span style="color:#f92672">-</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> 
+Mavariable
+</code></pre></div><pre><code>3
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> 
+Mavariable <span style="color:#f92672">*</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> 
+Mavariable
+</code></pre></div><pre><code>10
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.</span> 
+Mavariable <span style="color:#f92672">/</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> 
+Mavariable
+</code></pre></div><pre><code>2.5
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> 
+Mavariable <span style="color:#f92672">%</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> 
+Mavariable
+</code></pre></div><pre><code>1
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> 
+Mavariable <span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> 
+Mavariable
+</code></pre></div><pre><code>25
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mavariable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.</span> 
+Mavariable <span style="color:#f92672">/</span><span style="color:#f92672">/</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> 
+Mavariable
+</code></pre></div><pre><code>2.0
+</code></pre>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/tutorial_python/2-lists_in_python/" rel="prev">2 List in Python</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Tutorial_Python/1-Python_Basics.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Instead of extracting a grid point, we may want to extract a domain / box delimited by latitudes and longitudes.
+In this example we will work with the annual mean of daily maximum temperature data from several regional models of CORDEX-NAM44.
+We will extract all the grid points from the region between 47degN and 51degN of latitude and between -72degW and -64degW of longitude .
+We will then plot the inter-annual variability of the mean annual temperature anomalies.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/tutorial_python_netcdf/2-netcdf_tutorial_2/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/tutorial_python_netcdf/2-netcdf_tutorial_2/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/tutorial_python_netcdf/2-netcdf_tutorial_2/">
+  <meta property="og:title" content="2 Netcdf Part 2 | GDueymes">
+  <meta property="og:description" content="Instead of extracting a grid point, we may want to extract a domain / box delimited by latitudes and longitudes.
+In this example we will work with the annual mean of daily maximum temperature data from several regional models of CORDEX-NAM44.
+We will extract all the grid points from the region between 47degN and 51degN of latitude and between -72degW and -64degW of longitude .
+We will then plot the inter-annual variability of the mean annual temperature anomalies."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>2 Netcdf Part 2 | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/tutorial_python/">Python tutorial</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/tutorial_python/1-python_basics/">1 Basic data types</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/2-lists_in_python/">2 List in Python</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/3-flow_control/">3 Flow control</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/4-functions/">4 Functions</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/5-dictionaries/">5 Dictionaries</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/6-numpy_library/">6 Numpy library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/7-pandas_library/">7 Pandas library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/8-matplotlib_library/">8 Matplotlib library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/project1-eccc_temperature/">Project 1 ECCC temperature data</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/project2-eccc_precipitation/">Project 2 ECCC precipitation data</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/tutorial_python_netcdf/">Python Netcdf</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/1-netcdf_tutorial/">1 Netcdf Part 1</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/tutorial_python_netcdf/2-netcdf_tutorial_2/">2 Netcdf Part 2</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/3-cartopy_library/">3 Cartopy</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/4-xarray_library/">4 Xarray</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents"></nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>2 Netcdf Part 2</h1>
+
+          <div class="article-style">
+            <p>Instead of extracting a grid point, we may want to extract a domain / box delimited by latitudes and longitudes.</p>
+<p>In this example we will work with the annual mean of daily maximum temperature data from several regional models of CORDEX-NAM44.</p>
+<p>We will extract all the grid points from the region between <!-- raw HTML omitted --> 47degN and 51degN of latitude and between -72degW and -64degW of longitude <!-- raw HTML omitted -->.</p>
+<p>We will then plot the inter-annual variability of the mean annual temperature anomalies.</p>
+<p><img src="/img/netcdf/CORDEX_domaine.png" alt="image0"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># we first inmport librairies</span>
+<span style="color:#f92672">import</span> netCDF4
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> gridspec
+
+<span style="color:#75715e"># path and variable name</span>
+rep<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/Inter_annual_anomaly/</span><span style="color:#e6db74">&#39;</span>
+variable_in <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Mean_tasmax</span><span style="color:#e6db74">&#39;</span>
+
+<span style="color:#75715e"># list of periods we want to use</span>
+list_period <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2011-2040</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2041-2070</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2071-2100</span><span style="color:#e6db74">&#39;</span>]
+
+<span style="color:#75715e"># list of models</span>
+list_rcp45 <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp45</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_rcp45</span><span style="color:#e6db74">&#39;</span> ]
+
+<span style="color:#75715e"># Area to extract</span>
+latbounds <span style="color:#f92672">=</span> [ <span style="color:#ae81ff">47</span> , <span style="color:#ae81ff">51</span> ]
+lonbounds <span style="color:#f92672">=</span> [ <span style="color:#f92672">-</span><span style="color:#ae81ff">72</span> , <span style="color:#f92672">-</span><span style="color:#ae81ff">64</span> ] 
+</code></pre></div><p>We will make a loop over each model and period to make the extraction:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># </span>
+df_rcp45 <span style="color:#f92672">=</span> []
+matrix_45 <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> period <span style="color:#f92672">in</span> list_period: 
+    globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period] <span style="color:#f92672">=</span> []  <span style="color:#75715e"># we define a global variable </span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,len(list_rcp45)):
+        filename<span style="color:#f92672">=</span> rep <span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">anomalie_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  list_rcp45[i] <span style="color:#f92672">+</span>  <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> variable_in <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> period  <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_1971-2000.nc</span><span style="color:#e6db74">&#39;</span>   
+        nc <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+        <span style="color:#75715e"># we here read netcdf values</span>
+        var <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[variable_in][:]  
+        lats <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]; lons <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]
+        <span style="color:#75715e"># in this part, we extract our domain </span>
+        subset <span style="color:#f92672">=</span> ((lats <span style="color:#f92672">&gt;</span> latbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lats <span style="color:#f92672">&lt;</span> latbounds[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&amp;</span> 
+             (lons <span style="color:#f92672">&gt;</span> lonbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lons <span style="color:#f92672">&lt;</span> lonbounds[<span style="color:#ae81ff">1</span>]))
+        data<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame(var[:,subset], dtype<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#39;</span>) 
+        globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period]<span style="color:#f92672">.</span>append(data<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+        
+    df_rcp45<span style="color:#f92672">.</span>append(pd<span style="color:#f92672">.</span>DataFrame(globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period])<span style="color:#f92672">.</span>T) 
+    
+df_rcp45 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(df_rcp45)
+df_rcp45<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">0</th>
+<th align="right">1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">1.72084</td>
+<td align="right">-0.288691</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">1.4762</td>
+<td align="right">0.885357</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">0.581686</td>
+<td align="right">0.541863</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">0.390671</td>
+<td align="right">-0.0141989</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">1.14842</td>
+<td align="right">1.29417</td>
+</tr>
+</tbody>
+</table>
+<p>We can add datetime index in our DataFrame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TIME<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(int(list_period[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#ae81ff">0</span>]),int(list_period[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>):
+    TIME<span style="color:#f92672">.</span>append(datetime<span style="color:#f92672">.</span>strptime(str(y), <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">&#39;</span>))
+    
+df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> TIME   
+df_rcp45<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>]
+df_rcp45 <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>drop([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
+df_rcp45<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left">Date</th>
+<th align="right">0</th>
+<th align="right">1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2011-01-01 00:00:00</td>
+<td align="right">1.72084</td>
+<td align="right">-0.288691</td>
+</tr>
+<tr>
+<td align="left">2012-01-01 00:00:00</td>
+<td align="right">1.4762</td>
+<td align="right">0.885357</td>
+</tr>
+<tr>
+<td align="left">2013-01-01 00:00:00</td>
+<td align="right">0.581686</td>
+<td align="right">0.541863</td>
+</tr>
+<tr>
+<td align="left">2014-01-01 00:00:00</td>
+<td align="right">0.390671</td>
+<td align="right">-0.0141989</td>
+</tr>
+<tr>
+<td align="left">2015-01-01 00:00:00</td>
+<td align="right">1.14842</td>
+<td align="right">1.29417</td>
+</tr>
+</tbody>
+</table>
+<p>We then want, for each year, the intra-model variability. For this, we will calculate the minimum and maximum values by applying the <!-- raw HTML omitted --> .apply <!-- raw HTML omitted --> method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>min, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>max, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>mean, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp45<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left">Date</th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2011-01-01 00:00:00</td>
+<td align="right">1.72084</td>
+<td align="right">-0.288691</td>
+<td align="right">-0.288691</td>
+<td align="right">1.72084</td>
+<td align="right">0.716076</td>
+</tr>
+<tr>
+<td align="left">2012-01-01 00:00:00</td>
+<td align="right">1.4762</td>
+<td align="right">0.885357</td>
+<td align="right">0.885357</td>
+<td align="right">1.4762</td>
+<td align="right">1.18078</td>
+</tr>
+<tr>
+<td align="left">2013-01-01 00:00:00</td>
+<td align="right">0.581686</td>
+<td align="right">0.541863</td>
+<td align="right">0.541863</td>
+<td align="right">0.581686</td>
+<td align="right">0.561774</td>
+</tr>
+<tr>
+<td align="left">2014-01-01 00:00:00</td>
+<td align="right">0.390671</td>
+<td align="right">-0.0141989</td>
+<td align="right">-0.0141989</td>
+<td align="right">0.390671</td>
+<td align="right">0.188236</td>
+</tr>
+<tr>
+<td align="left">2015-01-01 00:00:00</td>
+<td align="right">1.14842</td>
+<td align="right">1.29417</td>
+<td align="right">1.14842</td>
+<td align="right">1.29417</td>
+<td align="right">1.2213</td>
+</tr>
+</tbody>
+</table>
+<p>We will make the same work with RCMs in future condition with rcp8.5 scenario and RCMs in historical conditions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_rcp85 <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp85</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-MR_rcp85</span><span style="color:#e6db74">&#39;</span>]
+df_rcp85 <span style="color:#f92672">=</span> []
+matrix_85 <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> period <span style="color:#f92672">in</span> list_period: 
+    globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period] <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,len(list_rcp85)):
+        filename<span style="color:#f92672">=</span> rep <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">anomalie_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  list_rcp85[i] <span style="color:#f92672">+</span>  <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> variable_in <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> period  <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_1971-2000.nc</span><span style="color:#e6db74">&#39;</span>   
+        nc <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+        var <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[variable_in][:]  
+        lats <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]; lons <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]            
+        subset <span style="color:#f92672">=</span> ((lats <span style="color:#f92672">&gt;</span> latbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lats <span style="color:#f92672">&lt;</span> latbounds[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&amp;</span> 
+             (lons <span style="color:#f92672">&gt;</span> lonbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lons <span style="color:#f92672">&lt;</span> lonbounds[<span style="color:#ae81ff">1</span>]))
+        <span style="color:#75715e">#mask = np.where(subset)</span>
+        data<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame(var[:,subset], dtype<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#39;</span>) 
+        globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period]<span style="color:#f92672">.</span>append(data<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))        
+    df_rcp85<span style="color:#f92672">.</span>append(pd<span style="color:#f92672">.</span>DataFrame(globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period])<span style="color:#f92672">.</span>T) 
+    
+df_rcp85 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(df_rcp85)
+df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> TIME   
+df_rcp85<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>]
+df_rcp85 <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>drop([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
+
+df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>min, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>max, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>mean, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e">### historical RCMs</span>
+list_histo <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_historical</span><span style="color:#e6db74">&#39;</span>]
+df_histo <span style="color:#f92672">=</span> []
+globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period] <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,len(list_histo)):
+    filename<span style="color:#f92672">=</span> rep <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">anomalie_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  list_histo[i] <span style="color:#f92672">+</span>  <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> variable_in <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_1971-2000_1971-2000.nc</span><span style="color:#e6db74">&#39;</span>   
+    nc <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+    var <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[variable_in][:]  
+    lats <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]; lons <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]
+    
+    subset <span style="color:#f92672">=</span> ((lats <span style="color:#f92672">&gt;</span> latbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lats <span style="color:#f92672">&lt;</span> latbounds[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&amp;</span> 
+         (lons <span style="color:#f92672">&gt;</span> lonbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lons <span style="color:#f92672">&lt;</span> lonbounds[<span style="color:#ae81ff">1</span>]))
+    <span style="color:#75715e">#mask = np.where(subset)</span>
+    data<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame(var[:,subset], dtype<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#39;</span>) 
+    globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period]<span style="color:#f92672">.</span>append(data<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))        
+df_histo<span style="color:#f92672">.</span>append(pd<span style="color:#f92672">.</span>DataFrame(globals()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened_list_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>period])<span style="color:#f92672">.</span>T) 
+TIME<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1971</span>,<span style="color:#ae81ff">2001</span>,<span style="color:#ae81ff">1</span>):
+    TIME<span style="color:#f92672">.</span>append(datetime<span style="color:#f92672">.</span>strptime(str(y), <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">&#39;</span>))  
+    
+df_histo <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(df_histo)
+df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> TIME   
+df_histo<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>]
+df_histo <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>drop([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
+
+df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>min, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>max, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>mean, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><p>We put all results in the same DataFrame:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">result <span style="color:#f92672">=</span> []
+result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp45</span><span style="color:#e6db74">&#39;</span>: df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min</span><span style="color:#e6db74">&#39;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp45</span><span style="color:#e6db74">&#39;</span>: df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max</span><span style="color:#e6db74">&#39;</span>],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp45</span><span style="color:#e6db74">&#39;</span>: df_rcp45[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>],
+                       <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp85</span><span style="color:#e6db74">&#39;</span>: df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min</span><span style="color:#e6db74">&#39;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp85</span><span style="color:#e6db74">&#39;</span>: df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max</span><span style="color:#e6db74">&#39;</span>],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp85</span><span style="color:#e6db74">&#39;</span>: df_rcp85[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>],
+                       <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_histo</span><span style="color:#e6db74">&#39;</span>: df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min</span><span style="color:#e6db74">&#39;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_histo</span><span style="color:#e6db74">&#39;</span>: df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max</span><span style="color:#e6db74">&#39;</span>],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_histo</span><span style="color:#e6db74">&#39;</span>: df_histo[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>]},
+        columns <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp45</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp45</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp45</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp85</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp85</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp85</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_histo</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_histo</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_histo</span><span style="color:#e6db74">&#39;</span>]) 
+
+result<span style="color:#f92672">.</span>tail()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left">Date</th>
+<th align="right">min_rcp45</th>
+<th align="right">max_rcp45</th>
+<th align="right">mean_rcp45</th>
+<th align="right">min_rcp85</th>
+<th align="right">max_rcp85</th>
+<th align="right">mean_rcp85</th>
+<th align="right">min_histo</th>
+<th align="right">max_histo</th>
+<th align="right">mean_histo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2096-01-01 00:00:00</td>
+<td align="right">1.89008</td>
+<td align="right">4.49628</td>
+<td align="right">3.19318</td>
+<td align="right">5.44184</td>
+<td align="right">8.03633</td>
+<td align="right">6.73908</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2097-01-01 00:00:00</td>
+<td align="right">3.86389</td>
+<td align="right">5.06262</td>
+<td align="right">4.46325</td>
+<td align="right">6.10506</td>
+<td align="right">7.35563</td>
+<td align="right">6.73034</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2098-01-01 00:00:00</td>
+<td align="right">2.28996</td>
+<td align="right">4.60365</td>
+<td align="right">3.4468</td>
+<td align="right">6.58306</td>
+<td align="right">7.14778</td>
+<td align="right">6.86542</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2099-01-01 00:00:00</td>
+<td align="right">2.94984</td>
+<td align="right">4.26892</td>
+<td align="right">3.60938</td>
+<td align="right">6.40518</td>
+<td align="right">7.04316</td>
+<td align="right">6.72417</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2100-01-01 00:00:00</td>
+<td align="right">2.99867</td>
+<td align="right">3.27685</td>
+<td align="right">3.13776</td>
+<td align="right">6.16794</td>
+<td align="right">6.96608</td>
+<td align="right">6.56701</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+</tbody>
+</table>
+<p>We can now plot our inter-annual variability:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">color <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">blue</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>]
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>)) 
+gs <span style="color:#f92672">=</span> gridspec<span style="color:#f92672">.</span>GridSpec(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, width_ratios<span style="color:#f92672">=</span>[<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>]) 
+gs<span style="color:#f92672">.</span>update( wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.04</span>)
+ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>])
+
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">figure.figsize</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]       <span style="color:#75715e">#  </span>
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_histo</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs historical</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">0</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp45</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs scenario rcp 4.5</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">1</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp85</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs scenario rcp 8.5</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">2</span>])
+
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_histo</span><span style="color:#e6db74">&#39;</span>],result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_histo</span><span style="color:#e6db74">&#39;</span>], color <span style="color:#f92672">=</span> color[<span style="color:#ae81ff">0</span>], alpha<span style="color:#f92672">=</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp45</span><span style="color:#e6db74">&#39;</span>],result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp45</span><span style="color:#e6db74">&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">1</span>], alpha<span style="color:#f92672">=</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp85</span><span style="color:#e6db74">&#39;</span>],result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp85</span><span style="color:#e6db74">&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">2</span>], alpha<span style="color:#f92672">=</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">upper left</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+
+plt<span style="color:#f92672">.</span>xticks(range(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>), fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">--</span><span style="color:#e6db74">&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">--</span><span style="color:#e6db74">&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+
+plt<span style="color:#f92672">.</span>setp(plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>get_xticklabels(), rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#34;</span>)
+
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">°C</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+ 
+ax1<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">white</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+plt<span style="color:#f92672">.</span>show()  
+
+</code></pre></div><p><img src="/img/netcdf/output_13_1.png" alt="png"></p>
+<p>We would add next to our chart a boxplot on all models for the period 1971-2000 and 2071-2100 only.
+We will extract these periods from our matrix result = []</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_to_remove <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>]
+df_histo <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>drop(list_to_remove, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
+df_rcp45 <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>drop(list_to_remove, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
+df_rcp85 <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>drop(list_to_remove, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
+df_histo <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>loc[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">1971</span><span style="color:#e6db74">&#39;</span> : <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2010</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>stack()
+df_rcp45 <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>loc[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2071</span><span style="color:#e6db74">&#39;</span> : <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2100</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>stack()
+df_rcp85 <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>loc[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2071</span><span style="color:#e6db74">&#39;</span> : <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2100</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>stack()
+
+matrix_box <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs_histo</span><span style="color:#e6db74">&#39;</span>: df_histo, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs_rcp45</span><span style="color:#e6db74">&#39;</span>: df_rcp45,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs_rcp85</span><span style="color:#e6db74">&#39;</span>: df_rcp85},
+        columns <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs_histo</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs_rcp45</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs_rcp85</span><span style="color:#e6db74">&#39;</span>])
+matrix_box<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">RCMs_histo</th>
+<th align="right">RCMs_rcp45</th>
+<th align="right">RCMs_rcp85</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">(Timestamp(&lsquo;1971-01-01 00:00:00&rsquo;), 0)</td>
+<td align="right">-1.34157</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">(Timestamp(&lsquo;1971-01-01 00:00:00&rsquo;), 1)</td>
+<td align="right">-0.12412</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">(Timestamp(&lsquo;1972-01-01 00:00:00&rsquo;), 0)</td>
+<td align="right">-0.641267</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">(Timestamp(&lsquo;1972-01-01 00:00:00&rsquo;), 1)</td>
+<td align="right">-0.0350673</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">(Timestamp(&lsquo;1973-01-01 00:00:00&rsquo;), 0)</td>
+<td align="right">0.0541643</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">color <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">blue</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>]
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">12</span>)) 
+gs <span style="color:#f92672">=</span> gridspec<span style="color:#f92672">.</span>GridSpec(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, width_ratios<span style="color:#f92672">=</span>[<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>]) 
+gs<span style="color:#f92672">.</span>update( wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.04</span>)
+ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>])
+
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">figure.figsize</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]       <span style="color:#75715e">#  </span>
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_histo</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs historical</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">0</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp45</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs scenario rcp 4.5</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">1</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean_rcp85</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RCMs scenario rcp 8.5</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">2</span>])
+
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_histo</span><span style="color:#e6db74">&#39;</span>],result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_histo</span><span style="color:#e6db74">&#39;</span>], color <span style="color:#f92672">=</span> color[<span style="color:#ae81ff">0</span>], alpha<span style="color:#f92672">=</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp45</span><span style="color:#e6db74">&#39;</span>],result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp45</span><span style="color:#e6db74">&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">1</span>], alpha<span style="color:#f92672">=</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rcp85</span><span style="color:#e6db74">&#39;</span>],result[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rcp85</span><span style="color:#e6db74">&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">2</span>], alpha<span style="color:#f92672">=</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">upper left</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+
+<span style="color:#75715e">#ax.set_xlim(result.index.year[0], result.index.year[-1])</span>
+plt<span style="color:#f92672">.</span>xticks(range(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>), fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">--</span><span style="color:#e6db74">&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">--</span><span style="color:#e6db74">&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+
+plt<span style="color:#f92672">.</span>setp(plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>get_xticklabels(), rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#34;</span>)
+
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">°C</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+
+
+my_pal <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">RCMs_histo</span><span style="color:#e6db74">&#34;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">grey</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">RCMs_rcp45</span><span style="color:#e6db74">&#34;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">blue</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">RCMs_rcp85</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#34;</span>}
+ax2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">1</span>])
+<span style="color:#75715e">#ax2 = matrix_box.boxplot(column=[&#39;RCMs_histo&#39;, &#39;RCMs_rcp45&#39;, &#39;RCMs_rcp85&#39;])</span>
+ax2 <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>boxplot(data<span style="color:#f92672">=</span>matrix_box, palette<span style="color:#f92672">=</span>my_pal)  
+<span style="color:#75715e"># Add transparency to colors</span>
+<span style="color:#66d9ef">for</span> patch <span style="color:#f92672">in</span> ax2<span style="color:#f92672">.</span>artists:
+ r, g, b, a <span style="color:#f92672">=</span> patch<span style="color:#f92672">.</span>get_facecolor()
+ patch<span style="color:#f92672">.</span>set_facecolor((r, g, b, <span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>))
+plt<span style="color:#f92672">.</span>setp(plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>get_xticklabels(), rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#34;</span>)
+ 
+ax1<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">white</span><span style="color:#e6db74">&#39;</span>)
+ax2<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">white</span><span style="color:#e6db74">&#39;</span>)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">top</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bottom</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">left</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
+
+medians <span style="color:#f92672">=</span> matrix_box<span style="color:#f92672">.</span>median()<span style="color:#f92672">.</span>values
+median_labels <span style="color:#f92672">=</span> [str(np<span style="color:#f92672">.</span>round(s, <span style="color:#ae81ff">2</span>))<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> °C</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> medians]
+pos <span style="color:#f92672">=</span> range(len(medians))
+i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> tick,label <span style="color:#f92672">in</span> zip(pos,ax2<span style="color:#f92672">.</span>get_xticklabels()):
+    ax2<span style="color:#f92672">.</span>text(pos[tick], medians[tick] <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.1</span>, median_labels[tick], 
+            horizontalalignment<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium</span><span style="color:#e6db74">&#39;</span>, color <span style="color:#f92672">=</span> color[i], weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+    i<span style="color:#f92672">+</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+x1, x2, x3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>
+ax2<span style="color:#f92672">.</span>text(x1, matrix_box<span style="color:#f92672">.</span>min()<span style="color:#f92672">.</span>min()<span style="color:#f92672">.</span>round()<span style="color:#f92672">-</span><span style="color:#ae81ff">0.15</span> , <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">1971-2000</span><span style="color:#e6db74">&#34;</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bottom</span><span style="color:#e6db74">&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)   
+ax2<span style="color:#f92672">.</span>text((x2<span style="color:#f92672">+</span>x3)<span style="color:#f92672">*</span><span style="color:#f92672">.</span><span style="color:#ae81ff">5</span>, matrix_box<span style="color:#f92672">.</span>min()<span style="color:#f92672">.</span>median()<span style="color:#f92672">-</span><span style="color:#ae81ff">0.4</span> , <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">2071-2100</span><span style="color:#e6db74">&#34;</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bottom</span><span style="color:#e6db74">&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+    
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./figures/VI_YEAR_Mean_tasmax.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">png</span><span style="color:#e6db74">&#39;</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>)
+plt<span style="color:#f92672">.</span>show()  
+</code></pre></div><p><img src="/img/netdf/output_16_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/tutorial_python_netcdf/1-netcdf_tutorial/" rel="next">1 Netcdf Part 1</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/tutorial_python_netcdf/3-cartopy_library/" rel="prev">3 Cartopy</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Tutorial_Python_Netcdf/2-Netcdf_Tutorial_2.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | GDueymes</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;I am able to discuss and negotiate with scientists/analysts from different backgrounds in order to understand their needs and offer them the best solution and more importantly develop tools that are unanimously accepted. I worked in various environments, ranging in the development of extreme weather indices (droughts, extreme precipitation&amp;hellip;), validation of regional climate models, development of epidemiological indices, monitoring of vector disease, analysis of storm trajectories or work on instrumental data.
+I am interested by Open Science and willing to learn about Data Science.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Robert Ford</title>
+      <link>/authors/robert-ford/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      <guid>/authors/robert-ford/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>First author&#39;s name</title>
+      <link>/authors/first-authors-name/</link>
+      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
+      <guid>/authors/first-authors-name/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Second author&#39;s name</title>
+      <link>/authors/second-authors-name/</link>
+      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
+      <guid>/authors/second-authors-name/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

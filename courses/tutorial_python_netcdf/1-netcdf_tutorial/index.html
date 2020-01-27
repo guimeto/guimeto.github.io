@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Network Common Data Form (Netcdf) is a way to create, access, and share scientific data in a format that is self-documenting and transparent for many types of machines.
+The Netcdf file itself has information describing the data it contains.
+A NetCDF file has dimensions, variables, and attributes.
+Here is a small example of a NetCDF file, to illustrate these concepts of dimensions, variables and attributes.
+The notation used to describe this NetCDF file is called Network Common Data Language (CDL).">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/tutorial_python_netcdf/1-netcdf_tutorial/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/tutorial_python_netcdf/1-netcdf_tutorial/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/tutorial_python_netcdf/1-netcdf_tutorial/">
+  <meta property="og:title" content="1 Netcdf Part 1 | GDueymes">
+  <meta property="og:description" content="Network Common Data Form (Netcdf) is a way to create, access, and share scientific data in a format that is self-documenting and transparent for many types of machines.
+The Netcdf file itself has information describing the data it contains.
+A NetCDF file has dimensions, variables, and attributes.
+Here is a small example of a NetCDF file, to illustrate these concepts of dimensions, variables and attributes.
+The notation used to describe this NetCDF file is called Network Common Data Language (CDL)."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>1 Netcdf Part 1 | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/tutorial_python/">Python tutorial</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/tutorial_python/1-python_basics/">1 Basic data types</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/2-lists_in_python/">2 List in Python</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/3-flow_control/">3 Flow control</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/4-functions/">4 Functions</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/5-dictionaries/">5 Dictionaries</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/6-numpy_library/">6 Numpy library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/7-pandas_library/">7 Pandas library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/8-matplotlib_library/">8 Matplotlib library</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/project1-eccc_temperature/">Project 1 ECCC temperature data</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python/project2-eccc_precipitation/">Project 2 ECCC precipitation data</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/tutorial_python_netcdf/">Python Netcdf</a>
+    <ul class="nav docs-sidenav">
+      
+      <li class="active">
+        <a href="/courses/tutorial_python_netcdf/1-netcdf_tutorial/">1 Netcdf Part 1</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/2-netcdf_tutorial_2/">2 Netcdf Part 2</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/3-cartopy_library/">3 Cartopy</a>
+      </li>
+      
+      <li >
+        <a href="/courses/tutorial_python_netcdf/4-xarray_library/">4 Xarray</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-create-a-netcdf-file">1- Create a Netcdf file:</a></li>
+    <li><a href="#2-read-a-netcdf-file">2- Read a Netcdf file</a></li>
+    <li><a href="#3-examples-of-manipulations-of-a-netcdf-file">3- Examples of manipulations of a Netcdf file</a></li>
+    <li><a href="#4-netcdf-gridpoint-extraction">4- Netcdf gridpoint extraction</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>1 Netcdf Part 1</h1>
+
+          <div class="article-style">
+            <p>Network Common Data Form (Netcdf) is a way to create, access, and share scientific data in a format that is self-documenting and transparent for many types of machines.</p>
+<p><img src="/img/netcdf/xarray.png" alt="image0"></p>
+<p>The Netcdf file itself has information describing the data it contains.</p>
+<p>A NetCDF file has dimensions, variables, and attributes.</p>
+<p>Here is a small example of a NetCDF file, to illustrate these concepts of dimensions, variables and attributes.</p>
+<p>The notation used to describe this NetCDF file is called Network Common Data Language (CDL). It gives a &ldquo;text&rdquo; version that allows an easy understanding of the structure and contents of a binary NetCDF file:</p>
+<pre><code>netcdf ./data/NARR_tasmax_201701.nc {
+  dimensions:
+x = 349;
+y = 277;
+time = 31;
+  variables:
+float lon(y=277, x=349);
+  :units = &quot;degrees_east&quot;;
+  :long_name = &quot;Longitude&quot;;
+  :CoordinateAxisType = &quot;Lon&quot;;
+
+float lat(y=277, x=349);
+  :units = &quot;degrees_north&quot;;
+  :long_name = &quot;Latitude&quot;;
+  :CoordinateAxisType = &quot;Lat&quot;;
+
+double time(time=31);
+  :long_name = &quot;Time&quot;;
+  :delta_t = &quot;&quot;;
+
+float tasmax(time=31, y=277, x=349);
+  :long_name = &quot;Daily maximum temperature&quot;;
+  :units = &quot;Celcius&quot;;
+  :missing_value = -999.0; // double
+  :coordinates = &quot;lon lat&quot;;
+</code></pre>
+<p>}</p>
+<p>Panoply is an apensource software used to quickly read aned visualize Netcdf file:
+<a href="https://www.giss.nasa.gov/tools/panoply/download/">https://www.giss.nasa.gov/tools/panoply/download/</a></p>
+<p>The python module that we will use in this section is netCDF4:
+<a href="https://pypi.org/project/netCDF4/">https://pypi.org/project/netCDF4/</a></p>
+<p>To install it under anaconda: <!-- raw HTML omitted -->conda install -c anaconda netcdf4<!-- raw HTML omitted --></p>
+<p><img src="/img/netcdf/CanESM2_rcp85_r1i1p1_global_tos.jpg" alt="image0"></p>
+<h2 id="1-create-a-netcdf-file">1- Create a Netcdf file:</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> os 
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
+
+file_name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">./DATA/2D_Temperature.nc</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(file_name):
+    os<span style="color:#f92672">.</span>remove(file_name)
+    
+<span style="color:#75715e">#open the file for writing, you can Also specify format=&#34;NETCDF4_CLASSIC&#34; or &#34;NETCDF3_CLASSIC&#34;</span>
+<span style="color:#75715e">#The format is NETCDF4 by default</span>
+ds <span style="color:#f92672">=</span> Dataset(file_name, mode<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><ul>
+<li>Netcdf4-python: <!-- raw HTML omitted -->createDimension<!-- raw HTML omitted --></li>
+</ul>
+<p>We will create here a 2D field: (20,20)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">20</span>)
+ds<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">20</span>)
+ds<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#34;</span>, None)
+</code></pre></div><pre><code>&lt;class 'netCDF4._netCDF4.Dimension'&gt; (unlimited): name = 'time', size = 0
+</code></pre>
+<ul>
+<li>Netcdf4-python: <!-- raw HTML omitted -->createVariable<!-- raw HTML omitted --></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">var1 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">field1</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">f4</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#34;</span>))
+var2 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">field2</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">f4</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#34;</span>))
+
+<span style="color:#75715e">#add netcdf attributes</span>
+var1<span style="color:#f92672">.</span>units <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Celcius</span><span style="color:#e6db74">&#34;</span>
+var1<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Surface air temperature</span><span style="color:#e6db74">&#34;</span>
+
+var2<span style="color:#f92672">.</span>units <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Kelvin</span><span style="color:#e6db74">&#34;</span>
+var2<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Surface air temperature</span><span style="color:#e6db74">&#34;</span>
+
+</code></pre></div><p>We can now assign our field or variable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#generate random data and tell the program where it should go</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>)
+var1[:] <span style="color:#f92672">=</span> data
+var2[:] <span style="color:#f92672">=</span>  data <span style="color:#f92672">+</span> <span style="color:#ae81ff">273.15</span>
+<span style="color:#75715e">#actually write data to the disk</span>
+ds<span style="color:#f92672">.</span>close();
+</code></pre></div><h2 id="2-read-a-netcdf-file">2- Read a Netcdf file</h2>
+<p>We will read the file Netcdf4 that we created previously.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+ds <span style="color:#f92672">=</span> Dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">./DATA/2D_Temperature.nc</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><p>We will select our variables of interest: no data is loaded at this level.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Which variables are in our Netcdf file ?</span>
+<span style="color:#66d9ef">print</span>(ds<span style="color:#f92672">.</span>variables<span style="color:#f92672">.</span>keys())
+
+data1_var <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">field1</span><span style="color:#e6db74">&#34;</span>]
+data2_var <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">field2</span><span style="color:#e6db74">&#34;</span>]
+
+<span style="color:#75715e">#What&#39;s the dimension ?</span>
+<span style="color:#66d9ef">print</span>(data1_var<span style="color:#f92672">.</span>dimensions, data1_var<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>odict_keys(['field1', 'field2'])
+('time', 'x', 'y') (10, 20, 20)
+</code></pre>
+<p>We can now read our file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#now we ask to really read the data into the memory</span>
+all_data <span style="color:#f92672">=</span> data1_var[:]
+<span style="color:#75715e">#print all_data.shape</span>
+data1 <span style="color:#f92672">=</span> data1_var[<span style="color:#ae81ff">1</span>,:,:]
+data2 <span style="color:#f92672">=</span> data2_var[<span style="color:#ae81ff">2</span>,:,:]
+<span style="color:#75715e">#data1</span>
+<span style="color:#66d9ef">print</span>(data1<span style="color:#f92672">.</span>shape, all_data<span style="color:#f92672">.</span>shape, all_data<span style="color:#f92672">.</span>mean(axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>mean(axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>mean(axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>))
+</code></pre></div><pre><code>(20, 20) (10, 20, 20) 0.0055584796
+</code></pre>
+<h2 id="3-examples-of-manipulations-of-a-netcdf-file">3- Examples of manipulations of a Netcdf file</h2>
+<p>In this example we will work with daily maximum temperature data for all January months from 1971 to 2000 from the CRCM5 regional model developed at the ESCER center.</p>
+<p>We will import our own module for calculating temperature indices, this module is calld Indices_Temperature.</p>
+<p>At first we will import the necessary libraries and define the input parameters.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> Indices_Temperature
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+
+Mois<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">01</span><span style="color:#e6db74">&#39;</span>
+model<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_NAM-44_ll_CCCma-CanESM2</span><span style="color:#e6db74">&#39;</span>
+path_model<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CRCM5-v1_CCCma-CanESM2_historical</span><span style="color:#e6db74">&#39;</span>
+variable<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tasmax</span><span style="color:#e6db74">&#39;</span>
+indice <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Tmax90p</span><span style="color:#e6db74">&#39;</span>
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1971</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
+<span style="color:#75715e">#########################################################</span>
+rep_data<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/CRCM5/</span><span style="color:#e6db74">&#39;</span>
+rep_out<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/CRCM5/</span><span style="color:#e6db74">&#39;</span>
+tot<span style="color:#f92672">=</span>(yf<span style="color:#f92672">-</span>yi)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> 
+</code></pre></div><ul>
+<li>Let's open &lsquo;CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical_tasmax_197101.nc&rsquo; file:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nc_Modc<span style="color:#f92672">=</span>Dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/CRCM5/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>model<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_historical_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>variable<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_197101.nc</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+lats<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]
+lons<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]
+varc<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[variable][:]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## Quick look of our file: </span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------------------</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Temperature dimension = </span><span style="color:#e6db74">&#39;</span>,varc<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Minimum of temperature = </span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>nanmin(varc))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum of temperature = </span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>nanmax(varc))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------------------</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------------------</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Latitude dimension= </span><span style="color:#e6db74">&#39;</span>,lats<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Minimum of latitude = </span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>min(lats))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum of latitude = </span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>max(lats))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------------------</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------------------</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Longitude dimesion = </span><span style="color:#e6db74">&#39;</span>,lons<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Minimum of longitude = </span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>min(lons))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum of longitude = </span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>max(lons))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-----------------------------------------</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>-----------------------------------------
+Temperature dimension =  (31, 130, 155)
+Minimum of temperature =  -57.66677
+Maximum of temperature =  30.657953
+-----------------------------------------
+-----------------------------------------
+Latitude dimension=  (130, 155)
+Minimum of latitude =  12.538727
+Maximum of latitude =  75.86
+-----------------------------------------
+-----------------------------------------
+Longitude dimesion =  (130, 155)
+Minimum of longitude =  -170.71053
+Maximum of longitude =  -23.28948
+-----------------------------------------
+</code></pre>
+<p>We can now loop over all our Netcdf files and apply a function to calculate our indice.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nt<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+IND <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((tot,<span style="color:#ae81ff">130</span>,<span style="color:#ae81ff">155</span>),dtype<span style="color:#f92672">=</span>float)
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+    <span style="color:#75715e">###### ouverture et lecture des fichiers Netcdf</span>
+    hist<span style="color:#f92672">=</span>model<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_historical_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>variable<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span>Mois<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>     
+    modelc<span style="color:#f92672">=</span>rep_data<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>hist
+    nc_Modc<span style="color:#f92672">=</span>Dataset(modelc,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+    lats<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]
+    lons<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]
+    varc<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[variable][:]
+    
+    <span style="color:#75715e">###### boucle sur tous les points de grille et calcul de l&#39;indice</span>
+    <span style="color:#66d9ef">for</span> ni <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(varc[<span style="color:#ae81ff">0</span>])):
+        <span style="color:#66d9ef">for</span> nj <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(varc[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>])):
+            <span style="color:#66d9ef">if</span> indice <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Mean_tasmax</span><span style="color:#e6db74">&#39;</span>:
+                IND[nt,ni,nj]<span style="color:#f92672">=</span>Indices_Temperature<span style="color:#f92672">.</span>MOY(varc[:,ni,nj])
+                description<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Monthly Mean of tasmax</span><span style="color:#e6db74">&#39;</span>
+                unite<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">°Celcius</span><span style="color:#e6db74">&#39;</span>
+            <span style="color:#66d9ef">elif</span> indice <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Tmax90p</span><span style="color:#e6db74">&#39;</span>:
+                IND[nt,ni,nj]<span style="color:#f92672">=</span>Indices_Temperature<span style="color:#f92672">.</span>Tmax90p(varc[:,ni,nj])
+                description<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Monthly Mean of Tmax90p</span><span style="color:#e6db74">&#39;</span> 
+                unite<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">°Celcius</span><span style="color:#e6db74">&#39;</span>               
+    nt<span style="color:#f92672">+</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> 
+    
+    <span style="color:#75715e">###### Écriture du fichier Netcdf en sortie</span>
+C <span style="color:#f92672">=</span> Dataset(rep_out<span style="color:#f92672">+</span>model<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_historical_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>indice<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(yi)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(yf)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>Mois<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#39;</span>)
+C<span style="color:#f92672">.</span>description <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Indice temperature</span><span style="color:#e6db74">&#39;</span>
+C<span style="color:#f92672">.</span>conventions <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CF-1.0</span><span style="color:#e6db74">&#39;</span>  
+C<span style="color:#f92672">.</span>model_id <span style="color:#f92672">=</span> model
+C<span style="color:#f92672">.</span>grid<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">latlon</span><span style="color:#e6db74">&#39;</span>
+C<span style="color:#f92672">.</span>CDO <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Climate Data Operators version 1.6.2 (http://code.zmaw.de/projects/cdo)</span><span style="color:#e6db74">&#39;</span>
+C<span style="color:#f92672">.</span>institution <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">UQAM - ESCER Center, University of Quebec in Montreal</span><span style="color:#e6db74">&#39;</span>
+C<span style="color:#f92672">.</span>contact <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Guillaume Dueymes</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#75715e">########################################</span>
+<span style="color:#75715e"># Dimensions</span>
+C<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>, len(varc[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]))
+C<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#39;</span>, len(varc[<span style="color:#ae81ff">0</span>]))
+C<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>, tot)
+
+var<span style="color:#f92672">=</span>C<span style="color:#f92672">.</span>createVariable(str(indice), np<span style="color:#f92672">.</span>float32, (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>)) 
+var<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> str(description)
+var<span style="color:#f92672">.</span>unit <span style="color:#f92672">=</span> str(unite)
+lat<span style="color:#f92672">=</span>C<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>float32, (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>))
+lon<span style="color:#f92672">=</span>C<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>float32, (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>)) 
+
+time <span style="color:#f92672">=</span> C<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>, np<span style="color:#f92672">.</span>float64, (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>,))
+time<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>
+
+<span style="color:#66d9ef">for</span> var <span style="color:#f92672">in</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>]:
+    <span style="color:#66d9ef">for</span> att <span style="color:#f92672">in</span> nc_Modc<span style="color:#f92672">.</span>variables[var]<span style="color:#f92672">.</span>ncattrs():
+        setattr(C<span style="color:#f92672">.</span>variables[var],att,getattr(nc_Modc<span style="color:#f92672">.</span>variables[var],att))
+
+time[:]<span style="color:#f92672">=</span>range(<span style="color:#ae81ff">1</span>,nt<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+lat[:,:] <span style="color:#f92672">=</span> lats
+lon[:,:] <span style="color:#f92672">=</span> lons
+C<span style="color:#f92672">.</span>variables[str(indice)][:,:,:] <span style="color:#f92672">=</span> IND[::]
+C<span style="color:#f92672">.</span>close()
+    
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">IND<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>(30, 130, 155)
+</code></pre>
+<h2 id="4-netcdf-gridpoint-extraction">4- Netcdf gridpoint extraction</h2>
+<p>In this example we will work with maximum daily temperature data from Regional Reanalysis (NARR) Regional Reanalysis. For more information about this product:</p>
+<p><a href="http://www.emc.ncep.noaa.gov/mmb/rreanl">www.emc.ncep.noaa.gov/mmb/rreanl</a></p>
+<p>The Netcdf files that we will open are daily values from January 1, 2017 to December 31, 2017. Files are archived by month.</p>
+<p>The NARR grid point closest to the ECCC Montréal / McTavish weather station (45.5N, -73.8W) will be extracted here.</p>
+<p>We first import the libraries.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> netCDF4
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date, timedelta
+<span style="color:#f92672">from</span> dateutil.relativedelta <span style="color:#f92672">import</span> relativedelta
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">rep1<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/NARR/</span><span style="color:#e6db74">&#39;</span>
+model<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NARR</span><span style="color:#e6db74">&#39;</span>
+variable<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tasmax</span><span style="color:#e6db74">&#39;</span>
+variable_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Temperature maximale</span><span style="color:#e6db74">&#39;</span>
+yeari<span style="color:#f92672">=</span><span style="color:#ae81ff">2017</span>
+monthi<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+yearf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2017</span>
+monthf <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
+station<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Montreal</span><span style="color:#e6db74">&#39;</span> 
+lati <span style="color:#f92672">=</span> <span style="color:#ae81ff">45.5</span>
+loni <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">73.8</span>
+
+day_start<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+day_end <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}-{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(yearf, monthf), periods<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, freq<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">M</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>day<span style="color:#f92672">.</span>tolist()[<span style="color:#ae81ff">0</span>]
+start<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime(yeari,monthi,day_start)
+end<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime(yearf,monthf,day_end)
+d0 <span style="color:#f92672">=</span> date(yeari, monthi, day_start)
+d1 <span style="color:#f92672">=</span> date(yearf, monthf, day_end)
+delta <span style="color:#f92672">=</span> d1 <span style="color:#f92672">-</span> d0
+nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+var_data<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>zeros(nb_days)
+
+</code></pre></div><p>We define a function that will calculate the distance between each grid point of the Netcdf file and our reference latitude / longitude. We then deduce the minimum distance.</p>
+<p>The other function allows us to increment our months when reading Netcdf files.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getclosest_ij</span>(lats,lons,latpt,lonpt):
+     <span style="color:#75715e"># find squared distance of every point on grid</span>
+     dist_sq <span style="color:#f92672">=</span> (lats<span style="color:#f92672">-</span>latpt)<span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (lons<span style="color:#f92672">-</span>lonpt)<span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> 
+     <span style="color:#75715e"># 1D index of minimum dist_sq element</span>
+     minindex_flattened <span style="color:#f92672">=</span> dist_sq<span style="color:#f92672">.</span>argmin()
+     <span style="color:#75715e"># Get 2D index for latvals and lonvals arrays from 1D index</span>
+     <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>unravel_index(minindex_flattened, lats<span style="color:#f92672">.</span>shape)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_month</span>(now):
+    <span style="color:#66d9ef">try</span>:
+        then <span style="color:#f92672">=</span> (now <span style="color:#f92672">+</span> relativedelta(months<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>replace(day<span style="color:#f92672">=</span>now<span style="color:#f92672">.</span>day)
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+        then <span style="color:#f92672">=</span> (now <span style="color:#f92672">+</span> relativedelta(months<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>))<span style="color:#f92672">.</span>replace(day<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">return</span> then
+</code></pre></div><p>We can know apply our function over each grid point, month by month and save the value into a DataFrame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+IND<span style="color:#f92672">=</span>[]
+<span style="color:#75715e"># Début de notre boucle temporelle</span>
+incr<span style="color:#f92672">=</span>start
+<span style="color:#66d9ef">while</span> incr <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> end:
+    filename<span style="color:#f92672">=</span> rep1 <span style="color:#f92672">+</span> model <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> variable <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> str(incr<span style="color:#f92672">.</span>year) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(incr<span style="color:#f92672">.</span>month) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>   
+    f <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+   <span style="color:#75715e"># print(f.variables.keys()) # get all variable names</span>
+    var <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>variables[variable] <span style="color:#75715e"># temperature variable</span>
+    <span style="color:#75715e">#print(temp) </span>
+    <span style="color:#75715e">#temp.dimensions</span>
+    <span style="color:#75715e">#temp.shape</span>
+    lat, lon <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>], f<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>]
+    <span style="color:#75715e">#print(lat)</span>
+    <span style="color:#75715e">#print(lon)</span>
+    <span style="color:#75715e">#print(lat[:])</span>
+    <span style="color:#75715e"># extract lat/lon values (in degrees) to numpy arrays</span>
+    latvals <span style="color:#f92672">=</span> lat[:]; lonvals <span style="color:#f92672">=</span> lon[:] 
+    <span style="color:#75715e"># a function to find the index of the point closest pt</span>
+    <span style="color:#75715e"># (in squared distance) to give lat/lon value.    </span>
+    iy_min, ix_min <span style="color:#f92672">=</span> getclosest_ij(latvals, lonvals, lati, loni)
+    <span style="color:#75715e">#print(iy_min)</span>
+    <span style="color:#75715e">#print(ix_min)</span>
+    IND<span style="color:#f92672">.</span>append(var[:,iy_min,ix_min])
+    incr<span style="color:#f92672">=</span>add_month(incr)
+    
+flattened_list <span style="color:#f92672">=</span> [y <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> IND <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> x]
+start<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime(yeari,monthi,day_start)
+TIME<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,nb_days,<span style="color:#ae81ff">1</span>): 
+ <span style="color:#75715e">#   TIME.append((start+timedelta(days=i)).strftime(&#34;%Y-%m-%d&#34;))</span>
+    TIME<span style="color:#f92672">.</span>append((start<span style="color:#f92672">+</span>timedelta(days<span style="color:#f92672">=</span>i)))
+dataFrame_NARR <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>: TIME, variable_name: flattened_list}, columns <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>,variable_name]) 
+dataFrame_NARR <span style="color:#f92672">=</span> dataFrame_NARR<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>)   
+dataFrame_NARR<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left">Date</th>
+<th align="right">Temperature maximale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2017-01-01 00:00:00</td>
+<td align="right">-0.893957</td>
+</tr>
+<tr>
+<td align="left">2017-01-02 00:00:00</td>
+<td align="right">-1.53144</td>
+</tr>
+<tr>
+<td align="left">2017-01-03 00:00:00</td>
+<td align="right">-1.73783</td>
+</tr>
+<tr>
+<td align="left">2017-01-04 00:00:00</td>
+<td align="right">-0.240698</td>
+</tr>
+<tr>
+<td align="left">2017-01-05 00:00:00</td>
+<td align="right">-0.791754</td>
+</tr>
+</tbody>
+</table>
+<p>We save our DataFrame in csv.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataFrame_NARR<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/NARR/NARR_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>station<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_1pt_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(variable)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(monthi) <span style="color:#f92672">+</span> str(yeari)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(monthf) <span style="color:#f92672">+</span> str(yearf)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>)    
+</code></pre></div><ul>
+<li>Observation vs NARR
+Now we have extracted our gridpoint near Montreal, we can compare these values with observations.</li>
+</ul>
+<p>We will extract the data from the Montreal McTavish station and put them in the NARR dataFrame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataframe_station <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/station/MONTREAL_TAVISH_tasmax_1948_2017.csv</span><span style="color:#e6db74">&#39;</span>, header<span style="color:#f92672">=</span>None, names<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum temperature: OBS</span><span style="color:#e6db74">&#39;</span>])
+start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">1948</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
+delta<span style="color:#f92672">=</span>(end<span style="color:#f92672">-</span>start) 
+nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
+rng <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(start, periods<span style="color:#f92672">=</span>nb_days, freq<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D</span><span style="color:#e6db74">&#39;</span>)
+
+dataframe_station[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> rng
+dataframe_station<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> dataframe_station[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#39;</span>] 
+dataframe_station <span style="color:#f92672">=</span> dataframe_station<span style="color:#f92672">.</span>drop([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataframe_station<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left">datetime</th>
+<th align="right">Maximum temperature: OBS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1948-01-01 00:00:00</td>
+<td align="right">-10</td>
+</tr>
+<tr>
+<td align="left">1948-01-02 00:00:00</td>
+<td align="right">-3.9</td>
+</tr>
+<tr>
+<td align="left">1948-01-03 00:00:00</td>
+<td align="right">-0.6</td>
+</tr>
+<tr>
+<td align="left">1948-01-04 00:00:00</td>
+<td align="right">-2.8</td>
+</tr>
+<tr>
+<td align="left">1948-01-05 00:00:00</td>
+<td align="right">-2.2</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataFrame_NARR <span style="color:#f92672">=</span> dataFrame_NARR<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Temperature maximale</span><span style="color:#e6db74">&#34;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Maximum temperature: NARR</span><span style="color:#e6db74">&#34;</span>})
+df_NARR_Station <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([dataframe_station,dataFrame_NARR],axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_NARR_Station<span style="color:#f92672">.</span>tail()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">Maximum temperature: OBS</th>
+<th align="right">Maximum temperature: NARR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2017-12-27 00:00:00</td>
+<td align="right">-17.6</td>
+<td align="right">-18.819</td>
+</tr>
+<tr>
+<td align="left">2017-12-28 00:00:00</td>
+<td align="right">-20.5</td>
+<td align="right">-19.3721</td>
+</tr>
+<tr>
+<td align="left">2017-12-29 00:00:00</td>
+<td align="right">-18.4</td>
+<td align="right">-16.4532</td>
+</tr>
+<tr>
+<td align="left">2017-12-30 00:00:00</td>
+<td align="right">-17.3</td>
+<td align="right">-16.2088</td>
+</tr>
+<tr>
+<td align="left">2017-12-31 00:00:00</td>
+<td align="right">-18.3</td>
+<td align="right">-16.7728</td>
+</tr>
+</tbody>
+</table>
+<p>We want to plot valeurs for 2016 and 2017 years.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">=</span>df_NARR_Station<span style="color:#f92672">.</span>loc[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2016</span><span style="color:#e6db74">&#39;</span> : <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2017</span><span style="color:#e6db74">&#39;</span>]
+df<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">Maximum temperature: OBS</th>
+<th align="right">Maximum temperature: NARR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2016-01-01 00:00:00</td>
+<td align="right">-0.1</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2016-01-02 00:00:00</td>
+<td align="right">0.4</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2016-01-03 00:00:00</td>
+<td align="right">0.2</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2016-01-04 00:00:00</td>
+<td align="right">-13.5</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">2016-01-05 00:00:00</td>
+<td align="right">-7.5</td>
+<td align="right">nan</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+color <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>]
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>plot(df<span style="color:#f92672">.</span>index, df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum temperature: NARR</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NARR Temperature</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">0</span>])
+plt<span style="color:#f92672">.</span>plot(df<span style="color:#f92672">.</span>index, df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum temperature: OBS</span><span style="color:#e6db74">&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Observation Temperature</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">1</span>])
+
+<span style="color:#75715e"># Autre méthode pour tracer avec Pandas</span>
+<span style="color:#75715e">#df_NARR_Station[&#39;2017&#39;].plot(figsize=(10,5))</span>
+
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Time</span><span style="color:#e6db74">&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Temperature</span><span style="color:#e6db74">&#34;</span>, {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">color</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">fontsize</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">10</span>})
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Time serie: Station MTL vs NARR</span><span style="color:#e6db74">&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">upper left</span><span style="color:#e6db74">&#39;</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>),fontsize <span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">figures/NARR_time_Serie_temperature.png</span><span style="color:#e6db74">&#34;</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>)   <span style="color:#75715e"># bbox_inches= : option qui permet de propostionner le graphique lors de l&#39;enregistrement</span>
+plt<span style="color:#f92672">.</span>show()
+
+</code></pre></div><p><img src="/img/netcdf/output_39_0.png" alt="png"></p>
+<ul>
+<li>Example of using the <!-- raw HTML omitted --> .rolling () &lt;/ b&gt; function to calculate a moving average on a signal.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+df_NARR_Station[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rollingmean5 Station</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">=</span>  df_NARR_Station[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum temperature: OBS</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>rolling(window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>mean()
+df_NARR_Station[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rollingmean5 NARR</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">=</span>  df_NARR_Station[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Maximum temperature: NARR</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>rolling(window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>mean()
+df_NARR_Station<span style="color:#f92672">.</span>tail()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">Maximum temperature: OBS</th>
+<th align="right">Maximum temperature: NARR</th>
+<th align="right">rollingmean5 Station</th>
+<th align="right">rollingmean5 NARR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2017-12-27 00:00:00</td>
+<td align="right">-17.6</td>
+<td align="right">-18.819</td>
+<td align="right">-8.04</td>
+<td align="right">-8.31893</td>
+</tr>
+<tr>
+<td align="left">2017-12-28 00:00:00</td>
+<td align="right">-20.5</td>
+<td align="right">-19.3721</td>
+<td align="right">-11.12</td>
+<td align="right">-11.0995</td>
+</tr>
+<tr>
+<td align="left">2017-12-29 00:00:00</td>
+<td align="right">-18.4</td>
+<td align="right">-16.4532</td>
+<td align="right">-13.88</td>
+<td align="right">-13.6478</td>
+</tr>
+<tr>
+<td align="left">2017-12-30 00:00:00</td>
+<td align="right">-17.3</td>
+<td align="right">-16.2088</td>
+<td align="right">-16.12</td>
+<td align="right">-15.6138</td>
+</tr>
+<tr>
+<td align="left">2017-12-31 00:00:00</td>
+<td align="right">-18.3</td>
+<td align="right">-16.7728</td>
+<td align="right">-18.42</td>
+<td align="right">-17.5252</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_NARR_Station[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2017-01</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2017-12</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Temps</span><span style="color:#e6db74">&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Température</span><span style="color:#e6db74">&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Maximum temperature time serie: Station MTL vs NARR</span><span style="color:#e6db74">&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">figures/NARR_time_Serie_temperature2.png</span><span style="color:#e6db74">&#34;</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>)   <span style="color:#75715e"># bbox_inches= : option qui permet de propostionner le graphique lors de l&#39;enregistrement</span>
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf/output_42_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/tutorial_python_netcdf/2-netcdf_tutorial_2/" rel="prev">2 Netcdf Part 2</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Tutorial_Python_Netcdf/1-Netcdf_Tutorial.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
