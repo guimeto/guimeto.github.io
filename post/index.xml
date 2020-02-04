@@ -5,12 +5,385 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 31 Jan 2020 07:20:28 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 04 Feb 2020 10:39:49 -0800</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Shapefiles_Country</title>
+      <link>/post/shapefiles_country/</link>
+      <pubDate>Tue, 04 Feb 2020 10:39:49 -0800</pubDate>
+      <guid>/post/shapefiles_country/</guid>
+      <description>&lt;h1 id=&#34;from-country-shapefiles-to-netcdf-mask&#34;&gt;From country shapefiles to Netcdf Mask&lt;/h1&gt;
+&lt;p&gt;In this tutorial, we will use shapefiles to create mask over specific countries.&lt;/p&gt;
+&lt;p&gt;In order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.&lt;/p&gt;
+&lt;p&gt;I will present a simple solution based on open-source Python modules:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    - xarray: for manipulating &amp;amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities
+    - regionmask: to mask a gridded file according to a shapefile
+    - numpy: for simple array manipulations
+    - geopandas: to open shapefiles
+    - matplotlib: for plotting
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;1--import-librairies-and-create-aliases&#34;&gt;1-  Import librairies and create aliases.&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr 
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; regionmask
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; geopandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; gpd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings; warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;working-over-countries&#34;&gt;Working over countries&lt;/h2&gt;
+&lt;p&gt;In this example we will focus on countries in Africa. We will use shapefiles developped in ESRI format from this link:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://community.esri.com/external-link.jspa?url=http%3A%2F%2Fwww.maplibrary.org%2Flibrary%2Fstacks%2FAfrica%2Findex.htm&#34;&gt;https://community.esri.com/external-link.jspa?url=http%3A%2F%2Fwww.maplibrary.org%2Flibrary%2Fstacks%2FAfrica%2Findex.htm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After downloaded the shapefile, we must load it using geopandas library:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;PATH_TO_SHAPEFILE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Countries/Africa_Countries.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+countries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(PATH_TO_SHAPEFILE)
+countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;CODE&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;COUNTRY&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;geometry&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;ALG&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;Algeria&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POLYGON ((-5.7636199999979 25.58624999999302, &amp;hellip;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;ANG&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;Angola&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POLYGON ((13.36632442474365 -8.32172966003418,&amp;hellip;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;762
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;my_list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(countries[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CODE&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])
+my_list_unique &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set(list(countries[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CODE&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]))
+indexes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [my_list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(x) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; my_list_unique]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Shapes are here a GeoDataFrame containing all polygons illustrating the countries boundaries.&lt;/p&gt;
+&lt;p&gt;Now we can load the ERA5 gridded data. The parameter chunks is very important, it defines how big are the “pieces” of data moved from the disk to the memory. With this value the entire computation on a workstation with 32 GB takes a couple of minutes.&lt;/p&gt;
+&lt;p&gt;We will load all the temperature files for the year 2018 using Xarray library.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;model&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ERA5_T2m_1h&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+t_in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/ERA5/T2m_1h/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;        
+data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; t_in &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; model &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_2018*_sfc.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+ds &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_mfdataset(data, chunks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;})
+ds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:    (latitude: 721, longitude: 1440, time: 8760)
+Coordinates:
+  * longitude  (longitude) float32 0.0 0.25 0.5 0.75 ... 359.25 359.5 359.75
+  * latitude   (latitude) float32 90.0 89.75 89.5 89.25 ... -89.5 -89.75 -90.0
+  * time       (time) datetime64[ns] 2018-01-01 ... 2018-12-31T23:00:00
+Data variables:
+    t2m        (time, latitude, longitude) float32 dask.array&amp;lt;shape=(8760, 721, 1440), chunksize=(10, 721, 1440)&amp;gt;
+Attributes:
+    Conventions:  CF-1.6
+    history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The next function &lt;!-- raw HTML omitted --&gt;assign_coords&lt;!-- raw HTML omitted --&gt; will convert the longitude from the 0-360 range to -180,180&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ds &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ds&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;assign_coords(longitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(((ds&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;longitude &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;360&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;))&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sortby(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:    (latitude: 721, longitude: 1440, time: 8760)
+Coordinates:
+  * longitude  (longitude) float32 -180.0 -179.75 -179.5 ... 179.25 179.5 179.75
+  * latitude   (latitude) float32 90.0 89.75 89.5 89.25 ... -89.5 -89.75 -90.0
+  * time       (time) datetime64[ns] 2018-01-01 ... 2018-12-31T23:00:00
+Data variables:
+    t2m        (time, latitude, longitude) float32 dask.array&amp;lt;shape=(8760, 721, 1440), chunksize=(10, 721, 1440)&amp;gt;
+Attributes:
+    Conventions:  CF-1.6
+    history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;len(list(countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values[i] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; indexes))
+len(list(countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;COUNTRY[indexes]))
+len(indexes)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;52
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape(a)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(762,)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our xarray Dataset contains a single variable (t2m) which is stored as a dask.array. This is the result of loading files with open_mfdataset.&lt;/p&gt;
+&lt;p&gt;Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: &lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;With this function we will create an object able to mask ERA5 gridded data.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;countries_mask_poly &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; regionmask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Regions_cls(name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COUNTRY&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; indexes, names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;COUNTRY[indexes], abbrevs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;COUNTRY[indexes], outlines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values[i] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])))
+countries_mask_poly
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;52 &#39;COUNTRY&#39; Regions ()
+Burkina Faso Senegal Botswana Liberia Chad Equatorial Guinea Djibouti Ghana Nigeria Sao Tome and Principe Swaziland Uganda Tanzania Comoros Guinea Algeria Niger Madagascar Burundi Cameroon Mali Zimbabwe Cote d`Ivoire Tunisia Sierra Leone Libya Rwanda Benin Malawi Gabon South Africa Western Sahara Zambia Central African Republic Togo Namibia Gambia Congo-Brazzaville Democratic Republic of Congo Morocco Eritrea Cape Verde Angola Ethiopia Lesotho Egypt Guinea-Bissau Kenya Mozambique Sudan Mauritania Somalia
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we are ready to apply the mask on the gridded dataset xarray ERA5.&lt;/p&gt;
+&lt;p&gt;We select only the first timestep to speed up the process.&lt;/p&gt;
+&lt;p&gt;This step could take few minutes because of ERA5 resolution and grid : Dimensions:    (latitude: 721, longitude: 1440)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; countries_mask_poly&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mask(ds&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;), lat_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, lon_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+mask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.DataArray &#39;region&#39; (latitude: 721, longitude: 1440)&amp;gt;
+array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+Coordinates:
+  * latitude   (latitude) float32 90.0 89.75 89.5 89.25 ... -89.5 -89.75 -90.0
+  * longitude  (longitude) float32 -180.0 -179.75 -179.5 ... 179.25 179.5 179.75
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Mask can be saved (for example as a NetCDF) for a later use.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_netcdf(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./mask_Africa_by_countries.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can use  Panoply free software to plot our netcdf file.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.giss.nasa.gov/tools/panoply/&#34;&gt;https://www.giss.nasa.gov/tools/panoply/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here&#39;s a quick visualisation using Matplotlib:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax)
+countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax, alpha &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;, facecolor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, lw &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0xbdf0d68&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Let&#39;s now extract one specific country from our mask. We will for example extract informations only over Algeria.
+Remember, index for Algeria is: 0  .&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask_algeria &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(mask &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; )
+mask_algeria&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_netcdf(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./mask_Algeria.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+mask_algeria&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax)
+countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax, alpha &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;, facecolor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, lw &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x7528278&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-extract-timeseries&#34;&gt;2- Extract time-series&lt;/h2&gt;
+&lt;p&gt;We can now for each country aggregate the grid cells in the national borders.
+We will first develop two methods to mask our area. Then, we will extract the time series.&lt;/p&gt;
+&lt;h3 id=&#34;-method-1&#34;&gt;- Method 1:&lt;/h3&gt;
+&lt;p&gt;I will focus on Algeria.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ID_COUNTRY &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;COUNTRY[ID_COUNTRY])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Algeria
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As first step, I will save the latitude and longitude vectors because I will use it later. Then, I select the mask points where the value is equal to target value (the ID_COUNTRY code). In the numpy array sel_mask all the values are nan except for the selected ones.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;latitude&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+lon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;longitude&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+
+sel_mask &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(mask &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; ID_COUNTRY)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+sel_mask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To speed-up the process I want to crop the xarray Dataset selecting the smallest box containing the entire mask. To do this I store in id_lon and id_lat the coordinate points where the mask has at least a non-nan value.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;id_lon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lon[np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(&lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isnan(sel_mask), axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))]
+id_lat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lat[np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(&lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isnan(sel_mask), axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))]
+id_lat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;array([37.  , 36.75, 36.5 , 36.25, 36.  , 35.75, 35.5 , 35.25, 35.  ,
+       34.75, 34.5 , 34.25, 34.  , 33.75, 33.5 , 33.25, 33.  , 32.75,
+       32.5 , 32.25, 32.  , 31.75, 31.5 , 31.25, 31.  , 30.75, 30.5 ,
+       30.25, 30.  , 29.75, 29.5 , 29.25, 29.  , 28.75, 28.5 , 28.25,
+       28.  , 27.75, 27.5 , 27.25, 27.  , 26.75, 26.5 , 26.25, 26.  ,
+       25.75, 25.5 , 25.25, 25.  , 24.75, 24.5 , 24.25, 24.  , 23.75,
+       23.5 , 23.25, 23.  , 22.75, 22.5 , 22.25, 22.  , 21.75, 21.5 ,
+       21.25, 21.  , 20.75, 20.5 , 20.25, 20.  , 19.75, 19.5 , 19.25,
+       19.  ], dtype=float32)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The Xarray dataset is reduced selecting only the target year and the coordinates containing the target region. Then the dataset is load from the dask array using compute and then filtered using the mask.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;out_sel1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ds&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(latitude &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slice(id_lat[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], id_lat[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]), longitude &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slice(id_lon[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], id_lon[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]))&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;compute()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(mask &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; ID_COUNTRY)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;out_sel1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:    (latitude: 73, longitude: 82, time: 8760)
+Coordinates:
+  * latitude   (latitude) float64 37.0 36.75 36.5 36.25 ... 19.5 19.25 19.0
+  * longitude  (longitude) float64 -8.5 -8.25 -8.0 -7.75 ... 11.25 11.5 11.75
+  * time       (time) datetime64[ns] 2018-01-01 ... 2018-12-31T23:00:00
+Data variables:
+    t2m        (time, latitude, longitude) float32 nan nan nan ... nan nan nan
+Attributes:
+    Conventions:  CF-1.6
+    history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;-method-2&#34;&gt;- Method 2:&lt;/h3&gt;
+&lt;p&gt;We can directly use xarray library to apply netcdf mask with using .where() method and DataArray mask:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;out_sel2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ds&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(mask &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;out_sel2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:    (latitude: 721, longitude: 1440, time: 8760)
+Coordinates:
+  * longitude  (longitude) float32 -180.0 -179.75 -179.5 ... 179.25 179.5 179.75
+  * latitude   (latitude) float32 90.0 89.75 89.5 89.25 ... -89.5 -89.75 -90.0
+  * time       (time) datetime64[ns] 2018-01-01 ... 2018-12-31T23:00:00
+Data variables:
+    t2m        (time, latitude, longitude) float32 dask.array&amp;lt;shape=(8760, 721, 1440), chunksize=(10, 721, 1440)&amp;gt;
+Attributes:
+    Conventions:  CF-1.6
+    history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Quick visualisation, we will display the first step of our DataArray masked.&lt;/p&gt;
+&lt;p&gt;For out_sel2 array :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+out_sel2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;t2m&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax)
+countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax, alpha &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;, facecolor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0xe73e550&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For out_sel1 array :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+out_sel1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;t2m&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax)
+countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax, alpha &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;, facecolor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0xe8024a8&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Finally we can aggregate by the arithmetic mean using the groupby function to obtain a time-series of national average temperatures.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; out_sel1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;groupby(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean()
+x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:  (time: 8760)
+Coordinates:
+  * time     (time) datetime64[ns] 2018-01-01 ... 2018-12-31T23:00:00
+Data variables:
+    t2m      (time) float32 285.01346 284.65833 283.95526 ... 282.03668 281.461
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we plot the time-series…&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;t2m&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&amp;lt;matplotlib.lines.Line2D at 0xe9dc518&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output5.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Let&#39;s resample our dataset by day and then compute a daily mean.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; out_sel1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;resample(time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;1D&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;273.15&lt;/span&gt;
+x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:    (latitude: 73, longitude: 82, time: 365)
+Coordinates:
+  * longitude  (longitude) float64 -8.5 -8.25 -8.0 -7.75 ... 11.25 11.5 11.75
+  * latitude   (latitude) float64 37.0 36.75 36.5 36.25 ... 19.5 19.25 19.0
+  * time       (time) datetime64[ns] 2018-01-01 2018-01-02 ... 2018-12-31
+Data variables:
+    t2m        (time, latitude, longitude) float32 nan nan nan ... nan nan nan
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;daily_mean &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;t2m&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean(dim&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+daily_mean
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.DataArray &#39;t2m&#39; (time: 365)&amp;gt;
+array([14.550091, 13.812102, 13.700798, ..., 10.975014, 11.182918, 10.956429],
+      dtype=float32)
+Coordinates:
+  * time     (time) datetime64[ns] 2018-01-01 2018-01-02 ... 2018-12-31
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;daily_mean&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&amp;lt;matplotlib.lines.Line2D at 0xe243f98&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output6.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And we save it as a csv&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;daily_mean&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_pandas()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;average-temperature-algeria.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, header &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;t2m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-extract-timeseries-for-one-specific-localisation&#34;&gt;2- Extract time-series for one specific localisation&lt;/h2&gt;
+&lt;p&gt;In this example, we eant to extract time-series for Alger:&lt;/p&gt;
+&lt;p&gt;With:
+- longitude = 3.04
+- latitude = 36.75&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lati &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;36.75&lt;/span&gt;
+loni &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3.04&lt;/span&gt;
+data  &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; out_sel1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(longitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;loni  , latitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;lati  , method&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;nearest&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;t2m
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.DataArray &#39;t2m&#39; (time: 8760)&amp;gt;
+array([289.91342, 289.63348, 289.2745 , ..., 285.62613, 284.9182 , 284.80624],
+      dtype=float32)
+Coordinates:
+    latitude   float64 36.75
+    longitude  float64 3.0
+  * time       (time) datetime64[ns] 2018-01-01 ... 2018-12-31T23:00:00
+Attributes:
+    units:      K
+    long_name:  2 metre temperature
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;data[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;t2m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;t2m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;273.15&lt;/span&gt;
+df &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;t2m&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_dataframe()
+fig &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+df[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;t2m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x20773fd0&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output7.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Let&#39;s plot montlhy temperature distribution for Alger:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;month&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;time&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;latitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;longitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;t2m&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;month&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;2018-01-01 00:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16.7634&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;2018-01-01 01:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16.4835&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;2018-01-01 02:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16.1245&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;2018-01-01 03:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16.197&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;2018-01-01 04:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16.0389&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+sns&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;boxplot(x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;month&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;t2m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;df, palette&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Set1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)  
+figure &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_figure()    
+figure&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_size_inches(&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;) 
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./output8.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Shapefile_netcdf</title>
