@@ -5,7 +5,7 @@
     <link>/authors/</link>
       <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Authors</title>
@@ -13,37 +13,373 @@
     </image>
     
     <item>
+      <title>Antoinette Ludwig</title>
+      <link>/authors/antoinette-ludwig/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/antoinette-ludwig/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Guillaume Dueymes</title>
+      <link>/authors/guillaume-dueymes/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/guillaume-dueymes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Irina Sagurova</title>
+      <link>/authors/irina-sagurova/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/irina-sagurova/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nicholas H. Ogden</title>
+      <link>/authors/nicholas-h.-ogden/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/nicholas-h.-ogden/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Philippe Gachon</title>
+      <link>/authors/philippe-gachon/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/philippe-gachon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yann Pelcat</title>
+      <link>/authors/yann-pelcat/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/yann-pelcat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aamir Fazil</title>
+      <link>/authors/aamir-fazil/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/aamir-fazil/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mariola Mascarenhas</title>
+      <link>/authors/mariola-mascarenhas/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/mariola-mascarenhas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Michael A. Johansson</title>
+      <link>/authors/michael-a.-johansson/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/michael-a.-johansson/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Milka Radojević</title>
+      <link>/authors/milka-radojevic/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/milka-radojevic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sophiya Garasia</title>
+      <link>/authors/sophiya-garasia/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/sophiya-garasia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Victoria Ng</title>
+      <link>/authors/victoria-ng/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/victoria-ng/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>E. D. Poan</title>
+      <link>/authors/e.-d.-poan/</link>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/e.-d.-poan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title> &#39;G. Dueymes&#39;</title>
+      <link>/authors/g.-dueymes/</link>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/g.-dueymes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title> &#39;P. Gachon&#39;</title>
+      <link>/authors/p.-gachon/</link>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/p.-gachon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title> &#39;R. Aider&#39;</title>
+      <link>/authors/r.-aider/</link>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/r.-aider/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title> &#39;R. Laprise&#39;</title>
+      <link>/authors/r.-laprise/</link>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/r.-laprise/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Abderrahmane Yagouti</title>
+      <link>/authors/abderrahmane-yagouti/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/abderrahmane-yagouti/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Denis Gosselin</title>
+      <link>/authors/denis-gosselin/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/denis-gosselin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Louise Bussières</title>
+      <link>/authors/louise-bussieres/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/louise-bussieres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marie Raphoz</title>
+      <link>/authors/marie-raphoz/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/marie-raphoz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Philippe Martin</title>
+      <link>/authors/philippe-martin/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/philippe-martin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pierre Gosselin</title>
+      <link>/authors/pierre-gosselin/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/pierre-gosselin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ray Bustinza</title>
+      <link>/authors/ray-bustinza/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/ray-bustinza/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sharon Jeffers</title>
+      <link>/authors/sharon-jeffers/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/sharon-jeffers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sylvain Labrecque</title>
+      <link>/authors/sylvain-labrecque/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/sylvain-labrecque/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>E. Diaconescu</title>
+      <link>/authors/e.-diaconescu/</link>
+      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/e.-diaconescu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>G.Dueymes</title>
+      <link>/authors/g.dueymes/</link>
+      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/g.dueymes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>I. Seidou Sanda</title>
+      <link>/authors/i.-seidou-sanda/</link>
+      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>/authors/i.-seidou-sanda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Olivier Gagnon</title>
+      <link>/authors/olivier-gagnon/</link>
+      <pubDate>Mon, 01 Sep 2014 00:00:00 +0000</pubDate>
+      <guid>/authors/olivier-gagnon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>P.Gachon</title>
+      <link>/authors/p.gachon/</link>
+      <pubDate>Mon, 01 Sep 2014 00:00:00 +0000</pubDate>
+      <guid>/authors/p.gachon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Allan K Bertram</title>
+      <link>/authors/allan-k-bertram/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>/authors/allan-k-bertram/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ping Du</title>
+      <link>/authors/ping-du/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>/authors/ping-du/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Éric Girard</title>
+      <link>/authors/eric-girard/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>/authors/eric-girard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A. Harding</title>
+      <link>/authors/a.-harding/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/authors/a.-harding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>H-II Eum</title>
+      <link>/authors/h-ii-eum/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/authors/h-ii-eum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>L.Benyahya</title>
+      <link>/authors/l.benyahya/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/authors/l.benyahya/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>M.Radojevic</title>
+      <link>/authors/m.radojevic/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/authors/m.radojevic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>N.Khaliq</title>
+      <link>/authors/n.khaliq/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/authors/n.khaliq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>P.Roy</title>
+      <link>/authors/p.roy/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/authors/p.roy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R.Laprise</title>
+      <link>/authors/r.laprise/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/authors/r.laprise/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A. Stefanof</title>
+      <link>/authors/a.-stefanof/</link>
+      <pubDate>Thu, 01 Nov 2007 00:00:00 +0000</pubDate>
+      <guid>/authors/a.-stefanof/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jean-Pierre Blanchet</title>
+      <link>/authors/jean-pierre-blanchet/</link>
+      <pubDate>Thu, 01 Nov 2007 00:00:00 +0000</pubDate>
+      <guid>/authors/jean-pierre-blanchet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>M. Peltier-Champigny</title>
+      <link>/authors/m.-peltier-champigny/</link>
+      <pubDate>Thu, 01 Nov 2007 00:00:00 +0000</pubDate>
+      <guid>/authors/m.-peltier-champigny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rodrigo Munoz-Alpizar</title>
+      <link>/authors/rodrigo-munoz-alpizar/</link>
+      <pubDate>Thu, 01 Nov 2007 00:00:00 +0000</pubDate>
+      <guid>/authors/rodrigo-munoz-alpizar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title></title>
       <link>/authors/admin/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/authors/admin/</guid>
       <description>&lt;p&gt;I am able to discuss and negotiate with scientists/analysts from different backgrounds in order to understand their needs and offer them the best solution and more importantly develop tools that are unanimously accepted. I worked in various environments, ranging in the development of extreme weather indices (droughts, extreme precipitation&amp;hellip;), validation of regional climate models, development of epidemiological indices, monitoring of vector disease, analysis of storm trajectories or work on instrumental data.
 I am interested by Open Science and willing to learn about Data Science.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Robert Ford</title>
-      <link>/authors/robert-ford/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>/authors/robert-ford/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>First author&#39;s name</title>
-      <link>/authors/first-authors-name/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>/authors/first-authors-name/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Second author&#39;s name</title>
-      <link>/authors/second-authors-name/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>/authors/second-authors-name/</guid>
-      <description></description>
     </item>
     
   </channel>

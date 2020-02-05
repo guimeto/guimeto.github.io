@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nicholas H. Ogden | GDueymes</title>
+    <link>/authors/nicholas-h.-ogden/</link>
+      <atom:link href="/authors/nicholas-h.-ogden/index.xml" rel="self" type="application/rss+xml" />
+    <description>Nicholas H. Ogden</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Nicholas H. Ogden</title>
+      <link>/authors/nicholas-h.-ogden/</link>
+    </image>
+    
+    <item>
+      <title>Predicted Northward Expansion of the Geographic Range of the Tick Vector Amblyomma americanum in North America under Future Climate Conditions</title>
+      <link>/publication/article9/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/article9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assessment of the Probability of Autochthonous Transmission of Chikungunya Virus in Canada under Recent and Projected Climate Change</title>
+      <link>/publication/article8/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/publication/article8/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

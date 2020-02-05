@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2 | GDueymes</title>
+    <link>/categories/2/</link>
+      <atom:link href="/categories/2/index.xml" rel="self" type="application/rss+xml" />
+    <description>2</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>2</title>
+      <link>/categories/2/</link>
+    </image>
+    
+    <item>
+      <title>Predicted Northward Expansion of the Geographic Range of the Tick Vector Amblyomma americanum in North America under Future Climate Conditions</title>
+      <link>/publication/article9/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/article9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assessment of the Probability of Autochthonous Transmission of Chikungunya Virus in Canada under Recent and Projected Climate Change</title>
+      <link>/publication/article8/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/publication/article8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Investigating added value of regional climate modeling in North American winter storm track simulations</title>
+      <link>/publication/article7/</link>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
+      <guid>/publication/article7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>West African monsoon intraseasonal activity and its daily precipitation indices in regional climate models: diagnostics and challenges.</title>
+      <link>/publication/article5/</link>
+      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>/publication/article5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assessment of the effects of acid-coated ice nuclei on the Arctic cloud microstructure, atmospheric dehydration, radiation and temperature during winter </title>
+      <link>/publication/article2/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>/publication/article2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assessment of the Dehydration-Greenhouse Feedback Over the Arctic During Winter</title>
+      <link>/publication/assessment_of_dehydration/</link>
+      <pubDate>Thu, 01 Nov 2007 00:00:00 +0000</pubDate>
+      <guid>/publication/assessment_of_dehydration/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

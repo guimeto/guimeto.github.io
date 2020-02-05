@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Allan K Bertram | GDueymes</title>
+    <link>/authors/allan-k-bertram/</link>
+      <atom:link href="/authors/allan-k-bertram/index.xml" rel="self" type="application/rss+xml" />
+    <description>Allan K Bertram</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Mar 2013 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Allan K Bertram</title>
+      <link>/authors/allan-k-bertram/</link>
+    </image>
+    
+    <item>
+      <title>Assessment of the effects of acid-coated ice nuclei on the Arctic cloud microstructure, atmospheric dehydration, radiation and temperature during winter </title>
+      <link>/publication/article2/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>/publication/article2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

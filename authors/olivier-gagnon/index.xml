@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Olivier Gagnon | GDueymes</title>
+    <link>/authors/olivier-gagnon/</link>
+      <atom:link href="/authors/olivier-gagnon/index.xml" rel="self" type="application/rss+xml" />
+    <description>Olivier Gagnon</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 01 Sep 2014 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Olivier Gagnon</title>
+      <link>/authors/olivier-gagnon/</link>
+    </image>
+    
+    <item>
+      <title>L’interdisciplinarité au service de la santé: cas du Québec. Territoires incubateurs de santé ?</title>
+      <link>/publication/article4/</link>
+      <pubDate>Mon, 01 Sep 2014 00:00:00 +0000</pubDate>
+      <guid>/publication/article4/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Milka Radojević | GDueymes</title>
+    <link>/authors/milka-radojevic/</link>
+      <atom:link href="/authors/milka-radojevic/index.xml" rel="self" type="application/rss+xml" />
+    <description>Milka Radojević</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Milka Radojević</title>
+      <link>/authors/milka-radojevic/</link>
+    </image>
+    
+    <item>
+      <title>Assessment of the Probability of Autochthonous Transmission of Chikungunya Virus in Canada under Recent and Projected Climate Change</title>
+      <link>/publication/article8/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>/publication/article8/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

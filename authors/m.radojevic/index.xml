@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>M.Radojevic | GDueymes</title>
+    <link>/authors/m.radojevic/</link>
+      <atom:link href="/authors/m.radojevic/index.xml" rel="self" type="application/rss+xml" />
+    <description>M.Radojevic</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2011 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>M.Radojevic</title>
+      <link>/authors/m.radojevic/</link>
+    </image>
+    
+    <item>
+      <title>Evaluation of regional Climate Model simulations: intercomparaisonover Canada and specific region </title>
+      <link>/publication/article3/</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 +0000</pubDate>
+      <guid>/publication/article3/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

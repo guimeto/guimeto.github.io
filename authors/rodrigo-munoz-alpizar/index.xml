@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rodrigo Munoz-Alpizar | GDueymes</title>
+    <link>/authors/rodrigo-munoz-alpizar/</link>
+      <atom:link href="/authors/rodrigo-munoz-alpizar/index.xml" rel="self" type="application/rss+xml" />
+    <description>Rodrigo Munoz-Alpizar</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 01 Nov 2007 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Rodrigo Munoz-Alpizar</title>
+      <link>/authors/rodrigo-munoz-alpizar/</link>
+    </image>
+    
+    <item>
+      <title>Assessment of the Dehydration-Greenhouse Feedback Over the Arctic During Winter</title>
+      <link>/publication/assessment_of_dehydration/</link>
+      <pubDate>Thu, 01 Nov 2007 00:00:00 +0000</pubDate>
+      <guid>/publication/assessment_of_dehydration/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

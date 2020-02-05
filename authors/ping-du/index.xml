@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ping Du | GDueymes</title>
+    <link>/authors/ping-du/</link>
+      <atom:link href="/authors/ping-du/index.xml" rel="self" type="application/rss+xml" />
+    <description>Ping Du</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Mar 2013 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Ping Du</title>
+      <link>/authors/ping-du/</link>
+    </image>
+    
+    <item>
+      <title>Assessment of the effects of acid-coated ice nuclei on the Arctic cloud microstructure, atmospheric dehydration, radiation and temperature during winter </title>
+      <link>/publication/article2/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>/publication/article2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

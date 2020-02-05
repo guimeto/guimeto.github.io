@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sylvain Labrecque | GDueymes</title>
+    <link>/authors/sylvain-labrecque/</link>
+      <atom:link href="/authors/sylvain-labrecque/index.xml" rel="self" type="application/rss+xml" />
+    <description>Sylvain Labrecque</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 01 Sep 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Sylvain Labrecque</title>
+      <link>/authors/sylvain-labrecque/</link>
+    </image>
+    
+    <item>
+      <title>Guide to identifying alert thresholds for heat waves in Canada based on evidence</title>
+      <link>/publication/article6/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      <guid>/publication/article6/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

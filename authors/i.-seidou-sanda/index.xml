@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>I. Seidou Sanda | GDueymes</title>
+    <link>/authors/i.-seidou-sanda/</link>
+      <atom:link href="/authors/i.-seidou-sanda/index.xml" rel="self" type="application/rss+xml" />
+    <description>I. Seidou Sanda</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 01 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>I. Seidou Sanda</title>
+      <link>/authors/i.-seidou-sanda/</link>
+    </image>
+    
+    <item>
+      <title>West African monsoon intraseasonal activity and its daily precipitation indices in regional climate models: diagnostics and challenges.</title>
+      <link>/publication/article5/</link>
+      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>/publication/article5/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

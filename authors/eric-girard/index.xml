@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Éric Girard | GDueymes</title>
+    <link>/authors/eric-girard/</link>
+      <atom:link href="/authors/eric-girard/index.xml" rel="self" type="application/rss+xml" />
+    <description>Éric Girard</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Mar 2013 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Éric Girard</title>
+      <link>/authors/eric-girard/</link>
+    </image>
+    
+    <item>
+      <title>Assessment of the effects of acid-coated ice nuclei on the Arctic cloud microstructure, atmospheric dehydration, radiation and temperature during winter </title>
+      <link>/publication/article2/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>/publication/article2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assessment of the Dehydration-Greenhouse Feedback Over the Arctic During Winter</title>
+      <link>/publication/assessment_of_dehydration/</link>
+      <pubDate>Thu, 01 Nov 2007 00:00:00 +0000</pubDate>
+      <guid>/publication/assessment_of_dehydration/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
