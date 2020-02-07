@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="﻿
+Scraping web data using Python In this tutorial, we will see how to get data from Environment Canada webpage.
+Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal..
+https://meteo.gc.ca/city/pages/qc-147_metric_f.html
+import requests import pandas as pd # we download the web page page = requests.get(&#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/scrap_eccc/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/scrap_eccc/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/post/scrap_eccc/">
+  <meta property="og:title" content="Scrap_ECCC | GDueymes">
+  <meta property="og:description" content="﻿
+Scraping web data using Python In this tutorial, we will see how to get data from Environment Canada webpage.
+Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal..
+https://meteo.gc.ca/city/pages/qc-147_metric_f.html
+import requests import pandas as pd # we download the web page page = requests.get(&#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-02-07T12:55:20-08:00">
+    
+    <meta property="article:modified_time" content="2020-02-07T12:55:20-08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/scrap_eccc/"
+  },
+  "headline": "Scrap_ECCC",
+  
+  "datePublished": "2020-02-07T12:55:20-08:00",
+  "dateModified": "2020-02-07T12:55:20-08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Guillaume Dueymes"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "GDueymes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "﻿\nScraping web data using Python In this tutorial, we will see how to get data from Environment Canada webpage.\nExploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal..\nhttps://meteo.gc.ca/city/pages/qc-147_metric_f.html\nimport requests import pandas as pd # we download the web page page = requests.get(\u0026#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html\u0026#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Scrap_ECCC | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Scrap_ECCC</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 7, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>﻿</p>
+<h1 id="scraping-web-data-using-python">Scraping web data using Python</h1>
+<p>In this tutorial, we  will see how to get data from Environment Canada webpage.</p>
+<h2 id="exploring-the-structure-of-the-eccc-web-page">Exploring the structure of the ECCC web page</h2>
+<p>We will extract the current weather conditions and weather forecast for Montreal..</p>
+<p><a href="https://meteo.gc.ca/city/pages/qc-147_metric_f.html">https://meteo.gc.ca/city/pages/qc-147_metric_f.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#75715e"># we download the web page</span>
+page <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://meteo.gc.ca/city/pages/qc-147_metric_e.html</span><span style="color:#e6db74">&#34;</span>)
+
+<span style="color:#75715e"># Using BeautifulSoup to analyze html code</span>
+<span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+
+<span style="color:#75715e"># we will analyze the previous content with BeautifulSoup</span>
+soup <span style="color:#f92672">=</span> BeautifulSoup(page<span style="color:#f92672">.</span>content,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">html.parser</span><span style="color:#e6db74">&#39;</span>)
+soup<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>[&lt;meta charset=&quot;utf-8&quot;/&gt;,
+ &lt;meta content=&quot;width=device-width, initial-scale=1&quot; name=&quot;viewport&quot;/&gt;,
+ &lt;meta content=&quot;Environment Canada&quot; name=&quot;dcterms.creator&quot;/&gt;,
+ &lt;meta content=&quot;eng&quot; name=&quot;dcterms.language&quot; title=&quot;ISO639-2&quot;/&gt;,
+ &lt;meta content=&quot;Current conditions and forecasts including 7 day outlook, daily high/low temperature, warnings, chance of precipitation, pressure, humidity/wind chill (when applicable) historical data, normals, record values and sunrise/sunset times&quot; name=&quot;description&quot;/&gt;,
+ &lt;meta content=&quot;meteorology;weather;weather warnings;weather forecasts&quot; name=&quot;dcterms.subject&quot; title=&quot;scheme&quot;/&gt;,
+ &lt;meta content=&quot;2013-04-16&quot; name=&quot;dcterms.issued&quot; title=&quot;W3CDTF&quot;/&gt;,
+ &lt;meta content=&quot;2020-02-07&quot; name=&quot;dcterms.modified&quot; title=&quot;W3CDTF&quot;/&gt;,
+ &lt;title&gt;Montréal, QC - 7 Day Forecast - Environment Canada&lt;/title&gt;,
+ &lt;meta content=&quot;Montréal, QC - 7 Day Forecast - Environment Canada&quot; name=&quot;dcterms.title&quot;/&gt;,
+ &lt;link href=&quot;/template/gcweb/v5.0.1/assets/favicon.ico&quot; rel=&quot;icon&quot; type=&quot;image/x-icon&quot;/&gt;,
+ &lt;link href=&quot;/template/gcweb/v5.0.1/css/theme.min.css&quot; rel=&quot;stylesheet&quot;/&gt;,
+ &lt;link href=&quot;/v175/css/city/jquery-ui-1.10.3.custom.min.css&quot; rel=&quot;stylesheet&quot;/&gt;,
+ &lt;noscript&gt;&lt;link href=&quot;/template/gcweb/v5.0.1/css/noscript.min.css&quot; rel=&quot;stylesheet&quot;/&gt;&lt;/noscript&gt;,
+ &lt;link href=&quot;/template/gcweb/v5.0.1/css/noscript.min.css&quot; rel=&quot;stylesheet&quot;/&gt;,
+ &lt;link href=&quot;/rss/city/qc-147_e.xml&quot; rel=&quot;alternate&quot; title=&quot;ATOM feed for Montréal - Weather - Environment Canada&quot; type=&quot;application/atom+xml&quot;/&gt;,
+ &lt;link href=&quot;/rss/warning/qc-147_e.xml&quot; rel=&quot;alternate&quot; title=&quot;ATOM feed for Montréal - Warning - Environment Canada&quot; type=&quot;application/atom+xml&quot;/&gt;,
+ &lt;link href=&quot;/v175/css/city/city.css&quot; rel=&quot;stylesheet&quot;/&gt;,
+ &lt;link href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css&quot; rel=&quot;stylesheet&quot;/&gt;,
+ &lt;link href=&quot;/v175/css/wxotemplate/wxo.css&quot; rel=&quot;stylesheet&quot;&gt;
+ &lt;link href=&quot;/v175/css/wxotemplate/print-sm.css&quot; rel=&quot;stylesheet&quot;/&gt;
+ &lt;!--[if lte IE 9]&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;/v175/css/wxotemplate/wxo-ie8.css&quot; /&gt;&lt;![endif]--&gt;
+ &lt;/link&gt;,
+ &lt;link href=&quot;/v175/css/wxotemplate/print-sm.css&quot; rel=&quot;stylesheet&quot;/&gt;]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">soup<span style="color:#f92672">.</span>title
+</code></pre></div><pre><code>&lt;title&gt;Montréal, QC - 7 Day Forecast - Environment Canada&lt;/title&gt;
+</code></pre>
+<h2 id="1--reading-current-conditions">1-  Reading current conditions</h2>
+<h3 id="column-1">Column 1</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">conditions <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mainContent</span><span style="color:#e6db74">&#34;</span>)
+col1 <span style="color:#f92672">=</span> conditions<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">dl-horizontal wxo-conds-col1</span><span style="color:#e6db74">&#34;</span>)
+today1 <span style="color:#f92672">=</span> col1[<span style="color:#ae81ff">1</span>]
+<span style="color:#75715e">#print(today1.prettify())</span>
+tmp1  <span style="color:#f92672">=</span> today1<span style="color:#f92672">.</span>select(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.mrgn-bttm-0</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#66d9ef">print</span>(tmp1)
+</code></pre></div><pre><code>[&lt;dd class=&quot;mrgn-bttm-0&quot;&gt;Light Snow and Blowing Snow&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;98.5 &lt;abbr title=&quot;kilopascals&quot;&gt;kPa&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;29.1 inches&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0&quot;&gt;Falling&lt;/dd&gt;]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">short_desc <span style="color:#f92672">=</span> [tmp1[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get_text()]
+short_desc
+</code></pre></div><pre><code>['Light Snow and Blowing Snow']
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pression <span style="color:#f92672">=</span> [tmp1[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)]
+trend <span style="color:#f92672">=</span>[ tmp1[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>get_text()]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">short_desc</span><span style="color:#e6db74">&#34;</span>: short_desc,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pression</span><span style="color:#e6db74">&#34;</span>:   pression,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">trend</span><span style="color:#e6db74">&#34;</span>:   trend,
+                       })
+weather
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="left">short_desc</th>
+<th align="left">pression</th>
+<th align="left">trend</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="left">Light Snow and Blowing Snow</td>
+<td align="left">98.5 kPa</td>
+<td align="left">Falling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="column-2">Column 2</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">col2 <span style="color:#f92672">=</span> conditions<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">dl-horizontal wxo-conds-col2</span><span style="color:#e6db74">&#34;</span>)
+today2 <span style="color:#f92672">=</span> col2[<span style="color:#ae81ff">1</span>]
+<span style="color:#75715e">#print(today2.prettify())</span>
+tmp2  <span style="color:#f92672">=</span> today2<span style="color:#f92672">.</span>select(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.mrgn-bttm-0</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#66d9ef">print</span>(tmp2)
+</code></pre></div><pre><code>[&lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;-6.7°&lt;abbr title=&quot;Celsius&quot;&gt;C&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;19.9°
+                    &lt;abbr title=&quot;Fahrenheit&quot;&gt;F&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;-8.8°&lt;abbr title=&quot;Celsius&quot;&gt;C&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;16.2°&lt;abbr title=&quot;Fahrenheit&quot;&gt;F&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0&quot;&gt;85%&lt;/dd&gt;]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">temperature <span style="color:#f92672">=</span> [tmp2[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)]
+rosee <span style="color:#f92672">=</span> [tmp2[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)]
+humidity <span style="color:#f92672">=</span> [tmp2[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">temperature</span><span style="color:#e6db74">&#34;</span>: temperature,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">temperature_rosee</span><span style="color:#e6db74">&#34;</span>:   rosee,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">humidity</span><span style="color:#e6db74">&#34;</span>:   humidity,
+                       })
+weather
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="left">temperature</th>
+<th align="left">temperature_rosee</th>
+<th align="left">humidity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="left">-6.7°C</td>
+<td align="left">-8.8°C</td>
+<td align="left">85%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="column-3">Column 3</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">col3 <span style="color:#f92672">=</span> conditions<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">dl-horizontal wxo-conds-col3</span><span style="color:#e6db74">&#34;</span>)
+today3 <span style="color:#f92672">=</span> col3[<span style="color:#ae81ff">1</span>]
+<span style="color:#75715e">#print(today2.prettify())</span>
+tmp3  <span style="color:#f92672">=</span> today3<span style="color:#f92672">.</span>select(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.mrgn-bttm-0</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#66d9ef">print</span>(tmp3)
+</code></pre></div><pre><code>[&lt;dd class=&quot;longContent mrgn-bttm-0 wxo-metric-hide&quot;&gt;
+&lt;abbr title=&quot;North&quot;&gt;N&lt;/abbr&gt; 35  &lt;br class=&quot;visible-xs&quot;/&gt;gust 53 &lt;abbr title=&quot;kilometres per hour&quot;&gt;km/h&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;longContent mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;
+&lt;abbr title=&quot;North&quot;&gt;N&lt;/abbr&gt; 22  &lt;br class=&quot;visible-xs&quot;/&gt;gust 33 &lt;abbr title=&quot;miles per hour&quot;&gt;mph&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;-16&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;3&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;0.8 &lt;abbr title=&quot;kilometres&quot;&gt;km&lt;/abbr&gt;
+&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;0.5 mile
+                        &lt;/dd&gt;]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">wind <span style="color:#f92672">=</span> [tmp3[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)]
+visibility <span style="color:#f92672">=</span> [tmp3[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">short_desc</span><span style="color:#e6db74">&#34;</span>: short_desc,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pression</span><span style="color:#e6db74">&#34;</span>:   pression,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Trend</span><span style="color:#e6db74">&#34;</span>:   trend,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">temperature</span><span style="color:#e6db74">&#34;</span>: temperature,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">temperature_rosee</span><span style="color:#e6db74">&#34;</span>:   rosee,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">humidity</span><span style="color:#e6db74">&#34;</span>:   humidity,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">wind</span><span style="color:#e6db74">&#34;</span>:   wind,
+                        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">visibility</span><span style="color:#e6db74">&#34;</span>:   visibility,
+                       })
+weather
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="left">short_desc</th>
+<th align="left">pression</th>
+<th align="left">Trend</th>
+<th align="left">temperature</th>
+<th align="left">temperature_rosee</th>
+<th align="left">humidity</th>
+<th align="left">wind</th>
+<th align="right">visibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="left">Light Snow and Blowing Snow</td>
+<td align="left">98.5 kPa</td>
+<td align="left">Falling</td>
+<td align="left">-6.7°C</td>
+<td align="left">-8.8°C</td>
+<td align="left">85%</td>
+<td align="left">N 35  gust 53 km/h</td>
+<td align="right">-16</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">current.csv</span><span style="color:#e6db74">&#34;</span>, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">utf-8</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><h2 id="2--reading-forecasting-values">2-  Reading forecasting values</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mainContent</span><span style="color:#e6db74">&#34;</span>)
+row1 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">div-row div-row1 div-row-head</span><span style="color:#e6db74">&#34;</span>)
+row1
+</code></pre></div><pre><code>[&lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;&lt;a href=&quot;/forecast/hourly/qc-147_metric_e.html&quot;&gt;&lt;strong title=&quot;Friday&quot;&gt;Fri&lt;/strong&gt;&lt;br/&gt;7 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;&lt;/a&gt;&lt;/div&gt;,
+ &lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;
+ &lt;strong title=&quot;Saturday&quot;&gt;Sat&lt;/strong&gt;&lt;br/&gt;8 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;
+ &lt;strong title=&quot;Sunday&quot;&gt;Sun&lt;/strong&gt;&lt;br/&gt;9 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;
+ &lt;strong title=&quot;Monday&quot;&gt;Mon&lt;/strong&gt;&lt;br/&gt;10 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;
+ &lt;strong title=&quot;Tuesday&quot;&gt;Tue&lt;/strong&gt;&lt;br/&gt;11 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;
+ &lt;strong title=&quot;Wednesday&quot;&gt;Wed&lt;/strong&gt;&lt;br/&gt;12 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;
+ &lt;strong title=&quot;Thursday&quot;&gt;Thu&lt;/strong&gt;&lt;br/&gt;13 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
+ &lt;/div&gt;]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mainContent</span><span style="color:#e6db74">&#34;</span>)
+row1 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">div-row div-row1 div-row-head</span><span style="color:#e6db74">&#34;</span>)
+periods <span style="color:#f92672">=</span> [pt<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xa0</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">for</span> pt <span style="color:#f92672">in</span> row1]
+periods
+</code></pre></div><pre><code>['Fri7 Feb',
+ 'Sat8 Feb',
+ 'Sun9 Feb',
+ 'Mon10 Feb',
+ 'Tue11 Feb',
+ 'Wed12 Feb',
+ 'Thu13 Feb']
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mainContent</span><span style="color:#e6db74">&#34;</span>)
+row2 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">div-row div-row2 div-row-data</span><span style="color:#e6db74">&#34;</span>)
+row2[<span style="color:#ae81ff">1</span>]
+</code></pre></div><pre><code>&lt;div class=&quot;div-row div-row2 div-row-data&quot;&gt;
+&lt;img alt=&quot;A mix of sun and cloud&quot; class=&quot;center-block&quot; height=&quot;51&quot; src=&quot;/weathericons/02.gif&quot; width=&quot;60&quot;/&gt;&lt;p class=&quot;mrgn-bttm-0&quot;&gt;&lt;span class=&quot;high wxo-metric-hide&quot; title=&quot;max&quot;&gt;-13°&lt;abbr title=&quot;Celsius&quot;&gt;C&lt;/abbr&gt;&lt;/span&gt;&lt;span class=&quot;high wxo-imperial-hide wxo-city-hidden&quot; title=&quot;max&quot;&gt;9°&lt;abbr title=&quot;Fahrenheit&quot;&gt;F&lt;/abbr&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;mrgn-bttm-0 pop text-center&quot;&gt; &lt;/p&gt;
+&lt;p class=&quot;mrgn-bttm-0&quot;&gt;A mix of sun and cloud&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mainContent</span><span style="color:#e6db74">&#34;</span>)
+row2 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">div-row div-row2 div-row-data</span><span style="color:#e6db74">&#34;</span>)
+temperature_f <span style="color:#f92672">=</span> [pt<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#ae81ff">1</span>][:] <span style="color:#66d9ef">for</span> pt <span style="color:#f92672">in</span> row2]
+temperature_f
+</code></pre></div><pre><code>['-5°C23°F',
+ '-13°C9°F',
+ '-6°C21°F',
+ '-3°C27°F',
+ '-2°C28°F',
+ '-6°C21°F',
+ '-6°C21°F']
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">temperature_2<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> val <span style="color:#f92672">in</span> enumerate(temperature_f):
+    temperature_2<span style="color:#f92672">.</span>append(val[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">C</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">C</span><span style="color:#e6db74">&#39;</span>)
+temperature_2
+</code></pre></div><pre><code>['-5°C', '-13°C', '-6°C', '-3°C', '-2°C', '-6°C', '-6°C']
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">conditions_f <span style="color:#f92672">=</span> [pt<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#ae81ff">3</span>] <span style="color:#66d9ef">for</span> pt <span style="color:#f92672">in</span> row2]
+conditions_f
+</code></pre></div><pre><code>['Snow at times heavy and blowing snow',
+ 'A mix of sun and cloud',
+ 'Sunny',
+ 'Snow',
+ 'Periods of snow',
+ 'A mix of sun and cloud',
+ 'Chance of flurries']
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather_f <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Period</span><span style="color:#e6db74">&#34;</span>: periods,
+                       <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">temperature_f</span><span style="color:#e6db74">&#34;</span>: temperature_f,
+                       <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conditions_f</span><span style="color:#e6db74">&#34;</span>:conditions_f,
+                       })
+weather_f
+
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="left">Period</th>
+<th align="left">temperature_f</th>
+<th align="left">conditions_f</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="left">Fri7 Feb</td>
+<td align="left">-5°C23°F</td>
+<td align="left">Snow at times heavy and blowing snow</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="left">Sat8 Feb</td>
+<td align="left">-13°C9°F</td>
+<td align="left">A mix of sun and cloud</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="left">Sun9 Feb</td>
+<td align="left">-6°C21°F</td>
+<td align="left">Sunny</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="left">Mon10 Feb</td>
+<td align="left">-3°C27°F</td>
+<td align="left">Snow</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="left">Tue11 Feb</td>
+<td align="left">-2°C28°F</td>
+<td align="left">Periods of snow</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="left">Wed12 Feb</td>
+<td align="left">-6°C21°F</td>
+<td align="left">A mix of sun and cloud</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="left">Thu13 Feb</td>
+<td align="left">-6°C21°F</td>
+<td align="left">Chance of flurries</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-download-of-weather-icons-for-the-next-7-days">3- Download of weather icons for the next 7 days</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> urllib <span style="color:#f92672">import</span> request
+row3 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">div-row div-row2 div-row-data</span><span style="color:#e6db74">&#34;</span>)
+i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> images <span style="color:#f92672">in</span> row3:
+    s <span style="color:#f92672">=</span> images<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">img</span><span style="color:#e6db74">&#39;</span>)
+    f <span style="color:#f92672">=</span> open(str(i) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.gif</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wb</span><span style="color:#e6db74">&#39;</span>)
+    f<span style="color:#f92672">.</span>write(request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://meteo.gc.ca/weathericons/</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">+</span>str(s)[str(s)<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gif</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>:(str(s)<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gif</span><span style="color:#e6db74">&#39;</span>))<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.gif</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>read())
+    f<span style="color:#f92672">.</span>close() 
+    i <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> 
+</code></pre></div><p><img src="scrap.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather_f<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">forecast.csv</span><span style="color:#e6db74">&#34;</span>, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">utf-8</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/scrap_eccc/&amp;text=Scrap_ECCC" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/scrap_eccc/&amp;t=Scrap_ECCC" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Scrap_ECCC&amp;body=/post/scrap_eccc/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/scrap_eccc/&amp;title=Scrap_ECCC" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Scrap_ECCC%20/post/scrap_eccc/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/scrap_eccc/&amp;title=Scrap_ECCC" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hued2496a182fbb6fc8c711157078d29a6_5348924_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Guillaume Dueymes</a></h5>
+      <h6 class="card-subtitle">Data Scientist and Research Assistant</h6>
+      <p class="card-text">My research interests include data science, data management and climate science.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Guillaume_Dueymes" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/guimeto" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
