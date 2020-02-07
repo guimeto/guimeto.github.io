@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>GDueymes</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 07 Feb 2020 10:57:37 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 07 Feb 2020 11:31:00 -0800</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>GDueymes</title>
@@ -2767,6 +2767,233 @@ Data variables:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>NARR_Synoptic</title>
+      <link>/post/narr_synoptic/</link>
+      <pubDate>Fri, 07 Feb 2020 11:31:00 -0800</pubDate>
+      <guid>/post/narr_synoptic/</guid>
+      <description>&lt;h1 id=&#34;working-with-netcd4python-data-synoptic-map&#34;&gt;Working with Netcd4-python data: Synoptic map&lt;/h1&gt;
+&lt;p&gt;In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files.
+We will then use matplotlib to plot it, and cartopy to map our analyse.&lt;/p&gt;
+&lt;p&gt;We will see the different steps to plot an exemple of synoptic map over North America with:
++ geopotential 850hpa
++ Temperature 850hpa
++ UU,VV 250hpa&lt;/p&gt;
+&lt;p&gt;We fist import the necessary packages. The plt.rcParams[&amp;lsquo;figure.figsize&amp;rsquo;] just sets the size of the inline figures in this notebook to make them larger and easier to read.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; cfeature
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; mpl
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings
+warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rcParams[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;figure.figsize&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will work with fields from NARR reanalysis at pressure levels.&lt;/p&gt;
+&lt;p&gt;Data can be directly download on this link:
+&lt;a href=&#34;ftp://ftp.cdc.noaa.gov/Datasets/NARR/pressure/&#34;&gt;ftp://ftp.cdc.noaa.gov/Datasets/NARR/pressure/&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;tas &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_air_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+uu &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_uwnd_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+vv &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_vwnd_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+omega &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/Daily/omega/NARR_omega_lc_2018_01_d.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+hgt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_hgt_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exploring-the-data&#34;&gt;- Exploring the data&lt;/h2&gt;
+&lt;p&gt;We can quickly explore our datasets by using some methods of the xarray library:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- DS.var
+- DS.dims
+= DS.coords
+- DS.attrs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hgt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:            (level: 29, time: 248, x: 349, y: 277)
+Coordinates:
+  * time               (time) datetime64[ns] 2018-01-01 ... 2018-01-31T21:00:00
+  * level              (level) float32 1000.0 975.0 950.0 ... 150.0 125.0 100.0
+    lat                (y, x) float32 ...
+    lon                (y, x) float32 ...
+  * y                  (y) float32 0.0 32463.0 64926.0 ... 8927325.0 8959788.0
+  * x                  (x) float32 0.0 32463.0 64926.0 ... 11264660.0 11297120.0
+Data variables:
+    Lambert_Conformal  int32 ...
+    hgt                (time, level, y, x) float32 ...
+Attributes:
+    Conventions:    CF-1.2
+    centerlat:      50.0
+    centerlon:      -107.0
+    comments:       
+    institution:    National Centers for Environmental Prediction
+    latcorners:     [ 1.000001  0.897945 46.3544   46.63433 ]
+    loncorners:     [-145.5       -68.32005    -2.569891  148.6418  ]
+    platform:       Model
+    standardpar1:   50.0
+    standardpar2:   50.000001
+    title:          8x Daily NARR
+    history:        created Mon Jul 18 17:37:00 MDT 2016 by NOAA/ESRL/PSD
+    dataset_title:  NCEP North American Regional Reanalysis (NARR)
+    references:     https://www.esrl.noaa.gov/psd/data/gridded/data.narr.html
+    source:         http://www.emc.ncep.noaa.gov/mmb/rreanl/index.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hgt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;coords
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Coordinates:
+  * time     (time) datetime64[ns] 2018-01-01 ... 2018-01-31T21:00:00
+  * level    (level) float32 1000.0 975.0 950.0 925.0 ... 150.0 125.0 100.0
+    lat      (y, x) float32 ...
+    lon      (y, x) float32 ...
+  * y        (y) float32 0.0 32463.0 64926.0 ... 8894862.0 8927325.0 8959788.0
+  * x        (x) float32 0.0 32463.0 64926.0 ... 11264660.0 11297120.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can quickly explore our datasets by using some methods of the xarray library.&lt;/p&gt;
+&lt;p&gt;We want to analyse a specific date : 13/01/2018 at 12UTC.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;tas&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.DataArray &#39;time&#39; (time: 248)&amp;gt;
+array([&#39;2018-01-01T00:00:00.000000000&#39;, &#39;2018-01-01T03:00:00.000000000&#39;,
+       &#39;2018-01-01T06:00:00.000000000&#39;, ..., &#39;2018-01-31T15:00:00.000000000&#39;,
+       &#39;2018-01-31T18:00:00.000000000&#39;, &#39;2018-01-31T21:00:00.000000000&#39;],
+      dtype=&#39;datetime64[ns]&#39;)
+Coordinates:
+  * time     (time) datetime64[ns] 2018-01-01 ... 2018-01-31T21:00:00
+Attributes:
+    axis:                T
+    coordinate_defines:  point
+    delta_t:             0000-00-00 03:00:00
+    long_name:           Time
+    standard_name:       time
+    actual_range:        [1910952. 1911693.]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#To select a specifi date: &lt;/span&gt;
+date &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;2018-01-13T12&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+tas&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;date)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(level&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;340&lt;/span&gt;), y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;230&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:            (x: 280, y: 180)
+Coordinates:
+    time               datetime64[ns] 2018-01-13T12:00:00
+    level              float32 500.0
+    lat                (y, x) float32 ...
+    lon                (y, x) float32 ...
+  * y                  (y) float32 1623150.0 1655613.0 ... 7401564.0 7434027.0
+  * x                  (x) float32 1947780.0 1980243.0 ... 10972490.0 11004960.0
+Data variables:
+    Lambert_Conformal  int32 ...
+    air                (y, x) float32 ...
+Attributes:
+    Conventions:    CF-1.2
+    centerlat:      50.0
+    centerlon:      -107.0
+    comments:       
+    institution:    National Centers for Environmental Prediction
+    latcorners:     [ 1.000001  0.897945 46.3544   46.63433 ]
+    loncorners:     [-145.5       -68.32005    -2.569891  148.6418  ]
+    platform:       Model
+    standardpar1:   50.0
+    standardpar2:   50.000001
+    title:          8x Daily NARR
+    history:        created Mon Jul 18 17:31:43 MDT 2016 by NOAA/ESRL/PSD
+    dataset_title:  NCEP North American Regional Reanalysis (NARR)
+    references:     https://www.esrl.noaa.gov/psd/data/gridded/data.narr.html
+    source:         http://www.emc.ncep.noaa.gov/mmb/rreanl/index.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hgt850 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hgt[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;hgt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;date)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(level&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;850&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;340&lt;/span&gt;), y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;230&lt;/span&gt;))
+tt850 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tas[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;air&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;date)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(level&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;850&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;340&lt;/span&gt;), y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;230&lt;/span&gt;))
+urel250 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; uu[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;uwnd&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;date)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(level&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;250&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;340&lt;/span&gt;), y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;230&lt;/span&gt;))
+vrel250 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; vv[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;vwnd&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;date)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(level&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;250&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;340&lt;/span&gt;), y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;slice(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;230&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;plotMap&lt;/span&gt;():
+    &lt;span style=&#34;color:#75715e&#34;&gt;#Set the projection information&lt;/span&gt;
+    proj &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LambertConformal(central_longitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;97.0&lt;/span&gt;,central_latitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt;, standard_parallels&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt;])
+    &lt;span style=&#34;color:#75715e&#34;&gt;#Create a figure with an axes object on which we will plot. Pass the projection to that axes.&lt;/span&gt;
+    fig, ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots(subplot_kw&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dict(projection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;proj))
+    
+    &lt;span style=&#34;color:#75715e&#34;&gt;#Zoom in&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ax.set_extent([-140,-60,10,70])&lt;/span&gt;
+    
+    &lt;span style=&#34;color:#75715e&#34;&gt;#Add map features&lt;/span&gt;
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAND, facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;0.9&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#Grayscale colors can be set using 0 (black) to 1 (white)&lt;/span&gt;
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAKES, alpha&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.9&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;#Alpha sets transparency (0 is transparent, 1 is solid)&lt;/span&gt;
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BORDERS, zorder&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;COASTLINE, zorder&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;#We can use additional features from Natural Earth (http://www.naturalearthdata.com/features/)&lt;/span&gt;
+    states_provinces &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(
+            category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;cultural&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,  name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;admin_1_states_provinces_lines&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+            scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, zorder&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+    
+    &lt;span style=&#34;color:#75715e&#34;&gt;#Add lat/lon gridlines every 20° to the map&lt;/span&gt;
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gridlines(xlocs&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;361&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;), ylocs&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)) 
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; fig, ax
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We specify the interval for our height contours. We use numpy&#39;s function arange to select a range of contours from 500 to 2000 m, every 60 m.&lt;/p&gt;
+&lt;p&gt;A key thing to note is the transform argument at the end of the contour call. This is what tells matplotlib to transform our variable in lat/lon coordinates onto our map projection coordinates.&lt;/p&gt;
+&lt;p&gt;We then plot temperature in filled contours. Matplotlib has many colormaps from which to choose. Here, we use cm.jet_r.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#Import scipy.ndimage to get the gaussian_filter function&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; scipy.ndimage &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ndimage
+hght_levels &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;) 
+&lt;span style=&#34;color:#75715e&#34;&gt;#Plot a new figure and map axes&lt;/span&gt;
+fig, ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plotMap()
+&lt;span style=&#34;color:#75715e&#34;&gt;## Choisissons une colormap&lt;/span&gt;
+cmap0&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cm&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;jet_r
+cmap0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_under(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;w&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;## on met en blanc les valeurs inferieures au min de clev&lt;/span&gt;
+cmap0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_over(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;darkblue&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#Smooth and re-plot the temperature field&lt;/span&gt;
+tt_smooth &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ndimage&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gaussian_filter(tt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;273.15&lt;/span&gt;, sigma&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.5&lt;/span&gt;, order&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+tt_contour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;contourf(tt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lon&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values, tt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values, tt_smooth, zorder&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,  
+                           cmap&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;cmap0, transform &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#Smooth and re-plot the height field&lt;/span&gt;
+hght_smooth &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ndimage&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gaussian_filter(hgt850, sigma&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, order&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+hght_contour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;contour(hgt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lon, hgt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lat, hght_smooth, levels&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;hght_levels, linewidths&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, colors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;k&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,transform &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+&lt;span style=&#34;color:#75715e&#34;&gt;#Plot contour labels for the heights, leaving a break in the contours for the text (inline=True)&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;clabel(hght_contour,  hght_levels, inline&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True, fmt&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%1i&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;a list of 18 text.Text objects&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;output_13_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;We can improve our synoptic map with adding wind barbs in Knots and using our own colormap.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#Import scipy.ndimage to get the gaussian_filter function&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; scipy.ndimage &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ndimage
+hght_levels &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;) 
+tt_levels &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) 
+&lt;span style=&#34;color:#75715e&#34;&gt;#Plot a new figure and map axes&lt;/span&gt;
+fig, ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plotMap()
+&lt;span style=&#34;color:#75715e&#34;&gt;## Choisissons une colormap&lt;/span&gt;
+Y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([[&lt;span style=&#34;color:#ae81ff&#34;&gt;77&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;111&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;115&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;181&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;160&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;17&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;222&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;195&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;240&lt;/span&gt;],\
+               [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;93&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;21&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;38&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;177&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;33&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;95&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;227&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;162&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;247&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;224&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;248&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;202&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;250&lt;/span&gt;],\
+               [&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;179&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;37&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;181&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;139&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;132&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;81&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;72&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;162&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;157&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;240&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;96&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;213&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;166&lt;/span&gt;],\
+               [&lt;span style=&#34;color:#ae81ff&#34;&gt;241&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;247&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;132&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;248&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;185&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;68&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;124&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;235&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;78&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;215&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;189&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;162&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;56&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;135&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;65&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;107&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;73&lt;/span&gt;]])&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;255.&lt;/span&gt;
+
+colbar&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;mpl&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;colors&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ListedColormap(Y)
+
+cmap0&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cm&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;jet_r
+cmap0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_under(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;w&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;## on met en blanc les valeurs inferieures au min de clev&lt;/span&gt;
+cmap0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_over(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;darkblue&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#Smooth and re-plot the temperature field&lt;/span&gt;
+tt_smooth &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ndimage&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gaussian_filter(tt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;273.15&lt;/span&gt;, sigma&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.5&lt;/span&gt;, order&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+tt_contour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;contourf(tt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lon&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values, tt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values, tt_smooth,  levels&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;tt_levels, zorder&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,  
+                           cmap&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;colbar, transform &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#Smooth and re-plot the height field&lt;/span&gt;
+hght_smooth &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ndimage&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gaussian_filter(hgt850, sigma&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, order&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+hght_contour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;contour(hgt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lon, hgt850&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lat, hght_smooth, levels&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;hght_levels, linewidths&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, colors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;red&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,transform &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+&lt;span style=&#34;color:#75715e&#34;&gt;#Plot contour labels for the heights, leaving a break in the contours for the text (inline=True)&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;clabel(hght_contour,  hght_levels, inline&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True, fmt&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%1i&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#Plot the barbs&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;barbs(urel250&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lon&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values, urel250&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values, urel250&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.944&lt;/span&gt;, vrel250&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.944&lt;/span&gt;, regrid_shape&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;, zorder&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, transform&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#Create a colorbar and shrink it down a bit.&lt;/span&gt;
+cb &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;colorbar(tt_contour, shrink&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;, ticks&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;40.1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;))
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#Set the title&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_title(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;850-hPa Heights, 850-hPa Temperature, Wind (kts) &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(date), fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Text(0.5, 1.0, &#39;850-hPa Heights, 850-hPa Temperature, Wind (kts) \n 2018-01-13T12&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;output_15_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     

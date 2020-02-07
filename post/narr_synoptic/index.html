@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Working with Netcd4-python data: Synoptic map In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files. We will then use matplotlib to plot it, and cartopy to map our analyse.
+We will see the different steps to plot an exemple of synoptic map over North America with: &#43; geopotential 850hpa &#43; Temperature 850hpa &#43; UU,VV 250hpa
+We fist import the necessary packages.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/narr_synoptic/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/narr_synoptic/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/post/narr_synoptic/">
+  <meta property="og:title" content="NARR_Synoptic | GDueymes">
+  <meta property="og:description" content="Working with Netcd4-python data: Synoptic map In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files. We will then use matplotlib to plot it, and cartopy to map our analyse.
+We will see the different steps to plot an exemple of synoptic map over North America with: &#43; geopotential 850hpa &#43; Temperature 850hpa &#43; UU,VV 250hpa
+We fist import the necessary packages."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-02-07T11:31:00-08:00">
+    
+    <meta property="article:modified_time" content="2020-02-07T11:31:00-08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/narr_synoptic/"
+  },
+  "headline": "NARR_Synoptic",
+  
+  "datePublished": "2020-02-07T11:31:00-08:00",
+  "dateModified": "2020-02-07T11:31:00-08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Guillaume Dueymes"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "GDueymes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "Working with Netcd4-python data: Synoptic map In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files. We will then use matplotlib to plot it, and cartopy to map our analyse.\nWe will see the different steps to plot an exemple of synoptic map over North America with: + geopotential 850hpa + Temperature 850hpa + UU,VV 250hpa\nWe fist import the necessary packages."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>NARR_Synoptic | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>NARR_Synoptic</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 7, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="working-with-netcd4python-data-synoptic-map">Working with Netcd4-python data: Synoptic map</h1>
+<p>In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files.
+We will then use matplotlib to plot it, and cartopy to map our analyse.</p>
+<p>We will see the different steps to plot an exemple of synoptic map over North America with:
++ geopotential 850hpa
++ Temperature 850hpa
++ UU,VV 250hpa</p>
+<p>We fist import the necessary packages. The plt.rcParams[&lsquo;figure.figsize&rsquo;] just sets the size of the inline figures in this notebook to make them larger and easier to read.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">figure.figsize</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>)
+</code></pre></div><p>We will work with fields from NARR reanalysis at pressure levels.</p>
+<p>Data can be directly download on this link:
+<a href="ftp://ftp.cdc.noaa.gov/Datasets/NARR/pressure/">ftp://ftp.cdc.noaa.gov/Datasets/NARR/pressure/</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tas <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/NARR/3hrs/NARR_air_lc_2018_01_3hrs.nc</span><span style="color:#e6db74">&#39;</span>)
+uu <span style="color:#f92672">=</span>  xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/NARR/3hrs/NARR_uwnd_lc_2018_01_3hrs.nc</span><span style="color:#e6db74">&#39;</span>)
+vv <span style="color:#f92672">=</span>  xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/NARR/3hrs/NARR_vwnd_lc_2018_01_3hrs.nc</span><span style="color:#e6db74">&#39;</span>)
+omega <span style="color:#f92672">=</span>  xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/NARR/Daily/omega/NARR_omega_lc_2018_01_d.nc</span><span style="color:#e6db74">&#39;</span>)
+hgt <span style="color:#f92672">=</span>  xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/NARR/3hrs/NARR_hgt_lc_2018_01_3hrs.nc</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><h2 id="-exploring-the-data">- Exploring the data</h2>
+<p>We can quickly explore our datasets by using some methods of the xarray library:</p>
+<pre><code>- DS.var
+- DS.dims
+= DS.coords
+- DS.attrs
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">hgt
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+Dimensions:            (level: 29, time: 248, x: 349, y: 277)
+Coordinates:
+  * time               (time) datetime64[ns] 2018-01-01 ... 2018-01-31T21:00:00
+  * level              (level) float32 1000.0 975.0 950.0 ... 150.0 125.0 100.0
+    lat                (y, x) float32 ...
+    lon                (y, x) float32 ...
+  * y                  (y) float32 0.0 32463.0 64926.0 ... 8927325.0 8959788.0
+  * x                  (x) float32 0.0 32463.0 64926.0 ... 11264660.0 11297120.0
+Data variables:
+    Lambert_Conformal  int32 ...
+    hgt                (time, level, y, x) float32 ...
+Attributes:
+    Conventions:    CF-1.2
+    centerlat:      50.0
+    centerlon:      -107.0
+    comments:       
+    institution:    National Centers for Environmental Prediction
+    latcorners:     [ 1.000001  0.897945 46.3544   46.63433 ]
+    loncorners:     [-145.5       -68.32005    -2.569891  148.6418  ]
+    platform:       Model
+    standardpar1:   50.0
+    standardpar2:   50.000001
+    title:          8x Daily NARR
+    history:        created Mon Jul 18 17:37:00 MDT 2016 by NOAA/ESRL/PSD
+    dataset_title:  NCEP North American Regional Reanalysis (NARR)
+    references:     https://www.esrl.noaa.gov/psd/data/gridded/data.narr.html
+    source:         http://www.emc.ncep.noaa.gov/mmb/rreanl/index.html
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">hgt<span style="color:#f92672">.</span>coords
+</code></pre></div><pre><code>Coordinates:
+  * time     (time) datetime64[ns] 2018-01-01 ... 2018-01-31T21:00:00
+  * level    (level) float32 1000.0 975.0 950.0 925.0 ... 150.0 125.0 100.0
+    lat      (y, x) float32 ...
+    lon      (y, x) float32 ...
+  * y        (y) float32 0.0 32463.0 64926.0 ... 8894862.0 8927325.0 8959788.0
+  * x        (x) float32 0.0 32463.0 64926.0 ... 11264660.0 11297120.0
+</code></pre>
+<p>We can quickly explore our datasets by using some methods of the xarray library.</p>
+<p>We want to analyse a specific date : 13/01/2018 at 12UTC.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tas<span style="color:#f92672">.</span>time
+</code></pre></div><pre><code>&lt;xarray.DataArray 'time' (time: 248)&gt;
+array(['2018-01-01T00:00:00.000000000', '2018-01-01T03:00:00.000000000',
+       '2018-01-01T06:00:00.000000000', ..., '2018-01-31T15:00:00.000000000',
+       '2018-01-31T18:00:00.000000000', '2018-01-31T21:00:00.000000000'],
+      dtype='datetime64[ns]')
+Coordinates:
+  * time     (time) datetime64[ns] 2018-01-01 ... 2018-01-31T21:00:00
+Attributes:
+    axis:                T
+    coordinate_defines:  point
+    delta_t:             0000-00-00 03:00:00
+    long_name:           Time
+    standard_name:       time
+    actual_range:        [1910952. 1911693.]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#To select a specifi date: </span>
+date <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-01-13T12</span><span style="color:#e6db74">&#39;</span>
+tas<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>date)<span style="color:#f92672">.</span>sel(level<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>)<span style="color:#f92672">.</span>isel(x<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">340</span>), y<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">230</span>))
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+Dimensions:            (x: 280, y: 180)
+Coordinates:
+    time               datetime64[ns] 2018-01-13T12:00:00
+    level              float32 500.0
+    lat                (y, x) float32 ...
+    lon                (y, x) float32 ...
+  * y                  (y) float32 1623150.0 1655613.0 ... 7401564.0 7434027.0
+  * x                  (x) float32 1947780.0 1980243.0 ... 10972490.0 11004960.0
+Data variables:
+    Lambert_Conformal  int32 ...
+    air                (y, x) float32 ...
+Attributes:
+    Conventions:    CF-1.2
+    centerlat:      50.0
+    centerlon:      -107.0
+    comments:       
+    institution:    National Centers for Environmental Prediction
+    latcorners:     [ 1.000001  0.897945 46.3544   46.63433 ]
+    loncorners:     [-145.5       -68.32005    -2.569891  148.6418  ]
+    platform:       Model
+    standardpar1:   50.0
+    standardpar2:   50.000001
+    title:          8x Daily NARR
+    history:        created Mon Jul 18 17:31:43 MDT 2016 by NOAA/ESRL/PSD
+    dataset_title:  NCEP North American Regional Reanalysis (NARR)
+    references:     https://www.esrl.noaa.gov/psd/data/gridded/data.narr.html
+    source:         http://www.emc.ncep.noaa.gov/mmb/rreanl/index.html
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">hgt850 <span style="color:#f92672">=</span> hgt[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hgt</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>date)<span style="color:#f92672">.</span>sel(level<span style="color:#f92672">=</span><span style="color:#ae81ff">850</span>)<span style="color:#f92672">.</span>isel(x<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">340</span>), y<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">230</span>))
+tt850 <span style="color:#f92672">=</span> tas[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">air</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>date)<span style="color:#f92672">.</span>sel(level<span style="color:#f92672">=</span><span style="color:#ae81ff">850</span>)<span style="color:#f92672">.</span>isel(x<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">340</span>), y<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">230</span>))
+urel250 <span style="color:#f92672">=</span> uu[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">uwnd</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>date)<span style="color:#f92672">.</span>sel(level<span style="color:#f92672">=</span><span style="color:#ae81ff">250</span>)<span style="color:#f92672">.</span>isel(x<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">340</span>), y<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">230</span>))
+vrel250 <span style="color:#f92672">=</span> vv[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">vwnd</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>date)<span style="color:#f92672">.</span>sel(level<span style="color:#f92672">=</span><span style="color:#ae81ff">250</span>)<span style="color:#f92672">.</span>isel(x<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">340</span>), y<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">230</span>))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plotMap</span>():
+    <span style="color:#75715e">#Set the projection information</span>
+    proj <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>LambertConformal(central_longitude<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">97.0</span>,central_latitude<span style="color:#f92672">=</span><span style="color:#ae81ff">53</span>, standard_parallels<span style="color:#f92672">=</span>[<span style="color:#ae81ff">53</span>])
+    <span style="color:#75715e">#Create a figure with an axes object on which we will plot. Pass the projection to that axes.</span>
+    fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(subplot_kw<span style="color:#f92672">=</span>dict(projection<span style="color:#f92672">=</span>proj))
+    
+    <span style="color:#75715e">#Zoom in</span>
+    <span style="color:#75715e">#ax.set_extent([-140,-60,10,70])</span>
+    
+    <span style="color:#75715e">#Add map features</span>
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND, facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0.9</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">#Grayscale colors can be set using 0 (black) to 1 (white)</span>
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.9</span>)  <span style="color:#75715e">#Alpha sets transparency (0 is transparent, 1 is solid)</span>
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS, zorder<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>COASTLINE, zorder<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+
+    <span style="color:#75715e">#We can use additional features from Natural Earth (http://www.naturalearthdata.com/features/)</span>
+    states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+            category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,  name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+            scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>, facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+    ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>, zorder<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+    
+    <span style="color:#75715e">#Add lat/lon gridlines every 20° to the map</span>
+    ax<span style="color:#f92672">.</span>gridlines(xlocs<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">361</span>,<span style="color:#ae81ff">20</span>), ylocs<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">20</span>)) 
+    
+    <span style="color:#66d9ef">return</span> fig, ax
+</code></pre></div><p>We specify the interval for our height contours. We use numpy's function arange to select a range of contours from 500 to 2000 m, every 60 m.</p>
+<p>A key thing to note is the transform argument at the end of the contour call. This is what tells matplotlib to transform our variable in lat/lon coordinates onto our map projection coordinates.</p>
+<p>We then plot temperature in filled contours. Matplotlib has many colormaps from which to choose. Here, we use cm.jet_r.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Import scipy.ndimage to get the gaussian_filter function</span>
+<span style="color:#f92672">import</span> scipy.ndimage <span style="color:#f92672">as</span> ndimage
+hght_levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">500</span>,<span style="color:#ae81ff">2000</span>,<span style="color:#ae81ff">60</span>) 
+<span style="color:#75715e">#Plot a new figure and map axes</span>
+fig, ax <span style="color:#f92672">=</span> plotMap()
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet_r
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#75715e">#Smooth and re-plot the temperature field</span>
+tt_smooth <span style="color:#f92672">=</span> ndimage<span style="color:#f92672">.</span>gaussian_filter(tt850<span style="color:#f92672">.</span>values<span style="color:#f92672">-</span><span style="color:#ae81ff">273.15</span>, sigma<span style="color:#f92672">=</span><span style="color:#ae81ff">1.5</span>, order<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+tt_contour <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(tt850<span style="color:#f92672">.</span>lon<span style="color:#f92672">.</span>values, tt850<span style="color:#f92672">.</span>lat<span style="color:#f92672">.</span>values, tt_smooth, zorder<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,  
+                           cmap<span style="color:#f92672">=</span>cmap0, transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
+
+<span style="color:#75715e">#Smooth and re-plot the height field</span>
+hght_smooth <span style="color:#f92672">=</span> ndimage<span style="color:#f92672">.</span>gaussian_filter(hgt850, sigma<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, order<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+hght_contour <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contour(hgt850<span style="color:#f92672">.</span>lon, hgt850<span style="color:#f92672">.</span>lat, hght_smooth, levels<span style="color:#f92672">=</span>hght_levels, linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">k</span><span style="color:#e6db74">&#39;</span>,transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
+<span style="color:#75715e">#Plot contour labels for the heights, leaving a break in the contours for the text (inline=True)</span>
+plt<span style="color:#f92672">.</span>clabel(hght_contour,  hght_levels, inline<span style="color:#f92672">=</span>True, fmt<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1i</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</code></pre></div><pre><code>&lt;a list of 18 text.Text objects&gt;
+</code></pre>
+<p><img src="output_13_1.png" alt="png"></p>
+<p>We can improve our synoptic map with adding wind barbs in Knots and using our own colormap.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Import scipy.ndimage to get the gaussian_filter function</span>
+<span style="color:#f92672">import</span> scipy.ndimage <span style="color:#f92672">as</span> ndimage
+hght_levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">500</span>,<span style="color:#ae81ff">2000</span>,<span style="color:#ae81ff">60</span>) 
+tt_levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">40</span>,<span style="color:#ae81ff">40</span>,<span style="color:#ae81ff">2</span>) 
+<span style="color:#75715e">#Plot a new figure and map axes</span>
+fig, ax <span style="color:#f92672">=</span> plotMap()
+<span style="color:#75715e">## Choisissons une colormap</span>
+Y<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">77</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">111</span>],[<span style="color:#ae81ff">115</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">181</span>],[<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">222</span>],[<span style="color:#ae81ff">195</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">240</span>],\
+               [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">93</span>],[<span style="color:#ae81ff">21</span>,<span style="color:#ae81ff">38</span>,<span style="color:#ae81ff">177</span>],[<span style="color:#ae81ff">33</span>,<span style="color:#ae81ff">95</span>,<span style="color:#ae81ff">227</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">247</span>],[<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">224</span>,<span style="color:#ae81ff">248</span>],[<span style="color:#ae81ff">202</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">250</span>],\
+               [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">179</span>],[<span style="color:#ae81ff">37</span>,<span style="color:#ae81ff">181</span>,<span style="color:#ae81ff">139</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">132</span>,<span style="color:#ae81ff">81</span>],[<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">60</span>],[<span style="color:#ae81ff">157</span>,<span style="color:#ae81ff">240</span>,<span style="color:#ae81ff">96</span>],[<span style="color:#ae81ff">213</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">166</span>],\
+               [<span style="color:#ae81ff">241</span>,<span style="color:#ae81ff">247</span>,<span style="color:#ae81ff">132</span>],[<span style="color:#ae81ff">248</span>,<span style="color:#ae81ff">185</span>,<span style="color:#ae81ff">68</span>],[<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">124</span>,<span style="color:#ae81ff">4</span>],[<span style="color:#ae81ff">235</span>,<span style="color:#ae81ff">78</span>,<span style="color:#ae81ff">14</span>],[<span style="color:#ae81ff">215</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">24</span>],[<span style="color:#ae81ff">189</span>,<span style="color:#ae81ff">24</span>,<span style="color:#ae81ff">40</span>],[<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">56</span>],[<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">65</span>],[<span style="color:#ae81ff">107</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">73</span>]])<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
+
+colbar<span style="color:#f92672">=</span>mpl<span style="color:#f92672">.</span>colors<span style="color:#f92672">.</span>ListedColormap(Y)
+
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet_r
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#75715e">#Smooth and re-plot the temperature field</span>
+tt_smooth <span style="color:#f92672">=</span> ndimage<span style="color:#f92672">.</span>gaussian_filter(tt850<span style="color:#f92672">.</span>values<span style="color:#f92672">-</span><span style="color:#ae81ff">273.15</span>, sigma<span style="color:#f92672">=</span><span style="color:#ae81ff">1.5</span>, order<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+tt_contour <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(tt850<span style="color:#f92672">.</span>lon<span style="color:#f92672">.</span>values, tt850<span style="color:#f92672">.</span>lat<span style="color:#f92672">.</span>values, tt_smooth,  levels<span style="color:#f92672">=</span>tt_levels, zorder<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,  
+                           cmap<span style="color:#f92672">=</span>colbar, transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
+
+<span style="color:#75715e">#Smooth and re-plot the height field</span>
+hght_smooth <span style="color:#f92672">=</span> ndimage<span style="color:#f92672">.</span>gaussian_filter(hgt850, sigma<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, order<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+hght_contour <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contour(hgt850<span style="color:#f92672">.</span>lon, hgt850<span style="color:#f92672">.</span>lat, hght_smooth, levels<span style="color:#f92672">=</span>hght_levels, linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>,transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
+<span style="color:#75715e">#Plot contour labels for the heights, leaving a break in the contours for the text (inline=True)</span>
+plt<span style="color:#f92672">.</span>clabel(hght_contour,  hght_levels, inline<span style="color:#f92672">=</span>True, fmt<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1i</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+
+<span style="color:#75715e">#Plot the barbs</span>
+ax<span style="color:#f92672">.</span>barbs(urel250<span style="color:#f92672">.</span>lon<span style="color:#f92672">.</span>values, urel250<span style="color:#f92672">.</span>lat<span style="color:#f92672">.</span>values, urel250<span style="color:#f92672">.</span>values<span style="color:#f92672">*</span><span style="color:#ae81ff">1.944</span>, vrel250<span style="color:#f92672">.</span>values<span style="color:#f92672">*</span><span style="color:#ae81ff">1.944</span>, regrid_shape<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>, zorder<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
+
+<span style="color:#75715e">#Create a colorbar and shrink it down a bit.</span>
+cb <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(tt_contour, shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">40.1</span>, <span style="color:#ae81ff">4</span>))
+
+<span style="color:#75715e">#Set the title</span>
+ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">850-hPa Heights, 850-hPa Temperature, Wind (kts) </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(date), fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+
+</code></pre></div><pre><code>Text(0.5, 1.0, '850-hPa Heights, 850-hPa Temperature, Wind (kts) \n 2018-01-13T12')
+</code></pre>
+<p><img src="output_15_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/narr_synoptic/&amp;text=NARR_Synoptic" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/narr_synoptic/&amp;t=NARR_Synoptic" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=NARR_Synoptic&amp;body=/post/narr_synoptic/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/narr_synoptic/&amp;title=NARR_Synoptic" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=NARR_Synoptic%20/post/narr_synoptic/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/narr_synoptic/&amp;title=NARR_Synoptic" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hued2496a182fbb6fc8c711157078d29a6_5348924_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Guillaume Dueymes</a></h5>
+      <h6 class="card-subtitle">Data Scientist and Research Assistant</h6>
+      <p class="card-text">My research interests include data science, data management and climate science.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Guillaume_Dueymes" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/guimeto" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
