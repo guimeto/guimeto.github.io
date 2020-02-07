@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>GDueymes</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 04 Feb 2020 10:39:49 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 07 Feb 2020 10:57:37 -0800</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>GDueymes</title>
@@ -2767,6 +2767,157 @@ Data variables:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>MSS_Server</title>
+      <link>/post/mss_server/</link>
+      <pubDate>Fri, 07 Feb 2020 10:57:37 -0800</pubDate>
+      <guid>/post/mss_server/</guid>
+      <description>&lt;h1 id=&#34;connexion-to-microsoft-sql-server-management-studio&#34;&gt;Connexion to Microsoft SQL Server Management Studio&lt;/h1&gt;
+&lt;p&gt;This is a short tutorial to connect python to a Miscrosoft SQL Server.&lt;/p&gt;
+&lt;h2 id=&#34;steps-to-connect-with-pyodbc-python-library&#34;&gt;Steps to connect with pyodbc python library&lt;/h2&gt;
+&lt;p&gt;You need to know some informations on your local server, database and tables you want to connect:
+In our case:
+- The Server Name is: DESKTOP-BE6M578
+- The Database Name is: BDSOPFEU
+- The Table Name is: dbo.Meteo_stations
+- The Table dbo.Meteo_stations containes stations information&lt;/p&gt;
+&lt;h3 id=&#34;1-retrieve-your-server-name&#34;&gt;1 Retrieve your server name&lt;/h3&gt;
+&lt;p&gt;You can get your server name by opening Microsoft SQL Server. You’ll then see the Connect to Server box, where the server name will be displayed.&lt;/p&gt;
+&lt;p&gt;In my case, the server name is: DESKTOP-BE6M578&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-retrieve-your-database-name&#34;&gt;2 Retrieve your Database name&lt;/h3&gt;
+&lt;p&gt;Next, you’ll need to obtain the database name in which your desired table is stored.&lt;/p&gt;
+&lt;p&gt;You can find the database name under the Object Explorer menu (underneath the Databases section) which is located on the left-hand side of your SQL Server.&lt;/p&gt;
+&lt;p&gt;In our example, the database name is: BDSOPFEU&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-get-the-table-name&#34;&gt;3 Get the table name&lt;/h3&gt;
+&lt;p&gt;Now you’ll need to get the name of your desired table.&lt;/p&gt;
+&lt;p&gt;The name of your table would also be located under the Object Explorer menu (underneath the Tables section).&lt;/p&gt;
+&lt;p&gt;Here, the name of the table is: dbo.Meteo_stations&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-connect-python-to-our-microsoft-sql-server&#34;&gt;4 Connect Python to our Microsoft SQL Server&lt;/h3&gt;
+&lt;p&gt;Now we have all the informations about our server and database to connect Python .&lt;/p&gt;
+&lt;p&gt;Here is the structure of the code that you may use in Python:&lt;/p&gt;
+&lt;p&gt;import pyodbc
+conn = pyodbc.connect(&amp;lsquo;Driver={SQL Server};&amp;rsquo;
+&amp;lsquo;Server=server_name;&amp;rsquo;
+&amp;lsquo;Database=db_name;&amp;rsquo;
+&amp;lsquo;Trusted_Connection=yes;&#39;)&lt;/p&gt;
+&lt;p&gt;cursor = conn.cursor()
+cursor.execute(&amp;lsquo;SELECT * FROM db_name.Table&amp;rsquo;)&lt;/p&gt;
+&lt;p&gt;for row in cursor:
+print(row)
+And this is how the code would look like in Python using our example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pyodbc 
+connexion &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pyodbc&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Driver={SQL Server};&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Server=DESKTOP-BE6M578;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Database=BDSOPFEU;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Trusted_Connection=yes;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+cursor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; connexion&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor()
+cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;execute(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SELECT * FROM BDSOPFEU.dbo.Meteo_stations&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# to loop over each row&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#for row in cursor:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#    print(row)&lt;/span&gt;
+row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fetchone()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(row)
+connexion&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(111, datetime.datetime(1978, 4, 1, 0, 0), 1, &#39;STE-PERPETUE&#39;, &#39;4113-1-5355&#39;, 111, datetime.datetime(1989, 10, 31, 0, 0), 400, &#39;M&#39;, &#39;N&#39;, 1, 1, &#39;MFFP_CEL&#39;, None, 13, &#39; &#39;, None, False, None, None, None)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;For having basic informations about our table:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;columns &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [column[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; column &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;description]
+columns
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&#39;No_station&#39;,
+ &#39;Ouverture&#39;,
+ &#39;Base&#39;,
+ &#39;Nom&#39;,
+ &#39;Quadr&#39;,
+ &#39;Secteur&#39;,
+ &#39;Fermeture&#39;,
+ &#39;Elevation&#39;,
+ &#39;T_hr&#39;,
+ &#39;Vent&#39;,
+ &#39;T_donnees&#39;,
+ &#39;T_station&#39;,
+ &#39;Provenance&#39;,
+ &#39;Stn_mere&#39;,
+ &#39;Hre_levee&#39;,
+ &#39;Memo&#39;,
+ &#39;Contour&#39;,
+ &#39;Active&#39;,
+ &#39;Cladonie&#39;,
+ &#39;Latitude&#39;,
+ &#39;Longitude&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, I’ll show you how to get data from SQL to pandas DataFrame.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pyodbc
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+
+connexion &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pyodbc&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Driver={SQL Server};&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Server=DESKTOP-BE6M578;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Database=BDSOPFEU;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Trusted_Connection=yes;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+SQL_Query &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_sql_query(
+&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Nom, No_station, Latitude, Longitude  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;FROM dbo.Meteo_stations &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;WHERE Active = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;, connexion)
+
+df &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(SQL_Query)
+df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pyodbc
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+
+connexion &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pyodbc&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Driver={SQL Server};&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Server=DESKTOP-BE6M578;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Database=BDSOPFEU;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Trusted_Connection=yes;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+SQL_Query &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_sql_query(
+&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Date,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Heure,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Pluie,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Hr,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Tsec,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Thum,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Vv,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Vvr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;FROM dbo.Meteo_obs &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; WHERE No_station = 111&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;, connexion)
+
+df &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(SQL_Query)
+df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tail()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
