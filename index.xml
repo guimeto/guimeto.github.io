@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>GDueymes</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 07 Feb 2020 12:55:20 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 14 Feb 2020 09:14:48 -0800</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>GDueymes</title>
@@ -2768,6 +2768,378 @@ Data variables:
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Province_shapefiles</title>
+      <link>/post/province_shapefiles/</link>
+      <pubDate>Fri, 14 Feb 2020 09:14:48 -0800</pubDate>
+      <guid>/post/province_shapefiles/</guid>
+      <description>&lt;p&gt;﻿&lt;/p&gt;
+&lt;h1 id=&#34;from-shapefiles-to-netcdf-mask&#34;&gt;From shapefiles to Netcdf Mask&lt;/h1&gt;
+&lt;p&gt;In this tutorial, we will use shapefiles to create masks over canadian provinces.&lt;/p&gt;
+&lt;p&gt;We will use gridded dataset ANUSPLIN meteorological data.&lt;/p&gt;
+&lt;p&gt;Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).&lt;/p&gt;
+&lt;p&gt;The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.&lt;/p&gt;
+&lt;p&gt;Data are available on:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&#34;&gt;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I will present a  solution based on open-source Python modules:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    - xarray: for manipulating &amp;amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities
+    - numpy: for simple array manipulations
+    - geopandas: to open shapefiles
+    - osgeo: 
+    - matplotlib: for plotting
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;1-first-we-need-to-import-librairies-and-create-aliases&#34;&gt;1- First we need to import librairies and create aliases.&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr 
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; regionmask
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; geopandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; gpd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; osgeo &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ogr
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings; warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;working-over-canadian-province&#34;&gt;Working over canadian province&lt;/h2&gt;
+&lt;p&gt;In this example we will use canadian province shapefiles developped by statistics canada.&lt;/p&gt;
+&lt;p&gt;Shapefiles are available on this website:
+&lt;a href=&#34;https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm&#34;&gt;https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After downloaded the shapefile, we must load it using geopandas library:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;PATH_TO_SHAPEFILE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+province &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(PATH_TO_SHAPEFILE)
+province
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;PRUID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;PRNAME&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;PRENAME&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;PRFNAME&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;PREABBR&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;PRFABBR&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Newfoundland and Labrador / Terre-Neuve-et-Labrador&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Newfoundland and Labrador&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Terre-Neuve-et-Labrador&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;N.L.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;T.-N.-L.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Prince Edward Island / Île-du-Prince-Édouard&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Prince Edward Island&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Île-du-Prince-Édouard&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;P.E.I.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Î.-P.-É.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nova Scotia / Nouvelle-Écosse&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nova Scotia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nouvelle-Écosse&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;N.S.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;N.-É.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;13&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;New Brunswick / Nouveau-Brunswick&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;New Brunswick&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nouveau-Brunswick&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;N.B.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;N.-B.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec / Québec&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Québec&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Que.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Qc&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;35&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ontario&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ontario&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ontario&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ont.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ont.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Manitoba&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Manitoba&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Manitoba&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Man.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Man.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saskatchewan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saskatchewan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saskatchewan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sask.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sask.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Alberta&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Alberta&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Alberta&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Alta.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Alb.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;British Columbia / Colombie-Britannique&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;British Columbia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Colombie-Britannique&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;B.C.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;C.-B.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;60&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yukon&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yukon&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yukon&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Y.T.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;61&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Northwest Territories / Territoires du Nord-Ouest&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Northwest Territories&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Territoires du Nord-Ouest&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;N.W.T.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;T.N.-O.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nunavut&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nunavut&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nunavut&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nvt.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nt&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Shapes are here a GeoDataFrame containing all polygons illustrating the province boundaries.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ID_PROV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PRNAME[ID_PROV])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Ontario
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[:, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;geometry&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0xad67400&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output_6_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;tmpWGS84 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_crs({&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;proj&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;longlat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ellps&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;WGS84&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;datum&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;WGS84&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;tmpWGS84&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x1327ac88&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output_8_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now we can load the ANUSPLIN_10km gridded data. The parameter chunks is very important, it defines how big are the “pieces” of data moved from the disk to the memory. With this value the entire computation on a workstation with 32 GB takes a couple of minutes.&lt;/p&gt;
+&lt;p&gt;We will load all the temperature files using Xarray library.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;model&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ANUSPLIN_10km_YEAR_Mean_tasmoy_1950-2017&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+t_in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/DONNEES_AMERIQUE_DU_NORD/ANUSPLIN_10km/Netcdf/INDICES_ANNEES/Mean_tasmoy/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;        
+data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; t_in &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; model &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+ds &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_mfdataset(data, chunks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;})
+ds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:      (time: 68, x: 510, y: 1068)
+Coordinates:
+    lon          (y, x) float32 dask.array&amp;lt;shape=(1068, 510), chunksize=(1068, 510)&amp;gt;
+    lat          (y, x) float32 dask.array&amp;lt;shape=(1068, 510), chunksize=(1068, 510)&amp;gt;
+  * time         (time) float64 1.0 2.0 3.0 4.0 5.0 ... 64.0 65.0 66.0 67.0 68.0
+Dimensions without coordinates: x, y
+Data variables:
+    Mean_tasmoy  (time, y, x) float32 dask.array&amp;lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our xarray Dataset contains a single variable (Mean_tasmoy) which is stored as a dask.array. This is the result of loading files with open_mfdataset.&lt;/p&gt;
+&lt;p&gt;Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: &lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;With this function we will create an object able to mask ANUSPLIN gridded data.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;province_mask_poly &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; regionmask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Regions_cls(name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;PRENAME&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)), names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(tmpWGS84&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PRENAME), abbrevs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(tmpWGS84&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PRENAME), outlines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(tmpWGS84&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values[i] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)))
+province_mask_poly
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;13 &#39;PRENAME&#39; Regions ()
+Newfoundland and Labrador Prince Edward Island Nova Scotia New Brunswick Quebec Ontario Manitoba Saskatchewan Alberta British Columbia Yukon Northwest Territories Nunavut
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we are ready to apply the mask on the gridded dataset xarray ANUSPLIN.&lt;/p&gt;
+&lt;p&gt;We select only the first timestep to speed up the process.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; province_mask_poly&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mask(ds&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;), lat_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, lon_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+mask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.DataArray (y: 1068, x: 510)&amp;gt;
+array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+Coordinates:
+  * y        (y) int64 0 1 2 3 4 5 6 7 ... 1061 1062 1063 1064 1065 1066 1067
+  * x        (x) int64 0 1 2 3 4 5 6 7 8 ... 501 502 503 504 505 506 507 508 509
+    lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
+    lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.DataArray (y: 1068, x: 510)&amp;gt;
+array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+Coordinates:
+  * y        (y) int64 0 1 2 3 4 5 6 7 ... 1061 1062 1063 1064 1065 1066 1067
+  * x        (x) int64 0 1 2 3 4 5 6 7 8 ... 501 502 503 504 505 506 507 508 509
+    lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
+    lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Mask can be saved (for example as a NetCDF) for a later use.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_netcdf(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./mask_all_province.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A quick visualisation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax)
+province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax, alpha &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;, facecolor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, lw &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x1b989828&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output_20_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-extract-one-province&#34;&gt;2- Extract one province&lt;/h2&gt;
+&lt;p&gt;We will sho how to mask Ontario province.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ID_PROV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PRNAME[ID_PROV])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Ontario
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.DataArray (y: 1068, x: 510)&amp;gt;
+array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+Coordinates:
+  * y        (y) int64 0 1 2 3 4 5 6 7 ... 1061 1062 1063 1064 1065 1066 1067
+  * x        (x) int64 0 1 2 3 4 5 6 7 8 ... 501 502 503 504 505 506 507 508 509
+    lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
+    lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;out_sel2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ds&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(mask &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; ID_PROV)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;out_sel2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;xarray.Dataset&amp;gt;
+Dimensions:      (time: 68, x: 510, y: 1068)
+Coordinates:
+  * y            (y) int64 0 1 2 3 4 5 6 ... 1061 1062 1063 1064 1065 1066 1067
+  * x            (x) int64 0 1 2 3 4 5 6 7 8 ... 502 503 504 505 506 507 508 509
+    lon          (y, x) float32 dask.array&amp;lt;shape=(1068, 510), chunksize=(1068, 510)&amp;gt;
+    lat          (y, x) float32 dask.array&amp;lt;shape=(1068, 510), chunksize=(1068, 510)&amp;gt;
+  * time         (time) float64 1.0 2.0 3.0 4.0 5.0 ... 64.0 65.0 66.0 67.0 68.0
+Data variables:
+    Mean_tasmoy  (time, y, x) float32 dask.array&amp;lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Quick visualisation, we will display the first step of our DataArray masked.&lt;/p&gt;
+&lt;p&gt;For out_sel2 array :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+out_sel2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Mean_tasmoy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isel(time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax)
+province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax, alpha &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;, facecolor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x18bc95f8&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./output_28_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;out_sel2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_netcdf(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Ontario.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; cfeature
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; mpl
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; netCDF4 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Dataset, num2date
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings
+warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+
+filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Ontario.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+nc_fid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Dataset(filename,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nc_fid&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;variables[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Mean_tasmoy&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;][:]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;squeeze()
+lons&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nc_fid&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;variables[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;][:]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;squeeze()
+lats&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nc_fid&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;variables[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;][:]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;squeeze()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(68, 1068, 510)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&#39;s use Xarray to compute climatology over 1988-2017.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;data_m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;:,:,:]
+clim_89_2017&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data_m&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean(axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+clim_89_2017&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(1068, 510)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;fig&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;), frameon&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)  
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplot(&lt;span style=&#34;color:#ae81ff&#34;&gt;111&lt;/span&gt;, projection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LambertConformal())
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent([&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;75&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;58&lt;/span&gt;])
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;OCEAN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche ocean&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAND&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))       &lt;span style=&#34;color:#75715e&#34;&gt;# couche land&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAKES&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche lac&lt;/span&gt;
+   
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BORDERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    &lt;span style=&#34;color:#75715e&#34;&gt;# couche frontieres&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RIVERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;# couche rivières &lt;/span&gt;
+coast &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;physical&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,     &lt;span style=&#34;color:#75715e&#34;&gt;# ajout de la couche cotière &lt;/span&gt;
+                            facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coastline&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(coast, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;black&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)    
+states_provinces &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(
+            category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;cultural&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+            name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;admin_1_states_provinces_lines&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+            scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+            facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+
+ 
+mm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;contourf(lons,\
+                   lats,\
+                   clim_89_2017,\
+                   vmin&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,\
+                   vmax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, \
+                   transform&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree(),\
+                   levels&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1.&lt;/span&gt;),\
+                   cmap&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cm&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;jet )
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gridlines()
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Define gridline locations and draw the lines using cartopy&amp;#39;s built-in gridliner:&lt;/span&gt;
+xticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150.0&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40.0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
+yticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+
+cbar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_label(&lt;span style=&#34;color:#e6db74&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Projection = Lambert Conformal Conic &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Resolution: 5 Arcs-Minutes (10 km)&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Data provided by Natural Resources Canada / Created by Guillaume Dueymes&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, size&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;medium&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# Affichage de la légende de la barre de couleur&lt;/span&gt;
+
+cbar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;colorbar(mm,  shrink&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.75&lt;/span&gt;, drawedges&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,extend&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;both&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+cbar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tick_params(labelsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;17&lt;/span&gt;) 
+    
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Temperature / Température (°C)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,size&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;x-large&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+string_title&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Climate normals of mean annual temperature (°C)&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; 1988 - 2017&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(string_title, size&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;xx-large&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./ANUSPLIN_Ontario_10km_YEAR_CLIM_1988-2017.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, bbox_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;tight&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, pad_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show() 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./output_34_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>

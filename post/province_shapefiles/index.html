@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="﻿
+From shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.
+We will use gridded dataset ANUSPLIN meteorological data.
+Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).
+The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km).">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/province_shapefiles/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/province_shapefiles/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/post/province_shapefiles/">
+  <meta property="og:title" content="Province_shapefiles | GDueymes">
+  <meta property="og:description" content="﻿
+From shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.
+We will use gridded dataset ANUSPLIN meteorological data.
+Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).
+The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km)."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-02-14T09:14:48-08:00">
+    
+    <meta property="article:modified_time" content="2020-02-14T09:14:48-08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/province_shapefiles/"
+  },
+  "headline": "Province_shapefiles",
+  
+  "datePublished": "2020-02-14T09:14:48-08:00",
+  "dateModified": "2020-02-14T09:14:48-08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Guillaume Dueymes"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "GDueymes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "﻿\nFrom shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.\nWe will use gridded dataset ANUSPLIN meteorological data.\nAgriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).\nThe so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km)."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Province_shapefiles | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Province_shapefiles</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 14, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>﻿</p>
+<h1 id="from-shapefiles-to-netcdf-mask">From shapefiles to Netcdf Mask</h1>
+<p>In this tutorial, we will use shapefiles to create masks over canadian provinces.</p>
+<p>We will use gridded dataset ANUSPLIN meteorological data.</p>
+<p>Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).</p>
+<p>The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.</p>
+<p>Data are available on:</p>
+<p><a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids">ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids</a></p>
+<p>I will present a  solution based on open-source Python modules:</p>
+<pre><code>    - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities
+    - numpy: for simple array manipulations
+    - geopandas: to open shapefiles
+    - osgeo: 
+    - matplotlib: for plotting
+</code></pre>
+<h2 id="1-first-we-need-to-import-librairies-and-create-aliases">1- First we need to import librairies and create aliases.</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr 
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> regionmask
+<span style="color:#f92672">import</span> geopandas <span style="color:#f92672">as</span> gpd
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">from</span> osgeo <span style="color:#f92672">import</span> ogr
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><h2 id="working-over-canadian-province">Working over canadian province</h2>
+<p>In this example we will use canadian province shapefiles developped by statistics canada.</p>
+<p>Shapefiles are available on this website:
+<a href="https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm">https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm</a></p>
+<p>After downloaded the shapefile, we must load it using geopandas library:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PATH_TO_SHAPEFILE <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp</span><span style="color:#e6db74">&#39;</span>
+province <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(PATH_TO_SHAPEFILE)
+province
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">PRUID</th>
+<th align="left">PRNAME</th>
+<th align="left">PRENAME</th>
+<th align="left">PRFNAME</th>
+<th align="left">PREABBR</th>
+<th align="left">PRFABBR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="left">Newfoundland and Labrador / Terre-Neuve-et-Labrador</td>
+<td align="left">Newfoundland and Labrador</td>
+<td align="left">Terre-Neuve-et-Labrador</td>
+<td align="left">N.L.</td>
+<td align="left">T.-N.-L.</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="left">Prince Edward Island / Île-du-Prince-Édouard</td>
+<td align="left">Prince Edward Island</td>
+<td align="left">Île-du-Prince-Édouard</td>
+<td align="left">P.E.I.</td>
+<td align="left">Î.-P.-É.</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="left">Nova Scotia / Nouvelle-Écosse</td>
+<td align="left">Nova Scotia</td>
+<td align="left">Nouvelle-Écosse</td>
+<td align="left">N.S.</td>
+<td align="left">N.-É.</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">13</td>
+<td align="left">New Brunswick / Nouveau-Brunswick</td>
+<td align="left">New Brunswick</td>
+<td align="left">Nouveau-Brunswick</td>
+<td align="left">N.B.</td>
+<td align="left">N.-B.</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">24</td>
+<td align="left">Quebec / Québec</td>
+<td align="left">Quebec</td>
+<td align="left">Québec</td>
+<td align="left">Que.</td>
+<td align="left">Qc</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="right">35</td>
+<td align="left">Ontario</td>
+<td align="left">Ontario</td>
+<td align="left">Ontario</td>
+<td align="left">Ont.</td>
+<td align="left">Ont.</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right">46</td>
+<td align="left">Manitoba</td>
+<td align="left">Manitoba</td>
+<td align="left">Manitoba</td>
+<td align="left">Man.</td>
+<td align="left">Man.</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="right">47</td>
+<td align="left">Saskatchewan</td>
+<td align="left">Saskatchewan</td>
+<td align="left">Saskatchewan</td>
+<td align="left">Sask.</td>
+<td align="left">Sask.</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="right">48</td>
+<td align="left">Alberta</td>
+<td align="left">Alberta</td>
+<td align="left">Alberta</td>
+<td align="left">Alta.</td>
+<td align="left">Alb.</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td align="right">59</td>
+<td align="left">British Columbia / Colombie-Britannique</td>
+<td align="left">British Columbia</td>
+<td align="left">Colombie-Britannique</td>
+<td align="left">B.C.</td>
+<td align="left">C.-B.</td>
+</tr>
+<tr>
+<td align="right">10</td>
+<td align="right">60</td>
+<td align="left">Yukon</td>
+<td align="left">Yukon</td>
+<td align="left">Yukon</td>
+<td align="left">Y.T.</td>
+<td align="left">Yn</td>
+</tr>
+<tr>
+<td align="right">11</td>
+<td align="right">61</td>
+<td align="left">Northwest Territories / Territoires du Nord-Ouest</td>
+<td align="left">Northwest Territories</td>
+<td align="left">Territoires du Nord-Ouest</td>
+<td align="left">N.W.T.</td>
+<td align="left">T.N.-O.</td>
+</tr>
+<tr>
+<td align="right">12</td>
+<td align="right">62</td>
+<td align="left">Nunavut</td>
+<td align="left">Nunavut</td>
+<td align="left">Nunavut</td>
+<td align="left">Nvt.</td>
+<td align="left">Nt</td>
+</tr>
+</tbody>
+</table>
+<p>Shapes are here a GeoDataFrame containing all polygons illustrating the province boundaries.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ID_PROV <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+<span style="color:#66d9ef">print</span>(province<span style="color:#f92672">.</span>PRNAME[ID_PROV])
+</code></pre></div><pre><code>Ontario
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">province<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xad67400&gt;
+</code></pre>
+<p><img src="./output_6_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmpWGS84 <span style="color:#f92672">=</span> province<span style="color:#f92672">.</span>to_crs({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">proj</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longlat</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ellps</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WGS84</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datum</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WGS84</span><span style="color:#e6db74">&#39;</span>})
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmpWGS84<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1327ac88&gt;
+</code></pre>
+<p><img src="./output_8_1.png" alt="png"></p>
+<p>Now we can load the ANUSPLIN_10km gridded data. The parameter chunks is very important, it defines how big are the “pieces” of data moved from the disk to the memory. With this value the entire computation on a workstation with 32 GB takes a couple of minutes.</p>
+<p>We will load all the temperature files using Xarray library.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ANUSPLIN_10km_YEAR_Mean_tasmoy_1950-2017</span><span style="color:#e6db74">&#39;</span>
+t_in <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/DONNEES_AMERIQUE_DU_NORD/ANUSPLIN_10km/Netcdf/INDICES_ANNEES/Mean_tasmoy/</span><span style="color:#e6db74">&#39;</span>        
+data <span style="color:#f92672">=</span> t_in <span style="color:#f92672">+</span> model <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>
+ds <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(data, chunks <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">10</span>})
+ds
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+Dimensions:      (time: 68, x: 510, y: 1068)
+Coordinates:
+    lon          (y, x) float32 dask.array&lt;shape=(1068, 510), chunksize=(1068, 510)&gt;
+    lat          (y, x) float32 dask.array&lt;shape=(1068, 510), chunksize=(1068, 510)&gt;
+  * time         (time) float64 1.0 2.0 3.0 4.0 5.0 ... 64.0 65.0 66.0 67.0 68.0
+Dimensions without coordinates: x, y
+Data variables:
+    Mean_tasmoy  (time, y, x) float32 dask.array&lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&gt;
+</code></pre>
+<p>Our xarray Dataset contains a single variable (Mean_tasmoy) which is stored as a dask.array. This is the result of loading files with open_mfdataset.</p>
+<p>Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: <a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls</a></p>
+<p>With this function we will create an object able to mask ANUSPLIN gridded data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">province_mask_poly <span style="color:#f92672">=</span> regionmask<span style="color:#f92672">.</span>Regions_cls(name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">PRENAME</span><span style="color:#e6db74">&#39;</span>, numbers <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)), names <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), abbrevs <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), outlines <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>values[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)))
+province_mask_poly
+</code></pre></div><pre><code>13 'PRENAME' Regions ()
+Newfoundland and Labrador Prince Edward Island Nova Scotia New Brunswick Quebec Ontario Manitoba Saskatchewan Alberta British Columbia Yukon Northwest Territories Nunavut
+</code></pre>
+<p>Now we are ready to apply the mask on the gridded dataset xarray ANUSPLIN.</p>
+<p>We select only the first timestep to speed up the process.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask <span style="color:#f92672">=</span> province_mask_poly<span style="color:#f92672">.</span>mask(ds<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>), lat_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>, lon_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>)
+mask
+</code></pre></div><pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
+array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+Coordinates:
+  * y        (y) int64 0 1 2 3 4 5 6 7 ... 1061 1062 1063 1064 1065 1066 1067
+  * x        (x) int64 0 1 2 3 4 5 6 7 8 ... 501 502 503 504 505 506 507 508 509
+    lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
+    lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask
+</code></pre></div><pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
+array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+Coordinates:
+  * y        (y) int64 0 1 2 3 4 5 6 7 ... 1061 1062 1063 1064 1065 1066 1067
+  * x        (x) int64 0 1 2 3 4 5 6 7 8 ... 501 502 503 504 505 506 507 508 509
+    lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
+    lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
+</code></pre>
+<p>Mask can be saved (for example as a NetCDF) for a later use.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./mask_all_province.nc</span><span style="color:#e6db74">&#39;</span>) 
+</code></pre></div><p>A quick visualisation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+mask<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
+province<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, lw <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1b989828&gt;
+</code></pre>
+<p><img src="./output_20_1.png" alt="png"></p>
+<h2 id="2-extract-one-province">2- Extract one province</h2>
+<p>We will sho how to mask Ontario province.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ID_PROV <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+<span style="color:#66d9ef">print</span>(province<span style="color:#f92672">.</span>PRNAME[ID_PROV])
+</code></pre></div><pre><code>Ontario
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask
+</code></pre></div><pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
+array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])
+Coordinates:
+  * y        (y) int64 0 1 2 3 4 5 6 7 ... 1061 1062 1063 1064 1065 1066 1067
+  * x        (x) int64 0 1 2 3 4 5 6 7 8 ... 501 502 503 504 505 506 507 508 509
+    lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
+    lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">==</span> ID_PROV)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+Dimensions:      (time: 68, x: 510, y: 1068)
+Coordinates:
+  * y            (y) int64 0 1 2 3 4 5 6 ... 1061 1062 1063 1064 1065 1066 1067
+  * x            (x) int64 0 1 2 3 4 5 6 7 8 ... 502 503 504 505 506 507 508 509
+    lon          (y, x) float32 dask.array&lt;shape=(1068, 510), chunksize=(1068, 510)&gt;
+    lat          (y, x) float32 dask.array&lt;shape=(1068, 510), chunksize=(1068, 510)&gt;
+  * time         (time) float64 1.0 2.0 3.0 4.0 5.0 ... 64.0 65.0 66.0 67.0 68.0
+Data variables:
+    Mean_tasmoy  (time, y, x) float32 dask.array&lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&gt;
+</code></pre>
+<p>Quick visualisation, we will display the first step of our DataArray masked.</p>
+<p>For out_sel2 array :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+out_sel2<span style="color:#f92672">.</span>Mean_tasmoy<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
+province<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x18bc95f8&gt;
+</code></pre>
+<p><img src="./output_28_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Ontario.nc</span><span style="color:#e6db74">&#39;</span>) 
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
+<span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset, num2date
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+filename<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Ontario.nc</span><span style="color:#e6db74">&#39;</span>
+nc_fid<span style="color:#f92672">=</span>Dataset(filename,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
+data<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Mean_tasmoy</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+lons<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+lats<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>(68, 1068, 510)
+</code></pre>
+<p>Let's use Xarray to compute climatology over 1988-2017.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_m <span style="color:#f92672">=</span> data[<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>:,:,:]
+clim_89_2017<span style="color:#f92672">=</span>data_m<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+clim_89_2017<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>(1068, 510)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>), frameon<span style="color:#f92672">=</span>True)  
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">75</span>,<span style="color:#ae81ff">40</span>,<span style="color:#ae81ff">58</span>])
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+   
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)    
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+            category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
+            name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+            scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
+            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+    
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>) 
+
+ 
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(lons,\
+                   lats,\
+                   clim_89_2017,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">1.</span>),\
+                   cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet )
+ax<span style="color:#f92672">.</span>gridlines()
+
+<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
+xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
+yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+
+cbar<span style="color:#f92672">.</span>set_label(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> Projection = Lambert Conformal Conic </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Resolution: 5 Arcs-Minutes (10 km)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Data provided by Natural Resources Canada / Created by Guillaume Dueymes</span><span style="color:#e6db74">&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># Affichage de la légende de la barre de couleur</span>
+
+cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm,  shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span>,extend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>)
+cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>) 
+    
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Temperature / Température (°C)</span><span style="color:#e6db74">&#39;</span>,size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x-large</span><span style="color:#e6db74">&#39;</span>)
+string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Climate normals of mean annual temperature (°C)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> 1988 - 2017</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./ANUSPLIN_Ontario_10km_YEAR_CLIM_1988-2017.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+plt<span style="color:#f92672">.</span>show() 
+
+</code></pre></div><p><img src="./output_34_0.png" alt="png"></p>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/province_shapefiles/&amp;text=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/province_shapefiles/&amp;t=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Province_shapefiles&amp;body=/post/province_shapefiles/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/province_shapefiles/&amp;title=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Province_shapefiles%20/post/province_shapefiles/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/province_shapefiles/&amp;title=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hued2496a182fbb6fc8c711157078d29a6_5348924_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Guillaume Dueymes</a></h5>
+      <h6 class="card-subtitle">Data Scientist and Research Assistant</h6>
+      <p class="card-text">My research interests include data science, data management and climate science.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Guillaume_Dueymes" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/guimeto" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
