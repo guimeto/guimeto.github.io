@@ -5,12 +5,507 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 14 Feb 2020 09:14:48 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 17 Feb 2020 11:51:51 -0800</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Shapefiles_in_python</title>
+      <link>/post/shapefiles_in_python/</link>
+      <pubDate>Mon, 17 Feb 2020 11:51:51 -0800</pubDate>
+      <guid>/post/shapefiles_in_python/</guid>
+      <description>&lt;p&gt;﻿&lt;/p&gt;
+&lt;h2 id=&#34;about-vector-data&#34;&gt;About Vector Data&lt;/h2&gt;
+&lt;p&gt;Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the
+spatial object.&lt;/p&gt;
+&lt;p&gt;The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file.
+&lt;img src=&#34;output_17_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lines: Lines are composed of many (at least 2) vertices, or points, that are connected. For instance, a road or a stream may be represented by a line. This line is composed of a series of segments, each “bend” in the road or stream represents a vertex that has defined x, y location.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;![png](./output_20_1.png)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Polygons: A polygon consists of 3 or more vertices that are connected and “closed”. Thus the outlines of plot boundaries, lakes, oceans, and states or countries are often represented by polygons. Occasionally, a polygon can have a hole in the middle of it (like a doughnut), this is something to be aware of but not an issue you will deal with in this tutorial.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;![png](output_30_1.png)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;shapefiles-points-lines-and-polygons&#34;&gt;Shapefiles: Points, Lines, and Polygons&lt;/h2&gt;
+&lt;p&gt;Geospatial data in vector format are often stored in a shapefile format. Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.&lt;/p&gt;
+&lt;p&gt;Objects stored in a shapefile often have a set of associated attributes that describe the data. For example, a line shapefile that contains the locations of streams, might contain the associated stream name, stream “order” and other information about each stream line object.&lt;/p&gt;
+&lt;p&gt;A shapefile is created by 3 or more files, all of which must retain the same NAME and be stored in the same file directory, in order for you to be able to work with them.&lt;/p&gt;
+&lt;h3 id=&#34;shapefile-structure&#34;&gt;Shapefile Structure&lt;/h3&gt;
+&lt;p&gt;There are 3 key files associated with any and all shapefiles:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.shp: the file that contains the geometry for all features.&lt;/li&gt;
+&lt;li&gt;.shx: the file that indexes the geometry.&lt;/li&gt;
+&lt;li&gt;.dbf: the file that stores feature attributes in a tabular format.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sometimes, a shapefile will have other associated files including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.prj: the file that contains information on projection format including the coordinate system and projection information. It is a plain text file describing the projection using well-known text (WKT) format.&lt;/li&gt;
+&lt;li&gt;.sbn and .sbx: the files that are a spatial index of the features.&lt;/li&gt;
+&lt;li&gt;.shp.xml: the file that is the geospatial metadata in XML format, (e.g. ISO 19115 or XML format).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We will use the geopandas library to work with vector data in Python. You will also use matplotlib.pyplot to plot your data.&lt;/p&gt;
+&lt;p&gt;First, we import librairies.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings; warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; matplotlib &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pyplot &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; geopandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; gpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;1-point-shapefile&#34;&gt;1- Point shapefile&lt;/h2&gt;
+&lt;p&gt;We can then open our first shapefile which contains point locations&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_ponts.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Each object in a shapefile has one or more attributes associated with it. Shapefile attributes are similar to fields or columns in a spreadsheet. Each row in the spreadsheet has a set of columns associated with it that describe the row element. In the case of a shapefile, each row represents a spatial object - for example, a road, represented as a line in a line shapefile, will have one “row” of attributes associated with it. These attributes can include different types of information that describe objects stored within a shapefile.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Id&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;ORIG_FID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;OCEAN_EN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;OCEAN_FR&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCSSDA&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCSDA&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WSCMDA&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCSSDA_EN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCSDA_EN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCMDA_EN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCSSDA_FR&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCSDA_FR&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WSCMDA_FR&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;BUFF_DIST&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;ORIG_FID_1&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Shape_Leng&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Shape_Area&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;geometry&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Atlantic Ocean&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;OcÃ©an Atlantique&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01AE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01A&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;01&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint John and Southern Bay of Fundy (N.B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Maritime Provinces Drainage Area&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint-Jean et sud de la baie de Fundy (N.-B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Aire de drainage des provinces Maritimes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23.6325&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.74042&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POINT (-68.31290411677341 47.93509135554499)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Atlantic Ocean&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;OcÃ©an Atlantique&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01AE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01A&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;01&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint John and Southern Bay of Fundy (N.B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Maritime Provinces Drainage Area&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint-Jean et sud de la baie de Fundy (N.-B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Aire de drainage des provinces Maritimes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23.6325&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.74042&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POINT (-68.10019745512986 47.8385423546759)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Atlantic Ocean&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;OcÃ©an Atlantique&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01AE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01A&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;01&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint John and Southern Bay of Fundy (N.B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Maritime Provinces Drainage Area&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint-Jean et sud de la baie de Fundy (N.-B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Aire de drainage des provinces Maritimes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23.6325&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.74042&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POINT (-68.05084811719591 47.67967312057342)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Atlantic Ocean&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;OcÃ©an Atlantique&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01AE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01A&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;01&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint John and Southern Bay of Fundy (N.B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Maritime Provinces Drainage Area&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint-Jean et sud de la baie de Fundy (N.-B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Aire de drainage des provinces Maritimes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23.6325&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.74042&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POINT (-67.94013835894734 47.46553718633378)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Atlantic Ocean&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;OcÃ©an Atlantique&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01AE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;01A&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;01&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint John and Southern Bay of Fundy (N.B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Maritime Provinces Drainage Area&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fish (Maine)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saint-Jean et sud de la baie de Fundy (N.-B.)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Aire de drainage des provinces Maritimes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23.6325&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.74042&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POINT (-67.79256589502562 47.36265881338679)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Notice that the geopandas data structure is a data.frame that contains a geometry column where the x, y point location values are stored. All of the other shapefile feature attributes are contained in columns, similar to what you may be used to if you’ve used a GIS tool such as ArcGIS or QGIS.&lt;/p&gt;
+&lt;h3 id=&#34;shapefile-metadata--attributes&#34;&gt;Shapefile Metadata &amp;amp; Attributes&lt;/h3&gt;
+&lt;p&gt;When you import the  shapefile layer into Python the gpd.read_file() function automatically stores information about the data as attributes. You are particularly interested in the geospatial metadata, describing the format, CRS, extent, and other components of the vector data, and the attributes which describe properties associated with each individual vector object.&lt;/p&gt;
+&lt;h3 id=&#34;spatial-metadata&#34;&gt;Spatial Metadata&lt;/h3&gt;
+&lt;p&gt;Key metadata for all shapefiles include:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Object Type: the class of the imported object.
+- Coordinate Reference System (CRS): the projection of the data.
+- Extent: the spatial extent (geographic area that the shapefile covers) of the shapefile. Note that the spatial extent for a shapefile represents the extent for ALL spatial objects in the shapefile.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can view shapefile metadata using the class(), .crs and .total_bounds methods:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;type(shapes)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;geopandas.geodataframe.GeoDataFrame
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;total_bounds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;array([-70.40000541,  45.21527633, -65.03721851,  48.06254733])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;crs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;{&#39;init&#39;: &#39;epsg:4269&#39;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The CRS for our data is epsg code: 4269.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geom_type&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;0    Point
+1    Point
+dtype: object
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;0    POINT (-68.31290411677341 47.93509135554499)
+1     POINT (-68.10019745512986 47.8385423546759)
+2    POINT (-68.05084811719591 47.67967312057342)
+3    POINT (-67.94013835894734 47.46553718633378)
+4    POINT (-67.79256589502562 47.36265881338679)
+Name: geometry, dtype: object
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;how-many-features-are-in-your-shapefile&#34;&gt;How Many Features Are in Your Shapefile?&lt;/h3&gt;
+&lt;p&gt;You can view the number of features (counted by the number of rows in the attribute table) and feature attributes (number of columns) in our data using the pandas .shape method. Note that the data are returned as a vector of two values:&lt;/p&gt;
+&lt;p&gt;(rows, columns)&lt;/p&gt;
+&lt;p&gt;Also note that the number of columns includes a column where the geometry (the x, y coordinate locations) are stored.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(72, 18)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;plot-our-shapefile&#34;&gt;Plot our Shapefile&lt;/h3&gt;
+&lt;p&gt;you can visualize the data in your Python geodata.frame object using the .plot() method.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[:, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;geometry&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x9b129b0&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;output_17_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-linestring-shapefile&#34;&gt;2- Linestring shapefile&lt;/h2&gt;
+&lt;p&gt;We had previously a POINT object.&lt;/p&gt;
+&lt;p&gt;We will then convert POINT to LINESTRING.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; shapely.geometry &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; LineString, mapping
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;point_to_linestring&lt;/span&gt;(fili_shps):
+    gdf &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(fili_shps) &lt;span style=&#34;color:#75715e&#34;&gt;#POINTS&lt;/span&gt;
+    latlon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [mapping(x)[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coordinates&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; gdf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry]
+    lats &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; latlon]
+    lons &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; latlon]
+    linestr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; LineString(zip(lons, lats))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;GeoDataFrame(index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], crs&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;gdf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;crs, geometry&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[linestr])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;line_shapes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; point_to_linestring(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_ponts.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+line_shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[:, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;geometry&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0xa55f128&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;output_20_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;line_shapes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;geometry&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;LINESTRING (-68.31290411677341 47.93509135554499, &amp;hellip; )&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;If we want to save our new shapefile:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;line_shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_file(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_lines.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And for example we can save latitude and longitude values into csv format:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; shapefile
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;shp2csv&lt;/span&gt;(shp_file):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Outputs a csv file based on input shapefile vertices&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    
+    out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;splitext(shp_file)[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_pnts.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; open(out, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;w&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; csv:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; shapefile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Reader(shp_file) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; sf:
+
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; shp_rec &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; sf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shapeRecords():
+                csv&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(shp_rec&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;record))
+
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; pnt &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; shp_rec&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;points:
+                    csv&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(pnt))
+
+shp2csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_lines.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+BV_border &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_lines_pnts.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, sep&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,skiprows &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
+BV_border&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;columns&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]
+BV_border[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;BV_border[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;apply(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x: x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;))&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;apply(pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numeric,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+BV_border[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;BV_border[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;apply(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x: x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;))&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;apply(pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numeric,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+BV_border&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+BV_border&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lon
+BV_border&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(BV_border, ignore_index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+BV_border&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;lon&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;lat&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-68.1002&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47.8385&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-68.0508&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47.6797&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-67.9401&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47.4655&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-67.7926&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47.3627&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-67.6059&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47.4158&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; cartopy.io.shapereader &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Reader
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ShapelyFeature
+
+fname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_lines.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+
+fig&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;), frameon&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)  
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes(projection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Robinson())
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent([&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;70&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;45&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;])
+        
+&lt;span style=&#34;color:#75715e&#34;&gt;#ax.coastlines(resolution=&amp;#39;110m&amp;#39;);&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;OCEAN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche ocean&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAND&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))       &lt;span style=&#34;color:#75715e&#34;&gt;# couche land&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAKES&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche lac&lt;/span&gt;
+    
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BORDERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    &lt;span style=&#34;color:#75715e&#34;&gt;# couche frontieres&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RIVERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;# couche rivières &lt;/span&gt;
+        
+coast &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;physical&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,     &lt;span style=&#34;color:#75715e&#34;&gt;# ajout de la couche cotière &lt;/span&gt;
+                            facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coastline&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(coast, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;black&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+states_provinces &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(
+        category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;cultural&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+        name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;admin_1_states_provinces_lines&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+         scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+         facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)  
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)  
+    
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gridlines()
+
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# Define gridline locations and draw the lines using cartopy&amp;#39;s built-in gridliner:&lt;/span&gt;
+xticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150.0&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40.0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
+yticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+        
+fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;canvas&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;draw()
+colors &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;red&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]
+maskBV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]                      
+cs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(BV_border&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lon,BV_border&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lat, transform&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree(), color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;colors[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;maskBV[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+shape_feature &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ShapelyFeature(Reader(fname)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometries(),
+                                ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree(), edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;red&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(shape_feature, facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;yellow&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;best&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, markerscale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)     
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./figure.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, bbox_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;tight&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, pad_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()  
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+       
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Terminé&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_27_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Terminé
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-polygon-shapefile&#34;&gt;3- Polygon shapefile&lt;/h2&gt;
+&lt;p&gt;We can now convert our linestring shapefile to a polygon shapefile:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; shapely.geometry &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Polygon, mapping
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;linestring_to_polygon&lt;/span&gt;(fili_shps):
+    gdf &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(fili_shps) &lt;span style=&#34;color:#75715e&#34;&gt;#LINESTRING&lt;/span&gt;
+    geom &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; gdf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry]
+    all_coords &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mapping(geom[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coordinates&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]
+    lats &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; all_coords]
+    lons &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; all_coords]
+    linestr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Polygon(zip(lons, lats))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;GeoDataFrame(index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], crs&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;gdf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;crs, geometry&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[linestr])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;poly_shapes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; linestring_to_polygon(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_lines.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+poly_shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_file(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_WGS84.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+poly_shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[:, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;geometry&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0xa5f0a90&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;output_30_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;poly_shapes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;geometry&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;POLYGON ((-68.31290411677341 47.93509135554499, &amp;hellip;))&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;4-find-if-a-point-in-inside-a-polygon&#34;&gt;4- Find if a point in inside a polygon&lt;/h2&gt;
+&lt;p&gt;Function bellow will check if a point, defined by a specific latitude and longitude, is inside or not a polygon shapefile.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check&lt;/span&gt;(lon, lat, ds_in):
+  lyr_in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ds_in&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;GetLayer(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)  
+  &lt;span style=&#34;color:#75715e&#34;&gt;# create point geometry&lt;/span&gt;
+  pt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ogr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Geometry(ogr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;wkbPoint)
+  pt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;SetPoint_2D(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, lon, lat)
+  &lt;span style=&#34;color:#75715e&#34;&gt;# go over all the polygons in the layer see if one include the point&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; feat_in &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lyr_in:
+    &lt;span style=&#34;color:#75715e&#34;&gt;# roughly subsets features, instead of go over everything&lt;/span&gt;
+    ply &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; feat_in&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;GetGeometryRef()
+    &lt;span style=&#34;color:#75715e&#34;&gt;# test&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ply&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Contains(pt):
+      &lt;span style=&#34;color:#75715e&#34;&gt;# TODO do what you need to do here&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Point in shapefile polygon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;(lon, lat)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;(True)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Point not in shapefile polygon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ds_in  &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ogr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Open(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_WGS84.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+lon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;68.&lt;/span&gt;
+lat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;47&lt;/span&gt;
+ind &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; check(lon, lat, ds_in)
+ind
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Point in shapefile polygon
+
+(-68.0, 47)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; cartopy.io.shapereader &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Reader
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ShapelyFeature
+
+fname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_WGS84.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+fig&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;), frameon&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)  
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes(projection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Robinson())
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent([&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;70&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;45&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;])
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;OCEAN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche ocean&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAND&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))       &lt;span style=&#34;color:#75715e&#34;&gt;# couche land&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAKES&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche lac&lt;/span&gt;
+   
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BORDERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    &lt;span style=&#34;color:#75715e&#34;&gt;# couche frontieres&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RIVERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;# couche rivières &lt;/span&gt;
+coast &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;physical&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,     &lt;span style=&#34;color:#75715e&#34;&gt;# ajout de la couche cotière &lt;/span&gt;
+                            facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coastline&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(coast, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;black&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)    
+states_provinces &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(
+            category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;cultural&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+            name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;admin_1_states_provinces_lines&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+            scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+            facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ind[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], ind[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, ms&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, transform&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Geodetic())
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text(ind[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;35&lt;/span&gt;, ind[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, 
+                &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Point in shapefile polygon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, 
+                va&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;center&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, 
+                ha&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;green&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, transform&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Geodetic(), fontweight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;bold&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;66&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;48.5&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ro&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, ms&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, transform&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Geodetic())
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;66&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;35&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;48.5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, 
+                &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Point outside shapefile polygon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, 
+                va&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;center&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, 
+                ha&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;red&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, transform&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Geodetic(), fontweight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;bold&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+shape_feature &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ShapelyFeature(Reader(fname)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometries(),
+                                ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree(), edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;black&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(shape_feature, facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;yellow&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_35_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Province_shapefiles</title>

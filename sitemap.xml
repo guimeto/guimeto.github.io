@@ -39,12 +39,17 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-02-14T09:14:48-08:00</lastmod>
+    <lastmod>2020-02-17T11:51:51-08:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-02-14T09:14:48-08:00</lastmod>
+    <lastmod>2020-02-17T11:51:51-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/shapefiles_in_python/</loc>
+    <lastmod>2020-02-17T11:51:51-08:00</lastmod>
   </url>
   
   <url>

@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="﻿
+About Vector Data Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the spatial object.
+The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:
+  Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/shapefiles_in_python/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/shapefiles_in_python/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/post/shapefiles_in_python/">
+  <meta property="og:title" content="Shapefiles_in_python | GDueymes">
+  <meta property="og:description" content="﻿
+About Vector Data Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the spatial object.
+The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:
+  Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file."><meta property="og:image" content="/post/shapefiles_in_python/featured.png">
+  <meta property="twitter:image" content="/post/shapefiles_in_python/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-02-17T11:51:51-08:00">
+    
+    <meta property="article:modified_time" content="2020-02-17T11:51:51-08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/shapefiles_in_python/"
+  },
+  "headline": "Shapefiles_in_python",
+  
+  "image": [
+    "/post/shapefiles_in_python/featured.png"
+  ],
+  
+  "datePublished": "2020-02-17T11:51:51-08:00",
+  "dateModified": "2020-02-17T11:51:51-08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Guillaume Dueymes"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "GDueymes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "﻿\nAbout Vector Data Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the spatial object.\nThe organization of the vertices determines the type of vector that you are working with. There are three types of vector data:\n  Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Shapefiles_in_python | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>Shapefiles_in_python</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 17, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 572px; max-height: 443px;">
+  <div style="position: relative">
+    <img src="/post/shapefiles_in_python/featured.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>﻿</p>
+<h2 id="about-vector-data">About Vector Data</h2>
+<p>Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the
+spatial object.</p>
+<p>The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:</p>
+<ul>
+<li>
+<p>Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file.
+<img src="output_17_1.png" alt="png"></p>
+</li>
+<li>
+<p>Lines: Lines are composed of many (at least 2) vertices, or points, that are connected. For instance, a road or a stream may be represented by a line. This line is composed of a series of segments, each “bend” in the road or stream represents a vertex that has defined x, y location.</p>
+</li>
+</ul>
+<pre><code>![png](./output_20_1.png)
+</code></pre>
+<ul>
+<li>Polygons: A polygon consists of 3 or more vertices that are connected and “closed”. Thus the outlines of plot boundaries, lakes, oceans, and states or countries are often represented by polygons. Occasionally, a polygon can have a hole in the middle of it (like a doughnut), this is something to be aware of but not an issue you will deal with in this tutorial.</li>
+</ul>
+<pre><code>![png](output_30_1.png)
+</code></pre>
+<h2 id="shapefiles-points-lines-and-polygons">Shapefiles: Points, Lines, and Polygons</h2>
+<p>Geospatial data in vector format are often stored in a shapefile format. Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.</p>
+<p>Objects stored in a shapefile often have a set of associated attributes that describe the data. For example, a line shapefile that contains the locations of streams, might contain the associated stream name, stream “order” and other information about each stream line object.</p>
+<p>A shapefile is created by 3 or more files, all of which must retain the same NAME and be stored in the same file directory, in order for you to be able to work with them.</p>
+<h3 id="shapefile-structure">Shapefile Structure</h3>
+<p>There are 3 key files associated with any and all shapefiles:</p>
+<ul>
+<li>.shp: the file that contains the geometry for all features.</li>
+<li>.shx: the file that indexes the geometry.</li>
+<li>.dbf: the file that stores feature attributes in a tabular format.</li>
+</ul>
+<p>Sometimes, a shapefile will have other associated files including:</p>
+<ul>
+<li>.prj: the file that contains information on projection format including the coordinate system and projection information. It is a plain text file describing the projection using well-known text (WKT) format.</li>
+<li>.sbn and .sbx: the files that are a spatial index of the features.</li>
+<li>.shp.xml: the file that is the geospatial metadata in XML format, (e.g. ISO 19115 or XML format).</li>
+</ul>
+<p>We will use the geopandas library to work with vector data in Python. You will also use matplotlib.pyplot to plot your data.</p>
+<p>First, we import librairies.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> pyplot <span style="color:#66d9ef">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
+<span style="color:#f92672">import</span> geopandas <span style="color:#f92672">as</span> gpd
+</code></pre></div><h2 id="1-point-shapefile">1- Point shapefile</h2>
+<p>We can then open our first shapefile which contains point locations</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_ponts.shp</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><p>Each object in a shapefile has one or more attributes associated with it. Shapefile attributes are similar to fields or columns in a spreadsheet. Each row in the spreadsheet has a set of columns associated with it that describe the row element. In the case of a shapefile, each row represents a spatial object - for example, a road, represented as a line in a line shapefile, will have one “row” of attributes associated with it. These attributes can include different types of information that describe objects stored within a shapefile.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">2</span>)
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Id</th>
+<th align="right">ORIG_FID</th>
+<th align="left">OCEAN_EN</th>
+<th align="left">OCEAN_FR</th>
+<th align="left">WSCSSDA</th>
+<th align="left">WSCSDA</th>
+<th align="right">WSCMDA</th>
+<th align="left">WSCSSDA_EN</th>
+<th align="left">WSCSDA_EN</th>
+<th align="left">WSCMDA_EN</th>
+<th align="left">WSCSSDA_FR</th>
+<th align="left">WSCSDA_FR</th>
+<th align="left">WSCMDA_FR</th>
+<th align="right">BUFF_DIST</th>
+<th align="right">ORIG_FID_1</th>
+<th align="right">Shape_Leng</th>
+<th align="right">Shape_Area</th>
+<th align="left">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">Atlantic Ocean</td>
+<td align="left">OcÃ©an Atlantique</td>
+<td align="left">01AE</td>
+<td align="left">01A</td>
+<td align="right">01</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint John and Southern Bay of Fundy (N.B.)</td>
+<td align="left">Maritime Provinces Drainage Area</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint-Jean et sud de la baie de Fundy (N.-B.)</td>
+<td align="left">Aire de drainage des provinces Maritimes</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">23.6325</td>
+<td align="right">6.74042</td>
+<td align="left">POINT (-68.31290411677341 47.93509135554499)</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">Atlantic Ocean</td>
+<td align="left">OcÃ©an Atlantique</td>
+<td align="left">01AE</td>
+<td align="left">01A</td>
+<td align="right">01</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint John and Southern Bay of Fundy (N.B.)</td>
+<td align="left">Maritime Provinces Drainage Area</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint-Jean et sud de la baie de Fundy (N.-B.)</td>
+<td align="left">Aire de drainage des provinces Maritimes</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">23.6325</td>
+<td align="right">6.74042</td>
+<td align="left">POINT (-68.10019745512986 47.8385423546759)</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">Atlantic Ocean</td>
+<td align="left">OcÃ©an Atlantique</td>
+<td align="left">01AE</td>
+<td align="left">01A</td>
+<td align="right">01</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint John and Southern Bay of Fundy (N.B.)</td>
+<td align="left">Maritime Provinces Drainage Area</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint-Jean et sud de la baie de Fundy (N.-B.)</td>
+<td align="left">Aire de drainage des provinces Maritimes</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">23.6325</td>
+<td align="right">6.74042</td>
+<td align="left">POINT (-68.05084811719591 47.67967312057342)</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">Atlantic Ocean</td>
+<td align="left">OcÃ©an Atlantique</td>
+<td align="left">01AE</td>
+<td align="left">01A</td>
+<td align="right">01</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint John and Southern Bay of Fundy (N.B.)</td>
+<td align="left">Maritime Provinces Drainage Area</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint-Jean et sud de la baie de Fundy (N.-B.)</td>
+<td align="left">Aire de drainage des provinces Maritimes</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">23.6325</td>
+<td align="right">6.74042</td>
+<td align="left">POINT (-67.94013835894734 47.46553718633378)</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">Atlantic Ocean</td>
+<td align="left">OcÃ©an Atlantique</td>
+<td align="left">01AE</td>
+<td align="left">01A</td>
+<td align="right">01</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint John and Southern Bay of Fundy (N.B.)</td>
+<td align="left">Maritime Provinces Drainage Area</td>
+<td align="left">Fish (Maine)</td>
+<td align="left">Saint-Jean et sud de la baie de Fundy (N.-B.)</td>
+<td align="left">Aire de drainage des provinces Maritimes</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">23.6325</td>
+<td align="right">6.74042</td>
+<td align="left">POINT (-67.79256589502562 47.36265881338679)</td>
+</tr>
+</tbody>
+</table>
+<p>Notice that the geopandas data structure is a data.frame that contains a geometry column where the x, y point location values are stored. All of the other shapefile feature attributes are contained in columns, similar to what you may be used to if you’ve used a GIS tool such as ArcGIS or QGIS.</p>
+<h3 id="shapefile-metadata--attributes">Shapefile Metadata &amp; Attributes</h3>
+<p>When you import the  shapefile layer into Python the gpd.read_file() function automatically stores information about the data as attributes. You are particularly interested in the geospatial metadata, describing the format, CRS, extent, and other components of the vector data, and the attributes which describe properties associated with each individual vector object.</p>
+<h3 id="spatial-metadata">Spatial Metadata</h3>
+<p>Key metadata for all shapefiles include:</p>
+<pre><code>- Object Type: the class of the imported object.
+- Coordinate Reference System (CRS): the projection of the data.
+- Extent: the spatial extent (geographic area that the shapefile covers) of the shapefile. Note that the spatial extent for a shapefile represents the extent for ALL spatial objects in the shapefile.
+</code></pre>
+<p>You can view shapefile metadata using the class(), .crs and .total_bounds methods:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">type(shapes)
+</code></pre></div><pre><code>geopandas.geodataframe.GeoDataFrame
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>total_bounds
+</code></pre></div><pre><code>array([-70.40000541,  45.21527633, -65.03721851,  48.06254733])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>crs
+</code></pre></div><pre><code>{'init': 'epsg:4269'}
+</code></pre>
+<p>The CRS for our data is epsg code: 4269.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>geom_type<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">2</span>)
+</code></pre></div><pre><code>0    Point
+1    Point
+dtype: object
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>0    POINT (-68.31290411677341 47.93509135554499)
+1     POINT (-68.10019745512986 47.8385423546759)
+2    POINT (-68.05084811719591 47.67967312057342)
+3    POINT (-67.94013835894734 47.46553718633378)
+4    POINT (-67.79256589502562 47.36265881338679)
+Name: geometry, dtype: object
+</code></pre>
+<h3 id="how-many-features-are-in-your-shapefile">How Many Features Are in Your Shapefile?</h3>
+<p>You can view the number of features (counted by the number of rows in the attribute table) and feature attributes (number of columns) in our data using the pandas .shape method. Note that the data are returned as a vector of two values:</p>
+<p>(rows, columns)</p>
+<p>Also note that the number of columns includes a column where the geometry (the x, y coordinate locations) are stored.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>(72, 18)
+</code></pre>
+<h3 id="plot-our-shapefile">Plot our Shapefile</h3>
+<p>you can visualize the data in your Python geodata.frame object using the .plot() method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x9b129b0&gt;
+</code></pre>
+<p><img src="output_17_1.png" alt="png"></p>
+<h2 id="2-linestring-shapefile">2- Linestring shapefile</h2>
+<p>We had previously a POINT object.</p>
+<p>We will then convert POINT to LINESTRING.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> shapely.geometry <span style="color:#f92672">import</span> LineString, mapping
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">point_to_linestring</span>(fili_shps):
+    gdf <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(fili_shps) <span style="color:#75715e">#POINTS</span>
+    latlon <span style="color:#f92672">=</span> [mapping(x)[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coordinates</span><span style="color:#e6db74">&#39;</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> gdf<span style="color:#f92672">.</span>geometry]
+    lats <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> latlon]
+    lons <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> latlon]
+    linestr <span style="color:#f92672">=</span> LineString(zip(lons, lats))
+    <span style="color:#66d9ef">return</span> gpd<span style="color:#f92672">.</span>GeoDataFrame(index<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>], crs<span style="color:#f92672">=</span>gdf<span style="color:#f92672">.</span>crs, geometry<span style="color:#f92672">=</span>[linestr])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">line_shapes <span style="color:#f92672">=</span> point_to_linestring(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_ponts.shp</span><span style="color:#e6db74">&#34;</span>)
+line_shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xa55f128&gt;
+</code></pre>
+<p><img src="output_20_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">line_shapes
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="left">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="left">LINESTRING (-68.31290411677341 47.93509135554499, &hellip; )</td>
+</tr>
+</tbody>
+</table>
+<p>If we want to save our new shapefile:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">line_shapes<span style="color:#f92672">.</span>to_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><p>And for example we can save latitude and longitude values into csv format:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> shapefile
+<span style="color:#f92672">import</span> os
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">shp2csv</span>(shp_file):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">Outputs a csv file based on input shapefile vertices</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+    
+    out <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>splitext(shp_file)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_pnts.csv</span><span style="color:#e6db74">&#39;</span>
+
+    <span style="color:#66d9ef">with</span> open(out, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> csv:
+        <span style="color:#66d9ef">with</span> shapefile<span style="color:#f92672">.</span>Reader(shp_file) <span style="color:#66d9ef">as</span> sf:
+
+            <span style="color:#66d9ef">for</span> shp_rec <span style="color:#f92672">in</span> sf<span style="color:#f92672">.</span>shapeRecords():
+                csv<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(shp_rec<span style="color:#f92672">.</span>record))
+
+                <span style="color:#66d9ef">for</span> pnt <span style="color:#f92672">in</span> shp_rec<span style="color:#f92672">.</span>shape<span style="color:#f92672">.</span>points:
+                    csv<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(pnt))
+
+shp2csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+BV_border <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.</span><span style="color:#e6db74">\</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines_pnts.csv</span><span style="color:#e6db74">&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span>,skiprows <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+BV_border<span style="color:#f92672">.</span>columns<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#34;</span>]
+BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span>BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>))<span style="color:#f92672">.</span>apply(pd<span style="color:#f92672">.</span>to_numeric,<span style="color:#ae81ff">1</span>)
+BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span>BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>))<span style="color:#f92672">.</span>apply(pd<span style="color:#f92672">.</span>to_numeric,<span style="color:#ae81ff">1</span>)
+BV_border<span style="color:#f92672">.</span>head()
+BV_border<span style="color:#f92672">.</span>lon
+BV_border<span style="color:#f92672">.</span>append(BV_border, ignore_index<span style="color:#f92672">=</span>True)
+BV_border<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">lon</th>
+<th align="right">lat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">-68.1002</td>
+<td align="right">47.8385</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">-68.0508</td>
+<td align="right">47.6797</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">-67.9401</td>
+<td align="right">47.4655</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">-67.7926</td>
+<td align="right">47.3627</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">-67.6059</td>
+<td align="right">47.4158</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">from</span> cartopy.io.shapereader <span style="color:#f92672">import</span> Reader
+<span style="color:#f92672">from</span> cartopy.feature <span style="color:#f92672">import</span> ShapelyFeature
+
+fname <span style="color:#f92672">=</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#39;</span>
+
+fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>), frameon<span style="color:#f92672">=</span>True)  
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Robinson())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">70</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">64</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">50</span>])
+        
+<span style="color:#75715e">#ax.coastlines(resolution=&#39;110m&#39;);</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+    
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+        
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+         scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
+         facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+    
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)  
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)  
+    
+ax<span style="color:#f92672">.</span>gridlines()
+
+
+        <span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
+xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
+yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+        
+fig<span style="color:#f92672">.</span>canvas<span style="color:#f92672">.</span>draw()
+colors <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>]
+maskBV <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">BV</span><span style="color:#e6db74">&#39;</span>]                      
+cs <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>plot(BV_border<span style="color:#f92672">.</span>lon,BV_border<span style="color:#f92672">.</span>lat, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), color<span style="color:#f92672">=</span>colors[<span style="color:#ae81ff">0</span>], linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, label<span style="color:#f92672">=</span>maskBV[<span style="color:#ae81ff">0</span>])
+shape_feature <span style="color:#f92672">=</span> ShapelyFeature(Reader(fname)<span style="color:#f92672">.</span>geometries(),
+                                ccrs<span style="color:#f92672">.</span>PlateCarree(), edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(shape_feature, facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">yellow</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">best</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">2.</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)     
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./figure.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+plt<span style="color:#f92672">.</span>show()  
+plt<span style="color:#f92672">.</span>close()
+       
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Terminé</span><span style="color:#e6db74">&#39;</span>)
+
+</code></pre></div><p><img src="output_27_0.png" alt="png"></p>
+<pre><code>Terminé
+</code></pre>
+<h2 id="3-polygon-shapefile">3- Polygon shapefile</h2>
+<p>We can now convert our linestring shapefile to a polygon shapefile:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> shapely.geometry <span style="color:#f92672">import</span> Polygon, mapping
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">linestring_to_polygon</span>(fili_shps):
+    gdf <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(fili_shps) <span style="color:#75715e">#LINESTRING</span>
+    geom <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> gdf<span style="color:#f92672">.</span>geometry]
+    all_coords <span style="color:#f92672">=</span> mapping(geom[<span style="color:#ae81ff">0</span>])[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coordinates</span><span style="color:#e6db74">&#39;</span>]
+    lats <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> all_coords]
+    lons <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> all_coords]
+    linestr <span style="color:#f92672">=</span> Polygon(zip(lons, lats))
+    <span style="color:#66d9ef">return</span> gpd<span style="color:#f92672">.</span>GeoDataFrame(index<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>], crs<span style="color:#f92672">=</span>gdf<span style="color:#f92672">.</span>crs, geometry<span style="color:#f92672">=</span>[linestr])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">poly_shapes <span style="color:#f92672">=</span> linestring_to_polygon(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#34;</span>)
+poly_shapes<span style="color:#f92672">.</span>to_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_WGS84.shp</span><span style="color:#e6db74">&#39;</span>)
+poly_shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xa5f0a90&gt;
+</code></pre>
+<p><img src="output_30_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">poly_shapes
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="left">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="left">POLYGON ((-68.31290411677341 47.93509135554499, &hellip;))</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-find-if-a-point-in-inside-a-polygon">4- Find if a point in inside a polygon</h2>
+<p>Function bellow will check if a point, defined by a specific latitude and longitude, is inside or not a polygon shapefile.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>(lon, lat, ds_in):
+  lyr_in <span style="color:#f92672">=</span> ds_in<span style="color:#f92672">.</span>GetLayer(<span style="color:#ae81ff">0</span>)  
+  <span style="color:#75715e"># create point geometry</span>
+  pt <span style="color:#f92672">=</span> ogr<span style="color:#f92672">.</span>Geometry(ogr<span style="color:#f92672">.</span>wkbPoint)
+  pt<span style="color:#f92672">.</span>SetPoint_2D(<span style="color:#ae81ff">0</span>, lon, lat)
+  <span style="color:#75715e"># go over all the polygons in the layer see if one include the point</span>
+  <span style="color:#66d9ef">for</span> feat_in <span style="color:#f92672">in</span> lyr_in:
+    <span style="color:#75715e"># roughly subsets features, instead of go over everything</span>
+    ply <span style="color:#f92672">=</span> feat_in<span style="color:#f92672">.</span>GetGeometryRef()
+    <span style="color:#75715e"># test</span>
+    <span style="color:#66d9ef">if</span> ply<span style="color:#f92672">.</span>Contains(pt):
+      <span style="color:#75715e"># TODO do what you need to do here</span>
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point in shapefile polygon</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">return</span>(lon, lat)
+        <span style="color:#66d9ef">return</span>(True)
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point not in shapefile polygon</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds_in  <span style="color:#f92672">=</span> ogr<span style="color:#f92672">.</span>Open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_WGS84.shp</span><span style="color:#e6db74">&#34;</span>)
+lon <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">68.</span>
+lat <span style="color:#f92672">=</span> <span style="color:#ae81ff">47</span>
+ind <span style="color:#f92672">=</span> check(lon, lat, ds_in)
+ind
+</code></pre></div><pre><code>Point in shapefile polygon
+
+(-68.0, 47)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">from</span> cartopy.io.shapereader <span style="color:#f92672">import</span> Reader
+<span style="color:#f92672">from</span> cartopy.feature <span style="color:#f92672">import</span> ShapelyFeature
+
+fname <span style="color:#f92672">=</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_WGS84.shp</span><span style="color:#e6db74">&#39;</span>
+fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>), frameon<span style="color:#f92672">=</span>True)  
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Robinson())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">70</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">64</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">50</span>])
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+   
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)    
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+            category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
+            name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+            scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
+            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+    
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>) 
+ax<span style="color:#f92672">.</span>plot(ind[<span style="color:#ae81ff">0</span>], ind[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">go</span><span style="color:#e6db74">&#39;</span>, ms<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic())
+
+ax<span style="color:#f92672">.</span>text(ind[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">35</span>, ind[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">15</span>, 
+                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point in shapefile polygon</span><span style="color:#e6db74">&#39;</span>, 
+                va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, 
+                ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">green</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic(), fontweight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bold</span><span style="color:#e6db74">&#39;</span>)
+
+ax<span style="color:#f92672">.</span>plot(<span style="color:#f92672">-</span><span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">48.5</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ro</span><span style="color:#e6db74">&#39;</span>, ms<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic())
+ax<span style="color:#f92672">.</span>text(<span style="color:#f92672">-</span><span style="color:#ae81ff">66</span> <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">48.5</span> <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">15</span>, 
+                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point outside shapefile polygon</span><span style="color:#e6db74">&#39;</span>, 
+                va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, 
+                ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic(), fontweight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bold</span><span style="color:#e6db74">&#39;</span>)
+
+shape_feature <span style="color:#f92672">=</span> ShapelyFeature(Reader(fname)<span style="color:#f92672">.</span>geometries(),
+                                ccrs<span style="color:#f92672">.</span>PlateCarree(), edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(shape_feature, facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">yellow</span><span style="color:#e6db74">&#39;</span>)
+
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="output_35_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/shapefiles_in_python/&amp;text=Shapefiles_in_python" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/shapefiles_in_python/&amp;t=Shapefiles_in_python" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Shapefiles_in_python&amp;body=/post/shapefiles_in_python/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/shapefiles_in_python/&amp;title=Shapefiles_in_python" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Shapefiles_in_python%20/post/shapefiles_in_python/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/shapefiles_in_python/&amp;title=Shapefiles_in_python" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hued2496a182fbb6fc8c711157078d29a6_5348924_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Guillaume Dueymes</a></h5>
+      <h6 class="card-subtitle">Data Scientist and Research Assistant</h6>
+      <p class="card-text">My research interests include data science, data management and climate science.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Guillaume_Dueymes" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/guimeto" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
