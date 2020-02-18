@@ -5,12 +5,1181 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 17 Feb 2020 11:51:51 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 18 Feb 2020 13:06:38 -0800</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>ECC_SWOB_Stations</title>
+      <link>/post/ecc_swob_stations/</link>
+      <pubDate>Tue, 18 Feb 2020 13:06:38 -0800</pubDate>
+      <guid>/post/ecc_swob_stations/</guid>
+      <description>&lt;p&gt;﻿&lt;/p&gt;
+&lt;h1 id=&#34;working-with-xml-extensible-markup-language-file-using-python-part-1&#34;&gt;Working with XML (Extensible Markup Language) file using Python Part 1:&lt;/h1&gt;
+&lt;h1 id=&#34;surface-weather-observation-xml-swobxml&#34;&gt;Surface Weather Observation XML (SW-OB-XML)&lt;/h1&gt;
+&lt;h2 id=&#34;swobxml&#34;&gt;SW-OB-XML&lt;/h2&gt;
+&lt;p&gt;For xml files, we will use a package called xml which will allow us to decrypt the xml file.&lt;/p&gt;
+&lt;p&gt;Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.&lt;/p&gt;
+&lt;p&gt;We will first download an xml file located in this directory:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dd.weather.gc.ca/observations/doc/&#34;&gt;https://dd.weather.gc.ca/observations/doc/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We are going to work here with the meteorological ground (SWOB-ML) and marine observations data found on the ECCC Datamart.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Data are available at the following links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;earth-observations&#34;&gt;Earth observations:&lt;/h2&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/swob-ml/AAAAMMJJ/XXXX/&#34;&gt;https://dd.meteo.gc.ca/observations/swob-ml/AAAAMMJJ/XXXX/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AAAAMMJJ: observations date, UTC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;XXXX: station ID (OMM ID)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;marine-observations&#34;&gt;Marine observations:&lt;/h2&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX&#34;&gt;https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;où:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AAAAMMJJ: observations date, UTC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;XXXXXXX: station ID (OMM ID), can be 5 or 7 digits&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;partner-observations&#34;&gt;Partner observations:&lt;/h2&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID&#34;&gt;https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;où:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NETWORK: acronym of the partner network&lt;/li&gt;
+&lt;li&gt;YYYYMMDD: observations date, UTC&lt;/li&gt;
+&lt;li&gt;MSC-ID: ID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;################################################&lt;/p&gt;
+&lt;h3 id=&#34;description&#34;&gt;Description                       &lt;/h3&gt;
+&lt;p&gt;################################################&lt;/p&gt;
+&lt;p&gt;The markup language for ground weather (SWOB Met-ML) and marine observations is an XML format for the distribution of weather data observed by Environment and Climate Change Canada and its partners.&lt;/p&gt;
+&lt;p&gt;The list of observation stations is available here:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/doc/swob-xml_station_list.csv&#34;&gt;https://dd.meteo.gc.ca/observations/doc/swob-xml_station_list.csv&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The list of marine observation stations is available here:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/doc/swob-xml_marine_station_list.csv&#34;&gt;https://dd.meteo.gc.ca/observations/doc/swob-xml_marine_station_list.csv&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The list of partner stations is available here:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/doc/swob-xml_partner_station_list.csv&#34;&gt;https://dd.meteo.gc.ca/observations/doc/swob-xml_partner_station_list.csv&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The format specification is available in the following directory:
+&lt;a href=&#34;https://dd.meteo.gc.ca/observations/doc/&#34;&gt;https://dd.meteo.gc.ca/observations/doc/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here is the structure of a SWOB file:&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;First, we import python librairies and define the date we want to extract:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# importations des librairies &lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; datetime &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime, timedelta
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd 
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xml.etree.ElementTree &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ET
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; wget
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings
+warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os 
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; os.path &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; exists
+now &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;utcnow() &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+year &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;year)
+month &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month)
+day &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;day)
+hour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{now.hour:02d}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+day &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{now.day:02d}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+month &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{now.month:02d}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+date &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; year&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;month&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;day
+date
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&#39;20200212&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We will list the stations we want to extract: example for the province of Quebec and Ontario.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_table(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;swob-xml_station_list.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, sep&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+stations_quebec &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)  ,:]
+stations_ontario &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Ontario&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)  ,:]
+stations_mask&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat([stations_quebec,stations_ontario],axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+stations_mask_sans_NaN &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations_mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dropna() 
+&lt;span style=&#34;color:#75715e&#34;&gt;#stations_mask_sans_NaN_AUTO = stations_mask_sans_NaN.loc[stations_mask_sans_NaN[&amp;#34;AUTO/MAN&amp;#34;]==&amp;#39;AUTO&amp;#39;,:]&lt;/span&gt;
+stations_mask_sans_NaN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;IATA_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WMO_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;MSC_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Latitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Longitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Elevation(m)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Data_Provider&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Dataset/Network&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;AUTO/MAN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Province/Territory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;48&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGAH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;LA GRANDE IV&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71823&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7093GJ5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-73.6828&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;306.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGBC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;BAIE-COMEAU&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71890&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7040442&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.1351&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-68.2024&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;22.6&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CHIBOUGAMAU-CHAPAIS&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7091410&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.7773&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-74.5304&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;389.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCL&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CAUSAPSCAL AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73005&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7051201&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.3088&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-67.2528&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;123&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGGA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GASPE AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73116&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7052603&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.7833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-64.4833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;working-with-one-station&#34;&gt;Working with one station&lt;/h2&gt;
+&lt;p&gt;Let&#39;s work with  CWTQ station ID:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
+stid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CWTQ&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+tmp_file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;https://dd.weather.gc.ca/observations/swob-ml/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;date&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;stid&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;year&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;month&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;day&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;hour&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;00-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;stid&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-AUTO-swob.xml&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+tmp_file
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&#39;https://dd.weather.gc.ca/observations/swob-ml/20200212/CWTQ/2020-02-12-1900-CWTQ-AUTO-swob.xml&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;wget&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;download(tmp_file)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;100% [............................................................] 9408 / 9408
+
+
+
+
+&#39;2020-02-12-1900-CWTQ-AUTO-swob.xml&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;tree &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ET&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;parse(year&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;month&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;day&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;hour&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;00-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;stid&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-AUTO-swob.xml&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+root&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;tree&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;getroot()
+children &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;getchildren()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here is the root of our data to extract:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;Element &#39;{http://www.opengis.net/om/1.0}ObservationCollection&#39; at 0x000000000950ED18&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;children
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&amp;lt;Element &#39;{http://www.opengis.net/om/1.0}member&#39; at 0x000000000950EE08&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Number of elements in our file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# total amount of items&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(len(root))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;for child in root.iter(&#39;*&#39;):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;print(child.items())
+
+#print(child.keys())
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;for child in root.iter(&#39;*&#39;):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;print(child)
+
+print(child.attrib)
+
+print(child.attrib.get(&#39;value&#39;))
+
+print(child.attrib.get(&#39;name&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The list of variables is available on page 40 of the document:
+&amp;mdash; SWOB-ML_Product_User_Guide_v8.2_f.pdf&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+date_tm&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[] 
+avg_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+max_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+min_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+max_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+min_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+stn_pres&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+mslp&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+pcpn_amt_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+wnd_dir_10m_pst1hr_max_spd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+max_wnd_spd_10m_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+avg_wnd_spd_10m_pst10mts&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+avg_snw_dpth_pst5mts_1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+avg_snw_dpth_pst5mts_2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+avg_snw_dpth_pst5mts_3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; child &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iter(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;):  
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;date_tm&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:           &lt;span style=&#34;color:#75715e&#34;&gt;# date of actual observation&lt;/span&gt;
+        date_tm&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:  &lt;span style=&#34;color:#75715e&#34;&gt;# average air temperature in the last hour &lt;/span&gt;
+        avg_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# minimum air temperature in the last hour&lt;/span&gt;
+        min_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# maximum air temperature in the last hour &lt;/span&gt;
+        max_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# maximum relative humidity in the past hour&lt;/span&gt;
+        max_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# minimum relative humidity in the past hour&lt;/span&gt;
+        min_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)) 
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;stn_pres&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:         &lt;span style=&#34;color:#75715e&#34;&gt;# pressure at the station (start of the hour)&lt;/span&gt;
+        stn_pres&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;pcpn_amt_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:   &lt;span style=&#34;color:#75715e&#34;&gt;# amount of precipitation in the past hour&lt;/span&gt;
+        pcpn_amt_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))  
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_wnd_spd_10m_pst10mts&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# average wind speed at 10 m for 10 min&lt;/span&gt;
+        avg_wnd_spd_10m_pst10mts&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_wnd_spd_10m_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;#  maximum wind speed at 10 m for one hour&lt;/span&gt;
+        max_wnd_spd_10m_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;wnd_dir_10m_pst1hr_max_spd&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# Instant wind direction at 10 m for maximum hourly wind speed, min 0 to 60&lt;/span&gt;
+        wnd_dir_10m_pst1hr_max_spd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))          
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mslp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:   &lt;span style=&#34;color:#75715e&#34;&gt;# average sea level pressure&lt;/span&gt;
+        mslp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:
+            avg_snw_dpth_pst5mts_1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:
+            avg_snw_dpth_pst5mts_2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_3&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:
+            avg_snw_dpth_pst5mts_3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+            
+            
+data_dict &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;date_tm&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:date_tm, 
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_air_temp_pst1hr, 
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:min_air_temp_pst1hr,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: max_air_temp_pst1hr, 
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:max_rel_hum_pst1hr,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:min_rel_hum_pst1hr,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;stn_pres&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:stn_pres,
+         &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mslp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:mslp,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;pcpn_amt_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:pcpn_amt_pst1hr,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_wnd_spd_10m_pst10mts&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_wnd_spd_10m_pst10mts,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;wnd_dir_10m_pst1hr_max_spd&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:wnd_dir_10m_pst1hr_max_spd,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_wnd_spd_10m_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:max_wnd_spd_10m_pst1hr,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_snw_dpth_pst5mts_1,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_snw_dpth_pst5mts_2,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_3&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_snw_dpth_pst5mts_3
+        
+       } 
+
+data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(data_dict)           
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;date_tm&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;avg_air_temp_pst1hr&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;min_air_temp_pst1hr&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;max_air_temp_pst1hr&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;max_rel_hum_pst1hr&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;min_rel_hum_pst1hr&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;stn_pres&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;mslp&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;pcpn_amt_pst1hr&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;avg_wnd_spd_10m_pst10mts&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;wnd_dir_10m_pst1hr_max_spd&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;max_wnd_spd_10m_pst1hr&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;avg_snw_dpth_pst5mts_1&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;avg_snw_dpth_pst5mts_2&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;avg_snw_dpth_pst5mts_3&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2020-02-18T20:00:00.000Z&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-1.2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;86&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;83&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1006.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1010.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;151&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;56.4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;37&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;33&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;37&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;reading-the-station-list&#34;&gt;Reading the station list&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_table(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;swob-xml_station_list.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, sep&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;IATA_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WMO_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;MSC_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Latitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Longitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Elevation(m)&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Data_Provider&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Dataset/Network&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;AUTO/MAN&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Province/Territory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4400488&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;East Chedabucto Bay&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44488&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9302000&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.445&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-60.9538&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4400489&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;West Chedabucto Bay&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44489&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9302001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.4869&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-61.141&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4400490&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;West Bay of Fundy&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44490&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9300300&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44.6606&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-66.3686&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4600303&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Southern Georgia Strait&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46303&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9102000&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.025&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-123.43&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4600304&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Entrance to English Bay&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46304&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9102001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.3017&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-123.357&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;nan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;filter-stations-over--a-specific-province&#34;&gt;Filter stations over  a specific province&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations_mask &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations_mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;IATA_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WMO_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;MSC_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Latitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Longitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Elevation(m)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Data_Provider&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Dataset/Network&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;AUTO/MAN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Province/Territory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;48&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGAH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;LA GRANDE IV&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71823&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7093GJ5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-73.6828&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;306.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGBC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;BAIE-COMEAU&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71890&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7040442&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.1351&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-68.2024&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;22.6&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CHIBOUGAMAU-CHAPAIS&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7091410&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.7773&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-74.5304&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;389.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCL&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CAUSAPSCAL AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73005&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7051201&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.3088&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-67.2528&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;123&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGGA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GASPE AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73116&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7052603&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.7833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-64.4833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#stations_mask_sans_NaN = stations_mask.dropna() &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#stations_mask_sans_NaN&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We want to work with only stations with automatic recording:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations_mask_AUTO &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations_mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations_mask[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations_mask_AUTO&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;IATA_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WMO_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;MSC_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Latitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Longitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Elevation(m)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Data_Provider&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Dataset/Network&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;AUTO/MAN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Province/Territory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;48&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGAH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;LA GRANDE IV&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71823&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7093GJ5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-73.6828&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;306.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGBC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;BAIE-COMEAU&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71890&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7040442&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.1351&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-68.2024&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;22.6&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CHIBOUGAMAU-CHAPAIS&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7091410&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.7773&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-74.5304&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;389.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCL&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CAUSAPSCAL AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73005&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7051201&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.3088&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-67.2528&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;123&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGGA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GASPE AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73116&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7052603&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.7833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-64.4833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Example of a loop on all stations in Quebec:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; index, row &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; stations_mask_AUTO&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iterrows():
+    stid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; row[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;IATA_ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]
+    tmp_file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;https://dd.weather.gc.ca/observations/swob-ml/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;date&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;stid&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;year&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;month&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;day&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;hour&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;00-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;stid&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-AUTO-swob.xml&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+    r &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(tmp_file)
+   
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+    
+    root &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ET&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fromstring(r&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;content)
+    data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    date_tm&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[] 
+    avg_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    max_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    min_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    max_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    min_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    stn_pres&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    mslp&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    pcpn_amt_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    wnd_dir_10m_pst1hr_max_spd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    max_wnd_spd_10m_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    avg_wnd_spd_10m_pst10mts&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    avg_snw_dpth_pst5mts_1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    avg_snw_dpth_pst5mts_2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    avg_snw_dpth_pst5mts_3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; child &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iter(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;):  
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;date_tm&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:                   &lt;span style=&#34;color:#75715e&#34;&gt;# date-heure d’observation réelle&lt;/span&gt;
+            date_tm&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:  &lt;span style=&#34;color:#75715e&#34;&gt;# température de l&amp;#39;air moyenne au cours de la dernière heure (minutes 00 à 60)&lt;/span&gt;
+            avg_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# température de l&amp;#39;air minimale au cours de la dernière heure (minutes 00 à 60)&lt;/span&gt;
+            min_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# température de l&amp;#39;air maximale au cours de la dernière heure (minutes 00 à 60) &lt;/span&gt;
+            max_air_temp_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# humidité relative maximale au cours de la dernière heure &lt;/span&gt;
+            max_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#75715e&#34;&gt;# humidité relative minimale au cours de la dernière heure&lt;/span&gt;
+            min_rel_hum_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)) 
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;stn_pres&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:         &lt;span style=&#34;color:#75715e&#34;&gt;# pression à la station (début de l’heure)&lt;/span&gt;
+            stn_pres&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;pcpn_amt_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:   &lt;span style=&#34;color:#75715e&#34;&gt;# quantité de précipitation au cours de la dernière heure&lt;/span&gt;
+            pcpn_amt_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))  
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_wnd_spd_10m_pst10mts&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# vitesse moyenne du vent à 10 m pendant 10 min&lt;/span&gt;
+            avg_wnd_spd_10m_pst10mts&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_wnd_spd_10m_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;#  vitesse maximale du vent à 10 m pendant une heure&lt;/span&gt;
+            max_wnd_spd_10m_pst1hr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;wnd_dir_10m_pst1hr_max_spd&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;#Direction instantanée du vent à 10 m pour une vitesse horaire maximale du vent, min 0 à 60&lt;/span&gt;
+            wnd_dir_10m_pst1hr_max_spd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))          
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mslp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:   &lt;span style=&#34;color:#75715e&#34;&gt;# pression moyenne au niveau de la mer&lt;/span&gt;
+            mslp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:
+                avg_snw_dpth_pst5mts_1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:
+                avg_snw_dpth_pst5mts_2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attrib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_3&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:
+                avg_snw_dpth_pst5mts_3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(child&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))
+
+
+    data_dict &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;date_tm&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:date_tm, 
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_air_temp_pst1hr, 
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:min_air_temp_pst1hr,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_air_temp_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;: max_air_temp_pst1hr, 
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:max_rel_hum_pst1hr,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min_rel_hum_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:min_rel_hum_pst1hr,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;stn_pres&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:stn_pres,
+             &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mslp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:mslp,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;pcpn_amt_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:pcpn_amt_pst1hr,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_wnd_spd_10m_pst10mts&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_wnd_spd_10m_pst10mts,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;wnd_dir_10m_pst1hr_max_spd&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:wnd_dir_10m_pst1hr_max_spd,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;max_wnd_spd_10m_pst1hr&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:max_wnd_spd_10m_pst1hr,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_snw_dpth_pst5mts_1,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_snw_dpth_pst5mts_2,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;avg_snw_dpth_pst5mts_3&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;:avg_snw_dpth_pst5mts_3
+
+           } 
+
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; key,value &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; data_dict&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;items(): 
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; value:
+            data_dict[key] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NaN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+            
+    data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(data_dict)
+    os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;makedirs(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, exist_ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)  
+
+       &lt;span style=&#34;color:#75715e&#34;&gt;# file = &amp;#39;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&amp;#39;+now.strftime(&amp;#34;%Y%m&amp;#34;)+&amp;#39;/&amp;#39;+str(int(row[&amp;#39;WMO_ID&amp;#39;]))+&amp;#39;_&amp;#39;+now.strftime(&amp;#34;%Y%m&amp;#34;)+&amp;#39;.csv&amp;#39;&lt;/span&gt;
+    file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(row[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MSC_ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; exists(file):
+        &lt;span style=&#34;color:#75715e&#34;&gt;#print (&amp;#34;File exist&amp;#34;)&lt;/span&gt;
+        data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(row[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MSC_ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,mode&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;False,header&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;False) 
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#75715e&#34;&gt;#print (&amp;#34;File not exist&amp;#34;)&lt;/span&gt;
+        pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(row)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(row[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MSC_ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;False)  
+        data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(row[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MSC_ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,mode&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;False)  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;we-will-trace-the-location-of-the-stations&#34;&gt;We will trace the location of the stations:&lt;/h3&gt;
+&lt;p&gt;We will start by extracting the latitudes and longitudes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;list_lat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+list_lon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; cfeature
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+
+fig &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;))   
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes(projection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150.0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;))
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;OCEAN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche ocean&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAND&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))       &lt;span style=&#34;color:#75715e&#34;&gt;# couche land&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAKES&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche lac&lt;/span&gt;
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BORDERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    &lt;span style=&#34;color:#75715e&#34;&gt;# couche frontieres&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RIVERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;# couche rivières      &lt;/span&gt;
+coast &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;physical&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,     &lt;span style=&#34;color:#75715e&#34;&gt;# ajout de la couche cotière &lt;/span&gt;
+                    facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coastline&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(coast, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;black&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+states_provinces &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(
+    category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;cultural&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;admin_1_states_provinces_lines&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)  
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gridlines()           
+mm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;scatter(list_lon, list_lat, c&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;red&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, s&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SWOB Met-ML MSC&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;#mm = ax.scatter(dfstat[&amp;#39;lon&amp;#39;].values, dfstat[&amp;#39;lat&amp;#39;].values, c=&amp;#39;green&amp;#39;, s=400, label=&amp;#39;Site&amp;#39;)&lt;/span&gt;
+
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;best&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, markerscale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.&lt;/span&gt;, scatterpoints&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;)
+          
+&lt;span style=&#34;color:#75715e&#34;&gt;# Define gridline locations and draw the lines using cartopy&amp;#39;s built-in gridliner:&lt;/span&gt;
+xticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150.0&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40.0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
+yticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)     
+fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;canvas&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;draw()
+ 
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Localisation_SWOB_CANADA.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, bbox_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;tight&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, pad_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()  
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_32_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;just-over-quebec&#34;&gt;Just over Quebec:&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;list_lat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; (stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;),:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+list_lon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; (stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;),:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; cfeature
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+
+fig &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;))   
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes(projection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;80.0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;70&lt;/span&gt;))
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;OCEAN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche ocean&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAND&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))       &lt;span style=&#34;color:#75715e&#34;&gt;# couche land&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAKES&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche lac&lt;/span&gt;
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BORDERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    &lt;span style=&#34;color:#75715e&#34;&gt;# couche frontieres&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RIVERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;# couche rivières      &lt;/span&gt;
+coast &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;physical&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,     &lt;span style=&#34;color:#75715e&#34;&gt;# ajout de la couche cotière &lt;/span&gt;
+                    facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coastline&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(coast, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;black&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+states_provinces &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(
+    category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;cultural&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;admin_1_states_provinces_lines&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)  
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gridlines()           
+mm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;scatter(list_lon, list_lat, c&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;red&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, s&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SWOB Met-ML MSC&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;#mm = ax.scatter(dfstat[&amp;#39;lon&amp;#39;].values, dfstat[&amp;#39;lat&amp;#39;].values, c=&amp;#39;green&amp;#39;, s=400, label=&amp;#39;Site&amp;#39;)&lt;/span&gt;
+
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;best&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, markerscale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.&lt;/span&gt;, scatterpoints&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;)
+          
+&lt;span style=&#34;color:#75715e&#34;&gt;# Define gridline locations and draw the lines using cartopy&amp;#39;s built-in gridliner:&lt;/span&gt;
+xticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150.0&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40.0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
+yticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)     
+fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;canvas&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;draw()
+ 
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Localisation_SWOB_Quebec.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, bbox_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;tight&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, pad_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()  
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_35_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;if-we-want-to-plot-by-grouping-by-province&#34;&gt;If we want to plot by grouping by province:&lt;/h1&gt;
+&lt;p&gt;We only want the &amp;ldquo;Automatic&amp;rdquo; stations and group them by province.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;grouped_dataframe &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;groupby(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+grouped_dataframe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;count()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Province/Territory&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;IATA_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WMO_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;MSC_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Latitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Longitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Elevation(m)&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Data_Provider&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Dataset/Network&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;AUTO/MAN&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Alberta&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;196&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;240&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;British Columbia&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;101&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;119&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Manitoba&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;New Brunswick&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Newfoundland and Labrador&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Northwest Territories&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Nova Scotia&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;39&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Nunavut&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;63&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Ontario&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;103&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;111&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Prince Edward Island&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;103&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Saskatchewan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;56&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Yukon&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; name,group &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; grouped_dataframe:
+   &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(name) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Alberta
+British Columbia
+Manitoba
+New Brunswick
+Newfoundland and Labrador
+Northwest Territories
+Nova Scotia
+Nunavut
+Ontario
+Prince Edward Island
+Quebec
+Saskatchewan
+Yukon
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;grouped_dataframe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_group(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;IATA_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WMO_ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;MSC_ID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Latitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Longitude&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Elevation(m)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Data_Provider&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Dataset/Network&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;AUTO/MAN&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Province/Territory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;48&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGAH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;LA GRANDE IV&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71823&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7093GJ5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.75&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-73.6828&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;306.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;49&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGBC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;BAIE-COMEAU&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71890&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7040442&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.1351&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-68.2024&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;22.6&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CHIBOUGAMAU-CHAPAIS&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7091410&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49.7773&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-74.5304&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;389.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGCL&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CAUSAPSCAL AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73005&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7051201&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.3088&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-67.2528&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;123&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CGGA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GASPE AIRPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73116&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7052603&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.7833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-64.4833&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MSC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AUTO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quebec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;We create a random color list for all of our provinces.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+number_of_colors &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(grouped_dataframe)
+color &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join([random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;0123456789ABCDEF&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;)])
+             &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(number_of_colors)]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; cfeature
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+
+
+fig &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;))   
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes(projection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ccrs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PlateCarree())
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150.0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;))
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;OCEAN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche ocean&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAND&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))       &lt;span style=&#34;color:#75715e&#34;&gt;# couche land&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LAKES&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))      &lt;span style=&#34;color:#75715e&#34;&gt;# couche lac&lt;/span&gt;
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BORDERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))    &lt;span style=&#34;color:#75715e&#34;&gt;# couche frontieres&lt;/span&gt;
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RIVERS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;with_scale(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;50m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;# couche rivières      &lt;/span&gt;
+coast &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;physical&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,     &lt;span style=&#34;color:#75715e&#34;&gt;# ajout de la couche cotière &lt;/span&gt;
+                    facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;coastline&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(coast, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;black&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+states_provinces &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cfeature&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NaturalEarthFeature(
+    category&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;cultural&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;admin_1_states_provinces_lines&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    scale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
+    facecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;none&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(states_provinces, edgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gray&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)  
+
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;gridlines()
+i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; 
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; name,group &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; grouped_dataframe:
+    list_lon&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; grouped_dataframe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_group(name)[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+    list_lat&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; grouped_dataframe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_group(name)[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+    
+    mm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;scatter(list_lon, list_lat, c&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;color[i], s&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SWOB Met-ML MSC: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; name  )
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;best&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, markerscale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.&lt;/span&gt;, scatterpoints&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+    i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Define gridline locations and draw the lines using cartopy&amp;#39;s built-in gridliner:&lt;/span&gt;
+xticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150.0&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40.0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
+yticks &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;arange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)     
+fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;canvas&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;draw()
+ 
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Localisation_SWOB_CANADA.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, bbox_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;tight&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, pad_inches&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()  
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_42_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Shapefiles_in_python</title>
