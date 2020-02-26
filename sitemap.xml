@@ -38,17 +38,22 @@
   </url>
   
   <url>
-    <loc>/post/ecc_swob_stations/</loc>
-    <lastmod>2020-02-18T13:06:38-08:00</lastmod>
+    <loc>/post/ckdtree_netcdf/</loc>
+    <lastmod>2020-02-26T13:10:29-08:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-02-18T13:06:38-08:00</lastmod>
+    <lastmod>2020-02-26T13:10:29-08:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-02-26T13:10:29-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/ecc_swob_stations/</loc>
     <lastmod>2020-02-18T13:06:38-08:00</lastmod>
   </url>
   
@@ -278,22 +283,22 @@
   </url>
   
   <url>
-    <loc>/authors/p.-gachon/</loc>
-    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/r.-laprise/</loc>
-    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/authors/g.-dueymes/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>/authors/p.-gachon/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/r.-aider/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/r.-laprise/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   

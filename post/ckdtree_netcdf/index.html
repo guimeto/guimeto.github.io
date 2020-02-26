@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="﻿
+Netcdf: Select closest points using CKDTree In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.
+To select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.
+Different method are considered here:
+- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared: - \begin{equation*} $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$) \end{equation*} - query ball point : Find all pairs of points whose distance is at most one distance  Let&#39;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/ckdtree_netcdf/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/ckdtree_netcdf/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/post/ckdtree_netcdf/">
+  <meta property="og:title" content="CKDTree_Netcdf | GDueymes">
+  <meta property="og:description" content="﻿
+Netcdf: Select closest points using CKDTree In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.
+To select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.
+Different method are considered here:
+- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared: - \begin{equation*} $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$) \end{equation*} - query ball point : Find all pairs of points whose distance is at most one distance  Let&#39;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy."><meta property="og:image" content="/post/ckdtree_netcdf/featured.png">
+  <meta property="twitter:image" content="/post/ckdtree_netcdf/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-02-26T13:10:29-08:00">
+    
+    <meta property="article:modified_time" content="2020-02-26T13:10:29-08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/ckdtree_netcdf/"
+  },
+  "headline": "CKDTree_Netcdf",
+  
+  "image": [
+    "/post/ckdtree_netcdf/featured.png"
+  ],
+  
+  "datePublished": "2020-02-26T13:10:29-08:00",
+  "dateModified": "2020-02-26T13:10:29-08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Guillaume Dueymes"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "GDueymes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "﻿\nNetcdf: Select closest points using CKDTree In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.\nTo select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.\nDifferent method are considered here:\n- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared: - \\begin{equation*} $T_t = \\frac{\\sum_{i=1}^{m}T_{s,i}w_i}{\\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$) \\end{equation*} - query ball point : Find all pairs of points whose distance is at most one distance  Let's import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>CKDTree_Netcdf | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>CKDTree_Netcdf</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 26, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    8 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 449px;">
+  <div style="position: relative">
+    <img src="/post/ckdtree_netcdf/featured_hu21f32ecfeba6778ad8835e33dfa782ed_110273_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>﻿</p>
+<h2 id="netcdf-select-closest-points-using-ckdtree">Netcdf: Select closest points using CKDTree</h2>
+<p>In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.</p>
+<p>To select closest grid points, we will use here one approach using <a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html">cKDTree</a> class from scipy.spatial package.</p>
+<p>Different method are considered here:</p>
+<pre><code>- nearest neighbour
+- nearest neighbours, weighting with the inverse of distance squared: 
+- 
+\begin{equation*}
+$T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)
+\end{equation*}
+
+- query ball point : Find all pairs of points whose distance is at most one distance
+</code></pre>
+<h3 id="lets-import-python-librairies">Let's import Python librairies</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#for Netcdf manipulation</span>
+<span style="color:#75715e">#import netCDF4</span>
+<span style="color:#75715e">#from netCDF4 import Dataset</span>
+<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
+
+<span style="color:#75715e">#for array manipulation</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+<span style="color:#75715e">#for plotting</span>
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+
+<span style="color:#75715e">#for interpolation</span>
+<span style="color:#f92672">from</span> scipy.spatial <span style="color:#f92672">import</span> cKDTree
+</code></pre></div><h3 id="loading-netcdf-files">Loading Netcdf files</h3>
+<p>We are going to use daily ERA5 reanalysis data from April 1st to 31th of october 2018.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">unique_dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">K:/PROJETS/PROJET_FIRE_INDEX/ERA5_FWI_Netcdf/ERA5_FWI_QC_SNOW_New_2018_from_4_to_8.nc</span><span style="color:#e6db74">&#39;</span>
+TAS <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(unique_dataDIR)
+TAS<span style="color:#f92672">.</span>lon<span style="color:#f92672">.</span>shape, TAS<span style="color:#f92672">.</span>lat<span style="color:#f92672">.</span>shape,
+</code></pre></div><pre><code>((121,), (77,))
+</code></pre>
+<p>Regrid 1D latitude and longitude to 2D grid.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lon2d, lat2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(TAS<span style="color:#f92672">.</span>lon, TAS<span style="color:#f92672">.</span>lat)
+lon2d<span style="color:#f92672">.</span>shape, lat2d<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>((77, 121), (77, 121))
+</code></pre>
+<p>Let’s have a quick look at our dataset, we will plot one day in our time range:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">75</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">52</span>])
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">110m</span><span style="color:#e6db74">&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,    
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
+
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)
+
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>) 
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkred</span><span style="color:#e6db74">&#39;</span>) 
+
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>&lt;matplotlib.collections.PathCollection at 0xc7d6828&gt;
+</code></pre>
+<p><img src="output_8_1.png" alt="png"></p>
+<p>The blue dots in the plot identify the grid points.</p>
+<p>What we want to achieve is to come up with a way to compare distances between a reference point (defined by latitude and longitude values), and all grid points, and pick the minimum value.</p>
+<p>But first, we need to measure distances between two points on our planet, given their geodetic (latitude/longitude/altitude) coordinates.</p>
+<p>In this post, we are going to use the cartesian or ECEF (“earth-centered, earth-fixed”) geographic coordinate system, which represents positions (in meters) as X, Y, and Z coordinates, approximating the earth surface as an ellipsoid of revolution (close enough for our purposes).</p>
+<p>Once we convert our latitude/longitude coordinates to cartesian coordinates, measuring the distance between two points is as simple as computing the Euclidean distance between them.</p>
+<p>The conversion between cartesian and geodetic coordinates latitude, longitude is done according to:</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>Where <!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->    is the local curvature of the ellipsoid along the first vertical, and where e, the first eccentricity, and a, the semi-major axis, are the parameters defining the ellipsoid.</p>
+<p>Finding the closest</p>
+<p>Our problem falls into the class of nearest neighbour searches. A common approach when it comes to finding the nearest neighbour in a number of points with k dimensions is to use a KD-tree, or k-dimensional tree.
+SciPy library provides a very efficient KD-tree implementation . Once we have constructed our tree, all we have to do is to populate it with a (n,m) shaped array of points and then query it the nearest neighbor to a reference point.</p>
+<p>We will have to make use of some NumPy acrobatics to reshape our data structures from a two-dimensional grid to a one-dimensional array, and to convert the returned one-dimensional index to a set of two indices on our original grid.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KDTreeIndex</span>():    
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> A KD-tree implementation for fast point lookup on a 2D grid</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Keyword arguments: </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    dataset -- a xarray DataArray containing lat/lon coordinates</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">               (named </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> and </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> respectively)               </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>    
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">transform_coordinates</span>(self, coords):
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> Transform coordinates from geodetic to cartesian</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        Keyword arguments:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        coords - a set of lan/lon coordinates (e.g. a tuple or </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">                 an array of tuples)</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+        <span style="color:#75715e"># WGS 84 reference coordinate system parameters</span>
+        A <span style="color:#f92672">=</span> <span style="color:#ae81ff">6378.137</span> <span style="color:#75715e"># major axis [km]   </span>
+        E2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">6.69437999014e-3</span> <span style="color:#75715e"># eccentricity squared    </span>
+        
+        coords <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(coords)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float)
+        
+        <span style="color:#75715e"># is coords a tuple? Convert it to an one-element array of tuples</span>
+        <span style="color:#66d9ef">if</span> coords<span style="color:#f92672">.</span>ndim <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+            coords <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([coords])
+        
+        <span style="color:#75715e"># convert to radiants</span>
+        lat_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(coords[:,<span style="color:#ae81ff">0</span>])
+        lon_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(coords[:,<span style="color:#ae81ff">1</span>]) 
+        
+        <span style="color:#75715e"># convert to cartesian coordinates</span>
+        r_n <span style="color:#f92672">=</span> A <span style="color:#f92672">/</span> (np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2 <span style="color:#f92672">*</span> (np<span style="color:#f92672">.</span>sin(lat_rad) <span style="color:#f92672">*</span><span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)))
+        x <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lon_rad)
+        y <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lon_rad)
+        z <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lat_rad)
+        
+        <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>column_stack((x, y, z))
+    
+    <span style="color:#66d9ef">def</span> __init__(self, dataset):
+        <span style="color:#75715e"># store original dataset shape</span>
+        self<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>shape
+        lon2d, lat2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(dataset<span style="color:#f92672">.</span>lon, dataset<span style="color:#f92672">.</span>lat)
+        <span style="color:#75715e"># reshape and stack coordinates</span>
+        coords <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>column_stack((lat2d<span style="color:#f92672">.</span>ravel(),
+                                  lon2d<span style="color:#f92672">.</span>ravel()))
+        
+        <span style="color:#75715e"># construct KD-tree</span>
+        self<span style="color:#f92672">.</span>tree <span style="color:#f92672">=</span> cKDTree(self<span style="color:#f92672">.</span>transform_coordinates(coords))
+        
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query</span>(self, point, k):
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> Query the kd-tree for nearest neighbour.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        Keyword arguments:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        point -- a (lat, lon) tuple or array of tuples</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+        d, inds  <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tree<span style="color:#f92672">.</span>query(self<span style="color:#f92672">.</span>transform_coordinates(point),k<span style="color:#f92672">=</span>k)
+        w <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> d<span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
+        <span style="color:#75715e"># regrid to 2D grid</span>
+        indslatlon <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>unravel_index(inds, self<span style="color:#f92672">.</span>shape)
+        <span style="color:#66d9ef">return</span> d, inds, w, indslatlon
+    
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query_ball_point</span>(self, point, radius):
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> Query the kd-tree for all point within distance </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        radius of point(s) x</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        Keyword arguments:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        point -- a (lat, lon) tuple or array of tuples</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        radius -- the search radius (km)</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+        
+        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tree<span style="color:#f92672">.</span>query_ball_point(self<span style="color:#f92672">.</span>transform_coordinates(point),
+                                           radius)
+
+        <span style="color:#75715e"># regrid to 2D grid </span>
+        index <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>unravel_index(index[<span style="color:#ae81ff">0</span>], self<span style="color:#f92672">.</span>shape)
+        
+        <span style="color:#75715e"># return DataArray indexers</span>
+        <span style="color:#66d9ef">return</span> xr<span style="color:#f92672">.</span>DataArray(index[<span style="color:#ae81ff">0</span>], dims<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>), \
+               xr<span style="color:#f92672">.</span>DataArray(index[<span style="color:#ae81ff">1</span>], dims<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>)
+    
+</code></pre></div><p>We will construct our cKDTree object using one time step from our xarray.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latlon_tree <span style="color:#f92672">=</span> KDTreeIndex(TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI)
+</code></pre></div><p>We can now query the tree the nearest grid point to one reference point:</p>
+<h3 id="nearest-neighbour-k1">Nearest neighbour k=1:</h3>
+<p>Let's select reference point defined by:
+- latitude = 50 degN
+- longitude = -68.1461 degE</p>
+<p>We can now query the tree the nearest point :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">site <span style="color:#f92672">=</span> (<span style="color:#ae81ff">50</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>)
+d, inds, w, indslatlon <span style="color:#f92672">=</span> latlon_tree<span style="color:#f92672">.</span>query(site, k<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">print</span>(inds)
+<span style="color:#66d9ef">print</span>(indslatlon)
+</code></pre></div><pre><code>[5871]
+(array([48], dtype=int64), array([63], dtype=int64))
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latpt <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+lonpt <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(latpt, lonpt)
+</code></pre></div><pre><code>48 63
+</code></pre>
+<p>The query method actually  returns:</p>
+<ul>
+<li>
+<p>two array objects a latitude and a longitude indexer</p>
+</li>
+<li>
+<p>one 1D indexer</p>
+</li>
+<li>
+<p>one distance value</p>
+</li>
+<li>
+<p>one corresponding weighting.</p>
+<p>*inds value (ie 5871) represents the index found for our one-dimensional array.</p>
+<p>*indslatlon are the corresponding longitude and latitude values for the closest point found.</p>
+</li>
+</ul>
+<p>To extract the xarray field value using our previous index, first we need to convert a two-dimensional grid to a one-dimensional array and then select index value.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds]
+</code></pre></div><pre><code>array([10.517308])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[latpt,lonpt]
+</code></pre></div><pre><code>&lt;xarray.DataArray 'FWI' ()&gt;
+array(10.517308)
+Coordinates:
+    lon      float64 -68.25
+    lat      float32 50.0
+    time     datetime64[ns] 2018-08-01
+</code></pre>
+<p>Let's make a quick look:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">12</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">72</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">51</span>])
+   <span style="color:#75715e"># ax.coastlines(resolution=&#39;110m&#39;);</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac    </span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
+
+  
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkred</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## bleu fonce pour les valeurs extremes de pluie</span>
+
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5 grid points</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[latpt,lonpt]<span style="color:#f92672">.</span>lon, 
+           TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[latpt,lonpt]<span style="color:#f92672">.</span>lat, 
+           color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">closest grid point</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(<span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>, <span style="color:#ae81ff">50</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), marker<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">reference point</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">upper left</span><span style="color:#e6db74">&#39;</span>, numpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+
+</code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0xc7d6358&gt;
+</code></pre>
+<p><img src="output_22_1.png" alt="png"></p>
+<h3 id="nearest-neighbours-k10">Nearest neighbours k=10</h3>
+<p>We will now make the same exercice using k=10.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">site <span style="color:#f92672">=</span> (<span style="color:#ae81ff">50</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>)
+d, inds, w, indslatlon <span style="color:#f92672">=</span> ground_pixel_tree<span style="color:#f92672">.</span>query(site, k<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+<span style="color:#66d9ef">print</span>(d)
+<span style="color:#66d9ef">print</span>(w)
+<span style="color:#66d9ef">print</span>(inds)
+<span style="color:#66d9ef">print</span>(indslatlon)
+</code></pre></div><pre><code>[[ 7.44918778 10.47474677 25.37308687 28.39863145 28.78330094 28.79213291
+  29.70566615 29.72368634 37.59953757 37.68733316]]
+[[0.01802114 0.00911408 0.00155329 0.00123995 0.00120703 0.00120629
+  0.00113324 0.00113187 0.00070735 0.00070406]]
+[[5871 5872 5870 5873 5750 5992 5751 5993 5749 5991]]
+(array([[48, 48, 48, 48, 47, 49, 47, 49, 47, 49]], dtype=int64), array([[63, 64, 62, 65, 63, 63, 64, 64, 62, 62]], dtype=int64))
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds]
+</code></pre></div><pre><code>array([[10.517308  ,  9.87137321,  8.57146189, 11.99096501,  9.32552318,
+        10.0954969 ,  9.84150618, 11.8046335 ,  9.26170112,  8.3454113 ]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+lonpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(latpts, lonpts)
+</code></pre></div><pre><code>[48 48 48 48 47 49 47 49 47 49] [63 64 62 65 63 63 64 64 62 62]
+</code></pre>
+<p>We can know Interpolate our field using inverse distance weighting, using 10 nearest neighbours (k=10):</p>
+<p>(i.e. Tt=∑mi=1Ts,iwi∑mi=1wi, wi=1/d2i).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>sum(w <span style="color:#f92672">*</span> TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>sum(w, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>array([10.21868978])
+</code></pre>
+<p>Let's make a quick look:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+lonpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[latpts,lonpts]<span style="color:#f92672">.</span>lon
+</code></pre></div><pre><code>&lt;xarray.DataArray 'lon' (lon: 10)&gt;
+array([-68.25, -68.  , -68.5 , -67.75, -68.25, -68.25, -68.  , -68.  , -68.5 ,
+       -68.5 ])
+Coordinates:
+  * lon      (lon) float64 -68.25 -68.0 -68.5 -67.75 ... -68.0 -68.0 -68.5 -68.5
+    time     datetime64[ns] 2018-08-01
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">12</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">72</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">51</span>])
+   <span style="color:#75715e"># ax.coastlines(resolution=&#39;110m&#39;);</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac    </span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
+
+  
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkred</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## bleu fonce pour les valeurs extremes de pluie</span>
+
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5 grid points</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[latpts,lonpts]<span style="color:#f92672">.</span>lon, 
+           TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[latpts,lonpts]<span style="color:#f92672">.</span>lat, 
+           color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">closest grid points</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(<span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>, <span style="color:#ae81ff">50</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), marker<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">reference point</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">upper left</span><span style="color:#e6db74">&#39;</span>, numpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0xcb78ac8&gt;
+</code></pre>
+<p><img src="output_32_1.png" alt="png"></p>
+<p>Now we will find all grid points  within a given distance from a reference point, by using the query_ball_point method in SciPy’s KD-tree implementation.</p>
+<p>Let’s find out which ground pixels fall into a 700km radius from our reference point:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ball_point_index <span style="color:#f92672">=</span> ground_pixel_tree<span style="color:#f92672">.</span>query_ball_point(site, <span style="color:#ae81ff">50</span>)
+lons <span style="color:#f92672">=</span> TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[ball_point_index]<span style="color:#f92672">.</span>lon
+lats <span style="color:#f92672">=</span> TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI[ball_point_index]<span style="color:#f92672">.</span>lat
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">12</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">72</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">51</span>])
+   <span style="color:#75715e"># ax.coastlines(resolution=&#39;110m&#39;);</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac    </span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
+
+  
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkred</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e">## bleu fonce pour les valeurs extremes de pluie</span>
+
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2018-08-01</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5 grid points</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(lons, 
+           lats, 
+           color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">grid points within 50 km from reference point</span><span style="color:#e6db74">&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(<span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>, <span style="color:#ae81ff">50</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), marker<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">reference point</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">upper left</span><span style="color:#e6db74">&#39;</span>, numpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0xcb86b38&gt;
+</code></pre>
+<p><img src="output_35_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/ckdtree_netcdf/&amp;text=CKDTree_Netcdf" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/ckdtree_netcdf/&amp;t=CKDTree_Netcdf" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=CKDTree_Netcdf&amp;body=/post/ckdtree_netcdf/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/ckdtree_netcdf/&amp;title=CKDTree_Netcdf" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=CKDTree_Netcdf%20/post/ckdtree_netcdf/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/ckdtree_netcdf/&amp;title=CKDTree_Netcdf" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hued2496a182fbb6fc8c711157078d29a6_5348924_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Guillaume Dueymes</a></h5>
+      <h6 class="card-subtitle">Data Scientist and Research Assistant</h6>
+      <p class="card-text">My research interests include data science, data management and climate science.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Guillaume_Dueymes" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/guimeto" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
