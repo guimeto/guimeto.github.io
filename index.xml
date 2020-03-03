@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>GDueymes</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 26 Feb 2020 13:10:29 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>GDueymes</title>
@@ -2768,6 +2768,14 @@ Data variables:
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Current and projected distributions of Aedes aegypti and Ae. albopictus in Canada and the U.</title>
+      <link>/publication/article10/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/article10/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -9956,7 +9964,7 @@ Manon 2
       <link>/courses/tutorial_python/6-numpy_library/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
       <guid>/courses/tutorial_python/6-numpy_library/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;/img/numpy.png&#34; alt=&#34;image0&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Numpy is the core library for scientific computing in Python&lt;/li&gt;
 &lt;li&gt;A new data container will be used: the ndarray (N-dimensional array). There are vectors (one-dimensional arrays), multidimensional arrays&lt;/li&gt;
@@ -10553,7 +10561,7 @@ temperature2,precipitation2,cumul2 &lt;span style=&#34;color:#f92672&#34;&gt;=&l
       <link>/courses/tutorial_python/7-pandas_library/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
       <guid>/courses/tutorial_python/7-pandas_library/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;/img/pandas.png&#34; alt=&#34;image0&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Pandas is a library specialized in data manipulation. This library contains a set of optimized functions for handling large datasets. It allows to create and export tables of data from text files (separators, .csv, fixed format, compressed), binary (HDF5 with Pytable), HTML, XML, JSON, MongoDB, SQL &amp;hellip;&lt;/p&gt;
 &lt;p&gt;A new data structure is used with this library: the DataFrame. There are two types of data with pandas: &lt;!-- raw HTML omitted --&gt;series&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;dataframes&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
 &lt;ul&gt;

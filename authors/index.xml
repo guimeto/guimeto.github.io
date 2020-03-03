@@ -5,7 +5,7 @@
     <link>/authors/</link>
       <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Authors</title>
@@ -13,18 +13,66 @@
     </image>
     
     <item>
-      <title>Antoinette Ludwig</title>
-      <link>/authors/antoinette-ludwig/</link>
-      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/antoinette-ludwig/</guid>
+      <title>Aamir Fazil</title>
+      <link>/authors/aamir-fazil/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/aamir-fazil/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Amy L. Greer</title>
+      <link>/authors/amy-l.-greer/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/amy-l.-greer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Guillaume Dueymes</title>
       <link>/authors/guillaume-dueymes/</link>
-      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/authors/guillaume-dueymes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nicholas H. Ogden</title>
+      <link>/authors/nicholas-h.-ogden/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/nicholas-h.-ogden/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Philippe Gachon</title>
+      <link>/authors/philippe-gachon/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/philippe-gachon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Salah Uddin Khan</title>
+      <link>/authors/salah-uddin-khan/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/salah-uddin-khan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Victoria Ng</title>
+      <link>/authors/victoria-ng/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/victoria-ng/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Antoinette Ludwig</title>
+      <link>/authors/antoinette-ludwig/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/antoinette-ludwig/</guid>
       <description></description>
     </item>
     
@@ -37,34 +85,10 @@
     </item>
     
     <item>
-      <title>Nicholas H. Ogden</title>
-      <link>/authors/nicholas-h.-ogden/</link>
-      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/nicholas-h.-ogden/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Philippe Gachon</title>
-      <link>/authors/philippe-gachon/</link>
-      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/philippe-gachon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Yann Pelcat</title>
       <link>/authors/yann-pelcat/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       <guid>/authors/yann-pelcat/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Aamir Fazil</title>
-      <link>/authors/aamir-fazil/</link>
-      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
-      <guid>/authors/aamir-fazil/</guid>
       <description></description>
     </item>
     
@@ -97,14 +121,6 @@
       <link>/authors/sophiya-garasia/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       <guid>/authors/sophiya-garasia/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Victoria Ng</title>
-      <link>/authors/victoria-ng/</link>
-      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
-      <guid>/authors/victoria-ng/</guid>
       <description></description>
     </item>
     

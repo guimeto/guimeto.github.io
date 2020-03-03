@@ -38,12 +38,72 @@
   </url>
   
   <url>
-    <loc>/post/ckdtree_netcdf/</loc>
-    <lastmod>2020-02-26T13:10:29-08:00</lastmod>
+    <loc>/categories/2/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/aamir-fazil/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/amy-l.-greer/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/article10/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/guillaume-dueymes/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/nicholas-h.-ogden/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/philippe-gachon/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/salah-uddin-khan/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/victoria-ng/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/ckdtree_netcdf/</loc>
     <lastmod>2020-02-26T13:10:29-08:00</lastmod>
   </url>
   
@@ -133,27 +193,7 @@
   </url>
   
   <url>
-    <loc>/categories/2/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/authors/antoinette-ludwig/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/guillaume-dueymes/</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -163,22 +203,7 @@
   </url>
   
   <url>
-    <loc>/authors/nicholas-h.-ogden/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/philippe-gachon/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/publication/article9/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication/</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -238,11 +263,6 @@
   </url>
   
   <url>
-    <loc>/authors/aamir-fazil/</loc>
-    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/publication/article8/</loc>
     <lastmod>2017-06-01T00:00:00+00:00</lastmod>
   </url>
@@ -264,11 +284,6 @@
   
   <url>
     <loc>/authors/sophiya-garasia/</loc>
-    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/victoria-ng/</loc>
     <lastmod>2017-06-01T00:00:00+00:00</lastmod>
   </url>
   
