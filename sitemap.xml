@@ -39,12 +39,17 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-03-10T09:38:17-07:00</lastmod>
+    <lastmod>2020-03-10T11:16:07-07:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-03-10T09:38:17-07:00</lastmod>
+    <lastmod>2020-03-10T11:16:07-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/working_with_xml_climate_data/</loc>
+    <lastmod>2020-03-10T11:16:07-07:00</lastmod>
   </url>
   
   <url>
@@ -303,22 +308,22 @@
   </url>
   
   <url>
-    <loc>/authors/p.-gachon/</loc>
-    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/r.-laprise/</loc>
-    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/authors/g.-dueymes/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>/authors/p.-gachon/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/r.-aider/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/r.-laprise/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   
