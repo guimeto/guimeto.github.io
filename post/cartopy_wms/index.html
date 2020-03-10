@@ -114,7 +114,7 @@ A Web Map Service (WMS) defines an interface that allows a client to get maps of
   
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/post/cartopy_wms/">
-  <meta property="og:title" content="Cartopy_WMS | GDueymes">
+  <meta property="og:title" content="Web Map Service and Cartopy | GDueymes">
   <meta property="og:description" content="Cartopy: Add WMS image from Environment Canada In this tutorial, we will use a Web Map Service and Cartopy python library to display products from Environment Canada
 A Web Map Service (WMS) defines an interface that allows a client to get maps of geospatial data and gain detailed information on specific features shown on the map. A &ldquo;map&rdquo; is defined here as a visual representation of geospatial data, not the geospatial data itself."><meta property="og:image" content="/post/cartopy_wms/featured.png">
   <meta property="twitter:image" content="/post/cartopy_wms/featured.png"><meta property="og:locale" content="en-us">
@@ -150,7 +150,7 @@ A Web Map Service (WMS) defines an interface that allows a client to get maps of
     "@type": "WebPage",
     "@id": "/post/cartopy_wms/"
   },
-  "headline": "Cartopy_WMS",
+  "headline": "Web Map Service and Cartopy",
   
   "image": [
     "/post/cartopy_wms/featured.png"
@@ -190,7 +190,7 @@ A Web Map Service (WMS) defines an interface that allows a client to get maps of
 
 
 
-  <title>Cartopy_WMS | GDueymes</title>
+  <title>Web Map Service and Cartopy | GDueymes</title>
 
 </head>
 
@@ -468,7 +468,7 @@ A Web Map Service (WMS) defines an interface that allows a client to get maps of
 
 
 <div class="article-container pt-3">
-  <h1>Cartopy_WMS</h1>
+  <h1>Web Map Service and Cartopy</h1>
 
   
 
@@ -538,7 +538,7 @@ A Web Map Service (WMS) defines an interface that allows a client to get maps of
   <div class="article-container">
 
     <div class="article-style">
-      <h1 id="cartopy-add-wms-image-from-environment-canada">Cartopy: Add WMS image from Environment Canada</h1>
+      <h2 id="cartopy-add-wms-image-from-environment-canada">Cartopy: Add WMS image from Environment Canada</h2>
 <p>In this tutorial, we will use a Web Map Service and Cartopy python library to display products from Environment Canada</p>
 <p>A Web Map Service (WMS) defines an interface that allows a client to get maps of geospatial data and gain detailed information on specific features shown on the map. A &ldquo;map&rdquo; is defined here as a visual representation of geospatial data, not the geospatial data itself.</p>
 <p>Environnement Canada generates and archives  moasic .png images every 5 minutes. These images are served as a Web Map Service. This notebook shows how to add those images to a cartopy figure axes.</p>
@@ -549,7 +549,7 @@ A Web Map Service (WMS) defines an interface that allows a client to get maps of
 <span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
 <span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
 <span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
-</code></pre></div><h2 id="1-plot-rrai-1-km-for-a-specific-date">1- plot RRAI 1 km for a specific date</h2>
+</code></pre></div><h3 id="1-plot-rrai-1-km-for-a-specific-date">1- plot RRAI 1 km for a specific date</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DATE <span style="color:#f92672">=</span> datetime(<span style="color:#ae81ff">2020</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">19</span>, <span style="color:#ae81ff">0</span>)
 
 fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">8</span>))
@@ -574,7 +574,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
 
 fig<span style="color:#f92672">.</span>subplots_adjust(wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.02</span>)
 </code></pre></div><p><img src="output_3_0.png" alt="png"></p>
-<h2 id="2-plot-the-most-recent-time-available">2- Plot the most recent time available</h2>
+<h3 id="2-plot-the-most-recent-time-available">2- Plot the most recent time available</h3>
 <p>Simply leave out the &lsquo;time&rsquo; argument in the wms_kwargs dict. The transparent option should default to True.</p>
 <p>The timestamp of the image is retrieved from the JSON file at <a href="https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_0.json">https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_0.json</a></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Get the metadata for the most recent NEXRAD image from JSON file.</span>
@@ -617,7 +617,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
 
 fig<span style="color:#f92672">.</span>subplots_adjust(wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.02</span>)
 </code></pre></div><p><img src="output_7_0.png" alt="png"></p>
-<h2 id="3">3</h2>
+<h3 id="3">3</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>))
 
 ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>,
@@ -747,7 +747,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
 fig<span style="color:#f92672">.</span>subplots_adjust(wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.02</span>)
 </code></pre></div><p><img src="output_13_0.png" alt="png"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div><h2 id="exemple-2--gdps">Exemple 2 : GDPS</h2>
+</code></pre></div><h3 id="exemple-2--gdps">Exemple 2 : GDPS</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">8</span>))
 
 ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>,
@@ -792,7 +792,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/cartopy_wms/&amp;text=Cartopy_WMS" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/cartopy_wms/&amp;text=Web%20Map%20Service%20and%20Cartopy" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -805,7 +805,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/cartopy_wms/&amp;t=Cartopy_WMS" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/cartopy_wms/&amp;t=Web%20Map%20Service%20and%20Cartopy" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -818,7 +818,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
       
       
       <li>
-        <a href="mailto:?subject=Cartopy_WMS&amp;body=/post/cartopy_wms/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Web%20Map%20Service%20and%20Cartopy&amp;body=/post/cartopy_wms/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -831,7 +831,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/cartopy_wms/&amp;title=Cartopy_WMS" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/cartopy_wms/&amp;title=Web%20Map%20Service%20and%20Cartopy" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -844,7 +844,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Cartopy_WMS%20/post/cartopy_wms/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Web%20Map%20Service%20and%20Cartopy%20/post/cartopy_wms/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -857,7 +857,7 @@ ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-<
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/cartopy_wms/&amp;title=Cartopy_WMS" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/cartopy_wms/&amp;title=Web%20Map%20Service%20and%20Cartopy" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>

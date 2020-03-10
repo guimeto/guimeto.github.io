@@ -2775,10 +2775,8 @@ Data variables:
       <link>/post/working_with_xml_climate_data/</link>
       <pubDate>Tue, 10 Mar 2020 11:16:07 -0700</pubDate>
       <guid>/post/working_with_xml_climate_data/</guid>
-      <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h1 id=&#34;working-with-xml-extensible-markup-language-file-using-python-part-2&#34;&gt;Working with XML (Extensible Markup Language) file using Python Part 2:&lt;/h1&gt;
-&lt;h1 id=&#34;hourly-observation-xml&#34;&gt;Hourly Observation XML&lt;/h1&gt;
-&lt;p&gt;In this tutorial, we will extract Hourly Observation from ECCC and display hourly temperature using plotly library.&lt;/p&gt;
+      <description>&lt;p&gt;﻿
+In this tutorial, we will extract Hourly Observation from ECCC and display hourly temperature using plotly library.&lt;/p&gt;
 &lt;p&gt;We are going to work here with the hourly weather observations data found on the ECCC Datamart.&lt;/p&gt;
 &lt;p&gt;These observations data are subject to quality control.
 Any value that does not pass quality control is deleted.
@@ -3132,12 +3130,12 @@ fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_image(&lt;span 
     </item>
     
     <item>
-      <title>Working_with_ECCC_climate_data</title>
+      <title>ECCC climate data</title>
       <link>/post/working_with_eccc_climate_data/</link>
       <pubDate>Tue, 10 Mar 2020 09:38:17 -0700</pubDate>
       <guid>/post/working_with_eccc_climate_data/</guid>
       <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h2 id=&#34;extract-hourly-daily-and-monthly-climate-data-from-eccc-datamart&#34;&gt;Extract hourly, daily and monthly climate data from ECCC datamart&lt;/h2&gt;
+&lt;h2 id=&#34;-extract-hourly-daily-and-monthly-climate-data-from-eccc-datamart&#34;&gt;- Extract hourly, daily and monthly climate data from ECCC datamart&lt;/h2&gt;
 &lt;p&gt;In this post, we will see how to automatically download all weather data for one station from environment and climate change canada using Python librairies.&lt;/p&gt;
 &lt;p&gt;Here&#39;s the  &lt;a href=&#34;https://climate.weather.gc.ca/&#34;&gt;URL&lt;/a&gt; to get historical data.&lt;/p&gt;
 &lt;p&gt;We will use a daily updated list of Climate stations in the National Archive available on this &lt;a href=&#34;https://drive.google.com/drive/folders/1WJCDEU34c60IfOnG4rv5EPZ4IhhW9vZH&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
@@ -3478,12 +3476,12 @@ fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_image(&lt;span 
     </item>
     
     <item>
-      <title>CKDTree_Netcdf</title>
+      <title>Netcdf select closest gridpoints</title>
       <link>/post/ckdtree_netcdf/</link>
       <pubDate>Wed, 26 Feb 2020 13:10:29 -0800</pubDate>
       <guid>/post/ckdtree_netcdf/</guid>
       <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h2 id=&#34;netcdf-select-closest-points-using-ckdtree&#34;&gt;Netcdf: Select closest points using CKDTree&lt;/h2&gt;
+&lt;h2 id=&#34;-netcdf-select-closest-points-using-ckdtree&#34;&gt;- Netcdf: Select closest points using CKDTree&lt;/h2&gt;
 &lt;p&gt;In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.&lt;/p&gt;
 &lt;p&gt;To select closest grid points, we will use here one approach using &lt;a href=&#34;http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html&#34;&gt;cKDTree&lt;/a&gt; class from scipy.spatial package.&lt;/p&gt;
 &lt;p&gt;Different method are considered here:&lt;/p&gt;
@@ -3496,7 +3494,7 @@ $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)
 
 - query ball point : Find all pairs of points whose distance is at most one distance
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;lets-import-python-librairies&#34;&gt;Let&#39;s import Python librairies&lt;/h3&gt;
+&lt;h3 id=&#34;1-lets-import-python-librairies&#34;&gt;1- Let&#39;s import Python librairies&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#for Netcdf manipulation&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#import netCDF4&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#from netCDF4 import Dataset&lt;/span&gt;
@@ -3513,7 +3511,7 @@ $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)
 
 &lt;span style=&#34;color:#75715e&#34;&gt;#for interpolation&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; scipy.spatial &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cKDTree
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;loading-netcdf-files&#34;&gt;Loading Netcdf files&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-loading-netcdf-files&#34;&gt;2- Loading Netcdf files&lt;/h3&gt;
 &lt;p&gt;We are going to use daily ERA5 reanalysis data from April 1st to 31th of october 2018.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;unique_dataDIR &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;K:/PROJETS/PROJET_FIRE_INDEX/ERA5_FWI_Netcdf/ERA5_FWI_QC_SNOW_New_2018_from_4_to_8.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 TAS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(unique_dataDIR)
@@ -3571,7 +3569,9 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;scatter(lon2d, lat2d, 
 &lt;p&gt;The conversion between cartesian and geodetic coordinates latitude, longitude is done according to:&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;Where &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;    is the local curvature of the ellipsoid along the first vertical, and where e, the first eccentricity, and a, the semi-major axis, are the parameters defining the ellipsoid.&lt;/p&gt;
-&lt;p&gt;Finding the closest&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Finding the closest&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Our problem falls into the class of nearest neighbour searches. A common approach when it comes to finding the nearest neighbour in a number of points with k dimensions is to use a KD-tree, or k-dimensional tree.
 SciPy library provides a very efficient KD-tree implementation . Once we have constructed our tree, all we have to do is to populate it with a (n,m) shaped array of points and then query it the nearest neighbor to a reference point.&lt;/p&gt;
 &lt;p&gt;We will have to make use of some NumPy acrobatics to reshape our data structures from a two-dimensional grid to a one-dimensional array, and to convert the returned one-dimensional index to a set of two indices on our original grid.&lt;/p&gt;
@@ -3655,7 +3655,7 @@ SciPy library provides a very efficient KD-tree implementation . Once we have co
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will construct our cKDTree object using one time step from our xarray.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;latlon_tree &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; KDTreeIndex(TAS&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sel(time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;2018-08-01&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;FWI)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can now query the tree the nearest grid point to one reference point:&lt;/p&gt;
-&lt;h3 id=&#34;nearest-neighbour-k1&#34;&gt;Nearest neighbour k=1:&lt;/h3&gt;
+&lt;h3 id=&#34;3-nearest-neighbour-k1&#34;&gt;3- Nearest neighbour k=1:&lt;/h3&gt;
 &lt;p&gt;Let&#39;s select reference point defined by:
 - latitude = 50 degN
 - longitude = -68.1461 degE&lt;/p&gt;
@@ -3747,7 +3747,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span st
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.legend.Legend at 0xc7d6358&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;output_22_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;nearest-neighbours-k10&#34;&gt;Nearest neighbours k=10&lt;/h3&gt;
+&lt;h3 id=&#34;4-nearest-neighbours-k10&#34;&gt;4- Nearest neighbours k=10&lt;/h3&gt;
 &lt;p&gt;We will now make the same exercice using k=10.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;site &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;68.1461&lt;/span&gt;)
 d, inds, w, indslatlon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ground_pixel_tree&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;query(site, k&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
@@ -3885,14 +3885,12 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span st
     </item>
     
     <item>
-      <title>ECC_SWOB_Stations</title>
+      <title>ECCC SWOB Stations</title>
       <link>/post/ecc_swob_stations/</link>
       <pubDate>Tue, 18 Feb 2020 13:06:38 -0800</pubDate>
       <guid>/post/ecc_swob_stations/</guid>
-      <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h1 id=&#34;working-with-xml-extensible-markup-language-file-using-python-part-1&#34;&gt;Working with XML (Extensible Markup Language) file using Python Part 1:&lt;/h1&gt;
-&lt;h1 id=&#34;surface-weather-observation-xml-swobxml&#34;&gt;Surface Weather Observation XML (SW-OB-XML)&lt;/h1&gt;
-&lt;h2 id=&#34;swobxml&#34;&gt;SW-OB-XML&lt;/h2&gt;
+      <description>&lt;p&gt;﻿In this post, we will show how to work with Surface Weather Observation from ECCC in XML language (Extensible Markup Language)&lt;/p&gt;
+&lt;h3 id=&#34;swobxml&#34;&gt;SW-OB-XML&lt;/h3&gt;
 &lt;p&gt;For xml files, we will use a package called xml which will allow us to decrypt the xml file.&lt;/p&gt;
 &lt;p&gt;Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.&lt;/p&gt;
 &lt;p&gt;We will first download an xml file located in this directory:&lt;/p&gt;
@@ -4072,7 +4070,7 @@ stations_mask_sans_NaN&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;he
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;working-with-one-station&#34;&gt;Working with one station&lt;/h2&gt;
+&lt;h2 id=&#34;1-working-with-one-station&#34;&gt;1- Working with one station&lt;/h2&gt;
 &lt;p&gt;Let&#39;s work with  CWTQ station ID:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
 stid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CWTQ&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
@@ -4232,7 +4230,7 @@ data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;reading-the-station-list&#34;&gt;Reading the station list&lt;/h2&gt;
+&lt;h2 id=&#34;2-reading-the-station-list&#34;&gt;2- Reading the station list&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_table(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;swob-xml_station_list.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, sep&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
@@ -4325,7 +4323,7 @@ stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;filter-stations-over--a-specific-province&#34;&gt;Filter stations over  a specific province&lt;/h3&gt;
+&lt;h2 id=&#34;3-filter-stations-over--a-specific-province&#34;&gt;3- Filter stations over  a specific province&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations_mask &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stations_mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
@@ -4608,7 +4606,7 @@ stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
         &lt;span style=&#34;color:#75715e&#34;&gt;#print (&amp;#34;File not exist&amp;#34;)&lt;/span&gt;
         pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(row)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(row[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MSC_ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;False)  
         data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(row[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MSC_ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;now&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,mode&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;False)  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;we-will-trace-the-location-of-the-stations&#34;&gt;We will trace the location of the stations:&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;4-we-will-trace-the-location-of-the-stations&#34;&gt;4- We will trace the location of the stations:&lt;/h3&gt;
 &lt;p&gt;We will start by extracting the latitudes and longitudes:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;list_lat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
 list_lon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
@@ -4653,7 +4651,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span styl
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()  
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_32_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;just-over-quebec&#34;&gt;Just over Quebec:&lt;/h1&gt;
+&lt;h3 id=&#34;5--just-over-quebec&#34;&gt;5-  Just over Quebec:&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;list_lat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; (stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;),:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
 list_lon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; (stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Quebec&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;),:][&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
@@ -4697,7 +4695,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span styl
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()  
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_35_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;if-we-want-to-plot-by-grouping-by-province&#34;&gt;If we want to plot by grouping by province:&lt;/h1&gt;
+&lt;h3 id=&#34;6--if-we-want-to-plot-by-grouping-by-province&#34;&gt;6-  If we want to plot by grouping by province:&lt;/h3&gt;
 &lt;p&gt;We only want the &amp;ldquo;Automatic&amp;rdquo; stations and group them by province.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;grouped_dataframe &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stations&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[stations[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO/MAN&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AUTO&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,:]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;groupby(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province/Territory&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 grouped_dataframe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;count()
@@ -5054,12 +5052,12 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
     </item>
     
     <item>
-      <title>Shapefiles_in_python</title>
+      <title>Shapefiles in python</title>
       <link>/post/shapefiles_in_python/</link>
       <pubDate>Mon, 17 Feb 2020 11:51:51 -0800</pubDate>
       <guid>/post/shapefiles_in_python/</guid>
       <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h2 id=&#34;about-vector-data&#34;&gt;About Vector Data&lt;/h2&gt;
+&lt;h3 id=&#34;about-vector-data&#34;&gt;About Vector Data&lt;/h3&gt;
 &lt;p&gt;Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the
 spatial object.&lt;/p&gt;
 &lt;p&gt;The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:&lt;/p&gt;
@@ -5079,7 +5077,7 @@ spatial object.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;![png](output_30_1.png)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;shapefiles-points-lines-and-polygons&#34;&gt;Shapefiles: Points, Lines, and Polygons&lt;/h2&gt;
+&lt;h3 id=&#34;shapefiles-points-lines-and-polygons&#34;&gt;Shapefiles: Points, Lines, and Polygons&lt;/h3&gt;
 &lt;p&gt;Geospatial data in vector format are often stored in a shapefile format. Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.&lt;/p&gt;
 &lt;p&gt;Objects stored in a shapefile often have a set of associated attributes that describe the data. For example, a line shapefile that contains the locations of streams, might contain the associated stream name, stream “order” and other information about each stream line object.&lt;/p&gt;
 &lt;p&gt;A shapefile is created by 3 or more files, all of which must retain the same NAME and be stored in the same file directory, in order for you to be able to work with them.&lt;/p&gt;
@@ -5102,7 +5100,7 @@ spatial object.&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; matplotlib &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pyplot &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; plt
 &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; geopandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; gpd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;1-point-shapefile&#34;&gt;1- Point shapefile&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;1-point-shapefile&#34;&gt;1- Point shapefile&lt;/h3&gt;
 &lt;p&gt;We can then open our first shapefile which contains point locations&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;shapes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;shapefiles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;BV_SJ_ponts.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Each object in a shapefile has one or more attributes associated with it. Shapefile attributes are similar to fields or columns in a spreadsheet. Each row in the spreadsheet has a set of columns associated with it that describe the row element. In the case of a shapefile, each row represents a spatial object - for example, a road, represented as a line in a line shapefile, will have one “row” of attributes associated with it. These attributes can include different types of information that describe objects stored within a shapefile.&lt;/p&gt;
@@ -5285,7 +5283,7 @@ Name: geometry, dtype: object
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x9b129b0&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;output_17_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;2-linestring-shapefile&#34;&gt;2- Linestring shapefile&lt;/h2&gt;
+&lt;h3 id=&#34;2-linestring-shapefile&#34;&gt;2- Linestring shapefile&lt;/h3&gt;
 &lt;p&gt;We had previously a POINT object.&lt;/p&gt;
 &lt;p&gt;We will then convert POINT to LINESTRING.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; shapely.geometry &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; LineString, mapping
@@ -5439,7 +5437,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_27_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Terminé
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;3-polygon-shapefile&#34;&gt;3- Polygon shapefile&lt;/h2&gt;
+&lt;h3 id=&#34;3-polygon-shapefile&#34;&gt;3- Polygon shapefile&lt;/h3&gt;
 &lt;p&gt;We can now convert our linestring shapefile to a polygon shapefile:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; shapely.geometry &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Polygon, mapping
 
@@ -5472,7 +5470,7 @@ poly_shapes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[:, &lt;sp
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;4-find-if-a-point-in-inside-a-polygon&#34;&gt;4- Find if a point in inside a polygon&lt;/h2&gt;
+&lt;h3 id=&#34;4-check-if-a-point-in-inside-a-polygon&#34;&gt;4- Check if a point in inside a polygon&lt;/h3&gt;
 &lt;p&gt;Function bellow will check if a point, defined by a specific latitude and longitude, is inside or not a polygon shapefile.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check&lt;/span&gt;(lon, lat, ds_in):
   lyr_in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ds_in&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;GetLayer(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)  
@@ -5549,12 +5547,12 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
     </item>
     
     <item>
-      <title>Province_shapefiles</title>
+      <title>Canadian shapefile province</title>
       <link>/post/province_shapefiles/</link>
       <pubDate>Fri, 14 Feb 2020 09:14:48 -0800</pubDate>
       <guid>/post/province_shapefiles/</guid>
       <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h1 id=&#34;from-shapefiles-to-netcdf-mask&#34;&gt;From shapefiles to Netcdf Mask&lt;/h1&gt;
+&lt;h3 id=&#34;from-shapefiles-to-netcdf-mask&#34;&gt;From shapefiles to Netcdf Mask&lt;/h3&gt;
 &lt;p&gt;In this tutorial, we will use shapefiles to create masks over canadian provinces.&lt;/p&gt;
 &lt;p&gt;We will use gridded dataset ANUSPLIN meteorological data.&lt;/p&gt;
 &lt;p&gt;Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).&lt;/p&gt;
@@ -5568,7 +5566,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
     - osgeo: 
     - matplotlib: for plotting
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;1-first-we-need-to-import-librairies-and-create-aliases&#34;&gt;1- First we need to import librairies and create aliases.&lt;/h2&gt;
+&lt;h3 id=&#34;1-first-we-need-to-import-librairies-and-create-aliases&#34;&gt;1- First we need to import librairies and create aliases.&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr 
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; regionmask
@@ -5578,7 +5576,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; osgeo &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ogr
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings; warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;working-over-canadian-province&#34;&gt;Working over canadian province&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;working-over-canadian-province&#34;&gt;Working over canadian province&lt;/h4&gt;
 &lt;p&gt;In this example we will use canadian province shapefiles developped by statistics canada.&lt;/p&gt;
 &lt;p&gt;Shapefiles are available on this website:
 &lt;a href=&#34;https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm&#34;&gt;https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm&lt;/a&gt;&lt;/p&gt;
@@ -5800,7 +5798,7 @@ province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;span
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x1b989828&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;./output_20_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;2-extract-one-province&#34;&gt;2- Extract one province&lt;/h2&gt;
+&lt;h3 id=&#34;2-extract-one-province&#34;&gt;2- Extract one province&lt;/h3&gt;
 &lt;p&gt;We will sho how to mask Ontario province.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ID_PROV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(province&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PRNAME[ID_PROV])
@@ -5921,15 +5919,15 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
     </item>
     
     <item>
-      <title>Scrap_ECCC</title>
+      <title>Web scraping using Python</title>
       <link>/post/scrap_eccc/</link>
       <pubDate>Fri, 07 Feb 2020 12:55:20 -0800</pubDate>
       <guid>/post/scrap_eccc/</guid>
       <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h1 id=&#34;scraping-web-data-using-python&#34;&gt;Scraping web data using Python&lt;/h1&gt;
+&lt;h3 id=&#34;scraping-web-data-using-python&#34;&gt;Scraping web data using Python&lt;/h3&gt;
 &lt;p&gt;In this tutorial, we  will see how to get data from Environment Canada webpage.&lt;/p&gt;
-&lt;h2 id=&#34;exploring-the-structure-of-the-eccc-web-page&#34;&gt;Exploring the structure of the ECCC web page&lt;/h2&gt;
-&lt;p&gt;We will extract the current weather conditions and weather forecast for Montreal..&lt;/p&gt;
+&lt;h3 id=&#34;1-exploring-the-structure-of-the-eccc-web-page&#34;&gt;1- Exploring the structure of the ECCC web page&lt;/h3&gt;
+&lt;p&gt;We will extract the current weather conditions and weather forecast for Montreal.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://meteo.gc.ca/city/pages/qc-147_metric_f.html&#34;&gt;https://meteo.gc.ca/city/pages/qc-147_metric_f.html&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
@@ -5970,8 +5968,8 @@ soup&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;soup&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;title&amp;gt;Montréal, QC - 7 Day Forecast - Environment Canada&amp;lt;/title&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;1--reading-current-conditions&#34;&gt;1-  Reading current conditions&lt;/h2&gt;
-&lt;h3 id=&#34;column-1&#34;&gt;Column 1&lt;/h3&gt;
+&lt;h3 id=&#34;1--reading-current-conditions&#34;&gt;1-  Reading current conditions&lt;/h3&gt;
+&lt;h4 id=&#34;column-1&#34;&gt;Column 1&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;conditions &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; soup&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find(id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mainContent&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 col1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conditions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find_all(class_&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dl-horizontal wxo-conds-col1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 today1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col1[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
@@ -6010,7 +6008,7 @@ weather
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;column-2&#34;&gt;Column 2&lt;/h3&gt;
+&lt;h4 id=&#34;column-2&#34;&gt;Column 2&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;col2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conditions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find_all(class_&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dl-horizontal wxo-conds-col2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 today2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col2[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
 &lt;span style=&#34;color:#75715e&#34;&gt;#print(today2.prettify())&lt;/span&gt;
@@ -6049,7 +6047,7 @@ weather
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;column-3&#34;&gt;Column 3&lt;/h3&gt;
+&lt;h4 id=&#34;column-3&#34;&gt;Column 3&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;col3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conditions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find_all(class_&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dl-horizontal wxo-conds-col3&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 today3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col3[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
 &lt;span style=&#34;color:#75715e&#34;&gt;#print(today2.prettify())&lt;/span&gt;
@@ -6104,7 +6102,7 @@ weather
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;weather&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;current.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, header &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True, sep &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,encoding&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;utf-8&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2--reading-forecasting-values&#34;&gt;2-  Reading forecasting values&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2--reading-forecasting-values&#34;&gt;2-  Reading forecasting values&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;period_tags &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; soup&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find(id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mainContent&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 row1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; period_tags&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find_all(class_&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;div-row div-row1 div-row-head&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 row1
@@ -6237,7 +6235,7 @@ weather_f
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;3-download-of-weather-icons-for-the-next-7-days&#34;&gt;3- Download of weather icons for the next 7 days&lt;/h2&gt;
+&lt;h3 id=&#34;3-download-of-weather-icons-for-the-next-7-days&#34;&gt;3- Download of weather icons for the next 7 days&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; urllib &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; request
 row3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; period_tags&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find_all(class_&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;div-row div-row2 div-row-data&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
@@ -6254,11 +6252,11 @@ i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;c
     </item>
     
     <item>
-      <title>Cartopy_WMS</title>
+      <title>Web Map Service and Cartopy</title>
       <link>/post/cartopy_wms/</link>
       <pubDate>Fri, 07 Feb 2020 12:42:01 -0800</pubDate>
       <guid>/post/cartopy_wms/</guid>
-      <description>&lt;h1 id=&#34;cartopy-add-wms-image-from-environment-canada&#34;&gt;Cartopy: Add WMS image from Environment Canada&lt;/h1&gt;
+      <description>&lt;h2 id=&#34;cartopy-add-wms-image-from-environment-canada&#34;&gt;Cartopy: Add WMS image from Environment Canada&lt;/h2&gt;
 &lt;p&gt;In this tutorial, we will use a Web Map Service and Cartopy python library to display products from Environment Canada&lt;/p&gt;
 &lt;p&gt;A Web Map Service (WMS) defines an interface that allows a client to get maps of geospatial data and gain detailed information on specific features shown on the map. A &amp;ldquo;map&amp;rdquo; is defined here as a visual representation of geospatial data, not the geospatial data itself.&lt;/p&gt;
 &lt;p&gt;Environnement Canada generates and archives  moasic .png images every 5 minutes. These images are served as a Web Map Service. This notebook shows how to add those images to a cartopy figure axes.&lt;/p&gt;
@@ -6269,7 +6267,7 @@ i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;c
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; cfeature
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;1-plot-rrai-1-km-for-a-specific-date&#34;&gt;1- plot RRAI 1 km for a specific date&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;1-plot-rrai-1-km-for-a-specific-date&#34;&gt;1- plot RRAI 1 km for a specific date&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;DATE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime(&lt;span style=&#34;color:#ae81ff&#34;&gt;2020&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
 
 fig &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
@@ -6294,7 +6292,7 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span s
 
 fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots_adjust(wspace&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.02&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_3_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;2-plot-the-most-recent-time-available&#34;&gt;2- Plot the most recent time available&lt;/h2&gt;
+&lt;h3 id=&#34;2-plot-the-most-recent-time-available&#34;&gt;2- Plot the most recent time available&lt;/h3&gt;
 &lt;p&gt;Simply leave out the &amp;lsquo;time&amp;rsquo; argument in the wms_kwargs dict. The transparent option should default to True.&lt;/p&gt;
 &lt;p&gt;The timestamp of the image is retrieved from the JSON file at &lt;a href=&#34;https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_0.json&#34;&gt;https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_0.json&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Get the metadata for the most recent NEXRAD image from JSON file.&lt;/span&gt;
@@ -6337,7 +6335,7 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span s
 
 fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots_adjust(wspace&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.02&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_7_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;3&#34;&gt;3&lt;/h2&gt;
+&lt;h3 id=&#34;3&#34;&gt;3&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;fig &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;))
 
 ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_subplot(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
@@ -6467,7 +6465,7 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span s
 fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots_adjust(wspace&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.02&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_13_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;exemple-2--gdps&#34;&gt;Exemple 2 : GDPS&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;exemple-2--gdps&#34;&gt;Exemple 2 : GDPS&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;fig &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
 
 ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_subplot(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
@@ -6494,11 +6492,11 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span s
     </item>
     
     <item>
-      <title>NARR_Synoptic</title>
+      <title>Create Synoptic NARR map</title>
       <link>/post/narr_synoptic/</link>
       <pubDate>Fri, 07 Feb 2020 11:31:00 -0800</pubDate>
       <guid>/post/narr_synoptic/</guid>
-      <description>&lt;h1 id=&#34;working-with-netcd4python-data-synoptic-map&#34;&gt;Working with Netcd4-python data: Synoptic map&lt;/h1&gt;
+      <description>&lt;h3 id=&#34;working-with-netcd4python-data-synoptic-map&#34;&gt;Working with Netcd4-python data: Synoptic map&lt;/h3&gt;
 &lt;p&gt;In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files.
 We will then use matplotlib to plot it, and cartopy to map our analyse.&lt;/p&gt;
 &lt;p&gt;We will see the different steps to plot an exemple of synoptic map over North America with:
@@ -6523,7 +6521,7 @@ uu &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#
 vv &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_vwnd_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 omega &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/Daily/omega/NARR_omega_lc_2018_01_d.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 hgt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_hgt_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exploring-the-data&#34;&gt;- Exploring the data&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;-exploring-the-data&#34;&gt;- Exploring the data&lt;/h3&gt;
 &lt;p&gt;We can quickly explore our datasets by using some methods of the xarray library:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;- DS.var
 - DS.dims
@@ -6721,13 +6719,13 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_title(&lt;span sty
     </item>
     
     <item>
-      <title>MSS_Server</title>
+      <title>Python connection to MSS Server</title>
       <link>/post/mss_server/</link>
       <pubDate>Fri, 07 Feb 2020 10:57:37 -0800</pubDate>
       <guid>/post/mss_server/</guid>
-      <description>&lt;h1 id=&#34;connexion-to-microsoft-sql-server-management-studio&#34;&gt;Connexion to Microsoft SQL Server Management Studio&lt;/h1&gt;
+      <description>&lt;h3 id=&#34;connexion-to-microsoft-sql-server-management-studio&#34;&gt;Connexion to Microsoft SQL Server Management Studio&lt;/h3&gt;
 &lt;p&gt;This is a short tutorial to connect python to a Miscrosoft SQL Server.&lt;/p&gt;
-&lt;h2 id=&#34;steps-to-connect-with-pyodbc-python-library&#34;&gt;Steps to connect with pyodbc python library&lt;/h2&gt;
+&lt;h3 id=&#34;steps-to-connect-with-pyodbc-python-library&#34;&gt;Steps to connect with pyodbc python library&lt;/h3&gt;
 &lt;p&gt;You need to know some informations on your local server, database and tables you want to connect:
 In our case:
 - The Server Name is: DESKTOP-BE6M578
@@ -7245,12 +7243,12 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
     </item>
     
     <item>
-      <title>Shapefile_netcdf</title>
+      <title>Convert shapefile to netcdf</title>
       <link>/post/shapefile_netcdf/</link>
       <pubDate>Fri, 31 Jan 2020 07:20:28 -0800</pubDate>
       <guid>/post/shapefile_netcdf/</guid>
       <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h1 id=&#34;from-shapefiles-to-netcdf-mask&#34;&gt;From shapefiles to Netcdf Mask&lt;/h1&gt;
+&lt;h2 id=&#34;from-shapefiles-to-netcdf-mask&#34;&gt;From shapefiles to Netcdf Mask&lt;/h2&gt;
 &lt;p&gt;Many times we need to create Netcdf mask files over continents or maybe countries. In this tutorial, we will use shapefiles to create those masks.&lt;/p&gt;
 &lt;p&gt;In order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.&lt;/p&gt;
 &lt;p&gt;I will present a simple solution based on open-source Python modules:&lt;/p&gt;
@@ -7260,7 +7258,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
     - geopandas: to open shapefiles
     - matplotlib: for plotting
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;1-first-we-need-to-import-librairies-and-create-aliases&#34;&gt;1- First we need to import librairies and create aliases.&lt;/h2&gt;
+&lt;h3 id=&#34;1-first-we-need-to-import-librairies-and-create-aliases&#34;&gt;1- First we need to import librairies and create aliases.&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr 
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; regionmask
@@ -7555,11 +7553,11 @@ Coordinates:
     </item>
     
     <item>
-      <title>Temperature_Radial_Chart</title>
+      <title>Temperature Radial Chart</title>
       <link>/post/temperature_radial_chart/</link>
       <pubDate>Fri, 06 Dec 2019 20:00:03 -0800</pubDate>
       <guid>/post/temperature_radial_chart/</guid>
-      <description>&lt;h1 id=&#34;plot-of-a-radial-temperature-chart&#34;&gt;Plot of a radial temperature chart&lt;/h1&gt;
+      <description>&lt;h3 id=&#34;plot-of-a-radial-temperature-chart&#34;&gt;Plot of a radial temperature chart&lt;/h3&gt;
 &lt;p&gt;In this post, we will plot a radial temperature chart using daily temperature from Environment Canada.&lt;/p&gt;
 &lt;p&gt;The objective of this product is to obtain an analysis of the daily evolution of the temperature and its positioning in relation to the norm and the historical records of the Julian day.&lt;/p&gt;
 &lt;p&gt;In this work, we will extract data from Environment and Climate Change Canada for the RIGAUD station in Quebec. Here is the information about this station:&lt;/p&gt;
@@ -7768,11 +7766,11 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
     </item>
     
     <item>
-      <title>ECCC_Temp</title>
+      <title>ECCC homogenized dataset</title>
       <link>/post/eccc_temp/</link>
       <pubDate>Fri, 06 Dec 2019 19:50:39 -0800</pubDate>
       <guid>/post/eccc_temp/</guid>
-      <description>&lt;h1 id=&#34;extract-daily-temperature-from-environment-canada-using-python&#34;&gt;Extract daily temperature from Environment Canada using Python&lt;/h1&gt;
+      <description>&lt;h2 id=&#34;extract-daily-temperature-from-environment-canada-using-python&#34;&gt;Extract daily temperature from Environment Canada using Python&lt;/h2&gt;
 &lt;p&gt;The objective of this product is to retrieve daily temperature data from the second generation homogenized dataset of Environment and Climate Change Canada developed by Vincent et al. 2012.&lt;/p&gt;
 &lt;p&gt;Adjusted and homogenized Canadian climate dataset (DCCAH) were prepared to provide a better spatial and temporal representation of the climate trends in Canada.&lt;/p&gt;
 &lt;p&gt;In the Second Generation of Homogenized Temperature, new adjustments were applied to the daily minimum temperatures at synoptic stations (mainly airports) to address the bias due to the change in observing time in July 1961 (Vincent et al. 2009).&lt;/p&gt;
@@ -8656,7 +8654,7 @@ tmp_tmin&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tail()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;visualization&#34;&gt;visualization:&lt;/h3&gt;
+&lt;h3 id=&#34;visualization&#34;&gt;Visualization:&lt;/h3&gt;
 &lt;p&gt;Quick visualization of the monthly average temperatures for the month of January.
 We will group the data by month and calculate the average.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
@@ -8855,11 +8853,11 @@ names[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#
     </item>
     
     <item>
-      <title>Cartopy_climatology</title>
+      <title>ANUSPLIN 10km climatology</title>
       <link>/post/cartopy_climatology/</link>
       <pubDate>Mon, 02 Dec 2019 17:56:14 -0800</pubDate>
       <guid>/post/cartopy_climatology/</guid>
-      <description>&lt;h2 id=&#34;anusplin-climatology-using-cartopy&#34;&gt;ANUSPLIN climatology using Cartopy&lt;/h2&gt;
+      <description>&lt;h3 id=&#34;anusplin-climatology-using-cartopy&#34;&gt;ANUSPLIN climatology using Cartopy&lt;/h3&gt;
 &lt;p&gt;Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).&lt;/p&gt;
 &lt;p&gt;The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.&lt;/p&gt;
 &lt;p&gt;Data are available on:&lt;/p&gt;

@@ -117,7 +117,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
   
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/post/province_shapefiles/">
-  <meta property="og:title" content="Province_shapefiles | GDueymes">
+  <meta property="og:title" content="Canadian shapefile province | GDueymes">
   <meta property="og:description" content="﻿
 From shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.
 We will use gridded dataset ANUSPLIN meteorological data.
@@ -156,7 +156,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
     "@type": "WebPage",
     "@id": "/post/province_shapefiles/"
   },
-  "headline": "Province_shapefiles",
+  "headline": "Canadian shapefile province",
   
   "image": [
     "/post/province_shapefiles/featured.png"
@@ -196,7 +196,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
 
 
 
-  <title>Province_shapefiles | GDueymes</title>
+  <title>Canadian shapefile province | GDueymes</title>
 
 </head>
 
@@ -474,7 +474,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
 
 
 <div class="article-container pt-3">
-  <h1>Province_shapefiles</h1>
+  <h1>Canadian shapefile province</h1>
 
   
 
@@ -545,7 +545,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
 
     <div class="article-style">
       <p>﻿</p>
-<h1 id="from-shapefiles-to-netcdf-mask">From shapefiles to Netcdf Mask</h1>
+<h3 id="from-shapefiles-to-netcdf-mask">From shapefiles to Netcdf Mask</h3>
 <p>In this tutorial, we will use shapefiles to create masks over canadian provinces.</p>
 <p>We will use gridded dataset ANUSPLIN meteorological data.</p>
 <p>Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).</p>
@@ -559,7 +559,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
     - osgeo: 
     - matplotlib: for plotting
 </code></pre>
-<h2 id="1-first-we-need-to-import-librairies-and-create-aliases">1- First we need to import librairies and create aliases.</h2>
+<h3 id="1-first-we-need-to-import-librairies-and-create-aliases">1- First we need to import librairies and create aliases.</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr 
 <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 <span style="color:#f92672">import</span> regionmask
@@ -569,7 +569,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
 <span style="color:#f92672">from</span> osgeo <span style="color:#f92672">import</span> ogr
 <span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
 <span style="color:#f92672">%</span>matplotlib inline
-</code></pre></div><h2 id="working-over-canadian-province">Working over canadian province</h2>
+</code></pre></div><h4 id="working-over-canadian-province">Working over canadian province</h4>
 <p>In this example we will use canadian province shapefiles developped by statistics canada.</p>
 <p>Shapefiles are available on this website:
 <a href="https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm">https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm</a></p>
@@ -791,7 +791,7 @@ province<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">
 </code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1b989828&gt;
 </code></pre>
 <p><img src="./output_20_1.png" alt="png"></p>
-<h2 id="2-extract-one-province">2- Extract one province</h2>
+<h3 id="2-extract-one-province">2- Extract one province</h3>
 <p>We will sho how to mask Ontario province.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ID_PROV <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
 <span style="color:#66d9ef">print</span>(province<span style="color:#f92672">.</span>PRNAME[ID_PROV])
@@ -930,7 +930,7 @@ plt<span style="color:#f92672">.</span>show()
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/province_shapefiles/&amp;text=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/province_shapefiles/&amp;text=Canadian%20shapefile%20province" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -943,7 +943,7 @@ plt<span style="color:#f92672">.</span>show()
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/province_shapefiles/&amp;t=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/province_shapefiles/&amp;t=Canadian%20shapefile%20province" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -956,7 +956,7 @@ plt<span style="color:#f92672">.</span>show()
       
       
       <li>
-        <a href="mailto:?subject=Province_shapefiles&amp;body=/post/province_shapefiles/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Canadian%20shapefile%20province&amp;body=/post/province_shapefiles/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -969,7 +969,7 @@ plt<span style="color:#f92672">.</span>show()
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/province_shapefiles/&amp;title=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/province_shapefiles/&amp;title=Canadian%20shapefile%20province" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -982,7 +982,7 @@ plt<span style="color:#f92672">.</span>show()
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Province_shapefiles%20/post/province_shapefiles/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Canadian%20shapefile%20province%20/post/province_shapefiles/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -995,7 +995,7 @@ plt<span style="color:#f92672">.</span>show()
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/province_shapefiles/&amp;title=Province_shapefiles" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/province_shapefiles/&amp;title=Canadian%20shapefile%20province" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>

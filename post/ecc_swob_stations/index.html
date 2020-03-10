@@ -28,10 +28,9 @@
   
     
   
-  <meta name="description" content="﻿
-Working with XML (Extensible Markup Language) file using Python Part 1: Surface Weather Observation XML (SW-OB-XML) SW-OB-XML For xml files, we will use a package called xml which will allow us to decrypt the xml file.
-Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.
-We will first download an xml file located in this directory:">
+  <meta name="description" content="﻿In this post, we will show how to work with Surface Weather Observation from ECCC in XML language (Extensible Markup Language)
+SW-OB-XML For xml files, we will use a package called xml which will allow us to decrypt the xml file.
+Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/ecc_swob_stations/">
@@ -116,11 +115,10 @@ We will first download an xml file located in this directory:">
   
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/post/ecc_swob_stations/">
-  <meta property="og:title" content="ECC_SWOB_Stations | GDueymes">
-  <meta property="og:description" content="﻿
-Working with XML (Extensible Markup Language) file using Python Part 1: Surface Weather Observation XML (SW-OB-XML) SW-OB-XML For xml files, we will use a package called xml which will allow us to decrypt the xml file.
-Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.
-We will first download an xml file located in this directory:"><meta property="og:image" content="/post/ecc_swob_stations/featured.png">
+  <meta property="og:title" content="ECCC SWOB Stations | GDueymes">
+  <meta property="og:description" content="﻿In this post, we will show how to work with Surface Weather Observation from ECCC in XML language (Extensible Markup Language)
+SW-OB-XML For xml files, we will use a package called xml which will allow us to decrypt the xml file.
+Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame."><meta property="og:image" content="/post/ecc_swob_stations/featured.png">
   <meta property="twitter:image" content="/post/ecc_swob_stations/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -154,7 +152,7 @@ We will first download an xml file located in this directory:"><meta property="o
     "@type": "WebPage",
     "@id": "/post/ecc_swob_stations/"
   },
-  "headline": "ECC_SWOB_Stations",
+  "headline": "ECCC SWOB Stations",
   
   "image": [
     "/post/ecc_swob_stations/featured.png"
@@ -176,7 +174,7 @@ We will first download an xml file located in this directory:"><meta property="o
       "url": "/img/icon-512.png"
     }
   },
-  "description": "﻿\nWorking with XML (Extensible Markup Language) file using Python Part 1: Surface Weather Observation XML (SW-OB-XML) SW-OB-XML For xml files, we will use a package called xml which will allow us to decrypt the xml file.\nPandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.\nWe will first download an xml file located in this directory:"
+  "description": "﻿In this post, we will show how to work with Surface Weather Observation from ECCC in XML language (Extensible Markup Language)\nSW-OB-XML For xml files, we will use a package called xml which will allow us to decrypt the xml file.\nPandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame."
 }
 </script>
 
@@ -194,7 +192,7 @@ We will first download an xml file located in this directory:"><meta property="o
 
 
 
-  <title>ECC_SWOB_Stations | GDueymes</title>
+  <title>ECCC SWOB Stations | GDueymes</title>
 
 </head>
 
@@ -474,7 +472,7 @@ We will first download an xml file located in this directory:"><meta property="o
 
 
 <div class="article-container pt-3">
-  <h1>ECC_SWOB_Stations</h1>
+  <h1>ECCC SWOB Stations</h1>
 
   
 
@@ -544,10 +542,8 @@ We will first download an xml file located in this directory:"><meta property="o
   <div class="article-container">
 
     <div class="article-style">
-      <p>﻿</p>
-<h1 id="working-with-xml-extensible-markup-language-file-using-python-part-1">Working with XML (Extensible Markup Language) file using Python Part 1:</h1>
-<h1 id="surface-weather-observation-xml-swobxml">Surface Weather Observation XML (SW-OB-XML)</h1>
-<h2 id="swobxml">SW-OB-XML</h2>
+      <p>﻿In this post, we will show how to work with Surface Weather Observation from ECCC in XML language (Extensible Markup Language)</p>
+<h3 id="swobxml">SW-OB-XML</h3>
 <p>For xml files, we will use a package called xml which will allow us to decrypt the xml file.</p>
 <p>Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.</p>
 <p>We will first download an xml file located in this directory:</p>
@@ -727,7 +723,7 @@ stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<h2 id="working-with-one-station">Working with one station</h2>
+<h2 id="1-working-with-one-station">1- Working with one station</h2>
 <p>Let's work with  CWTQ station ID:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
 stid <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CWTQ</span><span style="color:#e6db74">&#39;</span>
@@ -887,7 +883,7 @@ data<span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>D
 </tr>
 </tbody>
 </table>
-<h2 id="reading-the-station-list">Reading the station list</h2>
+<h2 id="2-reading-the-station-list">2- Reading the station list</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_table(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">swob-xml_station_list.csv</span><span style="color:#e6db74">&#34;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#34;</span>)
 stations<span style="color:#f92672">.</span>head()
 </code></pre></div><table>
@@ -980,7 +976,7 @@ stations<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<h3 id="filter-stations-over--a-specific-province">Filter stations over  a specific province</h3>
+<h2 id="3-filter-stations-over--a-specific-province">3- Filter stations over  a specific province</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations_mask <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>,:]
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations_mask<span style="color:#f92672">.</span>head()
 </code></pre></div><table>
@@ -1263,7 +1259,7 @@ stations<span style="color:#f92672">.</span>head()
         <span style="color:#75715e">#print (&#34;File not exist&#34;)</span>
         pd<span style="color:#f92672">.</span>DataFrame(row)<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(row[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MSC_ID</span><span style="color:#e6db74">&#39;</span>])<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>,index<span style="color:#f92672">=</span>False)  
         data<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(row[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MSC_ID</span><span style="color:#e6db74">&#39;</span>])<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>,mode<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>,index<span style="color:#f92672">=</span>False)  
-</code></pre></div><h3 id="we-will-trace-the-location-of-the-stations">We will trace the location of the stations:</h3>
+</code></pre></div><h3 id="4-we-will-trace-the-location-of-the-stations">4- We will trace the location of the stations:</h3>
 <p>We will start by extracting the latitudes and longitudes:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_lat <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>,:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Latitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
 list_lon <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>,:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Longitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
@@ -1308,7 +1304,7 @@ plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></spa
 plt<span style="color:#f92672">.</span>show()  
 plt<span style="color:#f92672">.</span>close()
 </code></pre></div><p><img src="output_32_0.png" alt="png"></p>
-<h1 id="just-over-quebec">Just over Quebec:</h1>
+<h3 id="5--just-over-quebec">5-  Just over Quebec:</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_lat <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[(stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">&amp;</span> (stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>),:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Latitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
 list_lon <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[(stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">&amp;</span> (stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>),:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Longitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
@@ -1352,7 +1348,7 @@ plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></spa
 plt<span style="color:#f92672">.</span>show()  
 plt<span style="color:#f92672">.</span>close()
 </code></pre></div><p><img src="output_35_0.png" alt="png"></p>
-<h1 id="if-we-want-to-plot-by-grouping-by-province">If we want to plot by grouping by province:</h1>
+<h3 id="6--if-we-want-to-plot-by-grouping-by-province">6-  If we want to plot by grouping by province:</h3>
 <p>We only want the &ldquo;Automatic&rdquo; stations and group them by province.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">grouped_dataframe <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>,:]<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#39;</span>)
 grouped_dataframe<span style="color:#f92672">.</span>count()
@@ -1727,7 +1723,7 @@ plt<span style="color:#f92672">.</span>close()
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/ecc_swob_stations/&amp;text=ECC_SWOB_Stations" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/ecc_swob_stations/&amp;text=ECCC%20SWOB%20Stations" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1740,7 +1736,7 @@ plt<span style="color:#f92672">.</span>close()
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/ecc_swob_stations/&amp;t=ECC_SWOB_Stations" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/ecc_swob_stations/&amp;t=ECCC%20SWOB%20Stations" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1753,7 +1749,7 @@ plt<span style="color:#f92672">.</span>close()
       
       
       <li>
-        <a href="mailto:?subject=ECC_SWOB_Stations&amp;body=/post/ecc_swob_stations/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=ECCC%20SWOB%20Stations&amp;body=/post/ecc_swob_stations/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1766,7 +1762,7 @@ plt<span style="color:#f92672">.</span>close()
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/ecc_swob_stations/&amp;title=ECC_SWOB_Stations" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/ecc_swob_stations/&amp;title=ECCC%20SWOB%20Stations" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1779,7 +1775,7 @@ plt<span style="color:#f92672">.</span>close()
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=ECC_SWOB_Stations%20/post/ecc_swob_stations/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=ECCC%20SWOB%20Stations%20/post/ecc_swob_stations/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1792,7 +1788,7 @@ plt<span style="color:#f92672">.</span>close()
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/ecc_swob_stations/&amp;title=ECC_SWOB_Stations" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/ecc_swob_stations/&amp;title=ECCC%20SWOB%20Stations" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
