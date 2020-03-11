@@ -568,8 +568,7 @@ I will present a simple solution based on open-source Python modules:
 <span style="color:#f92672">%</span>matplotlib inline
 </code></pre></div><h2 id="working-over-continents">Working over continents</h2>
 <p>In this example we will use the  classification developed by ARCGIS.</p>
-<p>Shapefiles are available on this website:
-<a href="https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372">https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372</a></p>
+<p>Shapefiles are available on this <a href="https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372">website</a>.</p>
 <p>After downloaded the shapefile, we must load it using geopandas library:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PATH_TO_SHAPEFILE <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./continent_shapefile/continent.shp</span><span style="color:#e6db74">&#39;</span>
 continents <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(PATH_TO_SHAPEFILE)
@@ -619,7 +618,8 @@ Attributes:
     history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
 </code></pre>
 <p>Our xarray Dataset contains a single variable (t2m) which is stored as a dask.array. This is the result of loading files with open_mfdataset.</p>
-<p>Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: <a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls</a></p>
+<p>Now we will use regionmask module to create a gridded mask with the
+<a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">function regions_cls</a>.</p>
 <p>With this function we will create an object able to mask ERA5 gridded data.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">continents_mask_poly <span style="color:#f92672">=</span> regionmask<span style="color:#f92672">.</span>Regions_cls(name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CONTINENT</span><span style="color:#e6db74">&#39;</span>, numbers <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">8</span>)), names <span style="color:#f92672">=</span> list(continents<span style="color:#f92672">.</span>CONTINENT), abbrevs <span style="color:#f92672">=</span> list(continents<span style="color:#f92672">.</span>CONTINENT), outlines <span style="color:#f92672">=</span> list(continents<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>values[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">8</span>)))
 continents_mask_poly
@@ -847,8 +847,7 @@ Coordinates:
 </code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0xc2d1f28&gt;]
 </code></pre>
 <p><img src="./continent5.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div>
+
     </div>
 
     

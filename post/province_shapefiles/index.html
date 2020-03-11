@@ -550,8 +550,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
 <p>We will use gridded dataset ANUSPLIN meteorological data.</p>
 <p>Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).</p>
 <p>The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.</p>
-<p>Data are available on:</p>
-<p><a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids">ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids</a></p>
+<p>Data are available on this <a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids">link</a>.</p>
 <p>I will present a  solution based on open-source Python modules:</p>
 <pre><code>    - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities
     - numpy: for simple array manipulations
@@ -571,8 +570,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
 <span style="color:#f92672">%</span>matplotlib inline
 </code></pre></div><h4 id="working-over-canadian-province">Working over canadian province</h4>
 <p>In this example we will use canadian province shapefiles developped by statistics canada.</p>
-<p>Shapefiles are available on this website:
-<a href="https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm">https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm</a></p>
+<p>Shapefiles are available on this <a href="https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm">website</a>.</p>
 <p>After downloaded the shapefile, we must load it using geopandas library:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PATH_TO_SHAPEFILE <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp</span><span style="color:#e6db74">&#39;</span>
 province <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(PATH_TO_SHAPEFILE)
@@ -741,7 +739,7 @@ Data variables:
     Mean_tasmoy  (time, y, x) float32 dask.array&lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&gt;
 </code></pre>
 <p>Our xarray Dataset contains a single variable (Mean_tasmoy) which is stored as a dask.array. This is the result of loading files with open_mfdataset.</p>
-<p>Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: <a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls</a></p>
+<p>Now we will use  regionmask module to create a gridded mask with the function regions_cls documented <a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">here</a>.</p>
 <p>With this function we will create an object able to mask ANUSPLIN gridded data.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">province_mask_poly <span style="color:#f92672">=</span> regionmask<span style="color:#f92672">.</span>Regions_cls(name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">PRENAME</span><span style="color:#e6db74">&#39;</span>, numbers <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)), names <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), abbrevs <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), outlines <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>values[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)))
 province_mask_poly

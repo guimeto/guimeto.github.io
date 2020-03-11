@@ -31,7 +31,6 @@
   <meta name="description" content="﻿
 Scraping web data using Python In this tutorial, we will see how to get data from Environment Canada webpage.
 1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.
-https://meteo.gc.ca/city/pages/qc-147_metric_f.html
 import requests import pandas as pd # we download the web page page = requests.get(&#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page.">
 
   
@@ -121,7 +120,6 @@ import requests import pandas as pd # we download the web page page = requests.g
   <meta property="og:description" content="﻿
 Scraping web data using Python In this tutorial, we will see how to get data from Environment Canada webpage.
 1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.
-https://meteo.gc.ca/city/pages/qc-147_metric_f.html
 import requests import pandas as pd # we download the web page page = requests.get(&#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."><meta property="og:image" content="/post/scrap_eccc/featured.jpg">
   <meta property="twitter:image" content="/post/scrap_eccc/featured.jpg"><meta property="og:locale" content="en-us">
   
@@ -178,7 +176,7 @@ import requests import pandas as pd # we download the web page page = requests.g
       "url": "/img/icon-512.png"
     }
   },
-  "description": "﻿\nScraping web data using Python In this tutorial, we will see how to get data from Environment Canada webpage.\n1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.\nhttps://meteo.gc.ca/city/pages/qc-147_metric_f.html\nimport requests import pandas as pd # we download the web page page = requests.get(\u0026#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html\u0026#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."
+  "description": "﻿\nScraping web data using Python In this tutorial, we will see how to get data from Environment Canada webpage.\n1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.\nimport requests import pandas as pd # we download the web page page = requests.get(\u0026#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html\u0026#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."
 }
 </script>
 
@@ -550,8 +548,7 @@ import requests import pandas as pd # we download the web page page = requests.g
 <h3 id="scraping-web-data-using-python">Scraping web data using Python</h3>
 <p>In this tutorial, we  will see how to get data from Environment Canada webpage.</p>
 <h3 id="1-exploring-the-structure-of-the-eccc-web-page">1- Exploring the structure of the ECCC web page</h3>
-<p>We will extract the current weather conditions and weather forecast for Montreal.</p>
-<p><a href="https://meteo.gc.ca/city/pages/qc-147_metric_f.html">https://meteo.gc.ca/city/pages/qc-147_metric_f.html</a></p>
+<p>We will extract the current weather conditions and weather forecast for <a href="https://meteo.gc.ca/city/pages/qc-147_metric_f.html">Montreal</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
 <span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 <span style="color:#75715e"># we download the web page</span>
@@ -870,7 +867,6 @@ i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
     i <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> 
 </code></pre></div><p><img src="scrap.png" alt="png"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather_f<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">forecast.csv</span><span style="color:#e6db74">&#34;</span>, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">utf-8</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 </code></pre></div>
     </div>
 

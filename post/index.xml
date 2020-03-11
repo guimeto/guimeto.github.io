@@ -425,22 +425,48 @@ df_daily &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df[[&lt;span s
 
 df_monthly &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df[[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Province&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Climate ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Station ID&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Latitude (Decimal Degrees)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,
               &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Longitude (Decimal Degrees)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MLY First Year&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MLY Last Year&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;]]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dropna()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will use wget python command to download data, example:
-wget.download(&amp;lsquo;&lt;a href=&#34;http://climate.weather.gc.ca/climate_data/bulk_data_e.html&#34;&gt;http://climate.weather.gc.ca/climate_data/bulk_data_e.html&lt;/a&gt;
-format=xml&amp;amp;stationID=&#39;+str(int(id_stat))+&amp;rsquo;&amp;amp;Year=&#39;+str(year)+&amp;rsquo;&amp;amp;Month=01&amp;amp;Day=14&amp;amp;timeframe=2&amp;rsquo;)
-With:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;year = year of the record&lt;/li&gt;
-&lt;li&gt;month = year of the record&lt;/li&gt;
-&lt;li&gt;format= [csv|xml]: the format output&lt;/li&gt;
-&lt;li&gt;timeframe = 1: for hourly data&lt;/li&gt;
-&lt;li&gt;timeframe = 2: for daily data&lt;/li&gt;
-&lt;li&gt;timeframe = 3 for monthly data&lt;/li&gt;
-&lt;li&gt;Day: the value of the &amp;ldquo;day&amp;rdquo; variable is not used and can be an arbitrary value&lt;/li&gt;
-&lt;li&gt;For another station, change the value of the variable stationID&lt;/li&gt;
-&lt;li&gt;For the data in XML format, change the value of the variable format to xml in the URL.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;1-working-with-hourly-data&#34;&gt;1- Working with hourly data:&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will use wget python command to download data using a specific path:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;wget&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;download(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&amp;amp;stationID=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(int(id_stat))&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;amp;Year=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(year)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;amp;Month=01&amp;amp;Day=14&amp;amp;timeframe=1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;year&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;year of the record&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;month&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;month of the record&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;format&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;[csv&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;timeframe = 1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;for hourly data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;timeframe = 2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;for daily data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;timeframe = 3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;for monthly data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre&gt;&lt;code&gt;- Day: the value of the &amp;quot;day&amp;quot; variable is not used and can be an arbitrary value
+- For another station, change the value of the variable stationID
+- For the data in XML format, change the value of the variable format to xml in the URL.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;1-working-with-hourly-data&#34;&gt;1- Working with hourly data:&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df_hourly&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;|    | Name              | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   HLY First Year |   HLY Last Year |
 |---:|:------------------|:-----------------|-------------:|-------------:|-----------------------------:|------------------------------:|-----------------:|----------------:|
@@ -455,7 +481,7 @@ With:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;id_stat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;27226&lt;/span&gt;
 year &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
 wget&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;download(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&amp;amp;stationID=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(int(id_stat))&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;amp;Year=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(year)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;amp;Month=01&amp;amp;Day=14&amp;amp;timeframe=1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&#39;en_climate_hourly_BC_1012475_001-2019_P1H (1).csv&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&#39;en_climate_hourly_BC_1012475_001-2019_P1H.csv&#39;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;en_climate_hourly_BC_1012475_001-2019_P1H.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, sep&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
 df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
@@ -553,7 +579,7 @@ Follow this &lt;a href=&#34;http://www.guillaumedueymes.com/Plotly_plots/file1.h
 pio&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_html(fig, file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file1.html&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, auto_open &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To save our file in png:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_image(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file1.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-working-with-daily-data&#34;&gt;2- Working with daily data:&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-working-with-daily-data&#34;&gt;2- Working with daily data:&lt;/h3&gt;
 &lt;p&gt;We will do the same job with daily mean temperature for one Climate station:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df_daily&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;|    | Name                   | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   DLY First Year |   DLY Last Year |
@@ -627,7 +653,7 @@ Follow this &lt;a href=&#34;http://www.guillaumedueymes.com/Plotly_plots/file2.h
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; plotly.io &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pio
 pio&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_html(fig, file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file2.html&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, auto_open &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True)
 fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_image(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file2.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-working-with-monthly-data&#34;&gt;3- Working with monthly data:&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-working-with-monthly-data&#34;&gt;3- Working with monthly data:&lt;/h3&gt;
 &lt;p&gt;We will do the same job with monthly total precipitation for one Climate station:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df_monthly&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;|    | Name                   | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   MLY First Year |   MLY Last Year |
@@ -705,7 +731,6 @@ Follow this &lt;a href=&#34;http://www.guillaumedueymes.com/Plotly_plots/file3.h
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; plotly.io &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pio
 pio&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_html(fig, file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file2.html&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, auto_open &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True)
 fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write_image(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file2.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
@@ -1127,8 +1152,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span st
 &lt;h3 id=&#34;swobxml&#34;&gt;SW-OB-XML&lt;/h3&gt;
 &lt;p&gt;For xml files, we will use a package called xml which will allow us to decrypt the xml file.&lt;/p&gt;
 &lt;p&gt;Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.&lt;/p&gt;
-&lt;p&gt;We will first download an xml file located in this directory:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://dd.weather.gc.ca/observations/doc/&#34;&gt;https://dd.weather.gc.ca/observations/doc/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We will first download &lt;a href=&#34;https://dd.weather.gc.ca/observations/doc/&#34;&gt;an xml file&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;We are going to work here with the meteorological ground (SWOB-ML) and marine observations data found on the ECCC Datamart.&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Data are available at the following links:&lt;/p&gt;
@@ -1151,7 +1175,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span st
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX&#34;&gt;https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;où:&lt;/p&gt;
+&lt;p&gt;Where:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;AAAAMMJJ: observations date, UTC&lt;/p&gt;
@@ -1164,7 +1188,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend(loc&lt;span st
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&#34;https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID&#34;&gt;https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;où:&lt;/p&gt;
+&lt;p&gt;Where:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;NETWORK: acronym of the partner network&lt;/li&gt;
 &lt;li&gt;YYYYMMDD: observations date, UTC&lt;/li&gt;
@@ -2776,8 +2800,7 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_feature(shape_feat
 
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_35_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+</description>
     </item>
     
     <item>
@@ -2791,8 +2814,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;p&gt;We will use gridded dataset ANUSPLIN meteorological data.&lt;/p&gt;
 &lt;p&gt;Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).&lt;/p&gt;
 &lt;p&gt;The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.&lt;/p&gt;
-&lt;p&gt;Data are available on:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&#34;&gt;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data are available on this &lt;a href=&#34;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I will present a  solution based on open-source Python modules:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    - xarray: for manipulating &amp;amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities
     - numpy: for simple array manipulations
@@ -2812,8 +2834,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;working-over-canadian-province&#34;&gt;Working over canadian province&lt;/h4&gt;
 &lt;p&gt;In this example we will use canadian province shapefiles developped by statistics canada.&lt;/p&gt;
-&lt;p&gt;Shapefiles are available on this website:
-&lt;a href=&#34;https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm&#34;&gt;https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Shapefiles are available on this &lt;a href=&#34;https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm&#34;&gt;website&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;After downloaded the shapefile, we must load it using geopandas library:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;PATH_TO_SHAPEFILE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 province &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(PATH_TO_SHAPEFILE)
@@ -2982,7 +3003,7 @@ Data variables:
     Mean_tasmoy  (time, y, x) float32 dask.array&amp;lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Our xarray Dataset contains a single variable (Mean_tasmoy) which is stored as a dask.array. This is the result of loading files with open_mfdataset.&lt;/p&gt;
-&lt;p&gt;Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: &lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now we will use  regionmask module to create a gridded mask with the function regions_cls documented &lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;With this function we will create an object able to mask ANUSPLIN gridded data.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;province_mask_poly &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; regionmask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Regions_cls(name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;PRENAME&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)), names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(tmpWGS84&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PRENAME), abbrevs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(tmpWGS84&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PRENAME), outlines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(tmpWGS84&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values[i] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)))
 province_mask_poly
@@ -3161,8 +3182,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;h3 id=&#34;scraping-web-data-using-python&#34;&gt;Scraping web data using Python&lt;/h3&gt;
 &lt;p&gt;In this tutorial, we  will see how to get data from Environment Canada webpage.&lt;/p&gt;
 &lt;h3 id=&#34;1-exploring-the-structure-of-the-eccc-web-page&#34;&gt;1- Exploring the structure of the ECCC web page&lt;/h3&gt;
-&lt;p&gt;We will extract the current weather conditions and weather forecast for Montreal.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://meteo.gc.ca/city/pages/qc-147_metric_f.html&#34;&gt;https://meteo.gc.ca/city/pages/qc-147_metric_f.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We will extract the current weather conditions and weather forecast for &lt;a href=&#34;https://meteo.gc.ca/city/pages/qc-147_metric_f.html&#34;&gt;Montreal&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
 &lt;span style=&#34;color:#75715e&#34;&gt;# we download the web page&lt;/span&gt;
@@ -3481,7 +3501,6 @@ i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;c
     i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;scrap.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;weather_f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;forecast.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, header &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True, sep &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,encoding&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;utf-8&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
@@ -3494,8 +3513,7 @@ i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;c
 &lt;p&gt;In this tutorial, we will use a Web Map Service and Cartopy python library to display products from Environment Canada&lt;/p&gt;
 &lt;p&gt;A Web Map Service (WMS) defines an interface that allows a client to get maps of geospatial data and gain detailed information on specific features shown on the map. A &amp;ldquo;map&amp;rdquo; is defined here as a visual representation of geospatial data, not the geospatial data itself.&lt;/p&gt;
 &lt;p&gt;Environnement Canada generates and archives  moasic .png images every 5 minutes. These images are served as a Web Map Service. This notebook shows how to add those images to a cartopy figure axes.&lt;/p&gt;
-&lt;p&gt;Here is a link with availables datasets:
-&lt;a href=&#34;https://eccc-msc.github.io/open-data/msc-data/readme_fr/&#34;&gt;https://eccc-msc.github.io/open-data/msc-data/readme_fr/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here is a &lt;a href=&#34;https://eccc-msc.github.io/open-data/msc-data/readme_fr/&#34;&gt;link&lt;/a&gt; with availables datasets.&lt;/p&gt;
 &lt;p&gt;Data Source: &lt;a href=&#34;https://geo.weather.gc.ca/geomet?service=WMS&amp;amp;version=1.3.0&amp;amp;request=GetCapabilities&amp;amp;layer=RADAR_1KM_RRAI&#34;&gt;https://geo.weather.gc.ca/geomet?service=WMS&amp;amp;version=1.3.0&amp;amp;request=GetCapabilities&amp;amp;layer=RADAR_1KM_RRAI&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; datetime &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
@@ -3528,7 +3546,7 @@ fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots_adjust(wspac
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_3_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;2-plot-the-most-recent-time-available&#34;&gt;2- Plot the most recent time available&lt;/h3&gt;
 &lt;p&gt;Simply leave out the &amp;lsquo;time&amp;rsquo; argument in the wms_kwargs dict. The transparent option should default to True.&lt;/p&gt;
-&lt;p&gt;The timestamp of the image is retrieved from the JSON file at &lt;a href=&#34;https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_0.json&#34;&gt;https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_0.json&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The timestamp of the image is retrieved from the &lt;a href=&#34;https://mesonet.agron.iastate.edu/data/gis/images/4326/USCOMP/n0q_0.json&#34;&gt;JSON file&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Get the metadata for the most recent NEXRAD image from JSON file.&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
 
@@ -3609,8 +3627,7 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_wms(wms&lt;span st
 ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_extent((&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;)) 
 fig&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots_adjust(wspace&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.02&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_9_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;An other example using NEXRAD mosaic image from Iowa Environmental Mesonet.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://mesonet.agron.iastate.edu/docs/nexrad_composites/&#34;&gt;https://mesonet.agron.iastate.edu/docs/nexrad_composites/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;An other example using &lt;a href=&#34;https://mesonet.agron.iastate.edu/docs/nexrad_composites/&#34;&gt;NEXRAD mosaic&lt;/a&gt;  image from Iowa Environmental Mesonet.&lt;/p&gt;
 &lt;p&gt;See the data source URL for dBZ colormaps. You can generate an approximate colormap with MetPy&#39;s NWSReflectivity and NWSReflectivityExpanded ctables.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;N0Q: Base Reflectivity - 8 bit/0.5 dbz resolution&lt;/li&gt;
@@ -3748,8 +3765,7 @@ We will then use matplotlib to plot it, and cartopy to map our analyse.&lt;/p&gt
 warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rcParams[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;figure.figsize&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will work with fields from NARR reanalysis at pressure levels.&lt;/p&gt;
-&lt;p&gt;Data can be directly download on this link:
-&lt;a href=&#34;ftp://ftp.cdc.noaa.gov/Datasets/NARR/pressure/&#34;&gt;ftp://ftp.cdc.noaa.gov/Datasets/NARR/pressure/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data can be directly download on this &lt;a href=&#34;ftp://ftp.cdc.noaa.gov/Datasets/NARR/pressure/&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;tas &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_air_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 uu &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_uwnd_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 vv &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;J:/REANALYSES/NARR/3hrs/NARR_vwnd_lc_2018_01_3hrs.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
@@ -4099,16 +4115,15 @@ df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tail()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+</description>
     </item>
     
     <item>
-      <title>Shapefiles_Country</title>
+      <title>Mask countries using shapefile</title>
       <link>/post/shapefiles_country/</link>
       <pubDate>Tue, 04 Feb 2020 10:39:49 -0800</pubDate>
       <guid>/post/shapefiles_country/</guid>
-      <description>&lt;h1 id=&#34;from-country-shapefiles-to-netcdf-mask&#34;&gt;From country shapefiles to Netcdf Mask&lt;/h1&gt;
+      <description>&lt;h3 id=&#34;using-country-shapefiles-to-create-netcdf-mask&#34;&gt;Using country shapefiles to create Netcdf mask&lt;/h3&gt;
 &lt;p&gt;In this tutorial, we will use shapefiles to create mask over specific countries.&lt;/p&gt;
 &lt;p&gt;In order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.&lt;/p&gt;
 &lt;p&gt;I will present a simple solution based on open-source Python modules:&lt;/p&gt;
@@ -4118,7 +4133,7 @@ df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tail()
     - geopandas: to open shapefiles
     - matplotlib: for plotting
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;1--import-librairies-and-create-aliases&#34;&gt;1-  Import librairies and create aliases.&lt;/h2&gt;
+&lt;h3 id=&#34;1--import-librairies-and-create-aliases&#34;&gt;1-  Import librairies and create aliases.&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr 
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; regionmask
@@ -4127,9 +4142,8 @@ df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tail()
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings; warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;working-over-countries&#34;&gt;Working over countries&lt;/h2&gt;
-&lt;p&gt;In this example we will focus on countries in Africa. We will use shapefiles developped in ESRI format from this link:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://community.esri.com/external-link.jspa?url=http%3A%2F%2Fwww.maplibrary.org%2Flibrary%2Fstacks%2FAfrica%2Findex.htm&#34;&gt;https://community.esri.com/external-link.jspa?url=http%3A%2F%2Fwww.maplibrary.org%2Flibrary%2Fstacks%2FAfrica%2Findex.htm&lt;/a&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;working-over-countries&#34;&gt;Working over countries&lt;/h3&gt;
+&lt;p&gt;In this example we will focus on countries in Africa. We will use &lt;a href=&#34;https://community.esri.com/external-link.jspa?url=http%3A%2F%2Fwww.maplibrary.org%2Flibrary%2Fstacks%2FAfrica%2Findex.htm&#34;&gt;shapefiles developped in ESRI format&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;After downloaded the shapefile, we must load it using geopandas library:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;PATH_TO_SHAPEFILE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Countries/Africa_Countries.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 countries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(PATH_TO_SHAPEFILE)
@@ -4212,7 +4226,8 @@ np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape(a)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(762,)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Our xarray Dataset contains a single variable (t2m) which is stored as a dask.array. This is the result of loading files with open_mfdataset.&lt;/p&gt;
-&lt;p&gt;Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: &lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now we will use regionmask module to create a gridded mask with the
+&lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;function regions_cls&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;With this function we will create an object able to mask ERA5 gridded data.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;countries_mask_poly &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; regionmask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Regions_cls(name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COUNTRY&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; indexes, names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;COUNTRY[indexes], abbrevs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;COUNTRY[indexes], outlines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values[i] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])))
 countries_mask_poly
@@ -4238,8 +4253,7 @@ Coordinates:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Mask can be saved (for example as a NetCDF) for a later use.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;mask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_netcdf(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./mask_Africa_by_countries.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can use  Panoply free software to plot our netcdf file.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.giss.nasa.gov/tools/panoply/&#34;&gt;https://www.giss.nasa.gov/tools/panoply/&lt;/a&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can use  &lt;a href=&#34;https://www.giss.nasa.gov/tools/panoply/&#34;&gt;Panoply&lt;/a&gt; free software to plot our netcdf file.&lt;/p&gt;
 &lt;p&gt;Here&#39;s a quick visualisation using Matplotlib:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
 ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
@@ -4260,7 +4274,7 @@ countries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(ax &lt;spa
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x7528278&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;./output2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;2-extract-timeseries&#34;&gt;2- Extract time-series&lt;/h2&gt;
+&lt;h3 id=&#34;2-extract-timeseries&#34;&gt;2- Extract time-series&lt;/h3&gt;
 &lt;p&gt;We can now for each country aggregate the grid cells in the national borders.
 We will first develop two methods to mask our area. Then, we will extract the time series.&lt;/p&gt;
 &lt;h3 id=&#34;-method-1&#34;&gt;- Method 1:&lt;/h3&gt;
@@ -4388,7 +4402,7 @@ Coordinates:
 &lt;p&gt;&lt;img src=&#34;./output6.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;And we save it as a csv&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;daily_mean&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_pandas()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;average-temperature-algeria.csv&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, header &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;t2m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-extract-timeseries-for-one-specific-localisation&#34;&gt;2- Extract time-series for one specific localisation&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-extract-timeseries-for-one-specific-localisation&#34;&gt;2- Extract time-series for one specific localisation&lt;/h3&gt;
 &lt;p&gt;In this example, we eant to extract time-series for Alger:&lt;/p&gt;
 &lt;p&gt;With:
 - longitude = 3.04
@@ -4503,8 +4517,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;working-over-continents&#34;&gt;Working over continents&lt;/h2&gt;
 &lt;p&gt;In this example we will use the  classification developed by ARCGIS.&lt;/p&gt;
-&lt;p&gt;Shapefiles are available on this website:
-&lt;a href=&#34;https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372&#34;&gt;https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Shapefiles are available on this &lt;a href=&#34;https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372&#34;&gt;website&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;After downloaded the shapefile, we must load it using geopandas library:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;PATH_TO_SHAPEFILE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./continent_shapefile/continent.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 continents &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(PATH_TO_SHAPEFILE)
@@ -4554,7 +4567,8 @@ Attributes:
     history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Our xarray Dataset contains a single variable (t2m) which is stored as a dask.array. This is the result of loading files with open_mfdataset.&lt;/p&gt;
-&lt;p&gt;Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: &lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now we will use regionmask module to create a gridded mask with the
+&lt;a href=&#34;https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls&#34;&gt;function regions_cls&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;With this function we will create an object able to mask ERA5 gridded data.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;continents_mask_poly &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; regionmask&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Regions_cls(name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CONTINENT&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)), names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(continents&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;CONTINENT), abbrevs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(continents&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;CONTINENT), outlines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(continents&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;geometry&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values[i] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)))
 continents_mask_poly
@@ -4782,8 +4796,7 @@ Coordinates:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;[&amp;lt;matplotlib.lines.Line2D at 0xc2d1f28&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;./continent5.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+</description>
     </item>
     
     <item>
@@ -4801,9 +4814,9 @@ Latitude: 45.5 degN
 Longitude: -74.37 degW
 Period covered: 1963 - today
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A list of stations is available on this site: &lt;a href=&#34;ftp://ftp.tor.ec.gc.ca/Pub/Get_More_Data_More_data/Repository%20of%20stations%20FR.csv&#34;&gt;ftp://ftp.tor.ec.gc.ca/Pub/Get_More_Data_More_data/Repository%20of%20stations%20FR.csv&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The data will be uploaded directly to Environment and Climate Change Canada&#39;s website &lt;a href=&#34;http://climate.weather.gc.ca/&#34;&gt;http://climate.weather.gc.ca/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The data is in XML format. XML or eXtensible Markup Language is a generic markup language. To read this format, we will call the &amp;lsquo;xml.etree.ElementTree&amp;rsquo; library: &lt;a href=&#34;https://docs.python.org/2/library/xml.etree.elementtree.html#module-xml.etree.ElementTree&#34;&gt;https://docs.python.org/2/library/xml.etree.elementtree.html#module-xml.etree.ElementTree&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A list of stations is available on this &lt;a href=&#34;ftp://ftp.tor.ec.gc.ca/Pub/Get_More_Data_More_data/Repository%20of%20stations%20FR.csv&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The data will be uploaded directly to Environment and Climate Change Canada&#39;s  &lt;a href=&#34;Repository%20of%20stations%20FR.csv&#34;&gt;website&lt;/a&gt; &lt;a href=&#34;http://climate.weather.gc.ca/)&#34;&gt;http://climate.weather.gc.ca/)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The data is in XML format. XML or eXtensible Markup Language is a generic markup language. To read this format, we will call the &lt;a href=&#34;https://docs.python.org/2/library/xml.etree.elementtree.html#module-xml.etree.ElementTree&#34;&gt;&amp;lsquo;xml.etree.ElementTree&amp;rsquo; library&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;First, we import the necessary libraries:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;- matplotlib: module to plot our graph
 - datetime: python module for manipulating dates
@@ -5008,9 +5021,8 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;p&gt;The objective of this product is to retrieve daily temperature data from the second generation homogenized dataset of Environment and Climate Change Canada developed by Vincent et al. 2012.&lt;/p&gt;
 &lt;p&gt;Adjusted and homogenized Canadian climate dataset (DCCAH) were prepared to provide a better spatial and temporal representation of the climate trends in Canada.&lt;/p&gt;
 &lt;p&gt;In the Second Generation of Homogenized Temperature, new adjustments were applied to the daily minimum temperatures at synoptic stations (mainly airports) to address the bias due to the change in observing time in July 1961 (Vincent et al. 2009).&lt;/p&gt;
-&lt;p&gt;Daily homogenized temperatures (minimum, maximum and mean) can be dowloaded on this link:
-&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;ftp://ccrp.tor.ec.gc.ca/pub/EC_data/AHCCD_daily/&#34;&gt;ftp://ccrp.tor.ec.gc.ca/pub/EC_data/AHCCD_daily/&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;Raw dataset can be downloaded here:  &lt;a href=&#34;http://climate.weather.gc.ca/historical_data/search_historic_data_f.html&#34;&gt;http://climate.weather.gc.ca/historical_data/search_historic_data_f.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Daily homogenized temperatures (minimum, maximum and mean) can be dowloaded on this &lt;a href=&#34;ftp://ccrp.tor.ec.gc.ca/pub/EC_data/AHCCD_daily/&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Raw dataset can be downloaded &lt;a href=&#34;http://climate.weather.gc.ca/historical_data/search_historic_data_f.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In this post, we will work on a specific province in Canada (using filters). To do this, we will use  Temperature_Stations.xls available on ftp site. This file provide us a list of all stations available.&lt;/p&gt;
 &lt;p&gt;We first need to import our librairies:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
@@ -6081,8 +6093,6 @@ names&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span sty
 
 base_filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Daily_data_by_Province/stations_noms_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;province&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 names[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(base_filename, sep&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; False) 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
@@ -6094,13 +6104,11 @@ names[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#
       <description>&lt;h3 id=&#34;anusplin-climatology-using-cartopy&#34;&gt;ANUSPLIN climatology using Cartopy&lt;/h3&gt;
 &lt;p&gt;Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).&lt;/p&gt;
 &lt;p&gt;The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.&lt;/p&gt;
-&lt;p&gt;Data are available on:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&#34;&gt;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data are available on &lt;a href=&#34;ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In this post, we will see how to use Cartopy with Netcdf in order to display a nice climatology.&lt;/p&gt;
 &lt;p&gt;We will display a climatoly of ANUSPLIN from 1981 to 2010.&lt;/p&gt;
 &lt;p&gt;This dataset is only availabe with ascii grid format, I&#39;ll here show how to convert it into Netcdf using Python in an other post.&lt;/p&gt;
-&lt;p&gt;The Cartopy python library allows you to analyze, process and plot georeferenced data with the help of Matplotlib.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://scitools.org.uk/cartopy/docs/latest/#&#34;&gt;https://scitools.org.uk/cartopy/docs/latest/#&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;https://scitools.org.uk/cartopy/docs/latest/#&#34;&gt;Cartopy&lt;/a&gt; python library allows you to analyze, process and plot georeferenced data with the help of Matplotlib.&lt;/p&gt;
 &lt;p&gt;We first import our librairies:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; netCDF4 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Dataset, num2date
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings

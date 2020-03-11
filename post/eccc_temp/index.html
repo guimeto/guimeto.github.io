@@ -546,9 +546,8 @@ In the Second Generation of Homogenized Temperature, new adjustments were applie
 <p>The objective of this product is to retrieve daily temperature data from the second generation homogenized dataset of Environment and Climate Change Canada developed by Vincent et al. 2012.</p>
 <p>Adjusted and homogenized Canadian climate dataset (DCCAH) were prepared to provide a better spatial and temporal representation of the climate trends in Canada.</p>
 <p>In the Second Generation of Homogenized Temperature, new adjustments were applied to the daily minimum temperatures at synoptic stations (mainly airports) to address the bias due to the change in observing time in July 1961 (Vincent et al. 2009).</p>
-<p>Daily homogenized temperatures (minimum, maximum and mean) can be dowloaded on this link:
-<!-- raw HTML omitted --><a href="ftp://ccrp.tor.ec.gc.ca/pub/EC_data/AHCCD_daily/">ftp://ccrp.tor.ec.gc.ca/pub/EC_data/AHCCD_daily/</a><!-- raw HTML omitted --></p>
-<p>Raw dataset can be downloaded here:  <a href="http://climate.weather.gc.ca/historical_data/search_historic_data_f.html">http://climate.weather.gc.ca/historical_data/search_historic_data_f.html</a></p>
+<p>Daily homogenized temperatures (minimum, maximum and mean) can be dowloaded on this <a href="ftp://ccrp.tor.ec.gc.ca/pub/EC_data/AHCCD_daily/">link</a>.</p>
+<p>Raw dataset can be downloaded <a href="http://climate.weather.gc.ca/historical_data/search_historic_data_f.html">here</a>.</p>
 <p>In this post, we will work on a specific province in Canada (using filters). To do this, we will use  Temperature_Stations.xls available on ftp site. This file provide us a list of all stations available.</p>
 <p>We first need to import our librairies:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
@@ -1619,8 +1618,6 @@ names<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74"></sp
 
 base_filename <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Daily_data_by_Province/stations_noms_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>province<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.txt</span><span style="color:#e6db74">&#39;</span>
 names[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>to_csv(base_filename, sep<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>, index <span style="color:#f92672">=</span> False) 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 </code></pre></div>
     </div>
 

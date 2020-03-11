@@ -541,13 +541,11 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
       <h3 id="anusplin-climatology-using-cartopy">ANUSPLIN climatology using Cartopy</h3>
 <p>Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).</p>
 <p>The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.</p>
-<p>Data are available on:</p>
-<p><a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids">ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids</a></p>
+<p>Data are available on <a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids">link</a>.</p>
 <p>In this post, we will see how to use Cartopy with Netcdf in order to display a nice climatology.</p>
 <p>We will display a climatoly of ANUSPLIN from 1981 to 2010.</p>
 <p>This dataset is only availabe with ascii grid format, I'll here show how to convert it into Netcdf using Python in an other post.</p>
-<p>The Cartopy python library allows you to analyze, process and plot georeferenced data with the help of Matplotlib.</p>
-<p><a href="https://scitools.org.uk/cartopy/docs/latest/#">https://scitools.org.uk/cartopy/docs/latest/#</a></p>
+<p>The <a href="https://scitools.org.uk/cartopy/docs/latest/#">Cartopy</a> python library allows you to analyze, process and plot georeferenced data with the help of Matplotlib.</p>
 <p>We first import our librairies:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset, num2date
 <span style="color:#f92672">import</span> warnings
