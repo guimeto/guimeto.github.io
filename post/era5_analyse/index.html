@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="﻿
+Exemples using ERA5 reanalysis In this post, we will work with ERA5 reanalysis and show how to extract a region using shapefile and compute standard deviation.
+We first import our librairies:
+from netCDF4 import Dataset, num2date import warnings warnings.filterwarnings(&#34;ignore&#34;) import datetime import xarray as xr import pandas as pd import cartopy.crs as ccrs import cartopy.feature as cfeature import xarray as xr import numpy as np import regionmask import geopandas as gpd import pandas as pd import matplotlib.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/era5_analyse/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/era5_analyse/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/post/era5_analyse/">
+  <meta property="og:title" content="ERA5_Analyse | GDueymes">
+  <meta property="og:description" content="﻿
+Exemples using ERA5 reanalysis In this post, we will work with ERA5 reanalysis and show how to extract a region using shapefile and compute standard deviation.
+We first import our librairies:
+from netCDF4 import Dataset, num2date import warnings warnings.filterwarnings(&#34;ignore&#34;) import datetime import xarray as xr import pandas as pd import cartopy.crs as ccrs import cartopy.feature as cfeature import xarray as xr import numpy as np import regionmask import geopandas as gpd import pandas as pd import matplotlib."><meta property="og:image" content="/post/era5_analyse/featured.png">
+  <meta property="twitter:image" content="/post/era5_analyse/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-04-05T12:49:01-07:00">
+    
+    <meta property="article:modified_time" content="2020-04-05T12:49:01-07:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/era5_analyse/"
+  },
+  "headline": "ERA5_Analyse",
+  
+  "image": [
+    "/post/era5_analyse/featured.png"
+  ],
+  
+  "datePublished": "2020-04-05T12:49:01-07:00",
+  "dateModified": "2020-04-05T12:49:01-07:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Guillaume Dueymes"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "GDueymes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "﻿\nExemples using ERA5 reanalysis In this post, we will work with ERA5 reanalysis and show how to extract a region using shapefile and compute standard deviation.\nWe first import our librairies:\nfrom netCDF4 import Dataset, num2date import warnings warnings.filterwarnings(\u0026#34;ignore\u0026#34;) import datetime import xarray as xr import pandas as pd import cartopy.crs as ccrs import cartopy.feature as cfeature import xarray as xr import numpy as np import regionmask import geopandas as gpd import pandas as pd import matplotlib."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>ERA5_Analyse | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>ERA5_Analyse</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 5, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 447px;">
+  <div style="position: relative">
+    <img src="/post/era5_analyse/featured_hu246319494afe7b6f77080a328f69bf45_190045_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>﻿</p>
+<h2 id="exemples-using-era5-reanalysis">Exemples using ERA5 reanalysis</h2>
+<p>In this post, we will work with ERA5 reanalysis and show how to extract a region using shapefile and compute standard deviation.</p>
+<p>We first import our librairies:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset, num2date
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr 
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> regionmask
+<span style="color:#f92672">import</span> geopandas <span style="color:#f92672">as</span> gpd
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><h2 id="working-over-canadian-provinces">Working over canadian provinces</h2>
+<p>Canadian province shapefiles are available on this website:
+<a href="https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372">https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372</a></p>
+<p>After downloaded the shapefiles, we must load it using geopandas library:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PATH_TO_SHAPEFILE <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp</span><span style="color:#e6db74">&#39;</span>
+province <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(PATH_TO_SHAPEFILE)
+province<span style="color:#f92672">.</span>iloc[:,:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">PRUID</th>
+<th align="left">PRNAME</th>
+<th align="left">PRENAME</th>
+<th align="left">PRFNAME</th>
+<th align="left">PREABBR</th>
+<th align="left">PRFABBR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="left">Newfoundland and Labrador / Terre-Neuve-et-Labrador</td>
+<td align="left">Newfoundland and Labrador</td>
+<td align="left">Terre-Neuve-et-Labrador</td>
+<td align="left">N.L.</td>
+<td align="left">T.-N.-L.</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="left">Prince Edward Island / Île-du-Prince-Édouard</td>
+<td align="left">Prince Edward Island</td>
+<td align="left">Île-du-Prince-Édouard</td>
+<td align="left">P.E.I.</td>
+<td align="left">Î.-P.-É.</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="left">Nova Scotia / Nouvelle-Écosse</td>
+<td align="left">Nova Scotia</td>
+<td align="left">Nouvelle-Écosse</td>
+<td align="left">N.S.</td>
+<td align="left">N.-É.</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">13</td>
+<td align="left">New Brunswick / Nouveau-Brunswick</td>
+<td align="left">New Brunswick</td>
+<td align="left">Nouveau-Brunswick</td>
+<td align="left">N.B.</td>
+<td align="left">N.-B.</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">24</td>
+<td align="left">Quebec / Québec</td>
+<td align="left">Quebec</td>
+<td align="left">Québec</td>
+<td align="left">Que.</td>
+<td align="left">Qc</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="right">35</td>
+<td align="left">Ontario</td>
+<td align="left">Ontario</td>
+<td align="left">Ontario</td>
+<td align="left">Ont.</td>
+<td align="left">Ont.</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right">46</td>
+<td align="left">Manitoba</td>
+<td align="left">Manitoba</td>
+<td align="left">Manitoba</td>
+<td align="left">Man.</td>
+<td align="left">Man.</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="right">47</td>
+<td align="left">Saskatchewan</td>
+<td align="left">Saskatchewan</td>
+<td align="left">Saskatchewan</td>
+<td align="left">Sask.</td>
+<td align="left">Sask.</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="right">48</td>
+<td align="left">Alberta</td>
+<td align="left">Alberta</td>
+<td align="left">Alberta</td>
+<td align="left">Alta.</td>
+<td align="left">Alb.</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td align="right">59</td>
+<td align="left">British Columbia / Colombie-Britannique</td>
+<td align="left">British Columbia</td>
+<td align="left">Colombie-Britannique</td>
+<td align="left">B.C.</td>
+<td align="left">C.-B.</td>
+</tr>
+<tr>
+<td align="right">10</td>
+<td align="right">60</td>
+<td align="left">Yukon</td>
+<td align="left">Yukon</td>
+<td align="left">Yukon</td>
+<td align="left">Y.T.</td>
+<td align="left">Yn</td>
+</tr>
+<tr>
+<td align="right">11</td>
+<td align="right">61</td>
+<td align="left">Northwest Territories / Territoires du Nord-Ouest</td>
+<td align="left">Northwest Territories</td>
+<td align="left">Territoires du Nord-Ouest</td>
+<td align="left">N.W.T.</td>
+<td align="left">T.N.-O.</td>
+</tr>
+<tr>
+<td align="right">12</td>
+<td align="right">62</td>
+<td align="left">Nunavut</td>
+<td align="left">Nunavut</td>
+<td align="left">Nunavut</td>
+<td align="left">Nvt.</td>
+<td align="left">Nt</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmpWGS84 <span style="color:#f92672">=</span> province<span style="color:#f92672">.</span>to_crs({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">proj</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longlat</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ellps</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WGS84</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datum</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WGS84</span><span style="color:#e6db74">&#39;</span>})
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmpWGS84<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x436e8908&gt;
+</code></pre>
+<p><img src="output_5_1.png" alt="png"></p>
+<p>Shapes are here a GeoDataFrame containing all polygons illustrating the canadian province boundaries.</p>
+<p>Now we can load the ERA5 gridded data. The parameter chunks is very important, it defines how big are the “pieces” of data moved from the disk to the memory. With this value the entire computation on a workstation with 32 GB takes a couple of minutes.</p>
+<p>We will load all the temperature files for the year 2018 using Xarray library.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5_T2m_1h</span><span style="color:#e6db74">&#39;</span>
+t_in <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/ERA5/T2m_1h/</span><span style="color:#e6db74">&#39;</span>        
+data <span style="color:#f92672">=</span> t_in <span style="color:#f92672">+</span> model <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_2018*_sfc.nc</span><span style="color:#e6db74">&#39;</span>
+ds <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(data, chunks <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">10</span>})
+</code></pre></div><p>The next function <!-- raw HTML omitted -->assign_coords<!-- raw HTML omitted --> will convert the longitude from the 0-360 range to -180,180</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>assign_coords(longitude<span style="color:#f92672">=</span>(((ds<span style="color:#f92672">.</span>longitude <span style="color:#f92672">+</span> <span style="color:#ae81ff">180</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">360</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">180</span>))<span style="color:#f92672">.</span>sortby(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitude</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><p>Our xarray Dataset contains a single variable (t2m) which is stored as a dask.array. This is the result of loading files with open_mfdataset.</p>
+<p>Now we will use  regionmask module to create a gridded mask with the function regions_cls documented here: <a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls</a></p>
+<p>With this function we will create an object able to mask ERA5 gridded data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">province_mask_poly <span style="color:#f92672">=</span> regionmask<span style="color:#f92672">.</span>Regions_cls(name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">PRENAME</span><span style="color:#e6db74">&#39;</span>, numbers <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)), names <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), abbrevs <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), outlines <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>values[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)))
+province_mask_poly
+</code></pre></div><pre><code>13 'PRENAME' Regions ()
+Newfoundland and Labrador Prince Edward Island Nova Scotia New Brunswick Quebec Ontario Manitoba Saskatchewan Alberta British Columbia Yukon Northwest Territories Nunavut
+</code></pre>
+<p>Now we are ready to apply the mask on the gridded dataset xarray ERA5.</p>
+<p>We select only the first timestep to speed up the process.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask <span style="color:#f92672">=</span> province_mask_poly<span style="color:#f92672">.</span>mask(ds<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>), lat_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">latitude</span><span style="color:#e6db74">&#39;</span>, lon_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitude</span><span style="color:#e6db74">&#39;</span>)
+mask<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5_mask_Canadian_provinces.nc</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">masque <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5_mask_Canadian_provinces.nc</span><span style="color:#e6db74">&#39;</span>)
+lat_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">40</span>]
+lon_bnd <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">148</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>]
+masque <span style="color:#f92672">=</span> masque<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lon_bnd), latitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lat_bnd),)
+</code></pre></div><p>Here's a function to make maps in the future.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_figure</span>():
+    fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">8</span>), frameon<span style="color:#f92672">=</span>True) 
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>), linestyle<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">dotted</span><span style="color:#e6db74">&#39;</span>)    <span style="color:#75715e"># couche frontieres</span>
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+    coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                                facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
+    ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)   
+    <span style="color:#66d9ef">return</span> fig, ax
+
+</code></pre></div><p>We can make a quick visualisation of our netcdf mask:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">_, ax <span style="color:#f92672">=</span> make_figure()
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">140</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">82</span>])
+masque<span style="color:#f92672">.</span>region<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>contourf(ax <span style="color:#f92672">=</span> ax, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
+</code></pre></div><pre><code>&lt;matplotlib.contour.QuadContourSet at 0x16563e48&gt;
+</code></pre>
+<p><img src="output_18_1.png" alt="png"></p>
+<h2 id="compute-daily-and-monthly-2-meters-temperature--mean">Compute daily and monthly 2 meters temperature  mean</h2>
+<p>We will now compute daily and monthly 2 meters temperature mean using hourly ERA5 datasets. To speed up our calcul, we will cut a subset over Canada only.</p>
+<p>Here's an example code just for one month and one year:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5_T2m_1h</span><span style="color:#e6db74">&#39;</span>
+
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1990</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">1990</span>
+<span style="color:#75715e">#########################################################</span>
+t_in <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/ERA5/T2m_1h/</span><span style="color:#e6db74">&#39;</span>
+daily_out <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/ERA5/T2m_daily/</span><span style="color:#e6db74">&#39;</span> 
+monthly_out <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/ERA5/T2m_monthly/</span><span style="color:#e6db74">&#39;</span> 
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):                    <span style="color:#75715e"># loop over years</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>):                   <span style="color:#75715e"># loop over months</span>
+        
+        data <span style="color:#f92672">=</span> t_in <span style="color:#f92672">+</span> model <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(year) <span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(i)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_sfc.nc</span><span style="color:#e6db74">&#39;</span>
+        ds <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(data)        
+        ds <span style="color:#f92672">=</span> ds <span style="color:#f92672">-</span> <span style="color:#ae81ff">273.15</span>  <span style="color:#75715e"># convert from Kelvin to Celcius </span>
+        ds <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>assign_coords(longitude<span style="color:#f92672">=</span>(((ds<span style="color:#f92672">.</span>longitude <span style="color:#f92672">+</span> <span style="color:#ae81ff">180</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">360</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">180</span>))<span style="color:#f92672">.</span>sortby(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitude</span><span style="color:#e6db74">&#39;</span>)
+        
+        lat_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">40</span>]
+        lon_bnd <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">148</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>]
+        ds <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lon_bnd), latitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lat_bnd),)
+        
+        daily_mean <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time.day</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>)
+        daily_mean<span style="color:#f92672">.</span>to_netcdf(daily_out <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Daily_Mean_T2m_CAN_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(year) <span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(i)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>)
+        
+        monthly_mean <span style="color:#f92672">=</span> daily_mean<span style="color:#f92672">.</span>mean(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">day</span><span style="color:#e6db74">&#39;</span>)
+        monthly_mean<span style="color:#f92672">.</span>to_netcdf(monthly_out <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Monthly_Mean_T2m_CAN_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(year) <span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(i)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>)
+
+</code></pre></div><h2 id="monthly-climatologies-and-standardized-anomalies">Monthly climatologies and standardized anomalies</h2>
+<p>Once we have monthly mean values, we can now compute climatology and standard anomaly for monthly temperature from 1979 to 2019. Our reference climatology to compute standardized anomalies is 1990-2019 period.</p>
+<p>We will first work with one month (ie january), we will make a loop over all months after.</p>
+<p>First we open and load datasets:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr 
+
+<span style="color:#75715e">#### First we open and load datasets</span>
+<span style="color:#75715e">#for month in range (1,2,1):</span>
+m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/ERA5/T2m_monthly/Monthly_Mean_T2m_CAN_</span><span style="color:#e6db74">&#39;</span>
+month <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(m)
+multi_file <span style="color:#f92672">=</span> [f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{file}{year}{month}.nc</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1990</span>,<span style="color:#ae81ff">2020</span>,<span style="color:#ae81ff">1</span>)]
+ds_all <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>concat([xr<span style="color:#f92672">.</span>open_dataset(f) <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> multi_file], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>)
+ds_all<span style="color:#f92672">.</span>time
+</code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Our time is without dimension, it's just an integer. To easly handle our fields, we can define a DatetimeIndex to change &lsquo;time&rsquo; dimension in our Xarray. For more information:</p>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#timeseries-offset-aliases">https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#timeseries-offset-aliases</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds_all[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">1990-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-01</span><span style="color:#e6db74">&#39;</span>, freq<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">YS</span><span style="color:#e6db74">&#39;</span>, periods<span style="color:#f92672">=</span>ds_all<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds_all<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>We can compute our climatology and standard deviation over 30 years: 1990-2019</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">clim_yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1990</span>
+clim_yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2019</span>
+ds_clim <span style="color:#f92672">=</span>  ds_all<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>slice(str(clim_yi)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-01</span><span style="color:#e6db74">&#39;</span>, str(clim_yf)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-01</span><span style="color:#e6db74">&#39;</span>))
+data_clim <span style="color:#f92672">=</span> ds_clim<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">t2m</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>mean(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#34;</span>)
+data_std  <span style="color:#f92672">=</span> ds_clim<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">t2m</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>std(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#34;</span>)
+
+</code></pre></div><p>We can apply a function with .apply_unfunc and groupby methods to compute a standardized anomaly:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stand_anomalies <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>apply_ufunc(
+    <span style="color:#66d9ef">lambda</span> x, m, s: (x <span style="color:#f92672">-</span> m) <span style="color:#f92672">/</span> s,
+    ds_all<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#34;</span>),
+    data_clim,
+    data_std,
+)
+
+stand_anomalies<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/REANALYSES/ERA5/T2m_Month_Anomaly/Std_Anomaly_Monthly_Mean_T2m_CAN_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>
+                          str(yi)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(yf)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_vs_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(clim_yi)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(clim_yf)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(month)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><p>We will mask all Canadian provinces with applying our mask region created at the begining of this post:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_clim_can <span style="color:#f92672">=</span> data_clim<span style="color:#f92672">.</span>where(masque<span style="color:#f92672">.</span>region <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
+</code></pre></div><p>We can now display january monthly mean temperature climatology:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">_, ax <span style="color:#f92672">=</span> make_figure()
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">140</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">82</span>])
+<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
+<span style="color:#f92672">import</span> datetime
+monthstr <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">1900</span>, int(month), <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;</span>)
+data_levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">5.1</span>)
+Y<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">77</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">111</span>],[<span style="color:#ae81ff">115</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">181</span>],[<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">222</span>],[<span style="color:#ae81ff">195</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">240</span>],\
+               [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">93</span>],[<span style="color:#ae81ff">21</span>,<span style="color:#ae81ff">38</span>,<span style="color:#ae81ff">177</span>],[<span style="color:#ae81ff">33</span>,<span style="color:#ae81ff">95</span>,<span style="color:#ae81ff">227</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">247</span>],[<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">224</span>,<span style="color:#ae81ff">248</span>],[<span style="color:#ae81ff">202</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">250</span>],\
+               [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">179</span>],[<span style="color:#ae81ff">37</span>,<span style="color:#ae81ff">181</span>,<span style="color:#ae81ff">139</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">132</span>,<span style="color:#ae81ff">81</span>],[<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">60</span>],[<span style="color:#ae81ff">157</span>,<span style="color:#ae81ff">240</span>,<span style="color:#ae81ff">96</span>],[<span style="color:#ae81ff">213</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">166</span>],\
+               [<span style="color:#ae81ff">241</span>,<span style="color:#ae81ff">247</span>,<span style="color:#ae81ff">132</span>],[<span style="color:#ae81ff">248</span>,<span style="color:#ae81ff">185</span>,<span style="color:#ae81ff">68</span>],[<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">124</span>,<span style="color:#ae81ff">4</span>],[<span style="color:#ae81ff">235</span>,<span style="color:#ae81ff">78</span>,<span style="color:#ae81ff">14</span>],[<span style="color:#ae81ff">215</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">24</span>],[<span style="color:#ae81ff">189</span>,<span style="color:#ae81ff">24</span>,<span style="color:#ae81ff">40</span>],[<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">56</span>],[<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">65</span>],[<span style="color:#ae81ff">107</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">73</span>]])<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
+
+colbar<span style="color:#f92672">=</span>mpl<span style="color:#f92672">.</span>colors<span style="color:#f92672">.</span>ListedColormap(Y)
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(data_clim_can<span style="color:#f92672">.</span>longitude,\
+                   data_clim_can<span style="color:#f92672">.</span>latitude,\
+                   data_clim_can,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">35</span>,\
+                   vmax<span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>data_levels,\
+                   cmap<span style="color:#f92672">=</span>colbar )
+
+data_contour <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contour(data_clim_can<span style="color:#f92672">.</span>longitude, data_clim_can<span style="color:#f92672">.</span>latitude, data_clim_can, 
+                          levels <span style="color:#f92672">=</span> data_levels, 
+                          linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, 
+                          colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">k</span><span style="color:#e6db74">&#39;</span>,
+                          transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
+<span style="color:#75715e">#Plot contour labels for the heights, leaving a break in the contours for the text (inline=True)</span>
+plt<span style="color:#f92672">.</span>clabel(data_contour,  data_levels, inline<span style="color:#f92672">=</span>True, fmt<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1i</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
+xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
+yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+
+cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm,  shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30.1</span>, <span style="color:#ae81ff">5.</span>), extend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># 2018</span>
+
+cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>) 
+
+string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Climatology of monthly mean 2meters temperature: </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> monthstr
+plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>Text(0.5, 1.0, 'Climatology of monthly mean 2meters temperature: January')
+</code></pre>
+<p><img src="output_34_1.png" alt="png"></p>
+<p>If we just want to display over one province, we can adjust our mask.  Let's plot climatology over Quebec:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_clim_qc <span style="color:#f92672">=</span> data_clim<span style="color:#f92672">.</span>where(masque<span style="color:#f92672">.</span>region <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>  )
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">_, ax <span style="color:#f92672">=</span> make_figure()
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">80</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">65</span>])
+monthstr <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">1900</span>, int(month), <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;</span>)
+data_levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">5.1</span>)
+Y<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">77</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">111</span>],[<span style="color:#ae81ff">115</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">181</span>],[<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">222</span>],[<span style="color:#ae81ff">195</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">240</span>],\
+               [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">93</span>],[<span style="color:#ae81ff">21</span>,<span style="color:#ae81ff">38</span>,<span style="color:#ae81ff">177</span>],[<span style="color:#ae81ff">33</span>,<span style="color:#ae81ff">95</span>,<span style="color:#ae81ff">227</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">247</span>],[<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">224</span>,<span style="color:#ae81ff">248</span>],[<span style="color:#ae81ff">202</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">250</span>],\
+               [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">179</span>],[<span style="color:#ae81ff">37</span>,<span style="color:#ae81ff">181</span>,<span style="color:#ae81ff">139</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">132</span>,<span style="color:#ae81ff">81</span>],[<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">60</span>],[<span style="color:#ae81ff">157</span>,<span style="color:#ae81ff">240</span>,<span style="color:#ae81ff">96</span>],[<span style="color:#ae81ff">213</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">166</span>],\
+               [<span style="color:#ae81ff">241</span>,<span style="color:#ae81ff">247</span>,<span style="color:#ae81ff">132</span>],[<span style="color:#ae81ff">248</span>,<span style="color:#ae81ff">185</span>,<span style="color:#ae81ff">68</span>],[<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">124</span>,<span style="color:#ae81ff">4</span>],[<span style="color:#ae81ff">235</span>,<span style="color:#ae81ff">78</span>,<span style="color:#ae81ff">14</span>],[<span style="color:#ae81ff">215</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">24</span>],[<span style="color:#ae81ff">189</span>,<span style="color:#ae81ff">24</span>,<span style="color:#ae81ff">40</span>],[<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">56</span>],[<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">65</span>],[<span style="color:#ae81ff">107</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">73</span>]])<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
+
+colbar<span style="color:#f92672">=</span>mpl<span style="color:#f92672">.</span>colors<span style="color:#f92672">.</span>ListedColormap(Y)
+
+data_levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">5.1</span>)
+
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(data_clim_qc<span style="color:#f92672">.</span>longitude,\
+                   data_clim_qc<span style="color:#f92672">.</span>latitude,\
+                   data_clim_qc,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">35</span>,\
+                   vmax<span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>data_levels,\
+                   cmap<span style="color:#f92672">=</span>colbar )
+
+data_contour <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contour(data_clim_qc<span style="color:#f92672">.</span>longitude, data_clim_qc<span style="color:#f92672">.</span>latitude, data_clim_qc, 
+                          levels <span style="color:#f92672">=</span> data_levels, 
+                          linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, 
+                          colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">k</span><span style="color:#e6db74">&#39;</span>,
+                          transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
+<span style="color:#75715e">#Plot contour labels for the heights, leaving a break in the contours for the text (inline=True)</span>
+plt<span style="color:#f92672">.</span>clabel(data_contour,  data_levels, inline<span style="color:#f92672">=</span>True, fmt<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1i</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
+xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
+yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+
+cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm,  shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30.1</span>, <span style="color:#ae81ff">5.</span>), extend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># 2018</span>
+
+cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>) 
+
+string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5 T2m Climatology (1990-2019) over Quebec </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> monthstr
+plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>Text(0.5, 1.0, 'ERA5 T2m Climatology (1990-2019) over Quebec January')
+</code></pre>
+<p><img src="output_37_1.png" alt="png"></p>
+<h2 id="interannual-standardised-anomaly">Inter-annual standardised anomaly</h2>
+<p>Let's compute and draw inter-annual standardised anomaly over Quebec:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stand_anomalies_qc  <span style="color:#f92672">=</span> stand_anomalies<span style="color:#f92672">.</span>where(masque<span style="color:#f92672">.</span>region <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>)
+stand_anomalie_serie <span style="color:#f92672">=</span> stand_anomalies_qc<span style="color:#f92672">.</span>mean([<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">latitude</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitude</span><span style="color:#e6db74">&#39;</span>])
+stand_anomalie_serie<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>values[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</code></pre></div><pre><code>numpy.datetime64('2019-01-01T00:00:00.000000000')
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">color <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">blue</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>]
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">12</span>)) 
+
+
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">figure.figsize</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]       <span style="color:#75715e">#  </span>
+plt<span style="color:#f92672">.</span>plot(stand_anomalie_serie<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>values, stand_anomalie_serie<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>values, 
+         label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5 2m temperature</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">2</span>])
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">upper left</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+
+ax<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">--</span><span style="color:#e6db74">&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+ax<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">--</span><span style="color:#e6db74">&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+
+plt<span style="color:#f92672">.</span>setp(plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>get_xticklabels(), rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#34;</span>)
+
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Date</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">°C</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Inter annual standardised anomaly of monthly mean temperature over Quevec in January: (1990-2019) compared with normal (1990-2019)</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">semibold</span><span style="color:#e6db74">&#39;</span>)
+ 
+ax<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">white</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+plt<span style="color:#f92672">.</span>show()  
+</code></pre></div><p><img src="output_40_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/era5_analyse/&amp;text=ERA5_Analyse" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/era5_analyse/&amp;t=ERA5_Analyse" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=ERA5_Analyse&amp;body=/post/era5_analyse/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/era5_analyse/&amp;title=ERA5_Analyse" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=ERA5_Analyse%20/post/era5_analyse/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/era5_analyse/&amp;title=ERA5_Analyse" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hued2496a182fbb6fc8c711157078d29a6_5348924_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Guillaume Dueymes</a></h5>
+      <h6 class="card-subtitle">Data Scientist and Research Assistant</h6>
+      <p class="card-text">My research interests include data science, data management and climate science.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Guillaume_Dueymes" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/guimeto" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
