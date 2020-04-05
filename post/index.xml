@@ -13,12 +13,12 @@
     </image>
     
     <item>
-      <title>ERA5_Analyse</title>
+      <title>Working with ERA5 reanalysis</title>
       <link>/post/era5_analyse/</link>
       <pubDate>Sun, 05 Apr 2020 12:49:01 -0700</pubDate>
       <guid>/post/era5_analyse/</guid>
       <description>&lt;p&gt;﻿&lt;/p&gt;
-&lt;h2 id=&#34;exemples-using-era5-reanalysis&#34;&gt;Exemples using ERA5 reanalysis&lt;/h2&gt;
+&lt;h3 id=&#34;exemples-using-era5-reanalysis&#34;&gt;Exemples using ERA5 reanalysis&lt;/h3&gt;
 &lt;p&gt;In this post, we will work with ERA5 reanalysis and show how to extract a region using shapefile and compute standard deviation.&lt;/p&gt;
 &lt;p&gt;We first import our librairies:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; netCDF4 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Dataset, num2date
@@ -37,9 +37,8 @@ warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(&
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings; warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;working-over-canadian-provinces&#34;&gt;Working over canadian provinces&lt;/h2&gt;
-&lt;p&gt;Canadian province shapefiles are available on this website:
-&lt;a href=&#34;https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372&#34;&gt;https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372&lt;/a&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;working-over-canadian-provinces&#34;&gt;Working over canadian provinces&lt;/h3&gt;
+&lt;p&gt;Canadian province shapefiles are available on this  &lt;a href=&#34;https://www.arcgis.com/home/item.html?id=5cf4f223c4a642eb9aa7ae1216a04372&#34;&gt;website&lt;/a&gt;:&lt;/p&gt;
 &lt;p&gt;After downloaded the shapefiles, we must load it using geopandas library:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;PATH_TO_SHAPEFILE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;./Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 province &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_file(PATH_TO_SHAPEFILE)
@@ -228,7 +227,7 @@ masque&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;region&lt;span sty
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;matplotlib.contour.QuadContourSet at 0x16563e48&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;output_18_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;compute-daily-and-monthly-2-meters-temperature--mean&#34;&gt;Compute daily and monthly 2 meters temperature  mean&lt;/h2&gt;
+&lt;h3 id=&#34;compute-daily-and-monthly-2-meters-temperature--mean&#34;&gt;Compute daily and monthly 2 meters temperature  mean&lt;/h3&gt;
 &lt;p&gt;We will now compute daily and monthly 2 meters temperature mean using hourly ERA5 datasets. To speed up our calcul, we will cut a subset over Canada only.&lt;/p&gt;
 &lt;p&gt;Here&#39;s an example code just for one month and one year:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;model&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ERA5_T2m_1h&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
@@ -257,7 +256,7 @@ monthly_out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span st
         monthly_mean &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; daily_mean&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;day&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
         monthly_mean&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_netcdf(monthly_out &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Monthly_Mean_T2m_CAN_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(year) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{:02d}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(i)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;monthly-climatologies-and-standardized-anomalies&#34;&gt;Monthly climatologies and standardized anomalies&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;monthly-climatologies-and-standardized-anomalies&#34;&gt;Monthly climatologies and standardized anomalies&lt;/h3&gt;
 &lt;p&gt;Once we have monthly mean values, we can now compute climatology and standard anomaly for monthly temperature from 1979 to 2019. Our reference climatology to compute standardized anomalies is 1990-2019 period.&lt;/p&gt;
 &lt;p&gt;We will first work with one month (ie january), we will make a loop over all months after.&lt;/p&gt;
 &lt;p&gt;First we open and load datasets:&lt;/p&gt;
@@ -273,8 +272,7 @@ ds_all &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style
 ds_all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;Our time is without dimension, it&#39;s just an integer. To easly handle our fields, we can define a DatetimeIndex to change &amp;lsquo;time&amp;rsquo; dimension in our Xarray. For more information:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#timeseries-offset-aliases&#34;&gt;https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#timeseries-offset-aliases&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Our time is without dimension, it&#39;s just an integer. To easly handle our fields, we can define a DatetimeIndex to change &amp;lsquo;time&amp;rsquo; dimension in our Xarray. For more &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#timeseries-offset-aliases&#34;&gt;information&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ds_all[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date_range(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;1990-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;month&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-01&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, freq&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;YS&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, periods&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ds_all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ds_all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;head()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
@@ -384,7 +382,7 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(string_title, s
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Text(0.5, 1.0, &#39;ERA5 T2m Climatology (1990-2019) over Quebec January&#39;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;output_37_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;interannual-standardised-anomaly&#34;&gt;Inter-annual standardised anomaly&lt;/h2&gt;
+&lt;h3 id=&#34;interannual-standardised-anomaly&#34;&gt;Inter-annual standardised anomaly&lt;/h3&gt;
 &lt;p&gt;Let&#39;s compute and draw inter-annual standardised anomaly over Quebec:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stand_anomalies_qc  &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stand_anomalies&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;where(masque&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;region &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)
 stand_anomalie_serie &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stand_anomalies_qc&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean([&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;latitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;longitude&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;])
@@ -415,8 +413,7 @@ ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_facecolor(&lt;span
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;yticks( fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;)
 plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()  
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_40_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+</description>
     </item>
     
     <item>
