@@ -574,7 +574,7 @@ Different method are considered here:
 <span style="color:#f92672">from</span> scipy.spatial <span style="color:#f92672">import</span> cKDTree
 </code></pre></div><h2 id="2--loading-source-file">2 - Loading source file</h2>
 <p>We are going to use daily maximum temperature of Daymet-1km for january 2017. In this analysis, we will use a subset of Daymet-1km and ERA5-32km. Indeed, we will only work over a specific watershed in Canada: Outaouais river's watershed:</p>
-<p><img src="attachment:image.png" alt="watershed.png"></p>
+<p><img src="watershed.png" alt="png"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">source <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DAYMET_1km_subset_BV_tmax_2017_01.nc4</span><span style="color:#e6db74">&#39;</span>)
 lat_source <span style="color:#f92672">=</span> source<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]
 lon_source <span style="color:#f92672">=</span> source<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]
