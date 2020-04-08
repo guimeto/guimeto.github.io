@@ -5,12 +5,103 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 05 Apr 2020 12:49:01 -0700</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 08 Apr 2020 06:48:49 -0700</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Netcdf_Interpolation</title>
+      <link>/post/netcdf_interpolation/</link>
+      <pubDate>Wed, 08 Apr 2020 06:48:49 -0700</pubDate>
+      <guid>/post/netcdf_interpolation/</guid>
+      <description>&lt;h2 id=&#34;netcdf-interpolation-between-grids-using-ckdtree-from-scipy-library&#34;&gt;Netcdf: Interpolation between grids using cKDTree from Scipy library&lt;/h2&gt;
+&lt;p&gt;In this post, we are going to define an algorithm to locate the closest points to a reference points, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.&lt;/p&gt;
+&lt;p&gt;To select closest grid points, we will use here one approach using &lt;a href=&#34;http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html&#34;&gt;cKDTree&lt;/a&gt; class from scipy.spatial package.&lt;/p&gt;
+&lt;p&gt;Different method are considered here:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- nearest neighbour
+- nearest neighbours, weighting with the inverse of distance squared: 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;$T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$).&lt;/p&gt;
+&lt;p&gt;In this example, we will interpolate &lt;a href=&#34;https://daymet.ornl.gov/&#34;&gt;Daymet-1km dataset&lt;/a&gt; on &lt;a href=&#34;https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5&#34;&gt;ERA5-grid&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The Daymet dataset provides gridded estimates of daily weather parameters. Seven surface weather parameters are available at a daily time step, 1 km x 1 km spatial resolution, with a North American spatial extent.&lt;/p&gt;
+&lt;p&gt;ERA5 Reanalyses provide a numerical description, with horizontal resolution of 31 km, of the recent climate (1979-present) by combining models with observations.&lt;/p&gt;
+&lt;h2 id=&#34;1--lets-import-python-librairies&#34;&gt;1-  Let&#39;s import Python librairies&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings; warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(action&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ignore&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline
+&lt;span style=&#34;color:#75715e&#34;&gt;#for Netcdf manipulation&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; xarray &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; xr
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#for array manipulation&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#for plotting&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.crs &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ccrs
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cartopy.feature &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; cfeature
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#for interpolation&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; scipy.spatial &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cKDTree
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2--loading-source-file&#34;&gt;2 - Loading source file&lt;/h2&gt;
+&lt;p&gt;We are going to use daily maximum temperature of Daymet-1km for january 2017. In this analysis, we will use a subset of Daymet-1km and ERA5-32km. Indeed, we will only work over a specific watershed in Canada: Outaouais river&#39;s watershed:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;attachment:image.png&#34; alt=&#34;watershed.png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;source &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;DAYMET_1km_subset_BV_tmax_2017_01.nc4&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+lat_source &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; source&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;variables[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;][:]
+lon_source &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; source&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;variables[&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lon&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;][:]
+lat_source&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(678, 702)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-loading-target-file&#34;&gt;3- Loading target file&lt;/h2&gt;
+&lt;p&gt;We want to interpolate our source file on ERA5-grid. Let&#39;s load ERA5 reanalysis as target grid.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;target &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;open_dataset(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ERA5_Outaouais_daily_tmax_201701.nc&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+lat_target&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;target&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;latitude
+lon_target&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;target&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;longitude
+lat_target&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(29,)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ERA5 latitude and longitude are 1D array dimension.  We must convert these 1-dimensional arrays into  2-dimensional arrays.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lon_target2d, lat_target2d &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;meshgrid(lon_target, lat_target)
+lon_target2d&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(29, 121)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This next function will be use for converting lat/lon to cartesian coordinates (x, y, z):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;lon_lat_to_cartesian&lt;/span&gt;(lon, lat):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# WGS 84 reference coordinate system parameters&lt;/span&gt;
+    A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;6378.137&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# major axis [km]   &lt;/span&gt;
+    E2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;6.69437999014e-3&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# eccentricity squared &lt;/span&gt;
+    
+    lon_rad &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;radians(lon)
+    lat_rad &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;radians(lat)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# convert to cartesian coordinates&lt;/span&gt;
+    r_n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; (np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sqrt(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; E2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(lat_rad) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)))
+    x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; r_n &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(lat_rad) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(lon_rad)
+    y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; r_n &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(lat_rad) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(lon_rad)
+    z &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; r_n &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; E2) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(lat_rad)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x,y,z
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now all necessary inputs are read in memory, we can now convert lat/lon to the Cartesian coordinate reference system (CRS):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;xs, ys, zs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lon_lat_to_cartesian(lon_source&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;flatten(), lat_source&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;flatten())
+xt, yt, zt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lon_lat_to_cartesian(lon_target2d&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;flatten(), lat_target2d&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;flatten())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-step1--construct-the-ckdtree-object&#34;&gt;4- Step1:  construct the cKDTree object&lt;/h2&gt;
+&lt;p&gt;We can then create a KD-tree with the set of points within which we want to search for a closest point in our source grid.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;tree &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cKDTree(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;column_stack((xs, ys, zs)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5-step2-interpolation-on-target-grid&#34;&gt;5- Step2: Interpolation on target grid&lt;/h2&gt;
+&lt;p&gt;The second step provides a query point and returns the closest point or points in the KD-tree to the query point, where how &amp;ldquo;closest&amp;rdquo; is defined can be varied.&lt;/p&gt;
+&lt;p&gt;Here, we use 3D points on spherical Earth with unit radius.&lt;/p&gt;
+&lt;p&gt;Two methods of interpolation are considered here: nearest neighbour and weighting with the inverse of distance squared.&lt;/p&gt;
+&lt;h3 id=&#34;a-nearest-neighbour-interpolation&#34;&gt;a- Nearest neighbour interpolation&lt;/h3&gt;
+&lt;p&gt;In this step, we find indices of the nearest neighbors in the flattened array using our &amp;lsquo;tree&amp;rsquo; from step1.  To do this, we will apply
+&lt;a href=&#34;https://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.query.html#scipy.spatial.cKDTree.query&#34;&gt;cKDTree.query method&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#find indices of the nearest neighbors in the flattened array&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#d, inds = tree.query(zip(xt, yt, zt), k = 1)&lt;/span&gt;
+d, inds &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tree&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;query(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;column_stack((xt, yt, zt)), k &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can now interpolate our 2d field using our index tree. We will interpolate our first timestep for daymet source file (ie datetime64[ns] 2017-01-01T12:00:00)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;source&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tmax[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
+</description>
+    </item>
     
     <item>
       <title>Working with ERA5 reanalysis</title>
