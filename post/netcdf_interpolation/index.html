@@ -31,7 +31,7 @@
   <meta name="description" content="Netcdf: Interpolation between grids using cKDTree from Scipy library In this post, we are going to define an algorithm to locate the closest points to a reference points, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.
 To select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.
 Different method are considered here:
-- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared:  $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$).">
+- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared:  $Tt = \frac{\sum{i=1}^{m}T_{s,i}wi}{\sum{i=1}^{m}w_i}$, $w_i = 1/d_i^2$).">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/netcdf_interpolation/">
@@ -120,7 +120,7 @@ Different method are considered here:
   <meta property="og:description" content="Netcdf: Interpolation between grids using cKDTree from Scipy library In this post, we are going to define an algorithm to locate the closest points to a reference points, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.
 To select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.
 Different method are considered here:
-- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared:  $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)."><meta property="og:image" content="/post/netcdf_interpolation/featured.png">
+- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared:  $Tt = \frac{\sum{i=1}^{m}T_{s,i}wi}{\sum{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)."><meta property="og:image" content="/post/netcdf_interpolation/featured.png">
   <meta property="twitter:image" content="/post/netcdf_interpolation/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -176,7 +176,7 @@ Different method are considered here:
       "url": "/img/icon-512.png"
     }
   },
-  "description": "Netcdf: Interpolation between grids using cKDTree from Scipy library In this post, we are going to define an algorithm to locate the closest points to a reference points, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.\nTo select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.\nDifferent method are considered here:\n- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared:  $T_t = \\frac{\\sum_{i=1}^{m}T_{s,i}w_i}{\\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)."
+  "description": "Netcdf: Interpolation between grids using cKDTree from Scipy library In this post, we are going to define an algorithm to locate the closest points to a reference points, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.\nTo select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.\nDifferent method are considered here:\n- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared:  $Tt = \\frac{\\sum{i=1}^{m}T_{s,i}wi}{\\sum{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)."
 }
 </script>
 
@@ -501,7 +501,7 @@ Different method are considered here:
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    6 min read
+    7 min read
   </span>
   
 
@@ -544,292 +544,389 @@ Different method are considered here:
   <div class="article-container">
 
     <div class="article-style">
-      <h2 id="netcdf-interpolation-between-grids-using-ckdtree-from-scipy-library">Netcdf: Interpolation between grids using cKDTree from Scipy library</h2>
+      
+
+<h2 id="netcdf-interpolation-between-grids-using-ckdtree-from-scipy-library">Netcdf: Interpolation between grids using cKDTree from Scipy library</h2>
+
 <p>In this post, we are going to define an algorithm to locate the closest points to a reference points, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.</p>
-<p>To select closest grid points, we will use here one approach using <a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html">cKDTree</a> class from scipy.spatial package.</p>
+
+<p>To select closest grid points, we will use here one approach using <a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html" target="_blank">cKDTree</a> class from scipy.spatial package.</p>
+
 <p>Different method are considered here:</p>
+
 <pre><code>- nearest neighbour
 - nearest neighbours, weighting with the inverse of distance squared: 
 </code></pre>
-<p>$T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$).</p>
-<p>In this example, we will interpolate <a href="https://daymet.ornl.gov/">Daymet-1km dataset</a> on <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5">ERA5-grid</a>.</p>
+
+<p>$T<em>t = \frac{\sum</em>{i=1}^{m}T_{s,i}w<em>i}{\sum</em>{i=1}^{m}w_i}$, $w_i = 1/d_i^2$).</p>
+
+<p>In this example, we will interpolate <a href="https://daymet.ornl.gov/" target="_blank">Daymet-1km dataset</a> on <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5" target="_blank">ERA5-grid</a>.</p>
+
 <p>The Daymet dataset provides gridded estimates of daily weather parameters. Seven surface weather parameters are available at a daily time step, 1 km x 1 km spatial resolution, with a North American spatial extent.</p>
+
 <p>ERA5 Reanalyses provide a numerical description, with horizontal resolution of 31 km, of the recent climate (1979-present) by combining models with observations.</p>
-<h2 id="1--lets-import-python-librairies">1-  Let's import Python librairies</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#f92672">%</span>matplotlib inline
-<span style="color:#75715e">#for Netcdf manipulation</span>
-<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
 
-<span style="color:#75715e">#for array manipulation</span>
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<h2 id="1-let-s-import-python-librairies">1-  Let&rsquo;s import Python librairies</h2>
 
-<span style="color:#75715e">#for plotting</span>
-<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
-<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<pre><code class="language-python">import warnings; warnings.filterwarnings(action='ignore')
+%matplotlib inline
+#for Netcdf manipulation
+import xarray as xr
 
-<span style="color:#75715e">#for interpolation</span>
-<span style="color:#f92672">from</span> scipy.spatial <span style="color:#f92672">import</span> cKDTree
-</code></pre></div><h2 id="2--loading-source-file">2 - Loading source file</h2>
-<p>We are going to use daily maximum temperature of Daymet-1km for january 2017. In this analysis, we will use a subset of Daymet-1km and ERA5-32km. Indeed, we will only work over a specific watershed in Canada: Outaouais river's watershed:</p>
-<p><img src="watershed.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">source <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DAYMET_1km_subset_BV_tmax_2017_01.nc4</span><span style="color:#e6db74">&#39;</span>)
-lat_source <span style="color:#f92672">=</span> source<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]
-lon_source <span style="color:#f92672">=</span> source<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]
-lat_source<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(678, 702)
+#for array manipulation
+import numpy as np
+import pandas as pd
+
+#for plotting
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.pylab as plt
+
+#for interpolation
+from scipy.spatial import cKDTree
 </code></pre>
+
+<h2 id="2-loading-source-file">2 - Loading source file</h2>
+
+<p>We are going to use daily maximum temperature of Daymet-1km for january 2017. In this analysis, we will use a subset of Daymet-1km and ERA5-32km. Indeed, we will only work over a specific watershed in Canada: Outaouais river&rsquo;s watershed:</p>
+
+<p><img src="watershed.png" alt="png" /></p>
+
+<pre><code class="language-python">source = xr.open_dataset('DAYMET_1km_subset_BV_tmax_2017_01.nc4')
+lat_source = source.variables['lat'][:]
+lon_source = source.variables['lon'][:]
+lat_source.shape
+</code></pre>
+
+<pre><code>(678, 702)
+</code></pre>
+
 <h2 id="3-loading-target-file">3- Loading target file</h2>
-<p>We want to interpolate our source file on ERA5-grid. Let's load ERA5 reanalysis as target grid.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">target <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5_Outaouais_daily_tmax_201701.nc</span><span style="color:#e6db74">&#39;</span>)
-lat_target<span style="color:#f92672">=</span>target<span style="color:#f92672">.</span>latitude
-lon_target<span style="color:#f92672">=</span>target<span style="color:#f92672">.</span>longitude
-lat_target<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(29,)
+
+<p>We want to interpolate our source file on ERA5-grid. Let&rsquo;s load ERA5 reanalysis as target grid.</p>
+
+<pre><code class="language-python">target = xr.open_dataset('ERA5_Outaouais_daily_tmax_201701.nc')
+lat_target=target.latitude
+lon_target=target.longitude
+lat_target.shape
 </code></pre>
+
+<pre><code>(29,)
+</code></pre>
+
 <p>ERA5 latitude and longitude are 1D array dimension.  We must convert these 1-dimensional arrays into  2-dimensional arrays.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lon_target2d, lat_target2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(lon_target, lat_target)
-lon_target2d<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(29, 121)
+
+<pre><code class="language-python">lon_target2d, lat_target2d = np.meshgrid(lon_target, lat_target)
+lon_target2d.shape
 </code></pre>
+
+<pre><code>(29, 121)
+</code></pre>
+
 <p>This next function will be use for converting lat/lon to cartesian coordinates (x, y, z):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lon_lat_to_cartesian</span>(lon, lat):
-    <span style="color:#75715e"># WGS 84 reference coordinate system parameters</span>
-    A <span style="color:#f92672">=</span> <span style="color:#ae81ff">6378.137</span> <span style="color:#75715e"># major axis [km]   </span>
-    E2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">6.69437999014e-3</span> <span style="color:#75715e"># eccentricity squared </span>
+
+<pre><code class="language-python">def lon_lat_to_cartesian(lon, lat):
+    # WGS 84 reference coordinate system parameters
+    A = 6378.137 # major axis [km]   
+    E2 = 6.69437999014e-3 # eccentricity squared 
     
-    lon_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(lon)
-    lat_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(lat)
-    <span style="color:#75715e"># convert to cartesian coordinates</span>
-    r_n <span style="color:#f92672">=</span> A <span style="color:#f92672">/</span> (np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2 <span style="color:#f92672">*</span> (np<span style="color:#f92672">.</span>sin(lat_rad) <span style="color:#f92672">*</span><span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)))
-    x <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lon_rad)
-    y <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lon_rad)
-    z <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lat_rad)
-    <span style="color:#66d9ef">return</span> x,y,z
-</code></pre></div><p>Now all necessary inputs are read in memory, we can now convert lat/lon to the Cartesian coordinate reference system (CRS):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xs, ys, zs <span style="color:#f92672">=</span> lon_lat_to_cartesian(lon_source<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten(), lat_source<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten())
-xt, yt, zt <span style="color:#f92672">=</span> lon_lat_to_cartesian(lon_target2d<span style="color:#f92672">.</span>flatten(), lat_target2d<span style="color:#f92672">.</span>flatten())
-</code></pre></div><h2 id="4-step1--construct-the-ckdtree-object">4- Step1:  construct the cKDTree object</h2>
+    lon_rad = np.radians(lon)
+    lat_rad = np.radians(lat)
+    # convert to cartesian coordinates
+    r_n = A / (np.sqrt(1 - E2 * (np.sin(lat_rad) ** 2)))
+    x = r_n * np.cos(lat_rad) * np.cos(lon_rad)
+    y = r_n * np.cos(lat_rad) * np.sin(lon_rad)
+    z = r_n * (1 - E2) * np.sin(lat_rad)
+    return x,y,z
+</code></pre>
+
+<p>Now all necessary inputs are read in memory, we can now convert lat/lon to the Cartesian coordinate reference system (CRS):</p>
+
+<pre><code class="language-python">xs, ys, zs = lon_lat_to_cartesian(lon_source.values.flatten(), lat_source.values.flatten())
+xt, yt, zt = lon_lat_to_cartesian(lon_target2d.flatten(), lat_target2d.flatten())
+</code></pre>
+
+<h2 id="4-step1-construct-the-ckdtree-object">4- Step1:  construct the cKDTree object</h2>
+
 <p>We can then create a KD-tree with the set of points within which we want to search for a closest point in our source grid.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tree <span style="color:#f92672">=</span> cKDTree(np<span style="color:#f92672">.</span>column_stack((xs, ys, zs)))
-</code></pre></div><h2 id="5-step2-interpolation-on-target-grid">5- Step2: Interpolation on target grid</h2>
+
+<pre><code class="language-python">tree = cKDTree(np.column_stack((xs, ys, zs)))
+</code></pre>
+
+<h2 id="5-step2-interpolation-on-target-grid">5- Step2: Interpolation on target grid</h2>
+
 <p>The second step provides a query point and returns the closest point or points in the KD-tree to the query point, where how &ldquo;closest&rdquo; is defined can be varied.</p>
+
 <p>Here, we use 3D points on spherical Earth with unit radius.</p>
+
 <p>Two methods of interpolation are considered here: nearest neighbour and weighting with the inverse of distance squared.</p>
+
 <h3 id="a-nearest-neighbour-interpolation">a- Nearest neighbour interpolation</h3>
+
 <p>In this step, we find indices of the nearest neighbors in the flattened array using our &lsquo;tree&rsquo; from step1.  To do this, we will apply
-<a href="https://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.query.html#scipy.spatial.cKDTree.query">cKDTree.query method</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#find indices of the nearest neighbors in the flattened array</span>
-<span style="color:#75715e">#d, inds = tree.query(zip(xt, yt, zt), k = 1)</span>
-d, inds <span style="color:#f92672">=</span> tree<span style="color:#f92672">.</span>query(np<span style="color:#f92672">.</span>column_stack((xt, yt, zt)), k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-</code></pre></div><p>We can now interpolate our 2d field using our index tree. We will interpolate our first timestep for daymet source file (ie datetime64[ns] 2017-01-01T12:00:00)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#get interpolated 2d field</span>
-air_nearest <span style="color:#f92672">=</span> source<span style="color:#f92672">.</span>tmax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds]<span style="color:#f92672">.</span>reshape(lon_target2d<span style="color:#f92672">.</span>shape)
-</code></pre></div><h3 id="b-interpolation-using-inverse-distance-weighting-using-10-nearest-neighbours-k10">b- Interpolation using inverse distance weighting, using 10 nearest neighbours (k=10):</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">d, inds <span style="color:#f92672">=</span> tree<span style="color:#f92672">.</span>query(np<span style="color:#f92672">.</span>column_stack((xt, yt, zt)), k <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
-w <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> d<span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
-air_idw <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sum(w <span style="color:#f92672">*</span> source<span style="color:#f92672">.</span>tmax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>sum(w, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-air_idw<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> lon_target2d<span style="color:#f92672">.</span>shape
-</code></pre></div><h2 id="6-plot-the-results">6- Plot the results:</h2>
+<a href="https://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.query.html#scipy.spatial.cKDTree.query" target="_blank">cKDTree.query method</a></p>
+
+<pre><code class="language-python">#find indices of the nearest neighbors in the flattened array
+#d, inds = tree.query(zip(xt, yt, zt), k = 1)
+d, inds = tree.query(np.column_stack((xt, yt, zt)), k = 1)
+</code></pre>
+
+<p>We can now interpolate our 2d field using our index tree. We will interpolate our first timestep for daymet source file (ie datetime64[ns] 2017-01-01T12:00:00)</p>
+
+<pre><code class="language-python">#get interpolated 2d field
+air_nearest = source.tmax[0].values.flatten()[inds].reshape(lon_target2d.shape)
+</code></pre>
+
+<h3 id="b-interpolation-using-inverse-distance-weighting-using-10-nearest-neighbours-k-10">b- Interpolation using inverse distance weighting, using 10 nearest neighbours (k=10):</h3>
+
+<pre><code class="language-python">d, inds = tree.query(np.column_stack((xt, yt, zt)), k = 10)
+w = 1.0 / d**2
+air_idw = np.sum(w * source.tmax[0].values.flatten()[inds], axis=1) / np.sum(w, axis=1)
+air_idw.shape = lon_target2d.shape
+</code></pre>
+
+<h2 id="6-plot-the-results">6- Plot the results:</h2>
+
 <p>Now let us plot the results from these two approaches. For ERA5-target grid, we will apply a mask to visualize the same watershed.
 This mask was created using a shapefile.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">MASK <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Outaouais_ERA5_Grid.nc</span><span style="color:#e6db74">&#39;</span>)
-lat1d<span style="color:#f92672">=</span>MASK<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">latitude</span><span style="color:#e6db74">&#39;</span>][:]
-lon1d<span style="color:#f92672">=</span>MASK<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitude</span><span style="color:#e6db74">&#39;</span>][:]
-lon2d, lat2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(lon1d, lat1d)
-mask <span style="color:#f92672">=</span> MASK[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tp</span><span style="color:#e6db74">&#39;</span>][ :, :]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">20</span>))
 
-subplot(<span style="color:#ae81ff">221</span>)
-plt<span style="color:#f92672">.</span>pcolormesh(source<span style="color:#f92672">.</span>tmax[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>transpose())
-plt<span style="color:#f92672">.</span>xlim([<span style="color:#ae81ff">0</span>, source<span style="color:#f92672">.</span>tmax[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]])
-plt<span style="color:#f92672">.</span>ylim([<span style="color:#ae81ff">0</span>, source<span style="color:#f92672">.</span>tmax[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]])
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Daymet grid</span><span style="color:#e6db74">&#34;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+<pre><code class="language-python">MASK = xr.open_dataset('Outaouais_ERA5_Grid.nc')
+lat1d=MASK.variables['latitude'][:]
+lon1d=MASK.variables['longitude'][:]
+lon2d, lat2d = np.meshgrid(lon1d, lat1d)
+mask = MASK['tp'][ :, :]
+</code></pre>
 
-subplot(<span style="color:#ae81ff">222</span>)
-plt<span style="color:#f92672">.</span>pcolormesh(target<span style="color:#f92672">.</span>t2m[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>where(mask<span style="color:#f92672">.</span>values<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>transpose())
-plt<span style="color:#f92672">.</span>xlim([<span style="color:#ae81ff">0</span>, target<span style="color:#f92672">.</span>t2m[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]])
-plt<span style="color:#f92672">.</span>ylim([<span style="color:#ae81ff">0</span>, target<span style="color:#f92672">.</span>t2m[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]])
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ERA5 grid</span><span style="color:#e6db74">&#34;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+<pre><code class="language-python">fig = plt.figure(figsize=(28,20))
 
-subplot(<span style="color:#ae81ff">223</span>)
-plt<span style="color:#f92672">.</span>pcolormesh(air_nearest<span style="color:#f92672">.</span>transpose())
-plt<span style="color:#f92672">.</span>xlim([<span style="color:#ae81ff">0</span>, air_nearest<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]])
-plt<span style="color:#f92672">.</span>ylim([<span style="color:#ae81ff">0</span>, air_nearest<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]])
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Daymet on ERA5 grid Nearest neighbor</span><span style="color:#e6db74">&#34;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+subplot(221)
+plt.pcolormesh(source.tmax[0,:,:].values.transpose())
+plt.xlim([0, source.tmax[0,:,:].shape[0]])
+plt.ylim([0, source.tmax[0,:,:].shape[1]])
+plt.colorbar()
+plt.title(&quot;Daymet grid&quot;, size='xx-large')
 
-subplot(<span style="color:#ae81ff">224</span>)
-plt<span style="color:#f92672">.</span>pcolormesh(air_idw<span style="color:#f92672">.</span>transpose())
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlim([<span style="color:#ae81ff">0</span>, air_idw<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]])
-plt<span style="color:#f92672">.</span>ylim([<span style="color:#ae81ff">0</span>, air_idw<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]])
-plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Daymet on  ERA5 grid IDW of square distance </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> using 10 neighbors</span><span style="color:#e6db74">&#34;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>);
-</code></pre></div><p><img src="output_26_0.png" alt="png"></p>
-<p>This was a quick plot, let's make better plots using Cartopy library.</p>
+subplot(222)
+plt.pcolormesh(target.t2m[0,:,:].where(mask.values&gt;=0).values.transpose())
+plt.xlim([0, target.t2m[0,:,:].shape[0]])
+plt.ylim([0, target.t2m[0,:,:].shape[1]])
+plt.colorbar()
+plt.title(&quot;ERA5 grid&quot;, size='xx-large')
+
+subplot(223)
+plt.pcolormesh(air_nearest.transpose())
+plt.xlim([0, air_nearest.shape[0]])
+plt.ylim([0, air_nearest.shape[1]])
+plt.colorbar()
+plt.title(&quot;Daymet on ERA5 grid Nearest neighbor&quot;, size='xx-large')
+
+subplot(224)
+plt.pcolormesh(air_idw.transpose())
+plt.colorbar()
+plt.xlim([0, air_idw.shape[0]])
+plt.ylim([0, air_idw.shape[1]])
+plt.title(&quot;Daymet on  ERA5 grid IDW of square distance \n using 10 neighbors&quot;, size='xx-large');
+</code></pre>
+
+<p><img src="output_26_0.png" alt="png" /></p>
+
+<p>This was a quick plot, let&rsquo;s make better plots using Cartopy library.</p>
+
 <p>We first define a function to create the map subplots:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_background</span>(ax):
-    ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">82</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">73</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">49</span>])
-    ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">110m</span><span style="color:#e6db74">&#39;</span>);
-    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      
-    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       
-    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     
-    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    
-    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    
-    coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,    
-                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-    ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
-    
-    states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-        category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-        name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-        scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
 
-    ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)
+<pre><code class="language-python">def plot_background(ax):
+    ax.set_extent([-82,-73,45,49])
+    ax.coastlines(resolution='110m');
+    ax.add_feature(cfeature.OCEAN.with_scale('50m'))      
+    ax.add_feature(cfeature.LAND.with_scale('50m'))       
+    ax.add_feature(cfeature.LAKES.with_scale('50m'))     
+    ax.add_feature(cfeature.BORDERS.with_scale('50m'))    
+    ax.add_feature(cfeature.RIVERS.with_scale('50m'))    
+    coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',    
+                        facecolor='none', name='coastline')
+    ax.add_feature(coast, edgecolor='black')
+    
+    states_provinces = cfeature.NaturalEarthFeature(
+        category='cultural',
+        name='admin_1_states_provinces_lines',
+        scale='10m',
+        facecolor='none')
+
+    ax.add_feature(states_provinces, edgecolor='gray')
 
    
-    <span style="color:#66d9ef">return</span> ax
-</code></pre></div><p>We will plot the two different interpolations (a) and (b):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">12</span>))
-<span style="color:#f92672">from</span> matplotlib.gridspec <span style="color:#f92672">import</span> GridSpec
-cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
-cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>) 
-cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkred</span><span style="color:#e6db74">&#39;</span>)
+    return ax
+</code></pre>
 
-gs <span style="color:#f92672">=</span> GridSpec(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>, width_ratios<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.05</span>], wspace <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>)
-crs<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal()
-<span style="color:#75715e"># Left plot - ERA5 grid Nearest neighbor</span>
-ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], projection<span style="color:#f92672">=</span>crs)
+<p>We will plot the two different interpolations (a) and (b):</p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(28,12))
+from matplotlib.gridspec import GridSpec
+cmap0=plt.cm.jet
+cmap0.set_under('darkblue') 
+cmap0.set_over('darkred')
+
+gs = GridSpec(1,3, width_ratios=[1,1, 0.05], wspace = 0.05)
+crs=ccrs.LambertConformal()
+# Left plot - ERA5 grid Nearest neighbor
+ax1 = plt.subplot(gs[0, 0], projection=crs)
 plot_background(ax1)
-ax1<span style="color:#f92672">.</span>contourf(lon_target2d,\
+ax1.contourf(lon_target2d,\
                    lat_target2d,\
                    air_nearest,\
-                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>,\
-                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, \
-                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
-                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>),\
-                   cmap<span style="color:#f92672">=</span>cmap0 )
-ax1<span style="color:#f92672">.</span>contour(lon_target2d, lat_target2d, air_nearest, 
-                          levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>), 
-                          linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, 
-                          colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">k</span><span style="color:#e6db74">&#39;</span>,
-                          transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
-ax1<span style="color:#f92672">.</span>scatter(lon_target2d, lat_target2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
-string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Daymet on ERA5 grid Nearest neighbor: 2017-01-01</span><span style="color:#e6db74">&#39;</span>
-plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+                   vmin=-15,\
+                   vmax=5, \
+                   transform=ccrs.PlateCarree(),\
+                   levels=np.arange(-15, 5, 1.0),\
+                   cmap=cmap0 )
+ax1.contour(lon_target2d, lat_target2d, air_nearest, 
+                          levels = np.arange(-15, 5, 1.0), 
+                          linewidths=2, 
+                          colors='k',
+                          transform = ccrs.PlateCarree())
+ax1.scatter(lon_target2d, lat_target2d, transform=ccrs.PlateCarree(), s=0.5)
+string_title=u'Daymet on ERA5 grid Nearest neighbor: 2017-01-01'
+plt.title(string_title, size='xx-large')
 
-<span style="color:#75715e"># Right plot - ERA5 grid IDW of square distance </span>
-ax2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], projection<span style="color:#f92672">=</span>crs)
+# Right plot - ERA5 grid IDW of square distance 
+ax2 = plt.subplot(gs[0, 1], projection=crs)
 
 plot_background(ax2)
-mm <span style="color:#f92672">=</span> ax2<span style="color:#f92672">.</span>contourf(lon_target2d,\
+mm = ax2.contourf(lon_target2d,\
                    lat_target2d,\
                    air_idw,\
-                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>,\
-                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, \
-                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
-                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>),\
-                   cmap<span style="color:#f92672">=</span>cmap0 )
-ax2<span style="color:#f92672">.</span>contour(lon_target2d, lat_target2d, air_idw, 
-                          levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>), 
-                          linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, 
-                          colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">k</span><span style="color:#e6db74">&#39;</span>,
-                          transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
+                   vmin=-15,\
+                   vmax=5, \
+                   transform=ccrs.PlateCarree(),\
+                   levels=np.arange(-15, 5, 1.0),\
+                   cmap=cmap0 )
+ax2.contour(lon_target2d, lat_target2d, air_idw, 
+                          levels = np.arange(-15, 5, 1.0), 
+                          linewidths=2, 
+                          colors='k',
+                          transform = ccrs.PlateCarree())
 
-ax2<span style="color:#f92672">.</span>scatter(lon_target2d, lat_target2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
-string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Daymet on  ERA5 grid IDW of square distance </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> using 10 neighbors: 2017-01-01 </span><span style="color:#e6db74">&#39;</span>
-plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
-ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(gs[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>])
-plt<span style="color:#f92672">.</span>colorbar(mm,  shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5.1</span>, <span style="color:#ae81ff">1.</span>), extend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>, cax <span style="color:#f92672">=</span> ax)
-cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>) 
+ax2.scatter(lon_target2d, lat_target2d, transform=ccrs.PlateCarree(), s=0.5)
+string_title=u'Daymet on  ERA5 grid IDW of square distance \n using 10 neighbors: 2017-01-01 '
+plt.title(string_title, size='xx-large')
+ax = fig.add_subplot(gs[0,2])
+plt.colorbar(mm,  shrink=0.75, drawedges='True', ticks=np.arange(-15, 5.1, 1.), extend='both', cax = ax)
+cbar.ax.tick_params(labelsize=20) 
 
-</code></pre></div><p><img src="output_30_0.png" alt="png"></p>
+</code></pre>
+
+<p><img src="output_30_0.png" alt="png" /></p>
+
 <p>We plot Daymet-1km and ERA5 datasets for the same date: 2017-01-01</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">12</span>))
-<span style="color:#f92672">from</span> matplotlib.gridspec <span style="color:#f92672">import</span> GridSpec
-cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
-cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkblue</span><span style="color:#e6db74">&#39;</span>) 
-cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">darkred</span><span style="color:#e6db74">&#39;</span>)
 
-gs <span style="color:#f92672">=</span> GridSpec(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>, width_ratios<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.05</span>], wspace <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>)
-crs<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal()
-<span style="color:#75715e"># Left plot: Daymet: source grid</span>
-ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], projection<span style="color:#f92672">=</span>crs)
+<pre><code class="language-python">fig = plt.figure(figsize=(28,12))
+from matplotlib.gridspec import GridSpec
+cmap0=plt.cm.jet
+cmap0.set_under('darkblue') 
+cmap0.set_over('darkred')
+
+gs = GridSpec(1,3, width_ratios=[1,1, 0.05], wspace = 0.05)
+crs=ccrs.LambertConformal()
+# Left plot: Daymet: source grid
+ax1 = plt.subplot(gs[0, 0], projection=crs)
 plot_background(ax1)
-ax1<span style="color:#f92672">.</span>contourf(lon_s,\
+ax1.contourf(lon_s,\
                    lat_s,\
-                   source<span style="color:#f92672">.</span>tmax[<span style="color:#ae81ff">0</span>,:,:],\
-                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>,\
-                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, \
-                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
-                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>),\
-                   cmap<span style="color:#f92672">=</span>cmap0 )
-ax1<span style="color:#f92672">.</span>contour(lon_s, lat_s, source<span style="color:#f92672">.</span>tmax[<span style="color:#ae81ff">0</span>,:,:], 
-                          levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>), 
-                          linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, 
-                          colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">k</span><span style="color:#e6db74">&#39;</span>,
-                          transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
-string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Daymet 1km: Tmax: 2017-01-01</span><span style="color:#e6db74">&#39;</span>
-plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
+                   source.tmax[0,:,:],\
+                   vmin=-15,\
+                   vmax=5, \
+                   transform=ccrs.PlateCarree(),\
+                   levels=np.arange(-15, 5, 1.0),\
+                   cmap=cmap0 )
+ax1.contour(lon_s, lat_s, source.tmax[0,:,:], 
+                          levels = np.arange(-15, 5, 1.0), 
+                          linewidths=2, 
+                          colors='k',
+                          transform = ccrs.PlateCarree())
+string_title=u'Daymet 1km: Tmax: 2017-01-01'
+plt.title(string_title, size='xx-large')
 
-<span style="color:#75715e"># Right plot: ERA5: target grid</span>
-ax2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], projection<span style="color:#f92672">=</span>crs)
+# Right plot: ERA5: target grid
+ax2 = plt.subplot(gs[0, 1], projection=crs)
 
 plot_background(ax2)
-mm <span style="color:#f92672">=</span> ax2<span style="color:#f92672">.</span>contourf(lon_target2d,\
+mm = ax2.contourf(lon_target2d,\
                    lat_target2d,\
-                   target<span style="color:#f92672">.</span>t2m[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>where(mask<span style="color:#f92672">.</span>values<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>),\
-                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>,\
-                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, \
-                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
-                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>),\
-                   cmap<span style="color:#f92672">=</span>cmap0 )
-ax2<span style="color:#f92672">.</span>contour(lon_target2d, lat_target2d, target<span style="color:#f92672">.</span>t2m[<span style="color:#ae81ff">0</span>,:,:]<span style="color:#f92672">.</span>where(mask<span style="color:#f92672">.</span>values<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>), 
-                          levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.0</span>), 
-                          linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, 
-                          colors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">k</span><span style="color:#e6db74">&#39;</span>,
-                          transform <span style="color:#f92672">=</span> ccrs<span style="color:#f92672">.</span>PlateCarree())
-string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5 grid: Tmax: 2017-01-01</span><span style="color:#e6db74">&#39;</span>
-plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
-ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(gs[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>])
-plt<span style="color:#f92672">.</span>colorbar(mm,  shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5.1</span>, <span style="color:#ae81ff">1.</span>), extend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>, cax <span style="color:#f92672">=</span> ax)
-cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>) 
-</code></pre></div><p><img src="output_32_0.png" alt="png"></p>
+                   target.t2m[0,:,:].where(mask.values&gt;=0),\
+                   vmin=-15,\
+                   vmax=5, \
+                   transform=ccrs.PlateCarree(),\
+                   levels=np.arange(-15, 5, 1.0),\
+                   cmap=cmap0 )
+ax2.contour(lon_target2d, lat_target2d, target.t2m[0,:,:].where(mask.values&gt;=0), 
+                          levels = np.arange(-15, 5, 1.0), 
+                          linewidths=2, 
+                          colors='k',
+                          transform = ccrs.PlateCarree())
+string_title=u'ERA5 grid: Tmax: 2017-01-01'
+plt.title(string_title, size='xx-large')
+ax = fig.add_subplot(gs[0,2])
+plt.colorbar(mm,  shrink=0.75, drawedges='True', ticks=np.arange(-15, 5.1, 1.), extend='both', cax = ax)
+cbar.ax.tick_params(labelsize=50) 
+</code></pre>
+
+<p><img src="output_32_0.png" alt="png" /></p>
+
 <h2 id="7-saving-netcdf-files-with-every-daily-timesteps">7- Saving Netcdf files with every daily timesteps:</h2>
+
 <p>We can work and interpolate for one timestep (ie 2017-01-01). We can now create a function to interpolate every timesteps of our source grid on target grid and then save the result array into netcdf file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">d, inds <span style="color:#f92672">=</span> tree<span style="color:#f92672">.</span>query(np<span style="color:#f92672">.</span>column_stack((xt, yt, zt)), k <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
-w <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> d<span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interpolate</span>(source, target, d, inds):    
-    nt <span style="color:#f92672">=</span> source[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
-    tmp <span style="color:#f92672">=</span> []
-    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, nt):        
-        result <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(target<span style="color:#f92672">.</span>shape)
-        w <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> d<span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
-        air_idw <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sum(w <span style="color:#f92672">*</span> source<span style="color:#f92672">.</span>tmax[t]<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>sum(w, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-        air_idw<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> target<span style="color:#f92672">.</span>shape
-        tmp<span style="color:#f92672">.</span>append(air_idw)
-    <span style="color:#66d9ef">return</span> tmp
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">source <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DAYMET_1km_subset_BV_tmax_2017_01.nc4</span><span style="color:#e6db74">&#39;</span>)
-target <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERA5_Outaouais_daily_tmax_201701.nc</span><span style="color:#e6db74">&#39;</span>)
-lon_target<span style="color:#f92672">=</span>target<span style="color:#f92672">.</span>longitude
-lat_target<span style="color:#f92672">=</span>target<span style="color:#f92672">.</span>latitude
-lon_target2d, lat_target2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(lon_target, lat_target)
 
-air_idw <span style="color:#f92672">=</span> interpolate(source,lon_target2d, d, inds)
+<pre><code class="language-python">d, inds = tree.query(np.column_stack((xt, yt, zt)), k = 10)
+w = 1.0 / d**2
+</code></pre>
 
-</code></pre></div><p>We can now save our numpy array to xarray and then into netcdf file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_set <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>Dataset( coords<span style="color:#f92672">=</span>{<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>: ([ <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>], lon_target),
-                                     <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>: ([<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>,], lat_target),
-                                     <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>: source<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>values})
-data_set[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">tasmax</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> ([<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>],  air_idw)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_set<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DAYMET_32km_subset_BV_tmax_2017_01.nc</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_set
-</code></pre></div><!-- raw HTML omitted -->
+<pre><code class="language-python">def interpolate(source, target, d, inds):    
+    nt = source[&quot;time&quot;].shape[0]
+    tmp = []
+    for t in range(0, nt):        
+        result = np.zeros(target.shape)
+        w = 1.0 / d**2
+        air_idw = np.sum(w * source.tmax[t].values.flatten()[inds], axis=1) / np.sum(w, axis=1)
+        air_idw.shape = target.shape
+        tmp.append(air_idw)
+    return tmp
+</code></pre>
+
+<pre><code class="language-python">source = xr.open_dataset('DAYMET_1km_subset_BV_tmax_2017_01.nc4')
+target = xr.open_dataset('ERA5_Outaouais_daily_tmax_201701.nc')
+lon_target=target.longitude
+lat_target=target.latitude
+lon_target2d, lat_target2d = np.meshgrid(lon_target, lat_target)
+
+air_idw = interpolate(source,lon_target2d, d, inds)
+
+</code></pre>
+
+<p>We can now save our numpy array to xarray and then into netcdf file.</p>
+
+<pre><code class="language-python">data_set = xr.Dataset( coords={'lon': ([ 'lon'], lon_target),
+                                     'lat': (['lat',], lat_target),
+                                     'time': source.time.values})
+data_set[&quot;tasmax&quot;] = (['time','lat', 'lon'],  air_idw)
+</code></pre>
+
+<pre><code class="language-python">data_set.to_netcdf('DAYMET_32km_subset_BV_tmax_2017_01.nc')
+</code></pre>
+
+<pre><code class="language-python">data_set
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:  (lat: 29, lon: 121, time: 31)
+Coordinates:
+  * lon      (lon) float32 270.0 270.25 270.5 270.75 ... 299.5 299.75 300.0
+  * lat      (lat) float32 50.0 49.75 49.5 49.25 49.0 ... 43.75 43.5 43.25 43.0
+  * time     (time) datetime64[ns] 2017-01-01T12:00:00 ... 2017-01-31T12:00:00
+Data variables:
+    tasmax   (time, lat, lon) float64 nan nan nan nan nan ... nan nan nan nan</pre>
+
+<pre><code class="language-python">
+</code></pre>
 
     </div>
 

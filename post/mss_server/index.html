@@ -538,148 +538,314 @@ Steps to connect with pyodbc python library You need to know some informations o
   <div class="article-container">
 
     <div class="article-style">
-      <h3 id="connexion-to-microsoft-sql-server-management-studio">Connexion to Microsoft SQL Server Management Studio</h3>
+      
+
+<h3 id="connexion-to-microsoft-sql-server-management-studio">Connexion to Microsoft SQL Server Management Studio</h3>
+
 <p>This is a short tutorial to connect python to a Miscrosoft SQL Server.</p>
+
 <h3 id="steps-to-connect-with-pyodbc-python-library">Steps to connect with pyodbc python library</h3>
+
 <p>You need to know some informations on your local server, database and tables you want to connect:
 In our case:
-- The Server Name is: DESKTOP-BE6M578
-- The Database Name is: BDSOPFEU
-- The Table Name is: dbo.Meteo_stations
-- The Table dbo.Meteo_stations containes stations information</p>
+    - The Server Name is: DESKTOP-BE6M578
+    - The Database Name is: BDSOPFEU
+    - The Table Name is: dbo.Meteo_stations
+    - The Table dbo.Meteo_stations containes stations information</p>
+
 <h3 id="1-retrieve-your-server-name">1 Retrieve your server name</h3>
+
 <p>You can get your server name by opening Microsoft SQL Server. You’ll then see the Connect to Server box, where the server name will be displayed.</p>
+
 <p>In my case, the server name is: DESKTOP-BE6M578</p>
-<p><img src="image1.png" alt="png"></p>
+
+<p><img src="image1.png" alt="png" /></p>
+
 <h3 id="2-retrieve-your-database-name">2 Retrieve your Database name</h3>
+
 <p>Next, you’ll need to obtain the database name in which your desired table is stored.</p>
+
 <p>You can find the database name under the Object Explorer menu (underneath the Databases section) which is located on the left-hand side of your SQL Server.</p>
+
 <p>In our example, the database name is: BDSOPFEU</p>
-<p><img src="image2.png" alt="png"></p>
+
+<p><img src="image2.png" alt="png" /></p>
+
 <h3 id="3-get-the-table-name">3 Get the table name</h3>
+
 <p>Now you’ll need to get the name of your desired table.</p>
+
 <p>The name of your table would also be located under the Object Explorer menu (underneath the Tables section).</p>
+
 <p>Here, the name of the table is: dbo.Meteo_stations</p>
-<p><img src="image3.png" alt="png"></p>
+
+<p><img src="image3.png" alt="png" /></p>
+
 <h3 id="4-connect-python-to-our-microsoft-sql-server">4 Connect Python to our Microsoft SQL Server</h3>
+
 <p>Now we have all the informations about our server and database to connect Python .</p>
+
 <p>Here is the structure of the code that you may use in Python:</p>
+
 <p>import pyodbc
 conn = pyodbc.connect(&lsquo;Driver={SQL Server};&rsquo;
-&lsquo;Server=server_name;&rsquo;
-&lsquo;Database=db_name;&rsquo;
-&lsquo;Trusted_Connection=yes;')</p>
+                      &lsquo;Server=server_name;&rsquo;
+                      &lsquo;Database=db_name;&rsquo;
+                      &lsquo;Trusted_Connection=yes;&lsquo;)</p>
+
 <p>cursor = conn.cursor()
 cursor.execute(&lsquo;SELECT * FROM db_name.Table&rsquo;)</p>
+
 <p>for row in cursor:
-print(row)
+    print(row)
 And this is how the code would look like in Python using our example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pyodbc 
-connexion <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Driver={SQL Server};</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Server=DESKTOP-BE6M578;</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Database=BDSOPFEU;</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Trusted_Connection=yes;</span><span style="color:#e6db74">&#39;</span>)
 
-cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
-cursor<span style="color:#f92672">.</span>execute(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SELECT * FROM BDSOPFEU.dbo.Meteo_stations</span><span style="color:#e6db74">&#39;</span>)
+<pre><code class="language-python">import pyodbc 
+connexion = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-BE6M578;'
+                      'Database=BDSOPFEU;'
+                      'Trusted_Connection=yes;')
 
-<span style="color:#75715e"># to loop over each row</span>
-<span style="color:#75715e">#for row in cursor:</span>
-<span style="color:#75715e">#    print(row)</span>
-row <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchone()
-<span style="color:#66d9ef">print</span>(row)
-connexion<span style="color:#f92672">.</span>close()
-</code></pre></div><pre><code>(111, datetime.datetime(1978, 4, 1, 0, 0), 1, 'STE-PERPETUE', '4113-1-5355', 111, datetime.datetime(1989, 10, 31, 0, 0), 400, 'M', 'N', 1, 1, 'MFFP_CEL', None, 13, ' ', None, False, None, None, None)
+cursor = connexion.cursor()
+cursor.execute('SELECT * FROM BDSOPFEU.dbo.Meteo_stations')
+
+# to loop over each row
+#for row in cursor:
+#    print(row)
+row = cursor.fetchone()
+print(row)
+connexion.close()
 </code></pre>
+
+<pre><code>(111, datetime.datetime(1978, 4, 1, 0, 0), 1, 'STE-PERPETUE', '4113-1-5355', 111, datetime.datetime(1989, 10, 31, 0, 0), 400, 'M', 'N', 1, 1, 'MFFP_CEL', None, 13, ' ', None, False, None, None, None)
+</code></pre>
+
 <ul>
-<li>For having basic informations about our table:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">columns <span style="color:#f92672">=</span> [column[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> column <span style="color:#f92672">in</span> cursor<span style="color:#f92672">.</span>description]
+<li><p>For having basic informations about our table:</p>
+
+<pre><code class="language-python">columns = [column[0] for column in cursor.description]
 columns
-</code></pre></div><pre><code>['No_station',
- 'Ouverture',
- 'Base',
- 'Nom',
- 'Quadr',
- 'Secteur',
- 'Fermeture',
- 'Elevation',
- 'T_hr',
- 'Vent',
- 'T_donnees',
- 'T_station',
- 'Provenance',
- 'Stn_mere',
- 'Hre_levee',
- 'Memo',
- 'Contour',
- 'Active',
- 'Cladonie',
- 'Latitude',
- 'Longitude']
 </code></pre>
+
+<p>[&lsquo;No_station&rsquo;,
+ &lsquo;Ouverture&rsquo;,
+ &lsquo;Base&rsquo;,
+ &lsquo;Nom&rsquo;,
+ &lsquo;Quadr&rsquo;,
+ &lsquo;Secteur&rsquo;,
+ &lsquo;Fermeture&rsquo;,
+ &lsquo;Elevation&rsquo;,
+ &rsquo;T_hr&rsquo;,
+ &lsquo;Vent&rsquo;,
+ &rsquo;T_donnees&rsquo;,
+ &rsquo;T_station&rsquo;,
+ &lsquo;Provenance&rsquo;,
+ &lsquo;Stn_mere&rsquo;,
+ &lsquo;Hre_levee&rsquo;,
+ &lsquo;Memo&rsquo;,
+ &lsquo;Contour&rsquo;,
+ &lsquo;Active&rsquo;,
+ &lsquo;Cladonie&rsquo;,
+ &lsquo;Latitude&rsquo;,
+ &lsquo;Longitude&rsquo;]</p></li>
+</ul>
+
 <p>Now, I’ll show you how to get data from SQL to pandas DataFrame.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pyodbc
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-connexion <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Driver={SQL Server};</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Server=DESKTOP-BE6M578;</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Database=BDSOPFEU;</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Trusted_Connection=yes;</span><span style="color:#e6db74">&#39;</span>)
+<pre><code class="language-python">import pyodbc
+import pandas as pd
 
-SQL_Query <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql_query(
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">SELECT</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Nom, No_station, Latitude, Longitude  </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">FROM dbo.Meteo_stations </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">WHERE Active = </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;&#39;&#39;</span>, connexion)
+connexion = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-BE6M578;'
+                      'Database=BDSOPFEU;'
+                      'Trusted_Connection=yes;')
 
-df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(SQL_Query)
-df<span style="color:#f92672">.</span>head()
-</code></pre></div><!-- raw HTML omitted -->
-<pre><code>.dataframe tbody tr th {
-    vertical-align: top;
-}
+SQL_Query = pd.read_sql_query(
+'''SELECT
+ Nom, No_station, Latitude, Longitude  
+FROM dbo.Meteo_stations 
+WHERE Active = 'True' ''', connexion)
 
-.dataframe thead th {
-    text-align: right;
-}
+df = pd.DataFrame(SQL_Query)
+df.head()
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pyodbc
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-connexion <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Driver={SQL Server};</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Server=DESKTOP-BE6M578;</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Database=BDSOPFEU;</span><span style="color:#e6db74">&#39;</span>
-                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Trusted_Connection=yes;</span><span style="color:#e6db74">&#39;</span>)
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-SQL_Query <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql_query(
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">SELECT</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Date,</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Heure,</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Pluie,</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Hr,</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Tsec,</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Thum,</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Vv,</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> Vvr</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">FROM dbo.Meteo_obs </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74"> WHERE No_station = 111</span><span style="color:#e6db74">&#39;&#39;&#39;</span>, connexion)
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(SQL_Query)
-df<span style="color:#f92672">.</span>tail()
-</code></pre></div><!-- raw HTML omitted -->
-<pre><code>.dataframe tbody tr th {
-    vertical-align: top;
-}
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nom</th>
+      <th>No_station</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LA PÈCHE</td>
+      <td>111</td>
+      <td>45:37:20</td>
+      <td>76:01:09</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>L'ACADIE</td>
+      <td>129</td>
+      <td>45:17:39</td>
+      <td>73:20:56</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>KIPAWA</td>
+      <td>132</td>
+      <td>47:09:23</td>
+      <td>78:56:02</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BAR.TEMISCAMINGUE</td>
+      <td>139</td>
+      <td>46:42:36</td>
+      <td>79:06:04</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>COULONGE</td>
+      <td>142</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-.dataframe thead th {
-    text-align: right;
-}
+<pre><code class="language-python">import pyodbc
+import pandas as pd
+
+connexion = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-BE6M578;'
+                      'Database=BDSOPFEU;'
+                      'Trusted_Connection=yes;')
+
+SQL_Query = pd.read_sql_query(
+'''SELECT
+ Date,
+ Heure,
+ Pluie,
+ Hr,
+ Tsec,
+ Thum,
+ Vv,
+ Vvr
+FROM dbo.Meteo_obs 
+ WHERE No_station = 111''', connexion)
+
+df = pd.DataFrame(SQL_Query)
+df.tail()
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Heure</th>
+      <th>Pluie</th>
+      <th>Hr</th>
+      <th>Tsec</th>
+      <th>Thum</th>
+      <th>Vv</th>
+      <th>Vvr</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>154619</th>
+      <td>2019-06-25</td>
+      <td>5</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>18.0</td>
+      <td>NaN</td>
+      <td>5.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>154620</th>
+      <td>2019-06-25</td>
+      <td>6</td>
+      <td>4.2</td>
+      <td>92.0</td>
+      <td>13.0</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>154621</th>
+      <td>2019-06-25</td>
+      <td>7</td>
+      <td>13.0</td>
+      <td>95.0</td>
+      <td>13.0</td>
+      <td>NaN</td>
+      <td>4.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>154622</th>
+      <td>2019-06-25</td>
+      <td>8</td>
+      <td>13.8</td>
+      <td>96.0</td>
+      <td>13.0</td>
+      <td>NaN</td>
+      <td>6.0</td>
+      <td>17.0</td>
+    </tr>
+    <tr>
+      <th>154623</th>
+      <td>2019-06-25</td>
+      <td>9</td>
+      <td>13.8</td>
+      <td>96.0</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>6.0</td>
+      <td>20.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
     </div>
 

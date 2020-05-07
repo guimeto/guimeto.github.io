@@ -538,25 +538,38 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
   <div class="article-container">
 
     <div class="article-style">
-      <h3 id="anusplin-climatology-using-cartopy">ANUSPLIN climatology using Cartopy</h3>
+      
+
+<h3 id="anusplin-climatology-using-cartopy">ANUSPLIN climatology using Cartopy</h3>
+
 <p>Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).</p>
+
 <p>The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.</p>
-<p>Data are available on <a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids">link</a>.</p>
+
+<p>Data are available on <a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids" target="_blank">link</a>.</p>
+
 <p>In this post, we will see how to use Cartopy with Netcdf in order to display a nice climatology.</p>
+
 <p>We will display a climatoly of ANUSPLIN from 1981 to 2010.</p>
-<p>This dataset is only availabe with ascii grid format, I'll here show how to convert it into Netcdf using Python in an other post.</p>
-<p>The <a href="https://scitools.org.uk/cartopy/docs/latest/#">Cartopy</a> python library allows you to analyze, process and plot georeferenced data with the help of Matplotlib.</p>
+
+<p>This dataset is only availabe with ascii grid format, I&rsquo;ll here show how to convert it into Netcdf using Python in an other post.</p>
+
+<p>The <a href="https://scitools.org.uk/cartopy/docs/latest/#" target="_blank">Cartopy</a> python library allows you to analyze, process and plot georeferenced data with the help of Matplotlib.</p>
+
 <p>We first import our librairies:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset, num2date
-<span style="color:#f92672">import</span> warnings
-warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
-<span style="color:#f92672">import</span> datetime
-<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
-filename<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">K:/DATA/ANUSPLIN_10km/Netcdf/all_domaine/YEAR/Mean_tasmoy/ANUSPLIN_10km_MEAN_YEAR_Mean_tasmoy_1950-2017.nc</span><span style="color:#e6db74">&#39;</span>
-nc_fid<span style="color:#f92672">=</span>Dataset(filename,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
-nc_fid<span style="color:#f92672">.</span>variables
-</code></pre></div><pre><code>OrderedDict([('lon', &lt;class 'netCDF4._netCDF4.Variable'&gt;
+
+<pre><code class="language-python">from netCDF4 import Dataset, num2date
+import warnings
+warnings.filterwarnings(&quot;ignore&quot;)
+import datetime
+import xarray as xr
+import pandas as pd
+filename='K:/DATA/ANUSPLIN_10km/Netcdf/all_domaine/YEAR/Mean_tasmoy/ANUSPLIN_10km_MEAN_YEAR_Mean_tasmoy_1950-2017.nc'
+nc_fid=Dataset(filename,'r')
+nc_fid.variables
+</code></pre>
+
+<pre><code>OrderedDict([('lon', &lt;class 'netCDF4._netCDF4.Variable'&gt;
               float32 lon(y, x)
                   units: degrees_east
                   long_name: Longitude
@@ -589,28 +602,46 @@ nc_fid<span style="color:#f92672">.</span>variables
               current shape = (68, 1068, 510)
               filling on, default _FillValue of 9.969209968386869e+36 used)])
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Mean_tasmoy</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
-lons<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
-lats<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
-time <span style="color:#f92672">=</span> nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(68, 1068, 510)
+
+<pre><code class="language-python">data=nc_fid.variables['Mean_tasmoy'][:].squeeze()
+lons=nc_fid.variables['lon'][:].squeeze()
+lats=nc_fid.variables['lat'][:].squeeze()
+time = nc_fid.variables['time']
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_m <span style="color:#f92672">=</span> data[<span style="color:#ae81ff">32</span>:<span style="color:#ae81ff">62</span>,:,:]
-clim_81_2010<span style="color:#f92672">=</span>data_m<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">clim_81_2010<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(1068, 510)
+
+<pre><code class="language-python">data.shape
 </code></pre>
+
+<pre><code>(68, 1068, 510)
+</code></pre>
+
+<pre><code class="language-python">data_m = data[32:62,:,:]
+clim_81_2010=data_m.mean(axis=0)
+</code></pre>
+
+<pre><code class="language-python">clim_81_2010.shape
+</code></pre>
+
+<pre><code>(1068, 510)
+</code></pre>
+
 <p>We will add some cities to display on our map. We first need to create a dataframe with names of stations and localisations.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">names<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Whitehorse</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Yellowknife</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Iqaluit</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Victoria</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Edmonton</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Regina</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Winnipeg</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Toronto</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Ottawa</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Halifax</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Charlottetown</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">St-John s</span><span style="color:#e6db74">&#39;</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latitudes<span style="color:#f92672">=</span>[<span style="color:#ae81ff">60.721188</span>,<span style="color:#ae81ff">62.453972</span>,<span style="color:#ae81ff">63.748611</span>,<span style="color:#ae81ff">48.407326</span>,<span style="color:#ae81ff">53.631611</span>,<span style="color:#ae81ff">50.445210</span>,
-          <span style="color:#ae81ff">49.895077</span>,<span style="color:#ae81ff">43.651070</span>,<span style="color:#ae81ff">45.424721</span>,<span style="color:#ae81ff">46.829853</span>,<span style="color:#ae81ff">44.651070</span>,<span style="color:#ae81ff">46.238888</span>,<span style="color:#ae81ff">47.560539</span>]
-longitudes<span style="color:#f92672">=</span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">135.056839</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">114.371788</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">68.519722</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">123.329773</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">113.323975</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">104.618896</span>,
-           <span style="color:#f92672">-</span><span style="color:#ae81ff">97.138451</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">79.347015</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">75.695000</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">71.254028</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">63.582687</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">63.129166</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">52.712830</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(list(zip(names, latitudes, longitudes)), 
-               columns <span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Names</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">latitudes</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitudes</span><span style="color:#e6db74">&#39;</span>]) 
+
+<pre><code class="language-python">names=['Whitehorse','Yellowknife','Iqaluit','Victoria','Edmonton','Regina','Winnipeg','Toronto','Ottawa','Quebec','Halifax','Charlottetown','St-John s']
+</code></pre>
+
+<pre><code class="language-python">latitudes=[60.721188,62.453972,63.748611,48.407326,53.631611,50.445210,
+          49.895077,43.651070,45.424721,46.829853,44.651070,46.238888,47.560539]
+longitudes=[-135.056839,-114.371788,-68.519722,-123.329773,-113.323975,-104.618896,
+           -97.138451,-79.347015,-75.695000,-71.254028,-63.582687,-63.129166,-52.712830]
+</code></pre>
+
+<pre><code class="language-python">df = pd.DataFrame(list(zip(names, latitudes, longitudes)), 
+               columns =['Names', 'latitudes', 'longitudes']) 
 df
-</code></pre></div><table>
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -619,6 +650,7 @@ df
 <th align="right">longitudes</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -626,72 +658,84 @@ df
 <td align="right">60.7212</td>
 <td align="right">-135.057</td>
 </tr>
+
 <tr>
 <td align="right">1</td>
 <td align="left">Yellowknife</td>
 <td align="right">62.454</td>
 <td align="right">-114.372</td>
 </tr>
+
 <tr>
 <td align="right">2</td>
 <td align="left">Iqaluit</td>
 <td align="right">63.7486</td>
 <td align="right">-68.5197</td>
 </tr>
+
 <tr>
 <td align="right">3</td>
 <td align="left">Victoria</td>
 <td align="right">48.4073</td>
 <td align="right">-123.33</td>
 </tr>
+
 <tr>
 <td align="right">4</td>
 <td align="left">Edmonton</td>
 <td align="right">53.6316</td>
 <td align="right">-113.324</td>
 </tr>
+
 <tr>
 <td align="right">5</td>
 <td align="left">Regina</td>
 <td align="right">50.4452</td>
 <td align="right">-104.619</td>
 </tr>
+
 <tr>
 <td align="right">6</td>
 <td align="left">Winnipeg</td>
 <td align="right">49.8951</td>
 <td align="right">-97.1385</td>
 </tr>
+
 <tr>
 <td align="right">7</td>
 <td align="left">Toronto</td>
 <td align="right">43.6511</td>
 <td align="right">-79.347</td>
 </tr>
+
 <tr>
 <td align="right">8</td>
 <td align="left">Ottawa</td>
 <td align="right">45.4247</td>
 <td align="right">-75.695</td>
 </tr>
+
 <tr>
 <td align="right">9</td>
 <td align="left">Quebec</td>
 <td align="right">46.8299</td>
 <td align="right">-71.254</td>
 </tr>
+
 <tr>
 <td align="right">10</td>
 <td align="left">Halifax</td>
 <td align="right">44.6511</td>
 <td align="right">-63.5827</td>
 </tr>
+
 <tr>
 <td align="right">11</td>
 <td align="left">Charlottetown</td>
 <td align="right">46.2389</td>
 <td align="right">-63.1292</td>
 </tr>
+
 <tr>
 <td align="right">12</td>
 <td align="left">St-John s</td>
@@ -700,80 +744,83 @@ df
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
-<span style="color:#f92672">from</span> carto <span style="color:#f92672">import</span> scale_bar
 
-Y<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">136</span>,<span style="color:#ae81ff">189</span>],[<span style="color:#ae81ff">102</span>,<span style="color:#ae81ff">194</span>,<span style="color:#ae81ff">165</span>],[<span style="color:#ae81ff">171</span>,<span style="color:#ae81ff">221</span>,<span style="color:#ae81ff">164</span>],[<span style="color:#ae81ff">230</span>,<span style="color:#ae81ff">245</span>,<span style="color:#ae81ff">152</span>],\
-               [<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">191</span>],[<span style="color:#ae81ff">254</span>,<span style="color:#ae81ff">224</span>,<span style="color:#ae81ff">139</span>],[<span style="color:#ae81ff">253</span>,<span style="color:#ae81ff">174</span>,<span style="color:#ae81ff">97</span>],[<span style="color:#ae81ff">244</span>,<span style="color:#ae81ff">109</span>,<span style="color:#ae81ff">67</span>],[<span style="color:#ae81ff">213</span>,<span style="color:#ae81ff">62</span>,<span style="color:#ae81ff">79</span>]])<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
+<pre><code class="language-python">import matplotlib.pylab as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import numpy as np
+import matplotlib as mpl
+from carto import scale_bar
 
-colbar<span style="color:#f92672">=</span>mpl<span style="color:#f92672">.</span>colors<span style="color:#f92672">.</span>ListedColormap(Y)
-fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>), frameon<span style="color:#f92672">=</span>True)  
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
-ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">55</span>,<span style="color:#ae81ff">35</span>,<span style="color:#ae81ff">80</span>])
- <span style="color:#75715e">#ax.coastlines(resolution=&#39;110m&#39;);</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+Y=np.array([[50,136,189],[102,194,165],[171,221,164],[230,245,152],\
+               [255,255,191],[254,224,139],[253,174,97],[244,109,67],[213,62,79]])/255.
+
+colbar=mpl.colors.ListedColormap(Y)
+fig=plt.figure(figsize=(28,16), frameon=True)  
+ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-55,35,80])
+ #ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
+ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
+ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac
    
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
-coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
-                            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)    
-states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-            category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-            name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-            scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
+ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières 
+coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
+                            facecolor='none', name='coastline')
+ax.add_feature(coast, edgecolor='black')    
+states_provinces = cfeature.NaturalEarthFeature(
+            category='cultural',
+            name='admin_1_states_provinces_lines',
+            scale='10m',
+            facecolor='none')
     
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>) 
+ax.add_feature(states_provinces, edgecolor='gray') 
 
-ax<span style="color:#f92672">.</span>plot(df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitudes</span><span style="color:#e6db74">&#39;</span>], df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">latitudes</span><span style="color:#e6db74">&#39;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ko</span><span style="color:#e6db74">&#39;</span>, ms<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic())
+ax.plot(df['longitudes'], df['latitudes'], 'ko', ms=5, transform=ccrs.Geodetic())
 
-<span style="color:#66d9ef">for</span> lg, lt, name <span style="color:#f92672">in</span> zip(df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longitudes</span><span style="color:#e6db74">&#39;</span>], df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">latitudes</span><span style="color:#e6db74">&#39;</span>], df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Names</span><span style="color:#e6db74">&#39;</span>]):
-    <span style="color:#66d9ef">if</span> name <span style="color:#f92672">in</span> [<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Nazaré</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Marinha Grande</span><span style="color:#e6db74">&#39;</span>]:
-        ax<span style="color:#f92672">.</span>text(lg <span style="color:#f92672">-</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">05</span>, lt <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">05</span>, 
+for lg, lt, name in zip(df['longitudes'], df['latitudes'], df['Names']):
+    if name in [u'Nazaré', 'Marinha Grande']:
+        ax.text(lg - .05, lt + .05, 
                 name, 
-                va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, 
-                ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic(), fontweight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bold</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#66d9ef">else</span>:    
-        ax<span style="color:#f92672">.</span>text(lg <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">5</span>, lt <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">5</span>, 
+                va='center', 
+                ha='right', transform=ccrs.Geodetic(), fontweight='bold')
+    else:    
+        ax.text(lg + .5, lt + .5, 
                 name, 
-                va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, 
-                ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">left</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic(), fontweight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bold</span><span style="color:#e6db74">&#39;</span>)
+                va='center', 
+                ha='left', transform=ccrs.Geodetic(), fontweight='bold')
         
  
-mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>pcolormesh(lons,\
+mm = ax.pcolormesh(lons,\
                    lats,\
                    clim_81_2010,\
-                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>,\
-                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>, \
-                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
-                   cmap<span style="color:#f92672">=</span>colbar )
-ax<span style="color:#f92672">.</span>gridlines()
+                   vmin=-30,\
+                   vmax=15, \
+                   transform=ccrs.PlateCarree(),\
+                   cmap=colbar )
+ax.gridlines()
 
-<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
-xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
-yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+# Define gridline locations and draw the lines using cartopy's built-in gridliner:
+xticks = np.arange(-150.0,-40.0,20)
+yticks =np.arange(10,80,10)
 
-<span style="color:#75715e"># Standard 6,000 km scale bar.</span>
-scale_bar(ax, (<span style="color:#ae81ff">0.85</span>, <span style="color:#ae81ff">0.05</span>), <span style="color:#ae81ff">500</span> ,plot_kwargs <span style="color:#f92672">=</span> dict(linestyle<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">dashed</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>))
+# Standard 6,000 km scale bar.
+scale_bar(ax, (0.85, 0.05), 500 ,plot_kwargs = dict(linestyle='dashed', color='black'))
 
-cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm, orientation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">horizontal</span><span style="color:#e6db74">&#39;</span>, shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">15.1</span>, <span style="color:#ae81ff">5</span>),extend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>)
-cbar<span style="color:#f92672">.</span>set_label(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> Projection = Lambert Conformal Conic </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Resolution: 5 Arcs-Minutes (10 km)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Data provided by Natural Resources Canada / Created by Guillaume Dueymes</span><span style="color:#e6db74">&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># Affichage de la légende de la barre de couleur</span>
-cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>) 
+cbar = plt.colorbar(mm, orientation='horizontal', shrink=0.5, drawedges='True', ticks=np.arange(-30, 15.1, 5),extend='both')
+cbar.set_label(u'\n Projection = Lambert Conformal Conic \nResolution: 5 Arcs-Minutes (10 km)\nData provided by Natural Resources Canada / Created by Guillaume Dueymes', size='medium') # Affichage de la légende de la barre de couleur
+cbar.ax.tick_params(labelsize=17) 
  
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Temperature / Température (°C)</span><span style="color:#e6db74">&#39;</span>,size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x-large</span><span style="color:#e6db74">&#39;</span>)
-string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Climate normals of mean annual temperature (°C)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> reference period 1981-2010</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
-plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
-plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./ANUSPLIN_NLDAS_10km_YEAR_CLIM_1981-2010.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-plt<span style="color:#f92672">.</span>show() 
+plt.xlabel(u'\n\n\nTemperature / Température (°C)',size='x-large')
+string_title=u'Climate normals of mean annual temperature (°C)\n reference period 1981-2010\n'
+plt.title(string_title, size='xx-large')
+plt.savefig('./ANUSPLIN_NLDAS_10km_YEAR_CLIM_1981-2010.png', bbox_inches='tight', pad_inches=0.1)
+plt.show() 
 
-</code></pre></div><p><img src="./Plot_Climatoloy_Netcdf_10_0.png" alt="png"></p>
+</code></pre>
+
+<p><img src="./Plot_Climatoloy_Netcdf_10_0.png" alt="png" /></p>
 
     </div>
 

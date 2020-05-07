@@ -542,97 +542,125 @@ Pandas does not directly have tools to transform xml into DataFrame because the 
   <div class="article-container">
 
     <div class="article-style">
-      <p>﻿In this post, we will show how to work with Surface Weather Observation from ECCC in XML language (Extensible Markup Language)</p>
-<h3 id="swobxml">SW-OB-XML</h3>
-<p>For xml files, we will use a package called xml which will allow us to decrypt the xml file.</p>
-<p>Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.</p>
-<p>We will first download <a href="https://dd.weather.gc.ca/observations/doc/">an xml file</a>.</p>
-<p>We are going to work here with the meteorological ground (SWOB-ML) and marine observations data found on the ECCC Datamart.</p>
-<hr>
-<p>Data are available at the following links:</p>
-<ul>
-<li>
-<h2 id="earth-observations">Earth observations:</h2>
-</li>
-</ul>
-<p><a href="https://dd.meteo.gc.ca/observations/swob-ml/AAAAMMJJ/XXXX/">https://dd.meteo.gc.ca/observations/swob-ml/AAAAMMJJ/XXXX/</a></p>
-<p>Where:</p>
-<ul>
-<li>
-<p>AAAAMMJJ: observations date, UTC</p>
-</li>
-<li>
-<p>XXXX: station ID (OMM ID)</p>
-</li>
-<li>
-<h2 id="marine-observations">Marine observations:</h2>
-</li>
-</ul>
-<p><a href="https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX">https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX</a></p>
-<p>Where:</p>
-<ul>
-<li>
-<p>AAAAMMJJ: observations date, UTC</p>
-</li>
-<li>
-<p>XXXXXXX: station ID (OMM ID), can be 5 or 7 digits</p>
-</li>
-<li>
-<h2 id="partner-observations">Partner observations:</h2>
-</li>
-</ul>
-<p><a href="https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID">https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID</a></p>
-<p>Where:</p>
-<ul>
-<li>NETWORK: acronym of the partner network</li>
-<li>YYYYMMDD: observations date, UTC</li>
-<li>MSC-ID: ID</li>
-</ul>
-<p>################################################</p>
-<h3 id="description">Description                       </h3>
-<p>################################################</p>
-<p>The markup language for ground weather (SWOB Met-ML) and marine observations is an XML format for the distribution of weather data observed by Environment and Climate Change Canada and its partners.</p>
-<p>The list of observation stations is available here:</p>
-<p><a href="https://dd.meteo.gc.ca/observations/doc/swob-xml_station_list.csv">https://dd.meteo.gc.ca/observations/doc/swob-xml_station_list.csv</a></p>
-<p>The list of marine observation stations is available here:</p>
-<p><a href="https://dd.meteo.gc.ca/observations/doc/swob-xml_marine_station_list.csv">https://dd.meteo.gc.ca/observations/doc/swob-xml_marine_station_list.csv</a></p>
-<p>The list of partner stations is available here:</p>
-<p><a href="https://dd.meteo.gc.ca/observations/doc/swob-xml_partner_station_list.csv">https://dd.meteo.gc.ca/observations/doc/swob-xml_partner_station_list.csv</a></p>
-<p>The format specification is available in the following directory:
-<a href="https://dd.meteo.gc.ca/observations/doc/">https://dd.meteo.gc.ca/observations/doc/</a></p>
-<p>Here is the structure of a SWOB file:</p>
-<!-- raw HTML omitted -->
-<p>First, we import python librairies and define the date we want to extract:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># importations des librairies </span>
-<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime, timedelta
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd 
-<span style="color:#f92672">import</span> xml.etree.ElementTree <span style="color:#f92672">as</span> ET
-<span style="color:#f92672">import</span> wget
-<span style="color:#f92672">import</span> warnings
-warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
-<span style="color:#f92672">import</span> os 
-<span style="color:#f92672">from</span> os.path <span style="color:#f92672">import</span> exists
-now <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>utcnow() <span style="color:#f92672">-</span> timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+      
 
-year <span style="color:#f92672">=</span> str(now<span style="color:#f92672">.</span>year)
-month <span style="color:#f92672">=</span> str(now<span style="color:#f92672">.</span>month)
-day <span style="color:#f92672">=</span> str(now<span style="color:#f92672">.</span>day)
-hour <span style="color:#f92672">=</span> f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{now.hour:02d}</span><span style="color:#e6db74">&#39;</span>
-day <span style="color:#f92672">=</span> f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{now.day:02d}</span><span style="color:#e6db74">&#39;</span>
-month <span style="color:#f92672">=</span> f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{now.month:02d}</span><span style="color:#e6db74">&#39;</span>
-date <span style="color:#f92672">=</span> year<span style="color:#f92672">+</span>month<span style="color:#f92672">+</span>day
+<p>﻿In this post, we will show how to work with Surface Weather Observation from ECCC in XML language (Extensible Markup Language)</p>
+
+<h3 id="sw-ob-xml">SW-OB-XML</h3>
+
+<p>For xml files, we will use a package called xml which will allow us to decrypt the xml file.</p>
+
+<p>Pandas does not directly have tools to transform xml into DataFrame because the semi-structured aspect of xml forces us to perform a few steps before filling out a DataFrame.</p>
+
+<p>We will first download <a href="https://dd.weather.gc.ca/observations/doc/" target="_blank">an xml file</a>.</p>
+
+<p>We are going to work here with the meteorological ground (SWOB-ML) and marine observations data found on the ECCC Datamart.</p>
+
+<hr />
+
+<p>Data are available at the following links:</p>
+
+<ul>
+<li>Earth observations:
+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</li>
+</ul>
+
+<p><a href="https://dd.meteo.gc.ca/observations/swob-ml/AAAAMMJJ/XXXX/" target="_blank">https://dd.meteo.gc.ca/observations/swob-ml/AAAAMMJJ/XXXX/</a></p>
+
+<p>Where:</p>
+
+<ul>
+<li>AAAAMMJJ: observations date, UTC</li>
+
+<li><p>XXXX: station ID (OMM ID)</p></li>
+
+<li><h2 id="marine-observations">Marine observations:</h2></li>
+</ul>
+
+<p><a href="https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX" target="_blank">https://dd.meteo.gc.ca/observations/swob-ml/marine/moored-buoys/YYYMMDD/XXXXXXX</a></p>
+
+<p>Where:
+* AAAAMMJJ: observations date, UTC
+* XXXXXXX: station ID (OMM ID), can be 5 or 7 digits</p>
+
+<ul>
+<li>Partner observations:
+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-
+<br /></li>
+</ul>
+
+<p><a href="https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID" target="_blank">https://dd.meteo.gc.ca/observations/swob-ml/partners/NETWORK/YYYMMDD/MSC-ID</a></p>
+
+<p>Where:
+ - NETWORK: acronym of the partner network
+ - YYYYMMDD: observations date, UTC
+ - MSC-ID: ID</p>
+
+<p>################################################</p>
+
+<h3 id="description">Description</h3>
+
+<p>################################################</p>
+
+<p>The markup language for ground weather (SWOB Met-ML) and marine observations is an XML format for the distribution of weather data observed by Environment and Climate Change Canada and its partners.</p>
+
+<p>The list of observation stations is available here:</p>
+
+<p><a href="https://dd.meteo.gc.ca/observations/doc/swob-xml_station_list.csv" target="_blank">https://dd.meteo.gc.ca/observations/doc/swob-xml_station_list.csv</a></p>
+
+<p>The list of marine observation stations is available here:</p>
+
+<p><a href="https://dd.meteo.gc.ca/observations/doc/swob-xml_marine_station_list.csv" target="_blank">https://dd.meteo.gc.ca/observations/doc/swob-xml_marine_station_list.csv</a></p>
+
+<p>The list of partner stations is available here:</p>
+
+<p><a href="https://dd.meteo.gc.ca/observations/doc/swob-xml_partner_station_list.csv" target="_blank">https://dd.meteo.gc.ca/observations/doc/swob-xml_partner_station_list.csv</a></p>
+
+<p>The format specification is available in the following directory:
+<a href="https://dd.meteo.gc.ca/observations/doc/" target="_blank">https://dd.meteo.gc.ca/observations/doc/</a></p>
+
+<p>Here is the structure of a SWOB file:</p>
+
+<p><img src="./struc_swob.png" alt="Indentation" width="100%" height="100%"></p>
+
+<p>First, we import python librairies and define the date we want to extract:</p>
+
+<pre><code class="language-python"># importations des librairies 
+from datetime import datetime, timedelta
+import pandas as pd 
+import xml.etree.ElementTree as ET
+import wget
+import warnings
+warnings.filterwarnings(&quot;ignore&quot;)
+import os 
+from os.path import exists
+now = datetime.utcnow() - timedelta(hours=1)
+
+year = str(now.year)
+month = str(now.month)
+day = str(now.day)
+hour = f'{now.hour:02d}'
+day = f'{now.day:02d}'
+month = f'{now.month:02d}'
+date = year+month+day
 date
-</code></pre></div><pre><code>'20200212'
 </code></pre>
+
+<pre><code>'20200212'
+</code></pre>
+
 <p>We will list the stations we want to extract: example for the province of Quebec and Ontario.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_table(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">swob-xml_station_list.csv</span><span style="color:#e6db74">&#34;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#34;</span>)
-stations_quebec <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[(stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>)  ,:]
-stations_ontario <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[(stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Ontario</span><span style="color:#e6db74">&#39;</span>)  ,:]
-stations_mask<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>concat([stations_quebec,stations_ontario],axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-stations_mask_sans_NaN <span style="color:#f92672">=</span> stations_mask<span style="color:#f92672">.</span>dropna() 
-<span style="color:#75715e">#stations_mask_sans_NaN_AUTO = stations_mask_sans_NaN.loc[stations_mask_sans_NaN[&#34;AUTO/MAN&#34;]==&#39;AUTO&#39;,:]</span>
-stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">stations = pd.read_table(&quot;swob-xml_station_list.csv&quot;, sep=&quot;,&quot;)
+stations_quebec = stations.loc[(stations[&quot;Province/Territory&quot;]=='Quebec')  ,:]
+stations_ontario = stations.loc[(stations[&quot;Province/Territory&quot;]=='Ontario')  ,:]
+stations_mask=pd.concat([stations_quebec,stations_ontario],axis=0)
+stations_mask_sans_NaN = stations_mask.dropna() 
+#stations_mask_sans_NaN_AUTO = stations_mask_sans_NaN.loc[stations_mask_sans_NaN[&quot;AUTO/MAN&quot;]=='AUTO',:]
+stations_mask_sans_NaN.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -649,6 +677,7 @@ stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
 <th align="left">Province/Territory</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">48</td>
@@ -664,6 +693,7 @@ stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">49</td>
 <td align="left">CGBC</td>
@@ -678,6 +708,7 @@ stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">50</td>
 <td align="left">CGCH</td>
@@ -692,6 +723,7 @@ stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">51</td>
 <td align="left">CGCL</td>
@@ -706,6 +738,7 @@ stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">52</td>
 <td align="left">CGGA</td>
@@ -717,48 +750,73 @@ stations_mask_sans_NaN<span style="color:#f92672">.</span>head()
 <td align="right">40</td>
 <td align="left">MSC</td>
 <td align="left">CA</td>
-<td></td>
-<td></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
+
 <h2 id="1-working-with-one-station">1- Working with one station</h2>
-<p>Let's work with  CWTQ station ID:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
-stid <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CWTQ</span><span style="color:#e6db74">&#39;</span>
-tmp_file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">https://dd.weather.gc.ca/observations/swob-ml/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>date<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>stid<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>year<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>day<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>hour<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">00-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>stid<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-AUTO-swob.xml</span><span style="color:#e6db74">&#39;</span>
+
+<p>Let&rsquo;s work with  CWTQ station ID:</p>
+
+<pre><code class="language-python">import requests
+stid = 'CWTQ'
+tmp_file = 'https://dd.weather.gc.ca/observations/swob-ml/'+date+'/'+stid+'/'+year+'-'+month+'-'+day+'-'+hour+'00-'+stid+'-AUTO-swob.xml'
 tmp_file
-</code></pre></div><pre><code>'https://dd.weather.gc.ca/observations/swob-ml/20200212/CWTQ/2020-02-12-1900-CWTQ-AUTO-swob.xml'
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">wget<span style="color:#f92672">.</span>download(tmp_file)
-</code></pre></div><pre><code>100% [............................................................] 9408 / 9408
+
+<pre><code>'https://dd.weather.gc.ca/observations/swob-ml/20200212/CWTQ/2020-02-12-1900-CWTQ-AUTO-swob.xml'
+</code></pre>
+
+<pre><code class="language-python">wget.download(tmp_file)
+</code></pre>
+
+<pre><code>100% [............................................................] 9408 / 9408
 
 
 
 
 '2020-02-12-1900-CWTQ-AUTO-swob.xml'
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tree <span style="color:#f92672">=</span> ET<span style="color:#f92672">.</span>parse(year<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>day<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>hour<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">00-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>stid<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-AUTO-swob.xml</span><span style="color:#e6db74">&#39;</span>)
-root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()
-children <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>getchildren()
-</code></pre></div><p>Here is the root of our data to extract:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">root
-</code></pre></div><pre><code>&lt;Element '{http://www.opengis.net/om/1.0}ObservationCollection' at 0x000000000950ED18&gt;
+
+<pre><code class="language-python">tree = ET.parse(year+'-'+month+'-'+day+'-'+hour+'00-'+stid+'-AUTO-swob.xml')
+root=tree.getroot()
+children = root.getchildren()
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">children
-</code></pre></div><pre><code>[&lt;Element '{http://www.opengis.net/om/1.0}member' at 0x000000000950EE08&gt;]
+
+<p>Here is the root of our data to extract:</p>
+
+<pre><code class="language-python">root
 </code></pre>
+
+<pre><code>&lt;Element '{http://www.opengis.net/om/1.0}ObservationCollection' at 0x000000000950ED18&gt;
+</code></pre>
+
+<pre><code class="language-python">children
+</code></pre>
+
+<pre><code>[&lt;Element '{http://www.opengis.net/om/1.0}member' at 0x000000000950EE08&gt;]
+</code></pre>
+
 <p>Number of elements in our file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># total amount of items</span>
-<span style="color:#66d9ef">print</span>(len(root))
-</code></pre></div><pre><code>1
+
+<pre><code class="language-python"># total amount of items
+print(len(root))
 </code></pre>
-<p>for child in root.iter('*'):</p>
+
+<pre><code>1
+</code></pre>
+
+<p>for child in root.iter(&rsquo;*&lsquo;):</p>
+
 <pre><code>print(child.items())
 
 #print(child.keys())
 </code></pre>
-<p>for child in root.iter('*'):</p>
+
+<p>for child in root.iter(&rsquo;*&lsquo;):</p>
+
 <pre><code>print(child)
 
 print(child.attrib)
@@ -767,80 +825,86 @@ print(child.attrib.get('value'))
 
 print(child.attrib.get('name'))
 </code></pre>
+
 <p>The list of variables is available on page 40 of the document:
 &mdash; SWOB-ML_Product_User_Guide_v8.2_f.pdf</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">=</span>[]
-date_tm<span style="color:#f92672">=</span>[] 
-avg_air_temp_pst1hr<span style="color:#f92672">=</span>[]
-max_air_temp_pst1hr<span style="color:#f92672">=</span>[]
-min_air_temp_pst1hr<span style="color:#f92672">=</span>[]
-max_rel_hum_pst1hr<span style="color:#f92672">=</span>[]
-min_rel_hum_pst1hr<span style="color:#f92672">=</span>[]
-stn_pres<span style="color:#f92672">=</span>[]
-mslp<span style="color:#f92672">=</span>[]
-pcpn_amt_pst1hr<span style="color:#f92672">=</span>[]
-wnd_dir_10m_pst1hr_max_spd<span style="color:#f92672">=</span>[]
-max_wnd_spd_10m_pst1hr<span style="color:#f92672">=</span>[]
-avg_wnd_spd_10m_pst10mts<span style="color:#f92672">=</span>[]
-avg_snw_dpth_pst5mts_1<span style="color:#f92672">=</span>[]
-avg_snw_dpth_pst5mts_2<span style="color:#f92672">=</span>[]
-avg_snw_dpth_pst5mts_3<span style="color:#f92672">=</span>[]
+
+<pre><code class="language-python">data=[]
+date_tm=[] 
+avg_air_temp_pst1hr=[]
+max_air_temp_pst1hr=[]
+min_air_temp_pst1hr=[]
+max_rel_hum_pst1hr=[]
+min_rel_hum_pst1hr=[]
+stn_pres=[]
+mslp=[]
+pcpn_amt_pst1hr=[]
+wnd_dir_10m_pst1hr_max_spd=[]
+max_wnd_spd_10m_pst1hr=[]
+avg_wnd_spd_10m_pst10mts=[]
+avg_snw_dpth_pst5mts_1=[]
+avg_snw_dpth_pst5mts_2=[]
+avg_snw_dpth_pst5mts_3=[]
 
 
-<span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>iter(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*</span><span style="color:#e6db74">&#39;</span>):  
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">date_tm</span><span style="color:#e6db74">&#39;</span>:           <span style="color:#75715e"># date of actual observation</span>
-        date_tm<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>:  <span style="color:#75715e"># average air temperature in the last hour </span>
-        avg_air_temp_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># minimum air temperature in the last hour</span>
-        min_air_temp_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># maximum air temperature in the last hour </span>
-        max_air_temp_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># maximum relative humidity in the past hour</span>
-        max_rel_hum_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># minimum relative humidity in the past hour</span>
-        min_rel_hum_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>)) 
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">stn_pres</span><span style="color:#e6db74">&#39;</span>:         <span style="color:#75715e"># pressure at the station (start of the hour)</span>
-        stn_pres<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pcpn_amt_pst1hr</span><span style="color:#e6db74">&#39;</span>:   <span style="color:#75715e"># amount of precipitation in the past hour</span>
-        pcpn_amt_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))  
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_wnd_spd_10m_pst10mts</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># average wind speed at 10 m for 10 min</span>
-        avg_wnd_spd_10m_pst10mts<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))      
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_wnd_spd_10m_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e">#  maximum wind speed at 10 m for one hour</span>
-        max_wnd_spd_10m_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))      
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wnd_dir_10m_pst1hr_max_spd</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># Instant wind direction at 10 m for maximum hourly wind speed, min 0 to 60</span>
-        wnd_dir_10m_pst1hr_max_spd<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))          
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mslp</span><span style="color:#e6db74">&#39;</span>:   <span style="color:#75715e"># average sea level pressure</span>
-        mslp<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))      
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_1</span><span style="color:#e6db74">&#39;</span>:
-            avg_snw_dpth_pst5mts_1<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_2</span><span style="color:#e6db74">&#39;</span>:
-            avg_snw_dpth_pst5mts_2<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_3</span><span style="color:#e6db74">&#39;</span>:
-            avg_snw_dpth_pst5mts_3<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
+for child in root.iter('*'):  
+    if child.attrib.get('name') == 'date_tm':           # date of actual observation
+        date_tm.append(child.get('value'))
+    if child.attrib.get('name') == 'avg_air_temp_pst1hr':  # average air temperature in the last hour 
+        avg_air_temp_pst1hr.append(child.get('value'))    
+    if child.attrib.get('name') == 'min_air_temp_pst1hr': # minimum air temperature in the last hour
+        min_air_temp_pst1hr.append(child.get('value'))    
+    if child.attrib.get('name') == 'max_air_temp_pst1hr': # maximum air temperature in the last hour 
+        max_air_temp_pst1hr.append(child.get('value'))    
+    if child.attrib.get('name') == 'max_rel_hum_pst1hr': # maximum relative humidity in the past hour
+        max_rel_hum_pst1hr.append(child.get('value'))    
+    if child.attrib.get('name') == 'min_rel_hum_pst1hr': # minimum relative humidity in the past hour
+        min_rel_hum_pst1hr.append(child.get('value')) 
+    if child.attrib.get('name') == 'stn_pres':         # pressure at the station (start of the hour)
+        stn_pres.append(child.get('value'))
+    if child.attrib.get('name') == 'pcpn_amt_pst1hr':   # amount of precipitation in the past hour
+        pcpn_amt_pst1hr.append(child.get('value'))  
+    if child.attrib.get('name') == 'avg_wnd_spd_10m_pst10mts': # average wind speed at 10 m for 10 min
+        avg_wnd_spd_10m_pst10mts.append(child.get('value'))      
+    if child.attrib.get('name') == 'max_wnd_spd_10m_pst1hr': #  maximum wind speed at 10 m for one hour
+        max_wnd_spd_10m_pst1hr.append(child.get('value'))      
+    if child.attrib.get('name') == 'wnd_dir_10m_pst1hr_max_spd': # Instant wind direction at 10 m for maximum hourly wind speed, min 0 to 60
+        wnd_dir_10m_pst1hr_max_spd.append(child.get('value'))          
+    if child.attrib.get('name') == 'mslp':   # average sea level pressure
+        mslp.append(child.get('value'))      
+    if child.attrib.get('name') == 'avg_snw_dpth_pst5mts_1':
+            avg_snw_dpth_pst5mts_1.append(child.get('value'))
+    if child.attrib.get('name') == 'avg_snw_dpth_pst5mts_2':
+            avg_snw_dpth_pst5mts_2.append(child.get('value'))
+    if child.attrib.get('name') == 'avg_snw_dpth_pst5mts_3':
+            avg_snw_dpth_pst5mts_3.append(child.get('value'))
             
             
-data_dict <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">date_tm</span><span style="color:#e6db74">&#39;</span>:date_tm, 
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>:avg_air_temp_pst1hr, 
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>:min_air_temp_pst1hr,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>: max_air_temp_pst1hr, 
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>:max_rel_hum_pst1hr,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>:min_rel_hum_pst1hr,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">stn_pres</span><span style="color:#e6db74">&#39;</span>:stn_pres,
-         <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mslp</span><span style="color:#e6db74">&#39;</span>:mslp,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pcpn_amt_pst1hr</span><span style="color:#e6db74">&#39;</span>:pcpn_amt_pst1hr,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_wnd_spd_10m_pst10mts</span><span style="color:#e6db74">&#39;</span>:avg_wnd_spd_10m_pst10mts,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wnd_dir_10m_pst1hr_max_spd</span><span style="color:#e6db74">&#39;</span>:wnd_dir_10m_pst1hr_max_spd,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_wnd_spd_10m_pst1hr</span><span style="color:#e6db74">&#39;</span>:max_wnd_spd_10m_pst1hr,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_1</span><span style="color:#e6db74">&#39;</span>:avg_snw_dpth_pst5mts_1,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_2</span><span style="color:#e6db74">&#39;</span>:avg_snw_dpth_pst5mts_2,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_3</span><span style="color:#e6db74">&#39;</span>:avg_snw_dpth_pst5mts_3
+data_dict = {'date_tm':date_tm, 
+        'avg_air_temp_pst1hr':avg_air_temp_pst1hr, 
+        'min_air_temp_pst1hr':min_air_temp_pst1hr,
+        'max_air_temp_pst1hr': max_air_temp_pst1hr, 
+        'max_rel_hum_pst1hr':max_rel_hum_pst1hr,
+        'min_rel_hum_pst1hr':min_rel_hum_pst1hr,
+        'stn_pres':stn_pres,
+         'mslp':mslp,
+        'pcpn_amt_pst1hr':pcpn_amt_pst1hr,
+        'avg_wnd_spd_10m_pst10mts':avg_wnd_spd_10m_pst10mts,
+        'wnd_dir_10m_pst1hr_max_spd':wnd_dir_10m_pst1hr_max_spd,
+        'max_wnd_spd_10m_pst1hr':max_wnd_spd_10m_pst1hr,
+        'avg_snw_dpth_pst5mts_1':avg_snw_dpth_pst5mts_1,
+        'avg_snw_dpth_pst5mts_2':avg_snw_dpth_pst5mts_2,
+        'avg_snw_dpth_pst5mts_3':avg_snw_dpth_pst5mts_3
         
        } 
 
-data<span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data_dict)           
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data
-</code></pre></div><table>
+data= pd.DataFrame(data_dict)           
+</code></pre>
+
+<pre><code class="language-python">data
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -861,6 +925,7 @@ data<span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>D
 <th align="right">avg_snw_dpth_pst5mts_3</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -882,10 +947,14 @@ data<span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>D
 </tr>
 </tbody>
 </table>
+
 <h2 id="2-reading-the-station-list">2- Reading the station list</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_table(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">swob-xml_station_list.csv</span><span style="color:#e6db74">&#34;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#34;</span>)
-stations<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">stations = pd.read_table(&quot;swob-xml_station_list.csv&quot;, sep=&quot;,&quot;)
+stations.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -902,6 +971,7 @@ stations<span style="color:#f92672">.</span>head()
 <th align="right">Province/Territory</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -917,6 +987,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="right">nan</td>
 </tr>
+
 <tr>
 <td align="right">1</td>
 <td align="right">4400489</td>
@@ -931,6 +1002,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="right">nan</td>
 </tr>
+
 <tr>
 <td align="right">2</td>
 <td align="right">4400490</td>
@@ -945,6 +1017,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="right">nan</td>
 </tr>
+
 <tr>
 <td align="right">3</td>
 <td align="right">4600303</td>
@@ -959,6 +1032,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="right">nan</td>
 </tr>
+
 <tr>
 <td align="right">4</td>
 <td align="right">4600304</td>
@@ -975,10 +1049,16 @@ stations<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<h2 id="3-filter-stations-over--a-specific-province">3- Filter stations over  a specific province</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations_mask <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>,:]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations_mask<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<h2 id="3-filter-stations-over-a-specific-province">3- Filter stations over  a specific province</h2>
+
+<pre><code class="language-python">stations_mask = stations.loc[stations[&quot;Province/Territory&quot;]=='Quebec',:]
+</code></pre>
+
+<pre><code class="language-python">stations_mask.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -995,6 +1075,7 @@ stations<span style="color:#f92672">.</span>head()
 <th align="left">Province/Territory</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">48</td>
@@ -1010,6 +1091,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">49</td>
 <td align="left">CGBC</td>
@@ -1024,6 +1106,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">50</td>
 <td align="left">CGCH</td>
@@ -1038,6 +1121,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">51</td>
 <td align="left">CGCL</td>
@@ -1052,6 +1136,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">52</td>
 <td align="left">CGGA</td>
@@ -1068,12 +1153,22 @@ stations<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#stations_mask_sans_NaN = stations_mask.dropna() </span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#stations_mask_sans_NaN</span>
-</code></pre></div><p>We want to work with only stations with automatic recording:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations_mask_AUTO <span style="color:#f92672">=</span> stations_mask<span style="color:#f92672">.</span>loc[stations_mask[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>,:]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stations_mask_AUTO<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">#stations_mask_sans_NaN = stations_mask.dropna() 
+</code></pre>
+
+<pre><code class="language-python">#stations_mask_sans_NaN
+</code></pre>
+
+<p>We want to work with only stations with automatic recording:</p>
+
+<pre><code class="language-python">stations_mask_AUTO = stations_mask.loc[stations_mask[&quot;AUTO/MAN&quot;]=='AUTO',:]
+</code></pre>
+
+<pre><code class="language-python">stations_mask_AUTO.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -1090,6 +1185,7 @@ stations<span style="color:#f92672">.</span>head()
 <th align="left">Province/Territory</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">48</td>
@@ -1105,6 +1201,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">49</td>
 <td align="left">CGBC</td>
@@ -1119,6 +1216,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">50</td>
 <td align="left">CGCH</td>
@@ -1133,6 +1231,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">51</td>
 <td align="left">CGCL</td>
@@ -1147,6 +1246,7 @@ stations<span style="color:#f92672">.</span>head()
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">52</td>
 <td align="left">CGGA</td>
@@ -1163,195 +1263,216 @@ stations<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
+
 <p>Example of a loop on all stations in Quebec:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> index, row <span style="color:#f92672">in</span> stations_mask_AUTO<span style="color:#f92672">.</span>iterrows():
-    stid <span style="color:#f92672">=</span> row[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">IATA_ID</span><span style="color:#e6db74">&#39;</span>]
-    tmp_file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">https://dd.weather.gc.ca/observations/swob-ml/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>date<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>stid<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>year<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>day<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>hour<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">00-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>stid<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-AUTO-swob.xml</span><span style="color:#e6db74">&#39;</span>
-    r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(tmp_file)
+
+<pre><code class="language-python">for index, row in stations_mask_AUTO.iterrows():
+    stid = row['IATA_ID']
+    tmp_file = 'https://dd.weather.gc.ca/observations/swob-ml/'+date+'/'+stid+'/'+year+'-'+month+'-'+day+'-'+hour+'00-'+stid+'-AUTO-swob.xml'
+    r = requests.get(tmp_file)
    
-    <span style="color:#66d9ef">if</span> r<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span>:
-        <span style="color:#66d9ef">continue</span>
+    if r.status_code != 200:
+        continue
     
-    root <span style="color:#f92672">=</span> ET<span style="color:#f92672">.</span>fromstring(r<span style="color:#f92672">.</span>content)
-    data<span style="color:#f92672">=</span>[]
-    date_tm<span style="color:#f92672">=</span>[] 
-    avg_air_temp_pst1hr<span style="color:#f92672">=</span>[]
-    max_air_temp_pst1hr<span style="color:#f92672">=</span>[]
-    min_air_temp_pst1hr<span style="color:#f92672">=</span>[]
-    max_rel_hum_pst1hr<span style="color:#f92672">=</span>[]
-    min_rel_hum_pst1hr<span style="color:#f92672">=</span>[]
-    stn_pres<span style="color:#f92672">=</span>[]
-    mslp<span style="color:#f92672">=</span>[]
-    pcpn_amt_pst1hr<span style="color:#f92672">=</span>[]
-    wnd_dir_10m_pst1hr_max_spd<span style="color:#f92672">=</span>[]
-    max_wnd_spd_10m_pst1hr<span style="color:#f92672">=</span>[]
-    avg_wnd_spd_10m_pst10mts<span style="color:#f92672">=</span>[]
-    avg_snw_dpth_pst5mts_1<span style="color:#f92672">=</span>[]
-    avg_snw_dpth_pst5mts_2<span style="color:#f92672">=</span>[]
-    avg_snw_dpth_pst5mts_3<span style="color:#f92672">=</span>[]
+    root = ET.fromstring(r.content)
+    data=[]
+    date_tm=[] 
+    avg_air_temp_pst1hr=[]
+    max_air_temp_pst1hr=[]
+    min_air_temp_pst1hr=[]
+    max_rel_hum_pst1hr=[]
+    min_rel_hum_pst1hr=[]
+    stn_pres=[]
+    mslp=[]
+    pcpn_amt_pst1hr=[]
+    wnd_dir_10m_pst1hr_max_spd=[]
+    max_wnd_spd_10m_pst1hr=[]
+    avg_wnd_spd_10m_pst10mts=[]
+    avg_snw_dpth_pst5mts_1=[]
+    avg_snw_dpth_pst5mts_2=[]
+    avg_snw_dpth_pst5mts_3=[]
 
-    <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>iter(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*</span><span style="color:#e6db74">&#39;</span>):  
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">date_tm</span><span style="color:#e6db74">&#39;</span>:                   <span style="color:#75715e"># date-heure d’observation réelle</span>
-            date_tm<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>:  <span style="color:#75715e"># température de l&#39;air moyenne au cours de la dernière heure (minutes 00 à 60)</span>
-            avg_air_temp_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># température de l&#39;air minimale au cours de la dernière heure (minutes 00 à 60)</span>
-            min_air_temp_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># température de l&#39;air maximale au cours de la dernière heure (minutes 00 à 60) </span>
-            max_air_temp_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># humidité relative maximale au cours de la dernière heure </span>
-            max_rel_hum_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))    
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>:<span style="color:#75715e"># humidité relative minimale au cours de la dernière heure</span>
-            min_rel_hum_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>)) 
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">stn_pres</span><span style="color:#e6db74">&#39;</span>:         <span style="color:#75715e"># pression à la station (début de l’heure)</span>
-            stn_pres<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pcpn_amt_pst1hr</span><span style="color:#e6db74">&#39;</span>:   <span style="color:#75715e"># quantité de précipitation au cours de la dernière heure</span>
-            pcpn_amt_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))  
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_wnd_spd_10m_pst10mts</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e"># vitesse moyenne du vent à 10 m pendant 10 min</span>
-            avg_wnd_spd_10m_pst10mts<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))      
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_wnd_spd_10m_pst1hr</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e">#  vitesse maximale du vent à 10 m pendant une heure</span>
-            max_wnd_spd_10m_pst1hr<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))      
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wnd_dir_10m_pst1hr_max_spd</span><span style="color:#e6db74">&#39;</span>: <span style="color:#75715e">#Direction instantanée du vent à 10 m pour une vitesse horaire maximale du vent, min 0 à 60</span>
-            wnd_dir_10m_pst1hr_max_spd<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))          
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mslp</span><span style="color:#e6db74">&#39;</span>:   <span style="color:#75715e"># pression moyenne au niveau de la mer</span>
-            mslp<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))      
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_1</span><span style="color:#e6db74">&#39;</span>:
-                avg_snw_dpth_pst5mts_1<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_2</span><span style="color:#e6db74">&#39;</span>:
-                avg_snw_dpth_pst5mts_2<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
-        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_3</span><span style="color:#e6db74">&#39;</span>:
-                avg_snw_dpth_pst5mts_3<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">value</span><span style="color:#e6db74">&#39;</span>))
+    for child in root.iter('*'):  
+        if child.attrib.get('name') == 'date_tm':                   # date-heure d’observation réelle
+            date_tm.append(child.get('value'))
+        if child.attrib.get('name') == 'avg_air_temp_pst1hr':  # température de l'air moyenne au cours de la dernière heure (minutes 00 à 60)
+            avg_air_temp_pst1hr.append(child.get('value'))    
+        if child.attrib.get('name') == 'min_air_temp_pst1hr': # température de l'air minimale au cours de la dernière heure (minutes 00 à 60)
+            min_air_temp_pst1hr.append(child.get('value'))    
+        if child.attrib.get('name') == 'max_air_temp_pst1hr': # température de l'air maximale au cours de la dernière heure (minutes 00 à 60) 
+            max_air_temp_pst1hr.append(child.get('value'))    
+        if child.attrib.get('name') == 'max_rel_hum_pst1hr': # humidité relative maximale au cours de la dernière heure 
+            max_rel_hum_pst1hr.append(child.get('value'))    
+        if child.attrib.get('name') == 'min_rel_hum_pst1hr':# humidité relative minimale au cours de la dernière heure
+            min_rel_hum_pst1hr.append(child.get('value')) 
+        if child.attrib.get('name') == 'stn_pres':         # pression à la station (début de l’heure)
+            stn_pres.append(child.get('value'))
+        if child.attrib.get('name') == 'pcpn_amt_pst1hr':   # quantité de précipitation au cours de la dernière heure
+            pcpn_amt_pst1hr.append(child.get('value'))  
+        if child.attrib.get('name') == 'avg_wnd_spd_10m_pst10mts': # vitesse moyenne du vent à 10 m pendant 10 min
+            avg_wnd_spd_10m_pst10mts.append(child.get('value'))      
+        if child.attrib.get('name') == 'max_wnd_spd_10m_pst1hr': #  vitesse maximale du vent à 10 m pendant une heure
+            max_wnd_spd_10m_pst1hr.append(child.get('value'))      
+        if child.attrib.get('name') == 'wnd_dir_10m_pst1hr_max_spd': #Direction instantanée du vent à 10 m pour une vitesse horaire maximale du vent, min 0 à 60
+            wnd_dir_10m_pst1hr_max_spd.append(child.get('value'))          
+        if child.attrib.get('name') == 'mslp':   # pression moyenne au niveau de la mer
+            mslp.append(child.get('value'))      
+        if child.attrib.get('name') == 'avg_snw_dpth_pst5mts_1':
+                avg_snw_dpth_pst5mts_1.append(child.get('value'))
+        if child.attrib.get('name') == 'avg_snw_dpth_pst5mts_2':
+                avg_snw_dpth_pst5mts_2.append(child.get('value'))
+        if child.attrib.get('name') == 'avg_snw_dpth_pst5mts_3':
+                avg_snw_dpth_pst5mts_3.append(child.get('value'))
 
 
-    data_dict <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">date_tm</span><span style="color:#e6db74">&#39;</span>:date_tm, 
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>:avg_air_temp_pst1hr, 
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>:min_air_temp_pst1hr,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_air_temp_pst1hr</span><span style="color:#e6db74">&#39;</span>: max_air_temp_pst1hr, 
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>:max_rel_hum_pst1hr,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">min_rel_hum_pst1hr</span><span style="color:#e6db74">&#39;</span>:min_rel_hum_pst1hr,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">stn_pres</span><span style="color:#e6db74">&#39;</span>:stn_pres,
-             <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mslp</span><span style="color:#e6db74">&#39;</span>:mslp,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pcpn_amt_pst1hr</span><span style="color:#e6db74">&#39;</span>:pcpn_amt_pst1hr,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_wnd_spd_10m_pst10mts</span><span style="color:#e6db74">&#39;</span>:avg_wnd_spd_10m_pst10mts,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wnd_dir_10m_pst1hr_max_spd</span><span style="color:#e6db74">&#39;</span>:wnd_dir_10m_pst1hr_max_spd,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_wnd_spd_10m_pst1hr</span><span style="color:#e6db74">&#39;</span>:max_wnd_spd_10m_pst1hr,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_1</span><span style="color:#e6db74">&#39;</span>:avg_snw_dpth_pst5mts_1,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_2</span><span style="color:#e6db74">&#39;</span>:avg_snw_dpth_pst5mts_2,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">avg_snw_dpth_pst5mts_3</span><span style="color:#e6db74">&#39;</span>:avg_snw_dpth_pst5mts_3
+    data_dict = {'date_tm':date_tm, 
+            'avg_air_temp_pst1hr':avg_air_temp_pst1hr, 
+            'min_air_temp_pst1hr':min_air_temp_pst1hr,
+            'max_air_temp_pst1hr': max_air_temp_pst1hr, 
+            'max_rel_hum_pst1hr':max_rel_hum_pst1hr,
+            'min_rel_hum_pst1hr':min_rel_hum_pst1hr,
+            'stn_pres':stn_pres,
+             'mslp':mslp,
+            'pcpn_amt_pst1hr':pcpn_amt_pst1hr,
+            'avg_wnd_spd_10m_pst10mts':avg_wnd_spd_10m_pst10mts,
+            'wnd_dir_10m_pst1hr_max_spd':wnd_dir_10m_pst1hr_max_spd,
+            'max_wnd_spd_10m_pst1hr':max_wnd_spd_10m_pst1hr,
+            'avg_snw_dpth_pst5mts_1':avg_snw_dpth_pst5mts_1,
+            'avg_snw_dpth_pst5mts_2':avg_snw_dpth_pst5mts_2,
+            'avg_snw_dpth_pst5mts_3':avg_snw_dpth_pst5mts_3
 
            } 
 
     
-    <span style="color:#66d9ef">for</span> key,value <span style="color:#f92672">in</span> data_dict<span style="color:#f92672">.</span>items(): 
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> value:
-            data_dict[key] <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NaN</span><span style="color:#e6db74">&#39;</span>
+    for key,value in data_dict.items(): 
+        if not value:
+            data_dict[key] = 'NaN'
             
-    data<span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data_dict)
-    os<span style="color:#f92672">.</span>makedirs(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span>, exist_ok<span style="color:#f92672">=</span>True)  
+    data= pd.DataFrame(data_dict)
+    os.makedirs('D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/'+now.strftime(&quot;%Y%m&quot;)+'/', exist_ok=True)  
 
-       <span style="color:#75715e"># file = &#39;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/&#39;+now.strftime(&#34;%Y%m&#34;)+&#39;/&#39;+str(int(row[&#39;WMO_ID&#39;]))+&#39;_&#39;+now.strftime(&#34;%Y%m&#34;)+&#39;.csv&#39;</span>
-    file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(row[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MSC_ID</span><span style="color:#e6db74">&#39;</span>])<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>
-    <span style="color:#66d9ef">if</span> exists(file):
-        <span style="color:#75715e">#print (&#34;File exist&#34;)</span>
-        data<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(row[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MSC_ID</span><span style="color:#e6db74">&#39;</span>])<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>,mode<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>,index<span style="color:#f92672">=</span>False,header<span style="color:#f92672">=</span>False) 
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#75715e">#print (&#34;File not exist&#34;)</span>
-        pd<span style="color:#f92672">.</span>DataFrame(row)<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(row[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MSC_ID</span><span style="color:#e6db74">&#39;</span>])<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>,index<span style="color:#f92672">=</span>False)  
-        data<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(row[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MSC_ID</span><span style="color:#e6db74">&#39;</span>])<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#39;</span>,mode<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>,index<span style="color:#f92672">=</span>False)  
-</code></pre></div><h3 id="4-we-will-trace-the-location-of-the-stations">4- We will trace the location of the stations:</h3>
+       # file = 'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/'+now.strftime(&quot;%Y%m&quot;)+'/'+str(int(row['WMO_ID']))+'_'+now.strftime(&quot;%Y%m&quot;)+'.csv'
+    file = 'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/'+now.strftime(&quot;%Y%m&quot;)+'/'+str(row['MSC_ID'])+'_'+now.strftime(&quot;%Y%m&quot;)+'.csv'
+    if exists(file):
+        #print (&quot;File exist&quot;)
+        data.to_csv(r'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/'+now.strftime(&quot;%Y%m&quot;)+'/'+str(row['MSC_ID'])+'_'+now.strftime(&quot;%Y%m&quot;)+'.csv',mode='a',index=False,header=False) 
+    else:
+        #print (&quot;File not exist&quot;)
+        pd.DataFrame(row).T.to_csv(r'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/'+now.strftime(&quot;%Y%m&quot;)+'/'+str(row['MSC_ID'])+'_'+now.strftime(&quot;%Y%m&quot;)+'.csv',index=False)  
+        data.to_csv(r'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/SWOB/'+now.strftime(&quot;%Y%m&quot;)+'/'+str(row['MSC_ID'])+'_'+now.strftime(&quot;%Y%m&quot;)+'.csv',mode='a',index=False)  
+</code></pre>
+
+<h3 id="4-we-will-trace-the-location-of-the-stations">4- We will trace the location of the stations:</h3>
+
 <p>We will start by extracting the latitudes and longitudes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_lat <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>,:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Latitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
-list_lon <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>,:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Longitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
-<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 
-fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>))   
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
-ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">90</span>))
+<pre><code class="language-python">list_lat = stations.loc[stations[&quot;AUTO/MAN&quot;]=='AUTO',:]['Latitude'].values
+list_lon = stations.loc[stations[&quot;AUTO/MAN&quot;]=='AUTO',:]['Longitude'].values
+</code></pre>
 
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+<pre><code class="language-python">import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.pylab as plt
+import numpy as np
 
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières      </span>
-coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
-                    facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
-states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-    category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-    name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-    scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-    facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+fig = plt.figure(figsize=(28,16))   
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.set_extent((-150.0, -50, 40, 90))
 
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)  
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
+ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
+ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac
 
-ax<span style="color:#f92672">.</span>gridlines()           
-mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>scatter(list_lon, list_lat, c<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SWOB Met-ML MSC</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#75715e">#mm = ax.scatter(dfstat[&#39;lon&#39;].values, dfstat[&#39;lat&#39;].values, c=&#39;green&#39;, s=400, label=&#39;Site&#39;)</span>
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
+ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières      
+coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
+                    facecolor='none', name='coastline')
+ax.add_feature(coast, edgecolor='black')
+states_provinces = cfeature.NaturalEarthFeature(
+    category='cultural',
+    name='admin_1_states_provinces_lines',
+    scale='10m',
+    facecolor='none')
 
-plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">best</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>)
+ax.add_feature(states_provinces, edgecolor='gray')  
+
+ax.gridlines()           
+mm = ax.scatter(list_lon, list_lat, c='red', s=100, label='SWOB Met-ML MSC')
+#mm = ax.scatter(dfstat['lon'].values, dfstat['lat'].values, c='green', s=400, label='Site')
+
+plt.legend(loc=&quot;best&quot;, markerscale=1., scatterpoints=1, fontsize=40)
           
-<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
-xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
-yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)     
-fig<span style="color:#f92672">.</span>canvas<span style="color:#f92672">.</span>draw()
+# Define gridline locations and draw the lines using cartopy's built-in gridliner:
+xticks = np.arange(-150.0,-40.0,20)
+yticks =np.arange(10,80,10)     
+fig.canvas.draw()
  
-plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Localisation_SWOB_CANADA.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-plt<span style="color:#f92672">.</span>show()  
-plt<span style="color:#f92672">.</span>close()
-</code></pre></div><p><img src="output_32_0.png" alt="png"></p>
-<h3 id="5--just-over-quebec">5-  Just over Quebec:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_lat <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[(stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">&amp;</span> (stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>),:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Latitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
-list_lon <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[(stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">&amp;</span> (stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>),:][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Longitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
-<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+plt.savefig('Localisation_SWOB_CANADA.png', bbox_inches='tight', pad_inches=0.1)
+plt.show()  
+plt.close()
+</code></pre>
 
-fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>))   
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
-ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-</span><span style="color:#ae81ff">80.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">70</span>))
+<p><img src="output_32_0.png" alt="png" /></p>
 
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+<h3 id="5-just-over-quebec">5-  Just over Quebec:</h3>
 
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières      </span>
-coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
-                    facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
-states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-    category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-    name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-    scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-    facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+<pre><code class="language-python">list_lat = stations.loc[(stations[&quot;AUTO/MAN&quot;]=='AUTO') &amp; (stations[&quot;Province/Territory&quot;]=='Quebec'),:]['Latitude'].values
+list_lon = stations.loc[(stations[&quot;AUTO/MAN&quot;]=='AUTO') &amp; (stations[&quot;Province/Territory&quot;]=='Quebec'),:]['Longitude'].values
+</code></pre>
 
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)  
+<pre><code class="language-python">import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.pylab as plt
+import numpy as np
 
-ax<span style="color:#f92672">.</span>gridlines()           
-mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>scatter(list_lon, list_lat, c<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SWOB Met-ML MSC</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#75715e">#mm = ax.scatter(dfstat[&#39;lon&#39;].values, dfstat[&#39;lat&#39;].values, c=&#39;green&#39;, s=400, label=&#39;Site&#39;)</span>
+fig = plt.figure(figsize=(28,16))   
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.set_extent((-80.0, -50, 40, 70))
 
-plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">best</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>)
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
+ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
+ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac
+
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
+ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières      
+coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
+                    facecolor='none', name='coastline')
+ax.add_feature(coast, edgecolor='black')
+states_provinces = cfeature.NaturalEarthFeature(
+    category='cultural',
+    name='admin_1_states_provinces_lines',
+    scale='10m',
+    facecolor='none')
+
+ax.add_feature(states_provinces, edgecolor='gray')  
+
+ax.gridlines()           
+mm = ax.scatter(list_lon, list_lat, c='red', s=100, label='SWOB Met-ML MSC')
+#mm = ax.scatter(dfstat['lon'].values, dfstat['lat'].values, c='green', s=400, label='Site')
+
+plt.legend(loc=&quot;best&quot;, markerscale=1., scatterpoints=1, fontsize=40)
           
-<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
-xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
-yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)     
-fig<span style="color:#f92672">.</span>canvas<span style="color:#f92672">.</span>draw()
+# Define gridline locations and draw the lines using cartopy's built-in gridliner:
+xticks = np.arange(-150.0,-40.0,20)
+yticks =np.arange(10,80,10)     
+fig.canvas.draw()
  
-plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Localisation_SWOB_Quebec.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-plt<span style="color:#f92672">.</span>show()  
-plt<span style="color:#f92672">.</span>close()
-</code></pre></div><p><img src="output_35_0.png" alt="png"></p>
-<h3 id="6--if-we-want-to-plot-by-grouping-by-province">6-  If we want to plot by grouping by province:</h3>
+plt.savefig('Localisation_SWOB_Quebec.png', bbox_inches='tight', pad_inches=0.1)
+plt.show()  
+plt.close()
+</code></pre>
+
+<p><img src="output_35_0.png" alt="png" /></p>
+
+<h3 id="6-if-we-want-to-plot-by-grouping-by-province">6-  If we want to plot by grouping by province:</h3>
+
 <p>We only want the &ldquo;Automatic&rdquo; stations and group them by province.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">grouped_dataframe <span style="color:#f92672">=</span> stations<span style="color:#f92672">.</span>loc[stations[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">AUTO/MAN</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AUTO</span><span style="color:#e6db74">&#39;</span>,:]<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Province/Territory</span><span style="color:#e6db74">&#39;</span>)
-grouped_dataframe<span style="color:#f92672">.</span>count()
-</code></pre></div><table>
+
+<pre><code class="language-python">grouped_dataframe = stations.loc[stations[&quot;AUTO/MAN&quot;]=='AUTO',:].groupby('Province/Territory')
+grouped_dataframe.count()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">Province/Territory</th>
@@ -1367,6 +1488,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <th align="right">AUTO/MAN</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">Alberta</td>
@@ -1381,6 +1503,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">240</td>
 <td align="right">240</td>
 </tr>
+
 <tr>
 <td align="left">British Columbia</td>
 <td align="right">119</td>
@@ -1394,6 +1517,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">119</td>
 <td align="right">119</td>
 </tr>
+
 <tr>
 <td align="left">Manitoba</td>
 <td align="right">47</td>
@@ -1407,6 +1531,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">47</td>
 <td align="right">47</td>
 </tr>
+
 <tr>
 <td align="left">New Brunswick</td>
 <td align="right">21</td>
@@ -1420,6 +1545,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">21</td>
 <td align="right">21</td>
 </tr>
+
 <tr>
 <td align="left">Newfoundland and Labrador</td>
 <td align="right">36</td>
@@ -1433,6 +1559,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">36</td>
 <td align="right">36</td>
 </tr>
+
 <tr>
 <td align="left">Northwest Territories</td>
 <td align="right">49</td>
@@ -1446,6 +1573,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">49</td>
 <td align="right">49</td>
 </tr>
+
 <tr>
 <td align="left">Nova Scotia</td>
 <td align="right">42</td>
@@ -1459,6 +1587,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">42</td>
 <td align="right">42</td>
 </tr>
+
 <tr>
 <td align="left">Nunavut</td>
 <td align="right">63</td>
@@ -1472,6 +1601,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">63</td>
 <td align="right">63</td>
 </tr>
+
 <tr>
 <td align="left">Ontario</td>
 <td align="right">111</td>
@@ -1485,6 +1615,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">111</td>
 <td align="right">111</td>
 </tr>
+
 <tr>
 <td align="left">Prince Edward Island</td>
 <td align="right">7</td>
@@ -1498,6 +1629,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">7</td>
 <td align="right">7</td>
 </tr>
+
 <tr>
 <td align="left">Quebec</td>
 <td align="right">122</td>
@@ -1511,6 +1643,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">122</td>
 <td align="right">122</td>
 </tr>
+
 <tr>
 <td align="left">Saskatchewan</td>
 <td align="right">57</td>
@@ -1524,6 +1657,7 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 <td align="right">57</td>
 <td align="right">57</td>
 </tr>
+
 <tr>
 <td align="left">Yukon</td>
 <td align="right">23</td>
@@ -1539,9 +1673,12 @@ grouped_dataframe<span style="color:#f92672">.</span>count()
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> name,group <span style="color:#f92672">in</span> grouped_dataframe:
-   <span style="color:#66d9ef">print</span>(name) 
-</code></pre></div><pre><code>Alberta
+
+<pre><code class="language-python">for name,group in grouped_dataframe:
+   print(name) 
+</code></pre>
+
+<pre><code>Alberta
 British Columbia
 Manitoba
 New Brunswick
@@ -1555,8 +1692,11 @@ Quebec
 Saskatchewan
 Yukon
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">grouped_dataframe<span style="color:#f92672">.</span>get_group(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Quebec</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">grouped_dataframe.get_group('Quebec').head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -1573,6 +1713,7 @@ Yukon
 <th align="left">Province/Territory</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">48</td>
@@ -1588,6 +1729,7 @@ Yukon
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">49</td>
 <td align="left">CGBC</td>
@@ -1602,6 +1744,7 @@ Yukon
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">50</td>
 <td align="left">CGCH</td>
@@ -1616,6 +1759,7 @@ Yukon
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">51</td>
 <td align="left">CGCL</td>
@@ -1630,6 +1774,7 @@ Yukon
 <td align="left">AUTO</td>
 <td align="left">Quebec</td>
 </tr>
+
 <tr>
 <td align="right">52</td>
 <td align="left">CGGA</td>
@@ -1646,61 +1791,73 @@ Yukon
 </tr>
 </tbody>
 </table>
+
 <p>We create a random color list for all of our provinces.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
-number_of_colors <span style="color:#f92672">=</span> len(grouped_dataframe)
-color <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join([random<span style="color:#f92672">.</span>choice(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0123456789ABCDEF</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">6</span>)])
-             <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(number_of_colors)]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
-<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+
+<pre><code class="language-python">import random
+number_of_colors = len(grouped_dataframe)
+color = [&quot;#&quot;+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
+             for i in range(number_of_colors)]
+</code></pre>
+
+<pre><code class="language-python">import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.pylab as plt
+import numpy as np
 
 
-fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>))   
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
-ax<span style="color:#f92672">.</span>set_extent((<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">90</span>))
+fig = plt.figure(figsize=(28,16))   
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.set_extent((-150.0, -50, 40, 90))
 
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
+ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
+ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac
 
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières      </span>
-coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
-                    facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
-states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-    category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-    name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-    scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-    facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
+ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières      
+coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
+                    facecolor='none', name='coastline')
+ax.add_feature(coast, edgecolor='black')
+states_provinces = cfeature.NaturalEarthFeature(
+    category='cultural',
+    name='admin_1_states_provinces_lines',
+    scale='10m',
+    facecolor='none')
 
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)  
+ax.add_feature(states_provinces, edgecolor='gray')  
 
-ax<span style="color:#f92672">.</span>gridlines()
-i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
-<span style="color:#66d9ef">for</span> name,group <span style="color:#f92672">in</span> grouped_dataframe:
-    list_lon<span style="color:#f92672">=</span> grouped_dataframe<span style="color:#f92672">.</span>get_group(name)[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Longitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
-    list_lat<span style="color:#f92672">=</span> grouped_dataframe<span style="color:#f92672">.</span>get_group(name)[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Latitude</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values
+ax.gridlines()
+i = 0 
+for name,group in grouped_dataframe:
+    list_lon= grouped_dataframe.get_group(name)['Longitude'].values
+    list_lat= grouped_dataframe.get_group(name)['Latitude'].values
     
-    mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>scatter(list_lon, list_lat, c<span style="color:#f92672">=</span>color[i], s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SWOB Met-ML MSC: </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span> name  )
-    plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">best</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
-    i<span style="color:#f92672">+</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+    mm = ax.scatter(list_lon, list_lat, c=color[i], s=100, label='SWOB Met-ML MSC: '+ name  )
+    plt.legend(loc=&quot;best&quot;, markerscale=1., scatterpoints=1, fontsize=10)
+    i+=1
 
-<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
-xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
-yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)     
-fig<span style="color:#f92672">.</span>canvas<span style="color:#f92672">.</span>draw()
+# Define gridline locations and draw the lines using cartopy's built-in gridliner:
+xticks = np.arange(-150.0,-40.0,20)
+yticks =np.arange(10,80,10)     
+fig.canvas.draw()
  
-plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Localisation_SWOB_CANADA.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-plt<span style="color:#f92672">.</span>show()  
-plt<span style="color:#f92672">.</span>close()
-</code></pre></div><p><img src="output_42_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div>
+plt.savefig('Localisation_SWOB_CANADA.png', bbox_inches='tight', pad_inches=0.1)
+plt.show()  
+plt.close()
+</code></pre>
+
+<p><img src="output_42_0.png" alt="png" /></p>
+
+<pre><code class="language-python">
+</code></pre>
+
+<pre><code class="language-python">
+</code></pre>
+
+<pre><code class="language-python">
+</code></pre>
+
     </div>
 
     

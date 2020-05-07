@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="1: ECCC temperature data In previous sections, we presented how to use the Pandas library which allowed us to process and manipulate data sets. Combining this with Python&#39;s Datetime and Matplotlib libraries, we were able to quickly visualize our data.
+  <meta name="description" content="1: ECCC temperature data In previous sections, we presented how to use the Pandas library which allowed us to process and manipulate data sets. Combining this with Python&rsquo;s Datetime and Matplotlib libraries, we were able to quickly visualize our data.
 We will continue to discover the functionality of these libraries in a practical case by analyzing the daily temperature data recorded by one of the Environment and Climate Change Canada stations located in Montreal / McTavish between the period 1948 and 2017 (file named &lsquo;MONTREAL_tasmoy_1948_2017.">
 
   
@@ -116,7 +116,7 @@ We will continue to discover the functionality of these libraries in a practical
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/tutorial_python/project1-eccc_temperature/">
   <meta property="og:title" content="Project 1 ECCC temperature data | GDueymes">
-  <meta property="og:description" content="1: ECCC temperature data In previous sections, we presented how to use the Pandas library which allowed us to process and manipulate data sets. Combining this with Python&#39;s Datetime and Matplotlib libraries, we were able to quickly visualize our data.
+  <meta property="og:description" content="1: ECCC temperature data In previous sections, we presented how to use the Pandas library which allowed us to process and manipulate data sets. Combining this with Python&rsquo;s Datetime and Matplotlib libraries, we were able to quickly visualize our data.
 We will continue to discover the functionality of these libraries in a practical case by analyzing the daily temperature data recorded by one of the Environment and Climate Change Canada stations located in Montreal / McTavish between the period 1948 and 2017 (file named &lsquo;MONTREAL_tasmoy_1948_2017."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -511,19 +511,21 @@ We will continue to discover the functionality of these libraries in a practical
       </ul>
 
       <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#1-eccc-temperature-data">1: ECCC temperature data</a></li>
-        <li><a href="#1-opening-and-reading-our-time-series">1- Opening and reading our time series</a></li>
-        <li><a href="#2-calculation-of-indices-on-the-temperature-data">2- Calculation of indices on the temperature data</a></li>
-        <li><a href="#3-some-examples-of-graphics-with-the-seaborn-library">3- Some examples of graphics with the Seaborn library</a></li>
-        <li><a href="#4-fonction-groupby">4- Fonction groupby</a></li>
-      </ul>
-    </li>
-    <li><a href="#exercice-">Exercice :</a></li>
-    <li><a href="#compute-day-degres-index-for-montreal-station">Compute day degres index for Montreal station</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1-eccc-temperature-data">1: ECCC temperature data</a></li>
+<li><a href="#1-opening-and-reading-our-time-series">1- Opening and reading our time series</a></li>
+<li><a href="#2-calculation-of-indices-on-the-temperature-data">2- Calculation of indices on the temperature data</a></li>
+<li><a href="#3-some-examples-of-graphics-with-the-seaborn-library">3- Some examples of graphics with the Seaborn library</a></li>
+<li><a href="#4-fonction-groupby">4- Fonction groupby</a></li>
+</ul></li>
+<li><a href="#exercice">Exercice :</a></li>
+<li><a href="#compute-day-degres-index-for-montreal-station">Compute day degres index for Montreal station</a></li>
+</ul></li>
+</ul>
 </nav>
 
       
@@ -538,51 +540,68 @@ We will continue to discover the functionality of these libraries in a practical
           <h1>Project 1 ECCC temperature data</h1>
 
           <div class="article-style">
-            <p><img src="/img/pylogo.png" alt="image0"></p>
+            
+
+<p><img src="/img/pylogo.png" alt="image0" /></p>
+
 <h3 id="1-eccc-temperature-data">1: ECCC temperature data</h3>
-<p>In previous sections, we presented how to use the Pandas library which allowed us to process and manipulate data sets. Combining this with Python's Datetime and Matplotlib libraries, we were able to quickly visualize our data.</p>
+
+<p>In previous sections, we presented how to use the Pandas library which allowed us to process and manipulate data sets. Combining this with Python&rsquo;s Datetime and Matplotlib libraries, we were able to quickly visualize our data.</p>
+
 <p>We will continue to discover the functionality of these libraries in a practical case by analyzing the daily temperature data recorded by one of the Environment and Climate Change Canada stations located in Montreal / McTavish between the period 1948 and 2017 (file named &lsquo;MONTREAL_tasmoy_1948_2017.txt&rsquo; in ./DATA directory)</p>
-<p>To complete and enrich our analysis, a new Python library will be presented: <!-- raw HTML omitted --> Seaborn <!-- raw HTML omitted -->.</p>
+
+<p>To complete and enrich our analysis, a new Python library will be presented: <b> Seaborn </b>.</p>
+
 <ul>
 <li>the Seaborn library is based on matplotlib.</li>
 <li>it allows to draw more complex graphs</li>
 </ul>
+
 <p>For more information:</p>
-<p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html">https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html</a></p>
+
+<p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html" target="_blank">https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html</a></p>
+
 <p>This link presents a gallery of chart types to be realized with Seaborn:
-<a href="https://seaborn.pydata.org/examples/index.html">https://seaborn.pydata.org/examples/index.html</a></p>
+<a href="https://seaborn.pydata.org/examples/index.html" target="_blank">https://seaborn.pydata.org/examples/index.html</a></p>
+
 <h3 id="1-opening-and-reading-our-time-series">1- Opening and reading our time series</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
-<span style="color:#f92672">import</span> datetime
-<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np 
-<span style="color:#f92672">import</span> warnings
-warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
 
-df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame()
+<pre><code class="language-python">import numpy as np
+import pandas as pd
+import datetime
+from datetime import date
+import numpy as np 
+import warnings
+warnings.filterwarnings(&quot;ignore&quot;)
 
-<span style="color:#75715e"># We open ascii file and store information in a new DataFrame</span>
-<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./DATA/MONTREAL_tasmoy_1948_2017.txt</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> file:
-     rows <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
-data_EC_Montreal <span style="color:#f92672">=</span> [float(row) <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows<span style="color:#f92672">.</span>split()]
-</code></pre></div><p>We have created a 1D field but we have no temporal information in our file.
-Knowing that our registration covers the period 1948 - 2017, we will format our dates with the <!-- raw HTML omitted --> datetime <!-- raw HTML omitted --> module of Python.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># We know that the time series starts on January 1, 1948 and ends on December 31, 2017 inclusively</span>
-<span style="color:#75715e"># We create a Datetime object instance to complete our DataFrame</span>
-start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">1948</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
-end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
-delta<span style="color:#f92672">=</span>(end<span style="color:#f92672">-</span>start) 
-nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
-rng <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(start, periods<span style="color:#f92672">=</span>nb_days, freq<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D</span><span style="color:#e6db74">&#39;</span>)
+df = pd.DataFrame()
 
-<span style="color:#75715e"># We will use DateTime object as DataFrame index</span>
-df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> rng
-df<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#39;</span>] 
+# We open ascii file and store information in a new DataFrame
+with open('./DATA/MONTREAL_tasmoy_1948_2017.txt', 'r') as file:
+     rows = file.read()
+data_EC_Montreal = [float(row) for row in rows.split()]
+</code></pre>
 
-df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Temperature Montreal</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> data_EC_Montreal
-df<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+<p>We have created a 1D field but we have no temporal information in our file.
+Knowing that our registration covers the period 1948 - 2017, we will format our dates with the <b> datetime </b> module of Python.</p>
+
+<pre><code class="language-python"># We know that the time series starts on January 1, 1948 and ends on December 31, 2017 inclusively
+# We create a Datetime object instance to complete our DataFrame
+start = date(1948, 1, 1)
+end = date(2017, 12, 31)
+delta=(end-start) 
+nb_days = delta.days + 1 
+rng = pd.date_range(start, periods=nb_days, freq='D')
+
+# We will use DateTime object as DataFrame index
+df['datetime'] = rng
+df.index = df['datetime'] 
+
+df['Temperature Montreal'] = data_EC_Montreal
+df.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -590,27 +609,32 @@ df<span style="color:#f92672">.</span>head()
 <th align="right">Temperature Montreal</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-01 00:00:00</td>
 <td align="left">1948-01-01 00:00:00</td>
 <td align="right">-12</td>
 </tr>
+
 <tr>
 <td align="left">1948-01-02 00:00:00</td>
 <td align="left">1948-01-02 00:00:00</td>
 <td align="right">-8.9</td>
 </tr>
+
 <tr>
 <td align="left">1948-01-03 00:00:00</td>
 <td align="left">1948-01-03 00:00:00</td>
 <td align="right">-3.4</td>
 </tr>
+
 <tr>
 <td align="left">1948-01-04 00:00:00</td>
 <td align="left">1948-01-04 00:00:00</td>
 <td align="right">-3.4</td>
 </tr>
+
 <tr>
 <td align="left">1948-01-05 00:00:00</td>
 <td align="left">1948-01-05 00:00:00</td>
@@ -618,37 +642,49 @@ df<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dir(df) <span style="color:#75715e"># the dir () function allows to list the functions that are applicable to our DataFrame object</span>
-</code></pre></div><p>We assigned our time series in a Pandas DataFrame and then formatted the date as a Datetime object.</p>
+
+<pre><code class="language-python">dir(df) # the dir () function allows to list the functions that are applicable to our DataFrame object
+</code></pre>
+
+<p>We assigned our time series in a Pandas DataFrame and then formatted the date as a Datetime object.</p>
+
 <p>It is now easy to manipulate the dataset and apply some simple functions.</p>
+
 <h3 id="2-calculation-of-indices-on-the-temperature-data">2- Calculation of indices on the temperature data</h3>
+
 <ul>
-<li>
-<p>We will develop and apply a function to calculate the quantiles of our distribution</p>
-</li>
-<li>
-<p>By resampling our series with the <!-- raw HTML omitted --> .resample () <!-- raw HTML omitted --> method of Pandas, we will see how to apply native functions of numpy and apply our own function.</p>
-</li>
+<li><p>We will develop and apply a function to calculate the quantiles of our distribution</p></li>
+
+<li><p>By resampling our series with the <b> .resample () </b> method of Pandas, we will see how to apply native functions of numpy and apply our own function.</p>
+
+<pre><code class="language-python"># Creating our index that calculates the quantile of the distribution
+# We use the numpy .percentile () function
+def percentile(n):
+def percentile_(x):
+    return np.nanpercentile(x, n)
+percentile_.__name__ = 'percentile_%s' % n
+return percentile_         
+</code></pre></li>
+
+<li><p><b> .resample () </b> and <b> .agg () </b> methods of Pandas</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Creating our index that calculates the quantile of the distribution</span>
-<span style="color:#75715e"># We use the numpy .percentile () function</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">percentile</span>(n):
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">percentile_</span>(x):
-        <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>nanpercentile(x, n)
-    percentile_<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">percentile_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> n
-    <span style="color:#66d9ef">return</span> percentile_         
-</code></pre></div><ul>
-<li><!-- raw HTML omitted --> .resample () <!-- raw HTML omitted --> and <!-- raw HTML omitted --> .agg () <!-- raw HTML omitted --> methods of Pandas</li>
-</ul>
-<p>The <!-- raw HTML omitted --> .resample () <!-- raw HTML omitted --> method is very useful for frequency conversion and time series resampling. The object (here DataFrame) must have a data / time index (DatetimeIndex) in order to be used.
+
+<p>The <b> .resample () </b> method is very useful for frequency conversion and time series resampling. The object (here DataFrame) must have a data / time index (DatetimeIndex) in order to be used.
 Several resampling frequencies are available (time, week, month, season, year &hellip;)</p>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.resample.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.resample.html</a></p>
-<p>The <!-- raw HTML omitted --> .agg () <!-- raw HTML omitted --> method is used for aggregation of data according to a list of functions to be applied to each column, resulting in an aggregated result with a hierarchical index.</p>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html</a></p>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.resample.html" target="_blank">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.resample.html</a></p>
+
+<p>The <b> .agg () </b> method is used for aggregation of data according to a list of functions to be applied to each column, resulting in an aggregated result with a hierarchical index.</p>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html" target="_blank">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html</a></p>
+
 <p>In our example, we will resample our data set by month and calculate for each month the average, the minimum, the maximum and the 90th and 95th quantiles.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>resample(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">M</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>agg([np<span style="color:#f92672">.</span>mean, np<span style="color:#f92672">.</span>min, np<span style="color:#f92672">.</span>max, percentile(<span style="color:#ae81ff">90</span>), percentile(<span style="color:#ae81ff">95</span>)])
-resamp_Montreal<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">resamp_Montreal = df.resample('M').agg([np.mean, np.min, np.max, percentile(90), percentile(95)])
+resamp_Montreal.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -662,6 +698,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <th align="left">month</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-31 00:00:00</td>
@@ -674,6 +711,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">1</td>
 <td align="left">Jan</td>
 </tr>
+
 <tr>
 <td align="left">1948-02-29 00:00:00</td>
 <td align="right">-9.58621</td>
@@ -685,6 +723,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">2</td>
 <td align="left">Feb</td>
 </tr>
+
 <tr>
 <td align="left">1948-03-31 00:00:00</td>
 <td align="right">-2.46129</td>
@@ -696,6 +735,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">3</td>
 <td align="left">Mar</td>
 </tr>
+
 <tr>
 <td align="left">1948-04-30 00:00:00</td>
 <td align="right">6.64</td>
@@ -707,6 +747,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">4</td>
 <td align="left">Apr</td>
 </tr>
+
 <tr>
 <td align="left">1948-05-31 00:00:00</td>
 <td align="right">12.6645</td>
@@ -720,10 +761,13 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># simple step to remove the row &#39;Temperature Montreal&#39; </span>
-resamp_Montreal <span style="color:#f92672">=</span> resamp_Montreal<span style="color:#f92672">.</span>loc[:,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Temperature Montreal</span><span style="color:#e6db74">&#39;</span>] 
-resamp_Montreal<span style="color:#f92672">.</span>head() 
-</code></pre></div><table>
+
+<pre><code class="language-python"># simple step to remove the row 'Temperature Montreal' 
+resamp_Montreal = resamp_Montreal.loc[:,'Temperature Montreal'] 
+resamp_Montreal.head() 
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -734,6 +778,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <th align="right">percentile_95</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-31 00:00:00</td>
@@ -743,6 +788,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">-3.6</td>
 <td align="right">-3.4</td>
 </tr>
+
 <tr>
 <td align="left">1948-02-29 00:00:00</td>
 <td align="right">-9.58621</td>
@@ -751,6 +797,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">-2.64</td>
 <td align="right">-0.32</td>
 </tr>
+
 <tr>
 <td align="left">1948-03-31 00:00:00</td>
 <td align="right">-2.46129</td>
@@ -759,6 +806,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">5.6</td>
 <td align="right">6.4</td>
 </tr>
+
 <tr>
 <td align="left">1948-04-30 00:00:00</td>
 <td align="right">6.64</td>
@@ -767,6 +815,7 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 <td align="right">12.08</td>
 <td align="right">13.13</td>
 </tr>
+
 <tr>
 <td align="left">1948-05-31 00:00:00</td>
 <td align="right">12.6645</td>
@@ -777,18 +826,29 @@ resamp_Montreal<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
+
 <h3 id="3-some-examples-of-graphics-with-the-seaborn-library">3- Some examples of graphics with the Seaborn library</h3>
-<p>Now that we have some statistics on our DataFrame, we will use Python's Seaborn library to visualize them.</p>
-<p><img src="/img/seaborn.png" alt="image0"></p>
+
+<p>Now that we have some statistics on our DataFrame, we will use Python&rsquo;s Seaborn library to visualize them.</p>
+
+<p><img src="/img/seaborn.png" alt="image0" /></p>
+
 <ul>
 <li>Example: Heatmap</li>
 </ul>
-<p><a href="https://seaborn.pydata.org/generated/seaborn.heatmap.html">https://seaborn.pydata.org/generated/seaborn.heatmap.html</a></p>
+
+<p><a href="https://seaborn.pydata.org/generated/seaborn.heatmap.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.heatmap.html</a></p>
+
 <p>For example, we would like to observe the variation of the average temperature for all the months of the year and all the years. We are going to define two new columns in our DataFrame in which will be assigned only the years and the months respectively.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">year</span><span style="color:#e6db74">&#39;</span>]  <span style="color:#f92672">=</span> resamp_Montreal<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year
-resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MonthNo</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> resamp_Montreal<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>month
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">resamp_Montreal['year']  = resamp_Montreal.index.year
+resamp_Montreal['MonthNo'] = resamp_Montreal.index.month
+</code></pre>
+
+<pre><code class="language-python">resamp_Montreal.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -801,6 +861,7 @@ resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&
 <th align="right">MonthNo</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-31 00:00:00</td>
@@ -812,6 +873,7 @@ resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&
 <td align="right">1948</td>
 <td align="right">1</td>
 </tr>
+
 <tr>
 <td align="left">1948-02-29 00:00:00</td>
 <td align="right">-9.58621</td>
@@ -822,6 +884,7 @@ resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&
 <td align="right">1948</td>
 <td align="right">2</td>
 </tr>
+
 <tr>
 <td align="left">1948-03-31 00:00:00</td>
 <td align="right">-2.46129</td>
@@ -832,6 +895,7 @@ resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&
 <td align="right">1948</td>
 <td align="right">3</td>
 </tr>
+
 <tr>
 <td align="left">1948-04-30 00:00:00</td>
 <td align="right">6.64</td>
@@ -842,6 +906,7 @@ resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&
 <td align="right">1948</td>
 <td align="right">4</td>
 </tr>
+
 <tr>
 <td align="left">1948-05-31 00:00:00</td>
 <td align="right">12.6645</td>
@@ -854,15 +919,19 @@ resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&
 </tr>
 </tbody>
 </table>
-<p>Before we plot our heatmap, we need to reorganize our dataframe.</p>
-<ul>
-<li>The <!-- raw HTML omitted --> .pivot_table () <!-- raw HTML omitted --> method: this method allows you to cross tables dynamically.</li>
-</ul>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html</a></p>
-<p>We would like to visualize only the average monthly temperatures, so work with the &lsquo;mean&rsquo; column, put the year in Index and have one month per column. The <!-- raw HTML omitted --> .pivot_table () <!-- raw HTML omitted --> method allows us to do this.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Montreal_pivot <span style="color:#f92672">=</span> resamp_Montreal<span style="color:#f92672">.</span>pivot_table(values<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#39;</span>,index<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">year</span><span style="color:#e6db74">&#39;</span>,columns<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">MonthNo</span><span style="color:#e6db74">&#39;</span>])
-Montreal_pivot<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<p>Before we plot our heatmap, we need to reorganize our dataframe.
+- The <b> .pivot_table () </b> method: this method allows you to cross tables dynamically.</p>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html" target="_blank">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html</a></p>
+
+<p>We would like to visualize only the average monthly temperatures, so work with the &lsquo;mean&rsquo; column, put the year in Index and have one month per column. The <b> .pivot_table () </b> method allows us to do this.</p>
+
+<pre><code class="language-python">Montreal_pivot = resamp_Montreal.pivot_table(values='mean',index='year',columns=['MonthNo'])
+Montreal_pivot.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right">year</th>
@@ -880,6 +949,7 @@ Montreal_pivot<span style="color:#f92672">.</span>head()
 <th align="right">12</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">1948</td>
@@ -896,6 +966,7 @@ Montreal_pivot<span style="color:#f92672">.</span>head()
 <td align="right">5.98333</td>
 <td align="right">-2.52258</td>
 </tr>
+
 <tr>
 <td align="right">1949</td>
 <td align="right">-5.77419</td>
@@ -911,6 +982,7 @@ Montreal_pivot<span style="color:#f92672">.</span>head()
 <td align="right">-0.193333</td>
 <td align="right">-3.21935</td>
 </tr>
+
 <tr>
 <td align="right">1950</td>
 <td align="right">-5.34839</td>
@@ -926,6 +998,7 @@ Montreal_pivot<span style="color:#f92672">.</span>head()
 <td align="right">3.95667</td>
 <td align="right">-4.83548</td>
 </tr>
+
 <tr>
 <td align="right">1951</td>
 <td align="right">-7.35484</td>
@@ -941,6 +1014,7 @@ Montreal_pivot<span style="color:#f92672">.</span>head()
 <td align="right">0.18</td>
 <td align="right">-5.3129</td>
 </tr>
+
 <tr>
 <td align="right">1952</td>
 <td align="right">-7.80323</td>
@@ -958,33 +1032,51 @@ Montreal_pivot<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<p>We then apply <!-- raw HTML omitted -->.heatmap()<!-- raw HTML omitted --> function on our DataFrame.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns 
-<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt 
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-sns<span style="color:#f92672">.</span>heatmap(Montreal_pivot)
-figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
-figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">10</span>) 
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_20_0.png" alt="image0"></p>
+
+<p>We then apply <b>.heatmap()</b> function on our DataFrame.</p>
+
+<pre><code class="language-python">import seaborn as sns 
+import matplotlib.pyplot as plt 
+ax = plt.axes()
+sns.heatmap(Montreal_pivot)
+figure = ax.get_figure()    
+figure.set_size_inches(15, 10) 
+plt.show()
+</code></pre>
+
+<p><img src="/img/netcdf1_20_0.png" alt="image0" /></p>
+
 <p>We can improve our display.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-sns<span style="color:#f92672">.</span>heatmap(Montreal_pivot, cmap<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RdYlGn_r</span><span style="color:#e6db74">&#39;</span>, linewidths<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, annot<span style="color:#f92672">=</span>True , ax <span style="color:#f92672">=</span> ax,vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,center<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, fmt<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">&#39;</span>,yticklabels<span style="color:#f92672">=</span>True, cbar_kws<span style="color:#f92672">=</span>{<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">label</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Celcius</span><span style="color:#e6db74">&#39;</span>})
-ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Mean temperature</span><span style="color:#e6db74">&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bold</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">x-large</span><span style="color:#e6db74">&#34;</span>)
-figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
-figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">15</span>) 
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_20_0.png" alt="png"></p>
+
+<pre><code class="language-python">ax = plt.axes()
+sns.heatmap(Montreal_pivot, cmap='RdYlGn_r', linewidths=0.5, annot=True , ax = ax,vmin=-30, vmax=30,center=0, fmt='.1f',yticklabels=True, cbar_kws={'label': 'Celcius'})
+ax.set_title('Mean temperature', weight='bold', fontsize=&quot;x-large&quot;)
+figure = ax.get_figure()    
+figure.set_size_inches(22, 15) 
+plt.show()
+</code></pre>
+
+<p><img src="/img/netcdf1_20_0.png" alt="png" /></p>
+
 <ul>
 <li>Other examples: Boxplot,  violin plot, line plot</li>
 </ul>
-<p><a href="https://seaborn.pydata.org/generated/seaborn.boxplot.html">https://seaborn.pydata.org/generated/seaborn.boxplot.html</a></p>
-<p><a href="https://seaborn.pydata.org/generated/seaborn.violinplot.html">https://seaborn.pydata.org/generated/seaborn.violinplot.html</a></p>
-<p><a href="https://seaborn.pydata.org/generated/seaborn.lineplot.html">https://seaborn.pydata.org/generated/seaborn.lineplot.html</a></p>
-<p>At first, we create a new variable containing the months but in string of characters. For this we apply the <!-- raw HTML omitted --> .strftime () <!-- raw HTML omitted --> method of datetime.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> resamp_Montreal<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<p><a href="https://seaborn.pydata.org/generated/seaborn.boxplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.boxplot.html</a></p>
+
+<p><a href="https://seaborn.pydata.org/generated/seaborn.violinplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.violinplot.html</a></p>
+
+<p><a href="https://seaborn.pydata.org/generated/seaborn.lineplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.lineplot.html</a></p>
+
+<p>At first, we create a new variable containing the months but in string of characters. For this we apply the <b> .strftime () </b> method of datetime.</p>
+
+<pre><code class="language-python">resamp_Montreal['month'] = resamp_Montreal.index.strftime(&quot;%b&quot;)
+</code></pre>
+
+<pre><code class="language-python">resamp_Montreal.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -998,6 +1090,7 @@ plt<span style="color:#f92672">.</span>show()
 <th align="left">month</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-31 00:00:00</td>
@@ -1010,6 +1103,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">1</td>
 <td align="left">Jan</td>
 </tr>
+
 <tr>
 <td align="left">1948-02-29 00:00:00</td>
 <td align="right">-9.58621</td>
@@ -1021,6 +1115,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">2</td>
 <td align="left">Feb</td>
 </tr>
+
 <tr>
 <td align="left">1948-03-31 00:00:00</td>
 <td align="right">-2.46129</td>
@@ -1032,6 +1127,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">3</td>
 <td align="left">Mar</td>
 </tr>
+
 <tr>
 <td align="left">1948-04-30 00:00:00</td>
 <td align="right">6.64</td>
@@ -1043,6 +1139,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">4</td>
 <td align="left">Apr</td>
 </tr>
+
 <tr>
 <td align="left">1948-05-31 00:00:00</td>
 <td align="right">12.6645</td>
@@ -1056,59 +1153,85 @@ plt<span style="color:#f92672">.</span>show()
 </tr>
 </tbody>
 </table>
+
 <ul>
-<li>Boxplot:</li>
+<li><p>Boxplot:</p>
+
+<pre><code class="language-python">ax = plt.axes()
+sns.boxplot(x=&quot;month&quot;, y=&quot;mean&quot;, data=resamp_Montreal, palette=&quot;Set1&quot;)  
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8) 
+plt.show()
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#34;</span>, data<span style="color:#f92672">=</span>resamp_Montreal, palette<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Set1</span><span style="color:#e6db74">&#34;</span>)  
-figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
-figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>) 
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_26_0.png" alt="png"></p>
+
+<p><img src="/img/netcdf1_26_0.png" alt="png" /></p>
+
 <ul>
-<li>Violin plot:</li>
+<li><p>Violin plot:</p>
+
+<pre><code class="language-python">ax = plt.axes()
+sns.violinplot(x=&quot;month&quot;, y=&quot;mean&quot;, data=resamp_Montreal, palette=&quot;Set1&quot;)  
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8)
+plt.show()
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-sns<span style="color:#f92672">.</span>violinplot(x<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#34;</span>, data<span style="color:#f92672">=</span>resamp_Montreal, palette<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Set1</span><span style="color:#e6db74">&#34;</span>)  
-figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
-figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>)
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_28_0.png" alt="png"></p>
+
+<p><img src="/img/netcdf1_28_0.png" alt="png" /></p>
+
 <ul>
-<li>Line plot:</li>
+<li><p>Line plot:</p>
+
+<pre><code class="language-python">ax = plt.axes()
+sns.lineplot(x=resamp_Montreal.index.year, y=&quot;mean&quot;,
+         hue=&quot;month&quot;,
+         data=resamp_Montreal,
+         palette=&quot;tab10&quot;)
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8)
+plt.show()
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-sns<span style="color:#f92672">.</span>lineplot(x<span style="color:#f92672">=</span>resamp_Montreal<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, y<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#34;</span>,
-             hue<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>,
-             data<span style="color:#f92672">=</span>resamp_Montreal,
-             palette<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">tab10</span><span style="color:#e6db74">&#34;</span>)
-figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
-figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>)
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_30_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>catplot(x<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">percentile_90</span><span style="color:#e6db74">&#34;</span>, data<span style="color:#f92672">=</span>resamp_Montreal, kind<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">swarm</span><span style="color:#e6db74">&#34;</span>)
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_31_0.png" alt="png"></p>
+
+<p><img src="/img/netcdf1_30_0.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.catplot(x=&quot;month&quot;, y=&quot;percentile_90&quot;, data=resamp_Montreal, kind=&quot;swarm&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="/img/netcdf1_31_0.png" alt="png" /></p>
+
 <ul>
-<li>We can combine several Seaborn charts:</li>
+<li><p>We can combine several Seaborn charts:</p>
+
+<pre><code class="language-python">ax = plt.axes()
+ax1 = plt.subplot2grid((2, 2), (0, 0), colspan=2)
+sns.lineplot(x=resamp_Montreal.index.year, y=&quot;mean&quot;, hue=&quot;month&quot;, data=resamp_Montreal, palette=&quot;tab10&quot;)
+ax2 = plt.subplot2grid((2, 2), (1, 0), colspan=1)
+sns.boxplot(x=&quot;month&quot;, y=&quot;mean&quot;, data=resamp_Montreal, palette=&quot;tab10&quot;) 
+ax3 = plt.subplot2grid((2, 2), (1, 1), colspan=1)
+sns.violinplot(x=&quot;month&quot;, y=&quot;mean&quot;, data=resamp_Montreal, palette=&quot;tab10&quot;) 
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8) 
+plt.show()
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot2grid((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), colspan<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
-sns<span style="color:#f92672">.</span>lineplot(x<span style="color:#f92672">=</span>resamp_Montreal<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, y<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#34;</span>, hue<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>, data<span style="color:#f92672">=</span>resamp_Montreal, palette<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">tab10</span><span style="color:#e6db74">&#34;</span>)
-ax2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot2grid((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>), colspan<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#34;</span>, data<span style="color:#f92672">=</span>resamp_Montreal, palette<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">tab10</span><span style="color:#e6db74">&#34;</span>) 
-ax3 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot2grid((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), colspan<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-sns<span style="color:#f92672">.</span>violinplot(x<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mean</span><span style="color:#e6db74">&#34;</span>, data<span style="color:#f92672">=</span>resamp_Montreal, palette<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">tab10</span><span style="color:#e6db74">&#34;</span>) 
-figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
-figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>) 
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_33_0.png" alt="png"></p>
+
+<p><img src="/img/netcdf1_33_0.png" alt="png" /></p>
+
 <h3 id="4-fonction-groupby">4- Fonction groupby</h3>
-<p>We previously see  <!-- raw HTML omitted -->.groupby()<!-- raw HTML omitted -->  method from Pandas.</p>
-<p><a href="https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm">https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm</a></p>
+
+<p>We previously see  <b>.groupby()</b>  method from Pandas.</p>
+
+<p><a href="https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm" target="_blank">https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm</a></p>
+
 <p>This method is very useful using datetime objects.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">resamp_Montreal.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1122,6 +1245,7 @@ plt<span style="color:#f92672">.</span>show()
 <th align="left">month</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-31 00:00:00</td>
@@ -1134,6 +1258,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">1</td>
 <td align="left">Jan</td>
 </tr>
+
 <tr>
 <td align="left">1948-02-29 00:00:00</td>
 <td align="right">-9.58621</td>
@@ -1145,6 +1270,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">2</td>
 <td align="left">Feb</td>
 </tr>
+
 <tr>
 <td align="left">1948-03-31 00:00:00</td>
 <td align="right">-2.46129</td>
@@ -1156,6 +1282,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">3</td>
 <td align="left">Mar</td>
 </tr>
+
 <tr>
 <td align="left">1948-04-30 00:00:00</td>
 <td align="right">6.64</td>
@@ -1167,6 +1294,7 @@ plt<span style="color:#f92672">.</span>show()
 <td align="right">4</td>
 <td align="left">Apr</td>
 </tr>
+
 <tr>
 <td align="left">1948-05-31 00:00:00</td>
 <td align="right">12.6645</td>
@@ -1180,10 +1308,14 @@ plt<span style="color:#f92672">.</span>show()
 </tr>
 </tbody>
 </table>
-<p>We want to group our dataframe by month  with  <!-- raw HTML omitted -->.groupeby()<!-- raw HTML omitted --> method.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal_grouped  <span style="color:#f92672">=</span> resamp_Montreal<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">month</span><span style="color:#e6db74">&#34;</span>) 
-resamp_Montreal_grouped<span style="color:#f92672">.</span>groups     <span style="color:#75715e"># Pour voir les groupes</span>
-</code></pre></div><pre><code>{'Apr': DatetimeIndex(['1948-04-30', '1949-04-30', '1950-04-30', '1951-04-30',
+
+<p>We want to group our dataframe by month  with  <b>.groupeby()</b> method.</p>
+
+<pre><code class="language-python">resamp_Montreal_grouped  = resamp_Montreal.groupby(&quot;month&quot;) 
+resamp_Montreal_grouped.groups     # Pour voir les groupes
+</code></pre>
+
+<pre><code>{'Apr': DatetimeIndex(['1948-04-30', '1949-04-30', '1950-04-30', '1951-04-30',
                 '1952-04-30', '1953-04-30', '1954-04-30', '1955-04-30',
                 '1956-04-30', '1957-04-30', '1958-04-30', '1959-04-30',
                 '1960-04-30', '1961-04-30', '1962-04-30', '1963-04-30',
@@ -1222,42 +1354,47 @@ resamp_Montreal_grouped<span style="color:#f92672">.</span>groups     <span styl
                 '2016-08-31', '2017-08-31'],
              ... }
 </code></pre>
-<ul>
-<li>To iterate through groups:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> MonthNo,group <span style="color:#f92672">in</span> resamp_Montreal_grouped :                              
-    <span style="color:#66d9ef">print</span>(MonthNo)
-    <span style="color:#66d9ef">print</span>(group)
-    
-</code></pre></div><pre><code>Apr
-                 mean  amin  amax  percentile_90  percentile_95  year  \
-datetime                                                                
-1948-04-30   6.640000  -1.7  14.5          12.08         13.130  1948   
-1949-04-30   7.516667   2.0  15.8          12.43         14.370  1949   
-1950-04-30   4.710000  -4.2  11.7           8.56         10.770  1950   
-1951-04-30   7.296667   1.4  15.0          11.78         13.105  1951   
-1952-04-30   7.996667  -1.4  15.3          14.01         15.000  1952   
-...
 
-[70 rows x 8 columns]
-Aug
-                 mean  amin  amax  percentile_90  percentile_95  year  \
-datetime                                                                
-1948-08-31  21.106452  15.0  27.8          26.40         27.400  1948   
-1949-08-31  21.545161  15.0  27.0          25.60         26.700  1949   
-1950-08-31  19.112903  12.5  23.4          22.50         23.050  1950   
-1951-08-31  18.667742  13.1  23.4          22.00         22.950  1951   
-1952-08-31  20.732258  14.2  25.6          23.40         25.300  1952   
-1953-08-31  20.480645  15.6  27.2          25.00         27.000  1953   
-1954-08-31  19.312903  12.8  24.5          22.00         23.350  1954   
-...
-</code></pre>
 <ul>
-<li>To select a group: get_group()</li>
+<li><p>To iterate through groups:</p>
+
+<pre><code class="language-python">for MonthNo,group in resamp_Montreal_grouped :                              
+print(MonthNo)
+print(group)
+    
+</code></pre>
+
+<p>Apr
+                 mean  amin  amax  percentile_90  percentile_95  year  <br />
+datetime<br />
+1948-04-30   6.640000  -1.7  14.5          12.08         13.130  1948<br />
+1949-04-30   7.516667   2.0  15.8          12.43         14.370  1949<br />
+1950-04-30   4.710000  -4.2  11.7           8.56         10.770  1950<br />
+1951-04-30   7.296667   1.4  15.0          11.78         13.105  1951<br />
+1952-04-30   7.996667  -1.4  15.3          14.01         15.000  1952<br />
+&hellip;</p>
+
+<p>[70 rows x 8 columns]
+Aug
+                 mean  amin  amax  percentile_90  percentile_95  year  <br />
+datetime<br />
+1948-08-31  21.106452  15.0  27.8          26.40         27.400  1948<br />
+1949-08-31  21.545161  15.0  27.0          25.60         26.700  1949<br />
+1950-08-31  19.112903  12.5  23.4          22.50         23.050  1950<br />
+1951-08-31  18.667742  13.1  23.4          22.00         22.950  1951<br />
+1952-08-31  20.732258  14.2  25.6          23.40         25.300  1952<br />
+1953-08-31  20.480645  15.6  27.2          25.00         27.000  1953<br />
+1954-08-31  19.312903  12.8  24.5          22.00         23.350  1954<br />
+&hellip;</p></li>
+
+<li><p>To select a group: get_group()</p>
+
+<pre><code class="language-python"># we grouped our dataframe using month index
+resamp_Montreal_grouped.get_group('Dec').head()
+</code></pre></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># we grouped our dataframe using month index</span>
-resamp_Montreal_grouped<span style="color:#f92672">.</span>get_group(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Dec</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1271,6 +1408,7 @@ resamp_Montreal_grouped<span style="color:#f92672">.</span>get_group(<span style
 <th align="left">month</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-12-31 00:00:00</td>
@@ -1283,6 +1421,7 @@ resamp_Montreal_grouped<span style="color:#f92672">.</span>get_group(<span style
 <td align="right">12</td>
 <td align="left">Dec</td>
 </tr>
+
 <tr>
 <td align="left">1949-12-31 00:00:00</td>
 <td align="right">-3.21935</td>
@@ -1294,6 +1433,7 @@ resamp_Montreal_grouped<span style="color:#f92672">.</span>get_group(<span style
 <td align="right">12</td>
 <td align="left">Dec</td>
 </tr>
+
 <tr>
 <td align="left">1950-12-31 00:00:00</td>
 <td align="right">-4.83548</td>
@@ -1305,6 +1445,7 @@ resamp_Montreal_grouped<span style="color:#f92672">.</span>get_group(<span style
 <td align="right">12</td>
 <td align="left">Dec</td>
 </tr>
+
 <tr>
 <td align="left">1951-12-31 00:00:00</td>
 <td align="right">-5.3129</td>
@@ -1316,6 +1457,7 @@ resamp_Montreal_grouped<span style="color:#f92672">.</span>get_group(<span style
 <td align="right">12</td>
 <td align="left">Dec</td>
 </tr>
+
 <tr>
 <td align="left">1952-12-31 00:00:00</td>
 <td align="right">-3.18387</td>
@@ -1329,13 +1471,16 @@ resamp_Montreal_grouped<span style="color:#f92672">.</span>get_group(<span style
 </tr>
 </tbody>
 </table>
+
 <ul>
-<li>Aggregation:
-Python has several methods are available to perform aggregations on data. It is done using the pandas and numpy libraries. The data must be available or converted to a dataframe to apply the aggregation functions.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># to calculate &#39;percentile_90&#39; in each  group. </span>
-resamp_Montreal_grouped[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">percentile_90</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>agg(np<span style="color:#f92672">.</span>mean)
-</code></pre></div><pre><code>month
+<li><p>Aggregation:
+Python has several methods are available to perform aggregations on data. It is done using the pandas and numpy libraries. The data must be available or converted to a dataframe to apply the aggregation functions.</p>
+
+<pre><code class="language-python"># to calculate 'percentile_90' in each  group. 
+resamp_Montreal_grouped['percentile_90'].agg(np.mean)
+</code></pre>
+
+<p>month
 Apr    12.434848
 Aug    24.283582
 Dec     1.790000
@@ -1348,10 +1493,12 @@ May    19.483846
 Nov     8.615147
 Oct    15.280294
 Sep    21.236765
-Name: percentile_90, dtype: float64
+Name: percentile_90, dtype: float64</p>
+
+<pre><code class="language-python">resamp_Montreal_grouped['percentile_90'].agg(np.size)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp_Montreal_grouped[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">percentile_90</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>agg(np<span style="color:#f92672">.</span>size)
-</code></pre></div><pre><code>month
+
+<p>month
 Apr    70.0
 Aug    70.0
 Dec    70.0
@@ -1364,46 +1511,68 @@ May    70.0
 Nov    70.0
 Oct    70.0
 Sep    70.0
-Name: percentile_90, dtype: float64
-</code></pre>
-<h2 id="exercice-">Exercice :</h2>
+Name: percentile_90, dtype: float64</p></li>
+</ul>
+
+<h2 id="exercice">Exercice :</h2>
+
 <h2 id="compute-day-degres-index-for-montreal-station">Compute day degres index for Montreal station</h2>
+
 <p>1- open and read file &ldquo;MONTREAL_tasmoy_1948_2017.txt&rdquo;</p>
+
 <p>2- Define datetime index (time range: 01/01/1948 : 31/12/2017 )</p>
+
 <p>3- Write a function to compute the index</p>
+
 <p>4- For each year, compute temperature mean, min , max and DG0 index</p>
+
 <p>5- Make a plot</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div><p>1-</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./data/MONTREAL_tasmoy_1948_2017.txt</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> file:
-     rows <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
-data_EC_Montreal <span style="color:#f92672">=</span> [float(row) <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows<span style="color:#f92672">.</span>split()]  
-</code></pre></div><p>2-</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
-<span style="color:#f92672">import</span> datetime
-<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date
-df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame()
 
-start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">1948</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
-end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
-delta<span style="color:#f92672">=</span>(end<span style="color:#f92672">-</span>start) 
-nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
-rng <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(start, periods<span style="color:#f92672">=</span>nb_days, freq<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D</span><span style="color:#e6db74">&#39;</span>)
+<pre><code class="language-python">
+</code></pre>
 
-df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> rng
-df<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#39;</span>] 
-df[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Temperature Montreal</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> data_EC_Montreal
-</code></pre></div><p>3-</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">DG0</span>(S):  
-     ind_DGO<span style="color:#f92672">=</span>[]
-     ind_DGO <span style="color:#f92672">=</span> sum(x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> S <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
-     <span style="color:#66d9ef">return</span> ind_DGO  
-</code></pre></div><p>4-</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resamp <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>resample(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">AS</span><span style="color:#e6db74">&#39;</span>)
-dataset <span style="color:#f92672">=</span> resamp<span style="color:#f92672">.</span>agg([np<span style="color:#f92672">.</span>mean, np<span style="color:#f92672">.</span>min, np<span style="color:#f92672">.</span>max, DG0])
-dataset<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+<p>1-</p>
+
+<pre><code class="language-python">import numpy as np
+with open('./data/MONTREAL_tasmoy_1948_2017.txt', 'r') as file:
+     rows = file.read()
+data_EC_Montreal = [float(row) for row in rows.split()]  
+</code></pre>
+
+<p>2-</p>
+
+<pre><code class="language-python">import pandas as pd
+import datetime
+from datetime import date
+df = pd.DataFrame()
+
+start = date(1948, 1, 1)
+end = date(2017, 12, 31)
+delta=(end-start) 
+nb_days = delta.days + 1 
+rng = pd.date_range(start, periods=nb_days, freq='D')
+
+df['datetime'] = rng
+df.index = df['datetime'] 
+df['Temperature Montreal'] = data_EC_Montreal
+</code></pre>
+
+<p>3-</p>
+
+<pre><code class="language-python">def DG0(S):  
+     ind_DGO=[]
+     ind_DGO = sum(x for x in S if x &gt;= 0)
+     return ind_DGO  
+</code></pre>
+
+<p>4-</p>
+
+<pre><code class="language-python">resamp = df.resample('AS')
+dataset = resamp.agg([np.mean, np.min, np.max, DG0])
+dataset.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1413,6 +1582,7 @@ dataset<span style="color:#f92672">.</span>head()
 <th align="right">(&lsquo;Temperature Montreal&rsquo;, &lsquo;DG0&rsquo;)</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-01 00:00:00</td>
@@ -1421,6 +1591,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">27.8</td>
 <td align="right">3506.1</td>
 </tr>
+
 <tr>
 <td align="left">1949-01-01 00:00:00</td>
 <td align="right">8.04767</td>
@@ -1428,6 +1599,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">28.4</td>
 <td align="right">3602.9</td>
 </tr>
+
 <tr>
 <td align="left">1950-01-01 00:00:00</td>
 <td align="right">6.84877</td>
@@ -1435,6 +1607,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">25.9</td>
 <td align="right">3318.9</td>
 </tr>
+
 <tr>
 <td align="left">1951-01-01 00:00:00</td>
 <td align="right">7.24521</td>
@@ -1442,6 +1615,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">25.3</td>
 <td align="right">3404.9</td>
 </tr>
+
 <tr>
 <td align="left">1952-01-01 00:00:00</td>
 <td align="right">7.85546</td>
@@ -1451,10 +1625,16 @@ dataset<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
+
 <p>5-</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>droplevel(<span style="color:#ae81ff">0</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DG0</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>head()
-</code></pre></div><pre><code>datetime
+
+<pre><code class="language-python">dataset.columns = dataset.columns.droplevel(0)
+</code></pre>
+
+<pre><code class="language-python">dataset['DG0'].head()
+</code></pre>
+
+<pre><code>datetime
 1948-01-01    3506.1
 1949-01-01    3602.9
 1950-01-01    3318.9
@@ -1462,25 +1642,33 @@ dataset<span style="color:#f92672">.</span>head()
 1952-01-01    3474.2
 Freq: AS-JAN, Name: DG0, dtype: float64
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
-dataset[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DG0</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">5</span>))
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_58_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># we must filter missing values</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">DG0bis</span>(S):  
-     ind_DGObis<span style="color:#f92672">=</span>[]      
-     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
-     N <span style="color:#f92672">=</span> len(S)
-     N2 <span style="color:#f92672">=</span> len(S_no_nan)
-     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
-         ind_DGObis <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
-         ind_DGObis <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
-     <span style="color:#66d9ef">else</span>:       
-         ind_DGObis <span style="color:#f92672">=</span> sum(x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> S <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
-     <span style="color:#66d9ef">return</span> ind_DGObis 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset <span style="color:#f92672">=</span> resamp<span style="color:#f92672">.</span>agg([np<span style="color:#f92672">.</span>mean, np<span style="color:#f92672">.</span>min, np<span style="color:#f92672">.</span>max, DG0, DG0bis])
-dataset<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+dataset['DG0'].plot(figsize=(12,5))
+plt.show()
+</code></pre>
+
+<p><img src="/img/netcdf1_58_0.png" alt="png" /></p>
+
+<pre><code class="language-python"># we must filter missing values
+def DG0bis(S):  
+     ind_DGObis=[]      
+     S_no_nan = S[~np.isnan(S)]
+     N = len(S)
+     N2 = len(S_no_nan)
+     if ((N2/N) &lt; 0.8): 
+         ind_DGObis = np.empty(1)
+         ind_DGObis = np.nan
+     else:       
+         ind_DGObis = sum(x for x in S if x &gt;= 0)
+     return ind_DGObis 
+</code></pre>
+
+<pre><code class="language-python">dataset = resamp.agg([np.mean, np.min, np.max, DG0, DG0bis])
+dataset.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1491,6 +1679,7 @@ dataset<span style="color:#f92672">.</span>head()
 <th align="right">(&lsquo;Temperature Montreal&rsquo;, &lsquo;DG0bis&rsquo;)</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">1948-01-01 00:00:00</td>
@@ -1500,6 +1689,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">3506.1</td>
 <td align="right">3506.1</td>
 </tr>
+
 <tr>
 <td align="left">1949-01-01 00:00:00</td>
 <td align="right">8.04767</td>
@@ -1508,6 +1698,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">3602.9</td>
 <td align="right">3602.9</td>
 </tr>
+
 <tr>
 <td align="left">1950-01-01 00:00:00</td>
 <td align="right">6.84877</td>
@@ -1516,6 +1707,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">3318.9</td>
 <td align="right">3318.9</td>
 </tr>
+
 <tr>
 <td align="left">1951-01-01 00:00:00</td>
 <td align="right">7.24521</td>
@@ -1524,6 +1716,7 @@ dataset<span style="color:#f92672">.</span>head()
 <td align="right">3404.9</td>
 <td align="right">3404.9</td>
 </tr>
+
 <tr>
 <td align="left">1952-01-01 00:00:00</td>
 <td align="right">7.85546</td>
@@ -1534,11 +1727,16 @@ dataset<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>droplevel(<span style="color:#ae81ff">0</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DG0</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">5</span>))
-dataset[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DG0bis</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">5</span>))
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="/img/netcdf1_62_0.png" alt="png"></p>
+
+<pre><code class="language-python">dataset.columns = dataset.columns.droplevel(0)
+</code></pre>
+
+<pre><code class="language-python">dataset['DG0'].plot(figsize=(12,5))
+dataset['DG0bis'].plot(figsize=(12,5))
+plt.show()
+</code></pre>
+
+<p><img src="/img/netcdf1_62_0.png" alt="png" /></p>
 
           </div>
 

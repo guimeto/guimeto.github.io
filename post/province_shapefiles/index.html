@@ -31,8 +31,7 @@
   <meta name="description" content="﻿
 From shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.
 We will use gridded dataset ANUSPLIN meteorological data.
-Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).
-The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km).">
+Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/province_shapefiles/">
@@ -121,8 +120,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
   <meta property="og:description" content="﻿
 From shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.
 We will use gridded dataset ANUSPLIN meteorological data.
-Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).
-The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km)."><meta property="og:image" content="/post/province_shapefiles/featured.png">
+Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011)."><meta property="og:image" content="/post/province_shapefiles/featured.png">
   <meta property="twitter:image" content="/post/province_shapefiles/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -178,7 +176,7 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
       "url": "/img/icon-512.png"
     }
   },
-  "description": "﻿\nFrom shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.\nWe will use gridded dataset ANUSPLIN meteorological data.\nAgriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).\nThe so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km)."
+  "description": "﻿\nFrom shapefiles to Netcdf Mask In this tutorial, we will use shapefiles to create masks over canadian provinces.\nWe will use gridded dataset ANUSPLIN meteorological data.\nAgriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011)."
 }
 </script>
 
@@ -544,38 +542,58 @@ The so-called ANUSPLIN data uses ground-based observations and generates daily g
   <div class="article-container">
 
     <div class="article-style">
-      <p>﻿</p>
+      
+
+<p>﻿</p>
+
 <h3 id="from-shapefiles-to-netcdf-mask">From shapefiles to Netcdf Mask</h3>
+
 <p>In this tutorial, we will use shapefiles to create masks over canadian provinces.</p>
+
 <p>We will use gridded dataset ANUSPLIN meteorological data.</p>
+
 <p>Agriculture and Agri-Food Canada have produced daily precipitation, minimum and maximum temperature across Canada (south of 60°N) for climate related application purpose using thin-plate smoothing splines, as implemented in the ANUSPLIN climate modeling software (Hutchinson et al., 2009; McKenney et al., 2011).</p>
+
 <p>The so-called ANUSPLIN data uses ground-based observations and generates daily gridded data from 1951 to 2017 on a Lambert conformal conic projection with 5’ arc minutes spacing (equivalent to a resolution of about 10 km). The key strength of this spatial interpolation method is its global dependence on all data, permitting robust and stable determination of spatially varying dependences on elevation. Hutchinson et al. (2009) have shown that while ANUSPLIN fall month’s absolute errors were remarkably small, those of winter months were quite large due to rather difficult observation and measurement conditions.</p>
-<p>Data are available on this <a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids">link</a>.</p>
+
+<p>Data are available on this <a href="ftp://ftp.nrcan.gc.ca/pub/outgoing/canada_daily_grids" target="_blank">link</a>.</p>
+
 <p>I will present a  solution based on open-source Python modules:</p>
+
 <pre><code>    - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities
     - numpy: for simple array manipulations
     - geopandas: to open shapefiles
     - osgeo: 
     - matplotlib: for plotting
 </code></pre>
+
 <h3 id="1-first-we-need-to-import-librairies-and-create-aliases">1- First we need to import librairies and create aliases.</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr 
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> regionmask
-<span style="color:#f92672">import</span> geopandas <span style="color:#f92672">as</span> gpd
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
-<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">from</span> osgeo <span style="color:#f92672">import</span> ogr
-<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#f92672">%</span>matplotlib inline
-</code></pre></div><h4 id="working-over-canadian-province">Working over canadian province</h4>
+
+<pre><code class="language-python">import xarray as xr 
+import numpy as np
+import regionmask
+import geopandas as gpd
+import pandas as pd
+import matplotlib.pyplot as plt
+from osgeo import ogr
+import warnings; warnings.filterwarnings(action='ignore')
+%matplotlib inline
+</code></pre>
+
+<h4 id="working-over-canadian-province">Working over canadian province</h4>
+
 <p>In this example we will use canadian province shapefiles developped by statistics canada.</p>
-<p>Shapefiles are available on this <a href="https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm">website</a>.</p>
+
+<p>Shapefiles are available on this <a href="https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm" target="_blank">website</a>.</p>
+
 <p>After downloaded the shapefile, we must load it using geopandas library:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PATH_TO_SHAPEFILE <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp</span><span style="color:#e6db74">&#39;</span>
-province <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(PATH_TO_SHAPEFILE)
+
+<pre><code class="language-python">PATH_TO_SHAPEFILE = './Canadian_province/lpr_000b16a_e/lpr_000b16a_e.shp'
+province = gpd.read_file(PATH_TO_SHAPEFILE)
 province
-</code></pre></div><table>
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -587,6 +605,7 @@ province
 <th align="left">PRFABBR</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -597,6 +616,7 @@ province
 <td align="left">N.L.</td>
 <td align="left">T.-N.-L.</td>
 </tr>
+
 <tr>
 <td align="right">1</td>
 <td align="right">11</td>
@@ -606,6 +626,7 @@ province
 <td align="left">P.E.I.</td>
 <td align="left">Î.-P.-É.</td>
 </tr>
+
 <tr>
 <td align="right">2</td>
 <td align="right">12</td>
@@ -615,6 +636,7 @@ province
 <td align="left">N.S.</td>
 <td align="left">N.-É.</td>
 </tr>
+
 <tr>
 <td align="right">3</td>
 <td align="right">13</td>
@@ -624,6 +646,7 @@ province
 <td align="left">N.B.</td>
 <td align="left">N.-B.</td>
 </tr>
+
 <tr>
 <td align="right">4</td>
 <td align="right">24</td>
@@ -633,6 +656,7 @@ province
 <td align="left">Que.</td>
 <td align="left">Qc</td>
 </tr>
+
 <tr>
 <td align="right">5</td>
 <td align="right">35</td>
@@ -642,6 +666,7 @@ province
 <td align="left">Ont.</td>
 <td align="left">Ont.</td>
 </tr>
+
 <tr>
 <td align="right">6</td>
 <td align="right">46</td>
@@ -651,6 +676,7 @@ province
 <td align="left">Man.</td>
 <td align="left">Man.</td>
 </tr>
+
 <tr>
 <td align="right">7</td>
 <td align="right">47</td>
@@ -660,6 +686,7 @@ province
 <td align="left">Sask.</td>
 <td align="left">Sask.</td>
 </tr>
+
 <tr>
 <td align="right">8</td>
 <td align="right">48</td>
@@ -669,6 +696,7 @@ province
 <td align="left">Alta.</td>
 <td align="left">Alb.</td>
 </tr>
+
 <tr>
 <td align="right">9</td>
 <td align="right">59</td>
@@ -678,6 +706,7 @@ province
 <td align="left">B.C.</td>
 <td align="left">C.-B.</td>
 </tr>
+
 <tr>
 <td align="right">10</td>
 <td align="right">60</td>
@@ -687,6 +716,7 @@ province
 <td align="left">Y.T.</td>
 <td align="left">Yn</td>
 </tr>
+
 <tr>
 <td align="right">11</td>
 <td align="right">61</td>
@@ -696,6 +726,7 @@ province
 <td align="left">N.W.T.</td>
 <td align="left">T.N.-O.</td>
 </tr>
+
 <tr>
 <td align="right">12</td>
 <td align="right">62</td>
@@ -707,28 +738,47 @@ province
 </tr>
 </tbody>
 </table>
+
 <p>Shapes are here a GeoDataFrame containing all polygons illustrating the province boundaries.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ID_PROV <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
-<span style="color:#66d9ef">print</span>(province<span style="color:#f92672">.</span>PRNAME[ID_PROV])
-</code></pre></div><pre><code>Ontario
+
+<pre><code class="language-python">ID_PROV = 5
+print(province.PRNAME[ID_PROV])
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">province<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
-</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xad67400&gt;
+
+<pre><code>Ontario
 </code></pre>
-<p><img src="./output_6_1.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmpWGS84 <span style="color:#f92672">=</span> province<span style="color:#f92672">.</span>to_crs({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">proj</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">longlat</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ellps</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WGS84</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datum</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WGS84</span><span style="color:#e6db74">&#39;</span>})
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmpWGS84<span style="color:#f92672">.</span>plot()
-</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1327ac88&gt;
+
+<pre><code class="language-python">province.loc[:, 'geometry'].plot()
 </code></pre>
-<p><img src="./output_8_1.png" alt="png"></p>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xad67400&gt;
+</code></pre>
+
+<p><img src="./output_6_1.png" alt="png" /></p>
+
+<pre><code class="language-python">tmpWGS84 = province.to_crs({'proj':'longlat', 'ellps':'WGS84', 'datum':'WGS84'})
+</code></pre>
+
+<pre><code class="language-python">tmpWGS84.plot()
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1327ac88&gt;
+</code></pre>
+
+<p><img src="./output_8_1.png" alt="png" /></p>
+
 <p>Now we can load the ANUSPLIN_10km gridded data. The parameter chunks is very important, it defines how big are the “pieces” of data moved from the disk to the memory. With this value the entire computation on a workstation with 32 GB takes a couple of minutes.</p>
+
 <p>We will load all the temperature files using Xarray library.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ANUSPLIN_10km_YEAR_Mean_tasmoy_1950-2017</span><span style="color:#e6db74">&#39;</span>
-t_in <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">J:/DONNEES_AMERIQUE_DU_NORD/ANUSPLIN_10km/Netcdf/INDICES_ANNEES/Mean_tasmoy/</span><span style="color:#e6db74">&#39;</span>        
-data <span style="color:#f92672">=</span> t_in <span style="color:#f92672">+</span> model <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.nc</span><span style="color:#e6db74">&#39;</span>
-ds <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(data, chunks <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">time</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">10</span>})
+
+<pre><code class="language-python">model='ANUSPLIN_10km_YEAR_Mean_tasmoy_1950-2017'
+t_in = 'J:/DONNEES_AMERIQUE_DU_NORD/ANUSPLIN_10km/Netcdf/INDICES_ANNEES/Mean_tasmoy/'        
+data = t_in + model + '.nc'
+ds = xr.open_mfdataset(data, chunks = {'time': 10})
 ds
-</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+</code></pre>
+
+<pre><code>&lt;xarray.Dataset&gt;
 Dimensions:      (time: 68, x: 510, y: 1068)
 Coordinates:
     lon          (y, x) float32 dask.array&lt;shape=(1068, 510), chunksize=(1068, 510)&gt;
@@ -738,19 +788,30 @@ Dimensions without coordinates: x, y
 Data variables:
     Mean_tasmoy  (time, y, x) float32 dask.array&lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&gt;
 </code></pre>
+
 <p>Our xarray Dataset contains a single variable (Mean_tasmoy) which is stored as a dask.array. This is the result of loading files with open_mfdataset.</p>
-<p>Now we will use  regionmask module to create a gridded mask with the function regions_cls documented <a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">here</a>.</p>
+
+<p>Now we will use  regionmask module to create a gridded mask with the function regions_cls documented <a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls" target="_blank">here</a>.</p>
+
 <p>With this function we will create an object able to mask ANUSPLIN gridded data.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">province_mask_poly <span style="color:#f92672">=</span> regionmask<span style="color:#f92672">.</span>Regions_cls(name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">PRENAME</span><span style="color:#e6db74">&#39;</span>, numbers <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)), names <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), abbrevs <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>PRENAME), outlines <span style="color:#f92672">=</span> list(tmpWGS84<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>values[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>)))
+
+<pre><code class="language-python">province_mask_poly = regionmask.Regions_cls(name = 'PRENAME', numbers = list(range(0,13)), names = list(tmpWGS84.PRENAME), abbrevs = list(tmpWGS84.PRENAME), outlines = list(tmpWGS84.geometry.values[i] for i in range(0,13)))
 province_mask_poly
-</code></pre></div><pre><code>13 'PRENAME' Regions ()
+</code></pre>
+
+<pre><code>13 'PRENAME' Regions ()
 Newfoundland and Labrador Prince Edward Island Nova Scotia New Brunswick Quebec Ontario Manitoba Saskatchewan Alberta British Columbia Yukon Northwest Territories Nunavut
 </code></pre>
+
 <p>Now we are ready to apply the mask on the gridded dataset xarray ANUSPLIN.</p>
+
 <p>We select only the first timestep to speed up the process.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask <span style="color:#f92672">=</span> province_mask_poly<span style="color:#f92672">.</span>mask(ds<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>), lat_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>, lon_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>)
+
+<pre><code class="language-python">mask = province_mask_poly.mask(ds.isel(time = 0), lat_name='lat', lon_name='lon')
 mask
-</code></pre></div><pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
+</code></pre>
+
+<pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
 array([[nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
@@ -764,8 +825,11 @@ Coordinates:
     lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
     lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask
-</code></pre></div><pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
+
+<pre><code class="language-python">mask
+</code></pre>
+
+<pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
 array([[nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
@@ -779,24 +843,40 @@ Coordinates:
     lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
     lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
 </code></pre>
+
 <p>Mask can be saved (for example as a NetCDF) for a later use.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./mask_all_province.nc</span><span style="color:#e6db74">&#39;</span>) 
-</code></pre></div><p>A quick visualisation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-mask<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
-province<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, lw <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1b989828&gt;
+
+<pre><code class="language-python">mask.to_netcdf('./mask_all_province.nc') 
 </code></pre>
-<p><img src="./output_20_1.png" alt="png"></p>
+
+<p>A quick visualisation:</p>
+
+<pre><code class="language-python">plt.figure(figsize=(15,8))
+ax = plt.axes()
+mask.plot(ax = ax)
+province.plot(ax = ax, alpha = 0.8, facecolor = 'none', lw = 1)
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1b989828&gt;
+</code></pre>
+
+<p><img src="./output_20_1.png" alt="png" /></p>
+
 <h3 id="2-extract-one-province">2- Extract one province</h3>
+
 <p>We will sho how to mask Ontario province.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ID_PROV <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
-<span style="color:#66d9ef">print</span>(province<span style="color:#f92672">.</span>PRNAME[ID_PROV])
-</code></pre></div><pre><code>Ontario
+
+<pre><code class="language-python">ID_PROV = 5
+print(province.PRNAME[ID_PROV])
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask
-</code></pre></div><pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
+
+<pre><code>Ontario
+</code></pre>
+
+<pre><code class="language-python">mask
+</code></pre>
+
+<pre><code>&lt;xarray.DataArray (y: 1068, x: 510)&gt;
 array([[nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
@@ -810,9 +890,14 @@ Coordinates:
     lat      (y, x) float32 83.45833 83.375 83.291664 ... 41.125 41.041668
     lon      (y, x) float32 -140.95833 -140.95833 ... -52.04167 -52.04167
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">==</span> ID_PROV)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2
-</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+
+<pre><code class="language-python">out_sel2 = ds.where(mask == ID_PROV)
+</code></pre>
+
+<pre><code class="language-python">out_sel2
+</code></pre>
+
+<pre><code>&lt;xarray.Dataset&gt;
 Dimensions:      (time: 68, x: 510, y: 1068)
 Coordinates:
   * y            (y) int64 0 1 2 3 4 5 6 ... 1061 1062 1063 1064 1065 1066 1067
@@ -823,89 +908,109 @@ Coordinates:
 Data variables:
     Mean_tasmoy  (time, y, x) float32 dask.array&lt;shape=(68, 1068, 510), chunksize=(10, 1068, 510)&gt;
 </code></pre>
-<p>Quick visualisation, we will display the first step of our DataArray masked.</p>
-<p>For out_sel2 array :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
-out_sel2<span style="color:#f92672">.</span>Mean_tasmoy<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
-province<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x18bc95f8&gt;
-</code></pre>
-<p><img src="./output_28_1.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Ontario.nc</span><span style="color:#e6db74">&#39;</span>) 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
-<span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset, num2date
-<span style="color:#f92672">import</span> warnings
-warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
-<span style="color:#f92672">import</span> datetime
-<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-filename<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./Ontario.nc</span><span style="color:#e6db74">&#39;</span>
-nc_fid<span style="color:#f92672">=</span>Dataset(filename,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span>)
-data<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Mean_tasmoy</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
-lons<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
-lats<span style="color:#f92672">=</span>nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(68, 1068, 510)
+<p>Quick visualisation, we will display the first step of our DataArray masked.</p>
+
+<p>For out_sel2 array :</p>
+
+<pre><code class="language-python">plt.figure(figsize=(15,8))
+ax = plt.axes()
+out_sel2.Mean_tasmoy.isel(time = 0).plot(ax = ax)
+province.plot(ax = ax, alpha = 0.8, facecolor = 'none')
 </code></pre>
-<p>Let's use Xarray to compute climatology over 1988-2017.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_m <span style="color:#f92672">=</span> data[<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>:,:,:]
-clim_89_2017<span style="color:#f92672">=</span>data_m<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-clim_89_2017<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(1068, 510)
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x18bc95f8&gt;
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>), frameon<span style="color:#f92672">=</span>True)  
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
-ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">75</span>,<span style="color:#ae81ff">40</span>,<span style="color:#ae81ff">58</span>])
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+
+<p><img src="./output_28_1.png" alt="png" /></p>
+
+<pre><code class="language-python">out_sel2.to_netcdf('./Ontario.nc') 
+</code></pre>
+
+<pre><code class="language-python">import matplotlib.pylab as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import numpy as np
+import matplotlib as mpl
+from netCDF4 import Dataset, num2date
+import warnings
+warnings.filterwarnings(&quot;ignore&quot;)
+import datetime
+import xarray as xr
+import pandas as pd
+
+filename='./Ontario.nc'
+nc_fid=Dataset(filename,'r')
+data=nc_fid.variables['Mean_tasmoy'][:].squeeze()
+lons=nc_fid.variables['lon'][:].squeeze()
+lats=nc_fid.variables['lat'][:].squeeze()
+</code></pre>
+
+<pre><code class="language-python">data.shape
+</code></pre>
+
+<pre><code>(68, 1068, 510)
+</code></pre>
+
+<p>Let&rsquo;s use Xarray to compute climatology over 1988-2017.</p>
+
+<pre><code class="language-python">data_m = data[-30:,:,:]
+clim_89_2017=data_m.mean(axis=0)
+clim_89_2017.shape
+</code></pre>
+
+<pre><code>(1068, 510)
+</code></pre>
+
+<pre><code class="language-python">fig=plt.figure(figsize=(28,16), frameon=True)  
+ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-100,-75,40,58])
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
+ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
+ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac
    
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
-coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
-                            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)    
-states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-            category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-            name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-            scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
+ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières 
+coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
+                            facecolor='none', name='coastline')
+ax.add_feature(coast, edgecolor='black')    
+states_provinces = cfeature.NaturalEarthFeature(
+            category='cultural',
+            name='admin_1_states_provinces_lines',
+            scale='10m',
+            facecolor='none')
     
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>) 
+ax.add_feature(states_provinces, edgecolor='gray') 
 
  
-mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(lons,\
+mm = ax.contourf(lons,\
                    lats,\
                    clim_89_2017,\
-                   vmin<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>,\
-                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, \
-                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
-                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">1.</span>),\
-                   cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet )
-ax<span style="color:#f92672">.</span>gridlines()
+                   vmin=-10,\
+                   vmax=10, \
+                   transform=ccrs.PlateCarree(),\
+                   levels=np.arange(-10, 10, 1.),\
+                   cmap=plt.cm.jet )
+ax.gridlines()
 
-<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
-xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
-yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+# Define gridline locations and draw the lines using cartopy's built-in gridliner:
+xticks = np.arange(-150.0,-40.0,20)
+yticks =np.arange(10,80,10)
 
-cbar<span style="color:#f92672">.</span>set_label(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> Projection = Lambert Conformal Conic </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Resolution: 5 Arcs-Minutes (10 km)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Data provided by Natural Resources Canada / Created by Guillaume Dueymes</span><span style="color:#e6db74">&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">medium</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># Affichage de la légende de la barre de couleur</span>
+cbar.set_label(u'\n Projection = Lambert Conformal Conic \nResolution: 5 Arcs-Minutes (10 km)\nData provided by Natural Resources Canada / Created by Guillaume Dueymes', size='medium') # Affichage de la légende de la barre de couleur
 
-cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm,  shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">True</span><span style="color:#e6db74">&#39;</span>,extend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>)
-cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>) 
+cbar = plt.colorbar(mm,  shrink=0.75, drawedges='True',extend='both')
+cbar.ax.tick_params(labelsize=17) 
     
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Temperature / Température (°C)</span><span style="color:#e6db74">&#39;</span>,size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x-large</span><span style="color:#e6db74">&#39;</span>)
-string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Climate normals of mean annual temperature (°C)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> 1988 - 2017</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
-plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">xx-large</span><span style="color:#e6db74">&#39;</span>)
-plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./ANUSPLIN_Ontario_10km_YEAR_CLIM_1988-2017.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-plt<span style="color:#f92672">.</span>show() 
+plt.xlabel(u'\n\n\nTemperature / Température (°C)',size='x-large')
+string_title=u'Climate normals of mean annual temperature (°C)\n 1988 - 2017\n'
+plt.title(string_title, size='xx-large')
+plt.savefig('./ANUSPLIN_Ontario_10km_YEAR_CLIM_1988-2017.png', bbox_inches='tight', pad_inches=0.1)
+plt.show() 
 
-</code></pre></div><p><img src="./output_34_0.png" alt="png"></p>
+</code></pre>
+
+<p><img src="./output_34_0.png" alt="png" /></p>
 
     </div>
 

@@ -31,7 +31,7 @@
   <meta name="description" content="4 Libraries and functions in Python 4.1 Introduction to librairies To facilitate the processing, manipulation and visualization of data, Python has many libraries.
 Python libraries allow you to import codes and functions that will make our analysis easier.
 Here are the most popular libraries:
- numpy: mathematics or scientific calculations: http://www.numpy.org/ pandas: data manipulation: http://pandas.pydata.org/ matplotlib: visualization of data: https://matplotlib.org/ scikit-learn: machine learning: https://scikit-learn.org Datetime: formatting dates: https: //docs.python.org/2/library/datetime.html  To import a library under Python, use the function: import &#43; library_name">
+ numpy: mathematics or scientific calculations: http://www.numpy.org/ pandas: data manipulation: http://pandas.pydata.org/ matplotlib: visualization of data: https://matplotlib.org/ scikit-learn: machine learning: https://scikit-learn.org Datetime: formatting dates: https: //docs.python.org/2/library/datetime.html  To import a library under Python, use the function:  import  &#43; library_name">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/tutorial_python/4-functions/">
@@ -121,7 +121,7 @@ Here are the most popular libraries:
   <meta property="og:description" content="4 Libraries and functions in Python 4.1 Introduction to librairies To facilitate the processing, manipulation and visualization of data, Python has many libraries.
 Python libraries allow you to import codes and functions that will make our analysis easier.
 Here are the most popular libraries:
- numpy: mathematics or scientific calculations: http://www.numpy.org/ pandas: data manipulation: http://pandas.pydata.org/ matplotlib: visualization of data: https://matplotlib.org/ scikit-learn: machine learning: https://scikit-learn.org Datetime: formatting dates: https: //docs.python.org/2/library/datetime.html  To import a library under Python, use the function: import &#43; library_name"><meta property="og:image" content="/img/icon-192.png">
+ numpy: mathematics or scientific calculations: http://www.numpy.org/ pandas: data manipulation: http://pandas.pydata.org/ matplotlib: visualization of data: https://matplotlib.org/ scikit-learn: machine learning: https://scikit-learn.org Datetime: formatting dates: https: //docs.python.org/2/library/datetime.html  To import a library under Python, use the function:  import  &#43; library_name"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -515,18 +515,20 @@ Here are the most popular libraries:
       </ul>
 
       <nav id="TableOfContents">
-  <ul>
-    <li><a href="#41-introduction-to-librairies">4.1 Introduction to librairies</a></li>
-    <li><a href="#42--builtin-function">4.2  Built-in function</a>
-      <ul>
-        <li><a href="#some-examples">Some examples:</a></li>
-      </ul>
-    </li>
-    <li><a href="#43--create-own-functions">4.3  Create own functions.</a></li>
-    <li><a href="#44--functions-with-args">4.4  Functions with *args</a></li>
-    <li><a href="#45-functions-with-kwargs">4.5 Functions with **kwargs</a></li>
-    <li><a href="#46-import-own-functions">4.6 Import own functions</a></li>
-  </ul>
+<ul>
+<li><a href="#4-libraries-and-functions-in-python">4  Libraries and functions in  Python</a>
+<ul>
+<li><a href="#4-1-introduction-to-librairies">4.1 Introduction to librairies</a></li>
+<li><a href="#4-2-built-in-function">4.2  Built-in function</a>
+<ul>
+<li><a href="#some-examples">Some examples:</a></li>
+</ul></li>
+<li><a href="#4-3-create-own-functions">4.3  Create own functions.</a></li>
+<li><a href="#4-4-functions-with-args">4.4  Functions with *args</a></li>
+<li><a href="#4-5-functions-with-kwargs">4.5 Functions with **kwargs</a></li>
+<li><a href="#4-6-import-own-functions">4.6 Import own functions</a></li>
+</ul></li>
+</ul>
 </nav>
 
       
@@ -541,41 +543,62 @@ Here are the most popular libraries:
           <h1>4 Functions</h1>
 
           <div class="article-style">
-            <p><img src="/img/pylogo.png" alt="image0">
-<!-- raw HTML omitted --></p>
-<h1 id="4--libraries-and-functions-in--python">4  Libraries and functions in  Python</h1>
-<h2 id="41-introduction-to-librairies">4.1 Introduction to librairies</h2>
+            
+
+<p><img src="/img/pylogo.png" alt="image0" />
+<img src="./figures/pylogo.png" alt="Indentation" width="50%" height="50%"></p>
+
+<h1 id="4-libraries-and-functions-in-python">4  Libraries and functions in  Python</h1>
+
+<h2 id="4-1-introduction-to-librairies">4.1 Introduction to librairies</h2>
+
 <p>To facilitate the processing, manipulation and visualization of data, Python has many libraries.</p>
+
 <p>Python libraries allow you to import codes and functions that will make our analysis easier.</p>
+
 <p>Here are the most popular libraries:</p>
+
 <ul>
-<li>numpy: mathematics or scientific calculations: <a href="http://www.numpy.org/">http://www.numpy.org/</a></li>
-<li>pandas: data manipulation: <a href="http://pandas.pydata.org/">http://pandas.pydata.org/</a></li>
-<li>matplotlib: visualization of data: <a href="https://matplotlib.org/">https://matplotlib.org/</a></li>
-<li>scikit-learn: machine learning: <a href="https://scikit-learn.org">https://scikit-learn.org</a></li>
+<li>numpy: mathematics or scientific calculations: <a href="http://www.numpy.org/" target="_blank">http://www.numpy.org/</a></li>
+<li>pandas: data manipulation: <a href="http://pandas.pydata.org/" target="_blank">http://pandas.pydata.org/</a></li>
+<li>matplotlib: visualization of data: <a href="https://matplotlib.org/" target="_blank">https://matplotlib.org/</a></li>
+<li>scikit-learn: machine learning: <a href="https://scikit-learn.org" target="_blank">https://scikit-learn.org</a></li>
 <li>Datetime: formatting dates: https: //docs.python.org/2/library/datetime.html</li>
 </ul>
-<p>To import a library under Python, use the function: <!-- raw HTML omitted --> import <!-- raw HTML omitted --> + library_name</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># To import a library</span>
-<span style="color:#f92672">import</span> numpy
-</code></pre></div><p>Every library imported under python has help.</p>
+
+<p>To import a library under Python, use the function: <b> import </b> + library_name</p>
+
+<pre><code class="language-python"># To import a library
+import numpy
+</code></pre>
+
+<p>Every library imported under python has help.</p>
+
 <p>To know what a library contains, we use the function: dir ()</p>
+
 <pre><code>    - Example: dir(numpy)    
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dir(numpy)
-</code></pre></div><p>The <!-- raw HTML omitted --> help () <!-- raw HTML omitted --> function provides help with a function in the library</p>
+
+<pre><code class="language-python">dir(numpy)
+</code></pre>
+
+<p>The <b> help () </b> function provides help with a function in the library</p>
+
 <pre><code>    - Example: help(numpy.mean)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">help(numpy<span style="color:#f92672">.</span>mean)
-</code></pre></div><pre><code>Help on function mean in module numpy:
+
+<pre><code class="language-python">help(numpy.mean)
+</code></pre>
+
+<pre><code>Help on function mean in module numpy:
 
 mean(a, axis=None, dtype=None, out=None, keepdims=&lt;no value&gt;)
     Compute the arithmetic mean along the specified axis.
-    
+
     Returns the average of the array elements.  The average is taken over
     the flattened array by default, otherwise over the specified axis.
     `float64` intermediate and return values are used for integer inputs.
-    
+
     Parameters
     ----------
     a : array_like
@@ -584,9 +607,9 @@ mean(a, axis=None, dtype=None, out=None, keepdims=&lt;no value&gt;)
     axis : None or int or tuple of ints, optional
         Axis or axes along which the means are computed. The default is to
         compute the mean of the flattened array.
-    
+
         .. versionadded:: 1.7.0
-    
+
         If this is a tuple of ints, a mean is performed over multiple axes,
         instead of a single axis or all the axes as before.
     dtype : data-type, optional
@@ -598,43 +621,43 @@ mean(a, axis=None, dtype=None, out=None, keepdims=&lt;no value&gt;)
         is ``None``; if provided, it must have the same shape as the
         expected output, but the type will be cast if necessary.
         See `doc.ufuncs` for details.
-    
+
     keepdims : bool, optional
         If this is set to True, the axes which are reduced are left
         in the result as dimensions with size one. With this option,
         the result will broadcast correctly against the input array.
-    
+
         If the default value is passed, then `keepdims` will not be
         passed through to the `mean` method of sub-classes of
         `ndarray`, however any non-default value will be.  If the
         sub-class' method does not implement `keepdims` any
         exceptions will be raised.
-    
+
     Returns
     -------
     m : ndarray, see dtype parameter above
         If `out=None`, returns a new array containing the mean values,
         otherwise a reference to the output array is returned.
-    
+
     See Also
     --------
     average : Weighted average
     std, var, nanmean, nanstd, nanvar
-    
+
     Notes
     -----
     The arithmetic mean is the sum of the elements along the axis divided
     by the number of elements.
-    
+
     Note that for floating-point input, the mean is computed using the
     same precision the input has.  Depending on the input data, this can
     cause the results to be inaccurate, especially for `float32` (see
     example below).  Specifying a higher-precision accumulator using the
     `dtype` keyword can alleviate this issue.
-    
+
     By default, `float16` results are computed using `float32` intermediates
     for extra precision.
-    
+
     Examples
     --------
     &gt;&gt;&gt; a = np.array([[1, 2], [3, 4]])
@@ -644,66 +667,95 @@ mean(a, axis=None, dtype=None, out=None, keepdims=&lt;no value&gt;)
     array([ 2.,  3.])
     &gt;&gt;&gt; np.mean(a, axis=1)
     array([ 1.5,  3.5])
-    
+
     In single precision, `mean` can be inaccurate:
-    
+
     &gt;&gt;&gt; a = np.zeros((2, 512*512), dtype=np.float32)
     &gt;&gt;&gt; a[0, :] = 1.0
     &gt;&gt;&gt; a[1, :] = 0.1
     &gt;&gt;&gt; np.mean(a)
     0.54999924
-    
+
     Computing the mean in float64 is more accurate:
-    
+
     &gt;&gt;&gt; np.mean(a, dtype=np.float64)
     0.55000000074505806
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_1<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>]
+
+<pre><code class="language-python">list_1=[1,2,3,4,5,6,7,8,9,10]
 list_1
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">numpy<span style="color:#f92672">.</span>mean(list_1)  <span style="color:#75715e"># name of library + name of function </span>
-</code></pre></div><pre><code>5.5
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">numpy<span style="color:#f92672">.</span>max(list_1)
-</code></pre></div><pre><code>10
+
+<pre><code class="language-python">numpy.mean(list_1)  # name of library + name of function 
 </code></pre>
-<h2 id="42--builtin-function">4.2  Built-in function</h2>
+
+<pre><code>5.5
+</code></pre>
+
+<pre><code class="language-python">numpy.max(list_1)
+</code></pre>
+
+<pre><code>10
+</code></pre>
+
+<h2 id="4-2-built-in-function">4.2  Built-in function</h2>
+
 <p>Python gives you many built-in functions like print(), etc</p>
-<p>Here's a list: <a href="https://docs.python.org/3/library/functions.html">https://docs.python.org/3/library/functions.html</a></p>
+
+<p>Here&rsquo;s a list: <a href="https://docs.python.org/3/library/functions.html" target="_blank">https://docs.python.org/3/library/functions.html</a></p>
+
 <h3 id="some-examples">Some examples:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">abs(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># Return the absolute value of a number </span>
-</code></pre></div><pre><code>1
+
+<pre><code class="language-python">abs(-1)  # Return the absolute value of a number 
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]) <span style="color:#75715e"># Return the length (the number of items) of an object. </span>
-</code></pre></div><pre><code>3
+
+<pre><code>1
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">max([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">99</span>,<span style="color:#ae81ff">1</span>])    <span style="color:#75715e">#Return max value from a list</span>
-</code></pre></div><pre><code>99
+
+<pre><code class="language-python">len([1,2,3]) # Return the length (the number of items) of an object. 
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">round(<span style="color:#ae81ff">1.2</span>)  <span style="color:#75715e"># Return number rounded to ndigits precision </span>
-</code></pre></div><pre><code>1
+
+<pre><code>3
 </code></pre>
-<h2 id="43--create-own-functions">4.3  Create own functions.</h2>
+
+<pre><code class="language-python">max([1,3,2,6,99,1])    #Return max value from a list
+</code></pre>
+
+<pre><code>99
+</code></pre>
+
+<pre><code class="language-python">round(1.2)  # Return number rounded to ndigits precision 
+</code></pre>
+
+<pre><code>1
+</code></pre>
+
+<h2 id="4-3-create-own-functions">4.3  Create own functions.</h2>
+
 <p>These functions are called user-defined functions.</p>
+
 <ul>
-<li>
-<p>a function makes our code more fluid and readable:</p>
-</li>
-<li>
-<p>Syntax: to write a function, we start with the def() keyword</p>
-<pre><code>             def sum (a, b): # we define the parameters
- indentation ---&gt; return a + b # return keyword to return result variable
+<li><p>a function makes our code more fluid and readable:</p></li>
+
+<li><p>Syntax: to write a function, we start with the def() keyword</p>
+
+<pre><code>           def sum (a, b): # we define the parameters
 </code></pre>
-</li>
-<li>
-<p>It does not specify the type of return, it is dynamically resolved at the time of execution of the program.</p>
-</li>
-<li>
-<p>Call of the function: result = sum (12,4) # result = 16</p>
-</li>
+
+<p>indentation &mdash;&gt; return a + b # return keyword to return result variable</p>
+
+<ul>
+<li><p>It does not specify the type of return, it is dynamically resolved at the time of execution of the program.</p></li>
+
+<li><p>Call of the function: result = sum (12,4) # result = 16</p></li>
+</ul></li>
 </ul>
+
 <p>Python also supports keyword arguments.</p>
+
 <pre><code>                def sum (a, b): # we define the parameters
                     return a + b # return keyword to return result variable
                 result = sum (12, b = 4)
@@ -712,119 +764,167 @@ list_1
                       return a + b # return keyword to return result variable
                 result = sum (12)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sign</span>(x):
-    <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">positive</span><span style="color:#e6db74">&#39;</span>
-    <span style="color:#66d9ef">elif</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">negative</span><span style="color:#e6db74">&#39;</span>
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">zero</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list_to_test <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> element <span style="color:#f92672">in</span> my_list_to_test:
-    <span style="color:#66d9ef">print</span>(sign(element))
-</code></pre></div><pre><code>zero
+
+<pre><code class="language-python">def sign(x):
+    if x &gt; 0:
+        return 'positive'
+    elif x &lt; 0:
+        return 'negative'
+    else:
+        return 'zero'
+</code></pre>
+
+<pre><code class="language-python">my_list_to_test = [0,2,-8,10,1,-6]
+</code></pre>
+
+<pre><code class="language-python">for element in my_list_to_test:
+    print(sign(element))
+</code></pre>
+
+<pre><code>zero
 positive
 negative
 positive
 positive
 negative
 </code></pre>
-<p>We will often define functions to take optional keyword arguments, like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello</span>(name, loud<span style="color:#f92672">=</span>False):
-    <span style="color:#66d9ef">if</span> loud:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">HELLO, </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> name<span style="color:#f92672">.</span>upper())
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Hello, </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">!</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> name)
 
-hello(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Bob</span><span style="color:#e6db74">&#39;</span>)
-hello(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Fred</span><span style="color:#e6db74">&#39;</span>, loud<span style="color:#f92672">=</span>True)
-</code></pre></div><pre><code>Hello, Bob!
+<p>We will often define functions to take optional keyword arguments, like this:</p>
+
+<pre><code class="language-python">def hello(name, loud=False):
+    if loud:
+        print('HELLO, %s' % name.upper())
+    else:
+        print('Hello, %s!' % name)
+
+hello('Bob')
+hello('Fred', loud=True)
+</code></pre>
+
+<pre><code>Hello, Bob!
 HELLO, FRED
 </code></pre>
-<h2 id="44--functions-with-args">4.4  Functions with *args</h2>
+
+<h2 id="4-4-functions-with-args">4.4  Functions with *args</h2>
+
 <ul>
 <li>Special syntax in python that allows to manage a variable number of parameters when calling a function</li>
-<li>It's the * that counts</li>
+<li>It&rsquo;s the * that counts</li>
 <li>args is a convention</li>
-<li>
-<ul>
-<li>args is a list of parameters containing the parameters of a function</li>
+<li>* args is a list of parameters containing the parameters of a function</li>
 </ul>
-</li>
-</ul>
+
 <p>Syntax * args:</p>
+
 <pre><code>        def print_ingredients (* args):
             for ingredients in args:
                 print (ingredient)
-                
+
         print_ingredients ( 'Tomatoes')
         print_ingredients ( 'Tomatoes' Banana)
         print_ingredients ( 'Tomatoes' Banana, apple)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum</span>(<span style="color:#f92672">*</span>args):
-    total <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
-    <span style="color:#66d9ef">for</span> number <span style="color:#f92672">in</span> args: 
-        total <span style="color:#f92672">+</span><span style="color:#f92672">=</span> number 
-    <span style="color:#66d9ef">print</span>(total)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sum(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>)
-sum(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">23</span>)
-</code></pre></div><pre><code>5
+
+<pre><code class="language-python">def sum(*args):
+    total = 0 
+    for number in args: 
+        total += number 
+    print(total)
+</code></pre>
+
+<pre><code class="language-python">sum(2,3)
+sum(2,3,10,90,23)
+</code></pre>
+
+<pre><code>5
 128
 </code></pre>
-<h2 id="45-functions-with-kwargs">4.5 Functions with **kwargs</h2>
+
+<h2 id="4-5-functions-with-kwargs">4.5 Functions with **kwargs</h2>
+
 <ul>
 <li>Like * args, but for keyword arguments</li>
-<li>It's the * that counts</li>
+<li>It&rsquo;s the * that counts</li>
 <li>** kwargs is a python dictionary containing the keys / values ​​of the parameters of a function</li>
 <li>it must always be present last in the list of parameters of a function</li>
 </ul>
+
 <p>Syntax ** kwargs:</p>
+
 <pre><code>        def print_languages ​​(** args):
             for language, definition in kwargs.items ():
                 print ('{} is {}'. format (language, definition))
-                
+
         print_languages ​​(Python = 'awesome')
         print_languages ​​(Python = 'awesome', Java = 'verbose')
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">capitals</span>(<span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-    <span style="color:#66d9ef">for</span> country, capital <span style="color:#f92672">in</span> kwargs<span style="color:#f92672">.</span>items():
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">The capital of {} in {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(country, capital))
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">capitals(France <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Paris</span><span style="color:#e6db74">&#39;</span>, Germany<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Berlin</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><pre><code>The capital of France in Paris
+
+<pre><code class="language-python">def capitals(**kwargs):
+    for country, capital in kwargs.items():
+        print(&quot;The capital of {} in {}&quot;.format(country, capital))
+</code></pre>
+
+<pre><code class="language-python">capitals(France = 'Paris', Germany='Berlin')
+</code></pre>
+
+<pre><code>The capital of France in Paris
 The capital of Germany in Berlin
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">capitals</span>(title, ending<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,  <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-    <span style="color:#66d9ef">print</span>(title)
-    <span style="color:#66d9ef">for</span> country, capital <span style="color:#f92672">in</span> kwargs<span style="color:#f92672">.</span>items():
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">The capital of {} in {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(country, capital))
-    <span style="color:#66d9ef">if</span> ending:
-        <span style="color:#66d9ef">print</span>(ending)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">capitals(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">List of countries</span><span style="color:#e6db74">&#34;</span>,
-    France <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Paris</span><span style="color:#e6db74">&#39;</span>, Germany<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Berlin</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><pre><code>List of countries
+
+<pre><code class="language-python">def capitals(title, ending='',  **kwargs):
+    print(title)
+    for country, capital in kwargs.items():
+        print(&quot;The capital of {} in {}&quot;.format(country, capital))
+    if ending:
+        print(ending)
+</code></pre>
+
+<pre><code class="language-python">capitals(&quot;List of countries&quot;,
+    France = 'Paris', Germany='Berlin')
+</code></pre>
+
+<pre><code>List of countries
 The capital of France in Paris
 The capital of Germany in Berlin
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">keywords <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">france</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Paris</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Germany</span><span style="color:#e6db74">&#39;</span> : <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Allemage</span><span style="color:#e6db74">&#39;</span>}
-capitals(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">List of countries 2 </span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>keywords)
-</code></pre></div><pre><code>List of countries 2 
+
+<pre><code class="language-python">keywords = {'france': 'Paris', 'Germany' : 'Allemage'}
+capitals(&quot;List of countries 2 &quot;, **keywords)
+</code></pre>
+
+<pre><code>List of countries 2 
 The capital of france in Paris
 The capital of Germany in Allemage
 </code></pre>
-<h2 id="46-import-own-functions">4.6 Import own functions</h2>
+
+<h2 id="4-6-import-own-functions">4.6 Import own functions</h2>
+
 <p>Modules refer to a file containing Python statements and definitions.</p>
+
 <p>A file containing Python code, for e.g.: example.py, is called a module and its module name would be example.</p>
+
 <p>We use modules to break down large programs into small manageable and organized files. Furthermore, modules provide reusability of code.</p>
+
 <p>We can define our most used functions in a module and import it, instead of copying their definitions into different programs.</p>
+
 <p>Here, we have defined different funcitons inside a module named my_functions.</p>
+
 <p>We use the import keyword to import our module and then our functions. To import our previously defined module example we type the following in the Python prompt:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> my_functions
-</code></pre></div><p>Using the module name we can access the function using the dot . operator. For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_functions<span style="color:#f92672">.</span>substraction(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">6</span>)
-</code></pre></div><pre><code>-2
+
+<pre><code class="language-python">import my_functions
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div>
+
+<p>Using the module name we can access the function using the dot . operator. For example:</p>
+
+<pre><code class="language-python">my_functions.substraction(4,6)
+</code></pre>
+
+<pre><code>-2
+</code></pre>
+
+<pre><code class="language-python">
+</code></pre>
+
           </div>
 
           

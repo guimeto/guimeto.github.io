@@ -509,17 +509,23 @@
       </ul>
 
       <nav id="TableOfContents">
-  <ul>
-    <li><a href="#51-create-a-dictionary">5.1 Create a dictionary:</a></li>
-    <li><a href="#52-update-a-dictionary">5.2 Update a dictionary:</a></li>
-    <li><a href="#53-access-a-dictionary">5.3 Access a dictionary:</a></li>
-    <li><a href="#exercise-on-dictionaries">Exercise on dictionaries</a></li>
-    <li><a href="#goal-to-manipulate-a-dictionary-containing-the-notes-of-15-students">Goal: To manipulate a dictionary containing the notes of 15 students.</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#5-1-create-a-dictionary">5.1 Create a dictionary:</a></li>
+<li><a href="#5-2-update-a-dictionary">5.2 Update a dictionary:</a></li>
+<li><a href="#5-3-access-a-dictionary">5.3 Access a dictionary:</a></li>
+<li><a href="#exercise-on-dictionaries">Exercise on dictionaries</a></li>
+<li><a href="#goal-to-manipulate-a-dictionary-containing-the-notes-of-15-students">Goal: To manipulate a dictionary containing the notes of 15 students.</a>
+<ul>
+<li>
+<ul>
+<li><a href="#correction">Correction</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#on-va-d-abord-déterminer-la-meilleure-note-utilisation-de-la-fonction-max">On va d&rsquo;abord déterminer  la meilleure note: utilisation de la fonction max()</a></li>
+</ul>
 </nav>
 
       
@@ -534,8 +540,11 @@
           <h1>5 Dictionaries</h1>
 
           <div class="article-style">
-            <p><img src="/img/pylogo.png" alt="image0">
-<!-- raw HTML omitted --></p>
+            
+
+<p><img src="/img/pylogo.png" alt="image0" />
+<img src="./figures/pylogo.png" alt="Indentation" width="50%" height="50%"></p>
+
 <ul>
 <li>The dictionary stores (key, value) pairs</li>
 <li>They are unordered data structures</li>
@@ -547,123 +556,173 @@
 <li>Dictionary values have no restrictions. They can be any arbitrary Python object, either standard objects or user-defined objects. However, same is not true for the keys.</li>
 <li>Keys must be immutable. Which means you can use strings, numbers or tuples as dictionary keys but something like [&lsquo;key&rsquo;] is not allowed.</li>
 </ul>
+
 <p>You can find all you need to know about dictionaries in the documentation:
-<a href="https://docs.python.org/2/library/stdtypes.html#dict">https://docs.python.org/2/library/stdtypes.html#dict</a></p>
-<h2 id="51-create-a-dictionary">5.1 Create a dictionary:</h2>
+<a href="https://docs.python.org/2/library/stdtypes.html#dict" target="_blank">https://docs.python.org/2/library/stdtypes.html#dict</a></p>
+
+<h2 id="5-1-create-a-dictionary">5.1 Create a dictionary:</h2>
+
 <p>In a dictionary, each key is separated from its value by a colon (:), the items are separated by commas, and the whole thing is enclosed in curly braces like this: {}.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># exemple : students&#39; note dictionary</span>
-my_dictionary <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Marie</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">15</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Thomas</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">12</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Julien</span><span style="color:#e6db74">&#34;</span> : <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">absent</span><span style="color:#e6db74">&#34;</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Elise</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">9</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Samuel</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">17</span>
+
+<pre><code class="language-python"># exemple : students' note dictionary
+my_dictionary = {
+    &quot;Marie&quot; : 15,
+    &quot;Thomas&quot; : 12,
+    &quot;Julien&quot; : &quot;absent&quot;,
+    &quot;Elise&quot; : 9,
+    &quot;Samuel&quot; : 17
 }
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_dictionary  <span style="color:#75715e"># We have the key : the value </span>
-</code></pre></div><pre><code>{'Marie': 15, 'Thomas': 12, 'Julien': 'absent', 'Elise': 9, 'Samuel': 17}
 </code></pre>
-<h2 id="52-update-a-dictionary">5.2 Update a dictionary:</h2>
+
+<pre><code class="language-python">my_dictionary  # We have the key : the value 
+</code></pre>
+
+<pre><code>{'Marie': 15, 'Thomas': 12, 'Julien': 'absent', 'Elise': 9, 'Samuel': 17}
+</code></pre>
+
+<h2 id="5-2-update-a-dictionary">5.2 Update a dictionary:</h2>
+
 <p>You can update a dictionary by adding a new entry or a key-value pair, modifying an existing entry, or deleting an existing entry as shown below.</p>
+
 <ul>
-<li>To <!-- raw HTML omitted -->add<!-- raw HTML omitted --> key-value pair</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Adding a key-value pair in a dictionary</span>
-my_dictionary[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Julie</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">9</span>
-<span style="color:#66d9ef">print</span>(my_dictionary)
-</code></pre></div><pre><code>{'Marie': 15, 'Thomas': 12, 'Julien': 'absent', 'Elise': 9, 'Samuel': 17, 'Julie': 9}
+<li><p>To <b>add</b> key-value pair</p>
+
+<pre><code class="language-python"># Adding a key-value pair in a dictionary
+my_dictionary[&quot;Julie&quot;]=9
+print(my_dictionary)
 </code></pre>
-<ul>
-<li>To <!-- raw HTML omitted -->change<!-- raw HTML omitted --> a value using existing key</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_dictionary[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Julien</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">13</span>
-<span style="color:#66d9ef">print</span>(my_dictionary)
-</code></pre></div><pre><code>{'Marie': 15, 'Thomas': 12, 'Julien': 13, 'Elise': 9, 'Samuel': 17, 'Julie': 9}
+
+<p>{&lsquo;Marie&rsquo;: 15, &lsquo;Thomas&rsquo;: 12, &lsquo;Julien&rsquo;: &lsquo;absent&rsquo;, &lsquo;Elise&rsquo;: 9, &lsquo;Samuel&rsquo;: 17, &lsquo;Julie&rsquo;: 9}</p></li>
+
+<li><p>To <b>change</b> a value using existing key</p>
+
+<pre><code class="language-python">my_dictionary[&quot;Julien&quot;]=13
+print(my_dictionary)
 </code></pre>
+
+<p>{&lsquo;Marie&rsquo;: 15, &lsquo;Thomas&rsquo;: 12, &lsquo;Julien&rsquo;: 13, &lsquo;Elise&rsquo;: 9, &lsquo;Samuel&rsquo;: 17, &lsquo;Julie&rsquo;: 9}</p></li>
+</ul>
+
 <p>More than one entry per key not allowed. Which means no duplicate key is allowed. When duplicate keys encountered during assignment, the last assignment wins.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dict <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Name</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Zara</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Age</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">7</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Name</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Manni</span><span style="color:#e6db74">&#39;</span>}
+
+<pre><code class="language-python">dict = {'Name': 'Zara', 'Age': 7, 'Name': 'Manni'}
 dict
-</code></pre></div><pre><code>{'Name': 'Manni', 'Age': 7}
 </code></pre>
+
+<pre><code>{'Name': 'Manni', 'Age': 7}
+</code></pre>
+
 <ul>
-<li>To <!-- raw HTML omitted -->delete<!-- raw HTML omitted --> a value using a key</li>
+<li>To <b>delete</b> a value using a key</li>
 </ul>
+
 <p>You can either remove individual dictionary elements or clear the entire contents of a dictionary. You can also delete entire dictionary in a single operation.</p>
+
 <p>To explicitly remove an entire dictionary, just use the del statement. Following is a simple example −</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">del</span> my_dictionary[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Julie</span><span style="color:#e6db74">&#34;</span>] <span style="color:#75715e"># remove entry with key &#39;Name&#39;</span>
-my_dictionary<span style="color:#f92672">.</span>clear()     <span style="color:#75715e"># remove all entries in my_dictionary</span>
-<span style="color:#66d9ef">del</span> my_dictionary       <span style="color:#75715e"># delete entire dictionary</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(my_dictionary)
-</code></pre></div><pre><code>---------------------------------------------------------------------------
+
+<pre><code class="language-python">del my_dictionary[&quot;Julie&quot;] # remove entry with key 'Name'
+my_dictionary.clear()     # remove all entries in my_dictionary
+del my_dictionary       # delete entire dictionary
+</code></pre>
+
+<pre><code class="language-python">print(my_dictionary)
+</code></pre>
+
+<pre><code>---------------------------------------------------------------------------
 NameError                                 Traceback (most recent call last)
 &lt;ipython-input-7-04bcd56b6daf&gt; in &lt;module&gt;
 ----&gt; 1 print(my_dictionary)
 NameError: name 'my_dictionary' is not defined
 ---------------------------------------------------------------------------
 </code></pre>
-<h2 id="53-access-a-dictionary">5.3 Access a dictionary:</h2>
+
+<h2 id="5-3-access-a-dictionary">5.3 Access a dictionary:</h2>
+
 <p>To access dictionary elements, you can use the familiar square brackets along with the key to obtain its value.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_dictionary <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Marie</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">15</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Thomas</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">12</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Julien</span><span style="color:#e6db74">&#34;</span> : <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">absent</span><span style="color:#e6db74">&#34;</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Elise</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">9</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Samuel</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">17</span>
+
+<pre><code class="language-python">my_dictionary = {
+    &quot;Marie&quot; : 15,
+    &quot;Thomas&quot; : 12,
+    &quot;Julien&quot; : &quot;absent&quot;,
+    &quot;Elise&quot; : 9,
+    &quot;Samuel&quot; : 17
 }
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_dictionary[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Samuel</span><span style="color:#e6db74">&#34;</span>]   
-</code></pre></div><pre><code>17
 </code></pre>
+
+<pre><code class="language-python">my_dictionary[&quot;Samuel&quot;]   
+</code></pre>
+
+<pre><code>17
+</code></pre>
+
 <ul>
-<li>We can access ditionary elements using <!-- raw HTML omitted -->FOR<!-- raw HTML omitted --> loop:
+<li><p>We can access ditionary elements using <b>FOR</b> loop:</p>
+
 <ul>
 <li>by value valeur</li>
 <li>by key</li>
-<li>by key-value pair</li>
+
+<li><p>by key-value pair</p>
+
+<pre><code class="language-python"># .keys() method returns list of dictionary dict's keys:
+my_dictionary.keys()
+</code></pre></li>
 </ul>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># .keys() method returns list of dictionary dict&#39;s keys:</span>
-my_dictionary<span style="color:#f92672">.</span>keys()
-</code></pre></div><pre><code>dict_keys(['Marie', 'Thomas', 'Julien', 'Elise', 'Samuel'])
+
+<p>dict_keys([&lsquo;Marie&rsquo;, &lsquo;Thomas&rsquo;, &lsquo;Julien&rsquo;, &lsquo;Elise&rsquo;, &lsquo;Samuel&rsquo;])</p>
+
+<pre><code class="language-python"># .values() method returns list of dictionary dict's values
+my_dictionary.values()
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># .values() method returns list of dictionary dict&#39;s values</span>
-my_dictionary<span style="color:#f92672">.</span>values()
-</code></pre></div><pre><code>dict_values([15, 12, 'absent', 9, 17])
+
+<p>dict_values([15, 12, &lsquo;absent&rsquo;, 9, 17])</p>
+
+<pre><code class="language-python"># Example using for loop and keys dictionary
+for key in my_dictionary.keys():
+print(key)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example using for loop and keys dictionary</span>
-<span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> my_dictionary<span style="color:#f92672">.</span>keys():
-    <span style="color:#66d9ef">print</span>(key)
-</code></pre></div><pre><code>Marie
+
+<p>Marie
 Thomas
 Julien
 Elise
-Samuel
+Samuel</p>
+
+<pre><code class="language-python">for value in my_dictionary.values():
+print(value)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> value <span style="color:#f92672">in</span> my_dictionary<span style="color:#f92672">.</span>values():
-    <span style="color:#66d9ef">print</span>(value)
-</code></pre></div><pre><code>15
+
+<p>15
 12
 absent
 9
-17
+17</p>
+
+<pre><code class="language-python"># .items() method returns a list of dict's (key, value) tuple pairs
+my_dictionary.items()
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># .items() method returns a list of dict&#39;s (key, value) tuple pairs</span>
-my_dictionary<span style="color:#f92672">.</span>items()
-</code></pre></div><pre><code>dict_items([('Marie', 15), ('Thomas', 12), ('Julien', 'absent'), ('Elise', 9), ('Samuel', 17)])
+
+<p>dict_items([(&lsquo;Marie&rsquo;, 15), (&lsquo;Thomas&rsquo;, 12), (&lsquo;Julien&rsquo;, &lsquo;absent&rsquo;), (&lsquo;Elise&rsquo;, 9), (&lsquo;Samuel&rsquo;, 17)])</p>
+
+<pre><code class="language-python"># Example using for loop and key-value pairs in dictionary
+for key,value in my_dictionary.items(): # la boucle for obtient un tuple à chaque itération
+if value == 'absent':
+    print('Absent')
+else:
+    print('The average of %s is %s /20' % (key, value))
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example using for loop and key-value pairs in dictionary</span>
-<span style="color:#66d9ef">for</span> key,value <span style="color:#f92672">in</span> my_dictionary<span style="color:#f92672">.</span>items(): <span style="color:#75715e"># la boucle for obtient un tuple à chaque itération</span>
-    <span style="color:#66d9ef">if</span> value <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">absent</span><span style="color:#e6db74">&#39;</span>:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Absent</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">The average of </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> is </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> /20</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (key, value))
-</code></pre></div><pre><code>The average of Marie is 15 /20
+
+<p>The average of Marie is 15 /20
 The average of Thomas is 12 /20
 Absent
 The average of Elise is 9 /20
-The average of Samuel is 17 /20
-</code></pre>
+The average of Samuel is 17 /20</p></li>
+</ul>
+
 <h2 id="exercise-on-dictionaries">Exercise on dictionaries</h2>
+
 <h2 id="goal-to-manipulate-a-dictionary-containing-the-notes-of-15-students">Goal: To manipulate a dictionary containing the notes of 15 students.</h2>
+
 <pre><code>1- Create a dictionary named notes_levels containing the following notes:
 Mary: 15; Samuel: 17; Gaston: 12; Fred: 10; Mae: 5; Julie: 15; Zoe: 7; Claire: 20; Chloe: 8; Julian: 14, Gael: 9, Samia: 15, Omar: 11, Gabriel: 16, Manon: 2
 
@@ -679,105 +738,142 @@ Mary: 15; Samuel: 17; Gaston: 12; Fred: 10; Mae: 5; Julie: 15; Zoe: 7; Claire: 2
 
 7- Show the first name of the pupils who have an even note (multiple of 2).! 
 </code></pre>
+
 <h4 id="correction">Correction</h4>
+
 <ul>
-<li>1:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">notes_levels <span style="color:#f92672">=</span>{
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Marie</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">15</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Samuel</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">17</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Gaston</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">12</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Fred</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">10</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Mae</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">5</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Julie</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">15</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Zoe</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">7</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Claire</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">20</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Chloe</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">8</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Julien</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">14</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Gaël</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">9</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Samia</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">15</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Omar</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">11</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Gabriel</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">16</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Manon</span><span style="color:#e6db74">&#34;</span> : <span style="color:#ae81ff">2</span>
+<li><p>1:</p>
+
+<pre><code class="language-python">notes_levels ={
+&quot;Marie&quot; : 15,
+&quot;Samuel&quot; : 17,
+&quot;Gaston&quot; : 12,
+&quot;Fred&quot; : 10,
+&quot;Mae&quot; : 5,
+&quot;Julie&quot; : 15,
+&quot;Zoe&quot; : 7,
+&quot;Claire&quot; : 20,
+&quot;Chloe&quot; : 8,
+&quot;Julien&quot; : 14,
+&quot;Gaël&quot; : 9,
+&quot;Samia&quot; : 15,
+&quot;Omar&quot; : 11,
+&quot;Gabriel&quot; : 16,
+&quot;Manon&quot; : 2
 }
-</code></pre></div><ul>
-<li>2:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">notes_eleves<span style="color:#f92672">.</span>values()
-</code></pre></div><pre><code>dict_values([15, 17, 12, 10, 5, 15, 7, 20, 8, 14, 9, 15, 11, 16, 2])
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-<span style="color:#f92672">import</span> numpy  
-average_note <span style="color:#f92672">=</span>numpy<span style="color:#f92672">.</span>mean(list(notes_eleves<span style="color:#f92672">.</span>values()))  
+</code></pre></li>
 
-<span style="color:#e6db74">``</span>
-<span style="color:#e6db74">``</span><span style="color:#960050;background-color:#1e0010">`</span>python
-average_note 
-</code></pre></div><pre><code>11.733333333333333
-</code></pre>
-<ul>
-<li>3:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre_eleves<span style="color:#f92672">=</span>len(notes_eleves)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Le nombre d</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">élèves dans la classe est de </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (nombre_eleves))
-</code></pre></div><pre><code>Le nombre d'élèves dans la classe est de 15
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(notes_eleves<span style="color:#f92672">.</span>keys())  
-</code></pre></div><pre><code>15
-</code></pre>
-<ul>
-<li>4:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre_eleves_avec_note_sup_moyenne<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-<span style="color:#66d9ef">for</span> valeur <span style="color:#f92672">in</span> notes_eleves<span style="color:#f92672">.</span>values():
-    <span style="color:#66d9ef">if</span> valeur <span style="color:#f92672">&gt;</span> moyenne_generale:   
-        nombre_eleves_avec_note_sup_moyenne<span style="color:#f92672">=</span>nombre_eleves_avec_note_sup_moyenne<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Le nombre d</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">élèves avec une note supérieure à </span><span style="color:#e6db74">%.2f</span><span style="color:#e6db74"> est de </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> élèves</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (moyenne_generale, nombre_eleves_avec_note_sup_moyenne))
-</code></pre></div><pre><code>Le nombre d'élèves avec une note supérieure à 11.73 est de 8 élèves
-</code></pre>
-<ul>
-<li>5:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># On va d&#39;abord déterminer  la meilleure note: utilisation de la fonction max()</span>
-meilleure_note<span style="color:#f92672">=</span>max(notes_eleves<span style="color:#f92672">.</span>values())
-<span style="color:#e6db74">``</span><span style="color:#960050;background-color:#1e0010">`</span>python
-meilleure_note
-</code></pre></div><pre><code>20
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># On va parcourir notre dictionnaire et trouver la clef associée à notre valeur</span>
-<span style="color:#75715e"># Pour cela on va travailler sur les tuples avec la méthode item()</span>
-<span style="color:#66d9ef">for</span> prenom,note <span style="color:#f92672">in</span> notes_eleves<span style="color:#f92672">.</span>items():
-    <span style="color:#66d9ef">if</span> note <span style="color:#f92672">==</span> meilleure_note:
-        <span style="color:#66d9ef">print</span>(prenom)
-</code></pre></div><pre><code>Claire
-</code></pre>
-<ul>
-<li>6:</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># On va parcourir les clefs de notre dictionnaire et mettre une condition sur la longueur de chaque clef</span>
+<li><p>2:</p>
 
-nombre_eleves<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-<span style="color:#66d9ef">for</span> prenom <span style="color:#f92672">in</span> notes_eleves<span style="color:#f92672">.</span>keys():
-    <span style="color:#66d9ef">if</span> len(prenom) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>:
-        nombre_eleves<span style="color:#f92672">=</span>nombre_eleves<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-<span style="color:#66d9ef">print</span>(nombre_eleves)
-</code></pre></div><pre><code>2
+<pre><code class="language-python">notes_eleves.values()
 </code></pre>
-<ul>
-<li>7:</li>
+
+<p>dict_values([15, 17, 12, 10, 5, 15, 7, 20, 8, 14, 9, 15, 11, 16, 2])</p>
+
+<pre><code class="language-python">
+import numpy  
+average_note =numpy.mean(list(notes_eleves.values()))  
+
+``
+</code></pre>
+
+<p>python</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># On va parcourir les tuples du dictionnaire et mettre une condition sur les valeurs </span>
-<span style="color:#66d9ef">for</span> prenom,note <span style="color:#f92672">in</span> notes_eleves<span style="color:#f92672">.</span>items():
-    <span style="color:#66d9ef">if</span> note <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">print</span>(prenom, note)
-</code></pre></div><pre><code>Gaston 12
+
+<p>average_note</p>
+
+<pre><code>    11.733333333333333
+
+
+
+- 3: 
+
+</code></pre>
+
+<p>python
+nombre_eleves=len(notes_eleves)
+print(&ldquo;Le nombre d&rsquo;élèves dans la classe est de %d&rdquo; % (nombre_eleves))</p>
+
+<pre><code>    Le nombre d'élèves dans la classe est de 15
+    
+</code></pre>
+
+<p>python
+len(notes_eleves.keys())</p>
+
+<pre><code>    15
+
+- 4: 
+</code></pre>
+
+<p>python
+nombre_eleves_avec_note_sup_moyenne=0
+for valeur in notes_eleves.values():
+    if valeur &gt; moyenne_generale:<br />
+        nombre_eleves_avec_note_sup_moyenne=nombre_eleves_avec_note_sup_moyenne+1
+print(&ldquo;Le nombre d&rsquo;élèves avec une note supérieure à %.2f est de %d élèves&rdquo; % (moyenne_generale, nombre_eleves_avec_note_sup_moyenne))</p>
+
+<pre><code>
+    Le nombre d'élèves avec une note supérieure à 11.73 est de 8 élèves
+    
+
+- 5:  
+
+
+</code></pre>
+
+<p>python</p>
+
+<h1 id="on-va-d-abord-déterminer-la-meilleure-note-utilisation-de-la-fonction-max">On va d&rsquo;abord déterminer  la meilleure note: utilisation de la fonction max()</h1>
+
+<p>meilleure_note=max(notes_eleves.values())</p>
+
+<pre><code class="language-python">meilleure_note
+</code></pre>
+
+<pre><code>20
+</code></pre>
+
+<pre><code class="language-python"># On va parcourir notre dictionnaire et trouver la clef associée à notre valeur
+# Pour cela on va travailler sur les tuples avec la méthode item()
+for prenom,note in notes_eleves.items():
+    if note == meilleure_note:
+        print(prenom)
+</code></pre>
+
+<pre><code>Claire
+</code></pre>
+
+<ul>
+<li><p>6:</p>
+
+<pre><code class="language-python"># On va parcourir les clefs de notre dictionnaire et mettre une condition sur la longueur de chaque clef
+
+nombre_eleves=0
+for prenom in notes_eleves.keys():
+if len(prenom) &lt; 4:
+    nombre_eleves=nombre_eleves+1
+print(nombre_eleves)
+</code></pre>
+
+<p>2</p></li>
+
+<li><p>7:</p>
+
+<pre><code class="language-python"># On va parcourir les tuples du dictionnaire et mettre une condition sur les valeurs 
+for prenom,note in notes_eleves.items():
+if note % 2 == 0:
+    print(prenom, note)
+</code></pre>
+
+<p>Gaston 12
 Fred 10
 Claire 20
 Chloe 8
 Julien 14
 Gabriel 16
-Manon 2
-</code></pre>
+Manon 2</p></li>
+</ul>
 
           </div>
 

@@ -513,23 +513,25 @@ Each element of a sequence is assigned by a number - its position or index."><me
       </ul>
 
       <nav id="TableOfContents">
-  <ul>
-    <li><a href="#21-create-a-list">2.1 Create a list</a></li>
-    <li><a href="#22-accessing-values-in-lists-">2.2 Accessing Values in Lists :</a></li>
-    <li><a href="#23-updating-lists">2.3 Updating Lists</a>
-      <ul>
-        <li><a href="#231-add-elements">2.3.1 Add elements</a></li>
-        <li><a href="#232-insert-elements">2.3.2 Insert elements</a></li>
-        <li><a href="#233-update-elements">2.3.3 Update elements</a></li>
-        <li><a href="#234-remove-elements">2.3.4 Remove elements</a></li>
-      </ul>
-    </li>
-    <li><a href="#24--some-useful-operations-on-lists">2.4  Some useful operations on lists</a></li>
-    <li><a href="#25-loop-over-lists">2.5 Loop over lists</a></li>
-    <li><a href="#26-list-comprehensions">2.6 List comprehensions</a></li>
-    <li><a href="#27-tuples">2.7 Tuples</a></li>
-    <li><a href="#-exercice-on-lists">- Exercice on lists:</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#2-1-create-a-list">2.1 Create a list</a></li>
+<li><a href="#2-2-accessing-values-in-lists">2.2 Accessing Values in Lists :</a></li>
+<li><a href="#2-3-updating-lists">2.3 Updating Lists</a>
+<ul>
+<li><a href="#2-3-1-add-elements">2.3.1 Add elements</a></li>
+<li><a href="#2-3-2-insert-elements">2.3.2 Insert elements</a></li>
+<li><a href="#2-3-3-update-elements">2.3.3 Update elements</a></li>
+<li><a href="#2-3-4-remove-elements">2.3.4 Remove elements</a></li>
+</ul></li>
+<li><a href="#2-4-some-useful-operations-on-lists">2.4  Some useful operations on lists</a></li>
+<li><a href="#2-5-loop-over-lists">2.5 Loop over lists</a></li>
+<li><a href="#2-6-list-comprehensions">2.6 List comprehensions</a></li>
+<li><a href="#2-7-tuples">2.7 Tuples</a></li>
+<li><a href="#exercice-on-lists">- Exercice on lists:</a></li>
+</ul></li>
+</ul>
 </nav>
 
       
@@ -544,32 +546,54 @@ Each element of a sequence is assigned by a number - its position or index."><me
           <h1>2 List in Python</h1>
 
           <div class="article-style">
-            <p><img src="/img/pylogo.png" alt="image0">
-<!-- raw HTML omitted --></p>
+            
+
+<p><img src="/img/pylogo.png" alt="image0" />
+<img src="./figures/pylogo.png" alt="Indentation" width="50%" height="50%"></p>
+
 <p>Python includes several built-in container types, but the most common ones are lists and tuples, which we would see in this tutorial.</p>
+
 <p>There are certain things you can do with all container types. These operations include indexing, slicing, adding, multiplying. In addition, Python has built-in functions like finding the length of a sequence, finding its largest and smallest elements&hellip;</p>
+
 <p>Each element of a sequence is assigned by a number - its position or index. The first index is zero, the second index is one&hellip;</p>
+
 <p>Creating a list is as simple as putting different comma-separated values between square brackets :</p>
+
 <ul>
 <li>list1 = [ a, b, c, d, e]</li>
 <li>list2 = [ 1, 2, 3, 4, 5]</li>
 </ul>
+
 <p>Python is an object-oriented language, lists are associated with methods: object.method()
 Functions can be applied to lists.</p>
-<h2 id="21-create-a-list">2.1 Create a list</h2>
+
+<h2 id="2-1-create-a-list">2.1 Create a list</h2>
+
 <p>To create a list, we use comma-separated values between square brackets.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#34;</span>,<span style="color:#ae81ff">10.5</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(my_list)  <span style="color:#75715e"># fonction to print elements in list </span>
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5]
+
+<pre><code class="language-python">my_list = [1,2,3,4,5,6,7,8,&quot;hello&quot;,10.5]
 </code></pre>
-<p>We can use <!-- raw HTML omitted -->range()<!-- raw HTML omitted --> function to generate a sequence of numbers over time.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">10</span>))
-my_list
-</code></pre></div><pre><code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+<pre><code class="language-python">print(my_list)  # fonction to print elements in list 
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1981</span>,<span style="color:#ae81ff">2011</span>,<span style="color:#ae81ff">2</span>))
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5]
+</code></pre>
+
+<p>We can use <b>range()</b> function to generate a sequence of numbers over time.</p>
+
+<pre><code class="language-python">my_list = list(range(10))
 my_list
-</code></pre></div><pre><code>[1981,
+</code></pre>
+
+<pre><code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre>
+
+<pre><code class="language-python">my_list = list(range(1981,2011,2))
+my_list
+</code></pre>
+
+<pre><code>[1981,
  1983,
  1985,
  1987,
@@ -585,9 +609,13 @@ my_list
  2007,
  2009]
 </code></pre>
+
 <p>When we work with Python object, dir() command always shows us the tasks we can do with this object: dir(my_list)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dir(my_list)
-</code></pre></div><pre><code>['__add__',
+
+<pre><code class="language-python">dir(my_list)
+</code></pre>
+
+<pre><code>['__add__',
  '__class__',
  '__contains__',
  '__delattr__',
@@ -634,273 +662,433 @@ my_list
  'reverse',
  'sort']
 </code></pre>
-<h2 id="22-accessing-values-in-lists-">2.2 Accessing Values in Lists :</h2>
+
+<h2 id="2-2-accessing-values-in-lists">2.2 Accessing Values in Lists :</h2>
+
 <p>To access values in a list, use the square brackets for slicing along with the index or indices to obtain value available at that index.</p>
+
 <p>The first index is zero, the second index is one&hellip; to read first element, we use index 0. Then to read last element, we use -1 index.</p>
+
 <p>It is also possible to modify a value with its index.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#34;</span>,<span style="color:#ae81ff">10.5</span>]
-my_list[:]  <span style="color:#75715e"># To use all elements</span>
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5]
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">1</span>] <span style="color:#75715e"># to access an item from the list: here we access the second element. </span>
-</code></pre></div><pre><code>2
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>] <span style="color:#75715e"># slicing:  to access the elements between the 3rd position and the 4th</span>
 
-</code></pre></div><pre><code>[3, 4]
+<pre><code class="language-python">my_list = [1,2,3,4,5,6,7,8,&quot;hello&quot;,10.5]
+my_list[:]  # To use all elements
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[:<span style="color:#ae81ff">4</span>] <span style="color:#75715e"># slicing: to access all elements up to index 4 or 4th position</span>
-</code></pre></div><pre><code>[1, 2, 3, 4]
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">3</span>:] <span style="color:#75715e"># slicing: to access all elements from index 3</span>
-</code></pre></div><pre><code>[4, 5, 6, 7, 8, 'hello', 10.5]
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#75715e"># to get the 2nd value from the end, with use negative indexes, we do not start from 0 anymore.</span>
 
-</code></pre></div><pre><code>'hello'
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>] <span style="color:#75715e"># we start from the index 1, with slicing, we stop at the 4th index from the end</span>
-</code></pre></div><pre><code>[2, 3, 4, 5, 6]
+
+<pre><code class="language-python">my_list[1] # to access an item from the list: here we access the second element. 
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[::<span style="color:#ae81ff">2</span>] <span style="color:#75715e"># to extract the elements with an increment</span>
-</code></pre></div><pre><code>[1, 3, 5, 7, 'hello']
+
+<pre><code>2
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">1</span>::<span style="color:#ae81ff">2</span>] <span style="color:#75715e"># to extract the elements with an increment</span>
-</code></pre></div><pre><code>[2, 4, 6, 8, 10.5]
+
+<pre><code class="language-python">my_list[2:4] # slicing:  to access the elements between the 3rd position and the 4th
+
 </code></pre>
-<h2 id="23-updating-lists">2.3 Updating Lists</h2>
-<p><a href="https://docs.python.org/2/tutorial/datastructures.html#more-on-lists">https://docs.python.org/2/tutorial/datastructures.html#more-on-lists</a></p>
-<h3 id="231-add-elements">2.3.1 Add elements</h3>
-<p>To <!-- raw HTML omitted -->add<!-- raw HTML omitted --> an element: we use <!-- raw HTML omitted -->.append()<!-- raw HTML omitted --> method</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#34;</span>,<span style="color:#ae81ff">10.5</span>]
+
+<pre><code>[3, 4]
+</code></pre>
+
+<pre><code class="language-python">my_list[:4] # slicing: to access all elements up to index 4 or 4th position
+</code></pre>
+
+<pre><code>[1, 2, 3, 4]
+</code></pre>
+
+<pre><code class="language-python">my_list[3:] # slicing: to access all elements from index 3
+</code></pre>
+
+<pre><code>[4, 5, 6, 7, 8, 'hello', 10.5]
+</code></pre>
+
+<pre><code class="language-python">my_list[-2] # to get the 2nd value from the end, with use negative indexes, we do not start from 0 anymore.
+
+</code></pre>
+
+<pre><code>'hello'
+</code></pre>
+
+<pre><code class="language-python">my_list[1:-4] # we start from the index 1, with slicing, we stop at the 4th index from the end
+</code></pre>
+
+<pre><code>[2, 3, 4, 5, 6]
+</code></pre>
+
+<pre><code class="language-python">my_list[::2] # to extract the elements with an increment
+</code></pre>
+
+<pre><code>[1, 3, 5, 7, 'hello']
+</code></pre>
+
+<pre><code class="language-python">my_list[1::2] # to extract the elements with an increment
+</code></pre>
+
+<pre><code>[2, 4, 6, 8, 10.5]
+</code></pre>
+
+<h2 id="2-3-updating-lists">2.3 Updating Lists</h2>
+
+<p><a href="https://docs.python.org/2/tutorial/datastructures.html#more-on-lists" target="_blank">https://docs.python.org/2/tutorial/datastructures.html#more-on-lists</a></p>
+
+<h3 id="2-3-1-add-elements">2.3.1 Add elements</h3>
+
+<p>To <b>add</b> an element: we use <b>.append()</b> method</p>
+
+<pre><code class="language-python">my_list = [1,2,3,4,5,6,7,8,&quot;hello&quot;,10.5]
 my_list
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">2</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(my_list)
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5, 2]
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5, 2]
+
+<pre><code class="language-python">my_list.append(2)
 </code></pre>
-<h3 id="232-insert-elements">2.3.2 Insert elements</h3>
-<p>To <!-- raw HTML omitted -->insert<!-- raw HTML omitted --> an element to our list using index: <!-- raw HTML omitted -->insert()<!-- raw HTML omitted --> method</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">5</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">new</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(my_list)
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 'new', 6, 7, 8, 'hello', 10.5, 2]
+
+<pre><code class="language-python">print(my_list)
 </code></pre>
-<h3 id="233-update-elements">2.3.3 Update elements</h3>
-<p>To <!-- raw HTML omitted -->change<!-- raw HTML omitted --> an element in our list using index</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(my_list)
-</code></pre></div><pre><code>['a', 2, 3, 4, 5, 'new', 6, 7, 8, 'hello', 10.5, 2]
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5, 2]
 </code></pre>
-<p>To <!-- raw HTML omitted -->change<!-- raw HTML omitted --> several elements in our list: slicing</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">5</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">22</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(my_list)
-</code></pre></div><pre><code>['a', 2, 3, 8, 10, 11, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+
+<pre><code class="language-python">my_list
 </code></pre>
-<h3 id="234-remove-elements">2.3.4 Remove elements</h3>
-<p>To <!-- raw HTML omitted -->remove<!-- raw HTML omitted --> in our list: 2 methods</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span>[]  <span style="color:#75715e"># remove using slicing </span>
-<span style="color:#66d9ef">print</span>(my_list)
-</code></pre></div><pre><code>[3, 8, 10, 11, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 'hello', 10.5, 2]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list
-</code></pre></div><pre><code>[3, 8, 10, 11, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+
+<h3 id="2-3-2-insert-elements">2.3.2 Insert elements</h3>
+
+<p>To <b>insert</b> an element to our list using index: <b>insert()</b> method</p>
+
+<pre><code class="language-python">my_list.insert(5,&quot;new&quot;)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">del</span> my_list[<span style="color:#ae81ff">3</span>] <span style="color:#75715e"># to remove using keywords</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(my_list)
-</code></pre></div><pre><code>[3, 8, 10, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+
+<pre><code class="language-python">print(my_list)
 </code></pre>
-<p><a href="https://www.programiz.com/python-programming/keyword-list">https://www.programiz.com/python-programming/keyword-list</a></p>
-<h2 id="24--some-useful-operations-on-lists">2.4  Some useful operations on lists</h2>
+
+<pre><code>[1, 2, 3, 4, 5, 'new', 6, 7, 8, 'hello', 10.5, 2]
+</code></pre>
+
+<h3 id="2-3-3-update-elements">2.3.3 Update elements</h3>
+
+<p>To <b>change</b> an element in our list using index</p>
+
+<pre><code class="language-python">my_list[0]=&quot;a&quot;
+</code></pre>
+
+<pre><code class="language-python">print(my_list)
+</code></pre>
+
+<pre><code>['a', 2, 3, 4, 5, 'new', 6, 7, 8, 'hello', 10.5, 2]
+</code></pre>
+
+<p>To <b>change</b> several elements in our list: slicing</p>
+
+<pre><code class="language-python">my_list[3:5]=[8,10,11,22]
+</code></pre>
+
+<pre><code class="language-python">print(my_list)
+</code></pre>
+
+<pre><code>['a', 2, 3, 8, 10, 11, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+</code></pre>
+
+<h3 id="2-3-4-remove-elements">2.3.4 Remove elements</h3>
+
+<p>To <b>remove</b> in our list: 2 methods</p>
+
+<pre><code class="language-python">my_list[0:2]=[]  # remove using slicing 
+print(my_list)
+</code></pre>
+
+<pre><code>[3, 8, 10, 11, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+</code></pre>
+
+<pre><code class="language-python">my_list
+</code></pre>
+
+<pre><code>[3, 8, 10, 11, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+</code></pre>
+
+<pre><code class="language-python">del my_list[3] # to remove using keywords
+</code></pre>
+
+<pre><code class="language-python">print(my_list)
+</code></pre>
+
+<pre><code>[3, 8, 10, 22, 'new', 6, 7, 8, 'hello', 10.5, 2]
+</code></pre>
+
+<p><a href="https://www.programiz.com/python-programming/keyword-list" target="_blank">https://www.programiz.com/python-programming/keyword-list</a></p>
+
+<h2 id="2-4-some-useful-operations-on-lists">2.4  Some useful operations on lists</h2>
+
 <ul>
-<li>Concatenate two lists</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list1<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list2<span style="color:#f92672">=</span>[<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list3<span style="color:#f92672">=</span>my_list1<span style="color:#f92672">+</span>my_list2
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list3
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+<li><p>Concatenate two lists</p>
+
+<pre><code class="language-python">my_list1=[1,2,3,4,5]
 </code></pre>
-<ul>
-<li>Duplicate a list</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list1<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
-my_list1<span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>
-</code></pre></div><pre><code>[1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+
+<pre><code class="language-python">my_list2=[6,7,8,9,10]
 </code></pre>
-<ul>
-<li>Reverse elements in list</li>
+
+<pre><code class="language-python">my_list3=my_list1+my_list2
+</code></pre>
+
+<pre><code class="language-python">my_list3
+</code></pre>
+
+<p>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</p></li>
+
+<li><p>Duplicate a list</p>
+
+<pre><code class="language-python">my_list1=[1,2,3,4,5]
+my_list1*3
+</code></pre>
+
+<p>[1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]</p></li>
+
+<li><p>Reverse elements in list</p></li>
 </ul>
-<p><!-- raw HTML omitted -->.reverse()<!-- raw HTML omitted --> method is used to reverse elements in list</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list1<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
-<span style="color:#66d9ef">print</span>(my_list1)
-my_list1<span style="color:#f92672">.</span>reverse()
-<span style="color:#66d9ef">print</span>(my_list1)
-</code></pre></div><pre><code>[1, 2, 3, 4, 5]
+
+<p><b>.reverse()</b> method is used to reverse elements in list</p>
+
+<pre><code class="language-python">my_list1=[1,2,3,4,5]
+print(my_list1)
+my_list1.reverse()
+print(my_list1)
+</code></pre>
+
+<pre><code>[1, 2, 3, 4, 5]
 [5, 4, 3, 2, 1]
 </code></pre>
+
 <ul>
 <li>Count elements in list</li>
 </ul>
-<p><!-- raw HTML omitted -->.count()<!-- raw HTML omitted --> method is used to return count of how many times obj occurs in list.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list2<span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#34;</span>]
-my_list2<span style="color:#f92672">.</span>count(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><pre><code>3
+
+<p><b>.count()</b> method is used to return count of how many times obj occurs in list.</p>
+
+<pre><code class="language-python">my_list2= [&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;]
+my_list2.count(&quot;a&quot;)
 </code></pre>
-<ul>
-<li><!-- raw HTML omitted -->.index()<!-- raw HTML omitted --> method returns the lowest index in list that obj appears</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list2<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#34;</span>]
-my_list2<span style="color:#f92672">.</span>index(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><pre><code>4
+
+<pre><code>3
 </code></pre>
+
 <ul>
-<li>function <!-- raw HTML omitted -->sum()<!-- raw HTML omitted --></li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list1<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
+<li><p><b>.index()</b> method returns the lowest index in list that obj appears</p>
+
+<pre><code class="language-python">my_list2=[&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;]
+my_list2.index(&quot;c&quot;)
+</code></pre>
+
+<p>4</p></li>
+
+<li><p>function <b>sum()</b></p>
+
+<pre><code class="language-python">my_list1=[1,2,3,4,5]
 sum(my_list1)
-</code></pre></div><pre><code>15
 </code></pre>
-<ul>
-<li>function <!-- raw HTML omitted -->.len()<!-- raw HTML omitted --> gives the total length of the list.</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(my_list1)
-</code></pre></div><pre><code>5
+
+<p>15</p></li>
+
+<li><p>function <b>.len()</b> gives the total length of the list.</p>
+
+<pre><code class="language-python">len(my_list1)
 </code></pre>
-<ul>
-<li><!-- raw HTML omitted -->.sort()<!-- raw HTML omitted --> function to sort objects of list</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> [<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">99</span>]
-my_list<span style="color:#f92672">.</span>sort() 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list
-</code></pre></div><pre><code>[1, 3, 4, 8, 10, 25, 90, 99]
+
+<p>5</p></li>
+
+<li><p><b>.sort()</b> function to sort objects of list</p>
+
+<pre><code class="language-python">my_list = [90,3,8,4,1,10,25,99]
+my_list.sort() 
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> [<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">99</span>]
+
+<pre><code class="language-python">my_list
+</code></pre>
+
+<p>[1, 3, 4, 8, 10, 25, 90, 99]</p>
+
+<pre><code class="language-python">my_list = [90,3,8,4,1,10,25,99]
 my_list
-</code></pre></div><pre><code>[90, 3, 8, 4, 1, 10, 25, 99]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list<span style="color:#f92672">.</span>sort()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list<span style="color:#f92672">.</span>reverse()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list
-</code></pre></div><pre><code>[99, 90, 25, 10, 8, 4, 3, 1]
+
+<p>[90, 3, 8, 4, 1, 10, 25, 99]</p>
+
+<pre><code class="language-python">my_list.sort()
 </code></pre>
-<ul>
-<li><!-- raw HTML omitted -->min()<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max()<!-- raw HTML omitted --> functions to return the <!-- raw HTML omitted -->minimum<!-- raw HTML omitted --> and the <!-- raw HTML omitted -->maximum<!-- raw HTML omitted --> from list</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list
-</code></pre></div><pre><code>[99, 90, 25, 10, 8, 4, 3, 1]
+
+<pre><code class="language-python">my_list.reverse()
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">min(my_list)
-</code></pre></div><pre><code>1
+
+<pre><code class="language-python">my_list
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">max(my_list)
-</code></pre></div><pre><code>99
+
+<p>[99, 90, 25, 10, 8, 4, 3, 1]</p></li>
+
+<li><p><b>min()</b> and <b>max()</b> functions to return the <b>minimum</b> and the <b>maximum</b> from list</p>
+
+<pre><code class="language-python">my_list
 </code></pre>
-<ul>
-<li>example applying a loop <!-- raw HTML omitted -->for<!-- raw HTML omitted --> and <!-- raw HTML omitted -->print()<!-- raw HTML omitted --> function to return values from a list</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_month <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">jan</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">feb</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mar</span><span style="color:#e6db74">&#34;</span>]
-<span style="color:#66d9ef">for</span> month <span style="color:#f92672">in</span> list_month:
-    <span style="color:#66d9ef">print</span>(month)
-</code></pre></div><pre><code>jan
+
+<p>[99, 90, 25, 10, 8, 4, 3, 1]</p>
+
+<pre><code class="language-python">min(my_list)
+</code></pre>
+
+<p>1</p>
+
+<pre><code class="language-python">max(my_list)
+</code></pre>
+
+<p>99</p></li>
+
+<li><p>example applying a loop <b>for</b> and <b>print()</b> function to return values from a list</p>
+
+<pre><code class="language-python">list_month = [&quot;jan&quot;,&quot;feb&quot;,&quot;mar&quot;]
+for month in list_month:
+print(month)
+</code></pre>
+
+<p>jan
 feb
-mar
+mar</p></li>
+
+<li><p><b>enumerate()</b> function to return values and index</p>
+
+<pre><code class="language-python">list_month = [&quot;jan&quot;,&quot;feb&quot;,&quot;mar&quot;]
+for month in enumerate(list_month):
+ print(month)
 </code></pre>
-<ul>
-<li><!-- raw HTML omitted -->enumerate()<!-- raw HTML omitted --> function to return values and index</li>
+
+<p>(0, &lsquo;jan&rsquo;)
+(1, &lsquo;feb&rsquo;)
+(2, &lsquo;mar&rsquo;)</p></li>
+
+<li><p><b>.split()</b> method to transform string into list</p>
+
+<pre><code class="language-python">my_string = &quot;January-February-March&quot;
+my_string.split(&quot;-&quot;)
+</code></pre>
+
+<p>[&lsquo;January&rsquo;, &lsquo;February&rsquo;, &lsquo;March&rsquo;]</p></li>
+
+<li><p><b>.join()</b> method to transform list into string</p>
+
+<pre><code class="language-python">list1 = ['January', 'February', 'March']
+&quot;:&quot;.join(list1)
+</code></pre>
+
+<p>&lsquo;January:February:March&rsquo;</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_month <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">jan</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">feb</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mar</span><span style="color:#e6db74">&#34;</span>]
-<span style="color:#66d9ef">for</span> month <span style="color:#f92672">in</span> enumerate(list_month):
-     <span style="color:#66d9ef">print</span>(month)
-</code></pre></div><pre><code>(0, 'jan')
-(1, 'feb')
-(2, 'mar')
-</code></pre>
-<ul>
-<li><!-- raw HTML omitted -->.split()<!-- raw HTML omitted --> method to transform string into list</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_string <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">January-February-March</span><span style="color:#e6db74">&#34;</span>
-my_string<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><pre><code>['January', 'February', 'March']
-</code></pre>
-<ul>
-<li><!-- raw HTML omitted -->.join()<!-- raw HTML omitted --> method to transform list into string</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list1 <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">January</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">February</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">March</span><span style="color:#e6db74">&#39;</span>]
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">:</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>join(list1)
-</code></pre></div><pre><code>'January:February:March'
-</code></pre>
-<h2 id="25-loop-over-lists">2.5 Loop over lists</h2>
+
+<h2 id="2-5-loop-over-lists">2.5 Loop over lists</h2>
+
 <p>You can loop over the elements of a list like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list1 <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">January</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">February</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">March</span><span style="color:#e6db74">&#39;</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> month <span style="color:#f92672">in</span> list1:
-    <span style="color:#66d9ef">print</span>(month)
-</code></pre></div><pre><code>January
+
+<pre><code class="language-python">list1 = ['January', 'February', 'March']
+</code></pre>
+
+<pre><code class="language-python">for month in list1:
+    print(month)
+</code></pre>
+
+<pre><code>January
 February
 March
 </code></pre>
+
 <p>If you want access to the index of each element within the body of a loop, use the built-in enumerate function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list1 <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">January</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">February</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">March</span><span style="color:#e6db74">&#39;</span>]
-<span style="color:#66d9ef">for</span> idx, month <span style="color:#f92672">in</span> enumerate(list1):
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">#</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, month))
-</code></pre></div><pre><code>#1: January
+
+<pre><code class="language-python">list1 = ['January', 'February', 'March']
+for idx, month in enumerate(list1):
+    print('#%d: %s' % (idx + 1, month))
+</code></pre>
+
+<pre><code>#1: January
 #2: February
 #3: March
 </code></pre>
-<h2 id="26-list-comprehensions">2.6 List comprehensions</h2>
+
+<h2 id="2-6-list-comprehensions">2.6 List comprehensions</h2>
+
 <p>When programming, frequently we want to transform one type of data into another. As a simple example, consider the following code that computes square numbers:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]
-squares <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> nums:
-    squares<span style="color:#f92672">.</span>append(x <span style="color:#f92672">*</span><span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
-<span style="color:#66d9ef">print</span>(squares)
-</code></pre></div><pre><code>[0, 1, 4, 9, 16]
+
+<pre><code class="language-python">nums = [0, 1, 2, 3, 4]
+squares = []
+for x in nums:
+    squares.append(x ** 2)
+print(squares)
 </code></pre>
+
+<pre><code>[0, 1, 4, 9, 16]
+</code></pre>
+
 <p>But, with You can make this code simpler using a list comprehension:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]
-squares <span style="color:#f92672">=</span> [x <span style="color:#f92672">*</span><span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> nums]
-<span style="color:#66d9ef">print</span>(squares)
-</code></pre></div><pre><code>[0, 1, 4, 9, 16]
+
+<pre><code class="language-python">nums = [0, 1, 2, 3, 4]
+squares = [x ** 2 for x in nums]
+print(squares)
 </code></pre>
+
+<pre><code>[0, 1, 4, 9, 16]
+</code></pre>
+
 <p>List comprehensions can also contain conditions:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]
-even_squares <span style="color:#f92672">=</span> [x <span style="color:#f92672">*</span><span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> nums <span style="color:#66d9ef">if</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
-<span style="color:#66d9ef">print</span>(even_squares)
-</code></pre></div><pre><code>[0, 4, 16]
+
+<pre><code class="language-python">nums = [0, 1, 2, 3, 4]
+even_squares = [x ** 2 for x in nums if x % 2 == 0]
+print(even_squares)
 </code></pre>
-<h2 id="27-tuples">2.7 Tuples</h2>
+
+<pre><code>[0, 4, 16]
+</code></pre>
+
+<h2 id="2-7-tuples">2.7 Tuples</h2>
+
 <ul>
-<li>
-<p>1 tuple is a list, a set of stored values, but with the difference that a tuple can not be modified as in a list.</p>
-</li>
-<li>
-<p>the interest of a tuple is what is stored in a tuple will never be modifiable</p>
-</li>
-<li>
-<p>We write all the elements of a tuple by separating them with commas and all surrounded by parentheses:
-- my_tuple = (,,,,)</p>
-</li>
+<li><p>1 tuple is a list, a set of stored values, but with the difference that a tuple can not be modified as in a list.</p></li>
+
+<li><p>the interest of a tuple is what is stored in a tuple will never be modifiable</p></li>
+
+<li><p>We write all the elements of a tuple by separating them with commas and all surrounded by parentheses:
+         - my_tuple = (,,,,)</p></li>
 </ul>
+
 <p>We will use a tuple to define some kinds of constants that are not intended to change</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tuple1<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tuple1
-</code></pre></div><pre><code>(1, 2, 3, 4, 5)
+
+<pre><code class="language-python">tuple1=(1,2,3,4,5)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tuple1[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#75715e"># we can&#39;t change a tuple</span>
-</code></pre></div><pre><code>---------------------------------------------------------------------------
+
+<pre><code class="language-python">tuple1
+</code></pre>
+
+<pre><code>(1, 2, 3, 4, 5)
+</code></pre>
+
+<pre><code class="language-python">tuple1[0]=0 # we can't change a tuple
+</code></pre>
+
+<pre><code>---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 &lt;ipython-input-60-c1b0272b0229&gt; in &lt;module&gt;
 ----&gt; 1 tuple1[0]=0 # we can't change a tuple
 TypeError: 'tuple' object does not support item assignment
 ----------------------------------------------------------------------------
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tuple1[<span style="color:#ae81ff">1</span>]
-</code></pre></div><pre><code>2
+
+<pre><code class="language-python">tuple1[1]
 </code></pre>
-<h2 id="-exercice-on-lists">- Exercice on lists:</h2>
+
+<pre><code>2
+</code></pre>
+
+<h2 id="exercice-on-lists">- Exercice on lists:</h2>
+
 <pre><code>    1- Create a list named &quot;my_notes&quot; which contains the following numbers:
                  19,7,15,9,10,6,18,10,16,14,13,10,2,20,17,8,12,10,11,4
 
@@ -909,84 +1097,149 @@ TypeError: 'tuple' object does not support item assignment
     3- Find the lowest score and the highest score
 
     4- Sort the list of notes from largest to smallest
-    
+
     5- Replace note 2 by 6
-    
+
     6- Count the number of notes equal to 10 in the class
 
     7- Count the number of notes equal to 10 in the class
-    
+
     8- Find the number of students with a grade&gt; 10
 </code></pre>
-<p>1- Create a list named &ldquo;my_notes&rdquo; which contains the following numbers</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes<span style="color:#f92672">=</span>[<span style="color:#ae81ff">19</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">4</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes
-</code></pre></div><pre><code>[19, 7, 15, 9, 10, 6, 18, 10, 16, 14, 13, 10, 2, 20, 17, 8, 12, 10, 11, 4]
-</code></pre>
-<p>2 - Calculate the overall average of this class of 20 students and put the result in a variable called &ldquo;general_note&rdquo;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy
-moyenne_generale<span style="color:#f92672">=</span>numpy<span style="color:#f92672">.</span>mean(mes_notes)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">moyenne_generale
-</code></pre></div><pre><code>11.55
-</code></pre>
-<p>3- Find the lowest score and the highest score</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">min(mes_notes)
-</code></pre></div><pre><code>2
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">max(mes_notes)
-</code></pre></div><pre><code>20
-</code></pre>
-<p>4- Sort the list of notes from largest to smallest
-- method 1 :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes<span style="color:#f92672">.</span>sort()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes
-</code></pre></div><pre><code>[2, 4, 6, 7, 8, 9, 10, 10, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes<span style="color:#f92672">.</span>reverse()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes
-</code></pre></div><pre><code>[20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10, 9, 8, 7, 6, 4, 2]
-</code></pre>
-<ul>
-<li>method 2: using .sort() method</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">help(mes_notes<span style="color:#f92672">.</span>sort)
-</code></pre></div><pre><code>Help on built-in function sort:
 
-sort(*, key=None, reverse=False) method of builtins.list instance
-    Stable sort *IN PLACE*.
+<p>1- Create a list named &ldquo;my_notes&rdquo; which contains the following numbers</p>
+
+<pre><code class="language-python">mes_notes=[19,7,15,9,10,6,18,10,16,14,13,10,2,20,17,8,12,10,11,4]
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes<span style="color:#f92672">.</span>sort(reverse<span style="color:#f92672">=</span>True)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes
-</code></pre></div><pre><code>[20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10, 9, 8, 7, 6, 4, 2]
+
+<pre><code class="language-python">mes_notes
 </code></pre>
+
+<pre><code>[19, 7, 15, 9, 10, 6, 18, 10, 16, 14, 13, 10, 2, 20, 17, 8, 12, 10, 11, 4]
+</code></pre>
+
+<p>2 - Calculate the overall average of this class of 20 students and put the result in a variable called &ldquo;general_note&rdquo;</p>
+
+<pre><code class="language-python">import numpy
+moyenne_generale=numpy.mean(mes_notes)
+</code></pre>
+
+<pre><code class="language-python">moyenne_generale
+</code></pre>
+
+<pre><code>11.55
+</code></pre>
+
+<p>3- Find the lowest score and the highest score</p>
+
+<pre><code class="language-python">min(mes_notes)
+</code></pre>
+
+<pre><code>2
+</code></pre>
+
+<pre><code class="language-python">max(mes_notes)
+</code></pre>
+
+<pre><code>20
+</code></pre>
+
+<p>4- Sort the list of notes from largest to smallest
+    - method 1 :</p>
+
+<pre><code class="language-python">mes_notes.sort()
+</code></pre>
+
+<pre><code class="language-python">mes_notes
+</code></pre>
+
+<pre><code>[2, 4, 6, 7, 8, 9, 10, 10, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+</code></pre>
+
+<pre><code class="language-python">mes_notes.reverse()
+</code></pre>
+
+<pre><code class="language-python">mes_notes
+</code></pre>
+
+<pre><code>[20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10, 9, 8, 7, 6, 4, 2]
+</code></pre>
+
+<ul>
+<li><p>method 2: using .sort() method</p>
+
+<pre><code class="language-python">help(mes_notes.sort)
+</code></pre>
+
+<p>Help on built-in function sort:</p>
+
+<p>sort(*, key=None, reverse=False) method of builtins.list instance
+    Stable sort <em>IN PLACE</em>.</p>
+
+<pre><code class="language-python">mes_notes.sort(reverse=True)
+</code></pre>
+
+<pre><code class="language-python">mes_notes
+</code></pre>
+
+<p>[20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10, 9, 8, 7, 6, 4, 2]</p></li>
+</ul>
+
 <p>5- Replace note 2 by 6</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes[<span style="color:#ae81ff">19</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes
-</code></pre></div><pre><code>[20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10, 9, 8, 7, 6, 4, 6]
+
+<pre><code class="language-python">mes_notes[19]=6
 </code></pre>
+
+<pre><code class="language-python">mes_notes
+</code></pre>
+
+<pre><code>[20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10, 9, 8, 7, 6, 4, 6]
+</code></pre>
+
 <p>6-  Count the number of notes equal to 10 in the class? : method count()</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes<span style="color:#f92672">.</span>count(<span style="color:#ae81ff">10</span>)
-</code></pre></div><pre><code>4
+
+<pre><code class="language-python">mes_notes.count(10)
 </code></pre>
+
+<pre><code>4
+</code></pre>
+
 <p>7- Count the number of notes equal to 10 in the class</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes_array<span style="color:#f92672">=</span>numpy<span style="color:#f92672">.</span>asarray(mes_notes)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes_array
-</code></pre></div><pre><code>array([20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10,  9,  8,  7,
+
+<pre><code class="language-python">mes_notes_array=numpy.asarray(mes_notes)
+</code></pre>
+
+<pre><code class="language-python">mes_notes_array
+</code></pre>
+
+<pre><code>array([20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 10, 10, 10,  9,  8,  7,
         6,  4,  6])
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes_array[mes_notes_array<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">10</span>] <span style="color:#75715e"># affichage des notes supérieures à 10 </span>
-</code></pre></div><pre><code>array([20, 19, 18, 17, 16, 15, 14, 13, 12, 11])
+
+<pre><code class="language-python">mes_notes_array[mes_notes_array&gt;10] # affichage des notes supérieures à 10 
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes_array<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">10</span> <span style="color:#75715e"># cette opération est un masque avec des booléens</span>
-</code></pre></div><pre><code>array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+
+<pre><code>array([20, 19, 18, 17, 16, 15, 14, 13, 12, 11])
+</code></pre>
+
+<pre><code class="language-python">mes_notes_array&gt;10 # cette opération est un masque avec des booléens
+</code></pre>
+
+<pre><code>array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
         True, False, False, False, False, False, False, False, False,
        False, False])
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(mes_notes_array[mes_notes_array<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">10</span>])
-</code></pre></div><pre><code>10
+
+<pre><code class="language-python">len(mes_notes_array[mes_notes_array&gt;10])
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mes_notes_array[mes_notes_array<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">10</span>]
-</code></pre></div><pre><code>array([20, 19, 18, 17, 16, 15, 14, 13, 12, 11])
+
+<pre><code>10
+</code></pre>
+
+<pre><code class="language-python">mes_notes_array[mes_notes_array&gt;10]
+</code></pre>
+
+<pre><code>array([20, 19, 18, 17, 16, 15, 14, 13, 12, 11])
 </code></pre>
 
           </div>

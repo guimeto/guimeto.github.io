@@ -31,7 +31,7 @@
   <meta name="description" content="﻿
 About Vector Data Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the spatial object.
 The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:
-  Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file.">
+ Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/shapefiles_in_python/">
@@ -120,7 +120,7 @@ The organization of the vertices determines the type of vector that you are work
   <meta property="og:description" content="﻿
 About Vector Data Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the spatial object.
 The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:
-  Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file."><meta property="og:image" content="/post/shapefiles_in_python/featured.png">
+ Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file."><meta property="og:image" content="/post/shapefiles_in_python/featured.png">
   <meta property="twitter:image" content="/post/shapefiles_in_python/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -176,7 +176,7 @@ The organization of the vertices determines the type of vector that you are work
       "url": "/img/icon-512.png"
     }
   },
-  "description": "﻿\nAbout Vector Data Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the spatial object.\nThe organization of the vertices determines the type of vector that you are working with. There are three types of vector data:\n  Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file."
+  "description": "﻿\nAbout Vector Data Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the spatial object.\nThe organization of the vertices determines the type of vector that you are working with. There are three types of vector data:\n Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file."
 }
 </script>
 
@@ -542,56 +542,81 @@ The organization of the vertices determines the type of vector that you are work
   <div class="article-container">
 
     <div class="article-style">
-      <p>﻿</p>
+      
+
+<p>﻿</p>
+
 <h3 id="about-vector-data">About Vector Data</h3>
+
 <p>Vector data are composed of discrete geometric locations (x, y values) known as vertices that define the “shape” of the
 spatial object.</p>
+
 <p>The organization of the vertices determines the type of vector that you are working with. There are three types of vector data:</p>
+
 <ul>
-<li>
-<p>Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file.
-<img src="output_17_1.png" alt="png"></p>
-</li>
-<li>
-<p>Lines: Lines are composed of many (at least 2) vertices, or points, that are connected. For instance, a road or a stream may be represented by a line. This line is composed of a series of segments, each “bend” in the road or stream represents a vertex that has defined x, y location.</p>
-</li>
+<li><p>Points: Each individual point is defined by a single x, y coordinate. There can be many points in a vector point file.
+<img src="output_17_1.png" alt="png" /></p></li>
+
+<li><p>Lines: Lines are composed of many (at least 2) vertices, or points, that are connected. For instance, a road or a stream may be represented by a line. This line is composed of a series of segments, each “bend” in the road or stream represents a vertex that has defined x, y location.</p>
+
+<p><img src="./output_20_1.png" alt="png" /></p></li>
+
+<li><p>Polygons: A polygon consists of 3 or more vertices that are connected and “closed”. Thus the outlines of plot boundaries, lakes, oceans, and states or countries are often represented by polygons. Occasionally, a polygon can have a hole in the middle of it (like a doughnut), this is something to be aware of but not an issue you will deal with in this tutorial.</p>
+
+<p><img src="output_30_1.png" alt="png" /></p></li>
 </ul>
-<pre><code>![png](./output_20_1.png)
-</code></pre>
-<ul>
-<li>Polygons: A polygon consists of 3 or more vertices that are connected and “closed”. Thus the outlines of plot boundaries, lakes, oceans, and states or countries are often represented by polygons. Occasionally, a polygon can have a hole in the middle of it (like a doughnut), this is something to be aware of but not an issue you will deal with in this tutorial.</li>
-</ul>
-<pre><code>![png](output_30_1.png)
-</code></pre>
+
 <h3 id="shapefiles-points-lines-and-polygons">Shapefiles: Points, Lines, and Polygons</h3>
+
 <p>Geospatial data in vector format are often stored in a shapefile format. Because the structure of points, lines, and polygons are different, each individual shapefile can only contain one vector type (all points, all lines or all polygons). You will not find a mixture of point, line and polygon objects in a single shapefile.</p>
+
 <p>Objects stored in a shapefile often have a set of associated attributes that describe the data. For example, a line shapefile that contains the locations of streams, might contain the associated stream name, stream “order” and other information about each stream line object.</p>
+
 <p>A shapefile is created by 3 or more files, all of which must retain the same NAME and be stored in the same file directory, in order for you to be able to work with them.</p>
+
 <h3 id="shapefile-structure">Shapefile Structure</h3>
+
 <p>There are 3 key files associated with any and all shapefiles:</p>
+
 <ul>
 <li>.shp: the file that contains the geometry for all features.</li>
 <li>.shx: the file that indexes the geometry.</li>
 <li>.dbf: the file that stores feature attributes in a tabular format.</li>
 </ul>
+
 <p>Sometimes, a shapefile will have other associated files including:</p>
+
 <ul>
 <li>.prj: the file that contains information on projection format including the coordinate system and projection information. It is a plain text file describing the projection using well-known text (WKT) format.</li>
 <li>.sbn and .sbx: the files that are a spatial index of the features.</li>
-<li>.shp.xml: the file that is the geospatial metadata in XML format, (e.g. ISO 19115 or XML format).</li>
+<li>.shp.xml: the file that is the geospatial metadata in XML format, (e.g. ISO 19115 or XML format).
+<br />
+<br /></li>
 </ul>
+
 <p>We will use the geopandas library to work with vector data in Python. You will also use matplotlib.pyplot to plot your data.</p>
+
 <p>First, we import librairies.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> pyplot <span style="color:#66d9ef">as</span> plt
-<span style="color:#f92672">%</span>matplotlib inline
-<span style="color:#f92672">import</span> geopandas <span style="color:#f92672">as</span> gpd
-</code></pre></div><h3 id="1-point-shapefile">1- Point shapefile</h3>
+
+<pre><code class="language-python">import warnings; warnings.filterwarnings(action='ignore')
+from matplotlib import pyplot as plt
+%matplotlib inline
+import geopandas as gpd
+</code></pre>
+
+<h3 id="1-point-shapefile">1- Point shapefile</h3>
+
 <p>We can then open our first shapefile which contains point locations</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_ponts.shp</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><p>Each object in a shapefile has one or more attributes associated with it. Shapefile attributes are similar to fields or columns in a spreadsheet. Each row in the spreadsheet has a set of columns associated with it that describe the row element. In the case of a shapefile, each row represents a spatial object - for example, a road, represented as a line in a line shapefile, will have one “row” of attributes associated with it. These attributes can include different types of information that describe objects stored within a shapefile.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">2</span>)
-</code></pre></div><table>
+
+<pre><code class="language-python">shapes = gpd.read_file(&quot;shapefiles\BV_SJ_ponts.shp&quot;)
+</code></pre>
+
+<p>Each object in a shapefile has one or more attributes associated with it. Shapefile attributes are similar to fields or columns in a spreadsheet. Each row in the spreadsheet has a set of columns associated with it that describe the row element. In the case of a shapefile, each row represents a spatial object - for example, a road, represented as a line in a line shapefile, will have one “row” of attributes associated with it. These attributes can include different types of information that describe objects stored within a shapefile.</p>
+
+<pre><code class="language-python">shapes.head(2)
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -615,6 +640,7 @@ spatial object.</p>
 <th align="left">geometry</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -637,6 +663,7 @@ spatial object.</p>
 <td align="right">6.74042</td>
 <td align="left">POINT (-68.31290411677341 47.93509135554499)</td>
 </tr>
+
 <tr>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -658,6 +685,7 @@ spatial object.</p>
 <td align="right">6.74042</td>
 <td align="left">POINT (-68.10019745512986 47.8385423546759)</td>
 </tr>
+
 <tr>
 <td align="right">2</td>
 <td align="right">0</td>
@@ -679,6 +707,7 @@ spatial object.</p>
 <td align="right">6.74042</td>
 <td align="left">POINT (-68.05084811719591 47.67967312057342)</td>
 </tr>
+
 <tr>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -700,6 +729,7 @@ spatial object.</p>
 <td align="right">6.74042</td>
 <td align="left">POINT (-67.94013835894734 47.46553718633378)</td>
 </tr>
+
 <tr>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -723,77 +753,126 @@ spatial object.</p>
 </tr>
 </tbody>
 </table>
+
 <p>Notice that the geopandas data structure is a data.frame that contains a geometry column where the x, y point location values are stored. All of the other shapefile feature attributes are contained in columns, similar to what you may be used to if you’ve used a GIS tool such as ArcGIS or QGIS.</p>
-<h3 id="shapefile-metadata--attributes">Shapefile Metadata &amp; Attributes</h3>
+
+<h3 id="shapefile-metadata-attributes">Shapefile Metadata &amp; Attributes</h3>
+
 <p>When you import the  shapefile layer into Python the gpd.read_file() function automatically stores information about the data as attributes. You are particularly interested in the geospatial metadata, describing the format, CRS, extent, and other components of the vector data, and the attributes which describe properties associated with each individual vector object.</p>
+
 <h3 id="spatial-metadata">Spatial Metadata</h3>
+
 <p>Key metadata for all shapefiles include:</p>
+
 <pre><code>- Object Type: the class of the imported object.
 - Coordinate Reference System (CRS): the projection of the data.
 - Extent: the spatial extent (geographic area that the shapefile covers) of the shapefile. Note that the spatial extent for a shapefile represents the extent for ALL spatial objects in the shapefile.
 </code></pre>
+
 <p>You can view shapefile metadata using the class(), .crs and .total_bounds methods:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">type(shapes)
-</code></pre></div><pre><code>geopandas.geodataframe.GeoDataFrame
+
+<pre><code class="language-python">type(shapes)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>total_bounds
-</code></pre></div><pre><code>array([-70.40000541,  45.21527633, -65.03721851,  48.06254733])
+
+<pre><code>geopandas.geodataframe.GeoDataFrame
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>crs
-</code></pre></div><pre><code>{'init': 'epsg:4269'}
+
+<pre><code class="language-python">shapes.total_bounds
 </code></pre>
+
+<pre><code>array([-70.40000541,  45.21527633, -65.03721851,  48.06254733])
+</code></pre>
+
+<pre><code class="language-python">shapes.crs
+</code></pre>
+
+<pre><code>{'init': 'epsg:4269'}
+</code></pre>
+
 <p>The CRS for our data is epsg code: 4269.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>geom_type<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">2</span>)
-</code></pre></div><pre><code>0    Point
+
+<pre><code class="language-python">shapes.geom_type.head(2)
+</code></pre>
+
+<pre><code>0    Point
 1    Point
 dtype: object
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>head()
-</code></pre></div><pre><code>0    POINT (-68.31290411677341 47.93509135554499)
+
+<pre><code class="language-python">shapes.geometry.head()
+</code></pre>
+
+<pre><code>0    POINT (-68.31290411677341 47.93509135554499)
 1     POINT (-68.10019745512986 47.8385423546759)
 2    POINT (-68.05084811719591 47.67967312057342)
 3    POINT (-67.94013835894734 47.46553718633378)
 4    POINT (-67.79256589502562 47.36265881338679)
 Name: geometry, dtype: object
 </code></pre>
-<h3 id="how-many-features-are-in-your-shapefile">How Many Features Are in Your Shapefile?</h3>
-<p>You can view the number of features (counted by the number of rows in the attribute table) and feature attributes (number of columns) in our data using the pandas .shape method. Note that the data are returned as a vector of two values:</p>
-<p>(rows, columns)</p>
-<p>Also note that the number of columns includes a column where the geometry (the x, y coordinate locations) are stored.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>shape
-</code></pre></div><pre><code>(72, 18)
-</code></pre>
-<h3 id="plot-our-shapefile">Plot our Shapefile</h3>
-<p>you can visualize the data in your Python geodata.frame object using the .plot() method.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
-</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x9b129b0&gt;
-</code></pre>
-<p><img src="output_17_1.png" alt="png"></p>
-<h3 id="2-linestring-shapefile">2- Linestring shapefile</h3>
-<p>We had previously a POINT object.</p>
-<p>We will then convert POINT to LINESTRING.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> shapely.geometry <span style="color:#f92672">import</span> LineString, mapping
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">point_to_linestring</span>(fili_shps):
-    gdf <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(fili_shps) <span style="color:#75715e">#POINTS</span>
-    latlon <span style="color:#f92672">=</span> [mapping(x)[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coordinates</span><span style="color:#e6db74">&#39;</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> gdf<span style="color:#f92672">.</span>geometry]
-    lats <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> latlon]
-    lons <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> latlon]
-    linestr <span style="color:#f92672">=</span> LineString(zip(lons, lats))
-    <span style="color:#66d9ef">return</span> gpd<span style="color:#f92672">.</span>GeoDataFrame(index<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>], crs<span style="color:#f92672">=</span>gdf<span style="color:#f92672">.</span>crs, geometry<span style="color:#f92672">=</span>[linestr])
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">line_shapes <span style="color:#f92672">=</span> point_to_linestring(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_ponts.shp</span><span style="color:#e6db74">&#34;</span>)
-line_shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
-</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xa55f128&gt;
+<h3 id="how-many-features-are-in-your-shapefile">How Many Features Are in Your Shapefile?</h3>
+
+<p>You can view the number of features (counted by the number of rows in the attribute table) and feature attributes (number of columns) in our data using the pandas .shape method. Note that the data are returned as a vector of two values:</p>
+
+<p>(rows, columns)</p>
+
+<p>Also note that the number of columns includes a column where the geometry (the x, y coordinate locations) are stored.</p>
+
+<pre><code class="language-python">shapes.shape
 </code></pre>
-<p><img src="output_20_1.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">line_shapes
-</code></pre></div><table>
+
+<pre><code>(72, 18)
+</code></pre>
+
+<h3 id="plot-our-shapefile">Plot our Shapefile</h3>
+
+<p>you can visualize the data in your Python geodata.frame object using the .plot() method.</p>
+
+<pre><code class="language-python">shapes.loc[:, 'geometry'].plot()
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x9b129b0&gt;
+</code></pre>
+
+<p><img src="output_17_1.png" alt="png" /></p>
+
+<h3 id="2-linestring-shapefile">2- Linestring shapefile</h3>
+
+<p>We had previously a POINT object.</p>
+
+<p>We will then convert POINT to LINESTRING.</p>
+
+<pre><code class="language-python">from shapely.geometry import LineString, mapping
+
+def point_to_linestring(fili_shps):
+    gdf = gpd.read_file(fili_shps) #POINTS
+    latlon = [mapping(x)['coordinates'] for x in gdf.geometry]
+    lats = [x[1] for x in latlon]
+    lons = [x[0] for x in latlon]
+    linestr = LineString(zip(lons, lats))
+    return gpd.GeoDataFrame(index=[0], crs=gdf.crs, geometry=[linestr])
+</code></pre>
+
+<pre><code class="language-python">line_shapes = point_to_linestring(&quot;shapefiles\BV_SJ_ponts.shp&quot;)
+line_shapes.loc[:, 'geometry'].plot()
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xa55f128&gt;
+</code></pre>
+
+<p><img src="output_20_1.png" alt="png" /></p>
+
+<pre><code class="language-python">line_shapes
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
 <th align="left">geometry</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -801,37 +880,46 @@ line_shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74
 </tr>
 </tbody>
 </table>
+
 <p>If we want to save our new shapefile:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">line_shapes<span style="color:#f92672">.</span>to_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><p>And for example we can save latitude and longitude values into csv format:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> shapefile
-<span style="color:#f92672">import</span> os
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">shp2csv</span>(shp_file):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">Outputs a csv file based on input shapefile vertices</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+<pre><code class="language-python">line_shapes.to_file(&quot;shapefiles\BV_SJ_lines.shp&quot;)
+</code></pre>
+
+<p>And for example we can save latitude and longitude values into csv format:</p>
+
+<pre><code class="language-python">import shapefile
+import os
+
+def shp2csv(shp_file):
+    '''Outputs a csv file based on input shapefile vertices'''
     
-    out <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>splitext(shp_file)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">_pnts.csv</span><span style="color:#e6db74">&#39;</span>
+    out = os.path.splitext(shp_file)[0]+'_pnts.csv'
 
-    <span style="color:#66d9ef">with</span> open(out, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> csv:
-        <span style="color:#66d9ef">with</span> shapefile<span style="color:#f92672">.</span>Reader(shp_file) <span style="color:#66d9ef">as</span> sf:
+    with open(out, 'w') as csv:
+        with shapefile.Reader(shp_file) as sf:
 
-            <span style="color:#66d9ef">for</span> shp_rec <span style="color:#f92672">in</span> sf<span style="color:#f92672">.</span>shapeRecords():
-                csv<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(shp_rec<span style="color:#f92672">.</span>record))
+            for shp_rec in sf.shapeRecords():
+                csv.write('{}\n'.format(shp_rec.record))
 
-                <span style="color:#66d9ef">for</span> pnt <span style="color:#f92672">in</span> shp_rec<span style="color:#f92672">.</span>shape<span style="color:#f92672">.</span>points:
-                    csv<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(pnt))
+                for pnt in shp_rec.shape.points:
+                    csv.write('{}\n'.format(pnt))
 
-shp2csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
-BV_border <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.</span><span style="color:#e6db74">\</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines_pnts.csv</span><span style="color:#e6db74">&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span>,skiprows <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
-BV_border<span style="color:#f92672">.</span>columns<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#34;</span>]
-BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span>BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lon</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>))<span style="color:#f92672">.</span>apply(pd<span style="color:#f92672">.</span>to_numeric,<span style="color:#ae81ff">1</span>)
-BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">=</span>BV_border[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">lat</span><span style="color:#e6db74">&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>replace(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>))<span style="color:#f92672">.</span>apply(pd<span style="color:#f92672">.</span>to_numeric,<span style="color:#ae81ff">1</span>)
-BV_border<span style="color:#f92672">.</span>head()
-BV_border<span style="color:#f92672">.</span>lon
-BV_border<span style="color:#f92672">.</span>append(BV_border, ignore_index<span style="color:#f92672">=</span>True)
-BV_border<span style="color:#f92672">.</span>head()
-</code></pre></div><table>
+shp2csv(&quot;shapefiles\BV_SJ_lines.shp&quot;)
+</code></pre>
+
+<pre><code class="language-python">import pandas as pd
+BV_border = pd.read_csv('.\shapefiles\BV_SJ_lines_pnts.csv', sep=',',skiprows = range(0, 1))
+BV_border.columns=[&quot;lon&quot;, &quot;lat&quot;]
+BV_border[&quot;lon&quot;]=BV_border[&quot;lon&quot;].apply(lambda x: x.replace(&quot;(&quot;, &quot;&quot;)).apply(pd.to_numeric,1)
+BV_border[&quot;lat&quot;]=BV_border[&quot;lat&quot;].apply(lambda x: x.replace(&quot;)&quot;, &quot;&quot;)).apply(pd.to_numeric,1)
+BV_border.head()
+BV_border.lon
+BV_border.append(BV_border, ignore_index=True)
+BV_border.head()
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -839,27 +927,32 @@ BV_border<span style="color:#f92672">.</span>head()
 <th align="right">lat</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
 <td align="right">-68.1002</td>
 <td align="right">47.8385</td>
 </tr>
+
 <tr>
 <td align="right">1</td>
 <td align="right">-68.0508</td>
 <td align="right">47.6797</td>
 </tr>
+
 <tr>
 <td align="right">2</td>
 <td align="right">-67.9401</td>
 <td align="right">47.4655</td>
 </tr>
+
 <tr>
 <td align="right">3</td>
 <td align="right">-67.7926</td>
 <td align="right">47.3627</td>
 </tr>
+
 <tr>
 <td align="right">4</td>
 <td align="right">-67.6059</td>
@@ -867,88 +960,104 @@ BV_border<span style="color:#f92672">.</span>head()
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">from</span> cartopy.io.shapereader <span style="color:#f92672">import</span> Reader
-<span style="color:#f92672">from</span> cartopy.feature <span style="color:#f92672">import</span> ShapelyFeature
 
-fname <span style="color:#f92672">=</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#39;</span>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+from cartopy.io.shapereader import Reader
+from cartopy.feature import ShapelyFeature
 
-fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>), frameon<span style="color:#f92672">=</span>True)  
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Robinson())
-ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">70</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">64</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">50</span>])
+fname = r'shapefiles\BV_SJ_lines.shp'
+
+fig=plt.figure(figsize=(10,10), frameon=True)  
+ax = plt.axes(projection=ccrs.Robinson())
+ax.set_extent([-70,-64,45,50])
         
-<span style="color:#75715e">#ax.coastlines(resolution=&#39;110m&#39;);</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+#ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
+ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
+ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac
     
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
+ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières 
         
-coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
-                            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
-states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-        category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-        name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-         scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-         facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+coast = cfeature.NaturalEarthFeature(category='physical', scale='50m',     # ajout de la couche cotière 
+                            facecolor='none', name='coastline')
+ax.add_feature(coast, edgecolor='black')
+states_provinces = cfeature.NaturalEarthFeature(
+        category='cultural',
+        name='admin_1_states_provinces_lines',
+         scale='10m',
+         facecolor='none')
     
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)  
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>)  
+ax.add_feature(states_provinces, edgecolor='gray')  
+ax.add_feature(states_provinces, edgecolor='gray')  
     
-ax<span style="color:#f92672">.</span>gridlines()
+ax.gridlines()
 
 
-        <span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
-xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
-yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+        # Define gridline locations and draw the lines using cartopy's built-in gridliner:
+xticks = np.arange(-150.0,-40.0,20)
+yticks =np.arange(10,80,10)
         
-fig<span style="color:#f92672">.</span>canvas<span style="color:#f92672">.</span>draw()
-colors <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>]
-maskBV <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">BV</span><span style="color:#e6db74">&#39;</span>]                      
-cs <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>plot(BV_border<span style="color:#f92672">.</span>lon,BV_border<span style="color:#f92672">.</span>lat, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), color<span style="color:#f92672">=</span>colors[<span style="color:#ae81ff">0</span>], linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, label<span style="color:#f92672">=</span>maskBV[<span style="color:#ae81ff">0</span>])
-shape_feature <span style="color:#f92672">=</span> ShapelyFeature(Reader(fname)<span style="color:#f92672">.</span>geometries(),
-                                ccrs<span style="color:#f92672">.</span>PlateCarree(), edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(shape_feature, facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">yellow</span><span style="color:#e6db74">&#39;</span>)
-plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">best</span><span style="color:#e6db74">&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">2.</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)     
-plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./figure.png</span><span style="color:#e6db74">&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tight</span><span style="color:#e6db74">&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
-plt<span style="color:#f92672">.</span>show()  
-plt<span style="color:#f92672">.</span>close()
+fig.canvas.draw()
+colors = ['red']
+maskBV = ['BV']                      
+cs = ax.plot(BV_border.lon,BV_border.lat, transform=ccrs.PlateCarree(), color=colors[0], linewidth=2, label=maskBV[0])
+shape_feature = ShapelyFeature(Reader(fname).geometries(),
+                                ccrs.PlateCarree(), edgecolor='red')
+ax.add_feature(shape_feature, facecolor='yellow')
+plt.legend(loc=&quot;best&quot;, markerscale=2., fontsize=10)     
+plt.savefig('./figure.png', bbox_inches='tight', pad_inches=0.1)
+plt.show()  
+plt.close()
        
 
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Terminé</span><span style="color:#e6db74">&#39;</span>)
+print('Terminé')
 
-</code></pre></div><p><img src="output_27_0.png" alt="png"></p>
+</code></pre>
+
+<p><img src="output_27_0.png" alt="png" /></p>
+
 <pre><code>Terminé
 </code></pre>
-<h3 id="3-polygon-shapefile">3- Polygon shapefile</h3>
-<p>We can now convert our linestring shapefile to a polygon shapefile:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> shapely.geometry <span style="color:#f92672">import</span> Polygon, mapping
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">linestring_to_polygon</span>(fili_shps):
-    gdf <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(fili_shps) <span style="color:#75715e">#LINESTRING</span>
-    geom <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> gdf<span style="color:#f92672">.</span>geometry]
-    all_coords <span style="color:#f92672">=</span> mapping(geom[<span style="color:#ae81ff">0</span>])[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coordinates</span><span style="color:#e6db74">&#39;</span>]
-    lats <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> all_coords]
-    lons <span style="color:#f92672">=</span> [x[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> all_coords]
-    linestr <span style="color:#f92672">=</span> Polygon(zip(lons, lats))
-    <span style="color:#66d9ef">return</span> gpd<span style="color:#f92672">.</span>GeoDataFrame(index<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>], crs<span style="color:#f92672">=</span>gdf<span style="color:#f92672">.</span>crs, geometry<span style="color:#f92672">=</span>[linestr])
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">poly_shapes <span style="color:#f92672">=</span> linestring_to_polygon(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_lines.shp</span><span style="color:#e6db74">&#34;</span>)
-poly_shapes<span style="color:#f92672">.</span>to_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_WGS84.shp</span><span style="color:#e6db74">&#39;</span>)
-poly_shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">geometry</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>plot()
-</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xa5f0a90&gt;
+<h3 id="3-polygon-shapefile">3- Polygon shapefile</h3>
+
+<p>We can now convert our linestring shapefile to a polygon shapefile:</p>
+
+<pre><code class="language-python">from shapely.geometry import Polygon, mapping
+
+def linestring_to_polygon(fili_shps):
+    gdf = gpd.read_file(fili_shps) #LINESTRING
+    geom = [x for x in gdf.geometry]
+    all_coords = mapping(geom[0])['coordinates']
+    lats = [x[1] for x in all_coords]
+    lons = [x[0] for x in all_coords]
+    linestr = Polygon(zip(lons, lats))
+    return gpd.GeoDataFrame(index=[0], crs=gdf.crs, geometry=[linestr])
 </code></pre>
-<p><img src="output_30_1.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">poly_shapes
-</code></pre></div><table>
+
+<pre><code class="language-python">poly_shapes = linestring_to_polygon(&quot;shapefiles\BV_SJ_lines.shp&quot;)
+poly_shapes.to_file('shapefiles\BV_SJ_WGS84.shp')
+poly_shapes.loc[:, 'geometry'].plot()
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xa5f0a90&gt;
+</code></pre>
+
+<p><img src="output_30_1.png" alt="png" /></p>
+
+<pre><code class="language-python">poly_shapes
+</code></pre>
+
+<table>
 <thead>
 <tr>
 <th align="right"></th>
 <th align="left">geometry</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -956,78 +1065,88 @@ poly_shapes<span style="color:#f92672">.</span>loc[:, <span style="color:#e6db74
 </tr>
 </tbody>
 </table>
+
 <h3 id="4-check-if-a-point-in-inside-a-polygon">4- Check if a point in inside a polygon</h3>
+
 <p>Function bellow will check if a point, defined by a specific latitude and longitude, is inside or not a polygon shapefile.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>(lon, lat, ds_in):
-  lyr_in <span style="color:#f92672">=</span> ds_in<span style="color:#f92672">.</span>GetLayer(<span style="color:#ae81ff">0</span>)  
-  <span style="color:#75715e"># create point geometry</span>
-  pt <span style="color:#f92672">=</span> ogr<span style="color:#f92672">.</span>Geometry(ogr<span style="color:#f92672">.</span>wkbPoint)
-  pt<span style="color:#f92672">.</span>SetPoint_2D(<span style="color:#ae81ff">0</span>, lon, lat)
-  <span style="color:#75715e"># go over all the polygons in the layer see if one include the point</span>
-  <span style="color:#66d9ef">for</span> feat_in <span style="color:#f92672">in</span> lyr_in:
-    <span style="color:#75715e"># roughly subsets features, instead of go over everything</span>
-    ply <span style="color:#f92672">=</span> feat_in<span style="color:#f92672">.</span>GetGeometryRef()
-    <span style="color:#75715e"># test</span>
-    <span style="color:#66d9ef">if</span> ply<span style="color:#f92672">.</span>Contains(pt):
-      <span style="color:#75715e"># TODO do what you need to do here</span>
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point in shapefile polygon</span><span style="color:#e6db74">&#39;</span>)
-        <span style="color:#66d9ef">return</span>(lon, lat)
-        <span style="color:#66d9ef">return</span>(True)
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point not in shapefile polygon</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds_in  <span style="color:#f92672">=</span> ogr<span style="color:#f92672">.</span>Open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_WGS84.shp</span><span style="color:#e6db74">&#34;</span>)
-lon <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">68.</span>
-lat <span style="color:#f92672">=</span> <span style="color:#ae81ff">47</span>
-ind <span style="color:#f92672">=</span> check(lon, lat, ds_in)
+
+<pre><code class="language-python">def check(lon, lat, ds_in):
+  lyr_in = ds_in.GetLayer(0)  
+  # create point geometry
+  pt = ogr.Geometry(ogr.wkbPoint)
+  pt.SetPoint_2D(0, lon, lat)
+  # go over all the polygons in the layer see if one include the point
+  for feat_in in lyr_in:
+    # roughly subsets features, instead of go over everything
+    ply = feat_in.GetGeometryRef()
+    # test
+    if ply.Contains(pt):
+      # TODO do what you need to do here
+        print('Point in shapefile polygon')
+        return(lon, lat)
+        return(True)
+    else:
+        print('Point not in shapefile polygon')
+</code></pre>
+
+<pre><code class="language-python">ds_in  = ogr.Open(&quot;shapefiles\BV_SJ_WGS84.shp&quot;)
+lon = -68.
+lat = 47
+ind = check(lon, lat, ds_in)
 ind
-</code></pre></div><pre><code>Point in shapefile polygon
+</code></pre>
+
+<pre><code>Point in shapefile polygon
 
 (-68.0, 47)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
-<span style="color:#f92672">from</span> cartopy.io.shapereader <span style="color:#f92672">import</span> Reader
-<span style="color:#f92672">from</span> cartopy.feature <span style="color:#f92672">import</span> ShapelyFeature
 
-fname <span style="color:#f92672">=</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">shapefiles</span><span style="color:#e6db74">\</span><span style="color:#e6db74">BV_SJ_WGS84.shp</span><span style="color:#e6db74">&#39;</span>
-fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>), frameon<span style="color:#f92672">=</span>True)  
-ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Robinson())
-ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">70</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">64</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">50</span>])
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))       <span style="color:#75715e"># couche land</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))      <span style="color:#75715e"># couche lac</span>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+from cartopy.io.shapereader import Reader
+from cartopy.feature import ShapelyFeature
+
+fname = r'shapefiles\BV_SJ_WGS84.shp'
+fig=plt.figure(figsize=(28,16), frameon=True)  
+ax = plt.axes(projection=ccrs.Robinson())
+ax.set_extent([-70,-64,45,50])
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
+ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
+ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac
    
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
-ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">50m</span><span style="color:#e6db74">&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
-coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">physical</span><span style="color:#e6db74">&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
-                            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coastline</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)    
-states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
-            category<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cultural</span><span style="color:#e6db74">&#39;</span>,
-            name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">admin_1_states_provinces_lines</span><span style="color:#e6db74">&#39;</span>,
-            scale<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10m</span><span style="color:#e6db74">&#39;</span>,
-            facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>)
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
+ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières 
+coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
+                            facecolor='none', name='coastline')
+ax.add_feature(coast, edgecolor='black')    
+states_provinces = cfeature.NaturalEarthFeature(
+            category='cultural',
+            name='admin_1_states_provinces_lines',
+            scale='10m',
+            facecolor='none')
     
-ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">gray</span><span style="color:#e6db74">&#39;</span>) 
-ax<span style="color:#f92672">.</span>plot(ind[<span style="color:#ae81ff">0</span>], ind[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">go</span><span style="color:#e6db74">&#39;</span>, ms<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic())
+ax.add_feature(states_provinces, edgecolor='gray') 
+ax.plot(ind[0], ind[1], 'go', ms=20, transform=ccrs.Geodetic())
 
-ax<span style="color:#f92672">.</span>text(ind[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">35</span>, ind[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">15</span>, 
-                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point in shapefile polygon</span><span style="color:#e6db74">&#39;</span>, 
-                va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, 
-                ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">green</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic(), fontweight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bold</span><span style="color:#e6db74">&#39;</span>)
+ax.text(ind[0] + .35, ind[1] + .15, 
+                'Point in shapefile polygon', 
+                va='center', 
+                ha='right', color= 'green', transform=ccrs.Geodetic(), fontweight='bold')
 
-ax<span style="color:#f92672">.</span>plot(<span style="color:#f92672">-</span><span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">48.5</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ro</span><span style="color:#e6db74">&#39;</span>, ms<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic())
-ax<span style="color:#f92672">.</span>text(<span style="color:#f92672">-</span><span style="color:#ae81ff">66</span> <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">48.5</span> <span style="color:#f92672">+</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">15</span>, 
-                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Point outside shapefile polygon</span><span style="color:#e6db74">&#39;</span>, 
-                va<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>, 
-                ha<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">right</span><span style="color:#e6db74">&#39;</span>, color<span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic(), fontweight<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bold</span><span style="color:#e6db74">&#39;</span>)
+ax.plot(-66, 48.5, 'ro', ms=20, transform=ccrs.Geodetic())
+ax.text(-66 + .35, 48.5 + .15, 
+                'Point outside shapefile polygon', 
+                va='center', 
+                ha='right', color= 'red', transform=ccrs.Geodetic(), fontweight='bold')
 
-shape_feature <span style="color:#f92672">=</span> ShapelyFeature(Reader(fname)<span style="color:#f92672">.</span>geometries(),
-                                ccrs<span style="color:#f92672">.</span>PlateCarree(), edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>add_feature(shape_feature, facecolor<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">yellow</span><span style="color:#e6db74">&#39;</span>)
+shape_feature = ShapelyFeature(Reader(fname).geometries(),
+                                ccrs.PlateCarree(), edgecolor='black')
+ax.add_feature(shape_feature, facecolor='yellow')
 
-plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p><img src="output_35_0.png" alt="png"></p>
+plt.show()
+</code></pre>
+
+<p><img src="output_35_0.png" alt="png" /></p>
 
     </div>
 

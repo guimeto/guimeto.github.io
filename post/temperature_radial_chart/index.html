@@ -499,7 +499,7 @@ In this work, we will extract data from Environment and Climate Change Canada fo
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    4 min read
+    5 min read
   </span>
   
 
@@ -542,212 +542,279 @@ In this work, we will extract data from Environment and Climate Change Canada fo
   <div class="article-container">
 
     <div class="article-style">
-      <h3 id="plot-of-a-radial-temperature-chart">Plot of a radial temperature chart</h3>
+      
+
+<h3 id="plot-of-a-radial-temperature-chart">Plot of a radial temperature chart</h3>
+
 <p>In this post, we will plot a radial temperature chart using daily temperature from Environment Canada.</p>
+
 <p>The objective of this product is to obtain an analysis of the daily evolution of the temperature and its positioning in relation to the norm and the historical records of the Julian day.</p>
+
 <p>In this work, we will extract data from Environment and Climate Change Canada for the RIGAUD station in Quebec. Here is the information about this station:</p>
+
 <pre><code>Name: RIGAUD
 Username: 5252
 Latitude: 45.5 degN
 Longitude: -74.37 degW
 Period covered: 1963 - today
 </code></pre>
-<p>A list of stations is available on this <a href="ftp://ftp.tor.ec.gc.ca/Pub/Get_More_Data_More_data/Repository%20of%20stations%20FR.csv">link</a>.</p>
-<p>The data will be uploaded directly to Environment and Climate Change Canada's  <a href="Repository%20of%20stations%20FR.csv">website</a> <a href="http://climate.weather.gc.ca/)">http://climate.weather.gc.ca/)</a>.</p>
-<p>The data is in XML format. XML or eXtensible Markup Language is a generic markup language. To read this format, we will call the <a href="https://docs.python.org/2/library/xml.etree.elementtree.html#module-xml.etree.ElementTree">&lsquo;xml.etree.ElementTree&rsquo; library</a>.</p>
+
+<p>A list of stations is available on this <a href="ftp://ftp.tor.ec.gc.ca/Pub/Get_More_Data_More_data/Repository%20of%20stations%20FR.csv" target="_blank">link</a>.</p>
+
+<p>The data will be uploaded directly to Environment and Climate Change Canada&rsquo;s  <a href="Repository%20of%20stations%20FR.csv" target="_blank">website</a> <a href="http://climate.weather.gc.ca/)" target="_blank">http://climate.weather.gc.ca/)</a>.</p>
+
+<p>The data is in XML format. XML or eXtensible Markup Language is a generic markup language. To read this format, we will call the <a href="https://docs.python.org/2/library/xml.etree.elementtree.html#module-xml.etree.ElementTree" target="_blank">&lsquo;xml.etree.ElementTree&rsquo; library</a>.</p>
+
 <p>First, we import the necessary libraries:</p>
+
 <pre><code>- matplotlib: module to plot our graph
 - datetime: python module for manipulating dates
 - wget: module to extract data on a url
 - pandas: module for working with data structures
 - os: &quot;system&quot; module to create, delete ... files from our environment
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> matplotlib.ticker <span style="color:#f92672">as</span> ticker
-<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date
-<span style="color:#f92672">import</span> os
-<span style="color:#f92672">import</span> wget
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
-<span style="color:#f92672">import</span> xml.etree.ElementTree <span style="color:#f92672">as</span> ET
-<span style="color:#f92672">import</span> warnings
-warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ignore</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><p>For example, we will extract the year 2000 daily records of the station RIGAUD (ID: 5252).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">id_stat <span style="color:#f92672">=</span> <span style="color:#ae81ff">5252</span>
-year <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
-tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&amp;Year=</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&amp;Month=01&amp;Day=14&amp;timeframe=2</span><span style="color:#e6db74">&#39;</span>)
-tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
-os<span style="color:#f92672">.</span>remove(tmp_file)
-root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()
-stationsdata <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>findall(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.//stationdata</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><pre><code>-1 / unknown
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.ticker as ticker
+from datetime import date
+import os
+import wget
+import pandas as pd
+import xml.etree.ElementTree as ET
+import warnings
+warnings.filterwarnings(&quot;ignore&quot;)
 </code></pre>
-<p>Notre fichier XML a la structure suivant:<br>
+
+<p>For example, we will extract the year 2000 daily records of the station RIGAUD (ID: 5252).</p>
+
+<pre><code class="language-python">id_stat = 5252
+year = 2000
+tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=2')
+tree=ET.parse(tmp_file)
+os.remove(tmp_file)
+root=tree.getroot()
+stationsdata = root.findall('.//stationdata')
+</code></pre>
+
+<pre><code>-1 / unknown
+</code></pre>
+
+<p>Notre fichier XML a la structure suivant:<br />
 Our XML file got this structure:</p>
-<!-- raw HTML omitted -->
+
+<p><stationdata year="1955" month="1" day="1">
+    <maxtemp units="°C" description="Maximum Temperature">3.3</maxtemp>
+    <mintemp units="°C" description="Minimum Temperature">-4.4</mintemp>
+    <meantemp units="°C" description="Mean Temperature">-0.6</meantemp>
+    <heatdegdays units="°C" description="Heating Degree Days">18.6</heatdegdays>
+    <cooldegdays units="°C" description="Cooling Degree Days">0.0</cooldegdays>
+    <totalrain units="mm" description="Total Rain">0.0</totalrain>
+    <totalsnow units="cm" description="Total Snow">0.0</totalsnow>
+    <totalprecipitation units="mm" description="Total Precipitation">0.0</totalprecipitation>
+    <snowonground units="cm" description="Snow on Ground"/>
+    <dirofmaxgust units="10s Deg" description="Direction of Maximum Gust"/>
+    <speedofmaxgust units="km/h" description="Speed of Maximum Gust"/>
+</stationdata></p>
+
 <p>We need to target the maxtemp and mintemp tags for our work, so the stationdata[0] and station[1] fields.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resultmax <span style="color:#f92672">=</span> []
-resultmin <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> stationdata <span style="color:#f92672">in</span> stationsdata:
-    champs1<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">maxtemp</span><span style="color:#e6db74">&#39;</span>)              
-    resultmax<span style="color:#f92672">.</span>append(champs1<span style="color:#f92672">.</span>text)   <span style="color:#75715e">#  we append data for each day in a year </span>
-    data_max<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(resultmax,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>)     
-<span style="color:#66d9ef">for</span> stationdata <span style="color:#f92672">in</span> stationsdata:
-    champs2<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mintemp</span><span style="color:#e6db74">&#39;</span>)              
-    resultmin<span style="color:#f92672">.</span>append(champs2<span style="color:#f92672">.</span>text)   <span style="color:#75715e">#  we append data for each day in a year </span>
-    data_min<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(resultmin,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>) 
-</code></pre></div><p>We then have two python lists with daily minimum and maximum temperatures.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(resultmax[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>])
-</code></pre></div><pre><code>['-1.0', '5.5', '2.0', '4.0', '-3.0']
+
+<pre><code class="language-python">resultmax = []
+resultmin = []
+for stationdata in stationsdata:
+    champs1=stationdata.find('maxtemp')              
+    resultmax.append(champs1.text)   #  we append data for each day in a year 
+    data_max=np.array(resultmax,&quot;float&quot;)     
+for stationdata in stationsdata:
+    champs2=stationdata.find('mintemp')              
+    resultmin.append(champs2.text)   #  we append data for each day in a year 
+    data_min=np.array(resultmin,&quot;float&quot;) 
 </code></pre>
+
+<p>We then have two python lists with daily minimum and maximum temperatures.</p>
+
+<pre><code class="language-python">print(resultmax[0:5])
+</code></pre>
+
+<pre><code>['-1.0', '5.5', '2.0', '4.0', '-3.0']
+</code></pre>
+
 <p>We can do the same over the whole recording period of the station (1963-2019) by applying a for loop over the years.</p>
+
 <p>For each year and each variable to be extracted we will increment a list in the variables min_array = [] and max_array = [].</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1963</span>
-yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2019</span>
-id_stat <span style="color:#f92672">=</span> <span style="color:#ae81ff">5252</span>
-station <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">RIGAUD</span><span style="color:#e6db74">&#39;</span>
-max_array <span style="color:#f92672">=</span> []
-min_array <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):    <span style="color:#75715e">### loop over yars </span>
-    tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&amp;Year=</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&amp;Month=01&amp;Day=14&amp;timeframe=2</span><span style="color:#e6db74">&#39;</span>)
-    tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
-    os<span style="color:#f92672">.</span>remove(tmp_file)
-    root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()
-    stationsdata <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>findall(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.//stationdata</span><span style="color:#e6db74">&#39;</span>)
-    resultmax <span style="color:#f92672">=</span> []
-    resultmin <span style="color:#f92672">=</span> []
-    <span style="color:#66d9ef">for</span>  stationdata <span style="color:#f92672">in</span> stationsdata:
-         champs1<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">maxtemp</span><span style="color:#e6db74">&#39;</span>)              
-         resultmax<span style="color:#f92672">.</span>append(champs1<span style="color:#f92672">.</span>text)   <span style="color:#75715e">#  loop over days for tmax </span>
-         data_max<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(resultmax,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>)     
-    <span style="color:#66d9ef">for</span>  stationdata <span style="color:#f92672">in</span> stationsdata:
-         champs2<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mintemp</span><span style="color:#e6db74">&#39;</span>)              
-         resultmin<span style="color:#f92672">.</span>append(champs2<span style="color:#f92672">.</span>text)   <span style="color:#75715e">#  loop over days for tmin </span>
-         data_min<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(resultmin,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>) 
+
+<pre><code class="language-python">yi = 1963
+yf = 2019
+id_stat = 5252
+station = 'RIGAUD'
+max_array = []
+min_array = []
+for year in range(yi,yf+1):    ### loop over yars 
+    tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=2')
+    tree=ET.parse(tmp_file)
+    os.remove(tmp_file)
+    root=tree.getroot()
+    stationsdata = root.findall('.//stationdata')
+    resultmax = []
+    resultmin = []
+    for  stationdata in stationsdata:
+         champs1=stationdata.find('maxtemp')              
+         resultmax.append(champs1.text)   #  loop over days for tmax 
+         data_max=np.array(resultmax,&quot;float&quot;)     
+    for  stationdata in stationsdata:
+         champs2=stationdata.find('mintemp')              
+         resultmin.append(champs2.text)   #  loop over days for tmin 
+         data_min=np.array(resultmin,&quot;float&quot;) 
          
-    max_array<span style="color:#f92672">.</span>append(data_max)
-    min_array<span style="color:#f92672">.</span>append(data_min)
+    max_array.append(data_max)
+    min_array.append(data_min)
 len(max_array)
-</code></pre></div><pre><code>-1 / unknown
+</code></pre>
+
+<pre><code>-1 / unknown
 
 
 
 
 57
 </code></pre>
+
 <p>For each min_array and max_array fields, we get a list of lists. We will flatten thoses lists:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flatten</span>(input):
-    new_list <span style="color:#f92672">=</span> []
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> input:
-        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> i:
-            new_list<span style="color:#f92672">.</span>append(j)
-    <span style="color:#66d9ef">return</span> new_list
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">min_array<span style="color:#f92672">=</span>flatten(min_array) 
-max_array<span style="color:#f92672">=</span>flatten(max_array)
-len(min_array)
-</code></pre></div><pre><code>20819
+
+<pre><code class="language-python">def flatten(input):
+    new_list = []
+    for i in input:
+        for j in i:
+            new_list.append(j)
+    return new_list
 </code></pre>
+
+<pre><code class="language-python">min_array=flatten(min_array) 
+max_array=flatten(max_array)
+len(min_array)
+</code></pre>
+
+<pre><code>20819
+</code></pre>
+
 <p>So we now have two lists of 20454 days for each min_array and max_array fields.</p>
+
 <p>Knowing that the period extends from January 1, 1963 to December 31, 2018, we can add a temporal dimension to our dataframe with the datetime module of python.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">1963</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
-end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2019</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
-delta<span style="color:#f92672">=</span>(end<span style="color:#f92672">-</span>start) 
-nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
-rng <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(start, periods<span style="color:#f92672">=</span>nb_days, freq<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">D</span><span style="color:#e6db74">&#39;</span>)
-tmin_dataset <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>Series(min_array, index<span style="color:#f92672">=</span>rng)
-tmax_dataset <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>Series(max_array, index<span style="color:#f92672">=</span>rng)
-tmax_dataset<span style="color:#f92672">.</span>head()
-</code></pre></div><pre><code>1963-01-01   -11.1
+
+<pre><code class="language-python">start = date(1963, 1, 1)
+end = date(2019, 12, 31)
+delta=(end-start) 
+nb_days = delta.days + 1 
+rng = pd.date_range(start, periods=nb_days, freq='D')
+tmin_dataset = pd.Series(min_array, index=rng)
+tmax_dataset = pd.Series(max_array, index=rng)
+tmax_dataset.head()
+</code></pre>
+
+<pre><code>1963-01-01   -11.1
 1963-01-02    -6.7
 1963-01-03    -3.9
 1963-01-04    -2.2
 1963-01-05    -3.9
 Freq: D, dtype: float64
 </code></pre>
+
 <p>One of the big advantages of the pandas dataframe is that we can very easily work with time series.
 Here we will calculate the daily climatologies of the tmin_dataset and tmax_dataset variables over the 1981-2010 normal period.</p>
+
 <p>Also, with the pandas groupby tools, we can calculate the daily minimum and maximum of tmin_dataset and tmax_dataset over the full period of the recording.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mintmin <span style="color:#f92672">=</span> []
-maxtmax <span style="color:#f92672">=</span> []
-climtmin <span style="color:#f92672">=</span> []
-climtmax <span style="color:#f92672">=</span> []
 
-clim_min_dataset<span style="color:#f92672">=</span>tmin_dataset[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">1981</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2010</span><span style="color:#e6db74">&#39;</span>]
-clim_max_dataset<span style="color:#f92672">=</span>tmax_dataset[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">1981</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">2010</span><span style="color:#e6db74">&#39;</span>]
-climtmin <span style="color:#f92672">=</span> clim_min_dataset<span style="color:#f92672">.</span>groupby([clim_min_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>month, clim_min_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>day])<span style="color:#f92672">.</span>mean()
-climtmax <span style="color:#f92672">=</span> clim_max_dataset<span style="color:#f92672">.</span>groupby([clim_max_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>month, clim_max_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>day])<span style="color:#f92672">.</span>mean()
+<pre><code class="language-python">mintmin = []
+maxtmax = []
+climtmin = []
+climtmax = []
 
-mintmin <span style="color:#f92672">=</span> tmin_dataset<span style="color:#f92672">.</span>groupby([tmin_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>month, tmin_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>day])<span style="color:#f92672">.</span>min()
-maxtmax <span style="color:#f92672">=</span> tmax_dataset<span style="color:#f92672">.</span>groupby([tmax_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>month, tmax_dataset<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>day])<span style="color:#f92672">.</span>max()
+clim_min_dataset=tmin_dataset['1981':'2010']
+clim_max_dataset=tmax_dataset['1981':'2010']
+climtmin = clim_min_dataset.groupby([clim_min_dataset.index.month, clim_min_dataset.index.day]).mean()
+climtmax = clim_max_dataset.groupby([clim_max_dataset.index.month, clim_max_dataset.index.day]).mean()
+
+mintmin = tmin_dataset.groupby([tmin_dataset.index.month, tmin_dataset.index.day]).min()
+maxtmax = tmax_dataset.groupby([tmax_dataset.index.month, tmax_dataset.index.day]).max()
 
 
-data_min_tmin<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(mintmin,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>)  
-data_max_tmax<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(maxtmax,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>) 
-data_clim_tmax<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(climtmax,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>)     
-data_clim_tmin<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(climtmin,<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#34;</span>) 
+data_min_tmin=np.array(mintmin,&quot;float&quot;)  
+data_max_tmax=np.array(maxtmax,&quot;float&quot;) 
+data_clim_tmax=np.array(climtmax,&quot;float&quot;)     
+data_clim_tmin=np.array(climtmin,&quot;float&quot;) 
 
-<span style="color:#66d9ef">print</span>(len(data_clim_tmax))
-<span style="color:#66d9ef">print</span>(len(maxtmax))
+print(len(data_clim_tmax))
+print(len(maxtmax))
 
-</code></pre></div><pre><code>366
+</code></pre>
+
+<pre><code>366
 366
 </code></pre>
+
 <p>We can know visualize our timeries with a radial chart.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> []
-ndays<span style="color:#f92672">=</span><span style="color:#ae81ff">366</span>
-Azs<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,ndays)
-angle <span style="color:#f92672">=</span> Azs <span style="color:#f92672">*</span> <span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">/</span> ndays
 
-fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">12</span>))
-ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>, polar<span style="color:#f92672">=</span>True)
+<pre><code class="language-python">x = []
+ndays=366
+Azs=np.arange(0,ndays)
+angle = Azs * 2.0 * np.pi / ndays
 
-ax<span style="color:#f92672">.</span>plot([angle[<span style="color:#ae81ff">0</span>],angle[<span style="color:#ae81ff">0</span>]], [data_min[<span style="color:#ae81ff">0</span>],data_max[<span style="color:#ae81ff">0</span>]],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">3.0</span>, label<span style="color:#f92672">=</span>str(yf))
-ax<span style="color:#f92672">.</span>plot([angle[<span style="color:#ae81ff">0</span>],angle[<span style="color:#ae81ff">0</span>]], [data_clim_tmin[<span style="color:#ae81ff">0</span>],data_clim_tmax[<span style="color:#ae81ff">0</span>]],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">blue</span><span style="color:#e6db74">&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">3.0</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Climatology (1981-2010)</span><span style="color:#e6db74">&#39;</span>)
-ax<span style="color:#f92672">.</span>plot([angle[<span style="color:#ae81ff">0</span>],angle[<span style="color:#ae81ff">0</span>]], [data_min_tmin[<span style="color:#ae81ff">0</span>],data_max_tmax[<span style="color:#ae81ff">0</span>]],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">grey</span><span style="color:#e6db74">&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.4</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">3.0</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Extreme (</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(yi)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(yf)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>)
+fig=plt.figure(figsize=(12,12))
+ax = fig.add_subplot(111, polar=True)
 
-leg<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>legend(bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.15</span>, <span style="color:#ae81ff">1.0</span>),fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
-leg<span style="color:#f92672">.</span>get_frame()<span style="color:#f92672">.</span>set_linewidth(<span style="color:#ae81ff">0.0</span>)
-leg<span style="color:#f92672">.</span>set_title(str(station)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>str(yf), prop<span style="color:#f92672">=</span>{<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">size</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">10</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">weight</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">heavy</span><span style="color:#e6db74">&#39;</span>})
+ax.plot([angle[0],angle[0]], [data_min[0],data_max[0]],'red', alpha=1.0, linewidth=3.0, label=str(yf))
+ax.plot([angle[0],angle[0]], [data_clim_tmin[0],data_clim_tmax[0]],'blue', alpha=0.3, linewidth=3.0, label='Climatology (1981-2010)')
+ax.plot([angle[0],angle[0]], [data_min_tmin[0],data_max_tmax[0]],'grey', alpha=0.4, linewidth=3.0, label='Extreme ('+str(yi)+'-'+str(yf)+')')
 
-ax<span style="color:#f92672">.</span>plot([angle,angle], [data_min,data_max],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">3.0</span>)
-ax<span style="color:#f92672">.</span>plot([angle,angle], [data_clim_tmin,data_clim_tmax],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">blue</span><span style="color:#e6db74">&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">3.0</span>)
-ax<span style="color:#f92672">.</span>plot([angle,angle], [data_min_tmin,data_max_tmax],<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">grey</span><span style="color:#e6db74">&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.4</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">3.0</span>)
+leg=plt.legend(bbox_to_anchor=(0.15, 1.0),fontsize=10)
+leg.get_frame().set_linewidth(0.0)
+leg.set_title(str(station)+' '+str(yf), prop={'size': 10, 'weight': 'heavy'})
 
-ax<span style="color:#f92672">.</span>set_rmin(<span style="color:#f92672">-</span><span style="color:#ae81ff">40</span>)
-ax<span style="color:#f92672">.</span>set_rmax(<span style="color:#f92672">+</span><span style="color:#ae81ff">40</span>)
-ax<span style="color:#f92672">.</span>grid(True)
-ax<span style="color:#f92672">.</span>set_theta_direction(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
-ax<span style="color:#f92672">.</span>set_theta_offset(np<span style="color:#f92672">.</span>pi <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)
+ax.plot([angle,angle], [data_min,data_max],'red', alpha=1.0, linewidth=3.0)
+ax.plot([angle,angle], [data_clim_tmin,data_clim_tmax],'blue', alpha=0.3, linewidth=3.0)
+ax.plot([angle,angle], [data_min_tmin,data_max_tmax],'grey', alpha=0.4, linewidth=3.0)
 
-ax<span style="color:#f92672">.</span>set_rticks([<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>])  <span style="color:#75715e"># less radial ticks</span>
-ax<span style="color:#f92672">.</span>set_rlabel_position(<span style="color:#f92672">-</span><span style="color:#ae81ff">45.</span>)  <span style="color:#75715e"># get radial labels away from plotted line</span>
-ax<span style="color:#f92672">.</span>set_yticklabels([<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">$-30^{</span><span style="color:#e6db74">\</span><span style="color:#e6db74">circ}$</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">$-20^{</span><span style="color:#e6db74">\</span><span style="color:#e6db74">circ}$</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">$-10^{</span><span style="color:#e6db74">\</span><span style="color:#e6db74">circ}$</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">$0^{</span><span style="color:#e6db74">\</span><span style="color:#e6db74">circ}$</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">$10^{</span><span style="color:#e6db74">\</span><span style="color:#e6db74">circ}$</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">$20^{</span><span style="color:#e6db74">\</span><span style="color:#e6db74">circ}$</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">$30^{</span><span style="color:#e6db74">\</span><span style="color:#e6db74">circ}$</span><span style="color:#e6db74">&#39;</span> ],
-   fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+ax.set_rmin(-40)
+ax.set_rmax(+40)
+ax.grid(True)
+ax.set_theta_direction(-1)
+ax.set_theta_offset(np.pi / 2)
 
-<span style="color:#75715e"># Set the major and minor tick locations</span>
-ax<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>set_major_locator(ticker<span style="color:#f92672">.</span>MultipleLocator(np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">6</span>))
-ax<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>set_minor_locator(ticker<span style="color:#f92672">.</span>MultipleLocator(np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">12</span>))
-ax<span style="color:#f92672">.</span>grid(linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,color<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">grey</span><span style="color:#e6db74">&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span>)
+ax.set_rticks([-30,-20, -10, 0, 10, 20, 30])  # less radial ticks
+ax.set_rlabel_position(-45.)  # get radial labels away from plotted line
+ax.set_yticklabels(['$-30^{\circ}$', '$-20^{\circ}$', '$-10^{\circ}$', '$0^{\circ}$', '$10^{\circ}$', '$20^{\circ}$', '$30^{\circ}$' ],
+   fontsize=10)
 
-<span style="color:#75715e"># Turn off major tick labels</span>
-ax<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>set_major_formatter(ticker<span style="color:#f92672">.</span>NullFormatter())
-ax<span style="color:#f92672">.</span>set_frame_on(False)
+# Set the major and minor tick locations
+ax.xaxis.set_major_locator(ticker.MultipleLocator(np.pi/6))
+ax.xaxis.set_minor_locator(ticker.MultipleLocator(np.pi/12))
+ax.grid(linewidth=1,color='grey', linestyle='-')
 
-<span style="color:#75715e"># Set the minor tick width to 0 so you don&#39;t see them</span>
-<span style="color:#66d9ef">for</span> tick <span style="color:#f92672">in</span> ax<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>get_minor_ticks():
-    tick<span style="color:#f92672">.</span>tick1line<span style="color:#f92672">.</span>set_markersize(<span style="color:#ae81ff">0</span>)
-    tick<span style="color:#f92672">.</span>tick2line<span style="color:#f92672">.</span>set_markersize(<span style="color:#ae81ff">0</span>)
-    tick<span style="color:#f92672">.</span>label1<span style="color:#f92672">.</span>set_horizontalalignment(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">center</span><span style="color:#e6db74">&#39;</span>)
+# Turn off major tick labels
+ax.xaxis.set_major_formatter(ticker.NullFormatter())
+ax.set_frame_on(False)
 
-<span style="color:#75715e"># Set the names of your ticks, with blank spaces for the major ticks</span>
-ax<span style="color:#f92672">.</span>set_xticklabels([<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Jan</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Feb</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Mar</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Apr</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">May</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Jun</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Jul</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Aug</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Sep</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Oct</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Nov</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Dec</span><span style="color:#e6db74">&#39;</span>],minor<span style="color:#f92672">=</span>True)
+# Set the minor tick width to 0 so you don't see them
+for tick in ax.xaxis.get_minor_ticks():
+    tick.tick1line.set_markersize(0)
+    tick.tick2line.set_markersize(0)
+    tick.label1.set_horizontalalignment('center')
 
-plt<span style="color:#f92672">.</span>show()
+# Set the names of your ticks, with blank spaces for the major ticks
+ax.set_xticklabels(['','Jan','','Feb','','Mar','','Apr','','May','','Jun','','Jul','','Aug','','Sep','','Oct','','Nov','','Dec'],minor=True)
 
-</code></pre></div><p><img src="output_18_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-</code></pre></div>
+plt.show()
+
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<pre><code class="language-python">
+</code></pre>
+
+<pre><code class="language-python">
+</code></pre>
+
     </div>
 
     
