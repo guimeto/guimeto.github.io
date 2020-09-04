@@ -524,16 +524,12 @@
 <li><a href="#g-to-get-the-values-of-the-diagonal-of-a-numpy-table-b-diagonal-b-function">g)- To get the values of the diagonal of a Numpy table: <b>diagonal()</b> function</a></li>
 </ul></li>
 <li><a href="#6-5-comparisons-and-masks">6.5 Comparisons and masks :</a></li>
-<li><a href="#exercise-using-numpy-library">Exercise using Numpy library:</a>
+<li><a href="#exercise-using-numpy-library">Exercise using Numpy library</a>
 <ul>
 <li><a href="#we-will-work-on-data-station-using-numpy-library">we will work on data station using Numpy library.</a></li>
 <li><a href="#correction">Correction</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#4">4-</a></li>
-<li><a href="#5">5-</a></li>
-<li><a href="#6">6-</a></li>
-<li><a href="#7">7.</a></li>
 </ul>
 </nav>
 
@@ -1369,7 +1365,7 @@ table[(table&gt;=50) | (table&lt;=40)]
        11, 53, 71, 63, 25, 75, 87, 68, 88, 30, 12, 95, 61, 14, 40, 61, 31])
 </code></pre>
 
-<h2 id="exercise-using-numpy-library">Exercise using Numpy library:</h2>
+<h2 id="exercise-using-numpy-library">Exercise using Numpy library</h2>
 
 <h3 id="we-will-work-on-data-station-using-numpy-library">we will work on data station using Numpy library.</h3>
 
@@ -1436,11 +1432,9 @@ len(tableau[tableau[:,1]&gt;=25])</p>
 
 </code></pre>
 
-<p>python</p>
-
-<h1 id="4">4-</h1>
-
-<p>precipitation_max = np.nanmax(tableau[:,1])
+<p>python
+ 4-
+precipitation_max = np.nanmax(tableau[:,1])
 print(precipitation_max)</p>
 
 <pre><code>
@@ -1461,9 +1455,8 @@ tableau[tableau[:,1] == precipitation_max]</p>
 
 </code></pre>
 
-<p>python</p>
-
-<h1 id="5">5-</h1>
+<p>python
+ 5-</p>
 
 <pre><code>
 
@@ -1483,11 +1476,9 @@ sum(tableau[:,1][tableau[:,1]&gt;0])</p>
 
 </code></pre>
 
-<p>python</p>
-
-<h1 id="6">6-</h1>
-
-<p>cumul_precipitation = np.nancumsum(tableau[:,1])</p>
+<p>python
+ 6-
+cumul_precipitation = np.nancumsum(tableau[:,1])</p>
 
 <pre><code>
 
@@ -1512,9 +1503,8 @@ sum(tableau[:,1][tableau[:,1]&gt;0])</p>
 
 </code></pre>
 
-<p>python</p>
-
-<h1 id="7">7.</h1>
+<p>python
+ 7.</p>
 
 <p>temperature2,precipitation2,cumul2 = np.hsplit(tableau, 3)</p>
 

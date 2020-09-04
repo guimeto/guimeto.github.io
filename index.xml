@@ -804,29 +804,17 @@ print(&#39;-----------------------------------------&#39;)
 print(&#39;Longitude dimesion = &#39;,lons.shape)
 print(&#39;Minimum of longitude = &#39;, np.min(lons))
 print(&#39;Maximum of longitude = &#39;, np.max(lons))
-print(&#39;-----------------------------------------&#39;)
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;hr /&gt;
-
-&lt;p&gt;Temperature dimension =  (31, 130, 155)
-Minimum of temperature =  -57.66677&lt;/p&gt;
-
-&lt;h2 id=&#34;maximum-of-temperature-30-657953&#34;&gt;Maximum of temperature =  30.657953&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Latitude dimension=  (130, 155)
-Minimum of latitude =  12.538727&lt;/p&gt;
-
-&lt;h2 id=&#34;maximum-of-latitude-75-86&#34;&gt;Maximum of latitude =  75.86&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Longitude dimesion =  (130, 155)
-Minimum of longitude =  -170.71053&lt;/p&gt;
-
-&lt;h2 id=&#34;maximum-of-longitude-23-28948&#34;&gt;Maximum of longitude =  -23.28948&lt;/h2&gt;&lt;/li&gt;
+Temperature dimension =  (31, 130, 155)
+Minimum of temperature =  -57.66677
+Maximum of temperature =  30.657953
+Latitude dimension=  (130, 155)
+Minimum of latitude =  12.538727
+Maximum of latitude =  75.86
+Longitude dimesion =  (130, 155)
+Minimum of longitude =  -170.71053
+Maximum of longitude =  -23.28948
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;We can now loop over all our Netcdf files and apply a function to calculate our indice.&lt;/p&gt;
@@ -2252,28 +2240,16 @@ print(&#39;dimension de longitude = &#39;,lon.shape)
 print(&#39;Min de lon est = &#39;, np.min(lon))
 print(&#39;Max de lon est = &#39;, np.max(lon))
 print(&#39;-----------------------------------------&#39;)
+dimension de precipitation =  (1068, 420)
+Min de precip est =  2.2327309
+Max de precip est =  809.1944
+dimension de latitude =  (1068, 420)
+Min de lat est =  25.125
+Max de lat est =  60.041664
+dimension de longitude =  (1068, 420)
+Min de lon est =  -140.95833
+Max de lon est =  -52.04167
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de precipitation =  (1068, 420)
-Min de precip est =  2.2327309&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-precip-est-809-1944&#34;&gt;Max de precip est =  809.1944&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de latitude =  (1068, 420)
-Min de lat est =  25.125&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-lat-est-60-041664&#34;&gt;Max de lat est =  60.041664&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de longitude =  (1068, 420)
-Min de lon est =  -140.95833&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-lon-est-52-04167&#34;&gt;Max de lon est =  -52.04167&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(22,12))
 
@@ -14554,9 +14530,9 @@ The average of Elise is 9 /20
 The average of Samuel is 17 /20&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;exercise-on-dictionaries&#34;&gt;Exercise on dictionaries&lt;/h2&gt;
+&lt;h3 id=&#34;exercise-on-dictionaries&#34;&gt;Exercise on dictionaries&lt;/h3&gt;
 
-&lt;h2 id=&#34;goal-to-manipulate-a-dictionary-containing-the-notes-of-15-students&#34;&gt;Goal: To manipulate a dictionary containing the notes of 15 students.&lt;/h2&gt;
+&lt;h3 id=&#34;goal-to-manipulate-a-dictionary-containing-the-notes-of-15-students&#34;&gt;Goal: To manipulate a dictionary containing the notes of 15 students.&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;1- Create a dictionary named notes_levels containing the following notes:
 Mary: 15; Samuel: 17; Gaston: 12; Fred: 10; Mae: 5; Julie: 15; Zoe: 7; Claire: 20; Chloe: 8; Julian: 14, Gael: 9, Samia: 15, Omar: 11, Gabriel: 16, Manon: 2
@@ -14659,7 +14635,7 @@ print(&amp;ldquo;Le nombre d&amp;rsquo;élèves avec une note supérieure à %.2
 
 &lt;p&gt;python&lt;/p&gt;
 
-&lt;h1 id=&#34;on-va-d-abord-déterminer-la-meilleure-note-utilisation-de-la-fonction-max&#34;&gt;On va d&amp;rsquo;abord déterminer  la meilleure note: utilisation de la fonction max()&lt;/h1&gt;
+&lt;h3 id=&#34;on-va-d-abord-déterminer-la-meilleure-note-utilisation-de-la-fonction-max&#34;&gt;On va d&amp;rsquo;abord déterminer  la meilleure note: utilisation de la fonction max()&lt;/h3&gt;
 
 &lt;p&gt;meilleure_note=max(notes_eleves.values())&lt;/p&gt;
 
@@ -15537,7 +15513,7 @@ table[(table&amp;gt;=50) | (table&amp;lt;=40)]
        11, 53, 71, 63, 25, 75, 87, 68, 88, 30, 12, 95, 61, 14, 40, 61, 31])
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;exercise-using-numpy-library&#34;&gt;Exercise using Numpy library:&lt;/h2&gt;
+&lt;h2 id=&#34;exercise-using-numpy-library&#34;&gt;Exercise using Numpy library&lt;/h2&gt;
 
 &lt;h3 id=&#34;we-will-work-on-data-station-using-numpy-library&#34;&gt;we will work on data station using Numpy library.&lt;/h3&gt;
 
@@ -15604,11 +15580,9 @@ len(tableau[tableau[:,1]&amp;gt;=25])&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;4&#34;&gt;4-&lt;/h1&gt;
-
-&lt;p&gt;precipitation_max = np.nanmax(tableau[:,1])
+&lt;p&gt;python
+ 4-
+precipitation_max = np.nanmax(tableau[:,1])
 print(precipitation_max)&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
@@ -15629,9 +15603,8 @@ tableau[tableau[:,1] == precipitation_max]&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;5&#34;&gt;5-&lt;/h1&gt;
+&lt;p&gt;python
+ 5-&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
 
@@ -15651,11 +15624,9 @@ sum(tableau[:,1][tableau[:,1]&amp;gt;0])&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;6&#34;&gt;6-&lt;/h1&gt;
-
-&lt;p&gt;cumul_precipitation = np.nancumsum(tableau[:,1])&lt;/p&gt;
+&lt;p&gt;python
+ 6-
+cumul_precipitation = np.nancumsum(tableau[:,1])&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
 
@@ -15680,9 +15651,8 @@ sum(tableau[:,1][tableau[:,1]&amp;gt;0])&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;7&#34;&gt;7.&lt;/h1&gt;
+&lt;p&gt;python
+ 7.&lt;/p&gt;
 
 &lt;p&gt;temperature2,precipitation2,cumul2 = np.hsplit(tableau, 3)&lt;/p&gt;
 
@@ -21817,7 +21787,7 @@ dataframe_UQAM.head()
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;introduction-to-matplotlib&#34;&gt;Introduction to Matplotlib&lt;/h2&gt;
+&lt;h2 id=&#34;8-1-introduction-to-matplotlib&#34;&gt;8.1 Introduction to Matplotlib&lt;/h2&gt;
 
 &lt;h3 id=&#34;conda-install-matplotlib&#34;&gt;conda install matplotlib&lt;/h3&gt;
 
@@ -21835,7 +21805,7 @@ plt.show()
 
 &lt;p&gt;&lt;img src=&#34;/img/output_6_0.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;add-data-to-our-charts&#34;&gt;Add data to our charts&lt;/h2&gt;
+&lt;h2 id=&#34;8-2-add-data-to-our-charts&#34;&gt;8.2 Add data to our charts&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;dataframe_UQAM[&#39;2015&#39;].head()
 &lt;/code&gt;&lt;/pre&gt;
@@ -21996,7 +21966,7 @@ plt.savefig(&amp;quot;figures/my_graph.png&amp;quot;, bbox_inches=&amp;quot;tigh
 &lt;pre&gt;&lt;code&gt;&amp;lt;Figure size 1152x648 with 0 Axes&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;matplotlib-classes&#34;&gt;Matplotlib classes&lt;/h2&gt;
+&lt;h2 id=&#34;8-3-matplotlib-classes&#34;&gt;8.3 Matplotlib classes&lt;/h2&gt;
 
 &lt;p&gt;When creating a graph, matplotlib:&lt;/p&gt;
 
@@ -22021,7 +21991,7 @@ plt.show()
 &lt;p&gt;Here is a documentation on subplot:
 &lt;a href=&#34;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&#34; target=&#34;_blank&#34;&gt;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;add-data&#34;&gt;Add data&lt;/h2&gt;
+&lt;h2 id=&#34;8-4-add-data&#34;&gt;8.4 Add data&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure()
 ax1 = fig.add_subplot(2,1,1) 
@@ -22037,7 +22007,7 @@ ax2.plot(dataframe_UQAM[&#39;2016&#39;].index,dataframe_UQAM[&#39;2016&#39;][&#3
 
 &lt;p&gt;&lt;img src=&#34;/img/output_24_1.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;improvement-of-the-graph&#34;&gt;Improvement of the graph&lt;/h2&gt;
+&lt;h2 id=&#34;8-5-improvement-of-the-graph&#34;&gt;8.5 Improvement of the graph&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(15, 8))
 colors = [&#39;green&#39;, &#39;blue&#39;, &#39;red&#39;]
@@ -22053,7 +22023,7 @@ plt.show()
 
 &lt;p&gt;&lt;img src=&#34;/img/output_26_0.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
+&lt;h2 id=&#34;8-6-example&#34;&gt;8.6 Example&lt;/h2&gt;
 
 &lt;h3 id=&#34;objectives-to-draw-a-meteogram-of-the-uqam-station-for-the-day-of-14-12-2018&#34;&gt;Objectives: to draw a meteogram of the UQAM station for the day of 14/12/2018&lt;/h3&gt;
 

@@ -520,9 +520,6 @@ To install the library under the prompt of anaconda: conda install -c conda-forg
 <ul>
 <li><a href="#1-example-of-drawing-a-2d-netcdf-field">1 - Example of drawing a 2D Netcdf field</a></li>
 <li><a href="#2-another-example-2d-netcdf">2 - Another example  2D Netcdf</a></li>
-<li><a href="#max-de-precip-est-809-1944">Max de precip est =  809.1944</a></li>
-<li><a href="#max-de-lat-est-60-041664">Max de lat est =  60.041664</a></li>
-<li><a href="#max-de-lon-est-52-04167">Max de lon est =  -52.04167</a></li>
 <li><a href="#3-cartopy-example-with-overplot">3 - Cartopy: example with overplot</a></li>
 <li><a href="#4-cartopy-modis">4 - Cartopy:  MODIS</a></li>
 </ul></li>
@@ -945,28 +942,16 @@ print('dimension de longitude = ',lon.shape)
 print('Min de lon est = ', np.min(lon))
 print('Max de lon est = ', np.max(lon))
 print('-----------------------------------------')
+dimension de precipitation =  (1068, 420)
+Min de precip est =  2.2327309
+Max de precip est =  809.1944
+dimension de latitude =  (1068, 420)
+Min de lat est =  25.125
+Max de lat est =  60.041664
+dimension de longitude =  (1068, 420)
+Min de lon est =  -140.95833
+Max de lon est =  -52.04167
 </code></pre>
-
-<hr />
-
-<p>dimension de precipitation =  (1068, 420)
-Min de precip est =  2.2327309</p>
-
-<h2 id="max-de-precip-est-809-1944">Max de precip est =  809.1944</h2>
-
-<hr />
-
-<p>dimension de latitude =  (1068, 420)
-Min de lat est =  25.125</p>
-
-<h2 id="max-de-lat-est-60-041664">Max de lat est =  60.041664</h2>
-
-<hr />
-
-<p>dimension de longitude =  (1068, 420)
-Min de lon est =  -140.95833</p>
-
-<h2 id="max-de-lon-est-52-04167">Max de lon est =  -52.04167</h2>
 
 <pre><code class="language-python">fig = plt.figure(figsize=(22,12))
 

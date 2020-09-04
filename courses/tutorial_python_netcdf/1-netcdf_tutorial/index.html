@@ -523,9 +523,6 @@ The notation used to describe this NetCDF file is called Network Common Data Lan
 <li><a href="#1-create-a-netcdf-file">1- Create a Netcdf file:</a></li>
 <li><a href="#2-read-a-netcdf-file">2- Read a Netcdf file</a></li>
 <li><a href="#3-examples-of-manipulations-of-a-netcdf-file">3- Examples of manipulations of a Netcdf file</a></li>
-<li><a href="#maximum-of-temperature-30-657953">Maximum of temperature =  30.657953</a></li>
-<li><a href="#maximum-of-latitude-75-86">Maximum of latitude =  75.86</a></li>
-<li><a href="#maximum-of-longitude-23-28948">Maximum of longitude =  -23.28948</a></li>
 <li><a href="#4-netcdf-gridpoint-extraction">4- Netcdf gridpoint extraction</a></li>
 </ul></li>
 </ul>
@@ -740,29 +737,17 @@ print('-----------------------------------------')
 print('Longitude dimesion = ',lons.shape)
 print('Minimum of longitude = ', np.min(lons))
 print('Maximum of longitude = ', np.max(lons))
-print('-----------------------------------------')
-</code></pre>
 
-<hr />
-
-<p>Temperature dimension =  (31, 130, 155)
-Minimum of temperature =  -57.66677</p>
-
-<h2 id="maximum-of-temperature-30-657953">Maximum of temperature =  30.657953</h2>
-
-<hr />
-
-<p>Latitude dimension=  (130, 155)
-Minimum of latitude =  12.538727</p>
-
-<h2 id="maximum-of-latitude-75-86">Maximum of latitude =  75.86</h2>
-
-<hr />
-
-<p>Longitude dimesion =  (130, 155)
-Minimum of longitude =  -170.71053</p>
-
-<h2 id="maximum-of-longitude-23-28948">Maximum of longitude =  -23.28948</h2></li>
+Temperature dimension =  (31, 130, 155)
+Minimum of temperature =  -57.66677
+Maximum of temperature =  30.657953
+Latitude dimension=  (130, 155)
+Minimum of latitude =  12.538727
+Maximum of latitude =  75.86
+Longitude dimesion =  (130, 155)
+Minimum of longitude =  -170.71053
+Maximum of longitude =  -23.28948
+</code></pre></li>
 </ul>
 
 <p>We can now loop over all our Netcdf files and apply a function to calculate our indice.</p>

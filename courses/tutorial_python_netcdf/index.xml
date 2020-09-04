@@ -214,29 +214,17 @@ print(&#39;-----------------------------------------&#39;)
 print(&#39;Longitude dimesion = &#39;,lons.shape)
 print(&#39;Minimum of longitude = &#39;, np.min(lons))
 print(&#39;Maximum of longitude = &#39;, np.max(lons))
-print(&#39;-----------------------------------------&#39;)
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;hr /&gt;
-
-&lt;p&gt;Temperature dimension =  (31, 130, 155)
-Minimum of temperature =  -57.66677&lt;/p&gt;
-
-&lt;h2 id=&#34;maximum-of-temperature-30-657953&#34;&gt;Maximum of temperature =  30.657953&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Latitude dimension=  (130, 155)
-Minimum of latitude =  12.538727&lt;/p&gt;
-
-&lt;h2 id=&#34;maximum-of-latitude-75-86&#34;&gt;Maximum of latitude =  75.86&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Longitude dimesion =  (130, 155)
-Minimum of longitude =  -170.71053&lt;/p&gt;
-
-&lt;h2 id=&#34;maximum-of-longitude-23-28948&#34;&gt;Maximum of longitude =  -23.28948&lt;/h2&gt;&lt;/li&gt;
+Temperature dimension =  (31, 130, 155)
+Minimum of temperature =  -57.66677
+Maximum of temperature =  30.657953
+Latitude dimension=  (130, 155)
+Minimum of latitude =  12.538727
+Maximum of latitude =  75.86
+Longitude dimesion =  (130, 155)
+Minimum of longitude =  -170.71053
+Maximum of longitude =  -23.28948
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;We can now loop over all our Netcdf files and apply a function to calculate our indice.&lt;/p&gt;
@@ -1662,28 +1650,16 @@ print(&#39;dimension de longitude = &#39;,lon.shape)
 print(&#39;Min de lon est = &#39;, np.min(lon))
 print(&#39;Max de lon est = &#39;, np.max(lon))
 print(&#39;-----------------------------------------&#39;)
+dimension de precipitation =  (1068, 420)
+Min de precip est =  2.2327309
+Max de precip est =  809.1944
+dimension de latitude =  (1068, 420)
+Min de lat est =  25.125
+Max de lat est =  60.041664
+dimension de longitude =  (1068, 420)
+Min de lon est =  -140.95833
+Max de lon est =  -52.04167
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de precipitation =  (1068, 420)
-Min de precip est =  2.2327309&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-precip-est-809-1944&#34;&gt;Max de precip est =  809.1944&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de latitude =  (1068, 420)
-Min de lat est =  25.125&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-lat-est-60-041664&#34;&gt;Max de lat est =  60.041664&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de longitude =  (1068, 420)
-Min de lon est =  -140.95833&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-lon-est-52-04167&#34;&gt;Max de lon est =  -52.04167&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(22,12))
 
