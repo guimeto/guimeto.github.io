@@ -2193,7 +2193,7 @@ ax.stock_img();
 
 # Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:
 xticks = np.arange(-150.0,-40.0,20)
-yticks =np.arange(10,80,10)
+yticksv =np.arange(10,80,10)
 ax.gridlines()
 
 # Standard 6,000 km scale bar.
@@ -2251,31 +2251,18 @@ print(&#39;-----------------------------------------&#39;)
 print(&#39;dimension de longitude = &#39;,lon.shape)
 print(&#39;Min de lon est = &#39;, np.min(lon))
 print(&#39;Max de lon est = &#39;, np.max(lon))
-print(&#39;-----------------------------------------&#39;)
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;hr /&gt;
+dimension de precipitation =  (1068, 420)
+Min de precip est =  2.2327309
+Max de precip est =  809.1944
+dimension de latitude =  (1068, 420)
+Min de lat est =  25.125
+Max de lat est =  60.041664
+dimension de longitude =  (1068, 420)
+Min de lon est =  -140.95833
+Max de lon est =  -52.04167
 
-&lt;p&gt;dimension de precipitation =  (1068, 420)
-Min de precip est =  2.2327309&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-precip-est-809-1944&#34;&gt;Max de precip est =  809.1944&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de latitude =  (1068, 420)
-Min de lat est =  25.125&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-lat-est-60-041664&#34;&gt;Max de lat est =  60.041664&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dimension de longitude =  (1068, 420)
-Min de lon est =  -140.95833&lt;/p&gt;
-
-&lt;h2 id=&#34;max-de-lon-est-52-04167&#34;&gt;Max de lon est =  -52.04167&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(22,12))
+fig = plt.figure(figsize=(22,12))
 
 ax = plt.subplot(111, projection=ccrs.LambertConformal())
 ax.set_extent([-130,-60,18,62])
@@ -13877,9 +13864,9 @@ median(a, axis=None, out=None, overwrite_input=False, keepdims=False)
     &amp;gt;&amp;gt;&amp;gt; assert not np.all(a==b)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;exercise&#34;&gt;- Exercise&lt;/h2&gt;
+&lt;h3 id=&#34;exercise&#34;&gt;- Exercise&lt;/h3&gt;
 
-&lt;h2 id=&#34;objective-to-manipulate-a-list-containing-the-prices-of-58-houses&#34;&gt;Objective: To manipulate a list containing the prices of 58 houses&lt;/h2&gt;
+&lt;h3 id=&#34;objective-to-manipulate-a-list-containing-the-prices-of-58-houses&#34;&gt;Objective: To manipulate a list containing the prices of 58 houses&lt;/h3&gt;
 
 &lt;p&gt;Creation of the list &amp;ldquo;price_of_58_houses&amp;rdquo;&lt;/p&gt;
 
@@ -14554,9 +14541,9 @@ The average of Elise is 9 /20
 The average of Samuel is 17 /20&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;exercise-on-dictionaries&#34;&gt;Exercise on dictionaries&lt;/h2&gt;
+&lt;h3 id=&#34;exercise-on-dictionaries&#34;&gt;Exercise on dictionaries&lt;/h3&gt;
 
-&lt;h2 id=&#34;goal-to-manipulate-a-dictionary-containing-the-notes-of-15-students&#34;&gt;Goal: To manipulate a dictionary containing the notes of 15 students.&lt;/h2&gt;
+&lt;h3 id=&#34;goal-to-manipulate-a-dictionary-containing-the-notes-of-15-students&#34;&gt;Goal: To manipulate a dictionary containing the notes of 15 students.&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;1- Create a dictionary named notes_levels containing the following notes:
 Mary: 15; Samuel: 17; Gaston: 12; Fred: 10; Mae: 5; Julie: 15; Zoe: 7; Claire: 20; Chloe: 8; Julian: 14, Gael: 9, Samia: 15, Omar: 11, Gabriel: 16, Manon: 2
@@ -15573,7 +15560,7 @@ precipitation = np.genfromtxt(&amp;quot;./DATA/OTTAWA_PrecTOT_2017.csv&amp;quot;
 
 &lt;h3 id=&#34;correction&#34;&gt;Correction&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#1- 
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1- 
 
 tableau = np.column_stack([temperature,precipitation])
 &lt;/code&gt;&lt;/pre&gt;
@@ -15590,7 +15577,7 @@ tableau = np.hstack([temperature.reshape(len(temperature),-1),precipitation.resh
 &lt;pre&gt;&lt;code&gt;(365, 2)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#2- 
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;2- 
 tableau[:,0]=tableau[:,0]-273.15  
 ``
 
@@ -15604,11 +15591,9 @@ len(tableau[tableau[:,1]&amp;gt;=25])&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;4&#34;&gt;4-&lt;/h1&gt;
-
-&lt;p&gt;precipitation_max = np.nanmax(tableau[:,1])
+&lt;p&gt;python
+ 4-
+precipitation_max = np.nanmax(tableau[:,1])
 print(precipitation_max)&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
@@ -15629,9 +15614,8 @@ tableau[tableau[:,1] == precipitation_max]&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;5&#34;&gt;5-&lt;/h1&gt;
+&lt;p&gt;python
+ 5-&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
 
@@ -15651,11 +15635,9 @@ sum(tableau[:,1][tableau[:,1]&amp;gt;0])&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;6&#34;&gt;6-&lt;/h1&gt;
-
-&lt;p&gt;cumul_precipitation = np.nancumsum(tableau[:,1])&lt;/p&gt;
+&lt;p&gt;python
+ 6-
+cumul_precipitation = np.nancumsum(tableau[:,1])&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
 
@@ -15680,9 +15662,8 @@ sum(tableau[:,1][tableau[:,1]&amp;gt;0])&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;python&lt;/p&gt;
-
-&lt;h1 id=&#34;7&#34;&gt;7.&lt;/h1&gt;
+&lt;p&gt;python
+ 7.&lt;/p&gt;
 
 &lt;p&gt;temperature2,precipitation2,cumul2 = np.hsplit(tableau, 3)&lt;/p&gt;
 
@@ -21817,7 +21798,7 @@ dataframe_UQAM.head()
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;introduction-to-matplotlib&#34;&gt;Introduction to Matplotlib&lt;/h2&gt;
+&lt;p&gt;##8.1 Introduction to Matplotlib&lt;/p&gt;
 
 &lt;h3 id=&#34;conda-install-matplotlib&#34;&gt;conda install matplotlib&lt;/h3&gt;
 
@@ -21835,7 +21816,7 @@ plt.show()
 
 &lt;p&gt;&lt;img src=&#34;/img/output_6_0.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;add-data-to-our-charts&#34;&gt;Add data to our charts&lt;/h2&gt;
+&lt;h2 id=&#34;8-2-add-data-to-our-charts&#34;&gt;8.2 Add data to our charts&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;dataframe_UQAM[&#39;2015&#39;].head()
 &lt;/code&gt;&lt;/pre&gt;
@@ -21996,7 +21977,7 @@ plt.savefig(&amp;quot;figures/my_graph.png&amp;quot;, bbox_inches=&amp;quot;tigh
 &lt;pre&gt;&lt;code&gt;&amp;lt;Figure size 1152x648 with 0 Axes&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;matplotlib-classes&#34;&gt;Matplotlib classes&lt;/h2&gt;
+&lt;h2 id=&#34;8-3-matplotlib-classes&#34;&gt;8.3 Matplotlib classes&lt;/h2&gt;
 
 &lt;p&gt;When creating a graph, matplotlib:&lt;/p&gt;
 
@@ -22021,7 +22002,7 @@ plt.show()
 &lt;p&gt;Here is a documentation on subplot:
 &lt;a href=&#34;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&#34; target=&#34;_blank&#34;&gt;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;add-data&#34;&gt;Add data&lt;/h2&gt;
+&lt;h2 id=&#34;8-4-add-data&#34;&gt;8.4 Add data&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure()
 ax1 = fig.add_subplot(2,1,1) 
@@ -22037,7 +22018,7 @@ ax2.plot(dataframe_UQAM[&#39;2016&#39;].index,dataframe_UQAM[&#39;2016&#39;][&#3
 
 &lt;p&gt;&lt;img src=&#34;/img/output_24_1.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;improvement-of-the-graph&#34;&gt;Improvement of the graph&lt;/h2&gt;
+&lt;h2 id=&#34;8-5-improvement-of-the-graph&#34;&gt;8.5 Improvement of the graph&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(15, 8))
 colors = [&#39;green&#39;, &#39;blue&#39;, &#39;red&#39;]
@@ -22053,7 +22034,7 @@ plt.show()
 
 &lt;p&gt;&lt;img src=&#34;/img/output_26_0.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
+&lt;h2 id=&#34;8-6-example&#34;&gt;8.6 Example&lt;/h2&gt;
 
 &lt;h3 id=&#34;objectives-to-draw-a-meteogram-of-the-uqam-station-for-the-day-of-14-12-2018&#34;&gt;Objectives: to draw a meteogram of the UQAM station for the day of 14/12/2018&lt;/h3&gt;
 
