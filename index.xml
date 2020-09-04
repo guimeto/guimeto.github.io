@@ -21798,7 +21798,7 @@ dataframe_UQAM.head()
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;##8.1 Introduction to Matplotlib&lt;/p&gt;
+&lt;h2 id=&#34;8-1-introduction-to-matplotlib&#34;&gt;8.1 Introduction to Matplotlib&lt;/h2&gt;
 
 &lt;h3 id=&#34;conda-install-matplotlib&#34;&gt;conda install matplotlib&lt;/h3&gt;
 
