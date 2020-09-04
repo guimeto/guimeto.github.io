@@ -530,6 +530,10 @@
 <li><a href="#correction">Correction</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#4">4-</a></li>
+<li><a href="#5">5-</a></li>
+<li><a href="#6">6-</a></li>
+<li><a href="#7">7.</a></li>
 </ul>
 </nav>
 
@@ -1401,7 +1405,7 @@ precipitation = np.genfromtxt(&quot;./DATA/OTTAWA_PrecTOT_2017.csv&quot;, dtype=
 
 <h3 id="correction">Correction</h3>
 
-<pre><code class="language-python">1- 
+<pre><code class="language-python">#1- 
 
 tableau = np.column_stack([temperature,precipitation])
 </code></pre>
@@ -1418,7 +1422,7 @@ tableau = np.hstack([temperature.reshape(len(temperature),-1),precipitation.resh
 <pre><code>(365, 2)
 </code></pre>
 
-<pre><code class="language-python">2- 
+<pre><code class="language-python">#2- 
 tableau[:,0]=tableau[:,0]-273.15  
 ``
 
@@ -1432,9 +1436,11 @@ len(tableau[tableau[:,1]&gt;=25])</p>
 
 </code></pre>
 
-<p>python
- 4-
-precipitation_max = np.nanmax(tableau[:,1])
+<p>python</p>
+
+<h1 id="4">4-</h1>
+
+<p>precipitation_max = np.nanmax(tableau[:,1])
 print(precipitation_max)</p>
 
 <pre><code>
@@ -1455,8 +1461,9 @@ tableau[tableau[:,1] == precipitation_max]</p>
 
 </code></pre>
 
-<p>python
- 5-</p>
+<p>python</p>
+
+<h1 id="5">5-</h1>
 
 <pre><code>
 
@@ -1476,9 +1483,11 @@ sum(tableau[:,1][tableau[:,1]&gt;0])</p>
 
 </code></pre>
 
-<p>python
- 6-
-cumul_precipitation = np.nancumsum(tableau[:,1])</p>
+<p>python</p>
+
+<h1 id="6">6-</h1>
+
+<p>cumul_precipitation = np.nancumsum(tableau[:,1])</p>
 
 <pre><code>
 
@@ -1503,8 +1512,9 @@ cumul_precipitation = np.nancumsum(tableau[:,1])</p>
 
 </code></pre>
 
-<p>python
- 7.</p>
+<p>python</p>
+
+<h1 id="7">7.</h1>
 
 <p>temperature2,precipitation2,cumul2 = np.hsplit(tableau, 3)</p>
 

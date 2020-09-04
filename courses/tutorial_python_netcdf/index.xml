@@ -1603,7 +1603,7 @@ ax.stock_img();
 
 # Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:
 xticks = np.arange(-150.0,-40.0,20)
-yticksv =np.arange(10,80,10)
+yticks =np.arange(10,80,10)
 ax.gridlines()
 
 # Standard 6,000 km scale bar.
@@ -1661,18 +1661,31 @@ print(&#39;-----------------------------------------&#39;)
 print(&#39;dimension de longitude = &#39;,lon.shape)
 print(&#39;Min de lon est = &#39;, np.min(lon))
 print(&#39;Max de lon est = &#39;, np.max(lon))
+print(&#39;-----------------------------------------&#39;)
+&lt;/code&gt;&lt;/pre&gt;
 
-dimension de precipitation =  (1068, 420)
-Min de precip est =  2.2327309
-Max de precip est =  809.1944
-dimension de latitude =  (1068, 420)
-Min de lat est =  25.125
-Max de lat est =  60.041664
-dimension de longitude =  (1068, 420)
-Min de lon est =  -140.95833
-Max de lon est =  -52.04167
+&lt;hr /&gt;
 
-fig = plt.figure(figsize=(22,12))
+&lt;p&gt;dimension de precipitation =  (1068, 420)
+Min de precip est =  2.2327309&lt;/p&gt;
+
+&lt;h2 id=&#34;max-de-precip-est-809-1944&#34;&gt;Max de precip est =  809.1944&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;dimension de latitude =  (1068, 420)
+Min de lat est =  25.125&lt;/p&gt;
+
+&lt;h2 id=&#34;max-de-lat-est-60-041664&#34;&gt;Max de lat est =  60.041664&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;dimension de longitude =  (1068, 420)
+Min de lon est =  -140.95833&lt;/p&gt;
+
+&lt;h2 id=&#34;max-de-lon-est-52-04167&#34;&gt;Max de lon est =  -52.04167&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(22,12))
 
 ax = plt.subplot(111, projection=ccrs.LambertConformal())
 ax.set_extent([-130,-60,18,62])
