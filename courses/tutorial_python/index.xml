@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>1 Basic data types</title>
+      <title>1 Python basics</title>
       <link>/courses/tutorial_python/1-python_basics/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
       <guid>/courses/tutorial_python/1-python_basics/</guid>
@@ -22,6 +22,8 @@
 &lt;p&gt;&lt;img src=&#34;/img/pylogo.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;1-1-variables&#34;&gt;1.1 Variables&lt;/h2&gt;
+
+&lt;p&gt;blablabla&lt;/p&gt;
 
 &lt;p&gt;A variable is an identifier or name to store information or results.
 All python programs use variables. It is important to remember that each type of information is stored in a special type of variable.
@@ -9791,7 +9793,7 @@ plt.show()
 &lt;p&gt;Here is a documentation on subplot:
 &lt;a href=&#34;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&#34; target=&#34;_blank&#34;&gt;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;8-4-add-data&#34;&gt;8.4 Add data&lt;/h2&gt;
+&lt;h2 id=&#34;8-4-add-some-data&#34;&gt;8.4 Add some data&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure()
 ax1 = fig.add_subplot(2,1,1) 
