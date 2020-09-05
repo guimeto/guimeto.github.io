@@ -28,12 +28,12 @@
   
     
   
-  <meta name="description" content="Objectifs  Tout préparer pour commencer le tutoriel Présentation et installation de l’environnement de travail Présentation de Jupyter Maitrise de jupyter notebook 1  Qu’est-ce qu’Anaconda ?  https://www.anaconda.com/
- Anaconda est une distribution Python, c&rsquo;est à dire une configuration particulière (bonne version Python, bon packages, les bonnes versions)
- Pourquoi Anaconda ? C’est le plus répandue (6M) , open source, que vous allez retrouver partout, adapté à la data science machine learning &hellip;">
+  <meta name="description" content="Exercices  1) Debuggez cette erreur et expliquer brievement le problème en commentaire
+Nom = &#39;Sebastien&#39;  print(&#39;mon nom est &#39;Nom)   File &quot;&lt;ipython-input-3-965d76a6ded8&gt;&quot;, line 1 print(&#39;mon nom est &#39;Nom) ^ SyntaxError: invalid syntax  print(&#39;mon nom est &#39; &#43; Nom)  mon nom est Sebastien  2) Faites en sorte que la cellule ci-dessous retourne &lsquo;J&rsquo;apprends la data Science&rsquo; à partir des variables à disposition
+debutPhrase = &#39;J&#39;apprends la &#39; finPhrase = &#39;Data science&#39; print()  debutPhrase = &quot;J&#39;apprends la &quot; finPhrase = &#39;Data science&#39; print(debutPhrase &#43; finPhrase)  J&#39;apprends la Data science  3) Debugguez le code ci-dessous en modifiant uniquement ce qu&rsquo;il se trouve dans print(&hellip;)">
 
   
-  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/1-introduction/">
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/2-les_bases-exercice/">
 
   
 
@@ -102,7 +102,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/courses/formation_python/1-introduction/">
+  <link rel="canonical" href="/courses/formation_python/2-les_bases-exercice/">
 
   
   
@@ -115,11 +115,11 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="GDueymes">
-  <meta property="og:url" content="/courses/formation_python/1-introduction/">
-  <meta property="og:title" content="1- Introduction | GDueymes">
-  <meta property="og:description" content="Objectifs  Tout préparer pour commencer le tutoriel Présentation et installation de l’environnement de travail Présentation de Jupyter Maitrise de jupyter notebook 1  Qu’est-ce qu’Anaconda ?  https://www.anaconda.com/
- Anaconda est une distribution Python, c&rsquo;est à dire une configuration particulière (bonne version Python, bon packages, les bonnes versions)
- Pourquoi Anaconda ? C’est le plus répandue (6M) , open source, que vous allez retrouver partout, adapté à la data science machine learning &hellip;"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/courses/formation_python/2-les_bases-exercice/">
+  <meta property="og:title" content="2- Les bases du language Python - Exercices | GDueymes">
+  <meta property="og:description" content="Exercices  1) Debuggez cette erreur et expliquer brievement le problème en commentaire
+Nom = &#39;Sebastien&#39;  print(&#39;mon nom est &#39;Nom)   File &quot;&lt;ipython-input-3-965d76a6ded8&gt;&quot;, line 1 print(&#39;mon nom est &#39;Nom) ^ SyntaxError: invalid syntax  print(&#39;mon nom est &#39; &#43; Nom)  mon nom est Sebastien  2) Faites en sorte que la cellule ci-dessous retourne &lsquo;J&rsquo;apprends la data Science&rsquo; à partir des variables à disposition
+debutPhrase = &#39;J&#39;apprends la &#39; finPhrase = &#39;Data science&#39; print()  debutPhrase = &quot;J&#39;apprends la &quot; finPhrase = &#39;Data science&#39; print(debutPhrase &#43; finPhrase)  J&#39;apprends la Data science  3) Debugguez le code ci-dessous en modifiant uniquement ce qu&rsquo;il se trouve dans print(&hellip;)"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -144,7 +144,7 @@
 
 
 
-  <title>1- Introduction | GDueymes</title>
+  <title>2- Les bases du language Python - Exercices | GDueymes</title>
 
 </head>
 
@@ -436,7 +436,7 @@
     <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
     <ul class="nav docs-sidenav">
       
-      <li class="active">
+      <li >
         <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
       </li>
       
@@ -444,7 +444,7 @@
         <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
       </li>
       
-      <li >
+      <li class="active">
         <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
       </li>
       
@@ -475,76 +475,174 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>1- Introduction</h1>
+          <h1>2- Les bases du language Python - Exercices</h1>
 
           <div class="article-style">
-            <h1>Objectifs</h1>
+            <h1> Exercices </h1>
 
-<ul>
-<li>Tout préparer pour commencer le tutoriel</li>
-<li>Présentation et installation de l’environnement de travail</li>
-<li>Présentation de Jupyter</li>
-<li>Maitrise de jupyter notebook 1</li>
-</ul>
+<p>1) Debuggez cette erreur et expliquer brievement le problème en commentaire</p>
 
-<h2>Qu’est-ce qu’Anaconda ?</h2>
+<pre><code class="language-python">Nom = 'Sebastien'
+</code></pre>
 
-<ul>
-<li><p><a href="https://www.anaconda.com/" target="_blank">https://www.anaconda.com/</a></p></li>
+<pre><code class="language-python">print('mon nom est 'Nom)
+</code></pre>
 
-<li><p>Anaconda est une distribution Python, c&rsquo;est à dire une configuration particulière (bonne version Python, bon packages, les bonnes versions)</p></li>
+<pre><code>  File &quot;&lt;ipython-input-3-965d76a6ded8&gt;&quot;, line 1
+    print('mon nom est 'Nom)
+                          ^
+SyntaxError: invalid syntax
+</code></pre>
 
-<li><p>Pourquoi Anaconda ? C’est le plus répandue (6M) , open source, que vous allez retrouver partout, adapté à la data science machine learning &hellip;</p></li>
-</ul>
+<pre><code class="language-python">print('mon nom est ' + Nom) 
+</code></pre>
 
-<p><b> Comment installer Anaconda ? </b></p>
+<pre><code>mon nom est Sebastien
+</code></pre>
 
-<ul>
-<li>Chercher ‘anaconda’ sur Google</li>
-<li>Aller dans download (25% utilisent encore Python 2). Prendre Python 3</li>
-<li>Suivre les processus d’installation classique (tout laisser par défaut)</li>
-</ul>
+<p>2) Faites en sorte que la cellule ci-dessous retourne &lsquo;J&rsquo;apprends la data Science&rsquo; à partir des variables à disposition</p>
 
-<h2> L'interface anaconda</h2>
+<pre><code class="language-python">debutPhrase = 'J'apprends la '
+finPhrase = 'Data science'
+print()
+</code></pre>
 
-<ul>
-<li>Lancer anaconda</li>
-<li>Présentation Home</li>
-<li>Présentation Environnements (noyaux avec packages autour) : chercher pandas, Seaborn. Cherchez plotly</li>
-<li>Lancer Jupyter  via anaconda</li>
-<li>Lancer jupyter via cortana</li>
-</ul>
+<pre><code class="language-python">debutPhrase = &quot;J'apprends la &quot;
+finPhrase = 'Data science'
+print(debutPhrase + finPhrase)
+</code></pre>
 
-<h2> Maitrise du notebook jupyter 1</h2>
+<pre><code>J'apprends la Data science
+</code></pre>
 
-<ul>
-<li>3 onglets : documents (vos dossiers), Running (notbook en cours), Clusters (parrallelisation de calcul)</li>
-<li>Création d’un nouveau dossier</li>
-<li>Création d’un nouveau notebook</li>
-<li>Renomer</li>
-<li>Print(‘Data science’)</li>
-<li>Ajouter une nouvelle cellule print(‘Machine learnin’)</li>
-<li>Changer valeur, rerun cell print(‘Machine learning’)</li>
-<li>Changer ordre (flèches)</li>
-<li>Supprimer</li>
-<li>Copy past</li>
-<li>Ajouter markdown</li>
-</ul>
+<p>3) Debugguez le code ci-dessous en modifiant uniquement ce qu&rsquo;il se trouve dans print(&hellip;)</p>
 
-<p><h1> jupyter introduction </h1>
-<h2> session 1 </h2></p>
+<pre><code class="language-python">heuresPassees = 2
+debutPhrase = 'j\'apprends Python depuis '
+finPhrase = ' heures.'
 
-<ul>
-<li>Sinon <a href="https://wordtohtml.net/" target="_blank">https://wordtohtml.net/</a></li>
-<li>Pour cela qu’on parle de notebook !
-<a href="https://www.kaggle.com/pavansanagapati/a-simple-tutorial-on-exploratory-data-analysis" target="_blank">https://www.kaggle.com/pavansanagapati/a-simple-tutorial-on-exploratory-data-analysis</a></li>
-<li>Première erreur (passer markdown en python)</li>
-<li>Restart &amp; clear output</li>
-<li>Cells &gt; Run all</li>
-<li>Save</li>
-<li>Print preview</li>
-<li>Download as</li>
-</ul>
+print(debutPhrase + heuresPassees + finPhrase)
+</code></pre>
+
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-8-54124c40b75b&gt; in &lt;module&gt;
+      3 finPhrase = ' heures.'
+      4 
+----&gt; 5 print(debutPhrase + heuresPassees + finPhrase)
+
+
+TypeError: can only concatenate str (not &quot;int&quot;) to str
+</code></pre>
+
+<pre><code class="language-python">heuresPassees = 2
+debutPhrase = 'j\'apprends Python depuis '
+finPhrase = ' heures.'
+
+print(debutPhrase + str(heuresPassees) + finPhrase)
+</code></pre>
+
+<pre><code>j'apprends Python depuis 2 heures.
+</code></pre>
+
+<p>4) quelle sera la valeur de varAge dans le code ci-dessous ? Expliquez en commentaire la raison</p>
+
+<pre><code class="language-python">varAge = 28
+</code></pre>
+
+<pre><code class="language-python">varAge = 30
+</code></pre>
+
+<pre><code class="language-python">print(varAge)
+</code></pre>
+
+<pre><code>30
+</code></pre>
+
+<p>5) a) A partir des variables mises à disposition, calculez le taux de conversion et stockez le dans la variable &ldquo;tauxConversion&rdquo;</p>
+
+<p>Définition : Le taux de conversion d’un site web désigne le plus souvent le ratio [conversions/visites] donnant le pourcentage de visiteurs réalisant un achat au cours de la visite d’un site</p>
+
+<pre><code class="language-python">nombreDeVisites = 26736352
+nombredeConversions = 973520
+#tauxConversion=...
+</code></pre>
+
+<pre><code class="language-python">tauxConversion= 973520/26736352
+print(tauxConversion)
+</code></pre>
+
+<pre><code>0.036411848557349934
+</code></pre>
+
+<p>b) Verifiez le type de la variable en l&rsquo;imprimant à l&rsquo;execution de la cellule</p>
+
+<pre><code class="language-python">#print(...)
+</code></pre>
+
+<pre><code class="language-python">print(type(tauxConversion))
+</code></pre>
+
+<pre><code>&lt;class 'float'&gt;
+</code></pre>
+
+<p>c) faites en sorte que le taux soit en base 100 plutôt qu&rsquo;en base 1 (ex : avoir 62 plutot que 0.62)</p>
+
+<pre><code class="language-python">#tauxConversion=...
+</code></pre>
+
+<pre><code class="language-python">tauxConversion= (973520/26736352) * 100
+print(tauxConversion)
+</code></pre>
+
+<pre><code>3.6411848557349935
+</code></pre>
+
+<p>d) trouvez un moyen d&rsquo;arrondir la variable tauxConversion à 2 chiffres après la virgule. Ne cherchez pas dans le cours, ça n&rsquo;y est pas :)</p>
+
+<p>Aide : round()</p>
+
+<pre><code class="language-python">#tauxConversion=...
+</code></pre>
+
+<pre><code class="language-python">tauxConversion= round((973520/26736352) * 100,2)
+print(tauxConversion)
+</code></pre>
+
+<pre><code>3.64
+</code></pre>
+
+<p>e) Imprimez la phrase suivante &ldquo;Le taux de conversion est (valeur tauxConversion) %&rdquo;</p>
+
+<pre><code class="language-python">#print(...)
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Le taux de conversion est &quot;+ str(tauxConversion) +&quot; %&quot;)
+</code></pre>
+
+<pre><code>Le taux de conversion est 3.64 %
+</code></pre>
+
+<p>f) Rassemblez toutes vos manipulations dans une cellule pour faire le travail en une seule fois. Commentez votre code.</p>
+
+<pre><code class="language-python">nombreDeVisites = 26736352
+nombredeConversions = 973520
+#tauxConversion=...
+</code></pre>
+
+<pre><code class="language-python">nombreDeVisites = 26736352
+nombredeConversions = 973520
+tauxConversion= round((nombredeConversions/nombreDeVisites) * 100,2)
+print(&quot;Le taux de conversion est &quot;+ str(tauxConversion) +&quot; %&quot;)
+</code></pre>
+
+<pre><code>Le taux de conversion est 3.64 %
+</code></pre>
+
+<pre><code class="language-python">
+</code></pre>
 
           </div>
 
@@ -560,9 +658,10 @@
   
   
   <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/courses/formation_python/2-les_bases/" rel="prev">2- Les bases du language Python - Cours</a>
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/2-les_bases/" rel="next">2- Les bases du language Python - Cours</a>
   </div>
+  
   
 </div>
 
@@ -583,7 +682,7 @@
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/1-Introduction.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/2-Les_bases-Exercice.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

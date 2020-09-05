@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Introduction</title>
+      <title>1- Introduction</title>
       <link>/courses/formation_python/1-introduction/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
       <guid>/courses/formation_python/1-introduction/</guid>
@@ -71,8 +71,7 @@
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;h1&gt; jupyter introduction &lt;/h1&gt;
-&lt;h2&gt; session 1 &lt;/h2&gt;
-&lt;p&gt;&amp;hellip;blablabla&lt;/p&gt;&lt;/p&gt;
+&lt;h2&gt; session 1 &lt;/h2&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Sinon &lt;a href=&#34;https://wordtohtml.net/&#34; target=&#34;_blank&#34;&gt;https://wordtohtml.net/&lt;/a&gt;&lt;/li&gt;
@@ -85,6 +84,811 @@
 &lt;li&gt;Print preview&lt;/li&gt;
 &lt;li&gt;Download as&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2- Les bases du language Python - Cours</title>
+      <link>/courses/formation_python/2-les_bases/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/formation_python/2-les_bases/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;/img/pylogo.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;les-bases-du-langage-python&#34;&gt;Les Bases du langage Python:&lt;/h2&gt;
+
+&lt;h2&gt;Objectifs&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Comprendre ce qu&amp;rsquo;est une variable&lt;/li&gt;
+&lt;li&gt;Les règles de nommage d&amp;rsquo;une variable&lt;/li&gt;
+&lt;li&gt;Les premiers types de variables&lt;/li&gt;
+&lt;li&gt;Réaliser des opération entre des variables&lt;/li&gt;
+&lt;li&gt;Vérifier et modifier le type d’une variable&lt;/li&gt;
+&lt;li&gt;Maîtrise de jupyter notebook 2 : execution du code à travers les cellules&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;2-les-variables&#34;&gt;2- Les variables&lt;/h2&gt;
+
+&lt;p&gt;Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.&lt;/p&gt;
+
+&lt;p&gt;Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&amp;rsquo;information est enregistré dans un type spécial de variable.&lt;/p&gt;
+
+&lt;p&gt;Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&amp;rsquo;interpreteur python ce qu&amp;rsquo;il peut faire ou ne pas faire avec cette variable.&lt;/p&gt;
+
+&lt;p&gt;Quelques remarques:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Python est sensible à la Casse: il distingue les Majuscules et les minuscules&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;On ne peut pas commencer une variable par un chiffre&lt;/li&gt;
+&lt;li&gt;Ne pas utiliser d&amp;rsquo;accents dans les noms de variables.&lt;/li&gt;
+&lt;li&gt;fonction type(): permet de connaitre le type de notre variable.&lt;/li&gt;
+&lt;li&gt;Pas d’espace (underscore)&lt;/li&gt;
+&lt;li&gt;Mots interdits (se mets en vert) : &lt;a href=&#34;https://www.programiz.com/python-programming/keywords-identifier&#34; target=&#34;_blank&#34;&gt;https://www.programiz.com/python-programming/keywords-identifier&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt; Concept de variable et déclaration d’une variable dans Jupyter &lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Se retrouve dans pratiquement tous les langages&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;job = &#39;data scientist&#39; # on stocke une valeur dans une variable 
+print(job)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;data scientist&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Une variable déclarée est accessible depuis d’autres cellules.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(job)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;data scientist
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-1-les-type-des-variables-concept&#34;&gt;2.1 Les type des variables (concept)&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Très important (fondamental comme dans tout type de langage)&lt;/li&gt;
+&lt;li&gt;La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&amp;rsquo;autres)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;2-1-1-les-types-numériques&#34;&gt;2.1.1- Les types numériques&lt;/h3&gt;
+
+&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;27%&#34;&gt;
+&lt;col width=&#34;57%&#34;&gt;
+&lt;/colgroup&gt;
+&lt;tbody valign=&#34;top&#34;&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;Les entiers: int()&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;1 est un nombre entier, 1.0 n&#39;en est pas un&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;Les décimaux: float()&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;nombre qui comprend une partie décimale &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;Les nombres complexes&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;association entre un nombre réel et un nombre imaginaire&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;m=3.2
+type(m)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;float
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;m=3
+type(m)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;int
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-1-2-les-types-booléens&#34;&gt;2.1.2- Les types booléens&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;variable contenant des valeurs binaires: True ou False&lt;/li&gt;
+&lt;li&gt;des types de données  résultent d&amp;rsquo;opérations logiques&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Très utile dans les confitions if().&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;3&amp;gt;5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;False
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;3&amp;lt;5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-1-3-les-chaînes-de-caractère&#34;&gt;2.1.3- Les chaînes de caractère&lt;/h3&gt;
+
+&lt;p&gt;Suite finie de caractères qu&amp;rsquo;on peut considérer comme du texte qu&amp;rsquo;on définit entre deux (&amp;lsquo;&amp;hellip;&amp;rsquo;) ou (&amp;ldquo;&amp;hellip;&amp;rdquo;).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Gestion des apostrohpes&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;job = &#39;data science&#39;
+job
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;lsquo;data science&amp;rsquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;darkVador = &#39;Luke, I&#39;m your father&#39;
+print(darkVador)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;File &amp;ldquo;&lt;ipython-input-34-24a0388f6afa&gt;&amp;rdquo;, line 1
+    darkVador = &amp;lsquo;Luke, I&amp;rsquo;m your father&amp;rsquo;
+                         ^
+SyntaxError: invalid syntax&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;darkVador = &amp;quot;Luke, I&#39;m your father&amp;quot;
+print(darkVador)
+# ou 
+
+darkVador = &#39;Luke, I\&#39;m your father&#39;
+print(darkVador)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Luke, I&amp;rsquo;m your father
+Luke, I&amp;rsquo;m your father&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Si texte trop long (marche aussi pour du code classique)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;luke = &#39;no…That\&#39;s impossible….Noooooooooooooooooooooooooo\
+oooooooooooo&#39;
+print(luke)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;no…That&amp;rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Possible de concatener 2 variables&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;start = &#39;luke, I\&#39;m&#39;
+end = &#39;your father&#39;
+darkVador = start+end
+print(darkVador)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;luke, I&amp;rsquo;myour father&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;darkVador = start+&#39; &#39;+end
+print(darkVador)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;luke, I&amp;rsquo;m your father&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Possible de répèter une chaine de caractère&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;luke = &#39;N&#39;+(&#39;o&#39;*10)
+print(luke)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Noooooooooo&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;2-1-4-vérifier-et-modifier-le-type-d-une-variable&#34;&gt;2.1.4- Vérifier et modifier le type d’une variable&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;exemple (règle : on ne mix pas chiffres et strings dans une concaténation)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;finalMotivationScore = 90
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;test = job + &#39;learning motivation ?&#39; + finalMotivationScore + &#39;% !&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;TypeError                                 Traceback (most recent call last)&lt;/p&gt;
+
+&lt;p&gt;&lt;ipython-input-41-77bbac5d7b73&gt; in &lt;module&gt;
+&amp;mdash;-&amp;gt; 1 test = job + &amp;lsquo;learning motivation ?&amp;rsquo; + finalMotivationScore + &amp;lsquo;% !&amp;rsquo;&lt;/p&gt;
+
+&lt;p&gt;TypeError: can only concatenate str (not &amp;ldquo;int&amp;rdquo;) to str&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verifier le type d’une variable&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(type(finalMotivationScore))
+print(type(&#39;test&#39;))
+print(type(1))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;class &#39;int&#39;&gt;
+&lt;class &#39;str&#39;&gt;
+&lt;class &#39;int&#39;&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;modifier le type d&amp;rsquo;une variable&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;float(1)
+int(1.3)
+str(1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;lsquo;1&amp;rsquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;test = job + &#39; learning motivation ? &#39; + str(finalMotivationScore) + &#39;% !&#39;
+print(test)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;data science learning motivation ? 90% !&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;2-2-les-opérateurs-arithmétiques&#34;&gt;2.2- Les opérateurs arithmétiques&lt;/h2&gt;
+
+&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;27%&#34;&gt;
+&lt;col width=&#34;57%&#34;&gt;
+&lt;/colgroup&gt;
+&lt;thead valign=&#34;bottom&#34;&gt;
+&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
+&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign=&#34;top&#34;&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;+&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Ajoute deux valeurs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;-&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Soustrait l&#39;opérande droit de l&#39;opérande gauche&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;#42;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Multiplie deux valeurs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;/&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Divise l&#39;opérande gauche par l&#39;opérande droit &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;%&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Divise l&#39;opérande gauche par l&#39;opérande droit et retourne le reste (opérateur modulo)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;#42;&amp;#42;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Calcule de la valeur exponentielle de l&#39;opératde gauche par l&#39;opérande droit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;//&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Divise l&#39;opérande gauche par l&#39;opérande droit et retourne la partie entière&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5-3 # soustraction 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5+3 # addition 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5*3 # multiplication
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;15
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5/3 # division  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;1.6666666666666667
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5//3 # le chiffre entier de ma division 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5%3 # récupérer le reste de ma division ou modulo  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5**3 # exponentielle ou puissance
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;125
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-3-les-opérateurs-relationnels&#34;&gt;2.3- Les opérateurs relationnels&lt;/h2&gt;
+
+&lt;p&gt;Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.&lt;/p&gt;
+
+&lt;p&gt;La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&amp;rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.&lt;/p&gt;
+
+&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;27%&#34;&gt;
+&lt;col width=&#34;57%&#34;&gt;
+&lt;/colgroup&gt;
+&lt;thead valign=&#34;bottom&#34;&gt;
+&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
+&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign=&#34;top&#34;&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;==&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Détermine si deux valeurs sont égales&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;!=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Détermine si deux valeurs sont différentes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;gt;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Vérifie que l&#39;opérande gauche est plus grand que l&#39;opérande droit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;lt;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Vérifie que l&#39;opérande gauche est plus petit que l&#39;opérande droit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Vérifie que l&#39;opérande gauche est supérieur ou égal à l&#39;opérande droit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Vérifie que l&#39;opérande gauche est inférieur ou égal à l&#39;opérande droit&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;is&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Indentité&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;pre&#34;&gt;not&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Négation&lt;/td&gt;
+
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# premier opérateur de comparaison : == 
+1 == 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1==2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;False
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 2ème opérateur de comparaison : != 
+1!=2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 3ème opérateur de comparaison : &amp;gt; et &amp;lt; 
+1&amp;gt;2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;False
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;2&amp;gt;1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1&amp;gt;1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;False
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1&amp;lt;2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1&amp;gt;=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;a=1 # Attention !!!! c&#39;est un opérateur d&#39;assignation de valeur à la variable 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-4-les-opérateurs-logiques&#34;&gt;2.4- Les opérateurs logiques&lt;/h2&gt;
+
+&lt;p&gt;Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.&lt;/p&gt;
+
+&lt;p&gt;Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.&lt;/p&gt;
+
+&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;27%&#34;&gt;
+&lt;col width=&#34;57%&#34;&gt;
+&lt;/colgroup&gt;
+&lt;thead valign=&#34;bottom&#34;&gt;
+&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
+&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign=&#34;top&#34;&gt;
+
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;and (et)&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Détermine si les deux opérandes sont vrais&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;or (ou)&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Détermine si l&#39;un des deux opérandes est vrai&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;not(non)&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Inverse la valeur logique de l&#39;opérande&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# premier opérateur logique : and
+(3==3) and (4==4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;(3==3) and (4==5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;False
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# deuxième opérateur logique : or
+(3==3) or (4==5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;(3!=3) or (4==5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;False
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 3ème opérateur logique : not
+not((3!=3) or (4==5))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-5-les-opérateurs-d-affectation&#34;&gt;2.5- Les opérateurs d&amp;rsquo;affectation&lt;/h2&gt;
+
+&lt;p&gt;Les opérateurs d&amp;rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&amp;rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&amp;rsquo;affectation.
+&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;27%&#34;&gt;
+&lt;col width=&#34;57%&#34;&gt;
+&lt;/colgroup&gt;
+&lt;thead valign=&#34;bottom&#34;&gt;
+&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
+&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign=&#34;top&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Affecte la valeur de l&amp;rsquo;opérande droit à l&amp;rsquo;opérande de gauche &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;+=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Ajoute la valeur de l&amp;rsquo;opérande droit à l&amp;rsquo;opérande de gauche et place le résultat dans l&amp;rsquo;opérande gauche&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;-=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Soustrait la valeur de l&amp;rsquo;opérande droit de l&amp;rsquo;opérande gauche et place le résultat dans l&amp;rsquo;opérande gauche&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;*=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Multiplie la valeur de l&amp;rsquo;opérande droit par celle de l&amp;rsquo;opérande gauche et place le résultat dans l&amp;rsquo;opérande de gauche&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;/=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Divise la valeur de l&amp;rsquo;opérande gauche par celle de l&amp;rsquo;opérande droit et place le résultat dans l&amp;rsquo;opérande de gauche&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;%=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Divise la valeur de l&amp;rsquo;opérande gauche par celle de l&amp;rsquo;opérande droit et place le reste dans l&amp;rsquo;opérande de gauche&lt;/td&gt;
+&lt;/tr&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;**=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Calcule la valeur exponentielle de l&amp;rsquo;opérande de gauche par celle de l&amp;rsquo;opérande droit et place le résultat dans l&amp;rsquo;opérande gauche&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;//=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;td&gt;Divise la valeur de l&amp;rsquo;opérande gauche par celle de l&amp;rsquo;opérande droit et place le résultat entier dans l&amp;rsquo;opérande gauche&lt;/td&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 2
+Mavariable
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 5 
+Mavariable += 2 
+Mavariable
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 5 
+Mavariable -= 2 
+Mavariable
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 5 
+Mavariable **= 2 
+Mavariable
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;25
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires&#34;&gt;2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp;amp; commentaires&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Modification de la variable au fil du script (la dernière valeur est conservé)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;number = 1.1
+print(number)
+print(type(number))
+
+number = 1
+print(number)
+print(type(number))
+
+number = &#39;1&#39;
+print(number)
+print(type(number))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;1.1
+&lt;class &#39;float&#39;&gt;
+1
+&lt;class &#39;int&#39;&gt;
+1
+&lt;class &#39;str&#39;&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(number)
+print(type(number))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;1
+&lt;class &#39;str&#39;&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ordre d&amp;rsquo;execution des cellules important (erreur fréquente)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;number = 1
+print(number)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;1&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;number = 2
+print(number)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(number)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Les commentaires&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&#39;&#39;&#39; Premier 
+commentaire &#39;&#39;&#39;
+print(number) #Deuxième commentaire
+print(&#39;voici un #commentaire&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2
+voici un #commentaire&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Exercices + corrections&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2- Les bases du language Python - Exercices</title>
+      <link>/courses/formation_python/2-les_bases-exercice/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/formation_python/2-les_bases-exercice/</guid>
+      <description>&lt;h1&gt; Exercices &lt;/h1&gt;
+
+&lt;p&gt;1) Debuggez cette erreur et expliquer brievement le problème en commentaire&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Nom = &#39;Sebastien&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(&#39;mon nom est &#39;Nom)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;  File &amp;quot;&amp;lt;ipython-input-3-965d76a6ded8&amp;gt;&amp;quot;, line 1
+    print(&#39;mon nom est &#39;Nom)
+                          ^
+SyntaxError: invalid syntax
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(&#39;mon nom est &#39; + Nom) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;mon nom est Sebastien
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2) Faites en sorte que la cellule ci-dessous retourne &amp;lsquo;J&amp;rsquo;apprends la data Science&amp;rsquo; à partir des variables à disposition&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;debutPhrase = &#39;J&#39;apprends la &#39;
+finPhrase = &#39;Data science&#39;
+print()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;debutPhrase = &amp;quot;J&#39;apprends la &amp;quot;
+finPhrase = &#39;Data science&#39;
+print(debutPhrase + finPhrase)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;J&#39;apprends la Data science
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3) Debugguez le code ci-dessous en modifiant uniquement ce qu&amp;rsquo;il se trouve dans print(&amp;hellip;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;heuresPassees = 2
+debutPhrase = &#39;j\&#39;apprends Python depuis &#39;
+finPhrase = &#39; heures.&#39;
+
+print(debutPhrase + heuresPassees + finPhrase)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&amp;lt;ipython-input-8-54124c40b75b&amp;gt; in &amp;lt;module&amp;gt;
+      3 finPhrase = &#39; heures.&#39;
+      4 
+----&amp;gt; 5 print(debutPhrase + heuresPassees + finPhrase)
+
+
+TypeError: can only concatenate str (not &amp;quot;int&amp;quot;) to str
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;heuresPassees = 2
+debutPhrase = &#39;j\&#39;apprends Python depuis &#39;
+finPhrase = &#39; heures.&#39;
+
+print(debutPhrase + str(heuresPassees) + finPhrase)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;j&#39;apprends Python depuis 2 heures.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4) quelle sera la valeur de varAge dans le code ci-dessous ? Expliquez en commentaire la raison&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;varAge = 28
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;varAge = 30
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(varAge)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;30
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;5) a) A partir des variables mises à disposition, calculez le taux de conversion et stockez le dans la variable &amp;ldquo;tauxConversion&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Définition : Le taux de conversion d’un site web désigne le plus souvent le ratio [conversions/visites] donnant le pourcentage de visiteurs réalisant un achat au cours de la visite d’un site&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;nombreDeVisites = 26736352
+nombredeConversions = 973520
+#tauxConversion=...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tauxConversion= 973520/26736352
+print(tauxConversion)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;0.036411848557349934
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;b) Verifiez le type de la variable en l&amp;rsquo;imprimant à l&amp;rsquo;execution de la cellule&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#print(...)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(type(tauxConversion))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;float&#39;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;c) faites en sorte que le taux soit en base 100 plutôt qu&amp;rsquo;en base 1 (ex : avoir 62 plutot que 0.62)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#tauxConversion=...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tauxConversion= (973520/26736352) * 100
+print(tauxConversion)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;3.6411848557349935
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;d) trouvez un moyen d&amp;rsquo;arrondir la variable tauxConversion à 2 chiffres après la virgule. Ne cherchez pas dans le cours, ça n&amp;rsquo;y est pas :)&lt;/p&gt;
+
+&lt;p&gt;Aide : round()&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#tauxConversion=...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tauxConversion= round((973520/26736352) * 100,2)
+print(tauxConversion)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;3.64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;e) Imprimez la phrase suivante &amp;ldquo;Le taux de conversion est (valeur tauxConversion) %&amp;rdquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#print(...)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(&amp;quot;Le taux de conversion est &amp;quot;+ str(tauxConversion) +&amp;quot; %&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;Le taux de conversion est 3.64 %
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;f) Rassemblez toutes vos manipulations dans une cellule pour faire le travail en une seule fois. Commentez votre code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;nombreDeVisites = 26736352
+nombredeConversions = 973520
+#tauxConversion=...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;nombreDeVisites = 26736352
+nombredeConversions = 973520
+tauxConversion= round((nombredeConversions/nombreDeVisites) * 100,2)
+print(&amp;quot;Le taux de conversion est &amp;quot;+ str(tauxConversion) +&amp;quot; %&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;Le taux de conversion est 3.64 %
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

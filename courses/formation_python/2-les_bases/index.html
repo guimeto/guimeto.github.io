@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
+Tous les programmes Python font appel à des variables.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/2-les_bases/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/2-les_bases/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/2-les_bases/">
+  <meta property="og:title" content="2- Les bases du language Python - Cours | GDueymes">
+  <meta property="og:description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
+Tous les programmes Python font appel à des variables."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>2- Les bases du language Python - Cours | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#les-bases-du-langage-python">Les Bases du langage Python:</a></li>
+<li><a href="#2-les-variables">2- Les variables</a></li>
+<li><a href="#2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</a>
+<ul>
+<li><a href="#2-1-1-les-types-numériques">2.1.1- Les types numériques</a></li>
+<li><a href="#2-1-2-les-types-booléens">2.1.2- Les types booléens</a></li>
+<li><a href="#2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</a></li>
+<li><a href="#2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</a></li>
+</ul></li>
+<li><a href="#2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</a></li>
+<li><a href="#2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</a></li>
+<li><a href="#2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</a></li>
+<li><a href="#2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</a></li>
+<li><a href="#2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</a></li>
+</ul></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>2- Les bases du language Python - Cours</h1>
+
+          <div class="article-style">
+            
+
+<p><img src="/img/pylogo.png" alt="image0" /></p>
+
+<h2 id="les-bases-du-langage-python">Les Bases du langage Python:</h2>
+
+<h2>Objectifs</h2>
+
+<ul>
+<li>Comprendre ce qu&rsquo;est une variable</li>
+<li>Les règles de nommage d&rsquo;une variable</li>
+<li>Les premiers types de variables</li>
+<li>Réaliser des opération entre des variables</li>
+<li>Vérifier et modifier le type d’une variable</li>
+<li>Maîtrise de jupyter notebook 2 : execution du code à travers les cellules</li>
+</ul>
+
+<h2 id="2-les-variables">2- Les variables</h2>
+
+<p>Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.</p>
+
+<p>Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&rsquo;information est enregistré dans un type spécial de variable.</p>
+
+<p>Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&rsquo;interpreteur python ce qu&rsquo;il peut faire ou ne pas faire avec cette variable.</p>
+
+<p>Quelques remarques:</p>
+
+<ul>
+<li>Python est sensible à la Casse: il distingue les Majuscules et les minuscules<br /></li>
+<li>On ne peut pas commencer une variable par un chiffre</li>
+<li>Ne pas utiliser d&rsquo;accents dans les noms de variables.</li>
+<li>fonction type(): permet de connaitre le type de notre variable.</li>
+<li>Pas d’espace (underscore)</li>
+<li>Mots interdits (se mets en vert) : <a href="https://www.programiz.com/python-programming/keywords-identifier" target="_blank">https://www.programiz.com/python-programming/keywords-identifier</a></li>
+<li>Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)</li>
+</ul>
+
+<h2> Concept de variable et déclaration d’une variable dans Jupyter </h2>
+
+<ul>
+<li>Se retrouve dans pratiquement tous les langages</li>
+
+<li><p>Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.</p>
+
+<pre><code class="language-python">job = 'data scientist' # on stocke une valeur dans une variable 
+print(job)
+</code></pre>
+
+<p>data scientist</p></li>
+</ul>
+
+<p>Une variable déclarée est accessible depuis d’autres cellules.</p>
+
+<pre><code class="language-python">print(job)
+</code></pre>
+
+<pre><code>data scientist
+</code></pre>
+
+<h2 id="2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</h2>
+
+<ul>
+<li>Très important (fondamental comme dans tout type de langage)</li>
+<li>La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&rsquo;autres)</li>
+</ul>
+
+<h3 id="2-1-1-les-types-numériques">2.1.1- Les types numériques</h3>
+
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<tbody valign="top">
+
+<tr><td><tt class="docutils literal"><span class="pre">Les entiers: int()</span></tt></td>
+<td>1 est un nombre entier, 1.0 n'en est pas un</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Les décimaux: float()</span></tt></td>
+<td>nombre qui comprend une partie décimale </td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">Les nombres complexes</span></tt></td>
+<td>association entre un nombre réel et un nombre imaginaire</td>
+</tr>
+
+</tbody>
+</table>
+
+<pre><code class="language-python">m=3.2
+type(m)
+</code></pre>
+
+<pre><code>float
+</code></pre>
+
+<pre><code class="language-python">m=3
+type(m)
+</code></pre>
+
+<pre><code>int
+</code></pre>
+
+<h3 id="2-1-2-les-types-booléens">2.1.2- Les types booléens</h3>
+
+<ul>
+<li>variable contenant des valeurs binaires: True ou False</li>
+<li>des types de données  résultent d&rsquo;opérations logiques</li>
+</ul>
+
+<p>Très utile dans les confitions if().</p>
+
+<pre><code class="language-python">3&gt;5
+</code></pre>
+
+<pre><code>False
+</code></pre>
+
+<pre><code class="language-python">3&lt;5
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<h3 id="2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</h3>
+
+<p>Suite finie de caractères qu&rsquo;on peut considérer comme du texte qu&rsquo;on définit entre deux (&lsquo;&hellip;&rsquo;) ou (&ldquo;&hellip;&rdquo;).</p>
+
+<ul>
+<li><p>Gestion des apostrohpes</p>
+
+<pre><code class="language-python">job = 'data science'
+job
+</code></pre>
+
+<p>&lsquo;data science&rsquo;</p>
+
+<pre><code class="language-python">darkVador = 'Luke, I'm your father'
+print(darkVador)
+</code></pre>
+
+<p>File &ldquo;<ipython-input-34-24a0388f6afa>&rdquo;, line 1
+    darkVador = &lsquo;Luke, I&rsquo;m your father&rsquo;
+                         ^
+SyntaxError: invalid syntax</p>
+
+<pre><code class="language-python">darkVador = &quot;Luke, I'm your father&quot;
+print(darkVador)
+# ou 
+
+darkVador = 'Luke, I\'m your father'
+print(darkVador)
+</code></pre>
+
+<p>Luke, I&rsquo;m your father
+Luke, I&rsquo;m your father</p></li>
+
+<li><p>Si texte trop long (marche aussi pour du code classique)</p>
+
+<pre><code class="language-python">luke = 'no…That\'s impossible….Noooooooooooooooooooooooooo\
+oooooooooooo'
+print(luke)
+</code></pre>
+
+<p>no…That&rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo</p></li>
+
+<li><p>Possible de concatener 2 variables</p>
+
+<pre><code class="language-python">start = 'luke, I\'m'
+end = 'your father'
+darkVador = start+end
+print(darkVador)
+</code></pre>
+
+<p>luke, I&rsquo;myour father</p>
+
+<pre><code class="language-python">darkVador = start+' '+end
+print(darkVador)
+</code></pre>
+
+<p>luke, I&rsquo;m your father</p></li>
+
+<li><p>Possible de répèter une chaine de caractère</p>
+
+<pre><code class="language-python">luke = 'N'+('o'*10)
+print(luke)
+</code></pre>
+
+<p>Noooooooooo</p></li>
+</ul>
+
+<h3 id="2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</h3>
+
+<ul>
+<li><p>exemple (règle : on ne mix pas chiffres et strings dans une concaténation)</p>
+
+<pre><code class="language-python">finalMotivationScore = 90
+</code></pre>
+
+<pre><code class="language-python">test = job + 'learning motivation ?' + finalMotivationScore + '% !'
+</code></pre>
+
+<hr />
+
+<p>TypeError                                 Traceback (most recent call last)</p>
+
+<p><ipython-input-41-77bbac5d7b73> in <module>
+&mdash;-&gt; 1 test = job + &lsquo;learning motivation ?&rsquo; + finalMotivationScore + &lsquo;% !&rsquo;</p>
+
+<p>TypeError: can only concatenate str (not &ldquo;int&rdquo;) to str</p></li>
+
+<li><p>Verifier le type d’une variable</p>
+
+<pre><code class="language-python">print(type(finalMotivationScore))
+print(type('test'))
+print(type(1))
+</code></pre>
+
+<p><class 'int'>
+<class 'str'>
+<class 'int'></p></li>
+
+<li><p>modifier le type d&rsquo;une variable</p>
+
+<pre><code class="language-python">float(1)
+int(1.3)
+str(1)
+</code></pre>
+
+<p>&lsquo;1&rsquo;</p>
+
+<pre><code class="language-python">test = job + ' learning motivation ? ' + str(finalMotivationScore) + '% !'
+print(test)
+</code></pre>
+
+<p>data science learning motivation ? 90% !</p></li>
+</ul>
+
+<h2 id="2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</h2>
+
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Opérateurs</th>
+<th class="head">Signification</th>
+</tr>
+</thead>
+<tbody valign="top">
+
+<tr><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
+<td>Ajoute deux valeurs</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
+<td>Soustrait l'opérande droit de l'opérande gauche</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">&#42;</span></tt></td>
+<td>Multiplie deux valeurs</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
+<td>Divise l'opérande gauche par l'opérande droit </td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
+<td>Divise l'opérande gauche par l'opérande droit et retourne le reste (opérateur modulo)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">&#42;&#42;</span></tt></td>
+<td>Calcule de la valeur exponentielle de l'opératde gauche par l'opérande droit</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
+<td>Divise l'opérande gauche par l'opérande droit et retourne la partie entière</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-python">5-3 # soustraction 
+</code></pre>
+
+<pre><code>2
+</code></pre>
+
+<pre><code class="language-python">5+3 # addition 
+</code></pre>
+
+<pre><code>8
+</code></pre>
+
+<pre><code class="language-python">5*3 # multiplication
+</code></pre>
+
+<pre><code>15
+</code></pre>
+
+<pre><code class="language-python">5/3 # division  
+</code></pre>
+
+<pre><code>1.6666666666666667
+</code></pre>
+
+<pre><code class="language-python">5//3 # le chiffre entier de ma division 
+</code></pre>
+
+<pre><code>1
+</code></pre>
+
+<pre><code class="language-python">5%3 # récupérer le reste de ma division ou modulo  
+</code></pre>
+
+<pre><code>2
+</code></pre>
+
+<pre><code class="language-python">5**3 # exponentielle ou puissance
+</code></pre>
+
+<pre><code>125
+</code></pre>
+
+<h2 id="2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</h2>
+
+<p>Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.</p>
+
+<p>La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.</p>
+
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Opérateurs</th>
+<th class="head">Signification</th>
+</tr>
+</thead>
+<tbody valign="top">
+
+<tr><td><tt class="docutils literal"><span class="pre">==</span></tt></td>
+<td>Détermine si deux valeurs sont égales</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">!=</span></tt></td>
+<td>Détermine si deux valeurs sont différentes</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
+<td>Vérifie que l'opérande gauche est plus grand que l'opérande droit</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">&lt;</span></tt></td>
+<td>Vérifie que l'opérande gauche est plus petit que l'opérande droit</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
+<td>Vérifie que l'opérande gauche est supérieur ou égal à l'opérande droit</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">&lt;=</span></tt></td>
+<td>Vérifie que l'opérande gauche est inférieur ou égal à l'opérande droit</td>
+</tr>
+
+<tr><td><tt class="docutils literal"><span class="pre">is</span></tt></td>
+<td>Indentité</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">is</span> <span class="pre">not</span></tt></td>
+<td>Négation</td>
+
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-python"># premier opérateur de comparaison : == 
+1 == 1
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<pre><code class="language-python">1==2
+</code></pre>
+
+<pre><code>False
+</code></pre>
+
+<pre><code class="language-python"># 2ème opérateur de comparaison : != 
+1!=2
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<pre><code class="language-python"># 3ème opérateur de comparaison : &gt; et &lt; 
+1&gt;2
+</code></pre>
+
+<pre><code>False
+</code></pre>
+
+<pre><code class="language-python">2&gt;1
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<pre><code class="language-python">1&gt;1
+</code></pre>
+
+<pre><code>False
+</code></pre>
+
+<pre><code class="language-python">1&lt;2
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<pre><code class="language-python">1&gt;=1
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<pre><code class="language-python">a=1 # Attention !!!! c'est un opérateur d'assignation de valeur à la variable 
+</code></pre>
+
+<h2 id="2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</h2>
+
+<p>Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.</p>
+
+<p>Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.</p>
+
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Opérateurs</th>
+<th class="head">Signification</th>
+</tr>
+</thead>
+<tbody valign="top">
+
+<tr><td><tt class="docutils literal"><span class="pre">and (et)</span></tt></td>
+<td>Détermine si les deux opérandes sont vrais</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">or (ou)</span></tt></td>
+<td>Détermine si l'un des deux opérandes est vrai</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">not(non)</span></tt></td>
+<td>Inverse la valeur logique de l'opérande</td>
+</tr>
+
+</tbody>
+</table>
+
+<pre><code class="language-python"># premier opérateur logique : and
+(3==3) and (4==4)
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<pre><code class="language-python">(3==3) and (4==5)
+</code></pre>
+
+<pre><code>False
+</code></pre>
+
+<pre><code class="language-python"># deuxième opérateur logique : or
+(3==3) or (4==5)
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<pre><code class="language-python">(3!=3) or (4==5)
+</code></pre>
+
+<pre><code>False
+</code></pre>
+
+<pre><code class="language-python"># 3ème opérateur logique : not
+not((3!=3) or (4==5))
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<h2 id="2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</h2>
+
+<p>Les opérateurs d&rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&rsquo;affectation.
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Opérateurs</th>
+<th class="head">Signification</th>
+</tr>
+</thead>
+<tbody valign="top"></p>
+
+<p><tr><td><tt class="docutils literal"><span class="pre">=</span></tt></td>
+<td>Affecte la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche </td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">+=</span></tt></td>
+<td>Ajoute la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche et place le résultat dans l&rsquo;opérande gauche</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-=</span></tt></td>
+<td>Soustrait la valeur de l&rsquo;opérande droit de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande gauche</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">*=</span></tt></td>
+<td>Multiplie la valeur de l&rsquo;opérande droit par celle de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande de gauche</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">/=</span></tt></td>
+<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande de gauche</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">%=</span></tt></td>
+<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le reste dans l&rsquo;opérande de gauche</td>
+</tr></p>
+
+<p><tr><td><tt class="docutils literal"><span class="pre">**=</span></tt></td>
+<td>Calcule la valeur exponentielle de l&rsquo;opérande de gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande gauche</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">//=</span></tt></td>
+<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat entier dans l&rsquo;opérande gauche</td></p>
+
+<p></tr>
+</tbody>
+</table></p>
+
+<pre><code class="language-python">Mavariable = 2
+Mavariable
+</code></pre>
+
+<pre><code>2
+</code></pre>
+
+<pre><code class="language-python">Mavariable = 5 
+Mavariable += 2 
+Mavariable
+</code></pre>
+
+<pre><code>7
+</code></pre>
+
+<pre><code class="language-python">Mavariable = 5 
+Mavariable -= 2 
+Mavariable
+</code></pre>
+
+<pre><code>3
+</code></pre>
+
+<pre><code class="language-python">Mavariable = 5 
+Mavariable **= 2 
+Mavariable
+</code></pre>
+
+<pre><code>25
+</code></pre>
+
+<h2 id="2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</h2>
+
+<ul>
+<li><p>Modification de la variable au fil du script (la dernière valeur est conservé)</p>
+
+<pre><code class="language-python">number = 1.1
+print(number)
+print(type(number))
+
+number = 1
+print(number)
+print(type(number))
+
+number = '1'
+print(number)
+print(type(number))
+</code></pre>
+
+<p>1.1
+<class 'float'>
+1
+<class 'int'>
+1
+<class 'str'></p>
+
+<pre><code class="language-python">print(number)
+print(type(number))
+</code></pre>
+
+<p>1
+<class 'str'></p></li>
+
+<li><p>Ordre d&rsquo;execution des cellules important (erreur fréquente)</p>
+
+<pre><code class="language-python">number = 1
+print(number)
+</code></pre>
+
+<p>1</p>
+
+<pre><code class="language-python">number = 2
+print(number)
+</code></pre>
+
+<p>2</p>
+
+<pre><code class="language-python">print(number)
+</code></pre>
+
+<p>2</p></li>
+
+<li><p>Les commentaires</p>
+
+<pre><code class="language-python">''' Premier 
+commentaire '''
+print(number) #Deuxième commentaire
+print('voici un #commentaire')
+</code></pre>
+
+<p>2
+voici un #commentaire</p></li>
+</ul>
+
+<p>Exercices + corrections</p>
+
+<pre><code class="language-python">
+</code></pre>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/1-introduction/" rel="next">1- Introduction</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/2-les_bases-exercice/" rel="prev">2- Les bases du language Python - Exercices</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/2-Les_bases.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
