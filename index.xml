@@ -605,6 +605,82 @@ Mavariable
     </item>
     
     <item>
+      <title>Introduction</title>
+      <link>/courses/formation_python/1-introduction/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/formation_python/1-introduction/</guid>
+      <description>&lt;h1&gt;Objectifs&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Tout préparer pour commencer le tutoriel&lt;/li&gt;
+&lt;li&gt;Présentation et installation de l’environnement de travail&lt;/li&gt;
+&lt;li&gt;Présentation de Jupyter&lt;/li&gt;
+&lt;li&gt;Maitrise de jupyter notebook 1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Qu’est-ce qu’Anaconda ?&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.anaconda.com/&#34; target=&#34;_blank&#34;&gt;https://www.anaconda.com/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Anaconda est une distribution Python, c&amp;rsquo;est à dire une configuration particulière (bonne version Python, bon packages, les bonnes versions)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pourquoi Anaconda ? C’est le plus répandue (6M) , open source, que vous allez retrouver partout, adapté à la data science machine learning &amp;hellip;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;b&gt; Comment installer Anaconda ? &lt;/b&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Chercher ‘anaconda’ sur Google&lt;/li&gt;
+&lt;li&gt;Aller dans download (25% utilisent encore Python 2). Prendre Python 3&lt;/li&gt;
+&lt;li&gt;Suivre les processus d’installation classique (tout laisser par défaut)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt; L&#39;interface anaconda&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Lancer anaconda&lt;/li&gt;
+&lt;li&gt;Présentation Home&lt;/li&gt;
+&lt;li&gt;Présentation Environnements (noyaux avec packages autour) : chercher pandas, Seaborn. Cherchez plotly&lt;/li&gt;
+&lt;li&gt;Lancer Jupyter  via anaconda&lt;/li&gt;
+&lt;li&gt;Lancer jupyter via cortana&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt; Maitrise du notebook jupyter 1&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;3 onglets : documents (vos dossiers), Running (notbook en cours), Clusters (parrallelisation de calcul)&lt;/li&gt;
+&lt;li&gt;Création d’un nouveau dossier&lt;/li&gt;
+&lt;li&gt;Création d’un nouveau notebook&lt;/li&gt;
+&lt;li&gt;Renomer&lt;/li&gt;
+&lt;li&gt;Print(‘Data science’)&lt;/li&gt;
+&lt;li&gt;Ajouter une nouvelle cellule print(‘Machine learnin’)&lt;/li&gt;
+&lt;li&gt;Changer valeur, rerun cell print(‘Machine learning’)&lt;/li&gt;
+&lt;li&gt;Changer ordre (flèches)&lt;/li&gt;
+&lt;li&gt;Supprimer&lt;/li&gt;
+&lt;li&gt;Copy past&lt;/li&gt;
+&lt;li&gt;Ajouter markdown&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;h1&gt; jupyter introduction &lt;/h1&gt;
+&lt;h2&gt; session 1 &lt;/h2&gt;
+&lt;p&gt;&amp;hellip;blablabla&lt;/p&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sinon &lt;a href=&#34;https://wordtohtml.net/&#34; target=&#34;_blank&#34;&gt;https://wordtohtml.net/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Pour cela qu’on parle de notebook !
+&lt;a href=&#34;https://www.kaggle.com/pavansanagapati/a-simple-tutorial-on-exploratory-data-analysis&#34; target=&#34;_blank&#34;&gt;https://www.kaggle.com/pavansanagapati/a-simple-tutorial-on-exploratory-data-analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Première erreur (passer markdown en python)&lt;/li&gt;
+&lt;li&gt;Restart &amp;amp; clear output&lt;/li&gt;
+&lt;li&gt;Cells &amp;gt; Run all&lt;/li&gt;
+&lt;li&gt;Save&lt;/li&gt;
+&lt;li&gt;Print preview&lt;/li&gt;
+&lt;li&gt;Download as&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Example Page 1</title>
       <link>/courses/example/example1/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
