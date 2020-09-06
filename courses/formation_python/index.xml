@@ -897,629 +897,401 @@ print(&amp;quot;Le taux de conversion est &amp;quot;+ str(tauxConversion) +&amp;
       <link>/courses/formation_python/3-les_listes/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
       <guid>/courses/formation_python/3-les_listes/</guid>
-      <description>
+      <description>&lt;p&gt;&lt;img src=&#34;/img/pylogo.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/pylogo.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;les-bases-du-langage-python&#34;&gt;Les Bases du langage Python:&lt;/h2&gt;
+&lt;h1&gt; 3- Les listes en Python:&lt;/h1&gt; 
 
 &lt;h2&gt;Objectifs&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Comprendre ce qu&amp;rsquo;est une variable&lt;/li&gt;
-&lt;li&gt;Les règles de nommage d&amp;rsquo;une variable&lt;/li&gt;
-&lt;li&gt;Les premiers types de variables&lt;/li&gt;
-&lt;li&gt;Réaliser des opération entre des variables&lt;/li&gt;
-&lt;li&gt;Vérifier et modifier le type d’une variable&lt;/li&gt;
-&lt;li&gt;Maîtrise de jupyter notebook 2 : execution du code à travers les cellules&lt;/li&gt;
+&lt;li&gt;Comprendre ce qu&amp;rsquo;est une liste&lt;/li&gt;
+&lt;li&gt;Savoir consulter et analyser une liste&lt;/li&gt;
+&lt;li&gt;Savoir manipuler une liste&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;2-les-variables&#34;&gt;2- Les variables&lt;/h2&gt;
+&lt;h2&gt;Concept et déclaration d&#39;une liste en Python&lt;/h2&gt;
 
-&lt;p&gt;Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.&lt;/p&gt;
+&lt;p&gt;La struture dite &amp;ldquo;liste&amp;rdquo; est fondamentale dans la programmation Python.&lt;/p&gt;
 
-&lt;p&gt;Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&amp;rsquo;information est enregistré dans un type spécial de variable.&lt;/p&gt;
+&lt;p&gt;Les listes permettent de regrouper un ensemble de valeurs sous forme ordonnée et modifiable accessible via des index.&lt;/p&gt;
 
-&lt;p&gt;Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&amp;rsquo;interpreteur python ce qu&amp;rsquo;il peut faire ou ne pas faire avec cette variable.&lt;/p&gt;
+&lt;p&gt;On écrit tous les éléments de la liste en les séparant par des virgules et le tout encadré par des crochets :
+             - ma_liste = [ , , , , ]&lt;/p&gt;
 
-&lt;p&gt;Quelques remarques:&lt;/p&gt;
+&lt;p&gt;Python est un langage orienté-objet, les listes sont associées à des méthodes: objet.method()&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Python est sensible à la Casse: il distingue les Majuscules et les minuscules&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;On ne peut pas commencer une variable par un chiffre&lt;/li&gt;
-&lt;li&gt;Ne pas utiliser d&amp;rsquo;accents dans les noms de variables.&lt;/li&gt;
-&lt;li&gt;fonction type(): permet de connaitre le type de notre variable.&lt;/li&gt;
-&lt;li&gt;Pas d’espace (underscore)&lt;/li&gt;
-&lt;li&gt;Mots interdits (se mets en vert) : &lt;a href=&#34;https://www.programiz.com/python-programming/keywords-identifier&#34; target=&#34;_blank&#34;&gt;https://www.programiz.com/python-programming/keywords-identifier&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;On peut appliquer des fonctions sur les listes&lt;/p&gt;
 
-&lt;h2&gt; Concept de variable et déclaration d’une variable dans Jupyter &lt;/h2&gt;
+&lt;h2&gt; 3.1- Créer une liste &lt;/h2&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Se retrouve dans pratiquement tous les langages&lt;/li&gt;
+&lt;p&gt;Pour crée une lixte, on écrit tous les éléments de la liste en les séparant par des virgules et le tout encadré par des crochets&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;job = &#39;data scientist&#39; # on stocke une valeur dans une variable 
-print(job)
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste=[1,2,3,4,5,6,7,8,&amp;quot;hello&amp;quot;,10.5]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;data scientist&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Une variable déclarée est accessible depuis d’autres cellules.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(job)
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(ma_liste)  # fonction pour voir ce qui compose notre liste 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;data scientist
+&lt;pre&gt;&lt;code&gt;[1, 2, 3, 4, 5, 6, 7, 8, &#39;hello&#39;, 10.5]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;2-1-les-type-des-variables-concept&#34;&gt;2.1 Les type des variables (concept)&lt;/h2&gt;
+&lt;p&gt;On peut aussi utiliser la fonction &lt;b&gt;range()&lt;/b&gt; pour générer une liste composée d&amp;rsquo;une simple suite arithmétique.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Très important (fondamental comme dans tout type de langage)&lt;/li&gt;
-&lt;li&gt;La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&amp;rsquo;autres)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;2-1-1-les-types-numériques&#34;&gt;2.1.1- Les types numériques&lt;/h3&gt;
-
-&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;27%&#34;&gt;
-&lt;col width=&#34;57%&#34;&gt;
-&lt;/colgroup&gt;
-&lt;tbody valign=&#34;top&#34;&gt;
-
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;Les entiers: int()&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;1 est un nombre entier, 1.0 n&#39;en est pas un&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;Les décimaux: float()&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;nombre qui comprend une partie décimale &lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;Les nombres complexes&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;association entre un nombre réel et un nombre imaginaire&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;m=3.2
-type(m)
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste=list(range(10))
+ma_liste
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;float
+&lt;pre&gt;&lt;code&gt;[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;m=3
-type(m)
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste=list(range(1981,1985,1))
+ma_liste
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;int
+&lt;pre&gt;&lt;code&gt;[1981, 1982, 1983, 1984]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-1-2-les-types-booléens&#34;&gt;2.1.2- Les types booléens&lt;/h3&gt;
+&lt;p&gt;Lorsque l&amp;rsquo;on travaille avec un objet sous Python, la commande dir() nous montre toujours les tâches que nous pouvons réaliser avec cet objet: dir(ma_liste)&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;variable contenant des valeurs binaires: True ou False&lt;/li&gt;
-&lt;li&gt;des types de données  résultent d&amp;rsquo;opérations logiques&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Très utile dans les confitions if().&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;3&amp;gt;5
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;dir()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;False
+&lt;pre&gt;&lt;code&gt;[&#39;In&#39;,
+ &#39;Out&#39;,
+ &#39;_&#39;,
+ &#39;_3&#39;,
+ &#39;_4&#39;,
+ &#39;__&#39;,
+ &#39;___&#39;,
+ &#39;__builtin__&#39;,
+ &#39;__builtins__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__loader__&#39;,
+ &#39;__name__&#39;,
+ &#39;__package__&#39;,
+ &#39;__spec__&#39;,
+ &#39;_dh&#39;,
+ &#39;_i&#39;,
+ &#39;_i1&#39;,
+ &#39;_i2&#39;,
+ &#39;_i3&#39;,
+ &#39;_i4&#39;,
+ &#39;_i5&#39;,
+ &#39;_ih&#39;,
+ &#39;_ii&#39;,
+ &#39;_iii&#39;,
+ &#39;_oh&#39;,
+ &#39;exit&#39;,
+ &#39;get_ipython&#39;,
+ &#39;ma_liste&#39;,
+ &#39;quit&#39;]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;3&amp;lt;5
+&lt;h2&gt; 3.2- Parcourir des listes &lt;/h2&gt;
+
+&lt;p&gt;Une fois la liste crée, nous pouvons accéder aux éléments de notre liste en utilisant les index de cette dernière.&lt;/p&gt;
+
+&lt;p&gt;Le premier item commence toujours avec l&amp;rsquo;index 0. Pour lire la premier item on utilise la valeur 0, le deuxième on utilise la valeur 1, etc.&lt;/p&gt;
+
+&lt;p&gt;Il est d&amp;rsquo;ailleurs possible de modifier une valeur avec son index.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste=[1,2,3,4,5,6,7,8,&amp;quot;hello&amp;quot;,10.5]
+ma_liste[:] # Affiche toutes les occurences
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;True
+&lt;pre&gt;&lt;code&gt;[1, 2, 3, 4, 5, 6, 7, 8, &#39;hello&#39;, 10.5]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-1-3-les-chaînes-de-caractère&#34;&gt;2.1.3- Les chaînes de caractère&lt;/h3&gt;
-
-&lt;p&gt;Suite finie de caractères qu&amp;rsquo;on peut considérer comme du texte qu&amp;rsquo;on définit entre deux (&amp;lsquo;&amp;hellip;&amp;rsquo;) ou (&amp;ldquo;&amp;hellip;&amp;rdquo;).&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Gestion des apostrohpes&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;job = &#39;data science&#39;
-job
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&amp;lsquo;data science&amp;rsquo;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;darkVador = &#39;Luke, I&#39;m your father&#39;
-print(darkVador)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;File &amp;ldquo;&lt;ipython-input-34-24a0388f6afa&gt;&amp;rdquo;, line 1
-    darkVador = &amp;lsquo;Luke, I&amp;rsquo;m your father&amp;rsquo;
-                         ^
-SyntaxError: invalid syntax&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;darkVador = &amp;quot;Luke, I&#39;m your father&amp;quot;
-print(darkVador)
-# ou 
-
-darkVador = &#39;Luke, I\&#39;m your father&#39;
-print(darkVador)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Luke, I&amp;rsquo;m your father
-Luke, I&amp;rsquo;m your father&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Si texte trop long (marche aussi pour du code classique)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;luke = &#39;no…That\&#39;s impossible….Noooooooooooooooooooooooooo\
-oooooooooooo&#39;
-print(luke)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;no…That&amp;rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Possible de concatener 2 variables&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;start = &#39;luke, I\&#39;m&#39;
-end = &#39;your father&#39;
-darkVador = start+end
-print(darkVador)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;luke, I&amp;rsquo;myour father&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;darkVador = start+&#39; &#39;+end
-print(darkVador)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;luke, I&amp;rsquo;m your father&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Possible de répèter une chaine de caractère&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;luke = &#39;N&#39;+(&#39;o&#39;*10)
-print(luke)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Noooooooooo&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;2-1-4-vérifier-et-modifier-le-type-d-une-variable&#34;&gt;2.1.4- Vérifier et modifier le type d’une variable&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;exemple (règle : on ne mix pas chiffres et strings dans une concaténation)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;finalMotivationScore = 90
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;test = job + &#39;learning motivation ?&#39; + finalMotivationScore + &#39;% !&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;TypeError                                 Traceback (most recent call last)&lt;/p&gt;
-
-&lt;p&gt;&lt;ipython-input-41-77bbac5d7b73&gt; in &lt;module&gt;
-&amp;mdash;-&amp;gt; 1 test = job + &amp;lsquo;learning motivation ?&amp;rsquo; + finalMotivationScore + &amp;lsquo;% !&amp;rsquo;&lt;/p&gt;
-
-&lt;p&gt;TypeError: can only concatenate str (not &amp;ldquo;int&amp;rdquo;) to str&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Verifier le type d’une variable&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(type(finalMotivationScore))
-print(type(&#39;test&#39;))
-print(type(1))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;class &#39;int&#39;&gt;
-&lt;class &#39;str&#39;&gt;
-&lt;class &#39;int&#39;&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;modifier le type d&amp;rsquo;une variable&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;float(1)
-int(1.3)
-str(1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&amp;lsquo;1&amp;rsquo;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;test = job + &#39; learning motivation ? &#39; + str(finalMotivationScore) + &#39;% !&#39;
-print(test)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;data science learning motivation ? 90% !&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;2-2-les-opérateurs-arithmétiques&#34;&gt;2.2- Les opérateurs arithmétiques&lt;/h2&gt;
-
-&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;27%&#34;&gt;
-&lt;col width=&#34;57%&#34;&gt;
-&lt;/colgroup&gt;
-&lt;thead valign=&#34;bottom&#34;&gt;
-&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
-&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody valign=&#34;top&#34;&gt;
-
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;+&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Ajoute deux valeurs&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;-&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Soustrait l&#39;opérande droit de l&#39;opérande gauche&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;#42;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Multiplie deux valeurs&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;/&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Divise l&#39;opérande gauche par l&#39;opérande droit &lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;%&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Divise l&#39;opérande gauche par l&#39;opérande droit et retourne le reste (opérateur modulo)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;#42;&amp;#42;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Calcule de la valeur exponentielle de l&#39;opératde gauche par l&#39;opérande droit&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;//&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Divise l&#39;opérande gauche par l&#39;opérande droit et retourne la partie entière&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5-3 # soustraction 
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[1] # pour accéder à un élement de la liste: ici on prend le deuxième élément. 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;pre&gt;&lt;code&gt;2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5+3 # addition 
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[2:4] # slicing: pour accéder aux éléments entre la 3ème position et la 4ème
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;8
+&lt;pre&gt;&lt;code&gt;[3, 4]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5*3 # multiplication
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[:4] # slicing: pour accéder tous les éléments jusqu&#39;à l&#39;index 4 ou 4ème position 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;15
+&lt;pre&gt;&lt;code&gt;[1, 2, 3, 4]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5/3 # division  
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[3:] # slicing: pour accéder tous les éléments à partir de l&#39;index 3
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;1.6666666666666667
+&lt;pre&gt;&lt;code&gt;[4, 5, 6, 7, 8, &#39;hello&#39;, 10.5]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5//3 # le chiffre entier de ma division 
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[0:2],ma_liste[4],ma_liste[5:7] # pour choisir plusieurs éléments, on fait plusieurs listes
+# on crée ici un tuple: qui contient des listes 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;1
+&lt;pre&gt;&lt;code&gt;([1, 2], 5, [6, 7])
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5%3 # récupérer le reste de ma division ou modulo  
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[-2] # pour récupérer la 2ème valeur à partir de la fin , avec les index négatifs, on ne part plus de 0 . 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;2
+&lt;pre&gt;&lt;code&gt;&#39;hello&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;5**3 # exponentielle ou puissance
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[1:-4] # on part de l&#39;index 1, avec le slicing , on s&#39;arrête une 4 fois avant 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;125
+&lt;pre&gt;&lt;code&gt;[2, 3, 4, 5, 6]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;2-3-les-opérateurs-relationnels&#34;&gt;2.3- Les opérateurs relationnels&lt;/h2&gt;
-
-&lt;p&gt;Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.&lt;/p&gt;
-
-&lt;p&gt;La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&amp;rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.&lt;/p&gt;
-
-&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;27%&#34;&gt;
-&lt;col width=&#34;57%&#34;&gt;
-&lt;/colgroup&gt;
-&lt;thead valign=&#34;bottom&#34;&gt;
-&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
-&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody valign=&#34;top&#34;&gt;
-
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;==&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Détermine si deux valeurs sont égales&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;!=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Détermine si deux valeurs sont différentes&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;gt;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Vérifie que l&#39;opérande gauche est plus grand que l&#39;opérande droit&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;lt;&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Vérifie que l&#39;opérande gauche est plus petit que l&#39;opérande droit&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Vérifie que l&#39;opérande gauche est supérieur ou égal à l&#39;opérande droit&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Vérifie que l&#39;opérande gauche est inférieur ou égal à l&#39;opérande droit&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;is&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Indentité&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;pre&#34;&gt;not&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Négation&lt;/td&gt;
-
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# premier opérateur de comparaison : == 
-1 == 1
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[::2] # pour extraire les éléments avec un incrément: ici on extrait les index pairs
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;True
+&lt;pre&gt;&lt;code&gt;[1, 3, 5, 7, &#39;hello&#39;]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1==2
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[1::2] # pour extraire les éléments avec un incrément: ici on extrait les indexs impairs
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;False
+&lt;pre&gt;&lt;code&gt;[2, 4, 6, 8, 10.5]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 2ème opérateur de comparaison : != 
-1!=2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;True
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 3ème opérateur de comparaison : &amp;gt; et &amp;lt; 
-1&amp;gt;2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;False
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;2&amp;gt;1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;True
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1&amp;gt;1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;False
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1&amp;lt;2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;True
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1&amp;gt;=1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;True
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;a=1 # Attention !!!! c&#39;est un opérateur d&#39;assignation de valeur à la variable 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;2-4-les-opérateurs-logiques&#34;&gt;2.4- Les opérateurs logiques&lt;/h2&gt;
-
-&lt;p&gt;Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.&lt;/p&gt;
-
-&lt;p&gt;Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.&lt;/p&gt;
-
-&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;27%&#34;&gt;
-&lt;col width=&#34;57%&#34;&gt;
-&lt;/colgroup&gt;
-&lt;thead valign=&#34;bottom&#34;&gt;
-&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
-&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody valign=&#34;top&#34;&gt;
-
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;and (et)&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Détermine si les deux opérandes sont vrais&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;or (ou)&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Détermine si l&#39;un des deux opérandes est vrai&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;not(non)&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Inverse la valeur logique de l&#39;opérande&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# premier opérateur logique : and
-(3==3) and (4==4)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;True
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;(3==3) and (4==5)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;False
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# deuxième opérateur logique : or
-(3==3) or (4==5)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;True
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;(3!=3) or (4==5)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;False
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 3ème opérateur logique : not
-not((3!=3) or (4==5))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;True
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;2-5-les-opérateurs-d-affectation&#34;&gt;2.5- Les opérateurs d&amp;rsquo;affectation&lt;/h2&gt;
-
-&lt;p&gt;Les opérateurs d&amp;rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&amp;rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&amp;rsquo;affectation.
-&lt;table border=&#34;1&#34; class=&#34;docutils&#34;&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;27%&#34;&gt;
-&lt;col width=&#34;57%&#34;&gt;
-&lt;/colgroup&gt;
-&lt;thead valign=&#34;bottom&#34;&gt;
-&lt;tr&gt;&lt;th class=&#34;head&#34;&gt;Opérateurs&lt;/th&gt;
-&lt;th class=&#34;head&#34;&gt;Signification&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody valign=&#34;top&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Affecte la valeur de l&amp;rsquo;opérande droit à l&amp;rsquo;opérande de gauche &lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;+=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Ajoute la valeur de l&amp;rsquo;opérande droit à l&amp;rsquo;opérande de gauche et place le résultat dans l&amp;rsquo;opérande gauche&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;-=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Soustrait la valeur de l&amp;rsquo;opérande droit de l&amp;rsquo;opérande gauche et place le résultat dans l&amp;rsquo;opérande gauche&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;*=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Multiplie la valeur de l&amp;rsquo;opérande droit par celle de l&amp;rsquo;opérande gauche et place le résultat dans l&amp;rsquo;opérande de gauche&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;/=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Divise la valeur de l&amp;rsquo;opérande gauche par celle de l&amp;rsquo;opérande droit et place le résultat dans l&amp;rsquo;opérande de gauche&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;%=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Divise la valeur de l&amp;rsquo;opérande gauche par celle de l&amp;rsquo;opérande droit et place le reste dans l&amp;rsquo;opérande de gauche&lt;/td&gt;
-&lt;/tr&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;**=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Calcule la valeur exponentielle de l&amp;rsquo;opérande de gauche par celle de l&amp;rsquo;opérande droit et place le résultat dans l&amp;rsquo;opérande gauche&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;//=&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
-&lt;td&gt;Divise la valeur de l&amp;rsquo;opérande gauche par celle de l&amp;rsquo;opérande droit et place le résultat entier dans l&amp;rsquo;opérande gauche&lt;/td&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 2
-Mavariable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 5 
-Mavariable += 2 
-Mavariable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;7
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 5 
-Mavariable -= 2 
-Mavariable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Mavariable = 5 
-Mavariable **= 2 
-Mavariable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;25
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires&#34;&gt;2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp;amp; commentaires&lt;/h2&gt;
+&lt;h2&gt; 3.3-  Modifier des listes &lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Modification de la variable au fil du script (la dernière valeur est conservé)&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;pour &lt;b&gt;ajouter&lt;/b&gt; un élément: on utilise une méthode append&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;number = 1.1
-print(number)
-print(type(number))
-
-number = 1
-print(number)
-print(type(number))
-
-number = &#39;1&#39;
-print(number)
-print(type(number))
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste.append(2)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;1.1
-&lt;class &#39;float&#39;&gt;
-1
-&lt;class &#39;int&#39;&gt;
-1
-&lt;class &#39;str&#39;&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(number)
-print(type(number))
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(ma_liste)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;1
-&lt;class &#39;str&#39;&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;[1981, 1982, 1983, 1984, 2]&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;Ordre d&amp;rsquo;execution des cellules important (erreur fréquente)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;pour &lt;b&gt;insérer&lt;/b&gt;  un élement dans notre liste à un index choisi: méthode insert()&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;number = 1
-print(number)
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste.insert(5,&amp;quot;nouvelle&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(ma_liste)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[1981, 1982, 1983, 1984, 2, &amp;lsquo;nouvelle&amp;rsquo;]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;pour &lt;b&gt;modifier&lt;/b&gt; une valeur dans notre liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[0]=&amp;quot;a&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(ma_liste)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[&amp;lsquo;a&amp;rsquo;, 1982, 1983, 1984, 2, &amp;lsquo;nouvelle&amp;rsquo;]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;pour &lt;b&gt;modifier&lt;/b&gt; plusieurs éléments de notre liste: slicing&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[3:5]=[8,10]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(ma_liste)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[&amp;lsquo;a&amp;rsquo;, 1982, 1983, 8, 10, &amp;lsquo;nouvelle&amp;rsquo;]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;pour &lt;b&gt;supprimer&lt;/b&gt; des valeurs d&amp;rsquo;une liste: 2 méthodes&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste[0:2]=[]  # supprimer avec du slicing 
+print(ma_liste)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[1983, 8, 10, &amp;lsquo;nouvelle&amp;rsquo;]&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;del ma_liste[3] # supprimer avec des mots clefs :https://fr.wikibooks.org/wiki/Programmation_Python/Tableau_des_mots_r%C3%A9serv%C3%A9s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(ma_liste)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[1983, 8, 10]&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt; 3.4-  Opérations utiles sur les listes  &lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;pour &lt;b&gt;concatener&lt;/b&gt; deux listes&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste1=[1,2,3,4,5]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste2=[6,7,8,9,10]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste3=ma_liste1+ma_liste2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;pour &lt;b&gt;duppliquer&lt;/b&gt; une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste1=[1,2,3,4,5]
+ma_liste1*3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;méthode &lt;b&gt;.reverse()&lt;/b&gt; pour &lt;b&gt;inverser&lt;/b&gt; les éléments d&amp;rsquo;une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste1=[1,2,3,4,5]
+print(ma_liste1)
+ma_liste1.reverse()
+print(ma_liste1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[1, 2, 3, 4, 5]
+[5, 4, 3, 2, 1]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;méthode &lt;b&gt;.count()&lt;/b&gt; pour &lt;b&gt;compter&lt;/b&gt; le nombre d&amp;rsquo;occurence dans une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste2=liste = [&amp;quot;a&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;]
+ma_liste2.count(&amp;quot;a&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;méthode &lt;b&gt;.index()&lt;/b&gt; pour &lt;b&gt;trouver l&amp;rsquo;index&lt;/b&gt; d&amp;rsquo;une valeur dans une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste2=liste = [&amp;quot;a&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;]
+ma_liste2.index(&amp;quot;c&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;fonction &lt;b&gt;sum()&lt;/b&gt; pour &lt;b&gt;sommer&lt;/b&gt; les éléments d&amp;rsquo;une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste1=[1,2,3,4,5]
+sum(ma_liste1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;15&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;fonction &lt;b&gt;.len()&lt;/b&gt; pour connaitre &lt;b&gt;le nombre d&amp;rsquo;items&lt;/b&gt; d&amp;rsquo;une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;len(ma_liste1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;5&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;méthode &lt;b&gt;.sort()&lt;/b&gt; pour &lt;b&gt;trier&lt;/b&gt; les items d&amp;rsquo;une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste = [90,3,8,4,1,10,25,99]
+ma_liste.sort() 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[1, 3, 4, 8, 10, 25, 90, 99]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;fonctions &lt;b&gt;min()&lt;/b&gt; et &lt;b&gt;max()&lt;/b&gt; pour extraire le &lt;b&gt;minimum&lt;/b&gt; ou le &lt;b&gt;maximum&lt;/b&gt; d&amp;rsquo;une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_liste
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[1, 3, 4, 8, 10, 25, 90, 99]&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;min(ma_liste) # fonction pour extraire le minimum de notre liste 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;1&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;number = 2
-print(number)
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;max(ma_liste) # fonction pour extraire le maximum de notre liste 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;2&lt;/p&gt;
+&lt;p&gt;99&lt;/p&gt;&lt;/li&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(number)
+&lt;li&gt;&lt;p&gt;association d&amp;rsquo;une boucle &lt;b&gt;for&lt;/b&gt; et de la fonction &lt;b&gt;print()&lt;/b&gt; pour afficher les valeurs d&amp;rsquo;une liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;list_mois = [&amp;quot;jan&amp;quot;,&amp;quot;fev&amp;quot;,&amp;quot;mar&amp;quot;]
+for mois in list_mois:
+print(mois)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;2&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;jan
+fev
+mar&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Les commentaires&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;fonction &lt;b&gt;enumerate()&lt;/b&gt; pour afficher les valeurs d&amp;rsquo;une liste ainsi que son index associé&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&#39;&#39;&#39; Premier 
-commentaire &#39;&#39;&#39;
-print(number) #Deuxième commentaire
-print(&#39;voici un #commentaire&#39;)
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;list_mois = [&amp;quot;jan&amp;quot;,&amp;quot;fev&amp;quot;,&amp;quot;mar&amp;quot;]
+for mois in enumerate(list_mois):
+ print(mois)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;2
-voici un #commentaire&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;(0, &amp;lsquo;jan&amp;rsquo;)
+(1, &amp;lsquo;fev&amp;rsquo;)
+(2, &amp;lsquo;mar&amp;rsquo;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;méthode &lt;b&gt;.split()&lt;/b&gt; pour transformer une chaîne de caractère en liste&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ma_chaine = &amp;quot;Janvier:Fevrier:Mars&amp;quot;
+ma_chaine.split(&amp;quot;:&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[&amp;lsquo;Janvier&amp;rsquo;, &amp;lsquo;Fevrier&amp;rsquo;, &amp;lsquo;Mars&amp;rsquo;]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;méthode &lt;b&gt;.join()&lt;/b&gt; pour transformer une liste en chaîne de caractères&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;liste = [&#39;Janvier&#39;, &#39;Fevrier&#39;, &#39;Mars&#39;]
+&amp;quot;:&amp;quot;.join(liste)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;lsquo;Janvier:Fevrier:Mars&amp;rsquo;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Exercices + corrections&lt;/p&gt;
+&lt;h2&gt; 3.5- Les tuples  &lt;/h2&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;1 tuple est une liste, soit ensemble de valeur stockée, mais à la différence qu&amp;rsquo;un tuple n&amp;rsquo;est pas modifiable comme dans une liste.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;l&amp;rsquo;intérêt d&amp;rsquo;un tuple est ce qui est rangé dans un tuble ne sera jamais modifiable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On écrit tous les éléments d&amp;rsquo;un tuple en les séparant par des virgules et le tout encadré par des parenthèses :
+         - mon_tuple = ( , , , , )&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On utilisera un tuple pour définir des sortes de constantes qui n&amp;rsquo;ont donc pas vocation à changer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tuple1=(1,2,3,4,5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tuple1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;(1, 2, 3, 4, 5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tuple1[0]=0 # on ne peut pas modifier un tuple
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&amp;lt;ipython-input-48-af300b8325d6&amp;gt; in &amp;lt;module&amp;gt;
+----&amp;gt; 1 tuple1[0]=0 # on ne peut pas modifier un tuple
+
+
+TypeError: &#39;tuple&#39; object does not support item assignment
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tuple1[1]
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
