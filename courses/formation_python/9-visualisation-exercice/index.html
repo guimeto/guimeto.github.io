@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="TP Data visualisation  Digimon, abréviation de &ldquo;monstres numériques&rdquo;, est une franchise qui s&rsquo;articule autour d&rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&rsquo;engager dans le combat avec eux. C&rsquo;est similaire aux Pokémon. Ce fichier contient une liste de tous les Digimon du jeu, avec leur niveau, leur coquille, leur attribut, leur mémoire et le nombre de slots d&rsquo;équipement. Toutes les statistiques (HP, SP, attaque, défense, intelligence et vitesse) sont pour ce Digimon au niveau 50.">
+  <meta name="description" content="TP Data visualisation Digimon, abréviation de &ldquo;monstres numériques&rdquo;, est une franchise qui s&rsquo;articule autour d&rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&rsquo;engager dans le combat avec eux. C&rsquo;est similaire aux Pokémon. Ce fichier contient une liste de tous les Digimon du jeu, avec leur niveau, leur coquille, leur attribut, leur mémoire et le nombre de slots d&rsquo;équipement. Toutes les statistiques (HP, SP, attaque, défense, intelligence et vitesse) sont pour ce Digimon au niveau 50.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/9-visualisation-exercice/">
@@ -115,7 +115,7 @@
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/9-visualisation-exercice/">
   <meta property="og:title" content="9- La visualisation grapgique avec Python - Exercice | GDueymes">
-  <meta property="og:description" content="TP Data visualisation  Digimon, abréviation de &ldquo;monstres numériques&rdquo;, est une franchise qui s&rsquo;articule autour d&rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&rsquo;engager dans le combat avec eux. C&rsquo;est similaire aux Pokémon. Ce fichier contient une liste de tous les Digimon du jeu, avec leur niveau, leur coquille, leur attribut, leur mémoire et le nombre de slots d&rsquo;équipement. Toutes les statistiques (HP, SP, attaque, défense, intelligence et vitesse) sont pour ce Digimon au niveau 50."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="TP Data visualisation Digimon, abréviation de &ldquo;monstres numériques&rdquo;, est une franchise qui s&rsquo;articule autour d&rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&rsquo;engager dans le combat avec eux. C&rsquo;est similaire aux Pokémon. Ce fichier contient une liste de tous les Digimon du jeu, avec leur niveau, leur coquille, leur attribut, leur mémoire et le nombre de slots d&rsquo;équipement. Toutes les statistiques (HP, SP, attaque, défense, intelligence et vitesse) sont pour ce Digimon au niveau 50."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -500,6 +500,14 @@
         <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
       </li>
       
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">Projet sur les données de températures ECCC</a>
+      </li>
+      
     </ul>
     
 
@@ -516,7 +524,14 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#tp-data-visualisation">TP Data visualisation</a></li>
+</ul></li>
+</ul>
+</nav>
 
       
     </div>
@@ -530,7 +545,9 @@
           <h1>9- La visualisation grapgique avec Python - Exercice</h1>
 
           <div class="article-style">
-            <h1>TP Data visualisation </h1>
+            
+
+<h2 id="tp-data-visualisation">TP Data visualisation</h2>
 
 <p>Digimon, abréviation de &ldquo;monstres numériques&rdquo;, est une franchise qui s&rsquo;articule autour d&rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&rsquo;engager dans le combat avec eux. C&rsquo;est similaire aux Pokémon. <br></p>
 
@@ -772,7 +789,7 @@ ax1.set_xticklabels(Type.index, rotation=45)
  Text(0, 0, 'Wind')]
 </code></pre>
 
-<p><img src="dataviz1_1.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1_1.png" alt="png" /></p>
 
 <p>5) en utilisant sns.distplot, affichez la répartition de la colonne Memory</p>
 
@@ -782,7 +799,7 @@ sns.set()
 plt.show()
 </code></pre>
 
-<p><img src="dataviz1_2.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1_2.png" alt="png" /></p>
 
 <p>6) en utiliant sns.kdeplot, affichez uniquement la courbe de répartition de la colonne &lsquo;Lv 50 HP&rsquo;</p>
 
@@ -791,7 +808,7 @@ sns.set()
 plt.show()
 </code></pre>
 
-<p><img src="dataviz1_3.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1_3.png" alt="png" /></p>
 
 <p>7) en utilisant scatter_matrix de Pandas, affichez la répartition et les nuages de point des 6 dernières colonnes du data set</p>
 
@@ -838,7 +855,7 @@ scatter_matrix(data[data.columns[-6:]], figsize=(15,15))
       dtype=object)
 </code></pre>
 
-<p><img src="dataviz1_4.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1_4.png" alt="png" /></p>
 
 <p>8) Il semble y avoir quelque chose d&rsquo;intéréssant entre &lsquo;Lv50 SP&rsquo; et &lsquo;Lv50 Int&rsquo;&hellip;utilisez sns.jointplot pour voir cela plus en détail</p>
 
@@ -846,7 +863,7 @@ scatter_matrix(data[data.columns[-6:]], figsize=(15,15))
 plt.show()
 </code></pre>
 
-<p><img src="dataviz1_5.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1_5.png" alt="png" /></p>
 
 <p>9) en utilisant sns.lmplot, ajoutez le niveau des digimons (Stage) sur le nuage de points réalisé en point 8.</p>
 
@@ -854,7 +871,7 @@ plt.show()
 plt.show()
 </code></pre>
 
-<p><img src="dataviz1_6.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1_6.png" alt="png" /></p>
 
 <p>10) En utilisant sns.violinplot, visionnez la réparition de &lsquo;Lv 50 HP&rsquo; en fonction du stage du digimon.</p>
 
@@ -864,7 +881,7 @@ sns.violinplot(x=&quot;Stage&quot;, y=&quot;Lv 50 HP&quot;, data=data)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz1_7.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1_7.png" alt="png" /></p>
 
 <pre><code class="language-python">
 </code></pre>

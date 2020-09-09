@@ -8616,7 +8616,9 @@ d0 = datetime(2000, 2, 21)
       <link>/courses/formation_python/9-visualisation-exercice/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
       <guid>/courses/formation_python/9-visualisation-exercice/</guid>
-      <description>&lt;h1&gt;TP Data visualisation &lt;/h1&gt;
+      <description>
+
+&lt;h2 id=&#34;tp-data-visualisation&#34;&gt;TP Data visualisation&lt;/h2&gt;
 
 &lt;p&gt;Digimon, abréviation de &amp;ldquo;monstres numériques&amp;rdquo;, est une franchise qui s&amp;rsquo;articule autour d&amp;rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&amp;rsquo;engager dans le combat avec eux. C&amp;rsquo;est similaire aux Pokémon. &lt;br&gt;&lt;/p&gt;
 
@@ -8858,7 +8860,7 @@ ax1.set_xticklabels(Type.index, rotation=45)
  Text(0, 0, &#39;Wind&#39;)]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1_1.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1_1.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;5) en utilisant sns.distplot, affichez la répartition de la colonne Memory&lt;/p&gt;
 
@@ -8868,7 +8870,7 @@ sns.set()
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1_2.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1_2.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;6) en utiliant sns.kdeplot, affichez uniquement la courbe de répartition de la colonne &amp;lsquo;Lv 50 HP&amp;rsquo;&lt;/p&gt;
 
@@ -8877,7 +8879,7 @@ sns.set()
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1_3.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1_3.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;7) en utilisant scatter_matrix de Pandas, affichez la répartition et les nuages de point des 6 dernières colonnes du data set&lt;/p&gt;
 
@@ -8924,7 +8926,7 @@ scatter_matrix(data[data.columns[-6:]], figsize=(15,15))
       dtype=object)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1_4.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1_4.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;8) Il semble y avoir quelque chose d&amp;rsquo;intéréssant entre &amp;lsquo;Lv50 SP&amp;rsquo; et &amp;lsquo;Lv50 Int&amp;rsquo;&amp;hellip;utilisez sns.jointplot pour voir cela plus en détail&lt;/p&gt;
 
@@ -8932,7 +8934,7 @@ scatter_matrix(data[data.columns[-6:]], figsize=(15,15))
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1_5.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1_5.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;9) en utilisant sns.lmplot, ajoutez le niveau des digimons (Stage) sur le nuage de points réalisé en point 8.&lt;/p&gt;
 
@@ -8940,7 +8942,7 @@ plt.show()
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1_6.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1_6.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;10) En utilisant sns.violinplot, visionnez la réparition de &amp;lsquo;Lv 50 HP&amp;rsquo; en fonction du stage du digimon.&lt;/p&gt;
 
@@ -8950,7 +8952,7 @@ sns.violinplot(x=&amp;quot;Stage&amp;quot;, y=&amp;quot;Lv 50 HP&amp;quot;, data
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1_7.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1_7.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -8964,7 +8966,7 @@ plt.show()
       <guid>/courses/formation_python/9-visualisation/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;/img/matplotlib.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/matplotlib.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;objectifs&#34;&gt;Objectifs&lt;/h2&gt;
 
@@ -9086,7 +9088,7 @@ plt.plot(year_to_plot.index,year_to_plot[&#39;Temperature moyenne&#39;])
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz1.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz1.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Option &lt;b&gt; marqueur &lt;/b&gt;:&lt;/li&gt;
@@ -9103,7 +9105,7 @@ plt.show()
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz2.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz2.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;year_to_plot = dataframe_UQAM[&#39;2015&#39;]
 plt.plot(year_to_plot.index,year_to_plot[&#39;Temperature moyenne&#39;], marker=&#39;x&#39;, linestyle=&amp;quot;--&amp;quot;)
@@ -9114,7 +9116,7 @@ plt.show()
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz3.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz3.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;year_to_plot = dataframe_UQAM[&#39;2015&#39;]
 plt.plot(year_to_plot.index,year_to_plot[&#39;Temperature minimale&#39;], color=&#39;lightblue&#39;)
@@ -9126,7 +9128,7 @@ plt.title(&amp;quot;multi-courbes&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz4.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz4.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Fonction &lt;b&gt; scatter &lt;/b&gt;: la fonction vous permet de créer un nuage de points&lt;/li&gt;
@@ -9139,7 +9141,7 @@ plt.show()
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz5.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz5.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;pour utiliser l&amp;rsquo;option scatter color, python veut une liste d&amp;rsquo;entrée et non un dictionnaire&lt;/li&gt;
@@ -9155,7 +9157,7 @@ plt.show()
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz6.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz6.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Nous avons utilisé la couleur de dispersion par défaut ()&lt;/li&gt;
@@ -9182,7 +9184,7 @@ plt.savefig(&amp;quot;figures/my_graph.png&amp;quot;, bbox_inches=&amp;quot;tigh
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz7.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz7.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;Figure size 1152x648 with 0 Axes&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -9202,13 +9204,13 @@ plt.show() #c&#39;est plt qui continue d&#39;indiquer l&#39;affichage du graphiq
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz8.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz8.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;b&gt;Résumé des principaux éléments dans un graphique matplotlib &lt;/b&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;attachment:recap_vocab.PNG&#34; alt=&#34;recap_vocab.PNG&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/resume_matplotlib.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure()
 ax1 = fig.add_subplot(121)
@@ -9220,7 +9222,7 @@ ax2.plot(dataframe_UQAM[&#39;2015&#39;].index,year_to_plot[&#39;Temperature maxi
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz9.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz9.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;matplotlib-subplot&#34;&gt;Matplotlib subplot&lt;/h2&gt;
 
@@ -9234,7 +9236,7 @@ plt.show()
 
 &lt;p&gt;Vous pouvez tracer différentes choses dans la même figure en utilisant la fonction de sous-tracé. Voici un exemple:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;attachment:SUBPLOT.PNG&#34; alt=&#34;SUBPLOT.PNG&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/subplot.png&#34; alt=&#34;SUBPLOT.PNG&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure()
 ax1 = fig.add_subplot(2,2,1) # up and left 
@@ -9244,7 +9246,7 @@ ax4 = fig.add_subplot(2,2,4) # down and right
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz10.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz10.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Voici une documentation sur le sous-intrigue:
 &lt;a href=&#34;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&#34; target=&#34;_blank&#34;&gt;https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot&lt;/a&gt;&lt;/p&gt;
@@ -9259,7 +9261,7 @@ ax2.legend(loc=&#39;upper left&#39;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz11.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz11.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(10,5))
 ax1 = fig.add_subplot(211)
@@ -9272,7 +9274,7 @@ plt.savefig(&amp;quot;foo.png&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz12.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz12.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(15, 8))
 colors = [&#39;green&#39;, &#39;blue&#39;, &#39;red&#39;,&#39;orange&#39;]
@@ -9285,7 +9287,7 @@ for i in range(4):
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz13.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz13.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;h2&gt;3- Présentation des principales représentations graphiques &lt;/h2&gt;
 &lt;h3&gt; a- Le bar chart &lt;/h3&gt;&lt;/p&gt;
@@ -9432,7 +9434,7 @@ ax1.set_xticklabels(passagersClasses.index, rotation=45) # ajout des labels
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz14.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz14.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;- Exemple 2 : 
 &lt;/code&gt;&lt;/pre&gt;
@@ -9481,7 +9483,7 @@ plt.legend()
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz15.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz15.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;- Exemple 3 : 
 &lt;/code&gt;&lt;/pre&gt;
@@ -9522,7 +9524,7 @@ plt.legend()
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz16.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz16.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;b-l-histogramme&#34;&gt;b- L&amp;rsquo; histogramme&lt;/h2&gt;
 
@@ -9535,7 +9537,7 @@ ax1.set_title(&amp;quot;repartition de l&#39;age&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz17.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz17.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(7,5))
 ax1 = fig.add_subplot(111)
@@ -9549,7 +9551,7 @@ ax1.set_title(&amp;quot;Répartition de l&#39;âge en fonction de la survie (en 
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz18.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz18.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;h3&gt; c- Le nuage de points &lt;/h3&gt;
 
@@ -9560,7 +9562,7 @@ ax1.set_title(&amp;quot;Prix du bilet en fonction de l&#39;age&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz19.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz19.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(7,5))
 ax1 = fig.add_subplot(111)
@@ -9570,7 +9572,7 @@ ax1.set_ylim(top=100)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz20.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz20.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig = plt.figure(figsize=(7,5))
 ax1 = fig.add_subplot(111)
@@ -9579,14 +9581,14 @@ ax1.set_title(&amp;quot;Prix du bilet en fonction de la classe&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz21.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz21.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from pandas.plotting import scatter_matrix
 scatter_matrix(data[[&#39;Survived&#39;,&#39;Pclass&#39;,&#39;Age&#39;,&#39;SibSp&#39;,&#39;Fare&#39;]], figsize=(15,15))
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz22.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz22.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;4-aller-plus-loin-avec-seaborn&#34;&gt;4- Aller plus loin avec Seaborn&lt;/h2&gt;
 
@@ -9614,7 +9616,7 @@ sns.set()
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz23.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz23.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.kdeplot(data[&amp;quot;Age&amp;quot;].dropna(), shade=True)
 sns.set()
@@ -9622,45 +9624,45 @@ plt.xlabel(&amp;quot;Age&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz24.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz24.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.lmplot(x=&amp;quot;Age&amp;quot;, y=&amp;quot;Fare&amp;quot;, hue=&amp;quot;Pclass&amp;quot;, data=data,fit_reg=False)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz25.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz25.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.jointplot(&amp;quot;Age&amp;quot;, &amp;quot;Fare&amp;quot;, data=data, kind=&amp;quot;reg&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz26.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz26.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.jointplot(&amp;quot;Age&amp;quot;, &amp;quot;Fare&amp;quot;, data=data, kind=&amp;quot;hex&amp;quot;)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz27.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz27.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.boxplot(x=data[&amp;quot;Age&amp;quot;])
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz28.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz28.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;attachment:boite%20a%20moustache.png&#34; alt=&#34;boite%20a%20moustache.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/moustache.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.boxplot(x=&amp;quot;Pclass&amp;quot;, y=&amp;quot;Age&amp;quot;, data=data)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz29.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz29.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.violinplot(x=&amp;quot;Pclass&amp;quot;, y=&amp;quot;Age&amp;quot;, data=data)
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz30.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz30.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig, ax = plt.subplots()
 fig.set_size_inches(12, 8)
@@ -9668,12 +9670,2542 @@ sns.violinplot(x=&amp;quot;Pclass&amp;quot;, y=&amp;quot;Age&amp;quot;, data=dat
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;dataviz31.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/formation/dataviz31.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Afin de mettre en pratique ce que nous venons de voir, une section exercice est proposée. Deux projets complets sur des analyses de stations météorologiques sont également proposées.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
 &lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Projet sur les données de précipitations ECCC</title>
+      <link>/courses/formation_python/project2-eccc_precipitation/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/formation_python/project2-eccc_precipitation/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/pylogo.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;objectifs&#34;&gt;Objectifs&lt;/h2&gt;
+
+&lt;h2 id=&#34;projet-2-données-de-précipitation-d-environnement-et-changement-climatique-canada&#34;&gt;Projet 2: Données de précipitation d&amp;rsquo;Environnement et Changement Climatique Canada&lt;/h2&gt;
+
+&lt;p&gt;Nous continuerons de découvrir la fonctionnalité de ces bibliothèques dans un cas pratique en analysant maintenant les données de précipitations quotidiennes enregistrées par les stations ECCC situées à l&amp;rsquo;aéroport de Montréal Trudeau entre la période 1961 et 2010.&lt;/p&gt;
+
+&lt;p&gt;Nous utiliserons le fichier &amp;lsquo;MONTREAL_preacc_1961_2010.dat&amp;rsquo; dans le répertoire .data /.&lt;/p&gt;
+
+&lt;h2 id=&#34;1-ouverture-et-lecture-de-nos-séries-de-données&#34;&gt;1- Ouverture et lecture de nos séries de données&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import numpy as np
+import pandas as pd
+import datetime
+from datetime import date
+import numpy as np 
+import warnings
+warnings.filterwarnings(&amp;quot;ignore&amp;quot;)
+
+df_Precipitation = pd.DataFrame()
+# Ouverture du fichier text  
+with open(&#39;./DATA/MONTREAL_preacc_1961_2010.dat&#39;, &#39;r&#39;) as file:
+     rows = file.read()
+data_EC_Montreal = [float(row) for row in rows.split()]  
+
+# We know that the time series begins on January 1, 1961
+# and ends on December 31, 2010
+# We can rebuild the index of Dataframes
+
+start = date(1961, 1, 1)
+end = date(2010, 12, 31)
+delta=(end-start) 
+nb_days = delta.days + 1 
+rng = pd.date_range(start, periods=nb_days, freq=&#39;D&#39;)
+
+# Create a column from the datetime datatype
+df_Precipitation[&#39;datetime&#39;] = rng
+# Set the datetime column as the index
+df_Precipitation.index = df_Precipitation[&#39;datetime&#39;] 
+
+# Create a column from the numeric score variable
+df_Precipitation[&#39;Precipitation Montreal&#39;] = data_EC_Montreal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df_Precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;Precipitation Montreal&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-01&lt;/th&gt;
+      &lt;td&gt;1961-01-01&lt;/td&gt;
+      &lt;td&gt;22.66&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-02&lt;/th&gt;
+      &lt;td&gt;1961-01-02&lt;/td&gt;
+      &lt;td&gt;1.05&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-03&lt;/th&gt;
+      &lt;td&gt;1961-01-03&lt;/td&gt;
+      &lt;td&gt;1.05&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-04&lt;/th&gt;
+      &lt;td&gt;1961-01-04&lt;/td&gt;
+      &lt;td&gt;0.66&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-05&lt;/th&gt;
+      &lt;td&gt;1961-01-05&lt;/td&gt;
+      &lt;td&gt;0.00&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(df_Precipitation.head(), headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            | datetime            |   Precipitation Montreal |
+|:--------------------|:--------------------|-------------------------:|
+| 1961-01-01 00:00:00 | 1961-01-01 00:00:00 |                    22.66 |
+| 1961-01-02 00:00:00 | 1961-01-02 00:00:00 |                     1.05 |
+| 1961-01-03 00:00:00 | 1961-01-03 00:00:00 |                     1.05 |
+| 1961-01-04 00:00:00 | 1961-01-04 00:00:00 |                     0.66 |
+| 1961-01-05 00:00:00 | 1961-01-05 00:00:00 |                     0    |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-application-des-indices-de-précipitations&#34;&gt;2- Application des indices de précipitations:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CDD: calcul du nombre maximum de jours secs consécutifs (Précipitations &amp;lt;1mm)&lt;/li&gt;
+&lt;li&gt;CWD: calcul du nombre maximum de jours de pluie consécutifs (Précipitations&amp;gt; 1mm)&lt;/li&gt;
+&lt;li&gt;Prcp1: calcul du pourcentage de jours de précipitations (Précipitations&amp;gt; 1mm)&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;SDII: calcul de l&amp;rsquo;intensité moyenne des précipitations pour les jours de pluie (Précipitations&amp;gt; 1mm&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# calculation of the maximum number of consecutive dry days (inf to 1mm) 
+# on the incoming signal (less than 20% of missing values) 
+def CDD(S):
+ import numpy as np
+ ind_CDD=[]
+ S_no_nan = S[~np.isnan(S)]
+ N = len(S)
+ N2 = len(S_no_nan)
+ if ((N2/N) &amp;lt; 0.8): 
+     ind_CDD = np.empty(1)
+     ind_CDD = np.nan
+ else:
+     temp = 0
+     ind_CDD = 0 
+     j =0
+     while (j &amp;lt; N2):
+         while (j &amp;lt; N2 ) and (S_no_nan[j] &amp;lt; 1.0 ):
+             j += 1
+             temp +=1
+         if ind_CDD &amp;lt; temp:
+             ind_CDD = temp
+         temp = 0
+         j += 1 
+ return ind_CDD      
+ 
+# calculation of the maximum number of consecutive wet days (sup to 1mm) 
+# on the incoming signal (less than 20% of missing values) 
+def CWD(S):
+ import numpy as np
+ ind_CWD=[]
+ S_no_nan = S[~np.isnan(S)]
+ N = len(S)
+ N2 = len(S_no_nan)
+ if ((N2/N) &amp;lt; 0.8): 
+     ind_CWD = np.empty(1)
+     ind_CWD = np.nan
+ else:
+     temp = 0
+     ind_CWD = 0 
+     j =0
+     while (j &amp;lt; N2):
+         while (j &amp;lt; N2 ) and (S_no_nan[j] &amp;gt; 1.0 ):
+             j += 1
+             temp +=1
+         if ind_CWD &amp;lt; temp:
+             ind_CWD = temp
+         temp = 0
+         j += 1 
+ return ind_CWD  
+
+# Calculation of the percentage of precipitation days 
+# on the incoming signal (less than 20% of missing values)
+def Prcp1(S):
+ import numpy as np
+ ind_Prcp1=[]
+ S_no_nan = S[~np.isnan(S)]
+ N = len(S)
+ N2 = len(S_no_nan)
+ if (N2 == 0):
+     N2=1
+         
+ if ((N2/N) &amp;lt; 0.8): 
+     ind_Prcp1 = np.empty(1)
+     ind_Prcp1 = np.nan
+ else:
+     ind_Prcp1 = 0
+     for row in S_no_nan:
+         if row &amp;gt;= 1 :
+             ind_Prcp1 += 1 
+                 
+     ind_Prcp1 = 100 * (ind_Prcp1/N2)
+ return ind_Prcp1     
+
+# average precipitation intensity for wet days (PR greater than 1mm) (less than 20% missing values)
+
+def SDII(S):
+ import numpy as np
+ ind_SDII=[]
+ S_no_nan = S[~np.isnan(S)]
+ N = len(S)
+ N2 = len(S_no_nan)
+ if ((N2/N) &amp;lt; 0.8): 
+     ind_SDII = np.empty(1)
+     ind_SDII = np.nan
+ else:
+     SS = S[S &amp;gt; 1]        
+     ind_SDII = np.nanmean(SS)
+ return ind_SDII      
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Les fonctions précédentes permettent de calculer des indices de précipitations sur un signal journalier. Nous voulons appliquer ces fonctions chaque mois.&lt;/p&gt;
+
+&lt;p&gt;Nous devons donc travailler avec un sous-ensemble de notre dataframe &lt;b&gt; df_Precipitation &lt;/b&gt; groupé par mois.&lt;/p&gt;
+
+&lt;p&gt;De la même manière que la section précédente sur les températures, nous appliquerons la méthode &lt;b&gt; .resample (&amp;rsquo;M&amp;rsquo;) &lt;/b&gt;: &amp;ldquo;M&amp;rdquo; pendant des mois (il est possible ici de travailler à l&amp;rsquo;échelle de la semaine, de la saison ou de l&amp;rsquo;année)
+Pour rappel, à ce stade il n&amp;rsquo;y a pas de calcul, les données sont simplement triées sur une base mensuelle.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df_Precipitation_resamp = df_Precipitation.resample(&#39;M&#39;)
+df_Precipitation_resamp.count().head()            
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;Precipitation Montreal&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;31&lt;/td&gt;
+      &lt;td&gt;31&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;28&lt;/td&gt;
+      &lt;td&gt;28&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;31&lt;/td&gt;
+      &lt;td&gt;31&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;31&lt;/td&gt;
+      &lt;td&gt;31&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(df_Precipitation_resamp.count().head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   datetime |   Precipitation Montreal |
+|:--------------------|-----------:|-------------------------:|
+| 1961-01-31 00:00:00 |         31 |                       31 |
+| 1961-02-28 00:00:00 |         28 |                       28 |
+| 1961-03-31 00:00:00 |         31 |                       31 |
+| 1961-04-30 00:00:00 |         30 |                       30 |
+| 1961-05-31 00:00:00 |         31 |                       31 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous pouvons maintenant appliquer nos fonctions définies précédemment pour chaque mois de notre DataFrame. Pour cela, nous utiliserons la méthode &lt;b&gt; .agg () &lt;/b&gt; sur notre sous-ensemble groupé par mois.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation = df_Precipitation_resamp.agg([CDD, CWD, Prcp1, SDII, np.sum, np.mean])
+indice_precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th colspan=&#34;6&#34; halign=&#34;left&#34;&gt;Precipitation Montreal&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;29.032258&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;55.09&lt;/td&gt;
+      &lt;td&gt;1.777097&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;28.571429&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;80.87&lt;/td&gt;
+      &lt;td&gt;2.888214&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;25.806452&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;97.59&lt;/td&gt;
+      &lt;td&gt;3.148065&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;50.000000&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;102.70&lt;/td&gt;
+      &lt;td&gt;3.423333&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;41.935484&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;70.22&lt;/td&gt;
+      &lt;td&gt;2.265161&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(indice_precipitation.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   (&#39;Precipitation Montreal&#39;, &#39;CDD&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;CWD&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;Prcp1&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;SDII&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;sum&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;mean&#39;) |
+|:--------------------|------------------------------------:|------------------------------------:|--------------------------------------:|-------------------------------------:|------------------------------------:|-------------------------------------:|
+| 1961-01-31 00:00:00 |                                  14 |                                   3 |                               29.0323 |                              5.69111 |                               55.09 |                              1.7771  |
+| 1961-02-28 00:00:00 |                                  12 |                                   3 |                               28.5714 |                              9.895   |                               80.87 |                              2.88821 |
+| 1961-03-31 00:00:00 |                                  16 |                                   3 |                               25.8065 |                             11.8687  |                               97.59 |                              3.14806 |
+| 1961-04-30 00:00:00 |                                   4 |                                   3 |                               50      |                              6.68333 |                              102.7  |                              3.42333 |
+| 1961-05-31 00:00:00 |                                   5 |                                   3 |                               41.9355 |                              5.13    |                               70.22 |                              2.26516 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-filtrer-les-données-directement-sur-notre-dataframe&#34;&gt;3- Filtrer les données directement sur notre DataFrame&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;les données peuvent être filtrées selon une condition sur une colonne.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On n&amp;rsquo;extraira par exemple que les données de précipitations supérieures ou égales à 1 mm.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;SDII2=df_Precipitation[df_Precipitation[&amp;quot;Precipitation Montreal&amp;quot;]&amp;gt;=1.0]
+SDII2.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;Precipitation Montreal&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-01&lt;/th&gt;
+      &lt;td&gt;1961-01-01&lt;/td&gt;
+      &lt;td&gt;22.66&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-02&lt;/th&gt;
+      &lt;td&gt;1961-01-02&lt;/td&gt;
+      &lt;td&gt;1.05&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-03&lt;/th&gt;
+      &lt;td&gt;1961-01-03&lt;/td&gt;
+      &lt;td&gt;1.05&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-06&lt;/th&gt;
+      &lt;td&gt;1961-01-06&lt;/td&gt;
+      &lt;td&gt;8.65&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-07&lt;/th&gt;
+      &lt;td&gt;1961-01-07&lt;/td&gt;
+      &lt;td&gt;4.05&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(SDII2.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            | datetime            |   Precipitation Montreal |
+|:--------------------|:--------------------|-------------------------:|
+| 1961-01-01 00:00:00 | 1961-01-01 00:00:00 |                    22.66 |
+| 1961-01-02 00:00:00 | 1961-01-02 00:00:00 |                     1.05 |
+| 1961-01-03 00:00:00 | 1961-01-03 00:00:00 |                     1.05 |
+| 1961-01-06 00:00:00 | 1961-01-06 00:00:00 |                     8.65 |
+| 1961-01-07 00:00:00 | 1961-01-07 00:00:00 |                     4.05 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous avons d&amp;rsquo;abord créé un masque de type booléen sur la colonne «Précipitation Montréal» qui a ensuite été appliqué à notre DataFrame.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;(df_Precipitation[&amp;quot;Precipitation Montreal&amp;quot;]&amp;gt;1.0).head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;datetime
+1961-01-01     True
+1961-01-02     True
+1961-01-03     True
+1961-01-04    False
+1961-01-05    False
+Name: Precipitation Montreal, dtype: bool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous regroupons ensuite notre DataFrame par mois et nous appliquons une fonction en appelant la méthode .agg ().&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;SDII2 = SDII2.resample(&#39;M&#39;).agg({&#39;SDII2&#39;: lambda x: x.mean()})
+SDII2.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;SDII2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Precipitation Montreal&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(SDII2.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   (&#39;SDII2&#39;, &#39;Precipitation Montreal&#39;) |
+|:--------------------|--------------------------------------:|
+| 1961-01-31 00:00:00 |                               5.69111 |
+| 1961-02-28 00:00:00 |                               9.895   |
+| 1961-03-31 00:00:00 |                              11.8688  |
+| 1961-04-30 00:00:00 |                               6.68333 |
+| 1961-05-31 00:00:00 |                               5.13    |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;4-mise-à-jour-de-notre-dataframe-initial&#34;&gt;4- Mise à jour de notre DataFrame initial&lt;/h2&gt;
+
+&lt;p&gt;Nous voulons ajouter à notre DataFrame initial la variable SDII2 précédemment créée.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation[&amp;quot;SDII2&amp;quot;]=SDII2[:].values
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th colspan=&#34;6&#34; halign=&#34;left&#34;&gt;Precipitation Montreal&lt;/th&gt;
+      &lt;th&gt;SDII2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;29.032258&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;55.09&lt;/td&gt;
+      &lt;td&gt;1.777097&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;28.571429&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;80.87&lt;/td&gt;
+      &lt;td&gt;2.888214&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;25.806452&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;97.59&lt;/td&gt;
+      &lt;td&gt;3.148065&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;50.000000&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;102.70&lt;/td&gt;
+      &lt;td&gt;3.423333&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;41.935484&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;70.22&lt;/td&gt;
+      &lt;td&gt;2.265161&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(indice_precipitation.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   (&#39;Precipitation Montreal&#39;, &#39;CDD&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;CWD&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;Prcp1&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;SDII&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;sum&#39;) |   (&#39;Precipitation Montreal&#39;, &#39;mean&#39;) |   (&#39;SDII2&#39;, &#39;&#39;) |
+|:--------------------|------------------------------------:|------------------------------------:|--------------------------------------:|-------------------------------------:|------------------------------------:|-------------------------------------:|----------------:|
+| 1961-01-31 00:00:00 |                                  14 |                                   3 |                               29.0323 |                              5.69111 |                               55.09 |                              1.7771  |         5.69111 |
+| 1961-02-28 00:00:00 |                                  12 |                                   3 |                               28.5714 |                              9.895   |                               80.87 |                              2.88821 |         9.895   |
+| 1961-03-31 00:00:00 |                                  16 |                                   3 |                               25.8065 |                             11.8687  |                               97.59 |                              3.14806 |        11.8688  |
+| 1961-04-30 00:00:00 |                                   4 |                                   3 |                               50      |                              6.68333 |                              102.7  |                              3.42333 |         6.68333 |
+| 1961-05-31 00:00:00 |                                   5 |                                   3 |                               41.9355 |                              5.13    |                               70.22 |                              2.26516 |         5.13    |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.columns = indice_precipitation.columns.droplevel(0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;29.032258&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;55.09&lt;/td&gt;
+      &lt;td&gt;1.777097&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;28.571429&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;80.87&lt;/td&gt;
+      &lt;td&gt;2.888214&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;25.806452&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;97.59&lt;/td&gt;
+      &lt;td&gt;3.148065&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;50.000000&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;102.70&lt;/td&gt;
+      &lt;td&gt;3.423333&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;41.935484&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;70.22&lt;/td&gt;
+      &lt;td&gt;2.265161&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(indice_precipitation.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |
+|:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|
+| 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |
+| 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |
+| 1961-03-31 00:00:00 |    16 |     3 | 25.8065 | 11.8687  |  97.59 | 3.14806 | 11.8688  |
+| 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |
+| 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;En utilisant la colonne index datetime, nous voulons créer de nouvelles colonnes avec l&amp;rsquo;année et le mois.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation[&#39;year&#39;]  = indice_precipitation.index.year
+indice_precipitation[&#39;month&#39;]  = indice_precipitation.index.month
+indice_precipitation[&#39;month&#39;] = indice_precipitation.index.strftime(&#39;%b&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;month&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;29.032258&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;55.09&lt;/td&gt;
+      &lt;td&gt;1.777097&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Jan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;28.571429&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;80.87&lt;/td&gt;
+      &lt;td&gt;2.888214&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Feb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;25.806452&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;97.59&lt;/td&gt;
+      &lt;td&gt;3.148065&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Mar&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;50.000000&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;102.70&lt;/td&gt;
+      &lt;td&gt;3.423333&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Apr&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;41.935484&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;70.22&lt;/td&gt;
+      &lt;td&gt;2.265161&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;May&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(indice_precipitation.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
+|:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|-------:|:--------|
+| 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |   1961 | Jan     |
+| 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |   1961 | Feb     |
+| 1961-03-31 00:00:00 |    16 |     3 | 25.8065 | 11.8687  |  97.59 | 3.14806 | 11.8688  |   1961 | Mar     |
+| 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |   1961 | Apr     |
+| 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |   1961 | May     |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous voulons sauvegarder notre Dataframe &lt;b&gt; indice_precipitation &lt;/b&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.to_csv(&#39;indice_precipitation.csv&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;4-visualisation-des-résultats&#34;&gt;4- Visualisation des résultats&lt;/h2&gt;
+
+&lt;p&gt;Nous allons visualiser notre dataframe final &lt;b&gt; index_precipitation &lt;/b&gt; avec la bibliothèque Seaborn.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/seaborn.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cependant, nous verrons quelques exemples avec des graphiques multidimensionnels.
+- Boxplot: fonction &lt;b&gt; boxplot () &lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Utilisons notre DataFrame de précipitations:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import seaborn as sns 
+import matplotlib.pyplot as plt 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;month&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;29.032258&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;55.09&lt;/td&gt;
+      &lt;td&gt;1.777097&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Jan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;28.571429&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;80.87&lt;/td&gt;
+      &lt;td&gt;2.888214&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Feb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;25.806452&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;97.59&lt;/td&gt;
+      &lt;td&gt;3.148065&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Mar&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;50.000000&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;102.70&lt;/td&gt;
+      &lt;td&gt;3.423333&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Apr&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;41.935484&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;70.22&lt;/td&gt;
+      &lt;td&gt;2.265161&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;May&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(indice_precipitation.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
+|:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|-------:|:--------|
+| 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |   1961 | Jan     |
+| 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |   1961 | Feb     |
+| 1961-03-31 00:00:00 |    16 |     3 | 25.8065 | 11.8687  |  97.59 | 3.14806 | 11.8688  |   1961 | Mar     |
+| 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |   1961 | Apr     |
+| 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |   1961 | May     |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous voulons visualiser le nombre de jours avec des précipitations par mois. Nous allons ensuite tracer la variable Prcp1 à partir de notre DataFrame.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import seaborn as sns
+import matplotlib.pyplot as plt 
+ax = plt.axes()
+sns.boxplot(x=&amp;quot;month&amp;quot;, y=&amp;quot;Prcp1&amp;quot;, data=indice_precipitation, palette=&amp;quot;Set1&amp;quot;) 
+
+ax.set_title(&#39;Number of days with precipitation in Montreal from 1948 to 2017&#39;)
+ax.set_ylabel(&#39;%&#39;)
+
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8) 
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/prec1.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Histogramme: fonction &lt;b&gt; barplot () &lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pour cet exemple, nous allons tracer l&amp;rsquo;accumulation moyenne de la pré-participation par mois, pour ce faire, nous devons utiliser la variable «sum».&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ax = plt.axes()
+sns.barplot(x=&amp;quot;month&amp;quot;, y=&amp;quot;sum&amp;quot;, data=indice_precipitation)
+ax.set_title(&#39;Monthly mean of cumulated precipitation in Montréal from 1948 to 2017&#39;)
+ax.set_ylabel(&#39;mm&#39;)
+
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8) 
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/prec2.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;graphe bivarié: fonction &lt;b&gt; jointplot () &lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jointplot affiche une relation entre 2 variables (bivariée)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://seaborn.pydata.org/generated/seaborn.jointplot.html&#34; target=&#34;_blank&#34;&gt;https://seaborn.pydata.org/generated/seaborn.jointplot.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.jointplot(x=&amp;quot;Prcp1&amp;quot;, y=&amp;quot;sum&amp;quot;, data=indice_precipitation,kind=&#39;reg&#39;,
+                   space=0, height=6, ratio=4)
+plt.show()
+
+# kind = &#39;kde&#39; 
+# kind=&amp;quot;hex&amp;quot;
+# kind=&amp;quot;reg&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/prec3.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;graphe bivarié: fonction &lt;b&gt; pairplot () &lt;/b&gt;
+&lt;a href=&#34;https://seaborn.pydata.org/generated/seaborn.pairplot.html&#34; target=&#34;_blank&#34;&gt;https://seaborn.pydata.org/generated/seaborn.pairplot.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Attributes of interest
+cols = [&#39;CWD&#39;, 
+    &#39;SDII&#39;, 
+    &#39;sum&#39;, 
+    &#39;Prcp1&#39;, 
+    &#39;mean&#39;]
+
+pp = sns.pairplot(indice_precipitation[cols], 
+              height=1.8, aspect=1.2, markers=&amp;quot;+&amp;quot;,
+              plot_kws=dict(edgecolor=&amp;quot;k&amp;quot;, linewidth=0.5),
+              diag_kws=dict(shade=True), # &amp;quot;diag&amp;quot; adjusts/tunes the diagonal plots
+              diag_kind=&amp;quot;kde&amp;quot;) # use &amp;quot;kde&amp;quot; for diagonal plots
+
+fig = pp.fig 
+fig.subplots_adjust(top=0.93, wspace=0.3)
+fig.suptitle(&#39;Indice de précipitation Pairwise Plots&#39;, 
+          fontsize=14, fontweight=&#39;bold&#39;)
+plt.show()
+
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/prec4.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Matrice de corrélation:
+La bibliothèque Pandas dispose d&amp;rsquo;une méthode pour calculer les corrélations entre chaque colonne d&amp;rsquo;un DataFrame.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html&#34; target=&#34;_blank&#34;&gt;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;month&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;29.032258&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;55.09&lt;/td&gt;
+      &lt;td&gt;1.777097&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Jan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;28.571429&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;80.87&lt;/td&gt;
+      &lt;td&gt;2.888214&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Feb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;25.806452&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;97.59&lt;/td&gt;
+      &lt;td&gt;3.148065&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Mar&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;50.000000&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;102.70&lt;/td&gt;
+      &lt;td&gt;3.423333&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Apr&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;41.935484&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;70.22&lt;/td&gt;
+      &lt;td&gt;2.265161&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;May&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(indice_precipitation.head() , headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
+|:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|-------:|:--------|
+| 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |   1961 | Jan     |
+| 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |   1961 | Feb     |
+| 1961-03-31 00:00:00 |    16 |     3 | 25.8065 | 11.8687  |  97.59 | 3.14806 | 11.8688  |   1961 | Mar     |
+| 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |   1961 | Apr     |
+| 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |   1961 | May     |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous supprimons d&amp;rsquo;abord la colonne «année», puis appliquons la méthode .corr ().&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation2 = indice_precipitation.drop([&amp;quot;year&amp;quot;], axis=1)
+corr_matrix = indice_precipitation2.corr()
+corr_matrix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;-0.288579&lt;/td&gt;
+      &lt;td&gt;-0.687758&lt;/td&gt;
+      &lt;td&gt;0.025358&lt;/td&gt;
+      &lt;td&gt;-0.480416&lt;/td&gt;
+      &lt;td&gt;-0.481019&lt;/td&gt;
+      &lt;td&gt;0.025172&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;td&gt;-0.288579&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;0.631665&lt;/td&gt;
+      &lt;td&gt;-0.040071&lt;/td&gt;
+      &lt;td&gt;0.418940&lt;/td&gt;
+      &lt;td&gt;0.417954&lt;/td&gt;
+      &lt;td&gt;-0.039654&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;td&gt;-0.687758&lt;/td&gt;
+      &lt;td&gt;0.631665&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;-0.064514&lt;/td&gt;
+      &lt;td&gt;0.661685&lt;/td&gt;
+      &lt;td&gt;0.663935&lt;/td&gt;
+      &lt;td&gt;-0.064554&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;td&gt;0.025358&lt;/td&gt;
+      &lt;td&gt;-0.040071&lt;/td&gt;
+      &lt;td&gt;-0.064514&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;0.659944&lt;/td&gt;
+      &lt;td&gt;0.661113&lt;/td&gt;
+      &lt;td&gt;0.999642&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;td&gt;-0.480416&lt;/td&gt;
+      &lt;td&gt;0.418940&lt;/td&gt;
+      &lt;td&gt;0.661685&lt;/td&gt;
+      &lt;td&gt;0.659944&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;0.997694&lt;/td&gt;
+      &lt;td&gt;0.660287&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;td&gt;-0.481019&lt;/td&gt;
+      &lt;td&gt;0.417954&lt;/td&gt;
+      &lt;td&gt;0.663935&lt;/td&gt;
+      &lt;td&gt;0.661113&lt;/td&gt;
+      &lt;td&gt;0.997694&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;0.661422&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;td&gt;0.025172&lt;/td&gt;
+      &lt;td&gt;-0.039654&lt;/td&gt;
+      &lt;td&gt;-0.064554&lt;/td&gt;
+      &lt;td&gt;0.999642&lt;/td&gt;
+      &lt;td&gt;0.660287&lt;/td&gt;
+      &lt;td&gt;0.661422&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(corr_matrix, headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;|       |        CDD |        CWD |      Prcp1 |       SDII |       sum |      mean |            |
+|:------|-----------:|-----------:|-----------:|-----------:|----------:|----------:|-----------:|
+| CDD   |  1         | -0.288579  | -0.687758  |  0.0253577 | -0.480416 | -0.481019 |  0.0251715 |
+| CWD   | -0.288579  |  1         |  0.631665  | -0.0400715 |  0.41894  |  0.417954 | -0.0396542 |
+| Prcp1 | -0.687758  |  0.631665  |  1         | -0.0645136 |  0.661685 |  0.663935 | -0.0645538 |
+| SDII  |  0.0253577 | -0.0400715 | -0.0645136 |  1         |  0.659944 |  0.661113 |  0.999642  |
+| sum   | -0.480416  |  0.41894   |  0.661685  |  0.659944  |  1        |  0.997694 |  0.660287  |
+| mean  | -0.481019  |  0.417954  |  0.663935  |  0.661113  |  0.997694 |  1        |  0.661422  |
+|       |  0.0251715 | -0.0396542 | -0.0645538 |  0.999642  |  0.660287 |  0.661422 |  1         |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous pouvons appeler la fonction &lt;b&gt; .heatmap () &lt;/b&gt; pour visualiser notre matrice de corrélation et ainsi faciliter nos interprétations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fig, (ax) = plt.subplots(1, 1, figsize=(10,6))
+hm = sns.heatmap(corr_matrix, 
+                 ax=ax,           # Axes in which to draw the plot, otherwise use the currently-active Axes.
+                 cmap=&amp;quot;coolwarm&amp;quot;, # Color Map.
+                 #square=True,    # If True, set the Axes aspect to “equal” so each cell will be square-shaped.
+                 annot=True, 
+                 fmt=&#39;.2f&#39;,       # String formatting code to use when adding annotations.
+                 #annot_kws={&amp;quot;size&amp;quot;: 14},
+                 linewidths=.05)
+
+fig.subplots_adjust(top=0.93)
+fig.suptitle(&#39;Correlation Matrix: Precipitation Indices Montreal Station&#39;, 
+              fontsize=14, 
+              fontweight=&#39;bold&#39;)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/prec5.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;bonus-ajoutez-des-indices-de-corrélation-avec-la-bibliothèque-scipy&#34;&gt;Bonus: ajoutez des indices de corrélation avec la bibliothèque scipy&lt;/h3&gt;
+
+&lt;p&gt;Le module &lt;b&gt; stats &lt;/b&gt; de la &lt;b&gt; bibliothèque Scipy &lt;/b&gt; possède de nombreuses fonctions statistiques.
+&lt;a href=&#34;https://docs.scipy.org/doc/scipy/reference/stats.html&#34; target=&#34;_blank&#34;&gt;https://docs.scipy.org/doc/scipy/reference/stats.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def corr_pearson(x, y, **kws):
+    r, p = stats.pearsonr(x, y)
+    p_stars = &#39;&#39;
+    if p &amp;lt;= 0.05:
+        p_stars = &#39;*&#39;
+    if p &amp;lt;= 0.01:
+        p_stars = &#39;**&#39;
+    if p &amp;lt;= 0.001:
+        p_stars = &#39;***&#39;
+   # r, _ = stats.spearmanr(x, y)
+    ax = plt.gca()   
+    pos = (0, .9) 
+    color2=&#39;red&#39;                                                                   
+    ax.annotate(&amp;quot;Pearson = {:.2f}&amp;quot;.format(r) + p_stars,
+                xy=pos, xycoords=ax.transAxes, color=color2, fontweight=&#39;bold&#39;)
+    
+
+def corr_spearman(x, y, **kws):
+    r, p = stats.spearmanr(x, y)
+    p_stars = &#39;&#39;
+    if p &amp;lt;= 0.05:
+        p_stars = &#39;*&#39;
+    if p &amp;lt;= 0.01:
+        p_stars = &#39;**&#39;
+    if p &amp;lt;= 0.001:
+        p_stars = &#39;***&#39;
+   # r, _ = stats.spearmanr(x, y)
+    ax = plt.gca()  
+    pos = (0, .6) 
+    color2=&#39;darkgreen&#39; 
+    ax.annotate(&amp;quot;Spearman = {:.2f}&amp;quot;.format(r) + p_stars,
+                xy=pos, xycoords=ax.transAxes, color=color2, fontweight=&#39;bold&#39;)
+
+def corr_kendall(x, y, **kws):
+    r, p = stats.kendalltau(x, y)
+    p_stars = &#39;&#39;
+    if p &amp;lt;= 0.05:
+        p_stars = &#39;*&#39;
+    if p &amp;lt;= 0.01:
+        p_stars = &#39;**&#39;
+    if p &amp;lt;= 0.001:
+        p_stars = &#39;***&#39;
+   # r, _ = stats.spearmanr(x, y)
+    ax = plt.gca()   
+    pos = (0, .3) 
+    color2=&#39;darkorange&#39; 
+    ax.annotate(&amp;quot;Kendall = {:.2f}&amp;quot;.format(r) + p_stars,
+                xy=pos, xycoords=ax.transAxes, color=color2, fontweight=&#39;bold&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_precipitation.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;CDD&lt;/th&gt;
+      &lt;th&gt;CWD&lt;/th&gt;
+      &lt;th&gt;Prcp1&lt;/th&gt;
+      &lt;th&gt;SDII&lt;/th&gt;
+      &lt;th&gt;sum&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;month&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-01-31&lt;/th&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;29.032258&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;55.09&lt;/td&gt;
+      &lt;td&gt;1.777097&lt;/td&gt;
+      &lt;td&gt;5.691111&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Jan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-02-28&lt;/th&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;28.571429&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;80.87&lt;/td&gt;
+      &lt;td&gt;2.888214&lt;/td&gt;
+      &lt;td&gt;9.895000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Feb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-03-31&lt;/th&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;25.806452&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;97.59&lt;/td&gt;
+      &lt;td&gt;3.148065&lt;/td&gt;
+      &lt;td&gt;11.868750&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Mar&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-04-30&lt;/th&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;50.000000&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;102.70&lt;/td&gt;
+      &lt;td&gt;3.423333&lt;/td&gt;
+      &lt;td&gt;6.683333&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;Apr&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1961-05-31&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;41.935484&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;70.22&lt;/td&gt;
+      &lt;td&gt;2.265161&lt;/td&gt;
+      &lt;td&gt;5.130000&lt;/td&gt;
+      &lt;td&gt;1961&lt;/td&gt;
+      &lt;td&gt;May&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;indice_month=indice_precipitation[[&amp;quot;CWD&amp;quot;, &amp;quot;SDII&amp;quot;, &amp;quot;sum&amp;quot;, &amp;quot;Prcp1&amp;quot;]].loc[(indice_precipitation[&amp;quot;month&amp;quot;]==&amp;quot;Jan&amp;quot;)]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from scipy import stats
+import seaborn as sns; sns.set()
+
+g = sns.PairGrid(indice_month[[&amp;quot;CWD&amp;quot;, &amp;quot;SDII&amp;quot;, &amp;quot;sum&amp;quot;, &amp;quot;Prcp1&amp;quot;]]) 
+
+g.map_upper(corr_pearson) 
+g.map_upper(corr_spearman) 
+g.map_upper(corr_kendall) 
+g.map_lower(sns.regplot) 
+g.map_diag(plt.hist) 
+g.set(alpha=0.5)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/prec6.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Projet sur les données de températures ECCC</title>
+      <link>/courses/formation_python/project1-eccc_temperature/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/formation_python/project1-eccc_temperature/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/pylogo.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;objectifs&#34;&gt;Objectifs&lt;/h2&gt;
+
+&lt;h2 id=&#34;projet-1-données-de-température-d-environnement-et-changement-climatique-canada&#34;&gt;Projet 1: Données de température d&amp;rsquo;Environnement et Changement Climatique Canada&lt;/h2&gt;
+
+&lt;p&gt;Dans les sections précédentes, nous avons présenté comment utiliser la bibliothèque Pandas qui nous a permis de traiter et de manipuler des ensembles de données.&lt;/p&gt;
+
+&lt;p&gt;En combinant cela avec les bibliothèques Datetime et Matplotlib de Python, nous avons pu visualiser rapidement nos données.&lt;/p&gt;
+
+&lt;p&gt;Nous continuerons à découvrir la fonctionnalité de ces bibliothèques dans un cas pratique en analysant les données quotidiennes de température enregistrées par l&amp;rsquo;une des stations d&amp;rsquo;Environnement et Changement climatique Canada situées à Montréal / McTavish entre la période 1948 et 2017 (fichier nommé &amp;lsquo;MONTREAL_tasmoy_1948_2017.txt&amp;rsquo; &amp;lsquo; dans le répertoire ./DATA)&lt;/p&gt;
+
+&lt;p&gt;Pour compléter et enrichir notre analyse, une nouvelle bibliothèque Python sera utilisée: &lt;b&gt; Seaborn &lt;/b&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;la bibliothèque Seaborn est basée sur matplotlib.&lt;/li&gt;
+&lt;li&gt;il permet de dessiner des graphiques plus complexes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pour plus d&amp;rsquo;informations:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html&#34; target=&#34;_blank&#34;&gt;https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ce lien présente une galerie de types de graphiques à réaliser avec Seaborn:
+&lt;a href=&#34;https://seaborn.pydata.org/examples/index.html&#34; target=&#34;_blank&#34;&gt;https://seaborn.pydata.org/examples/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;1-ouverture-et-lecture-de-nos-séries-de-données&#34;&gt;1- Ouverture et lecture de nos séries de données&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import numpy as np
+import pandas as pd
+import datetime
+from datetime import date
+import numpy as np 
+import warnings
+warnings.filterwarnings(&amp;quot;ignore&amp;quot;)
+
+df = pd.DataFrame()
+
+# We open ascii file and store information in a new DataFrame
+with open(&#39;./DATA/MONTREAL_tasmoy_1948_2017.txt&#39;, &#39;r&#39;) as file:
+     rows = file.read()
+data_EC_Montreal = [float(row) for row in rows.split()]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous avons créé un champ 1D mais nous n&amp;rsquo;avons aucune information temporelle dans notre fichier.&lt;/p&gt;
+
+&lt;p&gt;Sachant que notre enregistrement couvre la période 1948-2017, nous formaterons nos dates avec le module &lt;b&gt; datetime &lt;/b&gt; de Python.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# We know that the time series starts on January 1, 1948 and ends on December 31, 2017 inclusively
+# We create a Datetime object instance to complete our DataFrame
+start = date(1948, 1, 1)
+end = date(2017, 12, 31)
+delta=(end-start) 
+nb_days = delta.days + 1 
+rng = pd.date_range(start, periods=nb_days, freq=&#39;D&#39;)
+
+# We will use DateTime object as DataFrame index
+df[&#39;datetime&#39;] = rng
+df.index = df[&#39;datetime&#39;] 
+
+df[&#39;Temperature Montreal&#39;] = data_EC_Montreal
+df.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;Temperature Montreal&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-01&lt;/th&gt;
+      &lt;td&gt;1948-01-01&lt;/td&gt;
+      &lt;td&gt;-12.0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-02&lt;/th&gt;
+      &lt;td&gt;1948-01-02&lt;/td&gt;
+      &lt;td&gt;-8.9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-03&lt;/th&gt;
+      &lt;td&gt;1948-01-03&lt;/td&gt;
+      &lt;td&gt;-3.4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-04&lt;/th&gt;
+      &lt;td&gt;1948-01-04&lt;/td&gt;
+      &lt;td&gt;-3.4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-05&lt;/th&gt;
+      &lt;td&gt;1948-01-05&lt;/td&gt;
+      &lt;td&gt;-3.1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(df.head(), headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            | datetime            |   Temperature Montreal |
+|:--------------------|:--------------------|-----------------------:|
+| 1948-01-01 00:00:00 | 1948-01-01 00:00:00 |                  -12   |
+| 1948-01-02 00:00:00 | 1948-01-02 00:00:00 |                   -8.9 |
+| 1948-01-03 00:00:00 | 1948-01-03 00:00:00 |                   -3.4 |
+| 1948-01-04 00:00:00 | 1948-01-04 00:00:00 |                   -3.4 |
+| 1948-01-05 00:00:00 | 1948-01-05 00:00:00 |                   -3.1 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;dir(df) # the dir () function allows to list the functions that are applicable to our DataFrame object
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;[&#39;T&#39;,
+ &#39;_AXIS_ALIASES&#39;,
+ &#39;_AXIS_IALIASES&#39;,
+ &#39;_AXIS_LEN&#39;,
+ ...
+ &#39;var&#39;,
+ &#39;where&#39;,
+ &#39;xs&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nous avons attribué notre série temporelle dans un Pandas DataFrame, puis formaté la date en tant qu&amp;rsquo;objet Datetime.&lt;/p&gt;
+
+&lt;p&gt;Il est désormais facile de manipuler l&amp;rsquo;ensemble de données et d&amp;rsquo;appliquer quelques fonctions simples.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-calcul-d-indices-de-température&#34;&gt;2- Calcul d&amp;rsquo;indices de température&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Nous développerons et appliquerons une fonction pour calculer les quantiles de notre distribution&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;En rééchantillonnant notre série avec la méthode &lt;b&gt; .resample () &lt;/b&gt; de Pandas, nous verrons comment appliquer les fonctions natives de numpy et appliquer notre propre fonction.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Creating our index that calculates the quantile of the distribution
+# We use the numpy .percentile () function
+def percentile(n):
+def percentile_(x):
+    return np.nanpercentile(x, n)
+percentile_.__name__ = &#39;percentile_%s&#39; % n
+return percentile_         
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Méthodes &lt;b&gt; .resample () &lt;/b&gt; et &lt;b&gt; .agg () &lt;/b&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La méthode &lt;b&gt; .resample () &lt;/b&gt; est très utile pour la conversion de fréquence et le rééchantillonnage de séries chronologiques. L&amp;rsquo;objet (ici DataFrame) doit avoir un index data / time (DatetimeIndex) pour être utilisé.
+Plusieurs fréquences de rééchantillonnage sont disponibles (heure, semaine, mois, saison, année &amp;hellip;)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.resample.html&#34; target=&#34;_blank&#34;&gt;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.resample.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;La méthode &lt;b&gt; .agg () &lt;/b&gt; est utilisée pour l&amp;rsquo;agrégation des données selon une liste de fonctions à appliquer à chaque colonne, aboutissant à un résultat agrégé avec un index hiérarchique.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html&#34; target=&#34;_blank&#34;&gt;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Dans notre exemple, nous rééchantillonnerons notre ensemble de données par mois et calculerons pour chaque mois la moyenne, le minimum, le maximum et les 90e et 95e quantiles.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;resamp_Montreal = df.resample(&#39;M&#39;).agg([np.mean, np.min, np.max, percentile(90), percentile(95)])
+resamp_Montreal.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th colspan=&#34;5&#34; halign=&#34;left&#34;&gt;Temperature Montreal&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;amin&lt;/th&gt;
+      &lt;th&gt;amax&lt;/th&gt;
+      &lt;th&gt;percentile_90&lt;/th&gt;
+      &lt;th&gt;percentile_95&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-31&lt;/th&gt;
+      &lt;td&gt;-10.990323&lt;/td&gt;
+      &lt;td&gt;-23.4&lt;/td&gt;
+      &lt;td&gt;-3.1&lt;/td&gt;
+      &lt;td&gt;-3.60&lt;/td&gt;
+      &lt;td&gt;-3.40&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-02-29&lt;/th&gt;
+      &lt;td&gt;-9.586207&lt;/td&gt;
+      &lt;td&gt;-20.8&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;-2.64&lt;/td&gt;
+      &lt;td&gt;-0.32&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-03-31&lt;/th&gt;
+      &lt;td&gt;-2.461290&lt;/td&gt;
+      &lt;td&gt;-17.8&lt;/td&gt;
+      &lt;td&gt;7.5&lt;/td&gt;
+      &lt;td&gt;5.60&lt;/td&gt;
+      &lt;td&gt;6.40&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-04-30&lt;/th&gt;
+      &lt;td&gt;6.640000&lt;/td&gt;
+      &lt;td&gt;-1.7&lt;/td&gt;
+      &lt;td&gt;14.5&lt;/td&gt;
+      &lt;td&gt;12.08&lt;/td&gt;
+      &lt;td&gt;13.13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-05-31&lt;/th&gt;
+      &lt;td&gt;12.664516&lt;/td&gt;
+      &lt;td&gt;6.7&lt;/td&gt;
+      &lt;td&gt;21.7&lt;/td&gt;
+      &lt;td&gt;16.70&lt;/td&gt;
+      &lt;td&gt;18.35&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(resamp_Montreal.head(), headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |   (&#39;Temperature Montreal&#39;, &#39;mean&#39;) |   (&#39;Temperature Montreal&#39;, &#39;amin&#39;) |   (&#39;Temperature Montreal&#39;, &#39;amax&#39;) |   (&#39;Temperature Montreal&#39;, &#39;percentile_90&#39;) |   (&#39;Temperature Montreal&#39;, &#39;percentile_95&#39;) |
+|:--------------------|-----------------------------------:|-----------------------------------:|-----------------------------------:|--------------------------------------------:|--------------------------------------------:|
+| 1948-01-31 00:00:00 |                          -10.9903  |                              -23.4 |                               -3.1 |                                       -3.6  |                                       -3.4  |
+| 1948-02-29 00:00:00 |                           -9.58621 |                              -20.8 |                                3.6 |                                       -2.64 |                                       -0.32 |
+| 1948-03-31 00:00:00 |                           -2.46129 |                              -17.8 |                                7.5 |                                        5.6  |                                        6.4  |
+| 1948-04-30 00:00:00 |                            6.64    |                               -1.7 |                               14.5 |                                       12.08 |                                       13.13 |
+| 1948-05-31 00:00:00 |                           12.6645  |                                6.7 |                               21.7 |                                       16.7  |                                       18.35 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# simple step to remove the row &#39;Temperature Montreal&#39; 
+resamp_Montreal = resamp_Montreal.loc[:,&#39;Temperature Montreal&#39;] 
+resamp_Montreal.head() 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;amin&lt;/th&gt;
+      &lt;th&gt;amax&lt;/th&gt;
+      &lt;th&gt;percentile_90&lt;/th&gt;
+      &lt;th&gt;percentile_95&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-31&lt;/th&gt;
+      &lt;td&gt;-10.990323&lt;/td&gt;
+      &lt;td&gt;-23.4&lt;/td&gt;
+      &lt;td&gt;-3.1&lt;/td&gt;
+      &lt;td&gt;-3.60&lt;/td&gt;
+      &lt;td&gt;-3.40&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-02-29&lt;/th&gt;
+      &lt;td&gt;-9.586207&lt;/td&gt;
+      &lt;td&gt;-20.8&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;-2.64&lt;/td&gt;
+      &lt;td&gt;-0.32&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-03-31&lt;/th&gt;
+      &lt;td&gt;-2.461290&lt;/td&gt;
+      &lt;td&gt;-17.8&lt;/td&gt;
+      &lt;td&gt;7.5&lt;/td&gt;
+      &lt;td&gt;5.60&lt;/td&gt;
+      &lt;td&gt;6.40&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-04-30&lt;/th&gt;
+      &lt;td&gt;6.640000&lt;/td&gt;
+      &lt;td&gt;-1.7&lt;/td&gt;
+      &lt;td&gt;14.5&lt;/td&gt;
+      &lt;td&gt;12.08&lt;/td&gt;
+      &lt;td&gt;13.13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-05-31&lt;/th&gt;
+      &lt;td&gt;12.664516&lt;/td&gt;
+      &lt;td&gt;6.7&lt;/td&gt;
+      &lt;td&gt;21.7&lt;/td&gt;
+      &lt;td&gt;16.70&lt;/td&gt;
+      &lt;td&gt;18.35&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(resamp_Montreal.head(), headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |      mean |   amin |   amax |   percentile_90 |   percentile_95 |
+|:--------------------|----------:|-------:|-------:|----------------:|----------------:|
+| 1948-01-31 00:00:00 | -10.9903  |  -23.4 |   -3.1 |           -3.6  |           -3.4  |
+| 1948-02-29 00:00:00 |  -9.58621 |  -20.8 |    3.6 |           -2.64 |           -0.32 |
+| 1948-03-31 00:00:00 |  -2.46129 |  -17.8 |    7.5 |            5.6  |            6.4  |
+| 1948-04-30 00:00:00 |   6.64    |   -1.7 |   14.5 |           12.08 |           13.13 |
+| 1948-05-31 00:00:00 |  12.6645  |    6.7 |   21.7 |           16.7  |           18.35 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-quelques-exemples-graphique-avec-la-librairie-seaborn&#34;&gt;3- Quelques exemples graphique avec la librairie Seaborn&lt;/h2&gt;
+
+&lt;p&gt;Maintenant que nous avons quelques statistiques sur notre DataFrame, nous allons utiliser la bibliothèque Seaborn de Python pour les visualiser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/seaborn.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Exemple: Heatmap&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://seaborn.pydata.org/generated/seaborn.heatmap.html&#34; target=&#34;_blank&#34;&gt;https://seaborn.pydata.org/generated/seaborn.heatmap.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Par exemple, nous aimerions observer la variation de la température moyenne pour tous les mois de l&amp;rsquo;année et toutes les années. Nous allons définir deux nouvelles colonnes dans notre DataFrame dans lesquelles seront attribuées uniquement les années et les mois respectivement.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;resamp_Montreal[&#39;year&#39;]  = resamp_Montreal.index.year
+resamp_Montreal[&#39;MonthNo&#39;] = resamp_Montreal.index.month
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;resamp_Montreal.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;amin&lt;/th&gt;
+      &lt;th&gt;amax&lt;/th&gt;
+      &lt;th&gt;percentile_90&lt;/th&gt;
+      &lt;th&gt;percentile_95&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;MonthNo&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-31&lt;/th&gt;
+      &lt;td&gt;-10.990323&lt;/td&gt;
+      &lt;td&gt;-23.4&lt;/td&gt;
+      &lt;td&gt;-3.1&lt;/td&gt;
+      &lt;td&gt;-3.60&lt;/td&gt;
+      &lt;td&gt;-3.40&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-02-29&lt;/th&gt;
+      &lt;td&gt;-9.586207&lt;/td&gt;
+      &lt;td&gt;-20.8&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;-2.64&lt;/td&gt;
+      &lt;td&gt;-0.32&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-03-31&lt;/th&gt;
+      &lt;td&gt;-2.461290&lt;/td&gt;
+      &lt;td&gt;-17.8&lt;/td&gt;
+      &lt;td&gt;7.5&lt;/td&gt;
+      &lt;td&gt;5.60&lt;/td&gt;
+      &lt;td&gt;6.40&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-04-30&lt;/th&gt;
+      &lt;td&gt;6.640000&lt;/td&gt;
+      &lt;td&gt;-1.7&lt;/td&gt;
+      &lt;td&gt;14.5&lt;/td&gt;
+      &lt;td&gt;12.08&lt;/td&gt;
+      &lt;td&gt;13.13&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-05-31&lt;/th&gt;
+      &lt;td&gt;12.664516&lt;/td&gt;
+      &lt;td&gt;6.7&lt;/td&gt;
+      &lt;td&gt;21.7&lt;/td&gt;
+      &lt;td&gt;16.70&lt;/td&gt;
+      &lt;td&gt;18.35&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(resamp_Montreal.head(), headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |      mean |   amin |   amax |   percentile_90 |   percentile_95 |   year |   MonthNo |
+|:--------------------|----------:|-------:|-------:|----------------:|----------------:|-------:|----------:|
+| 1948-01-31 00:00:00 | -10.9903  |  -23.4 |   -3.1 |           -3.6  |           -3.4  |   1948 |         1 |
+| 1948-02-29 00:00:00 |  -9.58621 |  -20.8 |    3.6 |           -2.64 |           -0.32 |   1948 |         2 |
+| 1948-03-31 00:00:00 |  -2.46129 |  -17.8 |    7.5 |            5.6  |            6.4  |   1948 |         3 |
+| 1948-04-30 00:00:00 |   6.64    |   -1.7 |   14.5 |           12.08 |           13.13 |   1948 |         4 |
+| 1948-05-31 00:00:00 |  12.6645  |    6.7 |   21.7 |           16.7  |           18.35 |   1948 |         5 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Avant de tracer notre &amp;ldquo;heatmap&amp;rdquo;, nous devons réorganiser notre dataframe.
+- La méthode &lt;b&gt; .pivot_table () &lt;/b&gt;: cette méthode permet de croiser des tables de manière dynamique.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html&#34; target=&#34;_blank&#34;&gt;https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Nous aimerions visualiser uniquement les températures mensuelles moyennes, donc travaillez avec la colonne «moyenne», mettez l&amp;rsquo;année dans Index et ayez un mois par colonne. La méthode &lt;b&gt; .pivot_table () &lt;/b&gt; nous permet de faire cela.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Montreal_pivot = resamp_Montreal.pivot_table(values=&#39;mean&#39;,index=&#39;year&#39;,columns=[&#39;MonthNo&#39;])
+Montreal_pivot.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;MonthNo&lt;/th&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;th&gt;5&lt;/th&gt;
+      &lt;th&gt;6&lt;/th&gt;
+      &lt;th&gt;7&lt;/th&gt;
+      &lt;th&gt;8&lt;/th&gt;
+      &lt;th&gt;9&lt;/th&gt;
+      &lt;th&gt;10&lt;/th&gt;
+      &lt;th&gt;11&lt;/th&gt;
+      &lt;th&gt;12&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948&lt;/th&gt;
+      &lt;td&gt;-10.990323&lt;/td&gt;
+      &lt;td&gt;-9.586207&lt;/td&gt;
+      &lt;td&gt;-2.461290&lt;/td&gt;
+      &lt;td&gt;6.640000&lt;/td&gt;
+      &lt;td&gt;12.664516&lt;/td&gt;
+      &lt;td&gt;17.746667&lt;/td&gt;
+      &lt;td&gt;21.490323&lt;/td&gt;
+      &lt;td&gt;21.106452&lt;/td&gt;
+      &lt;td&gt;17.150000&lt;/td&gt;
+      &lt;td&gt;9.100000&lt;/td&gt;
+      &lt;td&gt;5.983333&lt;/td&gt;
+      &lt;td&gt;-2.522581&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1949&lt;/th&gt;
+      &lt;td&gt;-5.774194&lt;/td&gt;
+      &lt;td&gt;-5.692857&lt;/td&gt;
+      &lt;td&gt;-2.196774&lt;/td&gt;
+      &lt;td&gt;7.516667&lt;/td&gt;
+      &lt;td&gt;13.512903&lt;/td&gt;
+      &lt;td&gt;20.560000&lt;/td&gt;
+      &lt;td&gt;22.870968&lt;/td&gt;
+      &lt;td&gt;21.545161&lt;/td&gt;
+      &lt;td&gt;14.620000&lt;/td&gt;
+      &lt;td&gt;12.025806&lt;/td&gt;
+      &lt;td&gt;-0.193333&lt;/td&gt;
+      &lt;td&gt;-3.219355&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1950&lt;/th&gt;
+      &lt;td&gt;-5.348387&lt;/td&gt;
+      &lt;td&gt;-9.796429&lt;/td&gt;
+      &lt;td&gt;-4.893548&lt;/td&gt;
+      &lt;td&gt;4.710000&lt;/td&gt;
+      &lt;td&gt;14.116129&lt;/td&gt;
+      &lt;td&gt;18.956667&lt;/td&gt;
+      &lt;td&gt;21.325806&lt;/td&gt;
+      &lt;td&gt;19.112903&lt;/td&gt;
+      &lt;td&gt;13.616667&lt;/td&gt;
+      &lt;td&gt;10.100000&lt;/td&gt;
+      &lt;td&gt;3.956667&lt;/td&gt;
+      &lt;td&gt;-4.835484&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1951&lt;/th&gt;
+      &lt;td&gt;-7.354839&lt;/td&gt;
+      &lt;td&gt;-6.485714&lt;/td&gt;
+      &lt;td&gt;-0.490323&lt;/td&gt;
+      &lt;td&gt;7.296667&lt;/td&gt;
+      &lt;td&gt;14.409677&lt;/td&gt;
+      &lt;td&gt;18.270000&lt;/td&gt;
+      &lt;td&gt;21.312903&lt;/td&gt;
+      &lt;td&gt;18.667742&lt;/td&gt;
+      &lt;td&gt;15.133333&lt;/td&gt;
+      &lt;td&gt;10.370968&lt;/td&gt;
+      &lt;td&gt;0.180000&lt;/td&gt;
+      &lt;td&gt;-5.312903&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1952&lt;/th&gt;
+      &lt;td&gt;-7.803226&lt;/td&gt;
+      &lt;td&gt;-5.272414&lt;/td&gt;
+      &lt;td&gt;-0.987097&lt;/td&gt;
+      &lt;td&gt;7.996667&lt;/td&gt;
+      &lt;td&gt;12.406452&lt;/td&gt;
+      &lt;td&gt;19.600000&lt;/td&gt;
+      &lt;td&gt;23.080645&lt;/td&gt;
+      &lt;td&gt;20.732258&lt;/td&gt;
+      &lt;td&gt;16.030000&lt;/td&gt;
+      &lt;td&gt;7.674194&lt;/td&gt;
+      &lt;td&gt;3.656667&lt;/td&gt;
+      &lt;td&gt;-3.183871&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(Montreal_pivot.head(), headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;|   year |         1 |        2 |         3 |       4 |       5 |       6 |       7 |       8 |       9 |       10 |        11 |       12 |
+|-------:|----------:|---------:|----------:|--------:|--------:|--------:|--------:|--------:|--------:|---------:|----------:|---------:|
+|   1948 | -10.9903  | -9.58621 | -2.46129  | 6.64    | 12.6645 | 17.7467 | 21.4903 | 21.1065 | 17.15   |  9.1     |  5.98333  | -2.52258 |
+|   1949 |  -5.77419 | -5.69286 | -2.19677  | 7.51667 | 13.5129 | 20.56   | 22.871  | 21.5452 | 14.62   | 12.0258  | -0.193333 | -3.21935 |
+|   1950 |  -5.34839 | -9.79643 | -4.89355  | 4.71    | 14.1161 | 18.9567 | 21.3258 | 19.1129 | 13.6167 | 10.1     |  3.95667  | -4.83548 |
+|   1951 |  -7.35484 | -6.48571 | -0.490323 | 7.29667 | 14.4097 | 18.27   | 21.3129 | 18.6677 | 15.1333 | 10.371   |  0.18     | -5.3129  |
+|   1952 |  -7.80323 | -5.27241 | -0.987097 | 7.99667 | 12.4065 | 19.6    | 23.0806 | 20.7323 | 16.03   |  7.67419 |  3.65667  | -3.18387 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On applique ensuite la méthode &lt;b&gt;.heatmap()&lt;/b&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import seaborn as sns 
+import matplotlib.pyplot as plt 
+ax = plt.axes()
+sns.heatmap(Montreal_pivot)
+figure = ax.get_figure()    
+figure.set_size_inches(15, 10) 
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/temp1.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On peut améliorer notre affichage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ax = plt.axes()
+sns.heatmap(Montreal_pivot, cmap=&#39;RdYlGn_r&#39;, linewidths=0.5, annot=True , ax = ax,vmin=-30, vmax=30,center=0, fmt=&#39;.1f&#39;,yticklabels=True, cbar_kws={&#39;label&#39;: &#39;Celcius&#39;})
+ax.set_title(&#39;Mean temperature&#39;, weight=&#39;bold&#39;, fontsize=&amp;quot;x-large&amp;quot;)
+figure = ax.get_figure()    
+figure.set_size_inches(22, 15) 
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/temp2.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;d&amp;rsquo;autres: Boxplot,  violin plot, line plot&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://seaborn.pydata.org/generated/seaborn.boxplot.html&#34; target=&#34;_blank&#34;&gt;https://seaborn.pydata.org/generated/seaborn.boxplot.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://seaborn.pydata.org/generated/seaborn.violinplot.html&#34; target=&#34;_blank&#34;&gt;https://seaborn.pydata.org/generated/seaborn.violinplot.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://seaborn.pydata.org/generated/seaborn.lineplot.html&#34; target=&#34;_blank&#34;&gt;https://seaborn.pydata.org/generated/seaborn.lineplot.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Dans un premier temps, nous créons une nouvelle variable contenant les mois mais en chaîne de caractères. Pour cela, nous appliquons la méthode &lt;b&gt; .strftime () &lt;/b&gt; de datetime.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;resamp_Montreal[&#39;month&#39;] = resamp_Montreal.index.strftime(&amp;quot;%b&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;resamp_Montreal.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&#34;text-align: right;&#34;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;th&gt;amin&lt;/th&gt;
+      &lt;th&gt;amax&lt;/th&gt;
+      &lt;th&gt;percentile_90&lt;/th&gt;
+      &lt;th&gt;percentile_95&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;MonthNo&lt;/th&gt;
+      &lt;th&gt;month&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;datetime&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-01-31&lt;/th&gt;
+      &lt;td&gt;-10.990323&lt;/td&gt;
+      &lt;td&gt;-23.4&lt;/td&gt;
+      &lt;td&gt;-3.1&lt;/td&gt;
+      &lt;td&gt;-3.60&lt;/td&gt;
+      &lt;td&gt;-3.40&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Jan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-02-29&lt;/th&gt;
+      &lt;td&gt;-9.586207&lt;/td&gt;
+      &lt;td&gt;-20.8&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;-2.64&lt;/td&gt;
+      &lt;td&gt;-0.32&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Feb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-03-31&lt;/th&gt;
+      &lt;td&gt;-2.461290&lt;/td&gt;
+      &lt;td&gt;-17.8&lt;/td&gt;
+      &lt;td&gt;7.5&lt;/td&gt;
+      &lt;td&gt;5.60&lt;/td&gt;
+      &lt;td&gt;6.40&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Mar&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-04-30&lt;/th&gt;
+      &lt;td&gt;6.640000&lt;/td&gt;
+      &lt;td&gt;-1.7&lt;/td&gt;
+      &lt;td&gt;14.5&lt;/td&gt;
+      &lt;td&gt;12.08&lt;/td&gt;
+      &lt;td&gt;13.13&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Apr&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1948-05-31&lt;/th&gt;
+      &lt;td&gt;12.664516&lt;/td&gt;
+      &lt;td&gt;6.7&lt;/td&gt;
+      &lt;td&gt;21.7&lt;/td&gt;
+      &lt;td&gt;16.70&lt;/td&gt;
+      &lt;td&gt;18.35&lt;/td&gt;
+      &lt;td&gt;1948&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;May&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tabulate import tabulate
+print(tabulate(resamp_Montreal.head(), headers=&#39;keys&#39;, tablefmt=&#39;pipe&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;| datetime            |      mean |   amin |   amax |   percentile_90 |   percentile_95 |   year |   MonthNo | month   |
+|:--------------------|----------:|-------:|-------:|----------------:|----------------:|-------:|----------:|:--------|
+| 1948-01-31 00:00:00 | -10.9903  |  -23.4 |   -3.1 |           -3.6  |           -3.4  |   1948 |         1 | Jan     |
+| 1948-02-29 00:00:00 |  -9.58621 |  -20.8 |    3.6 |           -2.64 |           -0.32 |   1948 |         2 | Feb     |
+| 1948-03-31 00:00:00 |  -2.46129 |  -17.8 |    7.5 |            5.6  |            6.4  |   1948 |         3 | Mar     |
+| 1948-04-30 00:00:00 |   6.64    |   -1.7 |   14.5 |           12.08 |           13.13 |   1948 |         4 | Apr     |
+| 1948-05-31 00:00:00 |  12.6645  |    6.7 |   21.7 |           16.7  |           18.35 |   1948 |         5 | May     |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Boxplot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ax = plt.axes()
+sns.boxplot(x=&amp;quot;month&amp;quot;, y=&amp;quot;mean&amp;quot;, data=resamp_Montreal, palette=&amp;quot;Set1&amp;quot;)  
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8) 
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/temp3.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Violin plot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ax = plt.axes()
+sns.violinplot(x=&amp;quot;month&amp;quot;, y=&amp;quot;mean&amp;quot;, data=resamp_Montreal, palette=&amp;quot;Set1&amp;quot;)  
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/temp4.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Line plot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ax = plt.axes()
+sns.lineplot(x=resamp_Montreal.index.year, y=&amp;quot;mean&amp;quot;,
+         hue=&amp;quot;month&amp;quot;,
+         data=resamp_Montreal,
+         palette=&amp;quot;tab10&amp;quot;)
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/temp5.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.catplot(x=&amp;quot;month&amp;quot;, y=&amp;quot;percentile_90&amp;quot;, data=resamp_Montreal, kind=&amp;quot;swarm&amp;quot;)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/temp6.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;On peut combiner plusieurs graphiques Seaborn:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;ax = plt.axes()
+ax1 = plt.subplot2grid((2, 2), (0, 0), colspan=2)
+sns.lineplot(x=resamp_Montreal.index.year, y=&amp;quot;mean&amp;quot;, hue=&amp;quot;month&amp;quot;, data=resamp_Montreal, palette=&amp;quot;tab10&amp;quot;)
+ax2 = plt.subplot2grid((2, 2), (1, 0), colspan=1)
+sns.boxplot(x=&amp;quot;month&amp;quot;, y=&amp;quot;mean&amp;quot;, data=resamp_Montreal, palette=&amp;quot;tab10&amp;quot;) 
+ax3 = plt.subplot2grid((2, 2), (1, 1), colspan=1)
+sns.violinplot(x=&amp;quot;month&amp;quot;, y=&amp;quot;mean&amp;quot;, data=resamp_Montreal, palette=&amp;quot;tab10&amp;quot;) 
+figure = ax.get_figure()    
+figure.set_size_inches(12, 8) 
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/formation/temp7.png&#34; alt=&#34;image0&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

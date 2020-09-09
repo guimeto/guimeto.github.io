@@ -504,6 +504,14 @@ Pour illustrer certaines fonctionnalités du module Python matplotlib."><meta pr
         <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
       </li>
       
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">Projet sur les données de températures ECCC</a>
+      </li>
+      
     </ul>
     
 
@@ -547,7 +555,7 @@ Pour illustrer certaines fonctionnalités du module Python matplotlib."><meta pr
           <div class="article-style">
             
 
-<p><img src="/img/matplotlib.png" alt="image0" /></p>
+<p><img src="/img/formation/matplotlib.png" alt="image0" /></p>
 
 <h2 id="objectifs">Objectifs</h2>
 
@@ -669,7 +677,7 @@ plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'])
 plt.show()
 </code></pre>
 
-<p><img src="dataviz1.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz1.png" alt="png" /></p>
 
 <ul>
 <li>Option <b> marqueur </b>:</li>
@@ -686,7 +694,7 @@ plt.show()
 </code></pre></li>
 </ul>
 
-<p><img src="dataviz2.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz2.png" alt="png" /></p>
 
 <pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
 plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'], marker='x', linestyle=&quot;--&quot;)
@@ -697,7 +705,7 @@ plt.show()
 
 </code></pre>
 
-<p><img src="dataviz3.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz3.png" alt="png" /></p>
 
 <pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
 plt.plot(year_to_plot.index,year_to_plot['Temperature minimale'], color='lightblue')
@@ -709,7 +717,7 @@ plt.title(&quot;multi-courbes&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz4.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz4.png" alt="png" /></p>
 
 <ul>
 <li>Fonction <b> scatter </b>: la fonction vous permet de créer un nuage de points</li>
@@ -722,7 +730,7 @@ plt.show()
 </code></pre></li>
 </ul>
 
-<p><img src="dataviz5.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz5.png" alt="png" /></p>
 
 <ul>
 <li>pour utiliser l&rsquo;option scatter color, python veut une liste d&rsquo;entrée et non un dictionnaire</li>
@@ -738,7 +746,7 @@ plt.show()
 </code></pre></li>
 </ul>
 
-<p><img src="dataviz6.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz6.png" alt="png" /></p>
 
 <ul>
 <li>Nous avons utilisé la couleur de dispersion par défaut ()</li>
@@ -765,7 +773,7 @@ plt.savefig(&quot;figures/my_graph.png&quot;, bbox_inches=&quot;tight&quot;)
 </code></pre></li>
 </ul>
 
-<p><img src="dataviz7.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz7.png" alt="png" /></p>
 
 <pre><code>&lt;Figure size 1152x648 with 0 Axes&gt;
 </code></pre>
@@ -785,13 +793,13 @@ plt.show() #c'est plt qui continue d'indiquer l'affichage du graphique
 
 </code></pre>
 
-<p><img src="dataviz8.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz8.png" alt="png" /></p>
 
 <ul>
 <li><b>Résumé des principaux éléments dans un graphique matplotlib </b></li>
 </ul>
 
-<p><img src="attachment:recap_vocab.PNG" alt="recap_vocab.PNG" /></p>
+<p><img src="/img/formation/resume_matplotlib.png" alt="png" /></p>
 
 <pre><code class="language-python">fig = plt.figure()
 ax1 = fig.add_subplot(121)
@@ -803,7 +811,7 @@ ax2.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], colo
 plt.show()
 </code></pre>
 
-<p><img src="dataviz9.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz9.png" alt="png" /></p>
 
 <h2 id="matplotlib-subplot">Matplotlib subplot</h2>
 
@@ -817,7 +825,7 @@ plt.show()
 
 <p>Vous pouvez tracer différentes choses dans la même figure en utilisant la fonction de sous-tracé. Voici un exemple:</p>
 
-<p><img src="attachment:SUBPLOT.PNG" alt="SUBPLOT.PNG" /></p>
+<p><img src="/img/formation/subplot.png" alt="SUBPLOT.PNG" /></p>
 
 <pre><code class="language-python">fig = plt.figure()
 ax1 = fig.add_subplot(2,2,1) # up and left 
@@ -827,7 +835,7 @@ ax4 = fig.add_subplot(2,2,4) # down and right
 plt.show()
 </code></pre>
 
-<p><img src="dataviz10.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz10.png" alt="png" /></p>
 
 <p>Voici une documentation sur le sous-intrigue:
 <a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" target="_blank">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot</a></p>
@@ -842,7 +850,7 @@ ax2.legend(loc='upper left')
 plt.show()
 </code></pre>
 
-<p><img src="dataviz11.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz11.png" alt="png" /></p>
 
 <pre><code class="language-python">fig = plt.figure(figsize=(10,5))
 ax1 = fig.add_subplot(211)
@@ -855,7 +863,7 @@ plt.savefig(&quot;foo.png&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz12.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz12.png" alt="png" /></p>
 
 <pre><code class="language-python">fig = plt.figure(figsize=(15, 8))
 colors = ['green', 'blue', 'red','orange']
@@ -868,7 +876,7 @@ for i in range(4):
 plt.show()
 </code></pre>
 
-<p><img src="dataviz13.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz13.png" alt="png" /></p>
 
 <p><h2>3- Présentation des principales représentations graphiques </h2>
 <h3> a- Le bar chart </h3></p>
@@ -1015,7 +1023,7 @@ ax1.set_xticklabels(passagersClasses.index, rotation=45) # ajout des labels
 plt.show()
 </code></pre>
 
-<p><img src="dataviz14.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz14.png" alt="png" /></p>
 
 <pre><code>- Exemple 2 : 
 </code></pre>
@@ -1064,7 +1072,7 @@ plt.legend()
 plt.show()
 </code></pre>
 
-<p><img src="dataviz15.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz15.png" alt="png" /></p>
 
 <pre><code>- Exemple 3 : 
 </code></pre>
@@ -1105,7 +1113,7 @@ plt.legend()
 plt.show()
 </code></pre>
 
-<p><img src="dataviz16.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz16.png" alt="png" /></p>
 
 <h2 id="b-l-histogramme">b- L&rsquo; histogramme</h2>
 
@@ -1118,7 +1126,7 @@ ax1.set_title(&quot;repartition de l'age&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz17.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz17.png" alt="png" /></p>
 
 <pre><code class="language-python">fig = plt.figure(figsize=(7,5))
 ax1 = fig.add_subplot(111)
@@ -1132,7 +1140,7 @@ ax1.set_title(&quot;Répartition de l'âge en fonction de la survie (en bleu) ou
 plt.show()
 </code></pre>
 
-<p><img src="dataviz18.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz18.png" alt="png" /></p>
 
 <h3> c- Le nuage de points </h3>
 
@@ -1143,7 +1151,7 @@ ax1.set_title(&quot;Prix du bilet en fonction de l'age&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz19.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz19.png" alt="png" /></p>
 
 <pre><code class="language-python">fig = plt.figure(figsize=(7,5))
 ax1 = fig.add_subplot(111)
@@ -1153,7 +1161,7 @@ ax1.set_ylim(top=100)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz20.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz20.png" alt="png" /></p>
 
 <pre><code class="language-python">fig = plt.figure(figsize=(7,5))
 ax1 = fig.add_subplot(111)
@@ -1162,14 +1170,14 @@ ax1.set_title(&quot;Prix du bilet en fonction de la classe&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz21.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz21.png" alt="png" /></p>
 
 <pre><code class="language-python">from pandas.plotting import scatter_matrix
 scatter_matrix(data[['Survived','Pclass','Age','SibSp','Fare']], figsize=(15,15))
 plt.show()
 </code></pre>
 
-<p><img src="dataviz22.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz22.png" alt="png" /></p>
 
 <h2 id="4-aller-plus-loin-avec-seaborn">4- Aller plus loin avec Seaborn</h2>
 
@@ -1197,7 +1205,7 @@ sns.set()
 plt.show()
 </code></pre>
 
-<p><img src="dataviz23.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz23.png" alt="png" /></p>
 
 <pre><code class="language-python">sns.kdeplot(data[&quot;Age&quot;].dropna(), shade=True)
 sns.set()
@@ -1205,45 +1213,45 @@ plt.xlabel(&quot;Age&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz24.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz24.png" alt="png" /></p>
 
 <pre><code class="language-python">sns.lmplot(x=&quot;Age&quot;, y=&quot;Fare&quot;, hue=&quot;Pclass&quot;, data=data,fit_reg=False)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz25.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz25.png" alt="png" /></p>
 
 <pre><code class="language-python">sns.jointplot(&quot;Age&quot;, &quot;Fare&quot;, data=data, kind=&quot;reg&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz26.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz26.png" alt="png" /></p>
 
 <pre><code class="language-python">sns.jointplot(&quot;Age&quot;, &quot;Fare&quot;, data=data, kind=&quot;hex&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz27.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz27.png" alt="png" /></p>
 
 <pre><code class="language-python">sns.boxplot(x=data[&quot;Age&quot;])
 plt.show()
 </code></pre>
 
-<p><img src="dataviz28.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz28.png" alt="png" /></p>
 
-<p><img src="attachment:boite%20a%20moustache.png" alt="boite%20a%20moustache.png" /></p>
+<p><img src="/img/formation/moustache.png" alt="png" /></p>
 
 <pre><code class="language-python">sns.boxplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz29.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz29.png" alt="png" /></p>
 
 <pre><code class="language-python">sns.violinplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz30.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz30.png" alt="png" /></p>
 
 <pre><code class="language-python">fig, ax = plt.subplots()
 fig.set_size_inches(12, 8)
@@ -1251,7 +1259,7 @@ sns.violinplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
 plt.show()
 </code></pre>
 
-<p><img src="dataviz31.png" alt="png" /></p>
+<p><img src="/img/formation/dataviz31.png" alt="png" /></p>
 
 <p>Afin de mettre en pratique ce que nous venons de voir, une section exercice est proposée. Deux projets complets sur des analyses de stations météorologiques sont également proposées.</p>
 
@@ -1276,6 +1284,12 @@ plt.show()
     <a href="/courses/formation_python/9-visualisation-exercice/" rel="next">9- La visualisation grapgique avec Python - Exercice</a>
   </div>
   
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/project2-eccc_precipitation/" rel="prev">Projet sur les données de précipitations ECCC</a>
+  </div>
   
 </div>
 
