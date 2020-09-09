@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Analyse des données de location de vélo à San Fransisco  Le Bay Area Bike Share permet des excursions à vélo rapides, faciles et abordables dans la région de la Baie de San Francisco. Ils publient régulièrement des données ouvertes (cet ensemble de données est une version transformée des données de ce lien) et maintiennent une API en temps réel :  station - Contient des données qui représentent une station où les utilisateurs peuvent prendre ou rendre des vélos.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/12-requeter-une-base-sql-exercices/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/12-requeter-une-base-sql-exercices/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/12-requeter-une-base-sql-exercices/">
+  <meta property="og:title" content="12- SQL et Python - Exercice | GDueymes">
+  <meta property="og:description" content="Analyse des données de location de vélo à San Fransisco  Le Bay Area Bike Share permet des excursions à vélo rapides, faciles et abordables dans la région de la Baie de San Francisco. Ils publient régulièrement des données ouvertes (cet ensemble de données est une version transformée des données de ce lien) et maintiennent une API en temps réel :  station - Contient des données qui représentent une station où les utilisateurs peuvent prendre ou rendre des vélos."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>12- SQL et Python - Exercice | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes/">3- Les listes en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires/">4- Les dictionnaires en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires-exercice/">4- Les dictionnaires en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles/">5- Les boucles en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles-exercice/">5- Les boucles en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions/">6- Les fonctions en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions-exercice/">6- Les fonctions en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy/">7- La librairie Numpy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas-exercice/">8- La librairie Pandas - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas/">8- La lirairie Pandas - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation-exercice/">9- La visualisation grapgique avec Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">9- Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">9- Projet sur les données de températures ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-cours/">10- Travailler avec des API sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-exercices/">10- Travailler avec des API sous Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-exercices/">11- Web scrapping - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-cours/">12- SQL et Python - Cours</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/">12- SQL et Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/13-regex-cours/">13- Regex et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/14-statistique-descriptive-cours/">14- La statistique descriptive - Rappels</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>12- SQL et Python - Exercice</h1>
+
+          <div class="article-style">
+            <h1> Analyse des données de location de vélo à San Fransisco </h1> 
+
+<p>Le Bay Area Bike Share permet des excursions à vélo rapides, faciles et abordables dans la région de la Baie de San Francisco. Ils publient régulièrement des données ouvertes (cet ensemble de données est une version transformée des données de ce lien) et maintiennent une API en temps réel : <br></p>
+
+<ul>
+<li><p>station - Contient des données qui représentent une station où les utilisateurs peuvent prendre ou rendre des vélos. <br></p></li>
+
+<li><p>status - données sur le nombre de vélos et docks disponibles pour une station et une minute données. <br></p></li>
+
+<li><p>trips - Données sur les voyages à vélo individuels <br></p></li>
+
+<li><p>weather - Données sur la météo d&rsquo;un jour spécifique pour certains codes postaux</p></li>
+</ul>
+
+<p>1) Télécharger le fichier de la BDD depuis la page kaggle : <a href="https://www.kaggle.com/benhamner/sf-bay-area-bike-share/home" target="_blank">https://www.kaggle.com/benhamner/sf-bay-area-bike-share/home</a> <br>
+2) A l&rsquo;aide de sqlite3, connectez-vous à database.sqlite <br>
+3) Affichez le résumé des tables présentes dans la BDD <br>
+4) Créez le dataframe &lsquo;trip&rsquo; contenant toutes les données de la table trip <br>
+5) A l&rsquo;aide de count() comptez le nombres de voyages présents dans la table trip <br>
+6) A l&rsquo;aide de AVG, caculez le temps moyen d&rsquo;un voyage (duration). Pour plus de clareté, renomnez la colonne &lsquo;Moyenne_loc_minutes&rsquo;. Le temps est en seconde. Passez le en minutes en divisant Moyenne_loc_minutes par 60. <br>
+7) Affichez Moyenne_loc_minutes et count() en fonction du type d&rsquo;abonement (subscription_type) à l&rsquo;aide de GROUP BY
+8) Créez le dataframe &lsquo;station&rsquo; contenant toutes les données de la table station <br>
+9) On souhaite récupérer le nom de la ville de départ de chaque voyage. A l&rsquo;aide de Inner Join, récupérer la colonne city de la table city et ajouter la à la table trip <br>
+10) Affichez maintenant Moyenne_loc_minutes et count(*) en fonction de la ville de départ à l&rsquo;aide de GROUP BY <br>
+11 ) Faites le même exercice mais avec la ville d&rsquo;arrivée <br>
+12) Affichez ce même tableau mais uniquement pour les utilisateurs avec abonnement (&lsquo;Subscriber&rsquo; dans la colonne subscription_type)</p>
+
+<p>1) Télécharger le fichier de la BDD depuis la page kaggle : <a href="https://www.kaggle.com/benhamner/sf-bay-area-bike-share/home" target="_blank">https://www.kaggle.com/benhamner/sf-bay-area-bike-share/home</a> <br>
+2) A l&rsquo;aide de sqlite3, connectez-vous à database.sqlite <br></p>
+
+<pre><code class="language-python">import sqlite3
+path = 'database_tp.sqlite'
+conn = sqlite3.connect(path) # on crée une connexion 
+conn
+</code></pre>
+
+<pre><code>&lt;sqlite3.Connection at 0x5a81c70&gt;
+</code></pre>
+
+<p>3) Affichez le résumé des tables présentes dans la BDD <br></p>
+
+<pre><code class="language-python">import pandas as pd
+tables = pd.read_sql(&quot;&quot;&quot;SELECT *
+                        FROM sqlite_master
+                        WHERE type='table';&quot;&quot;&quot;, conn)
+tables
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>name</th>
+      <th>tbl_name</th>
+      <th>rootpage</th>
+      <th>sql</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>table</td>
+      <td>station</td>
+      <td>station</td>
+      <td>2</td>
+      <td>CREATE TABLE station (\n    id INTEGER PRIMARY...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>table</td>
+      <td>status</td>
+      <td>status</td>
+      <td>3</td>
+      <td>CREATE TABLE status (\n    station_id INTEGER,...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>table</td>
+      <td>trip</td>
+      <td>trip</td>
+      <td>4</td>
+      <td>CREATE TABLE trip (\n    id INTEGER PRIMARY KE...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>table</td>
+      <td>weather</td>
+      <td>weather</td>
+      <td>5</td>
+      <td>CREATE TABLE weather (\n    date TEXT,\n    ma...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>4) Créez le dataframe &lsquo;trip&rsquo; contenant toutes les données de la table trip <br></p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT *
+                        FROM trip;&quot;&quot;&quot;, conn)
+trip.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>duration</th>
+      <th>start_date</th>
+      <th>start_station_name</th>
+      <th>start_station_id</th>
+      <th>end_date</th>
+      <th>end_station_name</th>
+      <th>end_station_id</th>
+      <th>bike_id</th>
+      <th>subscription_type</th>
+      <th>zip_code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4069</td>
+      <td>174</td>
+      <td>8/29/2013 9:08</td>
+      <td>2nd at South Park</td>
+      <td>64</td>
+      <td>8/29/2013 9:11</td>
+      <td>2nd at South Park</td>
+      <td>64</td>
+      <td>288</td>
+      <td>Subscriber</td>
+      <td>94114</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4073</td>
+      <td>1067</td>
+      <td>8/29/2013 9:24</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:42</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>321</td>
+      <td>Subscriber</td>
+      <td>94703</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4074</td>
+      <td>1131</td>
+      <td>8/29/2013 9:24</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:43</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>317</td>
+      <td>Subscriber</td>
+      <td>94115</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4075</td>
+      <td>1117</td>
+      <td>8/29/2013 9:24</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:43</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>316</td>
+      <td>Subscriber</td>
+      <td>94122</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4076</td>
+      <td>1118</td>
+      <td>8/29/2013 9:25</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:43</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>322</td>
+      <td>Subscriber</td>
+      <td>94597</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>5) A l&rsquo;aide de count() comptez le nombres de voyages présents dans la table trip <br></p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT COUNT(*)
+                        FROM trip;&quot;&quot;&quot;, conn)
+trip
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>COUNT(*)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>669959</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>6) A l&rsquo;aide de AVG, caculez le temps moyen d&rsquo;un voyage (duration). Pour plus de clareté, renomnez la colonne &lsquo;Moyenne_loc_minutes&rsquo;. Le temps est en seconde. Passez le en minutes en divisant Moyenne_loc_minutes par 60. <br></p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT AVG(duration)/60 AS Moyenne_loc_minutes
+                        FROM trip;&quot;&quot;&quot;, conn)
+trip
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Moyenne_loc_minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.465831</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>7) Affichez Moyenne_loc_minutes et count() en fonction du type d&rsquo;abonnement (subscription_type) à l&rsquo;aide de GROUP BY</p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT subscription_type, AVG(duration)/60 AS Moyenne_loc_minutes, count(*) AS count
+                        FROM trip
+                        GROUP BY subscription_type;&quot;&quot;&quot;, conn)
+trip
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>subscription_type</th>
+      <th>Moyenne_loc_minutes</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Customer</td>
+      <td>65.862689</td>
+      <td>103213</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Subscriber</td>
+      <td>9.834148</td>
+      <td>566746</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>8) Créez le dataframe &lsquo;station&rsquo; contenant toutes les données de la table station <br></p>
+
+<pre><code class="language-python">station = pd.read_sql(&quot;&quot;&quot;SELECT *
+                        FROM station;&quot;&quot;&quot;, conn)
+station.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>lat</th>
+      <th>long</th>
+      <th>dock_count</th>
+      <th>city</th>
+      <th>installation_date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>San Jose Diridon Caltrain Station</td>
+      <td>37.329732</td>
+      <td>-121.901782</td>
+      <td>27</td>
+      <td>San Jose</td>
+      <td>8/6/2013</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>San Jose Civic Center</td>
+      <td>37.330698</td>
+      <td>-121.888979</td>
+      <td>15</td>
+      <td>San Jose</td>
+      <td>8/5/2013</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>Santa Clara at Almaden</td>
+      <td>37.333988</td>
+      <td>-121.894902</td>
+      <td>11</td>
+      <td>San Jose</td>
+      <td>8/6/2013</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>Adobe on Almaden</td>
+      <td>37.331415</td>
+      <td>-121.893200</td>
+      <td>19</td>
+      <td>San Jose</td>
+      <td>8/5/2013</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>San Pedro Square</td>
+      <td>37.336721</td>
+      <td>-121.894074</td>
+      <td>15</td>
+      <td>San Jose</td>
+      <td>8/7/2013</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>9) On souhaite récupérer le nom de la ville de départ de chaque voyage. A l&rsquo;aide de Inner Join, récupérer la colonne city de la table city et ajouter la à la table trip <br></p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT station.city AS city_start,*
+                        FROM trip
+                        INNER JOIN station
+                        ON trip.start_station_id = station.id;&quot;&quot;&quot;, conn)
+trip.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city_start</th>
+      <th>id</th>
+      <th>duration</th>
+      <th>start_date</th>
+      <th>start_station_name</th>
+      <th>start_station_id</th>
+      <th>end_date</th>
+      <th>end_station_name</th>
+      <th>end_station_id</th>
+      <th>bike_id</th>
+      <th>subscription_type</th>
+      <th>zip_code</th>
+      <th>id</th>
+      <th>name</th>
+      <th>lat</th>
+      <th>long</th>
+      <th>dock_count</th>
+      <th>city</th>
+      <th>installation_date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>San Francisco</td>
+      <td>4069</td>
+      <td>174</td>
+      <td>8/29/2013 9:08</td>
+      <td>2nd at South Park</td>
+      <td>64</td>
+      <td>8/29/2013 9:11</td>
+      <td>2nd at South Park</td>
+      <td>64</td>
+      <td>288</td>
+      <td>Subscriber</td>
+      <td>94114</td>
+      <td>64</td>
+      <td>2nd at South Park</td>
+      <td>37.782259</td>
+      <td>-122.392738</td>
+      <td>15</td>
+      <td>San Francisco</td>
+      <td>8/22/2013</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>San Francisco</td>
+      <td>4073</td>
+      <td>1067</td>
+      <td>8/29/2013 9:24</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:42</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>321</td>
+      <td>Subscriber</td>
+      <td>94703</td>
+      <td>66</td>
+      <td>South Van Ness at Market</td>
+      <td>37.774814</td>
+      <td>-122.418954</td>
+      <td>19</td>
+      <td>San Francisco</td>
+      <td>8/23/2013</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>San Francisco</td>
+      <td>4074</td>
+      <td>1131</td>
+      <td>8/29/2013 9:24</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:43</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>317</td>
+      <td>Subscriber</td>
+      <td>94115</td>
+      <td>66</td>
+      <td>South Van Ness at Market</td>
+      <td>37.774814</td>
+      <td>-122.418954</td>
+      <td>19</td>
+      <td>San Francisco</td>
+      <td>8/23/2013</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>San Francisco</td>
+      <td>4075</td>
+      <td>1117</td>
+      <td>8/29/2013 9:24</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:43</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>316</td>
+      <td>Subscriber</td>
+      <td>94122</td>
+      <td>66</td>
+      <td>South Van Ness at Market</td>
+      <td>37.774814</td>
+      <td>-122.418954</td>
+      <td>19</td>
+      <td>San Francisco</td>
+      <td>8/23/2013</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>San Francisco</td>
+      <td>4076</td>
+      <td>1118</td>
+      <td>8/29/2013 9:25</td>
+      <td>South Van Ness at Market</td>
+      <td>66</td>
+      <td>8/29/2013 9:43</td>
+      <td>San Francisco Caltrain 2 (330 Townsend)</td>
+      <td>69</td>
+      <td>322</td>
+      <td>Subscriber</td>
+      <td>94597</td>
+      <td>66</td>
+      <td>South Van Ness at Market</td>
+      <td>37.774814</td>
+      <td>-122.418954</td>
+      <td>19</td>
+      <td>San Francisco</td>
+      <td>8/23/2013</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>10) Affichez maintenant Moyenne_loc_minutes et count(*) en fonction de la ville de départ à l&rsquo;aide de GROUP BY <br></p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT station.city AS city_start, count(*) as count, AVG(duration)/60 as Moyenne_loc_minutes
+                        FROM trip
+                        INNER JOIN station
+                        ON trip.start_station_id = station.id
+                        GROUP BY (city_start);&quot;&quot;&quot;, conn)
+trip.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city_start</th>
+      <th>count</th>
+      <th>Moyenne_loc_minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mountain View</td>
+      <td>18167</td>
+      <td>29.894015</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Palo Alto</td>
+      <td>6773</td>
+      <td>71.309617</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Redwood City</td>
+      <td>3433</td>
+      <td>40.652340</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>San Francisco</td>
+      <td>603708</td>
+      <td>17.117811</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>San Jose</td>
+      <td>37878</td>
+      <td>23.009813</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>11 ) Faites le même exercice mais avec la ville d&rsquo;arrivée <br></p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT station.city AS city_end, count(*) as count, AVG(duration)/60 as Moyenne_loc_minutes
+                        FROM trip
+                        INNER JOIN station
+                        ON trip.end_station_id = station.id
+                        GROUP BY (city_end);&quot;&quot;&quot;, conn)
+trip.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city_end</th>
+      <th>count</th>
+      <th>Moyenne_loc_minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mountain View</td>
+      <td>18185</td>
+      <td>29.053462</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Palo Alto</td>
+      <td>6791</td>
+      <td>73.124209</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Redwood City</td>
+      <td>3390</td>
+      <td>37.841150</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>San Francisco</td>
+      <td>603718</td>
+      <td>17.134633</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>San Jose</td>
+      <td>37875</td>
+      <td>23.066883</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>12) Affichez ce même tableau mais uniquement pour les utilisateurs avec abonnement (&lsquo;Subscriber&rsquo; dans la colonne subscription_type)</p>
+
+<pre><code class="language-python">trip = pd.read_sql(&quot;&quot;&quot;SELECT station.city AS city_end, count(*) as count, AVG(duration)/60 as Moyenne_loc_minutes
+                        FROM trip
+                        INNER JOIN station
+                        ON trip.end_station_id == station.id
+                        WHERE subscription_type == 'Subscriber'
+                        GROUP BY (city_end);&quot;&quot;&quot;, conn)
+trip.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city_end</th>
+      <th>count</th>
+      <th>Moyenne_loc_minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mountain View</td>
+      <td>15506</td>
+      <td>9.771305</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Palo Alto</td>
+      <td>3797</td>
+      <td>17.377039</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Redwood City</td>
+      <td>2778</td>
+      <td>9.253558</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>San Francisco</td>
+      <td>512996</td>
+      <td>9.759421</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>San Jose</td>
+      <td>31669</td>
+      <td>10.221957</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">
+</code></pre>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/12-requeter-une-base-sql-cours/" rel="next">12- SQL et Python - Cours</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/13-regex-cours/" rel="prev">13- Regex et Python - Cours</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/12%20-%20Requ%c3%aater%20une%20base%20SQL%20-%20exercices.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

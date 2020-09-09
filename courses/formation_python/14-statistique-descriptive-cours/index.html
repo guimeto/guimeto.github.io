@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.
+import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.head(5)    .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }    Number Digimon Stage Type Attribute Memory Equip Slots Lv 50 HP Lv50 SP Lv50 Atk Lv50 Def Lv50 Int Lv50 Spd     0 1 Kuramon Baby Free Neutral 2 0 590 77 79 69 68 95   1 2 Pabumon Baby Free Neutral 2 0 950 62 76 76 69 68   2 3 Punimon Baby Free Neutral 2 0 870 50 97 87 50 75   3 4 Botamon Baby Free Neutral 2 0 690 68 77 95 76 61   4 5 Poyomon Baby Free Neutral 2 0 540 98 54 59 95 86     1- Les types de variables  Les variables catégorielles (qualitatives)   Il n&rsquo;y a pas de notion d&rsquo;échelle, c&rsquo;est un attribut d&rsquo;un critère">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/14-statistique-descriptive-cours/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/14-statistique-descriptive-cours/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/14-statistique-descriptive-cours/">
+  <meta property="og:title" content="14- La statistique descriptive - Rappels | GDueymes">
+  <meta property="og:description" content="Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.
+import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.head(5)    .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }    Number Digimon Stage Type Attribute Memory Equip Slots Lv 50 HP Lv50 SP Lv50 Atk Lv50 Def Lv50 Int Lv50 Spd     0 1 Kuramon Baby Free Neutral 2 0 590 77 79 69 68 95   1 2 Pabumon Baby Free Neutral 2 0 950 62 76 76 69 68   2 3 Punimon Baby Free Neutral 2 0 870 50 97 87 50 75   3 4 Botamon Baby Free Neutral 2 0 690 68 77 95 76 61   4 5 Poyomon Baby Free Neutral 2 0 540 98 54 59 95 86     1- Les types de variables  Les variables catégorielles (qualitatives)   Il n&rsquo;y a pas de notion d&rsquo;échelle, c&rsquo;est un attribut d&rsquo;un critère"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>14- La statistique descriptive - Rappels | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes/">3- Les listes en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires/">4- Les dictionnaires en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires-exercice/">4- Les dictionnaires en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles/">5- Les boucles en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles-exercice/">5- Les boucles en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions/">6- Les fonctions en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions-exercice/">6- Les fonctions en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy/">7- La librairie Numpy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas-exercice/">8- La librairie Pandas - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas/">8- La lirairie Pandas - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation-exercice/">9- La visualisation grapgique avec Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">9- Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">9- Projet sur les données de températures ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-cours/">10- Travailler avec des API sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-exercices/">10- Travailler avec des API sous Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-exercices/">11- Web scrapping - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-cours/">12- SQL et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/">12- SQL et Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/13-regex-cours/">13- Regex et Python - Cours</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/14-statistique-descriptive-cours/">14- La statistique descriptive - Rappels</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-les-types-de-variables">1- Les types de variables</a></li>
+<li><a href="#2-les-statistiques-de-base">2- Les statistiques de base</a></li>
+<li><a href="#3-la-loi-normale">3- La loi normale</a></li>
+<li><a href="#4-notion-de-correlation-entre-des-variables-et-calcul-du-coefficient-de-correlation">4- Notion de correlation entre des variables et calcul du coefficient de correlation</a></li>
+</ul></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>14- La statistique descriptive - Rappels</h1>
+
+          <div class="article-style">
+            
+
+<ul>
+<li><p>Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.</p>
+
+<pre><code class="language-python">import pandas as pd
+
+data = pd.read_csv('DigiDB_digimonlist.csv')
+data.head(5)
+</code></pre></li>
+</ul>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number</th>
+      <th>Digimon</th>
+      <th>Stage</th>
+      <th>Type</th>
+      <th>Attribute</th>
+      <th>Memory</th>
+      <th>Equip Slots</th>
+      <th>Lv 50 HP</th>
+      <th>Lv50 SP</th>
+      <th>Lv50 Atk</th>
+      <th>Lv50 Def</th>
+      <th>Lv50 Int</th>
+      <th>Lv50 Spd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Kuramon</td>
+      <td>Baby</td>
+      <td>Free</td>
+      <td>Neutral</td>
+      <td>2</td>
+      <td>0</td>
+      <td>590</td>
+      <td>77</td>
+      <td>79</td>
+      <td>69</td>
+      <td>68</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Pabumon</td>
+      <td>Baby</td>
+      <td>Free</td>
+      <td>Neutral</td>
+      <td>2</td>
+      <td>0</td>
+      <td>950</td>
+      <td>62</td>
+      <td>76</td>
+      <td>76</td>
+      <td>69</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Punimon</td>
+      <td>Baby</td>
+      <td>Free</td>
+      <td>Neutral</td>
+      <td>2</td>
+      <td>0</td>
+      <td>870</td>
+      <td>50</td>
+      <td>97</td>
+      <td>87</td>
+      <td>50</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Botamon</td>
+      <td>Baby</td>
+      <td>Free</td>
+      <td>Neutral</td>
+      <td>2</td>
+      <td>0</td>
+      <td>690</td>
+      <td>68</td>
+      <td>77</td>
+      <td>95</td>
+      <td>76</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Poyomon</td>
+      <td>Baby</td>
+      <td>Free</td>
+      <td>Neutral</td>
+      <td>2</td>
+      <td>0</td>
+      <td>540</td>
+      <td>98</td>
+      <td>54</td>
+      <td>59</td>
+      <td>95</td>
+      <td>86</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="1-les-types-de-variables">1- Les types de variables</h2>
+
+<ul>
+<li><p><b>Les variables catégorielles (qualitatives) </b>
+<p> Il n&rsquo;y a pas de notion d&rsquo;échelle, c&rsquo;est un attribut d&rsquo;un critère<br>
+Exemples : [homme,Femme], [première classe, deuxième classe, troisième classe], [Vrai,Faux]<p></p>
+
+<pre><code class="language-python">from matplotlib import pyplot as plt
+import seaborn as sns
+sns.set(style=&quot;darkgrid&quot;)
+sns.countplot(x=&quot;Type&quot;, data=data)
+</code></pre>
+
+<p><matplotlib.axes._subplots.AxesSubplot at 0xaff8a58></p></li>
+</ul>
+
+<p><img src="/img/formation/stats/output_3_1.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.countplot(x=&quot;Attribute&quot;, data=data)
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xb047160&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_4_1.png" alt="png" /></p>
+
+<ul>
+<li><b>Les variables quantitatives </b></li>
+</ul>
+
+<p> A l'inverse, ces variables permettent de mesurer des quantités <br>
+    Il en existe 2 types : Variables quantitatives <b>discrètes</b> et <b>continues</b> </p>
+
+<p><b>Les variables quantitatives discrètes </b>
+<p> C&rsquo;est une variable avec un nombre fini de valeurs <br>
+Exemples : nombre d&rsquo;items, nombre de personnes <p></p>
+
+<pre><code class="language-python">#les variables quantitatives discrètes
+sns.distplot(list(data['Memory']))
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc094860&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_6_1.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x63b4048&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_7_1.png" alt="png" /></p>
+
+<p><b>Les variables quantitatives continues </b>
+<p> C&rsquo;est une variable avec une infinité de valeurs <br>
+Exemples : poids, durée <p></p>
+
+<p>Pas de variable quantitative continue dans le data set !</p>
+
+<h2 id="2-les-statistiques-de-base">2- Les statistiques de base</h2>
+
+<p><b>Description d&rsquo;une variable continue </b> <br></p>
+
+<ul>
+<li>La moyenne: Somme des valeurs de la variable divisée par le nombre d&rsquo;individus</li>
+</ul>
+
+<p><img src="/img/formation/stats/theo/moyenne.png" alt="moyenne.PNG" /></p>
+
+<pre><code class="language-python">mean = data['Lv 50 HP'].mean()
+print(mean)
+sns.distplot(list(data['Lv 50 HP']))
+plt.axvline(mean, color='r')
+</code></pre>
+
+<pre><code>1210.8835341365461
+
+
+
+
+
+&lt;matplotlib.lines.Line2D at 0x643b5f8&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_11_2.png" alt="png" /></p>
+
+<ul>
+<li><p>La Médiane: valeur centrale qui partage l&rsquo;échantillon en 2 groupes de même effectif: 50 % au-dessus et 50 % en dessous</p>
+
+<pre><code class="language-python">median = data['Lv 50 HP'].median()
+print(median)
+sns.distplot(list(data['Lv 50 HP']))
+plt.axvline(mean, color='r')
+plt.axvline(median, color='g')
+</code></pre>
+
+<p>1180.0</p>
+
+<p><matplotlib.lines.Line2D at 0x64ada58></p></li>
+</ul>
+
+<p><img src="/img/formation/stats/output_13_2.png" alt="png" /></p>
+
+<ul>
+<li><p>Le mode: C&rsquo;est la valeur la plus fréquente dans le jeu de données</p>
+
+<pre><code class="language-python">mode = data['Lv 50 HP'].mode()
+print(mode)
+sns.distplot(list(data['Lv 50 HP']))
+plt.axvline(mean, color='r')
+plt.axvline(median, color='g')
+plt.axvline(float(mode), color='y')
+</code></pre>
+
+<p>0    1480
+dtype: int64</p>
+
+<p><matplotlib.lines.Line2D at 0xc15f358></p></li>
+</ul>
+
+<p><img src="/img/formation/stats/output_15_2.png" alt="png" /></p>
+
+<pre><code class="language-python">mode = data['Lv 50 HP'].mode()
+print(mode)
+nbValDif = len(data['Lv 50 HP'].unique())
+sns.distplot(list(data['Lv 50 HP']), bins=nbValDif)
+plt.axvline(mean, color='r')
+plt.axvline(median, color='g')
+plt.axvline(float(mode), color='y')
+</code></pre>
+
+<pre><code>0    1480
+dtype: int64
+
+
+
+
+
+&lt;matplotlib.lines.Line2D at 0xc2bd4a8&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_16_2.png" alt="png" /></p>
+
+<pre><code class="language-python">mode = data['Type'].mode()
+print(mode)
+sns.countplot(x=&quot;Type&quot;, data=data)
+</code></pre>
+
+<pre><code>0    Virus
+dtype: object
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0xc365b70&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_17_2.png" alt="png" /></p>
+
+<ul>
+<li>la variance: disparité dans notre jeu de données: moyenne arithmétique des carrés des écarts à la moyenne arithmétique observée</li>
+</ul>
+
+<p><img src="/img/formation/stats/theo/variance.png" alt="image.png" /></p>
+
+<pre><code class="language-python">variance = data['Lv 50 HP'].var()
+variance
+</code></pre>
+
+<pre><code>106342.76460681428
+</code></pre>
+
+<ul>
+<li>L&rsquo;écart type: c&rsquo;est la racine carrée de la variance</li>
+</ul>
+
+<p><img src="/img/formation/stats/theo/ecart.png" alt="image.png" /></p>
+
+<pre><code class="language-python">ecartType = data['Lv 50 HP'].std()
+ecartType
+</code></pre>
+
+<pre><code>326.1023836263916
+</code></pre>
+
+<pre><code class="language-python">variance**(1/2)
+</code></pre>
+
+<pre><code>326.1023836263916
+</code></pre>
+
+<ul>
+<li>Les quantiles: Dans la même logique que la médiane les quartile vont couper la population en 4 parties contenant le même nombre d&rsquo;observation</li>
+</ul>
+
+<p><img src="/img/formation/stats/theo/quantile1.png" alt="image.png" /></p>
+
+<p><img src="/img/formation/stats/theo/quantile2.png" alt="image.png" /></p>
+
+<pre><code class="language-python">ax = sns.boxplot(x=&quot;Type&quot;, y=&quot;Lv 50 HP&quot;, data=data)
+plt.show()
+</code></pre>
+
+<p><img src="/img/formation/stats/output_25_0.png" alt="image.png" /></p>
+
+<h2 id="3-la-loi-normale">3- La loi normale</h2>
+
+<ul>
+<li><b> Quelques exemples </b></li>
+</ul>
+
+<p><img src="/img/formation/stats/theo/normale1.png" alt="image.png" /></p>
+
+<p><img src="/img/formation/stats/theo/normale2.png" alt="image.png" /></p>
+
+<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc354d68&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_29_1.png" alt="image.png" /></p>
+
+<p>Dans une expérience aléatoire, plus on augmente le nombre d&rsquo;obeservations et plus la répartition va se lisser et se rapprocher de la fonction de gauss.</p>
+
+<p><img src="/img/formation/stats/theo/gauss.png" alt="image.png" /></p>
+
+<p><b><p>Distribution de la fonction de Gauss :</p> </b></p>
+
+<p><img src="/img/formation/stats/theo/distribution.png" alt="image.png" /></p>
+
+<p><img src="/img/formation/stats/theo/distribution2.png" alt="image.png" /></p>
+
+<p><b> Calculer le coéficient d&rsquo;assymétrie (skewness) de sa distribution </b></p>
+
+<p>Fait référence à l&rsquo;asymétrie des données. Lorsque les données sont concentrées sur le côté droit de l&rsquo;histogramme, par exemple, nous disons qu&rsquo;elles ont un skew négatif. Lorsque les données sont concentrées à gauche, on dit qu&rsquo;elles ont un skew positif.</p>
+
+<p><img src="/img/formation/stats/theo/skew.png" alt="image.png" /></p>
+
+<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
+data['Lv 50 HP'].skew()
+</code></pre>
+
+<pre><code>0.1374660716485841
+</code></pre>
+
+<p><img src="/img/formation/stats/output_35_1.png" alt="image.png" /></p>
+
+<p><b> Calculer le coéficient d&rsquo;applatissement d&rsquo;une distribution : Kurtosis </b></p>
+
+<p>Plus la valeur d'aplatissement est élevée, plus le pic est élevé. Plus la valeur de kustose est faible, plus la valeur est étalée.</p>
+
+<p><img src="/img/formation/stats/theo/kurto.png" alt="image.png" /></p>
+
+<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
+data['Lv 50 HP'].kurtosis()
+</code></pre>
+
+<pre><code>-0.5447522937424649
+</code></pre>
+
+<p><img src="/img/formation/stats/output_37_1.png" alt="image.png" /></p>
+
+<h2 id="4-notion-de-correlation-entre-des-variables-et-calcul-du-coefficient-de-correlation">4- Notion de correlation entre des variables et calcul du coefficient de correlation</h2>
+
+<p>La correlation indique s&rsquo;il y a une liaison entre 2 variables, c&rsquo;est à dire determiner si les variables sont indépendantes ou non.</p>
+
+<p><img src="/img/formation/stats/theo/corr1.png" alt="image.png" /></p>
+
+<p><img src="/img/formation/stats/theo/corr2.png" alt="image.png" /></p>
+
+<p><img src="/img/formation/stats/theo/corr3.png" alt="image.png" /></p>
+
+<p><img src="/img/formation/stats/theo/corr4.png" alt="image.png" /></p>
+
+<p><b> Calcul du coeficient de corrélation (pour 2 variables) </b> <br>
+   - Étape 1 : calculer la covariance</p>
+
+<p><img src="/img/formation/stats/theo/cov1.png" alt="image.png" /></p>
+
+<ul>
+<li>Étape 2 : calculer le coéficient de corrélation (valeur comprise entre -1 et 1)</li>
+</ul>
+
+<p>Plus le CC est eloigné de 0, plus la corrélation est forte, plus il est proche de 0 plus la corrélation est faible</p>
+
+<p><img src="/img/formation/stats/theo/cov2.png" alt="image.png" /></p>
+
+<pre><code class="language-python">from pandas.plotting import scatter_matrix
+scatter_matrix(data, figsize=(25,25))
+</code></pre>
+
+<pre><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000CA025C0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000CA0DDA0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DA0B438&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DA2FDA0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DA5C710&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DA8B0B8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DAAEA20&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DAE0400&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DAE0438&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DB316D8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DB5F080&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DB839E8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DBB4390&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DBD7CF8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DC056A0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DC33048&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DC599B0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DC88358&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DCACCC0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DCDA668&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DCFFFD0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DD2B978&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C95F278&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C9A3BE0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C91EDA0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C610710&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C581E10&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C518208&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C9E50B8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C9AEA20&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C5683C8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C5BED30&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C51B6D8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DD5C080&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C5309E8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C8BE390&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C90D358&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000C8E06A0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DD94048&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DDB99B0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DDE9358&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DE0ECC0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DE3A668&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DE61FD0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DE8F978&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DEBD320&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DEE2C88&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DF10630&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DF36F98&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DF65940&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DF962E8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DFBBC50&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DFE85F8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E010F60&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E03B908&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E06A2B0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E090C18&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E0BD5C0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E0E6F28&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E1148D0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E142278&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E167BE0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E196588&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E1BBEF0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E1E8898&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E21A240&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E23FBA8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E26E550&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E293EB8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E2C1860&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E2F2208&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E316B70&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E345518&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E36BE80&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E398828&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E3C81D0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E3EDB38&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E41C4E0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E442E48&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E4707F0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E4A0198&gt;]],
+      dtype=object)
+</code></pre>
+
+<p><img src="/img/formation/stats/output_46_1.png" alt="image.png" /></p>
+
+<pre><code class="language-python">sns.jointplot(&quot;Lv 50 HP&quot;, &quot;Lv50 SP&quot;, data=data)
+data[[&quot;Lv 50 HP&quot;, &quot;Lv50 SP&quot;]].corr()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Lv 50 HP</th>
+      <th>Lv50 SP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Lv 50 HP</th>
+      <td>1.000000</td>
+      <td>0.070957</td>
+    </tr>
+    <tr>
+      <th>Lv50 SP</th>
+      <td>0.070957</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><img src="/img/formation/stats/output_47_1.png" alt="image.png" /></p>
+
+<pre><code class="language-python">sns.jointplot(&quot;Lv50 Int&quot;, &quot;Lv50 SP&quot;, data=data)
+data[[&quot;Lv50 Int&quot;, &quot;Lv50 SP&quot;]].corr()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Lv50 Int</th>
+      <th>Lv50 SP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Lv50 Int</th>
+      <td>1.000000</td>
+      <td>0.895652</td>
+    </tr>
+    <tr>
+      <th>Lv50 SP</th>
+      <td>0.895652</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><img src="/img/formation/stats/output_48_1.png" alt="image.png" /></p>
+
+<pre><code class="language-python">data.corr()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number</th>
+      <th>Memory</th>
+      <th>Equip Slots</th>
+      <th>Lv 50 HP</th>
+      <th>Lv50 SP</th>
+      <th>Lv50 Atk</th>
+      <th>Lv50 Def</th>
+      <th>Lv50 Int</th>
+      <th>Lv50 Spd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Number</th>
+      <td>1.000000</td>
+      <td>0.923339</td>
+      <td>0.571901</td>
+      <td>0.626166</td>
+      <td>0.608113</td>
+      <td>0.552471</td>
+      <td>0.620177</td>
+      <td>0.560146</td>
+      <td>0.762861</td>
+    </tr>
+    <tr>
+      <th>Memory</th>
+      <td>0.923339</td>
+      <td>1.000000</td>
+      <td>0.355176</td>
+      <td>0.639569</td>
+      <td>0.623400</td>
+      <td>0.608372</td>
+      <td>0.611728</td>
+      <td>0.583956</td>
+      <td>0.797777</td>
+    </tr>
+    <tr>
+      <th>Equip Slots</th>
+      <td>0.571901</td>
+      <td>0.355176</td>
+      <td>1.000000</td>
+      <td>0.392137</td>
+      <td>0.278687</td>
+      <td>0.211450</td>
+      <td>0.466534</td>
+      <td>0.237616</td>
+      <td>0.286558</td>
+    </tr>
+    <tr>
+      <th>Lv 50 HP</th>
+      <td>0.626166</td>
+      <td>0.639569</td>
+      <td>0.392137</td>
+      <td>1.000000</td>
+      <td>0.070957</td>
+      <td>0.605708</td>
+      <td>0.561376</td>
+      <td>0.055314</td>
+      <td>0.317051</td>
+    </tr>
+    <tr>
+      <th>Lv50 SP</th>
+      <td>0.608113</td>
+      <td>0.623400</td>
+      <td>0.278687</td>
+      <td>0.070957</td>
+      <td>1.000000</td>
+      <td>-0.148365</td>
+      <td>0.169960</td>
+      <td>0.895652</td>
+      <td>0.603240</td>
+    </tr>
+    <tr>
+      <th>Lv50 Atk</th>
+      <td>0.552471</td>
+      <td>0.608372</td>
+      <td>0.211450</td>
+      <td>0.605708</td>
+      <td>-0.148365</td>
+      <td>1.000000</td>
+      <td>0.426901</td>
+      <td>-0.186125</td>
+      <td>0.522005</td>
+    </tr>
+    <tr>
+      <th>Lv50 Def</th>
+      <td>0.620177</td>
+      <td>0.611728</td>
+      <td>0.466534</td>
+      <td>0.561376</td>
+      <td>0.169960</td>
+      <td>0.426901</td>
+      <td>1.000000</td>
+      <td>0.182606</td>
+      <td>0.225921</td>
+    </tr>
+    <tr>
+      <th>Lv50 Int</th>
+      <td>0.560146</td>
+      <td>0.583956</td>
+      <td>0.237616</td>
+      <td>0.055314</td>
+      <td>0.895652</td>
+      <td>-0.186125</td>
+      <td>0.182606</td>
+      <td>1.000000</td>
+      <td>0.442214</td>
+    </tr>
+    <tr>
+      <th>Lv50 Spd</th>
+      <td>0.762861</td>
+      <td>0.797777</td>
+      <td>0.286558</td>
+      <td>0.317051</td>
+      <td>0.603240</td>
+      <td>0.522005</td>
+      <td>0.225921</td>
+      <td>0.442214</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">sns.heatmap(data.corr())
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xf386048&gt;
+</code></pre>
+
+<p><img src="/img/formation/stats/output_50_1.png" alt="image.png" /></p>
+
+<pre><code class="language-python">
+</code></pre>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/13-regex-cours/" rel="next">13- Regex et Python - Cours</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/2-les_bases/" rel="prev">2- Les bases du language Python - Cours</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/14%20-%20statistique%20descriptive%20-%20cours.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

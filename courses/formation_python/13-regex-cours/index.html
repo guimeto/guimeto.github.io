@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Les expressions régulières (de l&rsquo;anglais regex Regular Expression) constituent un système très puissant et très rapide pour faire des recherches dans des chaînes de caractères. C&rsquo;est une sorte de fonctionnalité Rechercher/Remplacer très poussée.
+Pour tester nos expressions régulières: Regex101.com
+En Python, les expressions régulières se font avec un package nommé re.
+Voici un exemple d&rsquo;usage d&rsquo;expressions régulières, ce code illustre un cas où l&rsquo;on chercherait à tester la présence d&rsquo;une adresse email :">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/13-regex-cours/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/13-regex-cours/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/13-regex-cours/">
+  <meta property="og:title" content="13- Regex et Python - Cours | GDueymes">
+  <meta property="og:description" content="Les expressions régulières (de l&rsquo;anglais regex Regular Expression) constituent un système très puissant et très rapide pour faire des recherches dans des chaînes de caractères. C&rsquo;est une sorte de fonctionnalité Rechercher/Remplacer très poussée.
+Pour tester nos expressions régulières: Regex101.com
+En Python, les expressions régulières se font avec un package nommé re.
+Voici un exemple d&rsquo;usage d&rsquo;expressions régulières, ce code illustre un cas où l&rsquo;on chercherait à tester la présence d&rsquo;une adresse email :"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>13- Regex et Python - Cours | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes/">3- Les listes en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires/">4- Les dictionnaires en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires-exercice/">4- Les dictionnaires en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles/">5- Les boucles en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles-exercice/">5- Les boucles en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions/">6- Les fonctions en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions-exercice/">6- Les fonctions en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy/">7- La librairie Numpy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas-exercice/">8- La librairie Pandas - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas/">8- La lirairie Pandas - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation-exercice/">9- La visualisation grapgique avec Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">9- Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">9- Projet sur les données de températures ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-cours/">10- Travailler avec des API sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-exercices/">10- Travailler avec des API sous Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-exercices/">11- Web scrapping - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-cours/">12- SQL et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/">12- SQL et Python - Exercice</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/13-regex-cours/">13- Regex et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/14-statistique-descriptive-cours/">14- La statistique descriptive - Rappels</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#13-1-trouver-des-caractères">13.1- Trouver des caractères</a></li>
+<li><a href="#13-1-1-les-caractères-génériques">13.1.1- Les caractères génériques</a></li>
+<li><a href="#13-1-2-rechercher-le-debut-ou-fin-d-une-chaine-de-caractères">13.1.2-  Rechercher le debut ou fin d&rsquo;une chaine de caractères</a></li>
+<li><a href="#13-1-3-la-fonction-match-tester-une-chaîne-de-caractères">13.1.3- La fonction match(), tester une chaîne de caractères:</a></li>
+<li><a href="#13-1-4-la-fonction-search-chercher-une-chaîne-de-caractères">13.1.4- La fonction search(), chercher une chaîne de caractères:</a></li>
+<li><a href="#13-1-5-la-fonction-split">13.1.5- La fonction split():</a></li>
+<li><a href="#13-1-6-la-fonction-sub">13.1.6- La fonction sub():</a></li>
+<li><a href="#13-1-7-mises-en-pratique-1">13.1.7-  Mises en pratique 1</a>
+<ul>
+<li><a href="#a-vérifier-la-validité-des-numéros-de-téléphone-à-l-aide-d-une-expression-régulière">a: vérifier la validité des numéros de téléphone à l&rsquo;aide d&rsquo;une expression régulière:</a></li>
+<li><a href="#b-vérifier-la-validité-d-une-liste-d-adresses-courriel">b: vérifier la validité d&rsquo;une liste d&rsquo;adresses courriel:</a></li>
+</ul></li>
+<li><a href="#13-1-8-mises-en-pratique-2">13.1.8-  Mises en pratique 2</a>
+<ul>
+<li><a href="#a-lecture-d-un-fichier-de-commentaires">a: Lecture d&rsquo;un fichier de commentaires:</a></li>
+<li><a href="#b-compter-les-correspondances">b: Compter les correspondances:</a></li>
+<li><a href="#c-lettres-minuscules-et-majuscules">c: Lettres minuscules et majuscules</a></li>
+<li><a href="#d-ignorer-les-caractères-spéciaux">d: Ignorer les caractères spéciaux:</a></li>
+<li><a href="#e-améliorer-notre-regexx">e: Améliorer notre regexx:</a></li>
+<li><a href="#f-combiner-plusieurs-regex">f: Combiner plusieurs regex:</a></li>
+<li><a href="#f-modifications-des-chaînes-dans-notre-regex">f: modifications des chaînes dans notre regex:</a></li>
+<li><a href="#g-trouver-les-années-avec-4-chiffres-dans-notre-document">g: Trouver les années avec 4 chiffres dans notre document:</a></li>
+<li><a href="#h-extraire-toutes-les-années-de-notre-document">h: Extraire toutes les années de notre document:</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>13- Regex et Python - Cours</h1>
+
+          <div class="article-style">
+            
+
+<p><img src="/img/formation/regex.jpg" alt="image0" /></p>
+
+<p>Les expressions régulières  (de l&rsquo;anglais regex Regular Expression) constituent un système très puissant et très rapide pour faire des recherches dans des chaînes de caractères. C&rsquo;est une sorte de fonctionnalité Rechercher/Remplacer très poussée.</p>
+
+<p>Pour tester nos expressions régulières: Regex101.com</p>
+
+<p>En Python, les expressions régulières se font avec un package nommé <b>re</b>.</p>
+
+<p>Voici un exemple d&rsquo;usage d&rsquo;expressions régulières, ce code illustre un cas où l&rsquo;on chercherait à tester la présence d&rsquo;une adresse email :</p>
+
+<pre><code class="language-python">import re
+
+chaine = &quot;guillaume.d@gmail.com&quot;
+
+# on vérifie qu'il y a bien le signe @ et on vérifie que l'adresse se termine par .fr ou .com
+regexp = &quot;(^[a-z0-9._-]+@[a-z0-9._-]+\.[(com|fr)]+)&quot;
+
+if re.match(regexp, chaine) is not None :
+    
+    print(&quot;Vrai&quot;)
+
+else:
+    
+    print(&quot;Faux&quot;)
+</code></pre>
+
+<pre><code>Vrai
+</code></pre>
+
+<p>Voici un autre exemple, voici une expression régulière pour déterminer si un numéro de téléphone francais est valide:</p>
+
+<ul>
+<li><p><sup class="footnote-ref" id="fnref:0"><a href="#fn:0">1</a></sup>{1}[1-7]{1}(-[0-9]{2}){4}$</p>
+
+<pre><code class="language-python">import re
+
+numero = &quot;02-98-07-48-56&quot;
+
+regexp = &quot;^[0]{1}[1-7]{1}(-[0-9]{2}){4}$&quot;
+
+if re.match(regexp, numero) is not None :
+    
+print(&quot;Vrai&quot;)
+
+else:
+    
+print(&quot;Faux&quot;)
+</code></pre>
+
+<p>Vrai</p></li>
+</ul>
+
+<p>Nous allons voir comment utiliser ces regex :</p>
+
+<h2 id="13-1-trouver-des-caractères">13.1- Trouver des caractères</h2>
+
+<h2 id="13-1-1-les-caractères-génériques">13.1.1- Les caractères génériques</h2>
+
+<p>Dans les regex, il est important de savoir ce que l&rsquo;on doit aller chercher et combien de fois.</p>
+
+<ul>
+<li><p><b>Chercher les caractères que nous voulons:</b></p></li>
+
+<li><p>. : Le point correspond à tous les caractères possibles</p></li>
+
+<li><p>\ : Utilisé pour supprimer la signification spéciale du caractère qui le suit (discuté ci-dessous)</p></li>
+
+<li><p>[A-F] : Correspond à une liste de caractères possibles: tous les éléments entre A et F</p></li>
+
+<li><p>^: le contraire de ce que l&rsquo;on veut</p></li>
+
+<li><p>$: Correspond à la fin</p></li>
+
+<li><p>(python|c++): chercher l&rsquo;un ou l&rsquo;autre</p></li>
+
+<li><p>(): Joindre un groupe de requête re()</p></li>
+
+<li><p>\d : chercher Uniquement des chiffres. Équivalent à [0-9]</p></li>
+
+<li><p>\D : chercher tout sauf des chiffres. Équivalent à [^0-9]</p></li>
+
+<li><p>\s : chercher Un espace</p></li>
+
+<li><p>\w : chercher un caractère alphanumérique. Équivalent à [a-zA-Z0-9_]</p></li>
+
+<li><p>\W :Tout sauf un caractère alphanumérique. Équivalent à [^a-zA-Z0-9_].</p></li>
+</ul>
+
+<p><b> - Pour compter des caractères: </b></p>
+
+<ul>
+<li>? : 0 ou 1 fois</li>
+<li>&lsquo;*&rsquo;   : 0 à l&rsquo;infini</li>
+<li>&rsquo;+&rsquo;   : de 1 à l&rsquo;infini</li>
+<li>{3} : exactement 3</li>
+<li>{3,} : de 3 à l&rsquo;infini</li>
+<li>{,3} : de 0 à 3 fois</li>
+<li>{3,6} : de 3 à 6 fois</li>
+</ul>
+
+<h2 id="13-1-2-rechercher-le-debut-ou-fin-d-une-chaine-de-caractères">13.1.2-  Rechercher le debut ou fin d&rsquo;une chaine de caractères</h2>
+
+<ul>
+<li>&rsquo;^&rsquo; pour le debut d&rsquo;une chaine</li>
+
+<li><p>&rsquo;$&rsquo; pour les fins de chaines</p>
+
+<pre><code class="language-python">import re
+
+strings = [&quot;il est sur le feu&quot;]
+
+bad_string = &quot;un feu de paille&quot;
+regexp = &quot;(f.u)$&quot;
+
+for string in strings:
+if re.match(regexp, string) is not None :
+
+    print(&quot;Vrai pour: &quot; + string)
+
+else:
+
+    print(&quot;Faux pour: &quot;+ string)
+    
+</code></pre>
+
+<p>Faux pour: il est sur le feu</p>
+
+<pre><code class="language-python">import re
+
+strings = [&quot;il est sur le feu&quot;,&quot;fou&quot;]
+
+bad_string = &quot;un feu de paille&quot;
+regexp = &quot;^(f.u)&quot;
+for string in strings: 
+if re.match(regexp, string) is not None :
+
+    print(&quot;Vrai&quot;)
+
+else:
+
+    print(&quot;Faux&quot;)
+</code></pre>
+
+<p>Faux
+Vrai</p></li>
+</ul>
+
+<h2 id="13-1-3-la-fonction-match-tester-une-chaîne-de-caractères">13.1.3- La fonction match(), tester une chaîne de caractères:</h2>
+
+<pre><code class="language-python"># Pourquoi on met un 'r'
+print('\tBonjour')
+print(r'\tBonjour')
+</code></pre>
+
+<pre><code>    Bonjour
+\tBonjour
+</code></pre>
+
+<ul>
+<li><p><b>match()</b> évalue la correspondance entre une expression régulière et une chaîne de caractères en partant du <b> bébut </b> de la chaîne.</p>
+
+<pre><code class="language-python">a = re.match(r'.', 'Pierre Dupont') # chercher n'importe quel caractère une seule fois
+print(a)
+</code></pre>
+
+<p><re.Match object; span=(0, 1), match='P'></p>
+
+<pre><code class="language-python">a = re.match(r'.', 'Pierre Dupont')
+print(a.group())
+</code></pre>
+
+<p>P</p>
+
+<pre><code class="language-python">a = re.match(r'.+', 'Pierre Dupont') # chercher n'importe quel caractère à l'infini
+print(a.group())
+</code></pre>
+
+<p>Pierre Dupont</p></li>
+</ul>
+
+<p>On peut créer différent groupe avec la méthode groupe:</p>
+
+<pre><code class="language-python">a = re.match(r'(\w+)\s(\w+)', 'Pierre Dupont')
+print(a.group(0)) # entièreté du match 
+print(a.group(1)) # premier groupe 
+print(a.group(2)) # deuxième groupe 
+</code></pre>
+
+<pre><code>Pierre Dupont
+Pierre
+Dupont
+</code></pre>
+
+<pre><code class="language-python">a = re.match(r'(\w+)(\s)(\w+)', 'Pierre Dupont')
+print(a.group(0)) # entièreté du match 
+print(a.group(1)) # premier groupe  
+print(a.group(2)) # deuxième groupe
+print(a.group(3)) # troisième groupe
+</code></pre>
+
+<pre><code>Pierre Dupont
+Pierre
+
+Dupont
+</code></pre>
+
+<p>On peut nommer les groupes au lieu de mettre des indexs:</p>
+
+<pre><code class="language-python">a = re.match(r'(?P&lt;prenom&gt;\w+) (?P&lt;nom&gt;\w+)', 'Pierre Dupont')
+
+print(a.group('prenom'))
+print(a.group('nom'))
+
+print(a.groups())
+print(a.groupdict())
+</code></pre>
+
+<pre><code>Pierre
+Dupont
+('Pierre', 'Dupont')
+{'prenom': 'Pierre', 'nom': 'Dupont'}
+</code></pre>
+
+<p><b>- Exercices: </b></p>
+
+<p>Pour chaque question, indiquez si le match est valide ou non et ce qu&rsquo;il retourne.</p>
+
+<ul>
+<li><p>1 re.match(r&rsquo;[a-z]+\d{2}&lsquo;, &lsquo;item01&rsquo;)</p></li>
+
+<li><p>2 re.match(r&rsquo;[a-zA-Z]+\s\w+&lsquo;, &lsquo;Pierre Dupont&rsquo;)</p></li>
+
+<li><p>3 re.match(r&rsquo;\s+&lsquo;, &lsquo;pierre dupont&rsquo;)</p></li>
+
+<li><p>4 re.match(r&rsquo;\w+&lsquo;, &lsquo;pierre dupont&rsquo;)</p></li>
+
+<li><p>5 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre-dupont&rsquo;)</p></li>
+
+<li><p>6 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre/dupont&rsquo;)</p></li>
+
+<li><p>7 re.match(r&rsquo;\w+([-+=]+)&lsquo;, &lsquo;pierre/dupont&rsquo;)</p></li>
+</ul>
+
+<p><b>- Correction: </b></p>
+
+<ul>
+<li>1 re.match(r&rsquo;[a-z]+\d{2}&lsquo;, &lsquo;item01&rsquo;)</li>
+</ul>
+
+<p>Match valide : retourne &lsquo;item01&rsquo;</p>
+
+<ul>
+<li>2 re.match(r&rsquo;[a-zA-Z]+\s\w+&lsquo;, &lsquo;Pierre Dupont&rsquo;)</li>
+</ul>
+
+<p>Match valide : retourne &lsquo;Pierre Dupont&rsquo;</p>
+
+<ul>
+<li>3 re.match(r&rsquo;\s+&lsquo;, &lsquo;pierre dupont&rsquo;)</li>
+</ul>
+
+<p>Match invalide : on cherche un espace au début de la chaîne de caractère, mais elle commence par une lettre.</p>
+
+<ul>
+<li>4 re.match(r&rsquo;\w+&lsquo;, &lsquo;pierre dupont&rsquo;)</li>
+</ul>
+
+<p>Match valide : retourne &lsquo;pierre&rsquo;</p>
+
+<ul>
+<li>5 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre-dupont&rsquo;)</li>
+</ul>
+
+<p>Match valide : retourne &lsquo;pierre-&rsquo;</p>
+
+<ul>
+<li>6 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre/dupont&rsquo;)</li>
+</ul>
+
+<p>Match valide : retourne &lsquo;pierre&rsquo;</p>
+
+<ul>
+<li>7 re.match(r&rsquo;\w+([-+=]+)&lsquo;, &lsquo;pierre/dupont&rsquo;)</li>
+</ul>
+
+<p>Match invalide : le + cherche si les caractères -, + ou = sont présents au moins une fois ou plus dans la chaîne de caractère. Aucun de ses éléments ne se retrouve dans la chaîne de caractère au moins une fois et donc le match n&rsquo;est pas valide.</p>
+
+<h2 id="13-1-4-la-fonction-search-chercher-une-chaîne-de-caractères">13.1.4- La fonction search(), chercher une chaîne de caractères:</h2>
+
+<pre><code class="language-python">a = re.search(r'\+', 'Pierre Dupont + Paul Martin')
+print(a.group())
+</code></pre>
+
+<pre><code>+
+</code></pre>
+
+<pre><code class="language-python">a = re.search(r'\s', 'Pierre Dupont + Paul Martin')
+print(a)
+</code></pre>
+
+<pre><code>&lt;re.Match object; span=(6, 7), match=' '&gt;
+</code></pre>
+
+<pre><code class="language-python">a = re.search(r'\+ Paul Martin', 'Pierre Dupont + Paul Martin')
+print(a.group())
+print(a)
+</code></pre>
+
+<pre><code>+ Paul Martin
+&lt;re.Match object; span=(14, 27), match='+ Paul Martin'&gt;
+</code></pre>
+
+<pre><code class="language-python">import re
+
+a = re.search(&quot;f.&quot;,&quot;kung fu&quot;)
+
+if a is not None:
+    print(&quot;trouvé&quot;)
+    print(a)
+    
+else:
+    print(&quot;Aucune correspondance&quot;)
+</code></pre>
+
+<pre><code>trouvé
+&lt;re.Match object; span=(5, 7), match='fu'&gt;
+</code></pre>
+
+<pre><code class="language-python">import re
+a = re.search(&quot;baton&quot;,&quot;kung fu&quot;)
+
+if a is not None:
+    print(&quot;trouvé&quot;)
+else:
+    print(&quot;Aucune correspondance&quot;)
+    
+</code></pre>
+
+<pre><code>Aucune correspondance
+</code></pre>
+
+<h2 id="13-1-5-la-fonction-split">13.1.5- La fonction split():</h2>
+
+<pre><code class="language-python">import re
+
+texte = 'item01 | item02 - item03 - item04 | item05'
+
+a = re.split(r' \| | - ' , texte)
+print(a)
+</code></pre>
+
+<pre><code>['item01', 'item02', 'item03', 'item04', 'item05']
+</code></pre>
+
+<h2 id="13-1-6-la-fonction-sub">13.1.6- La fonction sub():</h2>
+
+<p>Cette fonction su() permet de modifier des chaines de caractères avec regex.</p>
+
+<pre><code class="language-python">re.sub('yo','hello','yo world!')
+</code></pre>
+
+<pre><code>'hello world!'
+</code></pre>
+
+<h2 id="13-1-7-mises-en-pratique-1">13.1.7-  Mises en pratique 1</h2>
+
+<h3 id="a-vérifier-la-validité-des-numéros-de-téléphone-à-l-aide-d-une-expression-régulière">a: vérifier la validité des numéros de téléphone à l&rsquo;aide d&rsquo;une expression régulière:</h3>
+
+<p>Un numéro valide en France doit être composée d&rsquo;une suite de 5 nombres avec 2 chiffres. La première série de nombres doit être comprise entre 01 et 07.</p>
+
+<p>Cela donne donc 0A-XX-XX-XX-XX où A est un nombre compris entre 1 et 7 et X un nombre compris entre 0 et 9.</p>
+
+<p>Les numéros suivants sont donc valides :</p>
+
+<p>01-23-65-32-45</p>
+
+<p>07-35-88-99-23</p>
+
+<p>03-45-23-90-00</p>
+
+<p>Et les numéros suivants invalides :</p>
+
+<p>00-12-53-62-43 (commence par 00)</p>
+
+<p>08-14-62-32-99 (commence par 08)</p>
+
+<p>03-24-12-64 (seulement 4 séquences de deux chiffres)</p>
+
+<pre><code class="language-python">import re
+
+numeros_de_telephone = ['06-71-45-34-23',
+                        '02-12-33-75-12',
+                        '00-23-14-52-44',
+                        '514-235-0293',
+                        '03-52-31-56-34']
+
+for tel in numeros_de_telephone:
+    match = re.search(r'0{1}[1-7]{1}(-[0-9]{2}){4}', tel)
+    print('Le numero {} est {}'.format(tel, 'valide' if match else 'invalide'))
+</code></pre>
+
+<pre><code>Le numero 06-71-45-34-23 est valide
+Le numero 02-12-33-75-12 est valide
+Le numero 00-23-14-52-44 est invalide
+Le numero 514-235-0293 est invalide
+Le numero 03-52-31-56-34 est valide
+</code></pre>
+
+<h3 id="b-vérifier-la-validité-d-une-liste-d-adresses-courriel">b: vérifier la validité d&rsquo;une liste d&rsquo;adresses courriel:</h3>
+
+<p>Le but de cet exercice est de vérifier si les adresses emails contenues dans la liste sont valides ou non.</p>
+
+<pre><code class="language-python">import re
+
+adresses_mail = ['christian_martin@gmail.com',
+                 'JaiOublieLarobasegmail.com',
+                 'MarieHutchinson03523@yahoo.co.uk',
+                 'UnEaDreSSeMail!38BIZarre@unSiTeBizarre.com',
+                 'ceciNestPasUneDresseMail']
+
+for mail in adresses_mail:
+    adresse_valide = re.search(r'.+@[a-zA-Z0-9-]+\.[a-zA-Z-.]+', mail)
+    print(&quot;L'adresse {} est {}&quot;.format(mail, 'valide' if adresse_valide else 'invalide'))
+</code></pre>
+
+<pre><code>L'adresse christian_martin@gmail.com est valide
+L'adresse JaiOublieLarobasegmail.com est invalide
+L'adresse MarieHutchinson03523@yahoo.co.uk est valide
+L'adresse UnEaDreSSeMail!38BIZarre@unSiTeBizarre.com est valide
+L'adresse ceciNestPasUneDresseMail est invalide
+</code></pre>
+
+<h2 id="13-1-8-mises-en-pratique-2">13.1.8-  Mises en pratique 2</h2>
+
+<h3 id="a-lecture-d-un-fichier-de-commentaires">a: Lecture d&rsquo;un fichier de commentaires:</h3>
+
+<pre><code class="language-python">import csv
+f = open(&quot;askreddit-2015.csv&quot;, encoding='utf-8')
+csvreader=csv.reader(f)
+posts=list(csvreader)
+posts[0:2]
+</code></pre>
+
+<pre><code>[['Title', 'Score', 'Time', 'Gold', 'NumComs'],
+ ['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?',
+  '11510',
+  '1433213314.0',
+  '1',
+  '26195']]
+</code></pre>
+
+<pre><code class="language-python">posts = posts[1:] # pour retirer l'entête
+</code></pre>
+
+<pre><code class="language-python">for post in posts[:10]:
+    print(post)
+</code></pre>
+
+<pre><code>['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?', '11510', '1433213314.0', '1', '26195']
+[&quot;What's your favorite video that is 10 seconds or less?&quot;, '8656', '1434205517.0', '4', '8479']
+['What are some interesting tests you can take to find out about yourself?', '8480', '1443409636.0', '1', '4055']
+[&quot;PhD's of Reddit. What is a dumbed down summary of your thesis?&quot;, '7927', '1440188623.0', '0', '13201']
+['What is cool to be good at, yet uncool to be REALLY good at?', '7711', '1440082910.0', '0', '20325']
+['[Serious] Redditors currently in a relationship, besides dinner and a movie, what are your favorite activities for date night?', '7598', '1439993280.0', '2', '5389']
+[&quot;Parents of Reddit, what's something that your kid has done that you pretended to be angry about but secretly impressed or amused you?&quot;, '7553', '1439161809.0', '0', '11520']
+['What is a good subreddit to binge read the All Time Top Posts of?', '7498', '1438822288.0', '0', '2780']
+['What would the person who named Walkie Talkies have named other items?', '7501', '1447904351.0', '4', '6720']
+[&quot;People who grew up in a different socioeconomic class as your significant others, what are the notable differences you've noticed and how does it affect your relationship (if at all)?&quot;, '7419', '1440358069.0', '0', '8603']
+</code></pre>
+
+<h3 id="b-compter-les-correspondances">b: Compter les correspondances:</h3>
+
+<p>Dans notre dataset, on va compter le nombre de fois que l&rsquo;on trouve cette expression: &ldquo;of Reddit&rdquo;.</p>
+
+<pre><code class="language-python">import re 
+
+regex = &quot;of Reddit&quot;
+of_reddit_count=0
+for post in posts:
+    if re.search(regex,post[0]) is not None:
+        of_reddit_count +=1 
+        
+print(of_reddit_count)
+</code></pre>
+
+<pre><code>76
+</code></pre>
+
+<h3 id="c-lettres-minuscules-et-majuscules">c: Lettres minuscules et majuscules</h3>
+
+<p>Les crochets permettent de matcher à la fois avec les lettres minuscules et les majuscules</p>
+
+<p>Donc si on veut aller chercher toutes les occurences de &lsquo;of reddit&rsquo; et &lsquo;of Reddit&rsquo;dans notre exemple précédent:</p>
+
+<pre><code class="language-python">import re 
+
+regex = &quot;of [Rr]eddit&quot;
+of_reddit_count=0
+for post in posts:
+    if re.search(regex,post[0]) is not None:
+        of_reddit_count +=1 
+        
+print(of_reddit_count)
+</code></pre>
+
+<pre><code>102
+</code></pre>
+
+<h3 id="d-ignorer-les-caractères-spéciaux">d: Ignorer les caractères spéciaux:</h3>
+
+<pre><code class="language-python">#[Serious]
+regex=&quot;[Serious]&quot;
+regex = &quot;\.$&quot; # pour avoir que les fins de phrases
+
+</code></pre>
+
+<pre><code class="language-python">import re
+
+# utilisation de \ pour ignorer les '[' (crochets) dans notre regex  
+regex = &quot;\[Serious\]&quot;
+serious_count=0
+for post in posts:
+    if re.search(regex,post[0]) is not None:
+        serious_count +=1 
+print(serious_count)
+</code></pre>
+
+<pre><code>69
+</code></pre>
+
+<h3 id="e-améliorer-notre-regexx">e: Améliorer notre regexx:</h3>
+
+<p>Dans notre fichierm on doit aller chercher les tags avec les expressions:
+- (Serious) , (serious), [Serious], [serious]</p>
+
+<pre><code class="language-python">import re
+serious_count=0
+for post in posts:
+    if re.search(&quot;[\[\(][Ss]erious[\]\)]&quot;,post[0]) is not None:
+        serious_count +=1        
+print(serious_count)
+</code></pre>
+
+<pre><code>80
+</code></pre>
+
+<pre><code class="language-python">import re
+serious_count=0
+for post in posts:
+    if re.search(&quot;\([Ss]erious\)&quot;,post[0]) is not None:
+        serious_count +=1
+    if re.search(&quot;\[[Ss]erious\]&quot;,post[0]) is not None:
+        serious_count +=1
+print(serious_count)
+</code></pre>
+
+<pre><code>80
+</code></pre>
+
+<h3 id="f-combiner-plusieurs-regex">f: Combiner plusieurs regex:</h3>
+
+<pre><code class="language-python">import re
+
+serious_start_count = 0
+serious_end_count = 0
+serious_count_final = 0
+
+for row in posts:
+    if re.search(&quot;^[\(\[][Ss]erious[\)\]]&quot;,row[0]) is not None:  # pour les tags serious au début
+        serious_start_count += 1
+    if re.search(&quot;[\(\[][Ss]erious[\)\]]$&quot;,row[0]) is not None: # pour les tags serious à la fin
+        serious_end_count += 1 
+    if re.search(&quot;^[\(\[][Ss]erious[\)\]] | [\(\[][Ss]erious[\)\]]$&quot;,row[0]) is not None:   # pour les tags serious pour les deux
+        serious_count_final  += 1 
+print(serious_start_count)
+print(serious_end_count)
+print(serious_count_final)
+</code></pre>
+
+<pre><code>69
+11
+73
+</code></pre>
+
+<h3 id="f-modifications-des-chaînes-dans-notre-regex">f: modifications des chaînes dans notre regex:</h3>
+
+<pre><code class="language-python">import re 
+
+posts_new = []
+
+for post in posts:
+    post[0] = re.sub(&quot;[\[\(][Ss]erious[\]\)]&quot;,&quot;[Serious]&quot; , post[0])
+    posts_new.append(post)
+</code></pre>
+
+<pre><code class="language-python">print(posts_new[0:10])
+</code></pre>
+
+<pre><code>[['Title', 'Score', 'Time', 'Gold', 'NumComs'], ['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?', '11510', '1433213314.0', '1', '26195'], [&quot;What's your favorite video that is 10 seconds or less?&quot;, '8656', '1434205517.0', '4', '8479'], ['What are some interesting tests you can take to find out about yourself?', '8480', '1443409636.0', '1', '4055'], [&quot;PhD's of Reddit. What is a dumbed down summary of your thesis?&quot;, '7927', '1440188623.0', '0', '13201'], ['What is cool to be good at, yet uncool to be REALLY good at?', '7711', '1440082910.0', '0', '20325'], ['[Serious] Redditors currently in a relationship, besides dinner and a movie, what are your favorite activities for date night?', '7598', '1439993280.0', '2', '5389'], [&quot;Parents of Reddit, what's something that your kid has done that you pretended to be angry about but secretly impressed or amused you?&quot;, '7553', '1439161809.0', '0', '11520'], ['What is a good subreddit to binge read the All Time Top Posts of?', '7498', '1438822288.0', '0', '2780'], ['What would the person who named Walkie Talkies have named other items?', '7501', '1447904351.0', '4', '6720']]
+</code></pre>
+
+<h3 id="g-trouver-les-années-avec-4-chiffres-dans-notre-document">g: Trouver les années avec 4 chiffres dans notre document:</h3>
+
+<ul>
+<li>[0-9] rechercher les chiffres en 0 et 9</li>
+
+<li><p>[a-z] [A-Z] rechercher les lettres entre a et z et entre A et Z</p></li>
+
+<li><p>[1-2][0-9][0-9][0-9] pour rechercher les années</p></li>
+
+<li><p>[1-2][0-9]{3} : accolades pour faire des répétitions</p>
+
+<pre><code class="language-python">year_strings = []
+
+for row in posts: 
+a = re.search(&quot;[1-2][0-9]{3}&quot;,row[0])
+if a  is not None:
+    year_strings.append(a.group())       
+year_strings
+</code></pre>
+
+<p>[&lsquo;2000&rsquo;,
+ &lsquo;1990&rsquo;,
+ &lsquo;2015&rsquo;,
+ &lsquo;2014&rsquo;,
+ &lsquo;1000&rsquo;,
+ &lsquo;1500&rsquo;,
+ &lsquo;2015&rsquo;,
+ &lsquo;2016&rsquo;,
+ &lsquo;1000&rsquo;,
+ &lsquo;2016&rsquo;,
+ &lsquo;2115&rsquo;,
+ &lsquo;1000&rsquo;,
+ &lsquo;2015&rsquo;,
+ &lsquo;2014&rsquo;,
+ &lsquo;1000&rsquo;,
+ &lsquo;2001&rsquo;]</p></li>
+</ul>
+
+<h3 id="h-extraire-toutes-les-années-de-notre-document">h: Extraire toutes les années de notre document:</h3>
+
+<ul>
+<li><p>on peut utiliser la fonction findall() du module re()</p>
+
+<pre><code class="language-python"># findall()
+re.findall(&quot;[a-z]&quot;,&quot;abc123&quot;)
+</code></pre>
+
+<p>[&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;]</p>
+
+<pre><code class="language-python">year_strings='On est déjà en 2017, une année de plus que 2016 et de moins que 2018'
+years=re.findall(&quot;[1-2][0-9]{3}&quot;,year_strings)
+print(years)
+</code></pre>
+
+<p>[&lsquo;2017&rsquo;, &lsquo;2016&rsquo;, &lsquo;2018&rsquo;]</p>
+
+<pre><code class="language-python">
+</code></pre></li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:0">0 <a class="footnote-return" href="#fnref:0"><sup>^</sup></a></li>
+</ol>
+</div>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/" rel="next">12- SQL et Python - Exercice</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/14-statistique-descriptive-cours/" rel="prev">14- La statistique descriptive - Rappels</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/13-%20Regex%20-%20cours.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
