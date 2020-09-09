@@ -28,8 +28,9 @@
   
     
   
-  <meta name="description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables.">
+  <meta name="description" content="Objectifs  Comment générer des graphiques en Python avec matplotlib Gerer plusieurs données dans un même graphique Gérer les figures multi-graphiques Créer des bar charts, histogrammes, courbes, nuages de points et boites à moustaches Utiliser la librairie Seaborn   La bibliothèque Matplotlib est l&rsquo;une des bibliothèques les plus utilisées pour tracer des données en Python.
+De nombreux types de graphiques peuvent être développés avec cette bibliothèque: https://matplotlib.org/gallery/index.html
+Pour illustrer certaines fonctionnalités du module Python matplotlib.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/9-visualisation/">
@@ -116,8 +117,9 @@ Tous les programmes Python font appel à des variables.">
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/9-visualisation/">
   <meta property="og:title" content="9- La visualisation graphique avec Python - Cours | GDueymes">
-  <meta property="og:description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Objectifs  Comment générer des graphiques en Python avec matplotlib Gerer plusieurs données dans un même graphique Gérer les figures multi-graphiques Créer des bar charts, histogrammes, courbes, nuages de points et boites à moustaches Utiliser la librairie Seaborn   La bibliothèque Matplotlib est l&rsquo;une des bibliothèques les plus utilisées pour tracer des données en Python.
+De nombreux types de graphiques peuvent être développés avec cette bibliothèque: https://matplotlib.org/gallery/index.html
+Pour illustrer certaines fonctionnalités du module Python matplotlib."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -451,7 +453,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exerice</a>
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
       </li>
       
       <li >
@@ -483,7 +485,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exerice</a>
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
       </li>
       
       <li >
@@ -522,20 +524,11 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
 <ul>
 <li>
 <ul>
-<li><a href="#les-bases-du-langage-python">Les Bases du langage Python:</a></li>
-<li><a href="#2-les-variables">2- Les variables</a></li>
-<li><a href="#2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</a>
-<ul>
-<li><a href="#2-1-1-les-types-numériques">2.1.1- Les types numériques</a></li>
-<li><a href="#2-1-2-les-types-booléens">2.1.2- Les types booléens</a></li>
-<li><a href="#2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</a></li>
-<li><a href="#2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</a></li>
-</ul></li>
-<li><a href="#2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</a></li>
-<li><a href="#2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</a></li>
-<li><a href="#2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</a></li>
-<li><a href="#2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</a></li>
-<li><a href="#2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</a></li>
+<li><a href="#objectifs">Objectifs</a></li>
+<li><a href="#1-générer-son-premier-graphique">1- Générer son premier graphique</a></li>
+<li><a href="#matplotlib-subplot">Matplotlib subplot</a></li>
+<li><a href="#b-l-histogramme">b- L&rsquo; histogramme</a></li>
+<li><a href="#4-aller-plus-loin-avec-seaborn">4- Aller plus loin avec Seaborn</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -554,625 +547,713 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
           <div class="article-style">
             
 
-<p><img src="/img/pylogo.png" alt="image0" /></p>
+<p><img src="/img/matplotlib.png" alt="image0" /></p>
 
-<h2 id="les-bases-du-langage-python">Les Bases du langage Python:</h2>
-
-<h2>Objectifs</h2>
+<h2 id="objectifs">Objectifs</h2>
 
 <ul>
-<li>Comprendre ce qu&rsquo;est une variable</li>
-<li>Les règles de nommage d&rsquo;une variable</li>
-<li>Les premiers types de variables</li>
-<li>Réaliser des opération entre des variables</li>
-<li>Vérifier et modifier le type d’une variable</li>
-<li>Maîtrise de jupyter notebook 2 : execution du code à travers les cellules</li>
+<li>Comment générer des graphiques en Python avec matplotlib</li>
+<li>Gerer plusieurs données dans un même graphique</li>
+<li>Gérer les figures multi-graphiques</li>
+<li>Créer des bar charts, histogrammes, courbes, nuages de points et boites à moustaches</li>
+<li>Utiliser la librairie Seaborn <br><br></li>
 </ul>
 
-<h2 id="2-les-variables">2- Les variables</h2>
+<p>La bibliothèque Matplotlib est l&rsquo;une des bibliothèques les plus utilisées pour tracer des données en Python.</p>
 
-<p>Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.</p>
+<p>De nombreux types de graphiques peuvent être développés avec cette bibliothèque:
+<a href="https://matplotlib.org/gallery/index.html" target="_blank">https://matplotlib.org/gallery/index.html</a></p>
 
-<p>Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&rsquo;information est enregistré dans un type spécial de variable.</p>
+<p>Pour illustrer certaines fonctionnalités du module Python matplotlib.pyplot (qui fournit un système de traçage similaire à celui de MATLAB), nous utiliserons une base de données de la station UQAM.</p>
 
-<p>Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&rsquo;interpreteur python ce qu&rsquo;il peut faire ou ne pas faire avec cette variable.</p>
+<pre><code class="language-python">import pandas as pd 
+import numpy as np
+import warnings; warnings.filterwarnings(action='ignore')
+import matplotlib.pyplot as plt
 
-<p>Quelques remarques:</p>
-
-<ul>
-<li>Python est sensible à la Casse: il distingue les Majuscules et les minuscules<br /></li>
-<li>On ne peut pas commencer une variable par un chiffre</li>
-<li>Ne pas utiliser d&rsquo;accents dans les noms de variables.</li>
-<li>fonction type(): permet de connaitre le type de notre variable.</li>
-<li>Pas d’espace (underscore)</li>
-<li>Mots interdits (se mets en vert) : <a href="https://www.programiz.com/python-programming/keywords-identifier" target="_blank">https://www.programiz.com/python-programming/keywords-identifier</a></li>
-<li>Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)</li>
-</ul>
-
-<h2> Concept de variable et déclaration d’une variable dans Jupyter </h2>
-
-<ul>
-<li>Se retrouve dans pratiquement tous les langages</li>
-
-<li><p>Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.</p>
-
-<pre><code class="language-python">job = 'data scientist' # on stocke une valeur dans une variable 
-print(job)
+dataframe_UQAM = pd.read_csv('./DATA/UQAM_DATA_STATION_2018.csv')
+dataframe_UQAM['Date']=pd.to_datetime(dataframe_UQAM['Date'])
+dataframe_UQAM = dataframe_UQAM.set_index(&quot;Date&quot;, drop=True)
+dataframe_UQAM.head()
 </code></pre>
 
-<p>data scientist</p></li>
-</ul>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<p>Une variable déclarée est accessible depuis d’autres cellules.</p>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<pre><code class="language-python">print(job)
-</code></pre>
-
-<pre><code>data scientist
-</code></pre>
-
-<h2 id="2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</h2>
-
-<ul>
-<li>Très important (fondamental comme dans tout type de langage)</li>
-<li>La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&rsquo;autres)</li>
-</ul>
-
-<h3 id="2-1-1-les-types-numériques">2.1.1- Les types numériques</h3>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">Les entiers: int()</span></tt></td>
-<td>1 est un nombre entier, 1.0 n'en est pas un</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les décimaux: float()</span></tt></td>
-<td>nombre qui comprend une partie décimale </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les nombres complexes</span></tt></td>
-<td>association entre un nombre réel et un nombre imaginaire</td>
-</tr>
-
-</tbody>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Temperature minimale</th>
+      <th>Temperature maximale</th>
+      <th>Temperature moyenne</th>
+      <th>Precipitation totale</th>
+      <th>Dir_wind</th>
+      <th>Mod_wind</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2014-02-01</th>
+      <td>-4.6</td>
+      <td>0.9</td>
+      <td>-1.5</td>
+      <td>0.0</td>
+      <td>244.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2014-02-02</th>
+      <td>-6.2</td>
+      <td>0.2</td>
+      <td>-3.5</td>
+      <td>0.0</td>
+      <td>163.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2014-02-03</th>
+      <td>-4.8</td>
+      <td>0.5</td>
+      <td>-1.2</td>
+      <td>0.0</td>
+      <td>255.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2014-02-04</th>
+      <td>-9.9</td>
+      <td>-4.8</td>
+      <td>-8.0</td>
+      <td>0.0</td>
+      <td>148.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2014-02-05</th>
+      <td>-9.9</td>
+      <td>-6.3</td>
+      <td>-7.6</td>
+      <td>0.0</td>
+      <td>261.0</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
 </table>
+</div>
 
-<pre><code class="language-python">m=3.2
-type(m)
+<h2 id="1-générer-son-premier-graphique">1- Générer son premier graphique</h2>
+
+<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
+plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'])
+plt.show()
 </code></pre>
 
-<pre><code>float
-</code></pre>
-
-<pre><code class="language-python">m=3
-type(m)
-</code></pre>
-
-<pre><code>int
-</code></pre>
-
-<h3 id="2-1-2-les-types-booléens">2.1.2- Les types booléens</h3>
+<p><img src="dataviz1.png" alt="png" /></p>
 
 <ul>
-<li>variable contenant des valeurs binaires: True ou False</li>
-<li>des types de données  résultent d&rsquo;opérations logiques</li>
+<li>Option <b> marqueur </b>:</li>
 </ul>
 
-<p>Très utile dans les confitions if().</p>
-
-<pre><code class="language-python">3&gt;5
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">3&lt;5
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h3 id="2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</h3>
-
-<p>Suite finie de caractères qu&rsquo;on peut considérer comme du texte qu&rsquo;on définit entre deux (&lsquo;&hellip;&rsquo;) ou (&ldquo;&hellip;&rdquo;).</p>
+<p><a href="https://matplotlib.org/api/markers_api.html" target="_blank">https://matplotlib.org/api/markers_api.html</a></p>
 
 <ul>
-<li><p>Gestion des apostrohpes</p>
+<li><p>Option <b> linestyle </b>: supprimer ou non les lignes</p>
 
-<pre><code class="language-python">job = 'data science'
-job
-</code></pre>
-
-<p>&lsquo;data science&rsquo;</p>
-
-<pre><code class="language-python">darkVador = 'Luke, I'm your father'
-print(darkVador)
-</code></pre>
-
-<p>File &ldquo;<ipython-input-34-24a0388f6afa>&rdquo;, line 1
-    darkVador = &lsquo;Luke, I&rsquo;m your father&rsquo;
-                         ^
-SyntaxError: invalid syntax</p>
-
-<pre><code class="language-python">darkVador = &quot;Luke, I'm your father&quot;
-print(darkVador)
-# ou 
-
-darkVador = 'Luke, I\'m your father'
-print(darkVador)
-</code></pre>
-
-<p>Luke, I&rsquo;m your father
-Luke, I&rsquo;m your father</p></li>
-
-<li><p>Si texte trop long (marche aussi pour du code classique)</p>
-
-<pre><code class="language-python">luke = 'no…That\'s impossible….Noooooooooooooooooooooooooo\
-oooooooooooo'
-print(luke)
-</code></pre>
-
-<p>no…That&rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo</p></li>
-
-<li><p>Possible de concatener 2 variables</p>
-
-<pre><code class="language-python">start = 'luke, I\'m'
-end = 'your father'
-darkVador = start+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;myour father</p>
-
-<pre><code class="language-python">darkVador = start+' '+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;m your father</p></li>
-
-<li><p>Possible de répèter une chaine de caractère</p>
-
-<pre><code class="language-python">luke = 'N'+('o'*10)
-print(luke)
-</code></pre>
-
-<p>Noooooooooo</p></li>
+<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
+plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'], marker='x', linestyle=&quot;--&quot;)
+plt.show()
+</code></pre></li>
 </ul>
 
-<h3 id="2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</h3>
+<p><img src="dataviz2.png" alt="png" /></p>
+
+<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
+plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'], marker='x', linestyle=&quot;--&quot;)
+plt.xlabel(&quot; L'axe des abscisses&quot;)
+plt.ylabel(&quot;L'axe des ordonnées&quot;)
+plt.title(&quot;Ma deuxième courbe !&quot;)
+plt.show()
+
+</code></pre>
+
+<p><img src="dataviz3.png" alt="png" /></p>
+
+<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
+plt.plot(year_to_plot.index,year_to_plot['Temperature minimale'], color='lightblue')
+plt.plot(year_to_plot.index,year_to_plot['Temperature maximale'], color='darkred')
+
+plt.xlabel(&quot; L'axe des abscisses&quot;)
+plt.ylabel(&quot;L'axe des ordonnées&quot;)
+plt.title(&quot;multi-courbes&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz4.png" alt="png" /></p>
 
 <ul>
-<li><p>exemple (règle : on ne mix pas chiffres et strings dans une concaténation)</p>
+<li>Fonction <b> scatter </b>: la fonction vous permet de créer un nuage de points</li>
 
-<pre><code class="language-python">finalMotivationScore = 90
-</code></pre>
+<li><p>La méthode <b> .rcParams </b> est utilisée pour agrandir la fenêtre graphique</p>
 
-<pre><code class="language-python">test = job + 'learning motivation ?' + finalMotivationScore + '% !'
-</code></pre>
-
-<hr />
-
-<p>TypeError                                 Traceback (most recent call last)</p>
-
-<p><ipython-input-41-77bbac5d7b73> in <module>
-&mdash;-&gt; 1 test = job + &lsquo;learning motivation ?&rsquo; + finalMotivationScore + &lsquo;% !&rsquo;</p>
-
-<p>TypeError: can only concatenate str (not &ldquo;int&rdquo;) to str</p></li>
-
-<li><p>Verifier le type d’une variable</p>
-
-<pre><code class="language-python">print(type(finalMotivationScore))
-print(type('test'))
-print(type(1))
-</code></pre>
-
-<p><class 'int'>
-<class 'str'>
-<class 'int'></p></li>
-
-<li><p>modifier le type d&rsquo;une variable</p>
-
-<pre><code class="language-python">float(1)
-int(1.3)
-str(1)
-</code></pre>
-
-<p>&lsquo;1&rsquo;</p>
-
-<pre><code class="language-python">test = job + ' learning motivation ? ' + str(finalMotivationScore) + '% !'
-print(test)
-</code></pre>
-
-<p>data science learning motivation ? 90% !</p></li>
+<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]  
+plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'])
+plt.show()
+</code></pre></li>
 </ul>
 
-<h2 id="2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</h2>
+<p><img src="dataviz5.png" alt="png" /></p>
 
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
+<ul>
+<li>pour utiliser l&rsquo;option scatter color, python veut une liste d&rsquo;entrée et non un dictionnaire</li>
 
-<tr><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
-<td>Ajoute deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
-<td>Soustrait l'opérande droit de l'opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;</span></tt></td>
-<td>Multiplie deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne le reste (opérateur modulo)</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;&#42;</span></tt></td>
-<td>Calcule de la valeur exponentielle de l'opératde gauche par l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne la partie entière</td>
-</tr>
-</tbody>
+<li><p>option couleur: c = list ()</p>
+
+<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]
+plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'], c=list(year_to_plot['Temperature moyenne']))
+plt.xlabel(&quot;Temps&quot;)
+plt.ylabel(&quot;Température&quot;)
+plt.title(&quot;Temperature&quot;, y=1.05)
+plt.show()
+</code></pre></li>
+</ul>
+
+<p><img src="dataviz6.png" alt="png" /></p>
+
+<ul>
+<li>Nous avons utilisé la couleur de dispersion par défaut ()</li>
+<li>avec l&rsquo;option <b> cmap </b>, nous pouvons choisir notre panel de couleurs: <a href="https://matplotlib.org/examples/color/colormaps_reference.html" target="_blank">https://matplotlib.org/examples/color/colormaps_reference.html</a></li>
+<li>on choisira par exemple la palette de couleurs &ldquo;sismique&rdquo; via l&rsquo;option <b> cmap </b></li>
+<li>pour changer la forme et la taille des points: utilisez les options <b> marqueur </b> et <b> s </b></li>
+<li>pour enregistrer un graphe: fonction pyplot: <b> savefig () </b></li>
+<li>Pour ajouter une barre de couleur: fonction <b> colorbar () </b></li>
+
+<li><p>Pour faire pivoter les étiquettes dans x: function <b> xticks () </b></p>
+
+<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]
+plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'], c=list(year_to_plot['Temperature moyenne']),
+        cmap=&quot;seismic&quot;,
+        marker=&quot;D&quot;, 
+        s=100)
+plt.xlabel(&quot;Time&quot;)
+plt.ylabel(&quot;Temperature&quot;)
+plt.title(&quot;Temperature&quot;, y=1.05)
+plt.colorbar()
+plt.xticks(rotation=45)
+plt.show()
+plt.savefig(&quot;figures/my_graph.png&quot;, bbox_inches=&quot;tight&quot;) 
+</code></pre></li>
+</ul>
+
+<p><img src="dataviz7.png" alt="png" /></p>
+
+<pre><code>&lt;Figure size 1152x648 with 0 Axes&gt;
+</code></pre>
+
+<h2>2- Figure et multi graph </h2>
+
+<pre><code class="language-python">fig = plt.figure()               # je crée un nouvel espace de création pour mes graphique
+ax = fig.add_subplot(111)        # je crée un nouveau graphique appelé 'ax' et j'indique ses coordonnées
+ax.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
+ax.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
+ax.set_xlabel(&quot; L'axe des abscisses&quot;)
+ax.set_ylabel(&quot;L'axe des ordonnées&quot;)
+ax.set_title(&quot;multi-courbes&quot;)
+plt.xticks(rotation=45)
+plt.show() #c'est plt qui continue d'indiquer l'affichage du graphique
+
+
+</code></pre>
+
+<p><img src="dataviz8.png" alt="png" /></p>
+
+<ul>
+<li><b>Résumé des principaux éléments dans un graphique matplotlib </b></li>
+</ul>
+
+<p><img src="attachment:recap_vocab.PNG" alt="recap_vocab.PNG" /></p>
+
+<pre><code class="language-python">fig = plt.figure()
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
+
+ax1.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
+ax2.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
+
+plt.show()
+</code></pre>
+
+<p><img src="dataviz9.png" alt="png" /></p>
+
+<h2 id="matplotlib-subplot">Matplotlib subplot</h2>
+
+<p>Lors de la création d&rsquo;un graphique, matplotlib:</p>
+
+<ul>
+<li>stocke un conteneur pour tous les graphiques</li>
+<li>stocke un conteneur pour que le graphique soit positionné sur une grille</li>
+<li>stocke les symboles visuels sur le graphique</li>
+</ul>
+
+<p>Vous pouvez tracer différentes choses dans la même figure en utilisant la fonction de sous-tracé. Voici un exemple:</p>
+
+<p><img src="attachment:SUBPLOT.PNG" alt="SUBPLOT.PNG" /></p>
+
+<pre><code class="language-python">fig = plt.figure()
+ax1 = fig.add_subplot(2,2,1) # up and left 
+ax2 = fig.add_subplot(2,2,2) # up and right 
+ax3 = fig.add_subplot(2,2,3) # down and left 
+ax4 = fig.add_subplot(2,2,4) # down and right
+plt.show()
+</code></pre>
+
+<p><img src="dataviz10.png" alt="png" /></p>
+
+<p>Voici une documentation sur le sous-intrigue:
+<a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" target="_blank">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot</a></p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(10,5))
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
+ax1.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
+ax2.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
+ax1.legend(loc='upper left')
+ax2.legend(loc='upper left')
+plt.show()
+</code></pre>
+
+<p><img src="dataviz11.png" alt="png" /></p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(10,5))
+ax1 = fig.add_subplot(211)
+ax2 = fig.add_subplot(212)
+
+ax1.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
+ax2.scatter(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
+
+plt.savefig(&quot;foo.png&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz12.png" alt="png" /></p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(15, 8))
+colors = ['green', 'blue', 'red','orange']
+for i in range(4):
+    ax = fig.add_subplot(2,2,i+1)
+    year = str(2014+i)
+    label=year
+    plt.plot(dataframe_UQAM[year].index,dataframe_UQAM[year]['Temperature moyenne'], c=colors[i], label = label)
+    plt.legend(loc='upper left')
+plt.show()
+</code></pre>
+
+<p><img src="dataviz13.png" alt="png" /></p>
+
+<p><h2>3- Présentation des principales représentations graphiques </h2>
+<h3> a- Le bar chart </h3></p>
+
+<pre><code>- Exemple 1 : 
+</code></pre>
+
+<pre><code class="language-python">import pandas as pd
+data = pd.read_csv('./DATA/train.csv',encoding='latin-1', sep=',')
+data.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
 </table>
+</div>
 
-<pre><code class="language-python">5-3 # soustraction 
+<p>Répartition du nombre de personnes par class:</p>
+
+<pre><code class="language-python">passagersClasses = data['Pclass'].value_counts()
+passagersClasses
 </code></pre>
 
-<pre><code>2
+<pre><code>3    491
+1    216
+2    184
+Name: Pclass, dtype: int64
 </code></pre>
 
-<pre><code class="language-python">5+3 # addition 
+<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
+ax1.bar(range(len(passagersClasses)),passagersClasses)   # création du graphique
+tick_positions = range(0,len(passagersClasses))          # définition de la position des échelles sur les axes
+ax1.set_xticks(tick_positions)                           # ajout des échelles 
+ax1.set_xticklabels(passagersClasses.index, rotation=45) # ajout des labels
+
+plt.show()
 </code></pre>
 
-<pre><code>8
+<p><img src="dataviz14.png" alt="png" /></p>
+
+<pre><code>- Exemple 2 : 
 </code></pre>
 
-<pre><code class="language-python">5*3 # multiplication
+<p>Répartition des classes avec un filtre</p>
+
+<pre><code class="language-python">passagersClassesWomen = data['Pclass'][data['Sex'] == 'female'].value_counts()
+print(passagersClassesWomen)
+passagersClassesMen = data['Pclass'][data['Sex'] == 'male'].value_counts()
+print(passagersClassesMen)
 </code></pre>
 
-<pre><code>15
+<pre><code>3    144
+1     94
+2     76
+Name: Pclass, dtype: int64
+3    347
+1    122
+2    108
+Name: Pclass, dtype: int64
 </code></pre>
 
-<pre><code class="language-python">5/3 # division  
+<pre><code class="language-python">largeurBar = 0.25
+position1W = np.arange(len(passagersClassesWomen))
+position1M = [x + largeurBar for x in position1W]
+print(position1W)
+print(position1M)
 </code></pre>
 
-<pre><code>1.6666666666666667
+<pre><code>[0 1 2]
+[0.25, 1.25, 2.25]
 </code></pre>
 
-<pre><code class="language-python">5//3 # le chiffre entier de ma division 
+<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
+
+ax1.bar(position1W,passagersClassesWomen, width=largeurBar, label='Femmes')
+
+ax1.bar(position1M,passagersClassesMen, width=largeurBar,label='Hommes')
+
+tick_positions = range(0,len(passagersClasses))
+ax1.set_xticks(tick_positions)
+ax1.set_xticklabels(passagersClasses.index, rotation=45)
+
+plt.legend()
+plt.show()
 </code></pre>
 
-<pre><code>1
+<p><img src="dataviz15.png" alt="png" /></p>
+
+<pre><code>- Exemple 3 : 
 </code></pre>
 
-<pre><code class="language-python">5%3 # récupérer le reste de ma division ou modulo  
+<p>Création de bar empilé</p>
+
+<pre><code class="language-python">passagersVieClasses = data['Pclass'][data['Survived'] == 1].value_counts()
+print(passagersVieClasses)
+passagersMortClasses = data['Pclass'][data['Survived'] == 0].value_counts()
+print(passagersMortClasses)
 </code></pre>
 
-<pre><code>2
+<pre><code>1    136
+3    119
+2     87
+Name: Pclass, dtype: int64
+3    372
+2     97
+1     80
+Name: Pclass, dtype: int64
 </code></pre>
 
-<pre><code class="language-python">5**3 # exponentielle ou puissance
+<pre><code class="language-python">largeurBar = 0.5
+position1 = np.arange(len(passagersVieClasses))
+
+fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
+
+ax1.bar(position1,passagersVieClasses, width=largeurBar, label='Vie')
+
+ax1.bar(position1,passagersMortClasses, width=largeurBar,label='décès',bottom=passagersVieClasses)
+
+tick_positions = range(0,len(passagersClasses))
+ax1.set_xticks(tick_positions)
+ax1.set_xticklabels(passagersClasses.index, rotation=45)
+
+plt.legend()
+plt.show()
 </code></pre>
 
-<pre><code>125
+<p><img src="dataviz16.png" alt="png" /></p>
+
+<h2 id="b-l-histogramme">b- L&rsquo; histogramme</h2>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
+
+ax1.hist(data['Age'].dropna())          #on pousse la liste age en supprimant les valeurs manquantes
+ax1.set_title(&quot;repartition de l'age&quot;)
+
+plt.show()
 </code></pre>
 
-<h2 id="2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</h2>
+<p><img src="dataviz17.png" alt="png" /></p>
 
-<p>Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.</p>
+<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
 
-<p>La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">==</span></tt></td>
-<td>Détermine si deux valeurs sont égales</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">!=</span></tt></td>
-<td>Détermine si deux valeurs sont différentes</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus grand que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus petit que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est supérieur ou égal à l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est inférieur ou égal à l'opérande droit</td>
-</tr>
-
-<tr><td><tt class="docutils literal"><span class="pre">is</span></tt></td>
-<td>Indentité</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">is</span> <span class="pre">not</span></tt></td>
-<td>Négation</td>
-
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur de comparaison : == 
-1 == 1
+# on ajoute des filtres 
+ageEnVie = data['Age'][data['Survived'] == 1].dropna()    
+ageDeces = data['Age'][data['Survived'] == 0].dropna()
+# on va pousser deux listes dans notre histogramme
+ax1.hist([ageEnVie,ageDeces],bins=20,stacked=True,density = True)
+ax1.set_title(&quot;Répartition de l'âge en fonction de la survie (en bleu) ou du décès (en orange)&quot;)
+plt.show()
 </code></pre>
 
-<pre><code>True
+<p><img src="dataviz18.png" alt="png" /></p>
+
+<h3> c- Le nuage de points </h3>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
+ax1.scatter(data['Age'],data['Fare'])
+ax1.set_title(&quot;Prix du bilet en fonction de l'age&quot;)
+plt.show()
 </code></pre>
 
-<pre><code class="language-python">1==2
+<p><img src="dataviz19.png" alt="png" /></p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
+ax1.scatter(data['Age'],data['Fare'])
+ax1.set_title(&quot;Prix du bilet en fonction de l'age&quot;)
+ax1.set_ylim(top=100)
+plt.show()
 </code></pre>
 
-<pre><code>False
+<p><img src="dataviz20.png" alt="png" /></p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
+ax1 = fig.add_subplot(111)
+ax1.scatter(data['Pclass'],data['Fare'])
+ax1.set_title(&quot;Prix du bilet en fonction de la classe&quot;)
+plt.show()
 </code></pre>
 
-<pre><code class="language-python"># 2ème opérateur de comparaison : != 
-1!=2
+<p><img src="dataviz21.png" alt="png" /></p>
+
+<pre><code class="language-python">from pandas.plotting import scatter_matrix
+scatter_matrix(data[['Survived','Pclass','Age','SibSp','Fare']], figsize=(15,15))
+plt.show()
 </code></pre>
 
-<pre><code>True
-</code></pre>
+<p><img src="dataviz22.png" alt="png" /></p>
 
-<pre><code class="language-python"># 3ème opérateur de comparaison : &gt; et &lt; 
-1&gt;2
-</code></pre>
+<h2 id="4-aller-plus-loin-avec-seaborn">4- Aller plus loin avec Seaborn</h2>
 
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">2&gt;1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;1
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">1&lt;2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;=1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">a=1 # Attention !!!! c'est un opérateur d'assignation de valeur à la variable 
-</code></pre>
-
-<h2 id="2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</h2>
-
-<p>Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.</p>
-
-<p>Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">and (et)</span></tt></td>
-<td>Détermine si les deux opérandes sont vrais</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">or (ou)</span></tt></td>
-<td>Détermine si l'un des deux opérandes est vrai</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">not(non)</span></tt></td>
-<td>Inverse la valeur logique de l'opérande</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur logique : and
-(3==3) and (4==4)
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3==3) and (4==5)
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># deuxième opérateur logique : or
-(3==3) or (4==5)
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3!=3) or (4==5)
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 3ème opérateur logique : not
-not((3!=3) or (4==5))
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h2 id="2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</h2>
-
-<p>Les opérateurs d&rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&rsquo;affectation.
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top"></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">=</span></tt></td>
-<td>Affecte la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">+=</span></tt></td>
-<td>Ajoute la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-=</span></tt></td>
-<td>Soustrait la valeur de l&rsquo;opérande droit de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">*=</span></tt></td>
-<td>Multiplie la valeur de l&rsquo;opérande droit par celle de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le reste dans l&rsquo;opérande de gauche</td>
-</tr></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">**=</span></tt></td>
-<td>Calcule la valeur exponentielle de l&rsquo;opérande de gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat entier dans l&rsquo;opérande gauche</td></p>
-
-<p></tr>
-</tbody>
-</table></p>
-
-<pre><code class="language-python">Mavariable = 2
-Mavariable
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable += 2 
-Mavariable
-</code></pre>
-
-<pre><code>7
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable -= 2 
-Mavariable
-</code></pre>
-
-<pre><code>3
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable **= 2 
-Mavariable
-</code></pre>
-
-<pre><code>25
-</code></pre>
-
-<h2 id="2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</h2>
+<p>Pour compléter et enrichir nos visualiations, une nouvelle bibliothèque Python sera utilisée: <b> Seaborn </b>.</p>
 
 <ul>
-<li><p>Modification de la variable au fil du script (la dernière valeur est conservé)</p>
-
-<pre><code class="language-python">number = 1.1
-print(number)
-print(type(number))
-
-number = 1
-print(number)
-print(type(number))
-
-number = '1'
-print(number)
-print(type(number))
-</code></pre>
-
-<p>1.1
-<class 'float'>
-1
-<class 'int'>
-1
-<class 'str'></p>
-
-<pre><code class="language-python">print(number)
-print(type(number))
-</code></pre>
-
-<p>1
-<class 'str'></p></li>
-
-<li><p>Ordre d&rsquo;execution des cellules important (erreur fréquente)</p>
-
-<pre><code class="language-python">number = 1
-print(number)
-</code></pre>
-
-<p>1</p>
-
-<pre><code class="language-python">number = 2
-print(number)
-</code></pre>
-
-<p>2</p>
-
-<pre><code class="language-python">print(number)
-</code></pre>
-
-<p>2</p></li>
-
-<li><p>Les commentaires</p>
-
-<pre><code class="language-python">''' Premier 
-commentaire '''
-print(number) #Deuxième commentaire
-print('voici un #commentaire')
-</code></pre>
-
-<p>2
-voici un #commentaire</p></li>
+<li>la bibliothèque Seaborn est basée sur matplotlib.</li>
+<li>il permet de dessiner des graphiques plus complexes</li>
 </ul>
 
-<p>Exercices + corrections</p>
+<p>Pour plus d&rsquo;informations:</p>
+
+<p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html" target="_blank">https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html</a></p>
+
+<p>Ce lien présente une galerie de types de graphiques à réaliser avec Seaborn:
+<a href="https://seaborn.pydata.org/examples/index.html" target="_blank">https://seaborn.pydata.org/examples/index.html</a></p>
+
+<p><img src = "./figures/seaborn.png" alt = "Seaborn" width = "60%" height = "70%"></p>
+
+<p><a href="https://seaborn.pydata.org/examples/index.html" target="_blank">https://seaborn.pydata.org/examples/index.html</a></p>
+
+<pre><code class="language-python">import seaborn as sns
+sns.distplot(data[&quot;Age&quot;].dropna())
+sns.set()
+plt.show()
+</code></pre>
+
+<p><img src="dataviz23.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.kdeplot(data[&quot;Age&quot;].dropna(), shade=True)
+sns.set()
+plt.xlabel(&quot;Age&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz24.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.lmplot(x=&quot;Age&quot;, y=&quot;Fare&quot;, hue=&quot;Pclass&quot;, data=data,fit_reg=False)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz25.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.jointplot(&quot;Age&quot;, &quot;Fare&quot;, data=data, kind=&quot;reg&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz26.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.jointplot(&quot;Age&quot;, &quot;Fare&quot;, data=data, kind=&quot;hex&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz27.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.boxplot(x=data[&quot;Age&quot;])
+plt.show()
+</code></pre>
+
+<p><img src="dataviz28.png" alt="png" /></p>
+
+<p><img src="attachment:boite%20a%20moustache.png" alt="boite%20a%20moustache.png" /></p>
+
+<pre><code class="language-python">sns.boxplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz29.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.violinplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz30.png" alt="png" /></p>
+
+<pre><code class="language-python">fig, ax = plt.subplots()
+fig.set_size_inches(12, 8)
+sns.violinplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
+plt.show()
+</code></pre>
+
+<p><img src="dataviz31.png" alt="png" /></p>
+
+<p>Afin de mettre en pratique ce que nous venons de voir, une section exercice est proposée. Deux projets complets sur des analyses de stations météorologiques sont également proposées.</p>
 
 <pre><code class="language-python">
 </code></pre>

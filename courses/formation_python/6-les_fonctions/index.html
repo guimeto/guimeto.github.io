@@ -28,8 +28,8 @@
   
     
   
-  <meta name="description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables.">
+  <meta name="description" content="Les fonctions en Python: 6.1- Les librairies: Objectifs  Comprendre ce qu&rsquo;est une librairie Importer une librairie Importer un module précis d&rsquo;une librairie Utiliser les alias Utiliser la librairie math Installer, mettre à jour et vérifier la config d&rsquo;une librairie avec PIP  6.1.1- Les bibliothèques Python: Pour faciliter le traitement, la manipulation et la visualisation des données, Python possède de nombreuses librairies.
+Les bibliothèques de Python permettent d&rsquo;importer des codes et fonctions qui faciliteront nos analyses.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/6-les_fonctions/">
@@ -116,8 +116,8 @@ Tous les programmes Python font appel à des variables.">
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/6-les_fonctions/">
   <meta property="og:title" content="6- Les fonctions en Python - Cours | GDueymes">
-  <meta property="og:description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Les fonctions en Python: 6.1- Les librairies: Objectifs  Comprendre ce qu&rsquo;est une librairie Importer une librairie Importer un module précis d&rsquo;une librairie Utiliser les alias Utiliser la librairie math Installer, mettre à jour et vérifier la config d&rsquo;une librairie avec PIP  6.1.1- Les bibliothèques Python: Pour faciliter le traitement, la manipulation et la visualisation des données, Python possède de nombreuses librairies.
+Les bibliothèques de Python permettent d&rsquo;importer des codes et fonctions qui faciliteront nos analyses."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -451,7 +451,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exerice</a>
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
       </li>
       
       <li >
@@ -483,7 +483,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exerice</a>
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
       </li>
       
       <li >
@@ -522,20 +522,22 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
 <ul>
 <li>
 <ul>
-<li><a href="#les-bases-du-langage-python">Les Bases du langage Python:</a></li>
-<li><a href="#2-les-variables">2- Les variables</a></li>
-<li><a href="#2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</a>
+<li><a href="#les-fonctions-en-python">Les fonctions en Python:</a></li>
+<li><a href="#6-1-les-librairies">6.1- Les librairies:</a></li>
+<li><a href="#6-1-1-les-bibliothèques-python">6.1.1-  Les bibliothèques Python:</a></li>
+<li><a href="#6-1-2-la-librairie-pip">6.1.2-  La librairie PIP:</a></li>
+<li><a href="#6-2-les-fonctions">6.2- Les fonctions:</a></li>
+<li><a href="#6-2-1-les-fonctions-natives">6.2.1- Les fonctions natives:</a>
 <ul>
-<li><a href="#2-1-1-les-types-numériques">2.1.1- Les types numériques</a></li>
-<li><a href="#2-1-2-les-types-booléens">2.1.2- Les types booléens</a></li>
-<li><a href="#2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</a></li>
-<li><a href="#2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</a></li>
+<li><a href="#en-voici-quelques-exemples">En voici quelques exemples:</a></li>
 </ul></li>
-<li><a href="#2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</a></li>
-<li><a href="#2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</a></li>
-<li><a href="#2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</a></li>
-<li><a href="#2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</a></li>
-<li><a href="#2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</a></li>
+<li><a href="#6-2-2-création-de-notre-première-fonction-en-python">6.2.2- Création de notre première fonction en python:</a></li>
+<li><a href="#6-2-3-les-paramètres-des-fonctions">6.2.3- Les paramètres des fonctions:</a></li>
+<li><a href="#6-2-4-retourner-une-ou-plusieurs-valeurs-avec-une-fonction">6.2.4- Retourner une ou plusieurs valeurs avec une fonction:</a></li>
+<li><a href="#6-2-5-les-options-sur-les-paramètres">6.2.5- Les options sur les paramètres:</a></li>
+<li><a href="#6-2-6-définition-d-args">6.2.6- Définition d&rsquo;*args:</a></li>
+<li><a href="#6-2-7-définition-d-kwargs">6.2.7- Définition d&rsquo;**kwargs:</a></li>
+<li><a href="#6-3-importer-ses-propres-fonctions">6.3-Importer ses propres fonctions:</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -556,625 +558,597 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
 
 <p><img src="/img/pylogo.png" alt="image0" /></p>
 
-<h2 id="les-bases-du-langage-python">Les Bases du langage Python:</h2>
+<h2 id="les-fonctions-en-python">Les fonctions en Python:</h2>
+
+<h2 id="6-1-les-librairies">6.1- Les librairies:</h2>
 
 <h2>Objectifs</h2>
 
 <ul>
-<li>Comprendre ce qu&rsquo;est une variable</li>
-<li>Les règles de nommage d&rsquo;une variable</li>
-<li>Les premiers types de variables</li>
-<li>Réaliser des opération entre des variables</li>
-<li>Vérifier et modifier le type d’une variable</li>
-<li>Maîtrise de jupyter notebook 2 : execution du code à travers les cellules</li>
+<li>Comprendre ce qu&rsquo;est une librairie</li>
+<li>Importer une librairie</li>
+<li>Importer un module précis d&rsquo;une librairie</li>
+<li>Utiliser les alias</li>
+<li>Utiliser la librairie math</li>
+<li>Installer, mettre à jour et vérifier la config d&rsquo;une librairie avec PIP</li>
 </ul>
 
-<h2 id="2-les-variables">2- Les variables</h2>
+<h2 id="6-1-1-les-bibliothèques-python">6.1.1-  Les bibliothèques Python:</h2>
 
-<p>Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.</p>
+<p>Pour faciliter le traitement, la manipulation et la visualisation des données, Python possède de nombreuses librairies.</p>
 
-<p>Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&rsquo;information est enregistré dans un type spécial de variable.</p>
+<p>Les bibliothèques de Python permettent d&rsquo;importer des codes et fonctions qui faciliteront nos analyses.</p>
 
-<p>Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&rsquo;interpreteur python ce qu&rsquo;il peut faire ou ne pas faire avec cette variable.</p>
-
-<p>Quelques remarques:</p>
+<p>Voici les bibliothèques les plus populaires:</p>
 
 <ul>
-<li>Python est sensible à la Casse: il distingue les Majuscules et les minuscules<br /></li>
-<li>On ne peut pas commencer une variable par un chiffre</li>
-<li>Ne pas utiliser d&rsquo;accents dans les noms de variables.</li>
-<li>fonction type(): permet de connaitre le type de notre variable.</li>
-<li>Pas d’espace (underscore)</li>
-<li>Mots interdits (se mets en vert) : <a href="https://www.programiz.com/python-programming/keywords-identifier" target="_blank">https://www.programiz.com/python-programming/keywords-identifier</a></li>
-<li>Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)</li>
+<li>numpy, math: mathématique ou calculs scientifiques : <a href="http://www.numpy.org/" target="_blank">http://www.numpy.org/</a></li>
+<li>pandas: manipulations de données: <a href="http://pandas.pydata.org/" target="_blank">http://pandas.pydata.org/</a></li>
+<li>matplotlib, seaborn, Plotly: visualisation des données: <a href="https://matplotlib.org/" target="_blank">https://matplotlib.org/</a></li>
+<li>scikit-learn: machine learning: <a href="https://scikit-learn.org" target="_blank">https://scikit-learn.org</a></li>
+<li>Datetime: formatage de dates:<a href="https://docs.python.org/2/library/datetime.html" target="_blank">https://docs.python.org/2/library/datetime.html</a></li>
+<li>Keras, Tensorflow: deep learning</li>
 </ul>
 
-<h2> Concept de variable et déclaration d’une variable dans Jupyter </h2>
+<p>Pour importer une librairie sous Python, on utilise la fonction : <b>import</b> + nom_bibliothèque</p>
+
+<pre><code class="language-python">liste_1=[1,2,3,4,5,6,7,8,9,10]
+</code></pre>
+
+<pre><code class="language-python">liste_1
+</code></pre>
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+
+<p>Nous allons importer la librairie mathématie Numpy:</p>
+
+<pre><code class="language-python">import numpy
+</code></pre>
+
+<p>En dehors des tutoriels en ligne, chaque librairie importée sous python possède une aide.</p>
+
+<p>Pour savoir ce que contient une librairie, on utilise la fonction: dir()</p>
+
+<pre><code>    - Exemple: dir(numpy)    
+</code></pre>
+
+<pre><code class="language-python">dir(numpy)   
+</code></pre>
+
+<p>Une fois une fonction ciblée, La fonction <b>help()</b> permet d&rsquo;obtenir une aide sur une fonction de la librairie</p>
+
+<pre><code>    - Exemple: help(numpy.mean)
+</code></pre>
+
+<pre><code class="language-python">help(numpy.mean)    # pour obtenir une aide sur une fonction d'une librairie         
+# on peut distinguer les arguments optionnels et obligatoires
+</code></pre>
+
+<pre><code>Help on function mean in module numpy:
+
+mean(a, axis=None, dtype=None, out=None, keepdims=&lt;no value&gt;)
+    Compute the arithmetic mean along the specified axis.
+
+    Returns the average of the array elements.  The average is taken over
+    the flattened array by default, otherwise over the specified axis.
+    `float64` intermediate and return values are used for integer inputs.
+
+    Parameters
+    ----------
+    a : array_like
+        Array containing numbers whose mean is desired. If `a` is not an
+        array, a conversion is attempted.
+    axis : None or int or tuple of ints, optional
+        Axis or axes along which the means are computed. The default is to
+        compute the mean of the flattened array.
+
+        .. versionadded:: 1.7.0
+
+        If this is a tuple of ints, a mean is performed over multiple axes,
+        instead of a single axis or all the axes as before.
+    dtype : data-type, optional
+        Type to use in computing the mean.  For integer inputs, the default
+        is `float64`; for floating point inputs, it is the same as the
+        input dtype.
+    out : ndarray, optional
+        Alternate output array in which to place the result.  The default
+        is ``None``; if provided, it must have the same shape as the
+        expected output, but the type will be cast if necessary.
+        See `doc.ufuncs` for details.
+
+    keepdims : bool, optional
+        If this is set to True, the axes which are reduced are left
+        in the result as dimensions with size one. With this option,
+        the result will broadcast correctly against the input array.
+
+        If the default value is passed, then `keepdims` will not be
+        passed through to the `mean` method of sub-classes of
+        `ndarray`, however any non-default value will be.  If the
+        sub-class' method does not implement `keepdims` any
+        exceptions will be raised.
+
+    Returns
+    -------
+    m : ndarray, see dtype parameter above
+        If `out=None`, returns a new array containing the mean values,
+        otherwise a reference to the output array is returned.
+
+    See Also
+    --------
+    average : Weighted average
+    std, var, nanmean, nanstd, nanvar
+
+    Notes
+    -----
+    The arithmetic mean is the sum of the elements along the axis divided
+    by the number of elements.
+
+    Note that for floating-point input, the mean is computed using the
+    same precision the input has.  Depending on the input data, this can
+    cause the results to be inaccurate, especially for `float32` (see
+    example below).  Specifying a higher-precision accumulator using the
+    `dtype` keyword can alleviate this issue.
+
+    By default, `float16` results are computed using `float32` intermediates
+    for extra precision.
+
+    Examples
+    --------
+    &gt;&gt;&gt; a = np.array([[1, 2], [3, 4]])
+    &gt;&gt;&gt; np.mean(a)
+    2.5
+    &gt;&gt;&gt; np.mean(a, axis=0)
+    array([ 2.,  3.])
+    &gt;&gt;&gt; np.mean(a, axis=1)
+    array([ 1.5,  3.5])
+
+    In single precision, `mean` can be inaccurate:
+
+    &gt;&gt;&gt; a = np.zeros((2, 512*512), dtype=np.float32)
+    &gt;&gt;&gt; a[0, :] = 1.0
+    &gt;&gt;&gt; a[1, :] = 0.1
+    &gt;&gt;&gt; np.mean(a)
+    0.54999924
+
+    Computing the mean in float64 is more accurate:
+
+    &gt;&gt;&gt; np.mean(a, dtype=np.float64)
+    0.55000000074505806
+</code></pre>
+
+<pre><code class="language-python">numpy.mean(liste_1)  # nom de la biliothèque + nom de la fonction pour appeller la fonction 
+</code></pre>
+
+<pre><code>5.5
+</code></pre>
+
+<pre><code class="language-python">numpy.max(liste_1)
+</code></pre>
+
+<pre><code>10
+</code></pre>
+
+<pre><code class="language-python">from math import sqrt 
+sqrt(25)
+</code></pre>
+
+<pre><code>5.0
+</code></pre>
+
+<pre><code class="language-python">from math import pi as p
+p
+</code></pre>
+
+<pre><code>3.141592653589793
+</code></pre>
+
+<h2 id="6-1-2-la-librairie-pip">6.1.2-  La librairie PIP:</h2>
+
+<p>PiP est un gestionnaire de librairie très important à connaitre. il permet d&rsquo;installer, de désinstaler et de mettre à jour vos librairies</p>
+
+<pre><code class="language-python">! pip list
+</code></pre>
+
+<pre><code>Package                            Version    
+---------------------------------- -----------
+affine                             2.3.0      
+alabaster                          0.7.12     
+anaconda-client                    1.7.2      
+anaconda-navigator                 1.9.12     
+anaconda-project                   0.8.2      
+asn1crypto                         0.24.0     
+astroid                            2.2.5      
+...   
+</code></pre>
+
+<pre><code class="language-python">! pip show pandas
+</code></pre>
+
+<pre><code>Name: pandas
+Version: 0.24.2
+Summary: Powerful data structures for data analysis, time series, and statistics
+Home-page: http://pandas.pydata.org
+Author: None
+Author-email: None
+License: BSD
+Location: d:\utilisateurs\guillaume\anaconda3\lib\site-packages
+Requires: python-dateutil, pytz, numpy
+Required-by: xshape, xarray, seaborn, geopandas
+</code></pre>
+
+<p>Pour installer une librairie:
+! pip install plotly
+Pour mettre à jour une librairie:
+! pip install plotly &ndash;upgrade</p>
+
+<h2 id="6-2-les-fonctions">6.2- Les fonctions:</h2>
+
+<h2>Objectifs</h2>
 
 <ul>
-<li>Se retrouve dans pratiquement tous les langages</li>
-
-<li><p>Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.</p>
-
-<pre><code class="language-python">job = 'data scientist' # on stocke une valeur dans une variable 
-print(job)
-</code></pre>
-
-<p>data scientist</p></li>
+<li>Comprendre ce qu&rsquo;est une fonction</li>
+<li>Créer sa première fonction</li>
+<li>Intégrer des paramètres à une fonction</li>
+<li>Ajouter des paramètres optionnels</li>
+<li>Ajouter une nomenclature à vos paramètres</li>
 </ul>
 
-<p>Une variable déclarée est accessible depuis d’autres cellules.</p>
+<h2 id="6-2-1-les-fonctions-natives">6.2.1- Les fonctions natives:</h2>
 
-<pre><code class="language-python">print(job)
-</code></pre>
+<p>Il existe des fonctions natives à python (ou built-in). Elles n&rsquo;ont donc pas besoin d&rsquo;être importées.</p>
 
-<pre><code>data scientist
-</code></pre>
+<p>Voici une liste de ces fonctions: <a href="https://docs.python.org/3/library/functions.html" target="_blank">https://docs.python.org/3/library/functions.html</a></p>
 
-<h2 id="2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</h2>
+<h3 id="en-voici-quelques-exemples">En voici quelques exemples:</h3>
 
-<ul>
-<li>Très important (fondamental comme dans tout type de langage)</li>
-<li>La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&rsquo;autres)</li>
-</ul>
-
-<h3 id="2-1-1-les-types-numériques">2.1.1- Les types numériques</h3>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">Les entiers: int()</span></tt></td>
-<td>1 est un nombre entier, 1.0 n'en est pas un</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les décimaux: float()</span></tt></td>
-<td>nombre qui comprend une partie décimale </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les nombres complexes</span></tt></td>
-<td>association entre un nombre réel et un nombre imaginaire</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python">m=3.2
-type(m)
-</code></pre>
-
-<pre><code>float
-</code></pre>
-
-<pre><code class="language-python">m=3
-type(m)
-</code></pre>
-
-<pre><code>int
-</code></pre>
-
-<h3 id="2-1-2-les-types-booléens">2.1.2- Les types booléens</h3>
-
-<ul>
-<li>variable contenant des valeurs binaires: True ou False</li>
-<li>des types de données  résultent d&rsquo;opérations logiques</li>
-</ul>
-
-<p>Très utile dans les confitions if().</p>
-
-<pre><code class="language-python">3&gt;5
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">3&lt;5
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h3 id="2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</h3>
-
-<p>Suite finie de caractères qu&rsquo;on peut considérer comme du texte qu&rsquo;on définit entre deux (&lsquo;&hellip;&rsquo;) ou (&ldquo;&hellip;&rdquo;).</p>
-
-<ul>
-<li><p>Gestion des apostrohpes</p>
-
-<pre><code class="language-python">job = 'data science'
-job
-</code></pre>
-
-<p>&lsquo;data science&rsquo;</p>
-
-<pre><code class="language-python">darkVador = 'Luke, I'm your father'
-print(darkVador)
-</code></pre>
-
-<p>File &ldquo;<ipython-input-34-24a0388f6afa>&rdquo;, line 1
-    darkVador = &lsquo;Luke, I&rsquo;m your father&rsquo;
-                         ^
-SyntaxError: invalid syntax</p>
-
-<pre><code class="language-python">darkVador = &quot;Luke, I'm your father&quot;
-print(darkVador)
-# ou 
-
-darkVador = 'Luke, I\'m your father'
-print(darkVador)
-</code></pre>
-
-<p>Luke, I&rsquo;m your father
-Luke, I&rsquo;m your father</p></li>
-
-<li><p>Si texte trop long (marche aussi pour du code classique)</p>
-
-<pre><code class="language-python">luke = 'no…That\'s impossible….Noooooooooooooooooooooooooo\
-oooooooooooo'
-print(luke)
-</code></pre>
-
-<p>no…That&rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo</p></li>
-
-<li><p>Possible de concatener 2 variables</p>
-
-<pre><code class="language-python">start = 'luke, I\'m'
-end = 'your father'
-darkVador = start+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;myour father</p>
-
-<pre><code class="language-python">darkVador = start+' '+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;m your father</p></li>
-
-<li><p>Possible de répèter une chaine de caractère</p>
-
-<pre><code class="language-python">luke = 'N'+('o'*10)
-print(luke)
-</code></pre>
-
-<p>Noooooooooo</p></li>
-</ul>
-
-<h3 id="2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</h3>
-
-<ul>
-<li><p>exemple (règle : on ne mix pas chiffres et strings dans une concaténation)</p>
-
-<pre><code class="language-python">finalMotivationScore = 90
-</code></pre>
-
-<pre><code class="language-python">test = job + 'learning motivation ?' + finalMotivationScore + '% !'
-</code></pre>
-
-<hr />
-
-<p>TypeError                                 Traceback (most recent call last)</p>
-
-<p><ipython-input-41-77bbac5d7b73> in <module>
-&mdash;-&gt; 1 test = job + &lsquo;learning motivation ?&rsquo; + finalMotivationScore + &lsquo;% !&rsquo;</p>
-
-<p>TypeError: can only concatenate str (not &ldquo;int&rdquo;) to str</p></li>
-
-<li><p>Verifier le type d’une variable</p>
-
-<pre><code class="language-python">print(type(finalMotivationScore))
-print(type('test'))
-print(type(1))
-</code></pre>
-
-<p><class 'int'>
-<class 'str'>
-<class 'int'></p></li>
-
-<li><p>modifier le type d&rsquo;une variable</p>
-
-<pre><code class="language-python">float(1)
-int(1.3)
-str(1)
-</code></pre>
-
-<p>&lsquo;1&rsquo;</p>
-
-<pre><code class="language-python">test = job + ' learning motivation ? ' + str(finalMotivationScore) + '% !'
-print(test)
-</code></pre>
-
-<p>data science learning motivation ? 90% !</p></li>
-</ul>
-
-<h2 id="2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</h2>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
-<td>Ajoute deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
-<td>Soustrait l'opérande droit de l'opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;</span></tt></td>
-<td>Multiplie deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne le reste (opérateur modulo)</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;&#42;</span></tt></td>
-<td>Calcule de la valeur exponentielle de l'opératde gauche par l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne la partie entière</td>
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python">5-3 # soustraction 
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5+3 # addition 
-</code></pre>
-
-<pre><code>8
-</code></pre>
-
-<pre><code class="language-python">5*3 # multiplication
-</code></pre>
-
-<pre><code>15
-</code></pre>
-
-<pre><code class="language-python">5/3 # division  
-</code></pre>
-
-<pre><code>1.6666666666666667
-</code></pre>
-
-<pre><code class="language-python">5//3 # le chiffre entier de ma division 
+<pre><code class="language-python">abs(-1)  # abs(x) Retourne une valeur absolue 
 </code></pre>
 
 <pre><code>1
 </code></pre>
 
-<pre><code class="language-python">5%3 # récupérer le reste de ma division ou modulo  
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5**3 # exponentielle ou puissance
-</code></pre>
-
-<pre><code>125
-</code></pre>
-
-<h2 id="2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</h2>
-
-<p>Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.</p>
-
-<p>La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">==</span></tt></td>
-<td>Détermine si deux valeurs sont égales</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">!=</span></tt></td>
-<td>Détermine si deux valeurs sont différentes</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus grand que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus petit que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est supérieur ou égal à l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est inférieur ou égal à l'opérande droit</td>
-</tr>
-
-<tr><td><tt class="docutils literal"><span class="pre">is</span></tt></td>
-<td>Indentité</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">is</span> <span class="pre">not</span></tt></td>
-<td>Négation</td>
-
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur de comparaison : == 
-1 == 1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1==2
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 2ème opérateur de comparaison : != 
-1!=2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python"># 3ème opérateur de comparaison : &gt; et &lt; 
-1&gt;2
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">2&gt;1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;1
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">1&lt;2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;=1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">a=1 # Attention !!!! c'est un opérateur d'assignation de valeur à la variable 
-</code></pre>
-
-<h2 id="2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</h2>
-
-<p>Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.</p>
-
-<p>Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">and (et)</span></tt></td>
-<td>Détermine si les deux opérandes sont vrais</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">or (ou)</span></tt></td>
-<td>Détermine si l'un des deux opérandes est vrai</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">not(non)</span></tt></td>
-<td>Inverse la valeur logique de l'opérande</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur logique : and
-(3==3) and (4==4)
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3==3) and (4==5)
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># deuxième opérateur logique : or
-(3==3) or (4==5)
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3!=3) or (4==5)
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 3ème opérateur logique : not
-not((3!=3) or (4==5))
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h2 id="2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</h2>
-
-<p>Les opérateurs d&rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&rsquo;affectation.
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top"></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">=</span></tt></td>
-<td>Affecte la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">+=</span></tt></td>
-<td>Ajoute la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-=</span></tt></td>
-<td>Soustrait la valeur de l&rsquo;opérande droit de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">*=</span></tt></td>
-<td>Multiplie la valeur de l&rsquo;opérande droit par celle de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le reste dans l&rsquo;opérande de gauche</td>
-</tr></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">**=</span></tt></td>
-<td>Calcule la valeur exponentielle de l&rsquo;opérande de gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat entier dans l&rsquo;opérande gauche</td></p>
-
-<p></tr>
-</tbody>
-</table></p>
-
-<pre><code class="language-python">Mavariable = 2
-Mavariable
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable += 2 
-Mavariable
-</code></pre>
-
-<pre><code>7
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable -= 2 
-Mavariable
+<pre><code class="language-python">len([1,2,3]) # len(s) Retourne le nombre d'items d'un objet.
 </code></pre>
 
 <pre><code>3
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable **= 2 
-Mavariable
+<pre><code class="language-python">max([1,3,2,6,99,1])    #Retourne la valeur la plus élévée pour max() et la plus basse pour min()
 </code></pre>
 
-<pre><code>25
+<pre><code>99
 </code></pre>
 
-<h2 id="2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</h2>
+<pre><code class="language-python">round(1.2)  # Arrondi un nombre.
+</code></pre>
+
+<pre><code>1
+</code></pre>
+
+<pre><code class="language-python">a = [&quot;olivier&quot;, &quot;bruce&quot;, &quot;john&quot;]
+b = [&quot;engel&quot;, &quot;wayne&quot;, &quot;Wayne&quot;]
+zip(a,b)                         # Permet de regrouper sous la forme d'un tuple les items de listes.
+</code></pre>
+
+<pre><code>&lt;zip at 0x5fd5048&gt;
+</code></pre>
+
+<h2 id="6-2-2-création-de-notre-première-fonction-en-python">6.2.2- Création de notre première fonction en python:</h2>
 
 <ul>
-<li><p>Modification de la variable au fil du script (la dernière valeur est conservé)</p>
+<li><p>une fonction permet de rendre notre code plus fluide et lisible:</p></li>
 
-<pre><code class="language-python">number = 1.1
-print(number)
-print(type(number))
-
-number = 1
-print(number)
-print(type(number))
-
-number = '1'
-print(number)
-print(type(number))
-</code></pre>
-
-<p>1.1
-<class 'float'>
-1
-<class 'int'>
-1
-<class 'str'></p>
-
-<pre><code class="language-python">print(number)
-print(type(number))
-</code></pre>
-
-<p>1
-<class 'str'></p></li>
-
-<li><p>Ordre d&rsquo;execution des cellules important (erreur fréquente)</p>
-
-<pre><code class="language-python">number = 1
-print(number)
-</code></pre>
-
-<p>1</p>
-
-<pre><code class="language-python">number = 2
-print(number)
-</code></pre>
-
-<p>2</p>
-
-<pre><code class="language-python">print(number)
-</code></pre>
-
-<p>2</p></li>
-
-<li><p>Les commentaires</p>
-
-<pre><code class="language-python">''' Premier 
-commentaire '''
-print(number) #Deuxième commentaire
-print('voici un #commentaire')
-</code></pre>
-
-<p>2
-voici un #commentaire</p></li>
+<li><p>Syntaxe: pour écrire une fonction, on commence par le mot clef Python def()</p></li>
 </ul>
 
-<p>Exercices + corrections</p>
+<p>def sum(a, b):        # on definit les paramètres
+    return a+b       # mot clef return pour retourner la variable résultat<br />
+- On ne précise pas le type de retour, il est dynamiquement résolu au moment de l&rsquo;exécution du programme.</p>
 
-<pre><code class="language-python">
+<ul>
+<li><p>Appel de la fonction : result = sum(12,4)   # result = 16</p>
+
+<pre><code class="language-python">def ma_fonction():
+print(&quot;ma première fonction&quot;)
+</code></pre>
+
+<pre><code class="language-python">ma_fonction()
+</code></pre>
+
+<p>ma première fonction</p></li>
+</ul>
+
+<h2 id="6-2-3-les-paramètres-des-fonctions">6.2.3- Les paramètres des fonctions:</h2>
+
+<pre><code class="language-python">def bienvenue(userName):
+    print('Bienvenue '+userName)
+
+nom = input('votre nom:')
+bienvenue(nom)
+</code></pre>
+
+<pre><code>votre nom:Guillaume
+Bienvenue Guillaume
+</code></pre>
+
+<pre><code class="language-python">def bienvenue(userName):
+    print('Bienvenue '+userName+ ' ! ' )
+    humeur = input('comment allez-vous ? ')
+    print('votre humeur : '+humeur)
+</code></pre>
+
+<pre><code class="language-python">nom = input('votre nom')
+bienvenue(nom)
+</code></pre>
+
+<pre><code>votre nomGuillaume 
+Bienvenue Guillaume  ! 
+comment allez-vous ? Bien 
+votre humeur : Bien 
+</code></pre>
+
+<h2 id="6-2-4-retourner-une-ou-plusieurs-valeurs-avec-une-fonction">6.2.4- Retourner une ou plusieurs valeurs avec une fonction:</h2>
+
+<p>Pour retourner une valeur:</p>
+
+<pre><code class="language-python">def calculPrixTTC(prixht,TVA):
+    prixttc = prixht*(1+TVA)
+    return prixttc
+
+prixPdt = calculPrixTTC(10,0.20)
+prixPdt
+</code></pre>
+
+<pre><code>12.0
+</code></pre>
+
+<p>Pour retourner plusieurs valeurs:</p>
+
+<pre><code class="language-python">def calculPrixTTC(prixht,TVA):
+    prixttc = prixht*(1+TVA)
+    coutTVA = prixttc - prixht
+    return prixttc, coutTVA
+
+prixPdt = calculPrixTTC(20,0.20)
+prixPdt
+</code></pre>
+
+<pre><code>(24.0, 4.0)
+</code></pre>
+
+<p>On peut stocker ce retour de valeurs dans deux variables disctinctes:</p>
+
+<pre><code class="language-python">prixPdt, coutTVA = calculPrixTTC(20,0.20)
+print(prixPdt)
+print(coutTVA)
+</code></pre>
+
+<pre><code>24.0
+4.0
+</code></pre>
+
+<h2 id="6-2-5-les-options-sur-les-paramètres">6.2.5- Les options sur les paramètres:</h2>
+
+<p>Si on oublie un paramètre dans une fonction à deux paramètres :</p>
+
+<pre><code class="language-python"># et si on oubli un paramètre ?
+test = calculPrixTTC(20)
+</code></pre>
+
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-25-6633a6f65415&gt; in &lt;module&gt;
+      1 # et si on oubli un paramètre ?
+----&gt; 2 test = calculPrixTTC(20)
+
+
+TypeError: calculPrixTTC() missing 1 required positional argument: 'TVA'
+</code></pre>
+
+<p>Python supporte pour cela  les arguments mot clef (keyword argument).</p>
+
+<pre><code>                def sum(a, b):        # on definit les paramètres 
+                    return a+b       # mot clef return pour retourner la variable résultat 
+                result = sum(12,b=4)
+            -----------------------------
+                def sum(a, b=4):        # on definit les paramètres 
+                      return a+b       # mot clef return pour retourner la variable résultat
+                result = sum(12)                    
+</code></pre>
+
+<pre><code class="language-python">def calculPrixTTC(prixht,TVA=0.20):
+    prixttc = prixht*(1+TVA)
+    coutTVA = prixttc - prixht
+    return prixttc, coutTVA
+
+test1 = calculPrixTTC(20)
+print(test1)
+test2 = calculPrixTTC(20,0.05)
+print(test2)
+</code></pre>
+
+<pre><code>(24.0, 4.0)
+(21.0, 1.0)
+</code></pre>
+
+<h2 id="6-2-6-définition-d-args">6.2.6- Définition d&rsquo;*args:</h2>
+
+<ul>
+<li>Syntaxe spéciale en python qui permet de gérer un nombre de paramètres variable en appel d&rsquo;une fonction</li>
+<li>C&rsquo;est le * qui compte</li>
+<li>args est une convention</li>
+<li>*args est une liste de paramètres contenant les paramètres d&rsquo;une fonction</li>
+</ul>
+
+<p>Syntaxe *args:</p>
+
+<pre><code>        def print_ingredients(*args):
+            for ingredient in args: 
+                print(ingredient)
+
+        print_ingredients('Tomatoes')
+        print_ingredients('Tomatoes',Banana)
+        print_ingredients('Tomatoes',Banana,apple)
+</code></pre>
+
+<pre><code class="language-python">def sum(*args):
+    total = 0 
+    for number in args: 
+        total += number 
+    print(total)
+</code></pre>
+
+<pre><code class="language-python">sum(2,3)
+sum(2,3,10,90,23)
+</code></pre>
+
+<pre><code>5
+128
+</code></pre>
+
+<pre><code class="language-python">def second_sum(*args):    
+    def real_sum(*nums):
+        total=0
+        for number in nums:
+            total += number
+        return total
+    
+    print(real_sum(*args))
+</code></pre>
+
+<pre><code class="language-python">second_sum(10,20,30)
+</code></pre>
+
+<pre><code>60
+</code></pre>
+
+<h2 id="6-2-7-définition-d-kwargs">6.2.7- Définition d&rsquo;**kwargs:</h2>
+
+<ul>
+<li>Comme *args, mais pour les arguments mot-clé (keyword arguments)</li>
+<li>C&rsquo;est le * qui compte</li>
+<li>**kwargs est un dictionnaire python contenant les clés/valeurs des paramètres d&rsquo;une fonction</li>
+<li>il doit toujours être présent en dernier dans la liste des paramètres d&rsquo;une fonction</li>
+</ul>
+
+<p>Syntaxe **kwargs:</p>
+
+<pre><code>        def print_languages(**args):
+            for language, definition in kwargs.items():
+                print('{} is {}'.format(language, definition))  
+
+        print_languages(Python='awesome')
+        print_languages(Python='awesome',Java='verbose')
+</code></pre>
+
+<pre><code class="language-python">def capitals(**kwargs):
+    for country, capital in kwargs.items():
+        print(&quot;The capital of {} in {}&quot;.format(country, capital))
+</code></pre>
+
+<pre><code class="language-python">capitals(France = 'Paris', Germany='Berlin')
+</code></pre>
+
+<pre><code>The capital of France in Paris
+The capital of Germany in Berlin
+</code></pre>
+
+<pre><code class="language-python">def capitals(title, ending='',  **kwargs):
+    print(title)
+    for country, capital in kwargs.items():
+        print(&quot;The capital of {} in {}&quot;.format(country, capital))
+    if ending:
+        print(ending)
+</code></pre>
+
+<pre><code class="language-python">capitals(&quot;List of countries&quot;,
+    France = 'Paris', Germany='Berlin')
+</code></pre>
+
+<pre><code>List of countries
+The capital of France in Paris
+The capital of Germany in Berlin
+</code></pre>
+
+<pre><code class="language-python">keywords = {'france': 'Paris', 'Germany' : 'Allemage'}
+capitals(&quot;List of countries 2 &quot;, **keywords)
+</code></pre>
+
+<pre><code>List of countries 2 
+The capital of france in Paris
+The capital of Germany in Allemage
+</code></pre>
+
+<h2 id="6-3-importer-ses-propres-fonctions">6.3-Importer ses propres fonctions:</h2>
+
+<p>Les modules font référence à un fichier contenant des instructions et des définitions Python.</p>
+
+<p>Un fichier contenant du code Python, par exemple: example.py, est appelé un module et son nom de module serait un exemple.</p>
+
+<p>Nous utilisons des modules pour décomposer de gros programmes en petits fichiers gérables et organisés. De plus, les modules assurent la réutilisation du code.</p>
+
+<p>Nous pouvons définir nos fonctions les plus utilisées dans un module et l&rsquo;importer, au lieu de copier leurs définitions dans différents programmes.</p>
+
+<p>Ici, nous avons défini différentes fonctions à l&rsquo;intérieur d&rsquo;un module nommé my_functions.</p>
+
+<p>Nous utilisons le mot-clé import pour importer notre module puis nos fonctions. Pour importer notre exemple de module précédemment défini, nous tapons ce qui suit dans l&rsquo;invite Python:</p>
+
+<pre><code class="language-python">import my_functions
+</code></pre>
+
+<p>def addition(a, b):
+   &ldquo;&rdquo;&ldquo;This program adds two
+   numbers and return the result&rdquo;&ldquo;&rdquo;
+   result = a + b
+   return result</p>
+
+<p>def substraction(a, b):
+   &ldquo;&rdquo;&ldquo;This program subs two
+   numbers and return the result&rdquo;&ldquo;&rdquo;
+   result = a - b
+   return result</p>
+
+<p>def multiplication(a, b):
+   &ldquo;&rdquo;&ldquo;This program multiplies two
+   numbers and return the result&rdquo;&ldquo;&rdquo;
+   result = a * b
+   return result</p>
+
+<pre><code class="language-python">dir(my_functions)
+</code></pre>
+
+<pre><code>['__builtins__',
+ '__cached__',
+ '__doc__',
+ '__file__',
+ '__loader__',
+ '__name__',
+ '__package__',
+ '__spec__',
+ 'addition',
+ 'multiplication',
+ 'substraction']
+</code></pre>
+
+<p>En utilisant le nom du module, nous pouvons accéder à la fonction en utilisant le point. opérateur. Par exemple:</p>
+
+<pre><code class="language-python">my_functions.substraction(4,6)
+</code></pre>
+
+<pre><code>-2
+</code></pre>
+
+<pre><code class="language-python">help(my_functions.substraction)
+</code></pre>
+
+<pre><code>Help on function substraction in module my_functions:
+
+substraction(a, b)
+    This program subs two
+    numbers and return the result
 </code></pre>
 
           </div>

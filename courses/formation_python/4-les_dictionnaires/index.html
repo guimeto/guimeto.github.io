@@ -28,8 +28,7 @@
   
     
   
-  <meta name="description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables.">
+  <meta name="description" content="Les dictionnaires en Python:  Objectifs  Comprendre ce qu&rsquo;est un dictionnaire Savoir consulter et analyser un dictonnaire Savoir manipuler un dictionnaire créer un dictionnaire multi-propriétés  4- Les dictionnaires Python  Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs Les dictionnaires sont des structures de données non-ordonnées On peut les modifier et les indexer Principe: on peut lier une clef à une valeur Les dictionnaires s&rsquo;écrivent avec des { }  4.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/4-les_dictionnaires/">
@@ -116,8 +115,7 @@ Tous les programmes Python font appel à des variables.">
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/4-les_dictionnaires/">
   <meta property="og:title" content="4- Les dictionnaires en Python - Cours | GDueymes">
-  <meta property="og:description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Les dictionnaires en Python:  Objectifs  Comprendre ce qu&rsquo;est un dictionnaire Savoir consulter et analyser un dictonnaire Savoir manipuler un dictionnaire créer un dictionnaire multi-propriétés  4- Les dictionnaires Python  Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs Les dictionnaires sont des structures de données non-ordonnées On peut les modifier et les indexer Principe: on peut lier une clef à une valeur Les dictionnaires s&rsquo;écrivent avec des { }  4."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -451,7 +449,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exerice</a>
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
       </li>
       
       <li class="active">
@@ -483,7 +481,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exerice</a>
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
       </li>
       
       <li >
@@ -522,20 +520,12 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
 <ul>
 <li>
 <ul>
-<li><a href="#les-bases-du-langage-python">Les Bases du langage Python:</a></li>
-<li><a href="#2-les-variables">2- Les variables</a></li>
-<li><a href="#2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</a>
-<ul>
-<li><a href="#2-1-1-les-types-numériques">2.1.1- Les types numériques</a></li>
-<li><a href="#2-1-2-les-types-booléens">2.1.2- Les types booléens</a></li>
-<li><a href="#2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</a></li>
-<li><a href="#2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</a></li>
-</ul></li>
-<li><a href="#2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</a></li>
-<li><a href="#2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</a></li>
-<li><a href="#2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</a></li>
-<li><a href="#2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</a></li>
-<li><a href="#2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</a></li>
+<li><a href="#les-dictionnaires-en-python">Les dictionnaires en Python:</a></li>
+<li><a href="#4-les-dictionnaires-python">4- Les dictionnaires Python</a></li>
+<li><a href="#4-1-concept-et-déclaration-d-un-dictionnaire-en-python">4.1-Concept et déclaration d&rsquo;un dictionnaire en Python</a></li>
+<li><a href="#4-2-modifier-un-dictionnaire">4.2-Modifier un dictionnaire</a></li>
+<li><a href="#4-3-parcourir-un-dictionnaire">4.3- Parcourir un dictionnaire</a></li>
+<li><a href="#4-4-créer-un-dictionnaire-multi-propriétés">4.4- Créer un dictionnaire multi-propriétés</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -556,625 +546,232 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
 
 <p><img src="/img/pylogo.png" alt="image0" /></p>
 
-<h2 id="les-bases-du-langage-python">Les Bases du langage Python:</h2>
+<h2 id="les-dictionnaires-en-python">Les dictionnaires en Python:</h2>
 
-<h2>Objectifs</h2>
-
-<ul>
-<li>Comprendre ce qu&rsquo;est une variable</li>
-<li>Les règles de nommage d&rsquo;une variable</li>
-<li>Les premiers types de variables</li>
-<li>Réaliser des opération entre des variables</li>
-<li>Vérifier et modifier le type d’une variable</li>
-<li>Maîtrise de jupyter notebook 2 : execution du code à travers les cellules</li>
-</ul>
-
-<h2 id="2-les-variables">2- Les variables</h2>
-
-<p>Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.</p>
-
-<p>Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&rsquo;information est enregistré dans un type spécial de variable.</p>
-
-<p>Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&rsquo;interpreteur python ce qu&rsquo;il peut faire ou ne pas faire avec cette variable.</p>
-
-<p>Quelques remarques:</p>
+<h2> Objectifs</h2>
 
 <ul>
-<li>Python est sensible à la Casse: il distingue les Majuscules et les minuscules<br /></li>
-<li>On ne peut pas commencer une variable par un chiffre</li>
-<li>Ne pas utiliser d&rsquo;accents dans les noms de variables.</li>
-<li>fonction type(): permet de connaitre le type de notre variable.</li>
-<li>Pas d’espace (underscore)</li>
-<li>Mots interdits (se mets en vert) : <a href="https://www.programiz.com/python-programming/keywords-identifier" target="_blank">https://www.programiz.com/python-programming/keywords-identifier</a></li>
-<li>Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)</li>
+<li>Comprendre ce qu&rsquo;est un dictionnaire</li>
+<li>Savoir consulter et analyser un dictonnaire</li>
+<li>Savoir manipuler un dictionnaire</li>
+<li>créer un dictionnaire multi-propriétés</li>
 </ul>
 
-<h2> Concept de variable et déclaration d’une variable dans Jupyter </h2>
+<h2 id="4-les-dictionnaires-python">4- Les dictionnaires Python</h2>
 
 <ul>
-<li>Se retrouve dans pratiquement tous les langages</li>
-
-<li><p>Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.</p>
-
-<pre><code class="language-python">job = 'data scientist' # on stocke une valeur dans une variable 
-print(job)
-</code></pre>
-
-<p>data scientist</p></li>
+<li>Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs</li>
+<li>Les dictionnaires sont des structures de données non-ordonnées</li>
+<li>On peut les modifier et les indexer</li>
+<li>Principe: on peut lier une clef à une valeur</li>
+<li>Les dictionnaires s&rsquo;écrivent avec des {  }</li>
 </ul>
 
-<p>Une variable déclarée est accessible depuis d’autres cellules.</p>
+<h2 id="4-1-concept-et-déclaration-d-un-dictionnaire-en-python">4.1-Concept et déclaration d&rsquo;un dictionnaire en Python</h2>
 
-<pre><code class="language-python">print(job)
+<p>Pour créer un dictionnaire, on écrit tous les éléments en les séparant par des virgules et le tout encadré par des accolades {}.</p>
+
+<pre><code class="language-python">produitsPrix = [['smartphone',1000],['chaussures',100],['console',400]]
+print(produitsPrix[1][1])      
 </code></pre>
 
-<pre><code>data scientist
+<pre><code>100
 </code></pre>
 
-<h2 id="2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</h2>
+<p>Et si un des produits est supprimé ? Ou si l&rsquo;ordre est différent la fois suivante ? <br> Ce stockage n&rsquo;est pas optimal. Un stockage sous la forme d&rsquo;un dictionnaire est beaucoup plus adapté :</p>
+
+<pre><code class="language-python">produitsDict = {'smartphone':1000,'chaussures':100,'console':400}
+print(produitsDict)
+</code></pre>
+
+<pre><code>{'smartphone': 1000, 'chaussures': 100, 'console': 400}
+</code></pre>
+
+<h2 id="4-2-modifier-un-dictionnaire">4.2-Modifier un dictionnaire</h2>
 
 <ul>
-<li>Très important (fondamental comme dans tout type de langage)</li>
-<li>La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&rsquo;autres)</li>
+<li><p>Pour <b>ajouter</b> une valeur</p>
+
+<pre><code class="language-python"># Ajouter un nouveau couple ( clef : valeur ) dans un dictionnaire 
+produitsDict[&quot;tele&quot;]=100
+print(produitsDict)
+</code></pre>
+
+<p>{&lsquo;smartphone&rsquo;: 1000, &lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p></li>
+
+<li><p>Pour <b>modifier</b> une valeur avec une clef existant</p>
+
+<pre><code class="language-python"># On peut modifier une valeur dans un dictionnaire avec une clef existante 
+produitsDict[&quot;smartphone&quot;]=999
+print(produitsDict)
+</code></pre>
+
+<p>{&lsquo;smartphone&rsquo;: 999, &lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p>
+
+<pre><code class="language-python"># Un dictionnaire ne peut pas avoir deux fois la même clef, une clef est unique!
+produitsDict[&quot;smartphone&quot;]=888
+print(produitsDict)
+</code></pre>
+
+<p>{&lsquo;smartphone&rsquo;: 888, &lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p></li>
+
+<li><p>Pour <b>supprimer</b> une valeur avec une clef existantE</p>
+
+<pre><code class="language-python"># On peut supprimer une valeur dans un dictionnaire 
+del produitsDict[&quot;smartphone&quot;]
+</code></pre>
+
+<pre><code class="language-python">print(produitsDict)
+</code></pre>
+
+<p>{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p>
+
+<pre><code class="language-python">#Supprimer un item
+print(produitsDict)
+produitsDict.pop(&quot;tele&quot;)
+print(produitsDict)
+</code></pre>
+
+<p>{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}
+{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400}</p>
+
+<pre><code class="language-python">#vider un dictionnaire
+print(produitsDict)
+produitsDict.clear()
+print(produitsDict)
+</code></pre>
+
+<p>{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400}
+{}</p></li>
 </ul>
 
-<h3 id="2-1-1-les-types-numériques">2.1.1- Les types numériques</h3>
+<h2 id="4-3-parcourir-un-dictionnaire">4.3- Parcourir un dictionnaire</h2>
 
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<tbody valign="top">
+<p>Une fois le dictionnaire crée, nous pouvons accéder aux éléments en utilisant les clefs.</p>
 
-<tr><td><tt class="docutils literal"><span class="pre">Les entiers: int()</span></tt></td>
-<td>1 est un nombre entier, 1.0 n'en est pas un</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les décimaux: float()</span></tt></td>
-<td>nombre qui comprend une partie décimale </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les nombres complexes</span></tt></td>
-<td>association entre un nombre réel et un nombre imaginaire</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python">m=3.2
-type(m)
+<pre><code class="language-python">produitsDict = {'smartphone':1000,'chaussures':100,'console':400}
 </code></pre>
 
-<pre><code>float
+<pre><code class="language-python">#trouver la valeur d'un item
+print(produitsDict['console'])
 </code></pre>
 
-<pre><code class="language-python">m=3
-type(m)
+<pre><code>400
 </code></pre>
-
-<pre><code>int
-</code></pre>
-
-<h3 id="2-1-2-les-types-booléens">2.1.2- Les types booléens</h3>
 
 <ul>
-<li>variable contenant des valeurs binaires: True ou False</li>
-<li>des types de données  résultent d&rsquo;opérations logiques</li>
-</ul>
-
-<p>Très utile dans les confitions if().</p>
-
-<pre><code class="language-python">3&gt;5
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">3&lt;5
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h3 id="2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</h3>
-
-<p>Suite finie de caractères qu&rsquo;on peut considérer comme du texte qu&rsquo;on définit entre deux (&lsquo;&hellip;&rsquo;) ou (&ldquo;&hellip;&rdquo;).</p>
+<li><p>On peut parcourir un dictionnaire suivant 3 méthodes utilisant la boucle <b>FOR</b>:</p>
 
 <ul>
-<li><p>Gestion des apostrohpes</p>
+<li>par valeur</li>
+<li>par clef</li>
 
-<pre><code class="language-python">job = 'data science'
-job
-</code></pre>
+<li><p>par clef + valeur</p>
 
-<p>&lsquo;data science&rsquo;</p>
-
-<pre><code class="language-python">darkVador = 'Luke, I'm your father'
-print(darkVador)
-</code></pre>
-
-<p>File &ldquo;<ipython-input-34-24a0388f6afa>&rdquo;, line 1
-    darkVador = &lsquo;Luke, I&rsquo;m your father&rsquo;
-                         ^
-SyntaxError: invalid syntax</p>
-
-<pre><code class="language-python">darkVador = &quot;Luke, I'm your father&quot;
-print(darkVador)
-# ou 
-
-darkVador = 'Luke, I\'m your father'
-print(darkVador)
-</code></pre>
-
-<p>Luke, I&rsquo;m your father
-Luke, I&rsquo;m your father</p></li>
-
-<li><p>Si texte trop long (marche aussi pour du code classique)</p>
-
-<pre><code class="language-python">luke = 'no…That\'s impossible….Noooooooooooooooooooooooooo\
-oooooooooooo'
-print(luke)
-</code></pre>
-
-<p>no…That&rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo</p></li>
-
-<li><p>Possible de concatener 2 variables</p>
-
-<pre><code class="language-python">start = 'luke, I\'m'
-end = 'your father'
-darkVador = start+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;myour father</p>
-
-<pre><code class="language-python">darkVador = start+' '+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;m your father</p></li>
-
-<li><p>Possible de répèter une chaine de caractère</p>
-
-<pre><code class="language-python">luke = 'N'+('o'*10)
-print(luke)
-</code></pre>
-
-<p>Noooooooooo</p></li>
+<pre><code class="language-python"># Pour connaitre les clefs d'un dictionnaire: méthode .keys()
+produitsDict.keys()
+</code></pre></li>
 </ul>
 
-<h3 id="2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</h3>
+<p>dict_keys([&lsquo;smartphone&rsquo;, &lsquo;chaussures&rsquo;, &lsquo;console&rsquo;])</p>
 
-<ul>
-<li><p>exemple (règle : on ne mix pas chiffres et strings dans une concaténation)</p>
-
-<pre><code class="language-python">finalMotivationScore = 90
+<pre><code class="language-python"># Pour connaitre les valeurs d'un dictionnaire: méthode .values()
+produitsDict.values()
 </code></pre>
 
-<pre><code class="language-python">test = job + 'learning motivation ?' + finalMotivationScore + '% !'
+<p>dict_values([1000, 100, 400])</p>
+
+<pre><code class="language-python"># Pour parcourir les clefs d'un dictionnaire 
+for cle in produitsDict.keys():
+print(cle)
 </code></pre>
 
-<hr />
+<p>smartphone
+chaussures
+console</p>
 
-<p>TypeError                                 Traceback (most recent call last)</p>
-
-<p><ipython-input-41-77bbac5d7b73> in <module>
-&mdash;-&gt; 1 test = job + &lsquo;learning motivation ?&rsquo; + finalMotivationScore + &lsquo;% !&rsquo;</p>
-
-<p>TypeError: can only concatenate str (not &ldquo;int&rdquo;) to str</p></li>
-
-<li><p>Verifier le type d’une variable</p>
-
-<pre><code class="language-python">print(type(finalMotivationScore))
-print(type('test'))
-print(type(1))
+<pre><code class="language-python"># Pour parcourir les valeurs d'un dictionnaire
+for valeur in produitsDict.values():
+print(valeur)
 </code></pre>
 
-<p><class 'int'>
-<class 'str'>
-<class 'int'></p></li>
+<p>1000
+100
+400</p>
 
-<li><p>modifier le type d&rsquo;une variable</p>
-
-<pre><code class="language-python">float(1)
-int(1.3)
-str(1)
+<pre><code class="language-python"># Pour connaitre les couples clef, valeur: méthode .items()
+produitsDict.items()
 </code></pre>
 
-<p>&lsquo;1&rsquo;</p>
-
-<pre><code class="language-python">test = job + ' learning motivation ? ' + str(finalMotivationScore) + '% !'
-print(test)
-</code></pre>
-
-<p>data science learning motivation ? 90% !</p></li>
+<p>dict_items([(&lsquo;smartphone&rsquo;, 1000), (&lsquo;chaussures&rsquo;, 100), (&lsquo;console&rsquo;, 400)])</p></li>
 </ul>
 
-<h2 id="2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</h2>
+<p>Ici on a des listes contenant des tuples.</p>
 
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
-<td>Ajoute deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
-<td>Soustrait l'opérande droit de l'opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;</span></tt></td>
-<td>Multiplie deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne le reste (opérateur modulo)</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;&#42;</span></tt></td>
-<td>Calcule de la valeur exponentielle de l'opératde gauche par l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne la partie entière</td>
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python">5-3 # soustraction 
+<pre><code class="language-python"># Pour parcourir les couples clefs,valeurs 
+for cle,valeur in produitsDict.items(): # la boucle for obtient un tuple à chaque itération
+    print(cle,valeur)
 </code></pre>
 
-<pre><code>2
+<pre><code>smartphone 1000
+chaussures 100
+console 400
 </code></pre>
 
-<pre><code class="language-python">5+3 # addition 
-</code></pre>
-
-<pre><code>8
-</code></pre>
-
-<pre><code class="language-python">5*3 # multiplication
-</code></pre>
-
-<pre><code>15
-</code></pre>
-
-<pre><code class="language-python">5/3 # division  
-</code></pre>
-
-<pre><code>1.6666666666666667
-</code></pre>
-
-<pre><code class="language-python">5//3 # le chiffre entier de ma division 
-</code></pre>
-
-<pre><code>1
-</code></pre>
-
-<pre><code class="language-python">5%3 # récupérer le reste de ma division ou modulo  
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5**3 # exponentielle ou puissance
-</code></pre>
-
-<pre><code>125
-</code></pre>
-
-<h2 id="2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</h2>
-
-<p>Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.</p>
-
-<p>La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">==</span></tt></td>
-<td>Détermine si deux valeurs sont égales</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">!=</span></tt></td>
-<td>Détermine si deux valeurs sont différentes</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus grand que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus petit que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est supérieur ou égal à l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est inférieur ou égal à l'opérande droit</td>
-</tr>
-
-<tr><td><tt class="docutils literal"><span class="pre">is</span></tt></td>
-<td>Indentité</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">is</span> <span class="pre">not</span></tt></td>
-<td>Négation</td>
-
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur de comparaison : == 
-1 == 1
+<pre><code class="language-python">#vérifier si un item est présent
+print('smartphone' in produitsDict)
 </code></pre>
 
 <pre><code>True
 </code></pre>
 
-<pre><code class="language-python">1==2
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 2ème opérateur de comparaison : != 
-1!=2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python"># 3ème opérateur de comparaison : &gt; et &lt; 
-1&gt;2
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">2&gt;1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;1
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">1&lt;2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;=1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">a=1 # Attention !!!! c'est un opérateur d'assignation de valeur à la variable 
-</code></pre>
-
-<h2 id="2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</h2>
-
-<p>Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.</p>
-
-<p>Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">and (et)</span></tt></td>
-<td>Détermine si les deux opérandes sont vrais</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">or (ou)</span></tt></td>
-<td>Détermine si l'un des deux opérandes est vrai</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">not(non)</span></tt></td>
-<td>Inverse la valeur logique de l'opérande</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur logique : and
-(3==3) and (4==4)
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3==3) and (4==5)
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># deuxième opérateur logique : or
-(3==3) or (4==5)
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3!=3) or (4==5)
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 3ème opérateur logique : not
-not((3!=3) or (4==5))
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h2 id="2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</h2>
-
-<p>Les opérateurs d&rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&rsquo;affectation.
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top"></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">=</span></tt></td>
-<td>Affecte la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">+=</span></tt></td>
-<td>Ajoute la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-=</span></tt></td>
-<td>Soustrait la valeur de l&rsquo;opérande droit de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">*=</span></tt></td>
-<td>Multiplie la valeur de l&rsquo;opérande droit par celle de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le reste dans l&rsquo;opérande de gauche</td>
-</tr></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">**=</span></tt></td>
-<td>Calcule la valeur exponentielle de l&rsquo;opérande de gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat entier dans l&rsquo;opérande gauche</td></p>
-
-<p></tr>
-</tbody>
-</table></p>
-
-<pre><code class="language-python">Mavariable = 2
-Mavariable
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable += 2 
-Mavariable
-</code></pre>
-
-<pre><code>7
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable -= 2 
-Mavariable
+<pre><code class="language-python">#vérifier la longueur d'un dictionnaire
+print(len(produitsDict))
 </code></pre>
 
 <pre><code>3
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable **= 2 
-Mavariable
+<pre><code class="language-python">#obtenir à nouveau une liste d'items
+print(produitsDict.keys())
+print(list(produitsDict.keys()))
 </code></pre>
 
-<pre><code>25
+<pre><code>dict_keys(['smartphone', 'chaussures', 'console'])
+['smartphone', 'chaussures', 'console']
 </code></pre>
 
-<h2 id="2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</h2>
+<h2 id="4-4-créer-un-dictionnaire-multi-propriétés">4.4- Créer un dictionnaire multi-propriétés</h2>
 
-<ul>
-<li><p>Modification de la variable au fil du script (la dernière valeur est conservé)</p>
+<p>En plus du produit, je veux savoir s&rsquo;il est en stock ou non.</p>
 
-<pre><code class="language-python">number = 1.1
-print(number)
-print(type(number))
-
-number = 1
-print(number)
-print(type(number))
-
-number = '1'
-print(number)
-print(type(number))
+<pre><code class="language-python">produitsDictPrix = {'smartphone':1000,'chaussures':100,'console':400}
+produitsDictStock = {'smartphone':True,'chaussures':False,'console':True}
+print(produitsDictPrix)
+print(produitsDictStock)
 </code></pre>
 
-<p>1.1
-<class 'float'>
-1
-<class 'int'>
-1
-<class 'str'></p>
-
-<pre><code class="language-python">print(number)
-print(type(number))
+<pre><code>{'smartphone': 1000, 'chaussures': 100, 'console': 400}
+{'smartphone': True, 'chaussures': False, 'console': True}
 </code></pre>
 
-<p>1
-<class 'str'></p></li>
-
-<li><p>Ordre d&rsquo;execution des cellules important (erreur fréquente)</p>
-
-<pre><code class="language-python">number = 1
-print(number)
+<pre><code class="language-python">produitsDict = {
+    'smartphone':{'prix':1000,'enStock':True},
+    'chaussures':{'prix':100,'enStock':False},
+    'console':{'prix':400,'enStock':True}
+}
+print(produitsDict)
 </code></pre>
 
-<p>1</p>
-
-<pre><code class="language-python">number = 2
-print(number)
+<pre><code>{'smartphone': {'prix': 1000, 'enStock': True}, 'chaussures': {'prix': 100, 'enStock': False}, 'console': {'prix': 400, 'enStock': True}}
 </code></pre>
 
-<p>2</p>
-
-<pre><code class="language-python">print(number)
+<pre><code class="language-python">print(produitsDict['smartphone']['prix'])
+print(produitsDict['console']['enStock'])
 </code></pre>
 
-<p>2</p></li>
-
-<li><p>Les commentaires</p>
-
-<pre><code class="language-python">''' Premier 
-commentaire '''
-print(number) #Deuxième commentaire
-print('voici un #commentaire')
-</code></pre>
-
-<p>2
-voici un #commentaire</p></li>
-</ul>
-
-<p>Exercices + corrections</p>
-
-<pre><code class="language-python">
+<pre><code>1000
+True
 </code></pre>
 
           </div>
@@ -1192,7 +789,7 @@ voici un #commentaire</p></li>
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/formation_python/3-les_listes-exercice/" rel="next">3- Les listes en Python - Exerice</a>
+    <a href="/courses/formation_python/3-les_listes-exercice/" rel="next">3- Les listes en Python - Exercice</a>
   </div>
   
   

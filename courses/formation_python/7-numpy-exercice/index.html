@@ -28,8 +28,10 @@
   
     
   
-  <meta name="description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables.">
+  <meta name="description" content="TP : Analyse de données de station 
+Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.
+Ensemble : lecture du fichier contenant les données journalières de précipitation et de température pour la station d&rsquo;Ottawa pour l&rsquo;année 2017
+1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/7-numpy-exercice/">
@@ -115,9 +117,11 @@ Tous les programmes Python font appel à des variables.">
   
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/7-numpy-exercice/">
-  <meta property="og:title" content="7- La librairie Numpy - Exerice | GDueymes">
-  <meta property="og:description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:title" content="7- La librairie Numpy - Exercice | GDueymes">
+  <meta property="og:description" content="TP : Analyse de données de station 
+Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.
+Ensemble : lecture du fichier contenant les données journalières de précipitation et de température pour la station d&rsquo;Ottawa pour l&rsquo;année 2017
+1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes)."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -142,7 +146,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
 
 
 
-  <title>7- La librairie Numpy - Exerice | GDueymes</title>
+  <title>7- La librairie Numpy - Exercice | GDueymes</title>
 
 </head>
 
@@ -451,7 +455,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exerice</a>
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
       </li>
       
       <li >
@@ -483,7 +487,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li class="active">
-        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exerice</a>
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
       </li>
       
       <li >
@@ -518,27 +522,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#les-bases-du-langage-python">Les Bases du langage Python:</a></li>
-<li><a href="#2-les-variables">2- Les variables</a></li>
-<li><a href="#2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</a>
-<ul>
-<li><a href="#2-1-1-les-types-numériques">2.1.1- Les types numériques</a></li>
-<li><a href="#2-1-2-les-types-booléens">2.1.2- Les types booléens</a></li>
-<li><a href="#2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</a></li>
-<li><a href="#2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</a></li>
-</ul></li>
-<li><a href="#2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</a></li>
-<li><a href="#2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</a></li>
-<li><a href="#2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</a></li>
-<li><a href="#2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</a></li>
-<li><a href="#2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</a></li>
-</ul></li>
-</ul>
-</nav>
+      
 
       
     </div>
@@ -549,630 +533,146 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>7- La librairie Numpy - Exerice</h1>
+          <h1>7- La librairie Numpy - Exercice</h1>
 
           <div class="article-style">
-            
+            <p><img src="/img/pylogo.png" alt="image0" />
+<h1> TP : Analyse de données de station </h1></p>
 
-<p><img src="/img/pylogo.png" alt="image0" /></p>
+<p>Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.</p>
 
-<h2 id="les-bases-du-langage-python">Les Bases du langage Python:</h2>
+<p>Ensemble : lecture du fichier contenant les données journalières de précipitation et de température pour la station d&rsquo;Ottawa pour l&rsquo;année 2017</p>
 
-<h2>Objectifs</h2>
+<p>1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).</p>
 
-<ul>
-<li>Comprendre ce qu&rsquo;est une variable</li>
-<li>Les règles de nommage d&rsquo;une variable</li>
-<li>Les premiers types de variables</li>
-<li>Réaliser des opération entre des variables</li>
-<li>Vérifier et modifier le type d’une variable</li>
-<li>Maîtrise de jupyter notebook 2 : execution du code à travers les cellules</li>
-</ul>
+<p>2- Convertir les données de températures en Celcius (T[Celcius] = T[Kelvin] - 273.15).</p>
 
-<h2 id="2-les-variables">2- Les variables</h2>
+<p>3- Combien de journées ont une accumulation supérieure à 25mm ?</p>
 
-<p>Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.</p>
+<p>4- Quelle température a été enregistrée pour la journée présentant la plus grande accumulation.</p>
 
-<p>Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&rsquo;information est enregistré dans un type spécial de variable.</p>
+<p>5- Calculer le nombre de degrés jours (&gt;0degC) pour l&rsquo;année 2017.</p>
 
-<p>Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&rsquo;interpreteur python ce qu&rsquo;il peut faire ou ne pas faire avec cette variable.</p>
+<p>6- Calculer le cumul journalier de précipitation pour l&rsquo;année 2017 et assigner cette variable au tableau cumul_precipitation. Ajouter le tableau cumul_precipitation au tableau.</p>
 
-<p>Quelques remarques:</p>
+<p>7- Juste pour l’exercice, splitter (casser) l’array en 2 tableaux, puis les concaténer à nouveau pour obtenir le tableau initial.</p>
 
-<ul>
-<li>Python est sensible à la Casse: il distingue les Majuscules et les minuscules<br /></li>
-<li>On ne peut pas commencer une variable par un chiffre</li>
-<li>Ne pas utiliser d&rsquo;accents dans les noms de variables.</li>
-<li>fonction type(): permet de connaitre le type de notre variable.</li>
-<li>Pas d’espace (underscore)</li>
-<li>Mots interdits (se mets en vert) : <a href="https://www.programiz.com/python-programming/keywords-identifier" target="_blank">https://www.programiz.com/python-programming/keywords-identifier</a></li>
-<li>Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)</li>
-</ul>
-
-<h2> Concept de variable et déclaration d’une variable dans Jupyter </h2>
-
-<ul>
-<li>Se retrouve dans pratiquement tous les langages</li>
-
-<li><p>Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.</p>
-
-<pre><code class="language-python">job = 'data scientist' # on stocke une valeur dans une variable 
-print(job)
-</code></pre>
-
-<p>data scientist</p></li>
-</ul>
-
-<p>Une variable déclarée est accessible depuis d’autres cellules.</p>
-
-<pre><code class="language-python">print(job)
-</code></pre>
-
-<pre><code>data scientist
-</code></pre>
-
-<h2 id="2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</h2>
-
-<ul>
-<li>Très important (fondamental comme dans tout type de langage)</li>
-<li>La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&rsquo;autres)</li>
-</ul>
-
-<h3 id="2-1-1-les-types-numériques">2.1.1- Les types numériques</h3>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">Les entiers: int()</span></tt></td>
-<td>1 est un nombre entier, 1.0 n'en est pas un</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les décimaux: float()</span></tt></td>
-<td>nombre qui comprend une partie décimale </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les nombres complexes</span></tt></td>
-<td>association entre un nombre réel et un nombre imaginaire</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python">m=3.2
-type(m)
-</code></pre>
-
-<pre><code>float
-</code></pre>
-
-<pre><code class="language-python">m=3
-type(m)
-</code></pre>
-
-<pre><code>int
-</code></pre>
-
-<h3 id="2-1-2-les-types-booléens">2.1.2- Les types booléens</h3>
-
-<ul>
-<li>variable contenant des valeurs binaires: True ou False</li>
-<li>des types de données  résultent d&rsquo;opérations logiques</li>
-</ul>
-
-<p>Très utile dans les confitions if().</p>
-
-<pre><code class="language-python">3&gt;5
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">3&lt;5
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h3 id="2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</h3>
-
-<p>Suite finie de caractères qu&rsquo;on peut considérer comme du texte qu&rsquo;on définit entre deux (&lsquo;&hellip;&rsquo;) ou (&ldquo;&hellip;&rdquo;).</p>
-
-<ul>
-<li><p>Gestion des apostrohpes</p>
-
-<pre><code class="language-python">job = 'data science'
-job
-</code></pre>
-
-<p>&lsquo;data science&rsquo;</p>
-
-<pre><code class="language-python">darkVador = 'Luke, I'm your father'
-print(darkVador)
-</code></pre>
-
-<p>File &ldquo;<ipython-input-34-24a0388f6afa>&rdquo;, line 1
-    darkVador = &lsquo;Luke, I&rsquo;m your father&rsquo;
-                         ^
-SyntaxError: invalid syntax</p>
-
-<pre><code class="language-python">darkVador = &quot;Luke, I'm your father&quot;
-print(darkVador)
-# ou 
-
-darkVador = 'Luke, I\'m your father'
-print(darkVador)
-</code></pre>
-
-<p>Luke, I&rsquo;m your father
-Luke, I&rsquo;m your father</p></li>
-
-<li><p>Si texte trop long (marche aussi pour du code classique)</p>
-
-<pre><code class="language-python">luke = 'no…That\'s impossible….Noooooooooooooooooooooooooo\
-oooooooooooo'
-print(luke)
-</code></pre>
-
-<p>no…That&rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo</p></li>
-
-<li><p>Possible de concatener 2 variables</p>
-
-<pre><code class="language-python">start = 'luke, I\'m'
-end = 'your father'
-darkVador = start+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;myour father</p>
-
-<pre><code class="language-python">darkVador = start+' '+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;m your father</p></li>
-
-<li><p>Possible de répèter une chaine de caractère</p>
-
-<pre><code class="language-python">luke = 'N'+('o'*10)
-print(luke)
-</code></pre>
-
-<p>Noooooooooo</p></li>
-</ul>
-
-<h3 id="2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</h3>
-
-<ul>
-<li><p>exemple (règle : on ne mix pas chiffres et strings dans une concaténation)</p>
-
-<pre><code class="language-python">finalMotivationScore = 90
-</code></pre>
-
-<pre><code class="language-python">test = job + 'learning motivation ?' + finalMotivationScore + '% !'
-</code></pre>
-
-<hr />
-
-<p>TypeError                                 Traceback (most recent call last)</p>
-
-<p><ipython-input-41-77bbac5d7b73> in <module>
-&mdash;-&gt; 1 test = job + &lsquo;learning motivation ?&rsquo; + finalMotivationScore + &lsquo;% !&rsquo;</p>
-
-<p>TypeError: can only concatenate str (not &ldquo;int&rdquo;) to str</p></li>
-
-<li><p>Verifier le type d’une variable</p>
-
-<pre><code class="language-python">print(type(finalMotivationScore))
-print(type('test'))
-print(type(1))
-</code></pre>
-
-<p><class 'int'>
-<class 'str'>
-<class 'int'></p></li>
-
-<li><p>modifier le type d&rsquo;une variable</p>
-
-<pre><code class="language-python">float(1)
-int(1.3)
-str(1)
-</code></pre>
-
-<p>&lsquo;1&rsquo;</p>
-
-<pre><code class="language-python">test = job + ' learning motivation ? ' + str(finalMotivationScore) + '% !'
-print(test)
-</code></pre>
-
-<p>data science learning motivation ? 90% !</p></li>
-</ul>
-
-<h2 id="2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</h2>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
-<td>Ajoute deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
-<td>Soustrait l'opérande droit de l'opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;</span></tt></td>
-<td>Multiplie deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne le reste (opérateur modulo)</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;&#42;</span></tt></td>
-<td>Calcule de la valeur exponentielle de l'opératde gauche par l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne la partie entière</td>
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python">5-3 # soustraction 
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5+3 # addition 
-</code></pre>
-
-<pre><code>8
-</code></pre>
-
-<pre><code class="language-python">5*3 # multiplication
-</code></pre>
-
-<pre><code>15
-</code></pre>
-
-<pre><code class="language-python">5/3 # division  
-</code></pre>
-
-<pre><code>1.6666666666666667
-</code></pre>
-
-<pre><code class="language-python">5//3 # le chiffre entier de ma division 
-</code></pre>
-
-<pre><code>1
-</code></pre>
-
-<pre><code class="language-python">5%3 # récupérer le reste de ma division ou modulo  
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5**3 # exponentielle ou puissance
-</code></pre>
-
-<pre><code>125
-</code></pre>
-
-<h2 id="2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</h2>
-
-<p>Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.</p>
-
-<p>La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">==</span></tt></td>
-<td>Détermine si deux valeurs sont égales</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">!=</span></tt></td>
-<td>Détermine si deux valeurs sont différentes</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus grand que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus petit que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est supérieur ou égal à l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est inférieur ou égal à l'opérande droit</td>
-</tr>
-
-<tr><td><tt class="docutils literal"><span class="pre">is</span></tt></td>
-<td>Indentité</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">is</span> <span class="pre">not</span></tt></td>
-<td>Négation</td>
-
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur de comparaison : == 
-1 == 1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1==2
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 2ème opérateur de comparaison : != 
-1!=2
+<pre><code class="language-python">import numpy as np
+# pour lire un fichier csv avec numpy: appel de la fonction genfromtxt()
+temperature = np.genfromtxt(&quot;./OTTAWA_tasmoy_2017.csv&quot;, dtype=float)
+precipitation = np.genfromtxt(&quot;./OTTAWA_PrecTOT_2017.csv&quot;, dtype=float)
 </code></pre>
 
-<pre><code>True
+<pre><code class="language-python">print(temperature.shape, precipitation.shape)
 </code></pre>
 
-<pre><code class="language-python"># 3ème opérateur de comparaison : &gt; et &lt; 
-1&gt;2
+<pre><code>(365,) (365,)
 </code></pre>
 
-<pre><code>False
-</code></pre>
+<pre><code class="language-python">#1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. 
+#   (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).
 
-<pre><code class="language-python">2&gt;1
+tableau = np.column_stack([temperature,precipitation])
 </code></pre>
 
-<pre><code>True
+<pre><code class="language-python">#tableau = np.hstack([temperature,precipitation])
+tableau = np.hstack([temperature.reshape(len(temperature),-1),precipitation.reshape(len(precipitation),-1)])
 </code></pre>
 
-<pre><code class="language-python">1&gt;1
+<pre><code class="language-python">print(tableau.shape)
 </code></pre>
 
-<pre><code>False
+<pre><code>(365, 2)
 </code></pre>
 
-<pre><code class="language-python">1&lt;2
+<pre><code class="language-python">#2- Convertir les données de températures en Celcius (T[Celcius] = T[Kelvin] - 273.15).
+tableau[:,0]=tableau[:,0]-273.15  # on prend toutes les lignes de la première colonne 
 </code></pre>
 
-<pre><code>True
+<pre><code class="language-python"># 3- Combien de journées ont une accumulation supérieure à 25mm ?
+tableau[tableau[:,1]&gt;=25]    # On filtre toutes les lignes de la 2ème colonne 
 </code></pre>
 
-<pre><code class="language-python">1&gt;=1
-</code></pre>
+<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in greater_equal
 
-<pre><code>True
-</code></pre>
 
-<pre><code class="language-python">a=1 # Attention !!!! c'est un opérateur d'assignation de valeur à la variable 
-</code></pre>
 
-<h2 id="2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</h2>
-
-<p>Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.</p>
-
-<p>Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">and (et)</span></tt></td>
-<td>Détermine si les deux opérandes sont vrais</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">or (ou)</span></tt></td>
-<td>Détermine si l'un des deux opérandes est vrai</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">not(non)</span></tt></td>
-<td>Inverse la valeur logique de l'opérande</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur logique : and
-(3==3) and (4==4)
-</code></pre>
 
-<pre><code>True
-</code></pre>
 
-<pre><code class="language-python">(3==3) and (4==5)
-</code></pre>
 
-<pre><code>False
+array([[-1.8 , 26.57],
+       [ 2.3 , 25.84],
+       [ 3.3 , 28.49],
+       [ 4.5 , 31.14],
+       [ 8.8 , 35.22],
+       [ 8.3 , 40.12],
+       [16.  , 25.84],
+       [17.3 , 37.26],
+       [16.  , 26.04],
+       [15.8 , 45.01]])
 </code></pre>
 
-<pre><code class="language-python"># deuxième opérateur logique : or
-(3==3) or (4==5)
+<pre><code class="language-python"># pour connaitre le nombre de jours, on utilise la fonction len()
+len(tableau[tableau[:,1]&gt;=25])  
 </code></pre>
 
-<pre><code>True
-</code></pre>
+<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in greater_equal
 
-<pre><code class="language-python">(3!=3) or (4==5)
-</code></pre>
 
-<pre><code>False
-</code></pre>
 
-<pre><code class="language-python"># 3ème opérateur logique : not
-not((3!=3) or (4==5))
-</code></pre>
 
-<pre><code>True
-</code></pre>
 
-<h2 id="2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</h2>
-
-<p>Les opérateurs d&rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&rsquo;affectation.
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top"></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">=</span></tt></td>
-<td>Affecte la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">+=</span></tt></td>
-<td>Ajoute la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-=</span></tt></td>
-<td>Soustrait la valeur de l&rsquo;opérande droit de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">*=</span></tt></td>
-<td>Multiplie la valeur de l&rsquo;opérande droit par celle de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le reste dans l&rsquo;opérande de gauche</td>
-</tr></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">**=</span></tt></td>
-<td>Calcule la valeur exponentielle de l&rsquo;opérande de gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat entier dans l&rsquo;opérande gauche</td></p>
-
-<p></tr>
-</tbody>
-</table></p>
-
-<pre><code class="language-python">Mavariable = 2
-Mavariable
-</code></pre>
 
-<pre><code>2
+10
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable += 2 
-Mavariable
+<pre><code class="language-python"># 4- Quelle température a été enregistrée pour la journée présentant la plus grande accumulation.
+precipitation_max = np.nanmax(tableau[:,1]) # on cherche le maximum d'accumulation avec la fonction max()
+print(precipitation_max)
 </code></pre>
 
-<pre><code>7
+<pre><code>45.01
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable -= 2 
-Mavariable
+<pre><code class="language-python">tableau[tableau[:,1] == precipitation_max] # on cherche sur toutes les lignes de la deuxième colonne celle qui correspond à notre variable precipitation_max
 </code></pre>
 
-<pre><code>3
+<pre><code>array([[15.8 , 45.01]])
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable **= 2 
-Mavariable
+<pre><code class="language-python"># 5- Calculer le nombre de degrés jours (&gt;0degC) pour l'année 2017. 
 </code></pre>
 
-<pre><code>25
+<pre><code class="language-python">sum(tableau[:,1][tableau[:,1]&gt;0])
 </code></pre>
 
-<h2 id="2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</h2>
+<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: invalid value encountered in greater
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
 
-<ul>
-<li><p>Modification de la variable au fil du script (la dernière valeur est conservé)</p>
 
-<pre><code class="language-python">number = 1.1
-print(number)
-print(type(number))
 
-number = 1
-print(number)
-print(type(number))
 
-number = '1'
-print(number)
-print(type(number))
-</code></pre>
 
-<p>1.1
-<class 'float'>
-1
-<class 'int'>
-1
-<class 'str'></p>
-
-<pre><code class="language-python">print(number)
-print(type(number))
+1328.5300000000002
 </code></pre>
-
-<p>1
-<class 'str'></p></li>
-
-<li><p>Ordre d&rsquo;execution des cellules important (erreur fréquente)</p>
 
-<pre><code class="language-python">number = 1
-print(number)
+<pre><code class="language-python"># 6- Calculer le cumul journalier de précipitation pour l'année 2017
+cumul_precipitation = np.nancumsum(tableau[:,1])
 </code></pre>
 
-<p>1</p>
-
-<pre><code class="language-python">number = 2
-print(number)
+<pre><code class="language-python"># Ajouter le tableau cumul_precipitation au tableau. 
+tableau = np.column_stack([tableau, cumul_precipitation])
 </code></pre>
 
-<p>2</p>
+<pre><code class="language-python"># 7. spliter (casser) l’array en 3 tableaux, puis concaténer à nouveau pour obtenir le tableau initial.
 
-<pre><code class="language-python">print(number)
+# on assigne les trois tableaux et on fait une coupure horizontale avec la fonction hsplit()
+temperature2,precipitation2,cumul2 = np.hsplit(tableau, 3)
 </code></pre>
-
-<p>2</p></li>
 
-<li><p>Les commentaires</p>
-
-<pre><code class="language-python">''' Premier 
-commentaire '''
-print(number) #Deuxième commentaire
-print('voici un #commentaire')
+<pre><code class="language-python"># Pour revenir à notre tableau original, on utilise la fonction concatenate avec l'option axis = 1 
+tableau_original=np.concatenate([temperature2+273.15, precipitation2], axis = 1)
 </code></pre>
-
-<p>2
-voici un #commentaire</p></li>
-</ul>
-
-<p>Exercices + corrections</p>
 
 <pre><code class="language-python">
 </code></pre>

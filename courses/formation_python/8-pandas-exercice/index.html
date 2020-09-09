@@ -28,8 +28,9 @@
   
     
   
-  <meta name="description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables.">
+  <meta name="description" content="TP: Analyse d&#39;un listing de 10 000 chaussures vendues en ligne source du dataset : https://www.kaggle.com/datafiniti/womens-shoes-prices
+Nous allons analyser un data set contenant 10 000 chaussures avec de nombreuse caractéristiques comme le prix, les couleurs disponibles, les tailles disponibles, leurs poids&hellip;
+Voici une traduction de la description des colonnes principales : - asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit. - brand : Le nom de marque de ce produit.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/8-pandas-exercice/">
@@ -116,8 +117,9 @@ Tous les programmes Python font appel à des variables.">
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/8-pandas-exercice/">
   <meta property="og:title" content="8- La librairie Pandas - Exercice | GDueymes">
-  <meta property="og:description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="TP: Analyse d&#39;un listing de 10 000 chaussures vendues en ligne source du dataset : https://www.kaggle.com/datafiniti/womens-shoes-prices
+Nous allons analyser un data set contenant 10 000 chaussures avec de nombreuse caractéristiques comme le prix, les couleurs disponibles, les tailles disponibles, leurs poids&hellip;
+Voici une traduction de la description des colonnes principales : - asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit. - brand : Le nom de marque de ce produit."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -451,7 +453,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exerice</a>
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
       </li>
       
       <li >
@@ -483,7 +485,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exerice</a>
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
       </li>
       
       <li class="active">
@@ -518,27 +520,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#les-bases-du-langage-python">Les Bases du langage Python:</a></li>
-<li><a href="#2-les-variables">2- Les variables</a></li>
-<li><a href="#2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</a>
-<ul>
-<li><a href="#2-1-1-les-types-numériques">2.1.1- Les types numériques</a></li>
-<li><a href="#2-1-2-les-types-booléens">2.1.2- Les types booléens</a></li>
-<li><a href="#2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</a></li>
-<li><a href="#2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</a></li>
-</ul></li>
-<li><a href="#2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</a></li>
-<li><a href="#2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</a></li>
-<li><a href="#2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</a></li>
-<li><a href="#2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</a></li>
-<li><a href="#2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</a></li>
-</ul></li>
-</ul>
-</nav>
+      
 
       
     </div>
@@ -552,627 +534,261 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
           <h1>8- La librairie Pandas - Exercice</h1>
 
           <div class="article-style">
-            
+            <h1>TP: Analyse d'un listing de 10 000 chaussures vendues en ligne</h1>
 
-<p><img src="/img/pylogo.png" alt="image0" /></p>
+<p>source du dataset : <a href="https://www.kaggle.com/datafiniti/womens-shoes-prices" target="_blank">https://www.kaggle.com/datafiniti/womens-shoes-prices</a></p>
 
-<h2 id="les-bases-du-langage-python">Les Bases du langage Python:</h2>
+<p>Nous allons analyser un data set contenant 10 000 chaussures avec de nombreuse caractéristiques comme le prix, les couleurs disponibles, les tailles disponibles, leurs poids&hellip;</p>
 
-<h2>Objectifs</h2>
+<p>Voici une traduction de la description des colonnes principales :
+- asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit.
+- brand : Le nom de marque de ce produit.
+- categories : Une liste de mots-clés de catégorie utilisés pour ce produit dans plusieurs sources.
+- colors : Une liste de couleurs disponibles pour ce produit.
+- count : Le nombre d&rsquo;unités incluses dans l&rsquo;emballage du produit. Peut inclure une description de l&rsquo;unité.
+- dateAdded : La date à laquelle ce produit a été ajouté pour la première fois à la base de données des produits.
+- dateUpdated : La date la plus récente à laquelle ce produit a été mis à jour ou vu par notre système.
+- descriptions : Une liste des descriptions de ce produit provenant de diverses sources. Chaque description contient :
+- dimension : La longueur, la largeur et la hauteur de ce produit. Unités incluses.
+- ean : Les codes EAN de ce produit. Il peut y avoir plus d&rsquo;un EAN dans la liste lorsqu&rsquo;un produit a plusieurs variantes,
+- financingAndLeasing : Une liste des conditions de financement ou de location associées à ce produit
+- features : Une liste des caractéristiques associées à ce produit. La liste des caractéristiques peut être obtenue à partir des sections de caractéristiques spécifiques disponibles dans la liste des produits du produit.
+- manufacturer : Numéro du fabricant
+- merchants : Une liste des marchands qui vendent ce produit. Il s&rsquo;agit généralement de marchands tiers que l&rsquo;on trouve sur les sites Web de commerce électronique.
+- name : dénomination du produit
+- prices : Une liste de prix pour ce produit.
+- primaryCategories : Une liste des catégories normalisées auxquelles ce produit appartient. Les valeurs des catégories peuvent être trouvées ici.
+- quantities : Une liste des quantités disponibles pour ce produit. Les quantités indiquent combien d&rsquo;unités du produit sont disponibles auprès d&rsquo;une source spécifique à un moment donné.
+- reviews : Une liste de commentaires pour ce produit.
+- sizes : Une liste des tailles disponibles pour ce produit.
+- skus : Une liste des références de ce produit. Les SKU sont typiquement spécifiques aux détaillants individuels ou aux sites Web.
+- sourceURLs : Une liste d&rsquo;URLs utilisées pour générer les données de ce produit.
+- upc : Le code CUP de ce produit.
+- websiteIDs : Une liste d&rsquo;identifiants de site Web pour ce produit. Les ID de site Web sont liés à un détaillant en ligne spécifique. Il s&rsquo;agit de l&rsquo;identifiant unique utilisé par le site Web. Ils sont utilisés par Datafiniti lorsque d&rsquo;autres identificateurs uniques ne sont pas disponibles pour un produit.
+- weight : Le poids du produit. Unités incluses.</p>
+
+<p>La source <a href="https://developer.datafiniti.co/docs/product-data-schema" target="_blank">https://developer.datafiniti.co/docs/product-data-schema</a></p>
+
+<p><b> Exercices </b></p>
+
+<p><b>Découverte du data set</b><br>
+1) à l&rsquo;aide de la fonction read_csv, importez entièrement le data set de enregistrez dans le dataframe &lsquo;Shoes&rsquo; <br>
+2) Utilisez la méthode .head() pour afficher les premières lignes <br>
+3) Il y a trop de colonnes&hellip;Pour avoir une vue d&rsquo;ensemble changez le paramétrage de pandas avec set_option pour afficher les 34 colonnes. Une fois cela fait, affichez à nouveau le head de la page <br>
+4) On va garder uniquement les colonnes qui nous interessent. grace à la méthode de sélection de plusieurs colonnes, créez un dataframe &lsquo;ShoesLight&rsquo;, comprenant unique les colonnes suivantes :&lsquo;id&rsquo;,&lsquo;name&rsquo;,&lsquo;dateUpdated&rsquo;,&lsquo;colors&rsquo;,&lsquo;prices.amountMax&rsquo;,&lsquo;prices.amountMin&rsquo;,&lsquo;prices.merchant&rsquo;. <br>Affichez le head de ShoesLight.<br></p>
+
+<p><b> data cleaning </b> <br>
+5) A l&rsquo;aide de la méthode .dtypes, consultez les types de chaque colonne. Ecrivez en markdown celles devant être corrigées et comment. <br>
+6) A l&rsquo;aide des méthodes .isnull, .sum() et len(), calculez le % de valeurs maquantes par colonne. Notez en markdown celles qui sont problématiques. <br>
+7) Il manque trop de valeurs pour les colonnes des e-commercant et des couleurs. Retirez les du dataframe shoesLight <br>
+8) A l&rsquo;aide de la méthode .to_datetime, transformez la colonne &lsquo;dateUpdated&rsquo;</p>
+
+<p><b> features modeling </b> <br>
+9) caculez la colonne &lsquo;prices.amountAverage&rsquo; en additionnant les colonnes &lsquo;prices.amountMax&rsquo; et &lsquo;prices.amountMin&rsquo; et en divisant par 2 <br>
+10) grace à la méthode dt.weekday, créez une colonne &lsquo;dayOfweekUpdated&rsquo;, permettant de connaitre à partir de dateUpdated le jour de la semaine où les produits sont mis à jour</p>
+
+<p><b> data analyse </b> <br></p>
+
+<p>11) Analyser le prix moyen des chaussures avec la methode .desribe() <br>
+12) Y-a-t-il de grandes différences de prix en fonction de la marque ? A l&rsquo;aide des methodes groupby(), mean() et sort_values(), créez une varaible &lsquo;Luxe&rsquo; contenant les 10 marques les plus chères, puis la variable &lsquo;lowCost&rsquo; contenant les 10 marques les moins chères. <br>
+13) grace à la méthode value_counts(), determinez le jour de la semaine où les produits sont le plus souvent mis à jour <br>
+14) (optionnel) donnez le prix moyen des produits de la marque &lsquo;easy street&rsquo; mis à jour un jeudi</p>
+
+<pre><code class="language-python">
+</code></pre>
+
+<p><b>Découverte du data set</b><br></p>
+
+<pre><code class="language-python">import pandas as pd 
+from tabulate import tabulate
+shoes = pd.read_csv('Datafiniti_Womens_Shoes.csv', encoding = 'latin-1', sep=',')
+pd.set_option(&quot;display.max_columns&quot;, 35)
+print(tabulate(shoes.head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    | id                   | dateAdded            | dateUpdated          |   asins | brand       | categories                                                          | primaryCategories   | colors                         | dimension                |          ean | imageURLs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | keys                                                                                                                                                                                                                           | manufacturer   | manufacturerNumber   | name                                                          |   prices.amountMax |   prices.amountMin | prices.availability   | prices.color       | prices.condition   | prices.currency   | prices.dateAdded     | prices.dateSeen                                   | prices.isSale   | prices.merchant   |   prices.offer |   prices.returnPolicy | prices.shipping   | prices.size   | prices.sourceURLs                                                                                                                                                                                                                             | sizes                                                                                                                             | sourceURLs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |          upc |   weight |
+|---:|:---------------------|:---------------------|:---------------------|--------:|:------------|:--------------------------------------------------------------------|:--------------------|:-------------------------------|:-------------------------|-------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:---------------------|:--------------------------------------------------------------|-------------------:|-------------------:|:----------------------|:-------------------|:-------------------|:------------------|:---------------------|:--------------------------------------------------|:----------------|:------------------|---------------:|----------------------:|:------------------|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------:|---------:|
+|  0 | AVpfEf_hLJeJML431ueH | 2015-05-04T12:13:08Z | 2018-01-29T04:38:43Z |     nan | Naturalizer | Clothing,Shoes,Women's Shoes,All Women's Shoes,Heels,Sandals        | Shoes               | Silver,Cream Watercolor Floral | nan                      | nan          | https://i5.walmartimages.com/asr/861ca6cf-fa55-4a48-904d-b764d7c00f0c_1.1a2bb39923e1486d05bdafe37ad832e3.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/efe9ba1e-daed-4534-9e2e-11804bbb30f1_1.62e3e7f0268f641323a245d5caebdd6d.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/0c717815-228e-4c9b-a8fc-d033576461c9_1.f08402e0a5165746e133ddeb589c73e0.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/f46703c8-2cdb-4bf2-a3ea-819f24aab134_1.df725b76ca0112d64bdf566ad97760a9.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/f652f354-a1fb-47ac-b507-7f97eb216b14_1.39e78b87e2328421803115869ee8b950.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,http://ak1.ostkcdn.com/images/products/84/146/P16141204.jpg,http://s1.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_tp.jpg,http://s3.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_sl.jpg,http://s2.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_rt.jpg,http://s3.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_45.jpg,http://s2.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_hl.jpg,http://s1.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_lt.jpg,http://ak1.ostkcdn.com/images/products/85/115/P16454357.jpg | naturalizer/47147sc022,017136472311,womensnaturalizerdanyasoftsilvercrosshatchshinypatent/16141204,womensnaturalizerdanyasoftsilvercrosshatchshinypatent/377672,womensnaturalizerdanyasoftsilvercrosshatchshinypatent/16454357 | nan            | 47147SC022           | Naturalizer Danya Women N/S Open Toe Synthetic Silver Sandals |              55.99 |              55.99 | nan                   | UWomens  M Regular | nan                | USD               | 2017-03-28T11:40:25Z | 2017-03-25T09:19:24.819Z,2017-03-25T09:19:19.600Z | False           | Overstock.com     |            nan |                   nan | nan               | S             | https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Soft-Silver-Crosshatch-Shiny-Patent/8925023/product.html,https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html | 6W,9W,7.5W,12W,8.5M,9N,9M,9.5M,10.5M,10W,8.5W,7M,7.5M,7N,9.5W,10N,10M,5M,12M,5.5M,8W,11W,8N,8M,4.5M,6.5M,6M,11M,6N,11N,6.5W,4M,7W | https://www.walmart.com/ip/Naturalizer-Danya-Women-N-S-Open-Toe-Synthetic-Silver-Sandals/136041884,https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Soft-Silver-Crosshatch-Shiny-Patent/8925023/product.html,http://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Soft-Silver-Crosshatch-Shiny-Patent/8925023/product.html?refccid=O7POPZJCH6AJFPCMWNSBVDYJGI&amp;searchidx=6749,https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html,http://www.shoes.com/womens-naturalizer-danya-soft-silver-crosshatch-shiny-p2_id332635,http://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html?refccid=JEHJMDO4H2ZK5FKIT6XGVPS7B4&amp;searchidx=4871,http://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html?refccid=Y6DKPF6YL5DIRFCPAK7JMVETL4&amp;searchidx=4245 | 017136472311 |      nan |
+|  1 | AVpi74XfLJeJML43qZAc | 2017-01-27T01:23:39Z | 2018-01-03T05:21:54Z |     nan | MUK LUKS    | Clothing,Shoes,Women's Shoes,Women's Casual Shoes,All Women's Shoes | Shoes               | Grey                           | nan                      |   3.3977e+10 | https://i5.walmartimages.com/asr/421de5d5-3a74-4ca2-ae91-a75787f7da41_1.375e3cf74dc82303ce37bdf6a9742610.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/202d5a0e-b2aa-4d47-b63c-661fc3f9cd69_1.a61c1848859953067192fb2ce1c4f916.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/55a10ffd-de74-406b-8aa5-ae5be3569ee3_1.4b179b9702f0076cdf701afd0e7dcda2.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/138e9ecf-fac8-4e9d-946a-7ca33dfa46aa_1.e4211c14f2a6ecf891e3d440402b5f82.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/8c6c1ee4-7708-4d45-b48a-b30f974a5f2f_1.857088c50496451990583941d955218d.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/a486d1cf-f2b5-49ca-b0f8-3e2db896c51c_1.de1c99ac6fdfcf3dc3ddbd9c1c6c72b1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | mukluks/00173650206,033977045743,muklukswomensjanesuedemoccasin/553406801,0033977045743                                                                                                                                        | Muk Luks       | 0017365020-6         | MUK LUKS Womens Jane Suede Moccasin                           |              47    |              35.25 | In Stock              | Grey               | New                | USD               | 2018-01-03T05:21:54Z | 2017-12-08T14:24:00.000Z,2017-11-01T02:52:00.000Z | True            | Walmart.com       |            nan |                   nan | Standard          | 6             | https://www.walmart.com/ip/MUK-LUKS-Womens-Jane-Suede-Moccasin/41271362                                                                                                                                                                       | 10,7,6,9,8                                                                                                                        | https://www.walmart.com/ip/MUK-LUKS-Womens-Jane-Suede-Moccasin/41271362                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 033977045743 |      nan |
+|  2 | AVpi74XfLJeJML43qZAc | 2017-01-27T01:23:39Z | 2018-01-03T05:21:54Z |     nan | MUK LUKS    | Clothing,Shoes,Women's Shoes,Women's Casual Shoes,All Women's Shoes | Shoes               | Grey                           | nan                      |   3.3977e+10 | https://i5.walmartimages.com/asr/421de5d5-3a74-4ca2-ae91-a75787f7da41_1.375e3cf74dc82303ce37bdf6a9742610.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/202d5a0e-b2aa-4d47-b63c-661fc3f9cd69_1.a61c1848859953067192fb2ce1c4f916.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/55a10ffd-de74-406b-8aa5-ae5be3569ee3_1.4b179b9702f0076cdf701afd0e7dcda2.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/138e9ecf-fac8-4e9d-946a-7ca33dfa46aa_1.e4211c14f2a6ecf891e3d440402b5f82.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/8c6c1ee4-7708-4d45-b48a-b30f974a5f2f_1.857088c50496451990583941d955218d.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/a486d1cf-f2b5-49ca-b0f8-3e2db896c51c_1.de1c99ac6fdfcf3dc3ddbd9c1c6c72b1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | mukluks/00173650206,033977045743,muklukswomensjanesuedemoccasin/553406801,0033977045743                                                                                                                                        | Muk Luks       | 0017365020-6         | MUK LUKS Womens Jane Suede Moccasin                           |              35.25 |              35.25 | In Stock              | Grey               | New                | USD               | 2017-12-06T05:02:42Z | 2017-11-10T15:11:00.000Z,2017-11-18T08:00:00.000Z | False           | Slippers Dot Com  |            nan |                   nan | Value             | 6             | https://www.walmart.com/ip/MUK-LUKS-Womens-Jane-Suede-Moccasin/41271362                                                                                                                                                                       | 10,7,6,9,8                                                                                                                        | https://www.walmart.com/ip/MUK-LUKS-Womens-Jane-Suede-Moccasin/41271362                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 033977045743 |      nan |
+|  3 | AVpjXyCc1cnluZ0-V-Gj | 2017-01-27T01:25:56Z | 2018-01-04T11:52:35Z |     nan | MUK LUKS    | Clothing,Shoes,Women's Shoes,All Women's Shoes,Women's Slippers     | Shoes,Shoes         | Black                          | 6.0 in x 6.0 in x 1.0 in |   3.3977e+10 | https://i5.walmartimages.com/asr/950d38a5-0113-4111-952d-33fdcde53902_1.d2dd17888ccb2856f3227e0273d911f8.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/cd183ae0-efea-4771-b3fd-d341a57887cf_1.24ec8674bb4d7a783a92fe8c33656327.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/68891305-0fb3-4249-b7de-7dabd8702994_1.0f4a323222d690fca9dc9bb8f70f2761.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/d43b85d9-b4de-43fc-a9ca-0979e2f50455_1.5e4d5516a1443339e7dc329feb348cd1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/0ef94daa-fa39-420d-bb4c-e6156c441ce3_1.52cd0a9a611b0238ce83767b4dcf205e.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/3fece502-09aa-4981-ac4f-e1b7c4d5f954_1.e12aa766531546eea0f4143b37b8e4c1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,http://i5.walmartimages.com/dfw/dce07b8c-a7ea/k2-_46c4321b-d9d6-43b8-bc25-375ae7b82de0.v1.jpg,http://i5.walmartimages.com/dfw/dce07b8c-5142/k2-_74fbfb19-88d1-4a20-bd31-58b6a4b908ef.v1.jpg,http://i5.walmartimages.com/dfw/dce07b8c-2bb2/k2-_70437d33-1a05-4563-8eb6-a2b5f303580d.v2.jpg                                                                                                                                                                                                                                                                                                                               | 033977045903,muklukswomensdawnsuedescuffslipper/553409417,mukluks/00173660016,0033977045903                                                                                                                                    | Muk Luks       | 0017366001-6         | MUK LUKS Womens Dawn Suede Scuff Slipper                      |              24.75 |              24.75 | In Stock              | Black              | New                | USD               | 2018-01-04T11:52:35Z | 2017-12-07T16:37:00.000Z                          | False           | Slippers Dot Com  |            nan |                   nan | Value             | 6             | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288600                                                                                                                                                                  | 10,7,6,9,8                                                                                                                        | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288600,http://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288600                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 033977045903 |      nan |
+|  4 | AVphGKLPilAPnD_x1Nrm | 2017-01-27T01:25:56Z | 2018-01-18T03:55:18Z |     nan | MUK LUKS    | Clothing,Shoes,Women's Shoes,All Women's Shoes,Women's Slippers     | Shoes               | Grey                           | 6.0 in x 6.0 in x 1.0 in |   3.3977e+10 | https://i5.walmartimages.com/asr/5e137bc3-c900-4886-8b34-b668151f701b_1.84e3c472b6a11bf7a4591a29bc82e9d2.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/7daeac49-7810-406f-9c26-d4114c95f45d_1.a15e4690332f4ff0ff36ca920e8e524c.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/91daf35f-626a-4fbd-8f18-5eda881bd8c9_1.37f9328c0a254b6448fb81cd45161967.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/4189df99-e20a-4d15-8c84-2d2099b22268_1.fb873895715fea71bc31f0e89abca53d.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/366cacbc-afd6-4f00-a9e4-0f55dbb0ecfc_1.5d03f6fc3bff935a2295ed3ec1653da1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/5752e61a-01c2-4791-85a1-726a40accaf8_1.64d856d974c88497ac10a6ca5444291f.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | mukluks/00173660206,033977045958,0033977045958,muklukswomensdawnsuedescuffslipper/553409491                                                                                                                                    | nan            | 0017366020-6         | MUK LUKS Womens Dawn Suede Scuff Slipper                      |              33    |              30.39 | In Stock              | Grey               | New                | USD               | 2017-12-04T21:35:47Z | 2017-11-17T21:15:00.000Z                          | True            | Walmart.com       |            nan |                   nan | Expedited         | 6             | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288525                                                                                                                                                                  | 10,7,6,9,8                                                                                                                        | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288525,https://www.walmart.com/ip/Women-s-MUK-LUKS-Dawn-Suede-Scuff/41288525,https://www.walmart.com/ip/41288525                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 033977045958 |      nan |
+</code></pre>
+
+<pre><code class="language-python">shoesLight = shoes[['id','name','dateUpdated','colors','prices.amountMax','prices.amountMin','prices.merchant']]
+print(tabulate(shoesLight.head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    | id                   | name                                                          | dateUpdated          | colors                         |   prices.amountMax |   prices.amountMin | prices.merchant   |
+|---:|:---------------------|:--------------------------------------------------------------|:---------------------|:-------------------------------|-------------------:|-------------------:|:------------------|
+|  0 | AVpfEf_hLJeJML431ueH | Naturalizer Danya Women N/S Open Toe Synthetic Silver Sandals | 2018-01-29T04:38:43Z | Silver,Cream Watercolor Floral |              55.99 |              55.99 | Overstock.com     |
+|  1 | AVpi74XfLJeJML43qZAc | MUK LUKS Womens Jane Suede Moccasin                           | 2018-01-03T05:21:54Z | Grey                           |              47    |              35.25 | Walmart.com       |
+|  2 | AVpi74XfLJeJML43qZAc | MUK LUKS Womens Jane Suede Moccasin                           | 2018-01-03T05:21:54Z | Grey                           |              35.25 |              35.25 | Slippers Dot Com  |
+|  3 | AVpjXyCc1cnluZ0-V-Gj | MUK LUKS Womens Dawn Suede Scuff Slipper                      | 2018-01-04T11:52:35Z | Black                          |              24.75 |              24.75 | Slippers Dot Com  |
+|  4 | AVphGKLPilAPnD_x1Nrm | MUK LUKS Womens Dawn Suede Scuff Slipper                      | 2018-01-18T03:55:18Z | Grey                           |              33    |              30.39 | Walmart.com       |
+</code></pre>
+
+<pre><code class="language-python">shoesLight.dtypes
+</code></pre>
+
+<pre><code>id                   object
+name                 object
+dateUpdated          object
+colors               object
+prices.amountMax    float64
+prices.amountMin    float64
+prices.merchant      object
+dtype: object
+</code></pre>
 
 <ul>
-<li>Comprendre ce qu&rsquo;est une variable</li>
-<li>Les règles de nommage d&rsquo;une variable</li>
-<li>Les premiers types de variables</li>
-<li>Réaliser des opération entre des variables</li>
-<li>Vérifier et modifier le type d’une variable</li>
-<li>Maîtrise de jupyter notebook 2 : execution du code à travers les cellules</li>
+<li>dateUpdated doit etre passé en datetime</li>
+
+<li><p>colors doit etre passé en liste</p>
+
+<pre><code class="language-python">shoesLight.isnull().sum()/len(shoesLight)
+</code></pre>
+
+<p>id                  0.0000
+name                0.0000
+dateUpdated         0.0000
+colors              0.7369
+prices.amountMax    0.0000
+prices.amountMin    0.0000
+prices.merchant     0.9565
+dtype: float64</p></li>
 </ul>
 
-<h2 id="2-les-variables">2- Les variables</h2>
+<p>Il manque 75% des valeurs pour les couelurs et quasi tous les noms des e-commercants.</p>
+
+<pre><code class="language-python">shoesLight = shoes[['id','name','brand','dateUpdated','prices.amountMax','prices.amountMin']]
+print(tabulate(shoesLight.head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    | id                   | name                                                          | brand       | dateUpdated          |   prices.amountMax |   prices.amountMin |
+|---:|:---------------------|:--------------------------------------------------------------|:------------|:---------------------|-------------------:|-------------------:|
+|  0 | AVpfEf_hLJeJML431ueH | Naturalizer Danya Women N/S Open Toe Synthetic Silver Sandals | Naturalizer | 2018-01-29T04:38:43Z |              55.99 |              55.99 |
+|  1 | AVpi74XfLJeJML43qZAc | MUK LUKS Womens Jane Suede Moccasin                           | MUK LUKS    | 2018-01-03T05:21:54Z |              47    |              35.25 |
+|  2 | AVpi74XfLJeJML43qZAc | MUK LUKS Womens Jane Suede Moccasin                           | MUK LUKS    | 2018-01-03T05:21:54Z |              35.25 |              35.25 |
+|  3 | AVpjXyCc1cnluZ0-V-Gj | MUK LUKS Womens Dawn Suede Scuff Slipper                      | MUK LUKS    | 2018-01-04T11:52:35Z |              24.75 |              24.75 |
+|  4 | AVphGKLPilAPnD_x1Nrm | MUK LUKS Womens Dawn Suede Scuff Slipper                      | MUK LUKS    | 2018-01-18T03:55:18Z |              33    |              30.39 |
+</code></pre>
+
+<pre><code class="language-python">shoesLight['dateUpdated'] = pd.to_datetime(shoesLight['dateUpdated'])
+shoesLight['dateUpdated']
+</code></pre>
+
+<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+
+
+
+
+
+0      2018-01-29 04:38:43+00:00
+1      2018-01-03 05:21:54+00:00
+2      2018-01-03 05:21:54+00:00
+3      2018-01-04 11:52:35+00:00
+4      2018-01-18 03:55:18+00:00
+5      2018-10-23 21:26:11+00:00
+6      2018-10-15 15:50:13+00:00
+7      2018-10-15 15:50:13+00:00
+8      2018-01-03 05:22:07+00:00
+9      2018-01-30 06:18:34+00:00
+10     2018-01-30 06:18:34+00:00
+11     2018-01-23 04:13:40+00:00
+12     2018-01-04 11:52:59+00:00
+13     2018-01-04 11:52:59+00:00
+14     2018-01-04 08:03:19+00:00
+15     2018-01-28 10:16:47+00:00
+16     2018-01-28 10:16:47+00:00
+17     2018-01-28 10:16:47+00:00
+18     2018-01-28 10:52:04+00:00
+19     2018-01-28 10:52:04+00:00
+20     2018-01-09 21:18:52+00:00
+21     2018-06-05 22:29:16+00:00
+22     2018-01-04 11:52:59+00:00
+23     2018-01-04 08:02:27+00:00
+24     2018-01-04 08:03:26+00:00
+25     2018-01-03 05:21:54+00:00
+26     2018-01-03 05:21:54+00:00
+27     2018-04-21 12:44:31+00:00
+28     2018-04-21 12:44:31+00:00
+29     2018-04-21 12:44:03+00:00
+                  ...           
+9970   2018-04-06 21:35:55+00:00
+9971   2018-04-06 21:35:47+00:00
+9972   2018-04-06 21:35:47+00:00
+9973   2018-04-06 21:35:46+00:00
+9974   2018-04-06 21:35:46+00:00
+9975   2018-04-06 21:35:46+00:00
+9976   2018-04-06 21:35:43+00:00
+9977   2018-04-06 21:35:43+00:00
+9978   2018-04-06 21:35:38+00:00
+9979   2018-04-06 21:35:38+00:00
+9980   2018-04-06 21:35:37+00:00
+9981   2018-04-06 21:35:36+00:00
+9982   2018-04-06 21:35:34+00:00
+9983   2018-04-06 21:35:34+00:00
+9984   2018-04-06 21:35:34+00:00
+9985   2018-04-06 21:35:34+00:00
+9986   2018-04-06 21:35:34+00:00
+9987   2018-04-06 21:35:34+00:00
+9988   2018-04-06 21:02:08+00:00
+9989   2018-04-06 21:02:08+00:00
+9990   2018-04-06 21:02:08+00:00
+9991   2018-04-06 21:02:08+00:00
+9992   2018-04-06 21:02:08+00:00
+9993   2018-04-06 21:02:08+00:00
+9994   2018-04-06 21:02:08+00:00
+9995   2018-04-06 21:02:04+00:00
+9996   2018-04-06 21:02:04+00:00
+9997   2018-04-06 21:02:01+00:00
+9998   2018-04-06 21:01:53+00:00
+9999   2018-04-06 21:01:50+00:00
+Name: dateUpdated, Length: 10000, dtype: datetime64[ns, UTC]
+</code></pre>
+
+<pre><code class="language-python">shoesLight['prices.amountAverage'] =  (shoesLight['prices.amountMax'] + shoesLight['prices.amountMin']) / 2
+shoesLight['prices.amountAverage'].head()
+</code></pre>
+
+<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
 
-<p>Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.</p>
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
 
-<p>Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&rsquo;information est enregistré dans un type spécial de variable.</p>
 
-<p>Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&rsquo;interpreteur python ce qu&rsquo;il peut faire ou ne pas faire avec cette variable.</p>
 
-<p>Quelques remarques:</p>
 
-<ul>
-<li>Python est sensible à la Casse: il distingue les Majuscules et les minuscules<br /></li>
-<li>On ne peut pas commencer une variable par un chiffre</li>
-<li>Ne pas utiliser d&rsquo;accents dans les noms de variables.</li>
-<li>fonction type(): permet de connaitre le type de notre variable.</li>
-<li>Pas d’espace (underscore)</li>
-<li>Mots interdits (se mets en vert) : <a href="https://www.programiz.com/python-programming/keywords-identifier" target="_blank">https://www.programiz.com/python-programming/keywords-identifier</a></li>
-<li>Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)</li>
-</ul>
 
-<h2> Concept de variable et déclaration d’une variable dans Jupyter </h2>
-
-<ul>
-<li>Se retrouve dans pratiquement tous les langages</li>
-
-<li><p>Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.</p>
-
-<pre><code class="language-python">job = 'data scientist' # on stocke une valeur dans une variable 
-print(job)
-</code></pre>
-
-<p>data scientist</p></li>
-</ul>
-
-<p>Une variable déclarée est accessible depuis d’autres cellules.</p>
-
-<pre><code class="language-python">print(job)
-</code></pre>
-
-<pre><code>data scientist
-</code></pre>
-
-<h2 id="2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</h2>
-
-<ul>
-<li>Très important (fondamental comme dans tout type de langage)</li>
-<li>La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&rsquo;autres)</li>
-</ul>
-
-<h3 id="2-1-1-les-types-numériques">2.1.1- Les types numériques</h3>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">Les entiers: int()</span></tt></td>
-<td>1 est un nombre entier, 1.0 n'en est pas un</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les décimaux: float()</span></tt></td>
-<td>nombre qui comprend une partie décimale </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les nombres complexes</span></tt></td>
-<td>association entre un nombre réel et un nombre imaginaire</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python">m=3.2
-type(m)
-</code></pre>
-
-<pre><code>float
-</code></pre>
-
-<pre><code class="language-python">m=3
-type(m)
-</code></pre>
-
-<pre><code>int
-</code></pre>
-
-<h3 id="2-1-2-les-types-booléens">2.1.2- Les types booléens</h3>
-
-<ul>
-<li>variable contenant des valeurs binaires: True ou False</li>
-<li>des types de données  résultent d&rsquo;opérations logiques</li>
-</ul>
-
-<p>Très utile dans les confitions if().</p>
-
-<pre><code class="language-python">3&gt;5
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">3&lt;5
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h3 id="2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</h3>
-
-<p>Suite finie de caractères qu&rsquo;on peut considérer comme du texte qu&rsquo;on définit entre deux (&lsquo;&hellip;&rsquo;) ou (&ldquo;&hellip;&rdquo;).</p>
-
-<ul>
-<li><p>Gestion des apostrohpes</p>
-
-<pre><code class="language-python">job = 'data science'
-job
-</code></pre>
-
-<p>&lsquo;data science&rsquo;</p>
-
-<pre><code class="language-python">darkVador = 'Luke, I'm your father'
-print(darkVador)
-</code></pre>
-
-<p>File &ldquo;<ipython-input-34-24a0388f6afa>&rdquo;, line 1
-    darkVador = &lsquo;Luke, I&rsquo;m your father&rsquo;
-                         ^
-SyntaxError: invalid syntax</p>
-
-<pre><code class="language-python">darkVador = &quot;Luke, I'm your father&quot;
-print(darkVador)
-# ou 
-
-darkVador = 'Luke, I\'m your father'
-print(darkVador)
-</code></pre>
-
-<p>Luke, I&rsquo;m your father
-Luke, I&rsquo;m your father</p></li>
-
-<li><p>Si texte trop long (marche aussi pour du code classique)</p>
-
-<pre><code class="language-python">luke = 'no…That\'s impossible….Noooooooooooooooooooooooooo\
-oooooooooooo'
-print(luke)
-</code></pre>
-
-<p>no…That&rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo</p></li>
-
-<li><p>Possible de concatener 2 variables</p>
-
-<pre><code class="language-python">start = 'luke, I\'m'
-end = 'your father'
-darkVador = start+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;myour father</p>
-
-<pre><code class="language-python">darkVador = start+' '+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;m your father</p></li>
-
-<li><p>Possible de répèter une chaine de caractère</p>
-
-<pre><code class="language-python">luke = 'N'+('o'*10)
-print(luke)
-</code></pre>
-
-<p>Noooooooooo</p></li>
-</ul>
-
-<h3 id="2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</h3>
-
-<ul>
-<li><p>exemple (règle : on ne mix pas chiffres et strings dans une concaténation)</p>
-
-<pre><code class="language-python">finalMotivationScore = 90
-</code></pre>
-
-<pre><code class="language-python">test = job + 'learning motivation ?' + finalMotivationScore + '% !'
-</code></pre>
-
-<hr />
-
-<p>TypeError                                 Traceback (most recent call last)</p>
-
-<p><ipython-input-41-77bbac5d7b73> in <module>
-&mdash;-&gt; 1 test = job + &lsquo;learning motivation ?&rsquo; + finalMotivationScore + &lsquo;% !&rsquo;</p>
-
-<p>TypeError: can only concatenate str (not &ldquo;int&rdquo;) to str</p></li>
-
-<li><p>Verifier le type d’une variable</p>
-
-<pre><code class="language-python">print(type(finalMotivationScore))
-print(type('test'))
-print(type(1))
-</code></pre>
-
-<p><class 'int'>
-<class 'str'>
-<class 'int'></p></li>
-
-<li><p>modifier le type d&rsquo;une variable</p>
-
-<pre><code class="language-python">float(1)
-int(1.3)
-str(1)
-</code></pre>
-
-<p>&lsquo;1&rsquo;</p>
-
-<pre><code class="language-python">test = job + ' learning motivation ? ' + str(finalMotivationScore) + '% !'
-print(test)
-</code></pre>
-
-<p>data science learning motivation ? 90% !</p></li>
-</ul>
-
-<h2 id="2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</h2>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
-<td>Ajoute deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
-<td>Soustrait l'opérande droit de l'opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;</span></tt></td>
-<td>Multiplie deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne le reste (opérateur modulo)</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;&#42;</span></tt></td>
-<td>Calcule de la valeur exponentielle de l'opératde gauche par l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne la partie entière</td>
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python">5-3 # soustraction 
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5+3 # addition 
-</code></pre>
-
-<pre><code>8
-</code></pre>
-
-<pre><code class="language-python">5*3 # multiplication
-</code></pre>
-
-<pre><code>15
-</code></pre>
-
-<pre><code class="language-python">5/3 # division  
-</code></pre>
-
-<pre><code>1.6666666666666667
-</code></pre>
-
-<pre><code class="language-python">5//3 # le chiffre entier de ma division 
-</code></pre>
-
-<pre><code>1
-</code></pre>
-
-<pre><code class="language-python">5%3 # récupérer le reste de ma division ou modulo  
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5**3 # exponentielle ou puissance
-</code></pre>
-
-<pre><code>125
-</code></pre>
-
-<h2 id="2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</h2>
-
-<p>Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.</p>
-
-<p>La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">==</span></tt></td>
-<td>Détermine si deux valeurs sont égales</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">!=</span></tt></td>
-<td>Détermine si deux valeurs sont différentes</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus grand que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus petit que l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est supérieur ou égal à l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est inférieur ou égal à l'opérande droit</td>
-</tr>
-
-<tr><td><tt class="docutils literal"><span class="pre">is</span></tt></td>
-<td>Indentité</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">is</span> <span class="pre">not</span></tt></td>
-<td>Négation</td>
-
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur de comparaison : == 
-1 == 1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1==2
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 2ème opérateur de comparaison : != 
-1!=2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python"># 3ème opérateur de comparaison : &gt; et &lt; 
-1&gt;2
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">2&gt;1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;1
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">1&lt;2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;=1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">a=1 # Attention !!!! c'est un opérateur d'assignation de valeur à la variable 
-</code></pre>
-
-<h2 id="2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</h2>
-
-<p>Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.</p>
-
-<p>Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">and (et)</span></tt></td>
-<td>Détermine si les deux opérandes sont vrais</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">or (ou)</span></tt></td>
-<td>Détermine si l'un des deux opérandes est vrai</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">not(non)</span></tt></td>
-<td>Inverse la valeur logique de l'opérande</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python"># premier opérateur logique : and
-(3==3) and (4==4)
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3==3) and (4==5)
+0    55.990
+1    41.125
+2    35.250
+3    24.750
+4    31.695
+Name: prices.amountAverage, dtype: float64
 </code></pre>
 
-<pre><code>False
+<pre><code class="language-python">shoesLight['prices.amountAverage'].describe()
 </code></pre>
 
-<pre><code class="language-python"># deuxième opérateur logique : or
-(3==3) or (4==5)
+<pre><code>count    10000.000000
+mean        60.177376
+std         18.786193
+min          5.375000
+25%         49.990000
+50%         56.875000
+75%         67.490000
+max        359.950000
+Name: prices.amountAverage, dtype: float64
 </code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">(3!=3) or (4==5)
-</code></pre>
-
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python"># 3ème opérateur logique : not
-not((3!=3) or (4==5))
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<h2 id="2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</h2>
-
-<p>Les opérateurs d&rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&rsquo;affectation.
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top"></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">=</span></tt></td>
-<td>Affecte la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">+=</span></tt></td>
-<td>Ajoute la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-=</span></tt></td>
-<td>Soustrait la valeur de l&rsquo;opérande droit de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">*=</span></tt></td>
-<td>Multiplie la valeur de l&rsquo;opérande droit par celle de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le reste dans l&rsquo;opérande de gauche</td>
-</tr></p>
-
-<p><tr><td><tt class="docutils literal"><span class="pre">**=</span></tt></td>
-<td>Calcule la valeur exponentielle de l&rsquo;opérande de gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat entier dans l&rsquo;opérande gauche</td></p>
-
-<p></tr>
-</tbody>
-</table></p>
-
-<pre><code class="language-python">Mavariable = 2
-Mavariable
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable += 2 
-Mavariable
-</code></pre>
-
-<pre><code>7
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable -= 2 
-Mavariable
-</code></pre>
-
-<pre><code>3
-</code></pre>
-
-<pre><code class="language-python">Mavariable = 5 
-Mavariable **= 2 
-Mavariable
-</code></pre>
-
-<pre><code>25
-</code></pre>
-
-<h2 id="2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</h2>
-
-<ul>
-<li><p>Modification de la variable au fil du script (la dernière valeur est conservé)</p>
-
-<pre><code class="language-python">number = 1.1
-print(number)
-print(type(number))
-
-number = 1
-print(number)
-print(type(number))
-
-number = '1'
-print(number)
-print(type(number))
-</code></pre>
-
-<p>1.1
-<class 'float'>
-1
-<class 'int'>
-1
-<class 'str'></p>
-
-<pre><code class="language-python">print(number)
-print(type(number))
-</code></pre>
-
-<p>1
-<class 'str'></p></li>
-
-<li><p>Ordre d&rsquo;execution des cellules important (erreur fréquente)</p>
-
-<pre><code class="language-python">number = 1
-print(number)
-</code></pre>
-
-<p>1</p>
-
-<pre><code class="language-python">number = 2
-print(number)
-</code></pre>
-
-<p>2</p>
-
-<pre><code class="language-python">print(number)
-</code></pre>
-
-<p>2</p></li>
-
-<li><p>Les commentaires</p>
-
-<pre><code class="language-python">''' Premier 
-commentaire '''
-print(number) #Deuxième commentaire
-print('voici un #commentaire')
-</code></pre>
-
-<p>2
-voici un #commentaire</p></li>
-</ul>
-
-<p>Exercices + corrections</p>
 
 <pre><code class="language-python">
 </code></pre>
@@ -1192,7 +808,7 @@ voici un #commentaire</p></li>
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/formation_python/7-numpy-exercice/" rel="next">7- La librairie Numpy - Exerice</a>
+    <a href="/courses/formation_python/7-numpy-exercice/" rel="next">7- La librairie Numpy - Exercice</a>
   </div>
   
   

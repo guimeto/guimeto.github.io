@@ -28,8 +28,8 @@
   
     
   
-  <meta name="description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables.">
+  <meta name="description" content="La librairie Pandas: Pandas est une bibliothèque spécialisée dans la manipulation de données. Cette bibliothèque regroupe un ensemble de fonctions optimisées pour manipuler de gros jeux de données. Elle permet de créer et exporter des tables de données à partir de fichiers textes (séparateurs, .csv, format fixe, compressés), binaires (HDF5 avec Pytable), HTML, XML, JSON, MongoDB, SQL&hellip;
+Une nouvelle structure de donnée est utilisée avec cette bibliothèque: le DataFrame .">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/8-pandas/">
@@ -116,8 +116,8 @@ Tous les programmes Python font appel à des variables.">
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/8-pandas/">
   <meta property="og:title" content="8- La lirairie Pandas - Cours | GDueymes">
-  <meta property="og:description" content="Les Bases du langage Python: Objectifs  Comprendre ce qu&rsquo;est une variable Les règles de nommage d&rsquo;une variable Les premiers types de variables Réaliser des opération entre des variables Vérifier et modifier le type d’une variable Maîtrise de jupyter notebook 2 : execution du code à travers les cellules  2- Les variables Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.
-Tous les programmes Python font appel à des variables."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="La librairie Pandas: Pandas est une bibliothèque spécialisée dans la manipulation de données. Cette bibliothèque regroupe un ensemble de fonctions optimisées pour manipuler de gros jeux de données. Elle permet de créer et exporter des tables de données à partir de fichiers textes (séparateurs, .csv, format fixe, compressés), binaires (HDF5 avec Pytable), HTML, XML, JSON, MongoDB, SQL&hellip;
+Une nouvelle structure de donnée est utilisée avec cette bibliothèque: le DataFrame ."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -451,7 +451,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exerice</a>
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
       </li>
       
       <li >
@@ -483,7 +483,7 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
       </li>
       
       <li >
-        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exerice</a>
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
       </li>
       
       <li >
@@ -522,20 +522,42 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
 <ul>
 <li>
 <ul>
-<li><a href="#les-bases-du-langage-python">Les Bases du langage Python:</a></li>
-<li><a href="#2-les-variables">2- Les variables</a></li>
-<li><a href="#2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</a>
-<ul>
-<li><a href="#2-1-1-les-types-numériques">2.1.1- Les types numériques</a></li>
-<li><a href="#2-1-2-les-types-booléens">2.1.2- Les types booléens</a></li>
-<li><a href="#2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</a></li>
-<li><a href="#2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</a></li>
-</ul></li>
-<li><a href="#2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</a></li>
-<li><a href="#2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</a></li>
-<li><a href="#2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</a></li>
-<li><a href="#2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</a></li>
-<li><a href="#2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</a></li>
+<li><a href="#la-librairie-pandas">La librairie Pandas:</a></li>
+<li><a href="#introduction-sur-les-séries">- Introduction sur les séries -</a></li>
+<li><a href="#8-les-dataframes">8- Les dataframes:</a></li>
+<li><a href="#8-1-création-d-un-dataframe">8.1- Création d&rsquo;un Dataframe:</a></li>
+<li><a href="#8-1-1-création-d-un-dataframe-à-partir-d-un-array-numpy">8.1.1- Création d&rsquo;un DataFrame à partir d&rsquo;un array Numpy:</a></li>
+<li><a href="#8-1-2-création-d-un-dataframe-à-partir-de-series">8.1.2- Création d&rsquo;un DataFrame à partir de series:</a></li>
+<li><a href="#8-1-3-création-d-un-dataframe-à-partir-d-un-fichier-csv-fonctions-b-read-table-b-ou-b-read-csv">8.1.3- Création d&rsquo;un DataFrame à partir d&rsquo;un fichier csv: fonctions <b>read_table()</b> ou <b>read_csv():</a></li>
+<li><a href="#8-1-4-création-d-un-dataframe-à-partir-d-un-fichier-txt">8.1.4- Création d&rsquo;un DataFrame à partir d&rsquo;un fichier txt:</a></li>
+<li><a href="#8-1-5-création-d-un-dataframe-à-partir-d-un-fichier-excell-ou-xls-fonction-b-read-excel-b">8.1.5- Création d&rsquo;un DataFrame à partir d&rsquo;un fichier excell ou (.xls): fonction <b>read_excel()</b></a></li>
+<li><a href="#8-3-naviguer-dans-un-dataframe-et-accéder-aux-éléments">8.3- Naviguer dans un Dataframe et accéder aux éléments:</a></li>
+<li><a href="#8-3-1-la-méthode-iloc">8.3.1-  La méthode iloc()</a></li>
+<li><a href="#8-3-3-faire-des-boucles-dans-un-dataframe">8.3.3-  Faire des boucles dans un dataframe:</a></li>
+<li><a href="#8-4-data-cleaning-d-un-dataframe">8.4- &ldquo;Data cleaning&rdquo; d&rsquo;un dataframe:</a></li>
+<li><a href="#8-5-1-création-d-une-variable-depuis-un-dataframe">8.5.1-  Création d&rsquo;une variable depuis un DataFrame:</a></li>
+<li><a href="#8-5-2-ajout-d-une-variable-dans-un-dataframe">8.5.2- Ajout d&rsquo;une variable dans un DataFrame:</a></li>
+<li><a href="#8-5-4-appliquer-des-fonctions">8.5.4- Appliquer des fonctions:</a></li>
+<li><a href="#8-5-4-1-la-méthode-b-apply-b">8.5.4.1- La méthode <b>.apply()</b>:</a></li>
+<li><a href="#8-5-5-filtrer-des-données">8.5.5- Filtrer des données:</a></li>
+<li><a href="#8-5-6-1-fractionner-les-données-en-groupes">8.5.6.1- Fractionner les données en groupes:</a></li>
+<li><a href="#8-5-6-2-itérer-au-travers-des-groupes">8.5.6.2- Itérer au travers des  groupes:</a></li>
+<li><a href="#8-5-6-3-fonctions-dites-d-agrégation">8.5.6.3- Fonctions dites d&rsquo;agrégation:</a></li>
+<li><a href="#8-5-6-4-appliquer-plusieurs-fonctions">8.5.6.4-  Appliquer plusieurs fonctions:</a></li>
+<li><a href="#8-5-6-5-transformations">8.5.6.5- Transformations:</a></li>
+<li><a href="#8-5-6-6-filtration">8.5.6.6- Filtration:</a></li>
+<li><a href="#8-6-rassembler-plusieurs-dataframes">8.6-  Rassembler plusieurs Dataframes:</a></li>
+<li><a href="#8-6-1-jointure-de-dataframes">8.6.1- Jointure de DataFrames:</a></li>
+<li><a href="#8-6-1-1-assembler-deux-dataframes-sur-une-clé">8.6.1.1-  Assembler deux DataFrames sur une clé:</a></li>
+<li><a href="#8-6-1-2-fusionner-deux-dataframes-en-utilisant-l-argument-how">8.6.1.2-  Fusionner deux DataFrames en utilisant l&rsquo;argument &lsquo;How&rsquo;:</a></li>
+<li><a href="#8-6-2-concatenation-de-dataframes">8.6.2- Concatenation de DataFrames:</a></li>
+<li><a href="#concaténation-avec-append">Concaténation avec append</a></li>
+<li><a href="#9-sauver-un-dataframe">9-  Sauver un DataFrame:</a></li>
+<li><a href="#10-les-dates">10- Les dates:</a></li>
+<li><a href="#11-1-la-classe-b-datetime-b-du-module-datetime">11.1- La classe <b>datetime</b> du module datetime:</a></li>
+<li><a href="#11-1-1-création-d-un-objet-datetime">11.1.1- Création d&rsquo;un objet datetime:</a></li>
+<li><a href="#11-1-2-manipuler-un-objet-datetime">11.1.2- Manipuler un objet datetime:</a></li>
+<li><a href="#13-bonus-modifier-le-paramétrage-de-pandas">13- bonus : modifier le paramétrage de pandas:</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -554,625 +576,3771 @@ Tous les programmes Python font appel à des variables."><meta property="og:imag
           <div class="article-style">
             
 
-<p><img src="/img/pylogo.png" alt="image0" /></p>
+<p><img src="/img/pandas.png" alt="image0" /></p>
 
-<h2 id="les-bases-du-langage-python">Les Bases du langage Python:</h2>
+<h2 id="la-librairie-pandas">La librairie Pandas:</h2>
 
-<h2>Objectifs</h2>
+<p>Pandas est une bibliothèque spécialisée dans la manipulation de données.
+Cette bibliothèque regroupe un ensemble de fonctions optimisées pour manipuler de gros jeux de données.
+Elle permet de créer et exporter des tables de données à partir de fichiers textes (séparateurs, .csv, format fixe, compressés), binaires (HDF5 avec Pytable), HTML, XML, JSON, MongoDB, SQL&hellip;</p>
 
-<ul>
-<li>Comprendre ce qu&rsquo;est une variable</li>
-<li>Les règles de nommage d&rsquo;une variable</li>
-<li>Les premiers types de variables</li>
-<li>Réaliser des opération entre des variables</li>
-<li>Vérifier et modifier le type d’une variable</li>
-<li>Maîtrise de jupyter notebook 2 : execution du code à travers les cellules</li>
-</ul>
-
-<h2 id="2-les-variables">2- Les variables</h2>
-
-<p>Une variable est un identificateur ou un nom pour stocker des informations ou des résultats.</p>
-
-<p>Tous les programmes Python font appel à des variables. Il est important de garder en mémoire que chaque type d&rsquo;information est enregistré dans un type spécial de variable.</p>
-
-<p>Un type de variable est une information sur le contenu de la variable. Le type de variable va signifier à l&rsquo;interpreteur python ce qu&rsquo;il peut faire ou ne pas faire avec cette variable.</p>
-
-<p>Quelques remarques:</p>
+<p>Une nouvelle structure de donnée est utilisée avec cette bibliothèque: le DataFrame .
+Il existe deux types de données avec pandas: les séries et les dataframes.</p>
 
 <ul>
-<li>Python est sensible à la Casse: il distingue les Majuscules et les minuscules<br /></li>
-<li>On ne peut pas commencer une variable par un chiffre</li>
-<li>Ne pas utiliser d&rsquo;accents dans les noms de variables.</li>
-<li>fonction type(): permet de connaitre le type de notre variable.</li>
-<li>Pas d’espace (underscore)</li>
-<li>Mots interdits (se mets en vert) : <a href="https://www.programiz.com/python-programming/keywords-identifier" target="_blank">https://www.programiz.com/python-programming/keywords-identifier</a></li>
-<li>Soyez brefs mais clairs (allez l’écrire souvent, un code peut faire des 100aines de ligne)</li>
+<li>Un dataframe est un tableau qui est crée avec des dictionnaires ou des listes</li>
+<li>Ils sont basés sur des tableaux Numpy ou ndarray</li>
+<li>Ils peuvent avoir des noms de colonnes et des noms de lignes</li>
+
+<li><p>Ils ont la particularité de pouvoir mélanger les types de données: str, float, Nan, Int&hellip;</p></li>
+
+<li><p>On peut les visualiser comme une feuille excell mais avec un nombre important de volumes de données ainsi qu&rsquo;un nombre importants de fonctions et attributs.</p></li>
 </ul>
 
-<h2> Concept de variable et déclaration d’une variable dans Jupyter </h2>
+<h2 id="introduction-sur-les-séries">- Introduction sur les séries -</h2>
 
-<ul>
-<li>Se retrouve dans pratiquement tous les langages</li>
+<p>Une série est un objet unidimensionnel. Les séries représentent les valeurs d&rsquo;une variable statistique.
+Variables quantitatives ou des variables qualitatives.</p>
 
-<li><p>Données que vous stockez dans votre programme enregistré sous un nom. On pourra ensuite l’utiliser, faire des calculs et la modifier.</p>
-
-<pre><code class="language-python">job = 'data scientist' # on stocke une valeur dans une variable 
-print(job)
+<pre><code class="language-python"># on va charger la librairie pandas 
+import pandas as pd      # création d'un alias pour alléger les codes 
 </code></pre>
 
-<p>data scientist</p></li>
-</ul>
+<p>On va créer une série. On peut soit utiliser des listes, soit des dictionnaires.</p>
 
-<p>Une variable déclarée est accessible depuis d’autres cellules.</p>
-
-<pre><code class="language-python">print(job)
+<pre><code class="language-python">serie = pd.Series([11,15,12,13,14])
+print(serie)
 </code></pre>
 
-<pre><code>data scientist
+<pre><code>0    11
+1    15
+2    12
+3    13
+4    14
+dtype: int64
 </code></pre>
 
-<h2 id="2-1-les-type-des-variables-concept">2.1 Les type des variables (concept)</h2>
+<p>Nous avons dans les séries, les index et les valeurs. On peut remplacer ces index par du texte avec l&rsquo;option index. Attention, le nombre d&rsquo;index doit correspondre au nombre de valeurs.</p>
 
-<ul>
-<li>Très important (fondamental comme dans tout type de langage)</li>
-<li>La manière dont python va comprendre la nature de l’information stockée et permettre certaines actions (ou en bloquer d&rsquo;autres)</li>
-</ul>
-
-<h3 id="2-1-1-les-types-numériques">2.1.1- Les types numériques</h3>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">Les entiers: int()</span></tt></td>
-<td>1 est un nombre entier, 1.0 n'en est pas un</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les décimaux: float()</span></tt></td>
-<td>nombre qui comprend une partie décimale </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">Les nombres complexes</span></tt></td>
-<td>association entre un nombre réel et un nombre imaginaire</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python">m=3.2
-type(m)
+<pre><code class="language-python">serie = pd.Series([11,15,12,13,14], index=[&quot;Montréal&quot;, &quot;Ottawa&quot;, &quot;Toronto&quot;, &quot;Gatineau&quot;, &quot;Québec&quot;])
 </code></pre>
 
-<pre><code>float
+<pre><code class="language-python">print(serie)
 </code></pre>
 
-<pre><code class="language-python">m=3
-type(m)
+<pre><code>Montréal    11
+Ottawa      15
+Toronto     12
+Gatineau    13
+Québec      14
+dtype: int64
 </code></pre>
 
-<pre><code>int
+<p>La méthode describe() nous donne la distribution de nos données dans la série.</p>
+
+<pre><code class="language-python">serie.describe()
 </code></pre>
 
-<h3 id="2-1-2-les-types-booléens">2.1.2- Les types booléens</h3>
-
-<ul>
-<li>variable contenant des valeurs binaires: True ou False</li>
-<li>des types de données  résultent d&rsquo;opérations logiques</li>
-</ul>
-
-<p>Très utile dans les confitions if().</p>
-
-<pre><code class="language-python">3&gt;5
+<pre><code>count     5.000000
+mean     13.000000
+std       1.581139
+min      11.000000
+25%      12.000000
+50%      13.000000
+75%      14.000000
+max      15.000000
+dtype: float64
 </code></pre>
 
-<pre><code>False
+<p>On peut accéder à une valeur en utilisant l&rsquo;index.</p>
+
+<pre><code class="language-python">serie[&quot;Montréal&quot;]
 </code></pre>
 
-<pre><code class="language-python">3&lt;5
+<pre><code>11
 </code></pre>
 
-<pre><code>True
+<p>Mais on peut toujours utiliser le numéro de l&rsquo;index.</p>
+
+<pre><code class="language-python">serie[3]
 </code></pre>
 
-<h3 id="2-1-3-les-chaînes-de-caractère">2.1.3- Les chaînes de caractère</h3>
-
-<p>Suite finie de caractères qu&rsquo;on peut considérer comme du texte qu&rsquo;on définit entre deux (&lsquo;&hellip;&rsquo;) ou (&ldquo;&hellip;&rdquo;).</p>
-
-<ul>
-<li><p>Gestion des apostrohpes</p>
-
-<pre><code class="language-python">job = 'data science'
-job
+<pre><code>13
 </code></pre>
 
-<p>&lsquo;data science&rsquo;</p>
+<p>On peut accéder à plusieurs index.</p>
 
-<pre><code class="language-python">darkVador = 'Luke, I'm your father'
-print(darkVador)
+<pre><code class="language-python">serie[[&quot;Montréal&quot;, &quot;Québec&quot;, &quot;Toronto&quot;]]
 </code></pre>
 
-<p>File &ldquo;<ipython-input-34-24a0388f6afa>&rdquo;, line 1
-    darkVador = &lsquo;Luke, I&rsquo;m your father&rsquo;
-                         ^
-SyntaxError: invalid syntax</p>
-
-<pre><code class="language-python">darkVador = &quot;Luke, I'm your father&quot;
-print(darkVador)
-# ou 
-
-darkVador = 'Luke, I\'m your father'
-print(darkVador)
+<pre><code>Montréal    11
+Québec      14
+Toronto     12
+dtype: int64
 </code></pre>
 
-<p>Luke, I&rsquo;m your father
-Luke, I&rsquo;m your father</p></li>
+<p>Il exite d&rsquo;autres méthodes intéressantes pour faire des calculs sur la série.</p>
 
-<li><p>Si texte trop long (marche aussi pour du code classique)</p>
-
-<pre><code class="language-python">luke = 'no…That\'s impossible….Noooooooooooooooooooooooooo\
-oooooooooooo'
-print(luke)
+<pre><code class="language-python">serie.min()
 </code></pre>
 
-<p>no…That&rsquo;s impossible….Noooooooooooooooooooooooooooooooooooooo</p></li>
-
-<li><p>Possible de concatener 2 variables</p>
-
-<pre><code class="language-python">start = 'luke, I\'m'
-end = 'your father'
-darkVador = start+end
-print(darkVador)
+<pre><code>11
 </code></pre>
 
-<p>luke, I&rsquo;myour father</p>
-
-<pre><code class="language-python">darkVador = start+' '+end
-print(darkVador)
-</code></pre>
-
-<p>luke, I&rsquo;m your father</p></li>
-
-<li><p>Possible de répèter une chaine de caractère</p>
-
-<pre><code class="language-python">luke = 'N'+('o'*10)
-print(luke)
-</code></pre>
-
-<p>Noooooooooo</p></li>
-</ul>
-
-<h3 id="2-1-4-vérifier-et-modifier-le-type-d-une-variable">2.1.4- Vérifier et modifier le type d’une variable</h3>
-
-<ul>
-<li><p>exemple (règle : on ne mix pas chiffres et strings dans une concaténation)</p>
-
-<pre><code class="language-python">finalMotivationScore = 90
-</code></pre>
-
-<pre><code class="language-python">test = job + 'learning motivation ?' + finalMotivationScore + '% !'
-</code></pre>
-
-<hr />
-
-<p>TypeError                                 Traceback (most recent call last)</p>
-
-<p><ipython-input-41-77bbac5d7b73> in <module>
-&mdash;-&gt; 1 test = job + &lsquo;learning motivation ?&rsquo; + finalMotivationScore + &lsquo;% !&rsquo;</p>
-
-<p>TypeError: can only concatenate str (not &ldquo;int&rdquo;) to str</p></li>
-
-<li><p>Verifier le type d’une variable</p>
-
-<pre><code class="language-python">print(type(finalMotivationScore))
-print(type('test'))
-print(type(1))
-</code></pre>
-
-<p><class 'int'>
-<class 'str'>
-<class 'int'></p></li>
-
-<li><p>modifier le type d&rsquo;une variable</p>
-
-<pre><code class="language-python">float(1)
-int(1.3)
-str(1)
-</code></pre>
-
-<p>&lsquo;1&rsquo;</p>
-
-<pre><code class="language-python">test = job + ' learning motivation ? ' + str(finalMotivationScore) + '% !'
-print(test)
-</code></pre>
-
-<p>data science learning motivation ? 90% !</p></li>
-</ul>
-
-<h2 id="2-2-les-opérateurs-arithmétiques">2.2- Les opérateurs arithmétiques</h2>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">+</span></tt></td>
-<td>Ajoute deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">-</span></tt></td>
-<td>Soustrait l'opérande droit de l'opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;</span></tt></td>
-<td>Multiplie deux valeurs</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">/</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne le reste (opérateur modulo)</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">&#42;&#42;</span></tt></td>
-<td>Calcule de la valeur exponentielle de l'opératde gauche par l'opérande droit</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//</span></tt></td>
-<td>Divise l'opérande gauche par l'opérande droit et retourne la partie entière</td>
-</tr>
-</tbody>
-</table>
-
-<pre><code class="language-python">5-3 # soustraction 
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">5+3 # addition 
-</code></pre>
-
-<pre><code>8
-</code></pre>
-
-<pre><code class="language-python">5*3 # multiplication
+<pre><code class="language-python">serie.max()
 </code></pre>
 
 <pre><code>15
 </code></pre>
 
-<pre><code class="language-python">5/3 # division  
+<p>On peut utiliser des opérateurs de comparaison.</p>
+
+<pre><code class="language-python">serie[serie&gt;12]
 </code></pre>
 
-<pre><code>1.6666666666666667
+<pre><code>Ottawa      15
+Gatineau    13
+Québec      14
+dtype: int64
 </code></pre>
 
-<pre><code class="language-python">5//3 # le chiffre entier de ma division 
+<pre><code class="language-python">serie&gt;12 # c est l'ensemble de booléens.
 </code></pre>
 
-<pre><code>1
+<pre><code>Montréal    False
+Ottawa       True
+Toronto     False
+Gatineau     True
+Québec       True
+dtype: bool
 </code></pre>
 
-<pre><code class="language-python">5%3 # récupérer le reste de ma division ou modulo  
+<h2 id="8-les-dataframes">8- Les dataframes:</h2>
+
+<p>Un dataframe est un tableau avec des observations ou individus sur les lignes et des attributs sur les colonnes qui décrivent les individus.</p>
+
+<p>Un DataFrame est une structure de données tabulaire bidimensionnelle à taille variable, potentiellement hétérogène avec des axes étiquetés (lignes et colonnes).</p>
+
+<p><img src="/img/formation/dataframe_shadow.png" alt="image0" /></p>
+
+<p>Les attributs peuvent être soit qualitatif soit quantitatif.</p>
+
+<h2 id="8-1-création-d-un-dataframe">8.1- Création d&rsquo;un Dataframe:</h2>
+
+<p>Dans le monde réel, un DataFrame sera créé en chargeant les jeux de données à partir du stockage existant, le stockage peut être par exemple une base de données SQL, un fichier CSV ou un fichier Excel.</p>
+
+<p>Le DataFrame peut aussi être créé à partir de listes, d&rsquo;un dictionnaire et d&rsquo;une liste de dictionnaires, etc.</p>
+
+<p>Voici quelques façons de créer un dataframe:</p>
+
+<h2 id="8-1-1-création-d-un-dataframe-à-partir-d-un-array-numpy">8.1.1- Création d&rsquo;un DataFrame à partir d&rsquo;un array Numpy:</h2>
+
+<pre><code class="language-python">import numpy as np  # on importe la librairie numpy
+stations = np.genfromtxt(&quot;./DATA/DATA_Barrage_1963_2017_5.csv&quot;, delimiter=&quot;,&quot;, dtype='float')   # on assigne une variable. 
+stations
 </code></pre>
 
-<pre><code>2
+<pre><code>array([[  39.7       ,   39.09      ,   39.55645161,   23.23      ,
+          22.5       ,   22.85903226, 2390.52612903, 3164.97      ,
+        1673.8       ],
+       [  41.16      ,   40.96      ,   41.08806452,   23.22      ,
+          22.43      ,   22.7583871 , 2227.28290323, 3008.18      ,
+        1697.87      ],
+       [  41.15      ,   41.05      ,   41.11322581,   23.35      ,
+          22.87      ,   23.15548387, 2851.27419355, 3231.8       ,
+        2367.85      ],
+       [  41.09      ,   40.61      ,   40.9683871 ,   23.78      ,
+          22.7       ,   23.03258065, 2635.03774194, 3967.33      ,
+        2069.65      ],
+       [  41.09      ,   39.6       ,   40.26967742,   24.24      ,
+          22.87      ,   23.64580645, 3924.23451613, 5407.32      ,
+        2417.89      ]])
 </code></pre>
 
-<pre><code class="language-python">5**3 # exponentielle ou puissance
+<p>Pour créer le dataframe, on utilise la fonction <b>DataFrame()</b> de pandas. C&rsquo;est à cette étape qu&rsquo;on définit le nom de nos colonnes.  En entrée on met le tableau Numpy .</p>
+
+<pre><code class="language-python">dataframe = pd.DataFrame(stations, columns=[&quot;Amont Max&quot;, &quot;Amont Min&quot;, &quot;Amont Moyen&quot;, &quot;Aval Max&quot;, &quot;Aval Max&quot;, &quot;Aval Moyen&quot;, &quot;Debit Moyen&quot;, &quot;Debit Max&quot;,&quot;Debit Min&quot;])
+dataframe
 </code></pre>
 
-<pre><code>125
+<pre><code>|    |   Amont Max |   Amont Min |   Amont Moyen |   Aval Max |   Aval Max |   Aval Moyen |   Debit Moyen |   Debit Max |   Debit Min |
+|---:|------------:|------------:|--------------:|-----------:|-----------:|-------------:|--------------:|------------:|------------:|
+|  0 |       39.7  |       39.09 |       39.5565 |      23.23 |      22.5  |      22.859  |       2390.53 |     3164.97 |     1673.8  |
+|  1 |       41.16 |       40.96 |       41.0881 |      23.22 |      22.43 |      22.7584 |       2227.28 |     3008.18 |     1697.87 |
+|  2 |       41.15 |       41.05 |       41.1132 |      23.35 |      22.87 |      23.1555 |       2851.27 |     3231.8  |     2367.85 |
+|  3 |       41.09 |       40.61 |       40.9684 |      23.78 |      22.7  |      23.0326 |       2635.04 |     3967.33 |     2069.65 |
+|  4 |       41.09 |       39.6  |       40.2697 |      24.24 |      22.87 |      23.6458 |       3924.23 |     5407.32 |     2417.89 |
 </code></pre>
 
-<h2 id="2-3-les-opérateurs-relationnels">2.3- Les opérateurs relationnels</h2>
+<h2 id="8-1-2-création-d-un-dataframe-à-partir-de-series">8.1.2- Création d&rsquo;un DataFrame à partir de series:</h2>
 
-<p>Les opérateurs relationnels comparent une valeur avec une autre et vous disent si la relation fournie est vraie.</p>
+<p>On a vu précédemment comment créer une Série. On peut s&rsquo;en servir pour créer des Dataframes.</p>
 
-<p>La valeur vraie des relations est souvent utilisée pour prendre des décisions en s&rsquo;assurant que des conditions sont réunies pour effectuer une certaine tâche.</p>
+<p>Lors de la création d&rsquo;un DataFrame, chaque série définira une colonne.</p>
+
+<pre><code class="language-python"># on crée une première série 
+groupe1=pd.Series([11,15,12,13], index=[&quot;Fred&quot;, &quot;Jeanne&quot;, &quot;Julie&quot;, &quot;Julien&quot;])
+</code></pre>
+
+<pre><code class="language-python">groupe1
+</code></pre>
+
+<pre><code>Fred      11
+Jeanne    15
+Julie     12
+Julien    13
+dtype: int64
+</code></pre>
+
+<pre><code class="language-python"># on crée une deuxième série mais avec des nouveaux élèves en plus et des élèves absents.   
+groupe2=pd.Series([11,15,15,11], index=[&quot;Fred&quot;, &quot;Jeanne&quot;, &quot;Damien&quot;, &quot;Samuel&quot;])
+</code></pre>
+
+<p>On crée notre DataFrame avec nos deux séries.
+Pour cela on utilise des dictionnaire pour créer un dataframe avec des séries, donc on utilise des {}, avec des clés et des valeurs.</p>
+
+<pre><code class="language-python">dataframe = pd.DataFrame({&quot;Groupe1&quot; : groupe1, &quot;Groupe2&quot; : groupe2})
+</code></pre>
+
+<pre><code class="language-python">
+dataframe
+</code></pre>
+
+<pre><code>|        |   Groupe1 |   Groupe2 |
+|:-------|----------:|----------:|
+| Damien |       nan |        15 |
+| Fred   |        11 |        11 |
+| Jeanne |        15 |        15 |
+| Julie  |        12 |       nan |
+| Julien |        13 |       nan |
+| Samuel |       nan |        11 |
+</code></pre>
+
+<p>NaN: la valeur n&rsquo;est pas disponible.</p>
+
+<h2 id="8-1-3-création-d-un-dataframe-à-partir-d-un-fichier-csv-fonctions-b-read-table-b-ou-b-read-csv">8.1.3- Création d&rsquo;un DataFrame à partir d&rsquo;un fichier csv: fonctions <b>read_table()</b> ou <b>read_csv():</h2>
+
+<ul>
+<li><b>read_table()</b> et <b>read_csv()</b> sont les fonctions les plus utiles sous Pandas pour lire des fichiers textes et générer un objet de type DataFrame.</li>
+</ul>
+
+<p>On va travailler avec un jeu de données issu d&rsquo;un barrage hydraulique.</p>
+
+<p>Notre fichier csv possède 9 variables, la première ligne nous renvoie les noms des variables (ou labels).</p>
+
+<p>On peut lire un document csv avec la fonction <b>read_table()</b> , en mettant en attribut le séparateur &ldquo;,&rdquo;.</p>
+
+<pre><code class="language-python">barrage = pd.read_table(&quot;./DATA/DATA_EXTREME_Carillon_1963_2017_5.csv&quot;, sep=&quot;,&quot;)
+barrage.head()
+</code></pre>
+
+<pre><code>|    |   Amont_max |   Amont_min |   Amont_moyen |   Aval_max |   Aval_min |   Aval_moyen |   Debit_Moyen |   Debit_max |   Debit_min |
+|---:|------------:|------------:|--------------:|-----------:|-----------:|-------------:|--------------:|------------:|------------:|
+|  0 |       39.7  |       39.09 |       39.5565 |      23.23 |      22.5  |      22.859  |       2390.53 |     3164.97 |     1673.8  |
+|  1 |       41.16 |       40.96 |       41.0881 |      23.22 |      22.43 |      22.7584 |       2227.28 |     3008.18 |     1697.87 |
+|  2 |       41.15 |       41.05 |       41.1132 |      23.35 |      22.87 |      23.1555 |       2851.27 |     3231.8  |     2367.85 |
+|  3 |       41.09 |       40.61 |       40.9684 |      23.78 |      22.7  |      23.0326 |       2635.04 |     3967.33 |     2069.65 |
+|  4 |       41.09 |       39.6  |       40.2697 |      24.24 |      22.87 |      23.6458 |       3924.23 |     5407.32 |     2417.89 |
+
+
+D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: FutureWarning: read_table is deprecated, use read_csv instead.
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+</code></pre>
+
+<p>Cependant, si on sait que notre fichier à lire est un csv, on peut utiliser une fonction plus simple de Pandas qui est <b>read_csv()</b>.</p>
+
+<p>Pas besoin de l&rsquo;option sep=&rdquo; . Il trouvera le séparateur par défault.</p>
+
+<pre><code class="language-python">barrage = pd.read_csv(&quot;./DATA/DATA_EXTREME_Carillon_1963_2017_5.csv&quot;)
+
+barrage.head()
+</code></pre>
+
+<pre><code>|    |   Amont_max |   Amont_min |   Amont_moyen |   Aval_max |   Aval_min |   Aval_moyen |   Debit_Moyen |   Debit_max |   Debit_min |
+|---:|------------:|------------:|--------------:|-----------:|-----------:|-------------:|--------------:|------------:|------------:|
+|  0 |       39.7  |       39.09 |       39.5565 |      23.23 |      22.5  |      22.859  |       2390.53 |     3164.97 |     1673.8  |
+|  1 |       41.16 |       40.96 |       41.0881 |      23.22 |      22.43 |      22.7584 |       2227.28 |     3008.18 |     1697.87 |
+|  2 |       41.15 |       41.05 |       41.1132 |      23.35 |      22.87 |      23.1555 |       2851.27 |     3231.8  |     2367.85 |
+|  3 |       41.09 |       40.61 |       40.9684 |      23.78 |      22.7  |      23.0326 |       2635.04 |     3967.33 |     2069.65 |
+|  4 |       41.09 |       39.6  |       40.2697 |      24.24 |      22.87 |      23.6458 |       3924.23 |     5407.32 |     2417.89 |
+</code></pre>
+
+<pre><code class="language-python">#help(pd.read_csv)
+</code></pre>
+
+<p>Plusieurs options sont mises à disposition de la fonction read_csv(). Il est important de connaître la liste des possibilités et options offertes par cette simple commande.</p>
 
 <table border="1" class="docutils">
 <colgroup>
 <col width="27%">
 <col width="57%">
 </colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
 <tbody valign="top">
 
-<tr><td><tt class="docutils literal"><span class="pre">==</span></tt></td>
-<td>Détermine si deux valeurs sont égales</td>
+<tr><td><tt class="docutils literal"><span class="pre"><b>path</b></span></tt></td>
+<td>Chemin ou non du fichier ou URL</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">!=</span></tt></td>
-<td>Détermine si deux valeurs sont différentes</td>
+<tr><td><tt class="docutils literal"><span class="pre"><b>sep</b></span></tt></td>
+<td>délimiteur comme , ; | \t ou \s+ pour un nombre variable d’espaces</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus grand que l'opérande droit</td>
+<tr><td><tt class="docutils literal"><span class="pre"><b>header</b></span></tt></td>
+<td>défaut 0, la première ligne contient le nom des variables ; si None les noms sont générés ou définis par ailleurs</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;</span></tt></td>
-<td>Vérifie que l'opérande gauche est plus petit que l'opérande droit</td>
+<tr><td><tt class="docutils literal"><span class="pre"><b>index_col</b></span></tt></td>
+<td>Noms ou numéros de colonnes définissant les index de lignes, index pouvant être hiérarchisés comme les facteurs d’un plan d’expérience.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">&gt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est supérieur ou égal à l'opérande droit</td>
+<tr><td><tt class="docutils literal"><span class="pre"><b>names</b></span></tt></td>
+<td>Si header=None, liste des noms des variables.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">&lt;=</span></tt></td>
-<td>Vérifie que l'opérande gauche est inférieur ou égal à l'opérande droit</td>
+<tr><td><tt class="docutils literal"><span class="pre"><b>nrows</b></span></tt></td>
+<td>Utile pour tester et limiter le nombre de ligne à lire</td>
 </tr>
-
-<tr><td><tt class="docutils literal"><span class="pre">is</span></tt></td>
-<td>Indentité</td>
+<tr><td><tt class="docutils literal"><span class="pre"><b>skiprow</b></span></tt></td>
+<td>Liste de lignes à sauter en lecture</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">is</span> <span class="pre">not</span></tt></td>
-<td>Négation</td>
-
+<tr><td><tt class="docutils literal"><span class="pre"><b>skip_footer</b></span></tt></td>
+<td>Nombre de lignes à sauter en fin de fichier</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>na_values</b></span></tt></td>
+<td>Définition du ou des codes signalant des valeurs manquantes. Ils
+peuvent être définis dans un dictionnaire pour associer variables et codes
+de valeurs manquantes spécifiques</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>usecols</b></span></tt></td>
+<td>Sélectionne une liste des variable à lire pour éviter de lire des
+champs ou variables volumineuses et inutiles</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>skip_blank_lines</b></span></tt></td>
+<td>Si <b>True</b>, on saute les lignes blanches </td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>thousand</b></span></tt></td>
+<td>Séparateur des miliers : "." ou ",".</td>
 </tr>
 </tbody>
 </table>
 
-<pre><code class="language-python"># premier opérateur de comparaison : == 
-1 == 1
+<pre><code class="language-python">file1 = &quot;./DATA/DATA_EXTREME_Carillon_1963_2017_5.csv&quot;
+col_names = ['Variable1', 'Variable2', 'Variable3']
+df2 = pd.read_csv(file1, skiprows=1, usecols=[0, 1, 3], names=col_names)
 </code></pre>
 
-<pre><code>True
+<pre><code class="language-python">
+df2.head()
 </code></pre>
 
-<pre><code class="language-python">1==2
+<pre><code>|    |   Variable1 |   Variable2 |   Variable3 |
+|---:|------------:|------------:|------------:|
+|  0 |       39.7  |       39.09 |       23.23 |
+|  1 |       41.16 |       40.96 |       23.22 |
+|  2 |       41.15 |       41.05 |       23.35 |
+|  3 |       41.09 |       40.61 |       23.78 |
+|  4 |       41.09 |       39.6  |       24.24 |
 </code></pre>
 
-<pre><code>False
+<h2 id="8-1-4-création-d-un-dataframe-à-partir-d-un-fichier-txt">8.1.4- Création d&rsquo;un DataFrame à partir d&rsquo;un fichier txt:</h2>
+
+<pre><code class="language-python">with open('./DATA/Daily_Precipitation_1963-2017.txt', 'r') as file:
+        rows = file.read()      
+dataset = [float(row) for row in rows.split()]   
+df3 = pd.DataFrame({&quot;Precipitation&quot; : dataset})
 </code></pre>
 
-<pre><code class="language-python"># 2ème opérateur de comparaison : != 
-1!=2
+<pre><code class="language-python">df3.head()
 </code></pre>
 
-<pre><code>True
+<pre><code>|    |   Precipitation |
+|---:|----------------:|
+|  0 |               0 |
+|  1 |               0 |
+|  2 |               0 |
+|  3 |               0 |
+|  4 |               0 |
 </code></pre>
 
-<pre><code class="language-python"># 3ème opérateur de comparaison : &gt; et &lt; 
-1&gt;2
+<h2 id="8-1-5-création-d-un-dataframe-à-partir-d-un-fichier-excell-ou-xls-fonction-b-read-excel-b">8.1.5- Création d&rsquo;un DataFrame à partir d&rsquo;un fichier excell ou (.xls): fonction <b>read_excel()</b></h2>
+
+<p>Nous allons ouvrir ici un fichier excell (d&rsquo;extension .xls). Ce fichier est une base de données contenant de l&rsquo;information sur toutes les stations homogénéisées de température d&rsquo;Environnement et Changement Climatique Canada.</p>
+
+<p>Cette base de données présente 11 colonnes avec des données commençant à la 4 ème ligne.</p>
+
+<p>On va définir la colonne Province comme index de notre DataFrame.</p>
+
+<pre><code class="language-python">df4 = pd.read_excel(&quot;./DATA/Homog_Temperature_Stations.xls&quot;, index_col=0,skiprows = range(0, 3))
+from tabulate import tabulate
+print(tabulate(df4.head(), headers='keys', tablefmt='pipe'))
 </code></pre>
 
-<pre><code>False
+<pre><code>| Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |
+|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|
+| BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              |
+| BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |
+| BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              |
+| BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |
+| BC     | BELLA COOLA      | 1060841 |         1895 |           5 |         2017 |          11 |       52.37 |      -126.68 |         18 | Y              |
 </code></pre>
 
-<pre><code class="language-python">2&gt;1
+<h2> 8.2- Premiers pas sur un DataFrame:</h2> 
+
+<p>Une fois le dataframe crée, on peut appliquer quelques fonctions et méthodes pour effectuer une première exploration du jeu de données.</p>
+
+<p>Il existe plusieurs fonctions, méthodes ou attributs qu&rsquo;on peut appliquer sur les DataFrame:</p>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.DataFrame.html" target="_blank">https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.DataFrame.html</a></p>
+
+<p>Nous allons présenter quelques fonctions utiles lors de l&rsquo;exploration d&rsquo;un jeu de données.</p>
+
+<pre><code class="language-python">dataframe = pd.read_csv(&quot;./DATA/Climato_Stations_ECCC_1981_2010_YEAR.csv&quot;, encoding='latin-1')
+from tabulate import tabulate
+print(tabulate(dataframe.head(), headers='keys', tablefmt='pipe'))
 </code></pre>
 
-<pre><code>True
+<pre><code>|    |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |      Tmax |   Tmax90p |      Tmin |   Tmin10p |      DG0 |
+|---:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|----------:|----------:|----------:|----------:|---------:|
+|  0 |            0 | BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              | nan       |  nan      | nan       | nan       |  nan     |
+|  1 |            1 | BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |   5.63043 |   18.9033 |  -3.46052 | -19.235   |  860.083 |
+|  2 |            2 | BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              | nan       |  nan      | nan       | nan       |  nan     |
+|  3 |            3 | BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |  12.628   |   23.6417 |   4.01748 |  -3.646   | 1798.09  |
+|  4 |            4 | BC     | BLIND CHANNEL    | 1021480 |         1958 |           7 |         2016 |           2 |       50.42 |      -125.5  |         23 | N              |  12.1556  |   20.2007 |   6.77689 |   1.09467 | 2518.68  |
 </code></pre>
 
-<pre><code class="language-python">1&gt;1
-</code></pre>
+<ul>
+<li>La méthode <b>.info()</b> :</li>
+</ul>
 
-<pre><code>False
-</code></pre>
-
-<pre><code class="language-python">1&lt;2
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">1&gt;=1
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">a=1 # Attention !!!! c'est un opérateur d'assignation de valeur à la variable 
-</code></pre>
-
-<h2 id="2-4-les-opérateurs-logiques">2.4- Les opérateurs logiques</h2>
-
-<p>Les opérateurs logiques comparent des expressions booléennes et non  plus des valeurs comme dans le point précédent.</p>
-
-<p>Ils servent à créer des expressions booléennes qui nous aident à savoir si une certaine tâche doit ou non être réalisée.</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
+<table>
+<tbody>
+<tr style="height: 13px;">
+<td style="height: 13px;"><strong>Pandas dtype</strong></td>
+<td style="height: 13px;"><strong>Python type</strong></td>
+<td style="height: 13px;"><strong>Numpy type</strong></td>
+<td style="height: 13px;"><strong>Usage</strong></td>
 </tr>
-</thead>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">and (et)</span></tt></td>
-<td>Détermine si les deux opérandes sont vrais</td>
+<tr style="height: 13px;">
+<td style="height: 13px;">object</td>
+<td style="height: 13px;">str or mixed</td>
+<td style="height: 13px;">string_,unicode_,mixed types</td>
+<td style="height: 13px;">Text or mixed numeric and non-numeric values</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">or (ou)</span></tt></td>
-<td>Détermine si l'un des deux opérandes est vrai</td>
+<tr style="height: 13px;">
+<td style="height: 13px;">int64</td>
+<td style="height: 13px;">int</td>
+<td style="height: 13px;">int_,int8,int16,int32,int64,uint8,uint16,uint32,uint64</td>
+<td style="height: 13px;">Integer numbers</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">not(non)</span></tt></td>
-<td>Inverse la valeur logique de l'opérande</td>
+<tr style="height: 13px;">
+<td style="height: 13px;">float64</td>
+<td style="height: 13px;">float</td>
+<td style="height: 13px;">float_, float16, float32, float64</td>
+<td style="height: 13px;">Floating point numbers</td>
 </tr>
-
+<tr style="height: 13px;">
+<td style="height: 13px;">bool</td>
+<td style="height: 13px;">bool</td>
+<td style="height: 13px;">bool_</td>
+<td style="height: 13px;">True/False values</td>
+</tr>
+<tr style="height: 13px;">
+<td style="height: 13px;">datetime64</td>
+<td style="height: 13px;">NA</td>
+<td style="height: 13px;">datetime64[ns]</td>
+<td style="height: 13px;">Date and time values</td>
+</tr>
+<tr style="height: 13px;">
+<td style="height: 13px;">timedelta[ns]</td>
+<td style="height: 13px;">NA</td>
+<td style="height: 13px;">NA</td>
+<td style="height: 13px;">Differences between two datetimes</td>
+</tr>
+<tr style="height: 13px;">
+<td style="height: 13px;">category</td>
+<td style="height: 13px;">NA</td>
+<td style="height: 13px;">NA</td>
+<td style="height: 13px;">Finite list of text values</td>
+</tr>
 </tbody>
 </table>
 
-<pre><code class="language-python"># premier opérateur logique : and
-(3==3) and (4==4)
+<pre><code class="language-python">dataframe.info()
 </code></pre>
 
-<pre><code>True
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 289 entries, 0 to 288
+Data columns (total 17 columns):
+Unnamed: 0        289 non-null int64
+Prov              289 non-null object
+Nom de station    289 non-null object
+stnid             289 non-null object
+année déb.        289 non-null int64
+mois déb.         289 non-null int64
+année fin.        289 non-null int64
+mois fin.         289 non-null int64
+lat (deg)         289 non-null float64
+long (deg)        289 non-null float64
+élév (m)          289 non-null int64
+stns jointes      289 non-null object
+Tmax              172 non-null float64
+Tmax90p           172 non-null float64
+Tmin              171 non-null float64
+Tmin10p           171 non-null float64
+DG0               171 non-null float64
+dtypes: float64(7), int64(6), object(4)
+memory usage: 38.5+ KB
 </code></pre>
 
-<pre><code class="language-python">(3==3) and (4==5)
+<ul>
+<li><p>La méthode <b>.dtypes()</b>:  nous fournit les types de variables de notre DataFrame.</p>
+
+<pre><code class="language-python">dataframe.dtypes
 </code></pre>
 
-<pre><code>False
+<p>Unnamed: 0          int64
+Prov               object
+Nom de station     object
+stnid              object
+année déb.          int64
+mois déb.           int64
+année fin.          int64
+mois fin.           int64
+lat (deg)         float64
+long (deg)        float64
+élév (m)            int64
+stns jointes       object
+Tmax              float64
+Tmax90p           float64
+Tmin              float64
+Tmin10p           float64
+DG0               float64
+dtype: object</p>
+
+<pre><code class="language-python">dataframe.Prov.dtypes
 </code></pre>
 
-<pre><code class="language-python"># deuxième opérateur logique : or
-(3==3) or (4==5)
+<p>dtype(&lsquo;O&rsquo;)</p></li>
+
+<li><p>La méthode <b>.shape</b> : retourne un tuple sur la dimension de notre DataFrame</p>
+
+<pre><code class="language-python">dataframe.shape # nous avons donc 289 lignes et 17 colonnes dans notre base de données.
 </code></pre>
 
-<pre><code>True
+<p>(289, 17)</p></li>
+
+<li><p>La méthode <b>.columns</b>: retourne les noms des colonnes de notre DataFrame</p>
+
+<pre><code class="language-python">dataframe.columns
 </code></pre>
 
-<pre><code class="language-python">(3!=3) or (4==5)
+<p>Index([&lsquo;Unnamed: 0&rsquo;, &lsquo;Prov&rsquo;, &lsquo;Nom de station&rsquo;, &lsquo;stnid&rsquo;, &lsquo;année déb.&rsquo;,
+       &lsquo;mois déb.&rsquo;, &lsquo;année fin.&rsquo;, &lsquo;mois fin.&rsquo;, &lsquo;lat (deg)&rsquo;, &lsquo;long (deg)&rsquo;,
+       &lsquo;élév (m)&rsquo;, &lsquo;stns jointes&rsquo;, &lsquo;Tmax&rsquo;, &lsquo;Tmax90p&rsquo;, &lsquo;Tmin&rsquo;, &lsquo;Tmin10p&rsquo;,
+       &lsquo;DG0&rsquo;],
+      dtype=&lsquo;object&rsquo;)</p>
+
+<ul>
+<li>La méthode <b>.isnull</b>:  nous informe si la valeur est NaN ou non
+<br /></li>
+</ul></li>
+</ul>
+
+<p>On va imbriquer deux méthodes pour connaître le nombre de valeurs manquantes.</p>
+
+<pre><code>- .isnull(): nous informe si la valeur est NaN ou non 
+
+- .sum(): effectue la somme. 
 </code></pre>
 
-<pre><code>False
+<pre><code class="language-python">dataframe.isnull().sum() # information sur la somme des NaN par catégorie
 </code></pre>
 
-<pre><code class="language-python"># 3ème opérateur logique : not
-not((3!=3) or (4==5))
+<pre><code>Unnamed: 0          0
+Prov                0
+Nom de station      0
+stnid               0
+année déb.          0
+mois déb.           0
+année fin.          0
+mois fin.           0
+lat (deg)           0
+long (deg)          0
+élév (m)            0
+stns jointes        0
+Tmax              117
+Tmax90p           117
+Tmin              118
+Tmin10p           118
+DG0               118
+dtype: int64
 </code></pre>
 
-<pre><code>True
+<ul>
+<li><p>La méthode <b>.describe()</b>:  permet d&rsquo;avoir un apperçu de notre DataFrame</p>
+
+<pre><code class="language-python">dataframe.describe()
 </code></pre>
 
-<h2 id="2-5-les-opérateurs-d-affectation">2.5- Les opérateurs d&rsquo;affectation</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">Unnamed: 0</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+</tr>
+</thead>
 
-<p>Les opérateurs d&rsquo;affectation placent une valeur dans une variable. Nous aovns déjà vu le cas le plus simple (=), mais python offre bien d&rsquo;autres opérateurs de ce type, afin nottamment de réaliser une opération aithmétique en même temps que l&rsquo;affectation.
+<tbody>
+<tr>
+<td align="left">count</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">172</td>
+<td align="right">172</td>
+<td align="right">171</td>
+<td align="right">171</td>
+<td align="right">171</td>
+</tr>
+
+<tr>
+<td align="left">mean</td>
+<td align="right">144</td>
+<td align="right">1919.32</td>
+<td align="right">5.77509</td>
+<td align="right">2016.55</td>
+<td align="right">10.8166</td>
+<td align="right">52.7494</td>
+<td align="right">-96.5974</td>
+<td align="right">338.315</td>
+<td align="right">7.91631</td>
+<td align="right">23.565</td>
+<td align="right">-2.27754</td>
+<td align="right">-18.6113</td>
+<td align="right">1397.74</td>
+</tr>
+
+<tr>
+<td align="left">std</td>
+<td align="right">83.5713</td>
+<td align="right">23.9921</td>
+<td align="right">3.60092</td>
+<td align="right">1.3012</td>
+<td align="right">2.58285</td>
+<td align="right">7.34345</td>
+<td align="right">23.6708</td>
+<td align="right">314.664</td>
+<td align="right">5.52463</td>
+<td align="right">4.39633</td>
+<td align="right">5.25505</td>
+<td align="right">9.05387</td>
+<td align="right">544.373</td>
+</tr>
+
+<tr>
+<td align="left">min</td>
+<td align="right">0</td>
+<td align="right">1840</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">1</td>
+<td align="right">42.03</td>
+<td align="right">-140.2</td>
+<td align="right">2</td>
+<td align="right">-15.3665</td>
+<td align="right">4.74167</td>
+<td align="right">-21.9351</td>
+<td align="right">-42.8867</td>
+<td align="right">58.6167</td>
+</tr>
+
+<tr>
+<td align="left">25%</td>
+<td align="right">72</td>
+<td align="right">1905</td>
+<td align="right">2</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">48.33</td>
+<td align="right">-116.98</td>
+<td align="right">64</td>
+<td align="right">7.36465</td>
+<td align="right">22.5659</td>
+<td align="right">-4.03064</td>
+<td align="right">-23.6402</td>
+<td align="right">1106.85</td>
+</tr>
+
+<tr>
+<td align="left">50%</td>
+<td align="right">144</td>
+<td align="right">1916</td>
+<td align="right">6</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">50.7</td>
+<td align="right">-99.28</td>
+<td align="right">251</td>
+<td align="right">8.98805</td>
+<td align="right">24.5307</td>
+<td align="right">-2.2296</td>
+<td align="right">-19.8553</td>
+<td align="right">1366.14</td>
+</tr>
+
+<tr>
+<td align="left">75%</td>
+<td align="right">216</td>
+<td align="right">1940</td>
+<td align="right">9</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">54.82</td>
+<td align="right">-75.55</td>
+<td align="right">546</td>
+<td align="right">11.0182</td>
+<td align="right">26.0746</td>
+<td align="right">0.691542</td>
+<td align="right">-12.6338</td>
+<td align="right">1676.23</td>
+</tr>
+
+<tr>
+<td align="left">max</td>
+<td align="right">288</td>
+<td align="right">1960</td>
+<td align="right">12</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">82.5</td>
+<td align="right">-52.75</td>
+<td align="right">1580</td>
+<td align="right">16.1055</td>
+<td align="right">30.8767</td>
+<td align="right">7.01629</td>
+<td align="right">1.949</td>
+<td align="right">2807.09</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-python">dataframe.describe(include=&quot;all&quot;)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="left">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">count</td>
+<td align="right">289</td>
+<td align="left">289</td>
+<td align="left">289</td>
+<td align="left">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="right">289</td>
+<td align="left">289</td>
+<td align="right">172</td>
+<td align="right">172</td>
+<td align="right">171</td>
+<td align="right">171</td>
+<td align="right">171</td>
+</tr>
+
+<tr>
+<td align="left">unique</td>
+<td align="right">nan</td>
+<td align="left">14</td>
+<td align="left">288</td>
+<td align="left">289</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="left">2</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+
+<tr>
+<td align="left">top</td>
+<td align="right">nan</td>
+<td align="left">BC</td>
+<td align="left">WOODSTOCK</td>
+<td align="left">250M001</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="left">Y</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+
+<tr>
+<td align="left">freq</td>
+<td align="right">nan</td>
+<td align="left">51</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="left">224</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+
+<tr>
+<td align="left">mean</td>
+<td align="right">144</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="right">1919.32</td>
+<td align="right">5.77509</td>
+<td align="right">2016.55</td>
+<td align="right">10.8166</td>
+<td align="right">52.7494</td>
+<td align="right">-96.5974</td>
+<td align="right">338.315</td>
+<td align="left">nan</td>
+<td align="right">7.91631</td>
+<td align="right">23.565</td>
+<td align="right">-2.27754</td>
+<td align="right">-18.6113</td>
+<td align="right">1397.74</td>
+</tr>
+
+<tr>
+<td align="left">std</td>
+<td align="right">83.5713</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="right">23.9921</td>
+<td align="right">3.60092</td>
+<td align="right">1.3012</td>
+<td align="right">2.58285</td>
+<td align="right">7.34345</td>
+<td align="right">23.6708</td>
+<td align="right">314.664</td>
+<td align="left">nan</td>
+<td align="right">5.52463</td>
+<td align="right">4.39633</td>
+<td align="right">5.25505</td>
+<td align="right">9.05387</td>
+<td align="right">544.373</td>
+</tr>
+
+<tr>
+<td align="left">min</td>
+<td align="right">0</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="right">1840</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">1</td>
+<td align="right">42.03</td>
+<td align="right">-140.2</td>
+<td align="right">2</td>
+<td align="left">nan</td>
+<td align="right">-15.3665</td>
+<td align="right">4.74167</td>
+<td align="right">-21.9351</td>
+<td align="right">-42.8867</td>
+<td align="right">58.6167</td>
+</tr>
+
+<tr>
+<td align="left">25%</td>
+<td align="right">72</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="right">1905</td>
+<td align="right">2</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">48.33</td>
+<td align="right">-116.98</td>
+<td align="right">64</td>
+<td align="left">nan</td>
+<td align="right">7.36465</td>
+<td align="right">22.5659</td>
+<td align="right">-4.03064</td>
+<td align="right">-23.6402</td>
+<td align="right">1106.85</td>
+</tr>
+
+<tr>
+<td align="left">50%</td>
+<td align="right">144</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="right">1916</td>
+<td align="right">6</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">50.7</td>
+<td align="right">-99.28</td>
+<td align="right">251</td>
+<td align="left">nan</td>
+<td align="right">8.98805</td>
+<td align="right">24.5307</td>
+<td align="right">-2.2296</td>
+<td align="right">-19.8553</td>
+<td align="right">1366.14</td>
+</tr>
+
+<tr>
+<td align="left">75%</td>
+<td align="right">216</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="right">1940</td>
+<td align="right">9</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">54.82</td>
+<td align="right">-75.55</td>
+<td align="right">546</td>
+<td align="left">nan</td>
+<td align="right">11.0182</td>
+<td align="right">26.0746</td>
+<td align="right">0.691542</td>
+<td align="right">-12.6338</td>
+<td align="right">1676.23</td>
+</tr>
+
+<tr>
+<td align="left">max</td>
+<td align="right">288</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="right">1960</td>
+<td align="right">12</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">82.5</td>
+<td align="right">-52.75</td>
+<td align="right">1580</td>
+<td align="left">nan</td>
+<td align="right">16.1055</td>
+<td align="right">30.8767</td>
+<td align="right">7.01629</td>
+<td align="right">1.949</td>
+<td align="right">2807.09</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+
+<p>On peut faire directement des statistiques sur des variables quantitatives.</p>
+
+<pre><code class="language-python">dataframe[&quot;Tmin&quot;].describe()
+</code></pre>
+
+<pre><code>count    171.000000
+mean      -2.277538
+std        5.255046
+min      -21.935075
+25%       -4.030637
+50%       -2.229597
+75%        0.691542
+max        7.016292
+Name: Tmin, dtype: float64
+</code></pre>
+
+<h2 id="8-3-naviguer-dans-un-dataframe-et-accéder-aux-éléments">8.3- Naviguer dans un Dataframe et accéder aux éléments:</h2>
+
+<pre><code class="language-python">dataframe = pd.read_excel(&quot;./DATA/Homog_Temperature_Stations.xls&quot;, skiprows = range(0, 3))
+dataframe.head()
+</code></pre>
+
+<pre><code>|    | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |
+|---:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|
+|  0 | BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              |
+|  1 | BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |
+|  2 | BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              |
+|  3 | BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |
+|  4 | BC     | BELLA COOLA      | 1060841 |         1895 |           5 |         2017 |          11 |       52.37 |      -126.68 |         18 | Y              |
+</code></pre>
+
+<p>Avant exploration d&rsquo;un Dataframe, on peut modifier l&rsquo;index pour faciliter l&rsquo;analyse d&rsquo;un jeu de données. Pour cela, on utilise la fonction <b>.set_index()</b> . On doit créer un nouvel objet.</p>
+
+<pre><code class="language-python">dataframe_Prov_index = dataframe.set_index(&quot;Prov&quot;).head()
+</code></pre>
+
+<pre><code class="language-python">dataframe_Prov_index()
+</code></pre>
+
+<pre><code>| Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |
+|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|
+| BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              |
+| BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |
+| BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              |
+| BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |
+| BC     | BELLA COOLA      | 1060841 |         1895 |           5 |         2017 |          11 |       52.37 |      -126.68 |         18 | Y              |
+</code></pre>
+
+<p>Pour accéder à un élément dans un dataframe, il existe deux méthodes:</p>
+
+<ul>
+<li><p>la méthode <b>iloc()</b> pour accéder aux données à partir des numéros d&rsquo;index</p></li>
+
+<li><p>la méthode <b>loc()</b> pour accéder aux données à partir des labels</p></li>
+</ul>
+
+<p><img src="/img/formation/pandas_selection.png" alt="image0" /></p>
+
+<h2 id="8-3-1-la-méthode-iloc">8.3.1-  La méthode iloc()</h2>
+
+<ul>
+<li><p>iloc:  on veut les extraire les valeurs localiées à la colonne d&rsquo;index 1 et ligne d&rsquo;index 4 [row, column]</p>
+
+<pre><code class="language-python">dataframe_Prov_index.iloc[4,1]      
+</code></pre>
+
+<p>1060841</p></li>
+
+<li><p>iloc: pour accéder aux 4 premières lignes et toutes les colonnes de notre DataFrame.</p>
+
+<pre><code class="language-python">dataframe_Prov_index.iloc[0:4,:]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.25</td>
+<td align="right">-121.77</td>
+<td align="right">15</td>
+<td align="left">N</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1200560</td>
+<td align="right">1905</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">59.57</td>
+<td align="right">-133.7</td>
+<td align="right">674</td>
+<td align="left">N</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1090660</td>
+<td align="right">1888</td>
+<td align="right">2</td>
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">53.07</td>
+<td align="right">-121.52</td>
+<td align="right">1265</td>
+<td align="left">N</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1130771</td>
+<td align="right">1939</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">9</td>
+<td align="right">49.48</td>
+<td align="right">-119.05</td>
+<td align="right">838</td>
+<td align="left">Y</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>iloc: pour accéder aux 4 premières colonnes et toutes les lignes de notre DataFrame.</p>
+
+<pre><code class="language-python">dataframe_Prov_index.iloc[:,0:4]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1200560</td>
+<td align="right">1905</td>
+<td align="right">8</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1090660</td>
+<td align="right">1888</td>
+<td align="right">2</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1130771</td>
+<td align="right">1939</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BELLA COOLA</td>
+<td align="right">1060841</td>
+<td align="right">1895</td>
+<td align="right">5</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>Slicing sur les colonnes et les lignes: on veut les lignes d&rsquo;index 2 à 5 et les colonnes d&rsquo;index 3 à 8</p>
+
+<pre><code class="language-python">dataframe_Prov_index.iloc[2:5,3:8]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prov</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">BC</td>
+<td align="right">2</td>
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">53.07</td>
+<td align="right">-121.52</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">9</td>
+<td align="right">49.48</td>
+<td align="right">-119.05</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="right">5</td>
+<td align="right">2017</td>
+<td align="right">11</td>
+<td align="right">52.37</td>
+<td align="right">-126.68</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+
+<p>## 8.3.2-  La méthode loc():</p>
+
+<ul>
+<li><p>loc: On veut extraire pour accéder à toutes les valeurs d&rsquo;un index, utilisation du slicing.</p>
+
+<pre><code class="language-python">dataframe_Prov_index.loc[&quot;BC&quot;,&quot;stnid&quot;]
+</code></pre>
+
+<p>Prov
+BC    1100120
+BC    1200560
+BC    1090660
+BC    1130771
+BC    1060841
+Name: stnid, dtype: object</p>
+
+<pre><code class="language-python">dataframe_Prov_index.loc[&quot;BC&quot;,:]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.25</td>
+<td align="right">-121.77</td>
+<td align="right">15</td>
+<td align="left">N</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1200560</td>
+<td align="right">1905</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">59.57</td>
+<td align="right">-133.7</td>
+<td align="right">674</td>
+<td align="left">N</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1090660</td>
+<td align="right">1888</td>
+<td align="right">2</td>
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">53.07</td>
+<td align="right">-121.52</td>
+<td align="right">1265</td>
+<td align="left">N</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1130771</td>
+<td align="right">1939</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">9</td>
+<td align="right">49.48</td>
+<td align="right">-119.05</td>
+<td align="right">838</td>
+<td align="left">Y</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BELLA COOLA</td>
+<td align="right">1060841</td>
+<td align="right">1895</td>
+<td align="right">5</td>
+<td align="right">2017</td>
+<td align="right">11</td>
+<td align="right">52.37</td>
+<td align="right">-126.68</td>
+<td align="right">18</td>
+<td align="left">Y</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>loc pour sélectionner toutes les lignes de 3 labels .</p>
+
+<pre><code class="language-python">dataframe_Prov_index.loc[:,[&quot;Nom de station&quot;, &quot;année déb.&quot;, &quot;année fin.&quot;]].head()
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">année déb.</th>
+<th align="right">année fin.</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1893</td>
+<td align="right">2017</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1905</td>
+<td align="right">2017</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1888</td>
+<td align="right">2015</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1939</td>
+<td align="right">2006</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BELLA COOLA</td>
+<td align="right">1895</td>
+<td align="right">2017</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+
+<h2 id="8-3-3-faire-des-boucles-dans-un-dataframe">8.3.3-  Faire des boucles dans un dataframe:</h2>
+
+<pre><code class="language-python">for row_index,row in dataframe_Prov_index.head(5).iterrows():
+    print (row_index)
+    print(row['année déb.'])
+</code></pre>
+
+<pre><code>BC
+1893
+BC
+1905
+BC
+1888
+BC
+1939
+BC
+1895
+</code></pre>
+
+<pre><code class="language-python">for key,value in dataframe_Prov_index.head(2).iteritems():
+    print(key)
+    print(value)
+</code></pre>
+
+<pre><code>Nom de station
+Prov
+BC    AGASSIZ
+BC      ATLIN
+Name: Nom de station, dtype: object
+stnid
+Prov
+BC    1100120
+BC    1200560
+Name: stnid, dtype: object
+année déb.
+Prov
+BC    1893
+BC    1905
+Name: année déb., dtype: int64
+mois déb.
+Prov
+BC    1
+BC    8
+Name: mois déb., dtype: int64
+année fin.
+Prov
+BC    2017
+BC    2017
+Name: année fin., dtype: int64
+mois fin.
+Prov
+BC    12
+BC    12
+Name: mois fin., dtype: int64
+lat (deg)
+Prov
+BC    49.25
+BC    59.57
+Name: lat (deg), dtype: float64
+long (deg)
+Prov
+BC   -121.77
+BC   -133.70
+Name: long (deg), dtype: float64
+élév (m)
+Prov
+BC     15
+BC    674
+Name: élév (m), dtype: int64
+stns jointes
+Prov
+BC    N
+BC    N
+Name: stns jointes, dtype: object
+</code></pre>
+
+<h2 id="8-4-data-cleaning-d-un-dataframe">8.4- &ldquo;Data cleaning&rdquo; d&rsquo;un dataframe:</h2>
+
+<pre><code class="language-python">dataframe = pd.read_csv(&quot;./DATA/Climato_Stations_ECCC_1981_2010_YEAR.csv&quot;, encoding='latin-1')
+
+dataframe.head(3)
+</code></pre>
+
+<pre><code>|    |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |      Tmax |   Tmax90p |      Tmin |   Tmin10p |     DG0 |
+|---:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|----------:|----------:|----------:|----------:|--------:|
+|  0 |            0 | BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              | nan       |  nan      | nan       |   nan     | nan     |
+|  1 |            1 | BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |   5.63043 |   18.9033 |  -3.46052 |   -19.235 | 860.083 |
+|  2 |            2 | BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              | nan       |  nan      | nan       |   nan     | nan     |
+</code></pre>
+
+<ul>
+<li><p>La méthode <b>.replace()</b> :</p>
+
+<pre><code class="language-python">dataframe.replace('N',np.nan, inplace=True)
+
+dataframe.head(3)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="right">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.25</td>
+<td align="right">-121.77</td>
+<td align="right">15</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+
+<tr>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1200560</td>
+<td align="right">1905</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">59.57</td>
+<td align="right">-133.7</td>
+<td align="right">674</td>
+<td align="right">nan</td>
+<td align="right">5.63043</td>
+<td align="right">18.9033</td>
+<td align="right">-3.46052</td>
+<td align="right">-19.235</td>
+<td align="right">860.083</td>
+</tr>
+
+<tr>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1090660</td>
+<td align="right">1888</td>
+<td align="right">2</td>
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">53.07</td>
+<td align="right">-121.52</td>
+<td align="right">1265</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>La méthode <b>.isnull()</b> :</p>
+
+<pre><code class="language-python">dataframe.isnull().head(3)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="right">Prov</th>
+<th align="right">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="right">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-python">dataframe.isnull().sum()
+</code></pre>
+
+<p>Unnamed: 0          0
+Prov                0
+Nom de station      0
+stnid               0
+année déb.          0
+mois déb.           0
+année fin.          0
+mois fin.           0
+lat (deg)           0
+long (deg)          0
+élév (m)            0
+stns jointes       65
+Tmax              117
+Tmax90p           117
+Tmin              118
+Tmin10p           118
+DG0               118
+dtype: int64</p>
+
+<pre><code class="language-python">dataframe.isnull().sum()/len(dataframe)
+</code></pre>
+
+<p>Unnamed: 0        0.000000
+Prov              0.000000
+Nom de station    0.000000
+stnid             0.000000
+année déb.        0.000000
+mois déb.         0.000000
+année fin.        0.000000
+mois fin.         0.000000
+lat (deg)         0.000000
+long (deg)        0.000000
+élév (m)          0.000000
+stns jointes      0.224913
+Tmax              0.404844
+Tmax90p           0.404844
+Tmin              0.408304
+Tmin10p           0.408304
+DG0               0.408304
+dtype: float64</p></li>
+
+<li><p>La méthode <b>.fillna()</b> :</p>
+
+<pre><code class="language-python">
+dataframe.fillna(0).head(5)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.25</td>
+<td align="right">-121.77</td>
+<td align="right">15</td>
+<td align="left">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1200560</td>
+<td align="right">1905</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">59.57</td>
+<td align="right">-133.7</td>
+<td align="right">674</td>
+<td align="left">0</td>
+<td align="right">5.63043</td>
+<td align="right">18.9033</td>
+<td align="right">-3.46052</td>
+<td align="right">-19.235</td>
+<td align="right">860.083</td>
+</tr>
+
+<tr>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1090660</td>
+<td align="right">1888</td>
+<td align="right">2</td>
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">53.07</td>
+<td align="right">-121.52</td>
+<td align="right">1265</td>
+<td align="left">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1130771</td>
+<td align="right">1939</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">9</td>
+<td align="right">49.48</td>
+<td align="right">-119.05</td>
+<td align="right">838</td>
+<td align="left">Y</td>
+<td align="right">12.628</td>
+<td align="right">23.6417</td>
+<td align="right">4.01748</td>
+<td align="right">-3.646</td>
+<td align="right">1798.09</td>
+</tr>
+
+<tr>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="left">BC</td>
+<td align="left">BLIND CHANNEL</td>
+<td align="right">1021480</td>
+<td align="right">1958</td>
+<td align="right">7</td>
+<td align="right">2016</td>
+<td align="right">2</td>
+<td align="right">50.42</td>
+<td align="right">-125.5</td>
+<td align="right">23</td>
+<td align="left">0</td>
+<td align="right">12.1556</td>
+<td align="right">20.2007</td>
+<td align="right">6.77689</td>
+<td align="right">1.09467</td>
+<td align="right">2518.68</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>La méthode <b>.dropna()</b> :</p>
+
+<pre><code class="language-python">
+dataframe.dropna(axis=1).head(5)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.25</td>
+<td align="right">-121.77</td>
+<td align="right">15</td>
+</tr>
+
+<tr>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1200560</td>
+<td align="right">1905</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">59.57</td>
+<td align="right">-133.7</td>
+<td align="right">674</td>
+</tr>
+
+<tr>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1090660</td>
+<td align="right">1888</td>
+<td align="right">2</td>
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">53.07</td>
+<td align="right">-121.52</td>
+<td align="right">1265</td>
+</tr>
+
+<tr>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1130771</td>
+<td align="right">1939</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">9</td>
+<td align="right">49.48</td>
+<td align="right">-119.05</td>
+<td align="right">838</td>
+</tr>
+
+<tr>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="left">BC</td>
+<td align="left">BLIND CHANNEL</td>
+<td align="right">1021480</td>
+<td align="right">1958</td>
+<td align="right">7</td>
+<td align="right">2016</td>
+<td align="right">2</td>
+<td align="right">50.42</td>
+<td align="right">-125.5</td>
+<td align="right">23</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-python">
+dataframe.dropna(axis=0).head(5)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1130771</td>
+<td align="right">1939</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">9</td>
+<td align="right">49.48</td>
+<td align="right">-119.05</td>
+<td align="right">838</td>
+<td align="left">Y</td>
+<td align="right">12.628</td>
+<td align="right">23.6417</td>
+<td align="right">4.01748</td>
+<td align="right">-3.646</td>
+<td align="right">1798.09</td>
+</tr>
+
+<tr>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="left">BC</td>
+<td align="left">BLUE RIVER</td>
+<td align="right">1160899</td>
+<td align="right">1946</td>
+<td align="right">9</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">52.13</td>
+<td align="right">-119.28</td>
+<td align="right">683</td>
+<td align="left">Y</td>
+<td align="right">10.4408</td>
+<td align="right">25.9917</td>
+<td align="right">-1.12501</td>
+<td align="right">-12.5823</td>
+<td align="right">987.363</td>
+</tr>
+
+<tr>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="left">BC</td>
+<td align="left">COMOX</td>
+<td align="right">1021830</td>
+<td align="right">1935</td>
+<td align="right">11</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.72</td>
+<td align="right">-124.9</td>
+<td align="right">26</td>
+<td align="left">Y</td>
+<td align="right">13.7376</td>
+<td align="right">23.1023</td>
+<td align="right">6.42485</td>
+<td align="right">-0.526</td>
+<td align="right">2444.39</td>
+</tr>
+
+<tr>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="left">BC</td>
+<td align="left">CRANBROOK</td>
+<td align="right">1152105</td>
+<td align="right">1901</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.62</td>
+<td align="right">-115.78</td>
+<td align="right">940</td>
+<td align="left">Y</td>
+<td align="right">11.96</td>
+<td align="right">27.3203</td>
+<td align="right">0.403836</td>
+<td align="right">-11.3553</td>
+<td align="right">1383.26</td>
+</tr>
+
+<tr>
+<td align="right">12</td>
+<td align="right">12</td>
+<td align="left">BC</td>
+<td align="left">DARFIELD</td>
+<td align="right">1162265</td>
+<td align="right">1913</td>
+<td align="right">12</td>
+<td align="right">2017</td>
+<td align="right">11</td>
+<td align="right">51.3</td>
+<td align="right">-120.18</td>
+<td align="right">412</td>
+<td align="left">Y</td>
+<td align="right">12.8902</td>
+<td align="right">27.6917</td>
+<td align="right">1.82373</td>
+<td align="right">-8.12333</td>
+<td align="right">1525.71</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-python">dataframe.dtypes
+</code></pre>
+
+<p>Unnamed: 0          int64
+Prov               object
+Nom de station     object
+stnid              object
+année déb.          int64
+mois déb.           int64
+année fin.          int64
+mois fin.           int64
+lat (deg)         float64
+long (deg)        float64
+élév (m)            int64
+stns jointes       object
+Tmax              float64
+Tmax90p           float64
+Tmin              float64
+Tmin10p           float64
+DG0               float64
+dtype: object</p></li>
+
+<li><p>La méthode <b>.map()</b> :</p>
+
+<pre><code class="language-python">dataframe['Tmax'] = dataframe['Tmax'].map(int,na_action='ignore')
+</code></pre></li>
+
+<li><p>La méthode <b>.unique()</b> :</p>
+
+<pre><code class="language-python">len(dataframe['Prov'].unique())
+</code></pre>
+
+<p>14</p>
+
+<pre><code class="language-python">def multiple_unique(liste):
+if len(liste) == 0:
+    result = np.nan
+elif len(liste) == 1:
+    result = 'unique'
+else:
+    result = 'multiples'
+return result
+</code></pre>
+
+<pre><code class="language-python">dataframe['Prov'] = multiple_unique(dataframe['Prov'])
+dataframe['Prov'].unique()
+#Ne fonctionne pas car il prend toute la colonne en tant que liste
+</code></pre>
+
+<p>array([&lsquo;multiples&rsquo;], dtype=object)</p>
+
+<pre><code class="language-python">dataframe['uniq'] = dataframe['Prov'].apply(lambda x: multiple_unique(x))
+dataframe['uniq'].value_counts()
+</code></pre>
+
+<p>multiples    289
+Name: uniq, dtype: int64</p></li>
+
+<li><p>La méthode <b>.sort_values()</b> :</p>
+
+<pre><code class="language-python">
+dataframe.sort_values(['Prov'] ,ascending=False).head()
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+<th align="left">uniq</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">multiples</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.25</td>
+<td align="right">-121.77</td>
+<td align="right">15</td>
+<td align="left">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="left">multiples</td>
+</tr>
+
+<tr>
+<td align="right">145</td>
+<td align="right">145</td>
+<td align="left">multiples</td>
+<td align="left">PILGER</td>
+<td align="right">4056120</td>
+<td align="right">1911</td>
+<td align="right">10</td>
+<td align="right">2011</td>
+<td align="right">9</td>
+<td align="right">52.42</td>
+<td align="right">-105.15</td>
+<td align="right">552</td>
+<td align="left">nan</td>
+<td align="right">7</td>
+<td align="right">25.419</td>
+<td align="right">-3.86342</td>
+<td align="right">-23.695</td>
+<td align="right">1270.17</td>
+<td align="left">multiples</td>
+</tr>
+
+<tr>
+<td align="right">197</td>
+<td align="right">197</td>
+<td align="left">multiples</td>
+<td align="left">MINE CENTRE</td>
+<td align="right">6025205</td>
+<td align="right">1915</td>
+<td align="right">2</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">48.8</td>
+<td align="right">-92.6</td>
+<td align="right">361</td>
+<td align="left">Y</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="left">multiples</td>
+</tr>
+
+<tr>
+<td align="right">196</td>
+<td align="right">196</td>
+<td align="left">multiples</td>
+<td align="left">MADAWASKA</td>
+<td align="right">6080192</td>
+<td align="right">1915</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">45.5</td>
+<td align="right">-77.98</td>
+<td align="right">316</td>
+<td align="left">Y</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="left">multiples</td>
+</tr>
+
+<tr>
+<td align="right">195</td>
+<td align="right">195</td>
+<td align="left">multiples</td>
+<td align="left">LONDON</td>
+<td align="right">6144478</td>
+<td align="right">1883</td>
+<td align="right">3</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">43.03</td>
+<td align="right">-81.15</td>
+<td align="right">278</td>
+<td align="left">Y</td>
+<td align="right">13</td>
+<td align="right">27.68</td>
+<td align="right">4.21358</td>
+<td align="right">-9.20833</td>
+<td align="right">2377.23</td>
+<td align="left">multiples</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>Quelques méthodes sur les chaînes de caractères: <b>.lower()</b>, <b>.upper()</b>, <b>.len()</b>, <b>.contains()</b>:</p>
+
+<pre><code class="language-python">dataframe['Nom de station'].str.lower().head(5)
+</code></pre>
+
+<p>0          agassiz
+1            atlin
+2      barkerville
+3       beaverdell
+4    blind channel
+Name: Nom de station, dtype: object</p>
+
+<pre><code class="language-python">dataframe['Nom de station'].str.upper().head(5)
+</code></pre>
+
+<p>0          AGASSIZ
+1            ATLIN
+2      BARKERVILLE
+3       BEAVERDELL
+4    BLIND CHANNEL
+Name: Nom de station, dtype: object</p>
+
+<pre><code class="language-python">dataframe['Nom de station'].str.len().head(5)
+</code></pre>
+
+<p>0     7
+1     5
+2    11
+3    10
+4    13
+Name: Nom de station, dtype: int64</p>
+
+<pre><code class="language-python">
+dataframe[dataframe['Nom de station'].str.contains('CRANBROOK')]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+<th align="left">uniq</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="left">multiples</td>
+<td align="left">CRANBROOK</td>
+<td align="right">1152105</td>
+<td align="right">1901</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.62</td>
+<td align="right">-115.78</td>
+<td align="right">940</td>
+<td align="left">Y</td>
+<td align="right">11</td>
+<td align="right">27.3203</td>
+<td align="right">0.403836</td>
+<td align="right">-11.3553</td>
+<td align="right">1383.26</td>
+<td align="left">multiples</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-python">dataframe['Nom de station'].str.strip().head(5)
+</code></pre>
+
+<p>0          AGASSIZ
+1            ATLIN
+2      BARKERVILLE
+3       BEAVERDELL
+4    BLIND CHANNEL
+Name: Nom de station, dtype: object</p>
+
+<pre><code class="language-python">dataframe['Nom de station'].str.split(',').head(5)
+</code></pre>
+
+<p>0          [AGASSIZ]
+1            [ATLIN]
+2      [BARKERVILLE]
+3       [BEAVERDELL]
+4    [BLIND CHANNEL]
+Name: Nom de station, dtype: object</p></li>
+</ul>
+
+<p>## 8.5-  Modifier un DataFrame et introduction au &ldquo;feature modeling&rdquo;:</p>
+
+<p>Il existe plusieurs fonctions, méthodes ou attributs qu&rsquo;on peut appliquer sur les DataFrame:</p>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.DataFrame.html" target="_blank">https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.DataFrame.html</a></p>
+
+<p>Nous allons présenter quelques fonctions utiles lors de l&rsquo;exploration d&rsquo;un jeu de données.</p>
+
+<pre><code class="language-python">
+dataframe_Prov_index.head()
+
+</code></pre>
+
+<pre><code>| Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |
+|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|
+| BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              |
+| BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |
+| BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              |
+| BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |
+| BC     | BELLA COOLA      | 1060841 |         1895 |           5 |         2017 |          11 |       52.37 |      -126.68 |         18 | Y              |
+</code></pre>
+
+<h2 id="8-5-1-création-d-une-variable-depuis-un-dataframe">8.5.1-  Création d&rsquo;une variable depuis un DataFrame:</h2>
+
+<pre><code class="language-python">delta_year = (dataframe_Prov_index[&quot;année fin.&quot;] - dataframe_Prov_index[&quot;année déb.&quot;]) + 1
+</code></pre>
+
+<pre><code class="language-python">delta_year.head()
+</code></pre>
+
+<pre><code>Prov
+BC    125
+BC    113
+BC    128
+BC     68
+BC    123
+dtype: int64
+</code></pre>
+
+<h2 id="8-5-2-ajout-d-une-variable-dans-un-dataframe">8.5.2- Ajout d&rsquo;une variable dans un DataFrame:</h2>
+
+<pre><code class="language-python">dataframe_Prov_index[&quot;total année&quot;] = delta_year
+</code></pre>
+
+<pre><code class="language-python">
+dataframe_Prov_index.head()
+</code></pre>
+
+<pre><code>| Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |   total année |
+|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|--------------:|
+| BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              |           125 |
+| BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |           113 |
+| BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              |           128 |
+| BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |            68 |
+| BC     | BELLA COOLA      | 1060841 |         1895 |           5 |         2017 |          11 |       52.37 |      -126.68 |         18 | Y              |           123 |
+</code></pre>
+
+<p>## 8.5.3- Suppression d&rsquo;une variable dans un DataFrame:</p>
+
+<ul>
+<li><p>méthode <b>drop()</b>, en entrée on spécifie une liste</p>
+
+<pre><code class="language-python">
+dataframe_Prov_index.drop([&quot;stns jointes&quot;], axis=1)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="right">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="right">total année</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">BC</td>
+<td align="left">AGASSIZ</td>
+<td align="right">1100120</td>
+<td align="right">1893</td>
+<td align="right">1</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">49.25</td>
+<td align="right">-121.77</td>
+<td align="right">15</td>
+<td align="right">125</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">ATLIN</td>
+<td align="right">1200560</td>
+<td align="right">1905</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">59.57</td>
+<td align="right">-133.7</td>
+<td align="right">674</td>
+<td align="right">113</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BARKERVILLE</td>
+<td align="right">1090660</td>
+<td align="right">1888</td>
+<td align="right">2</td>
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">53.07</td>
+<td align="right">-121.52</td>
+<td align="right">1265</td>
+<td align="right">128</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BEAVERDELL</td>
+<td align="right">1130771</td>
+<td align="right">1939</td>
+<td align="right">1</td>
+<td align="right">2006</td>
+<td align="right">9</td>
+<td align="right">49.48</td>
+<td align="right">-119.05</td>
+<td align="right">838</td>
+<td align="right">68</td>
+</tr>
+
+<tr>
+<td align="left">BC</td>
+<td align="left">BELLA COOLA</td>
+<td align="right">1060841</td>
+<td align="right">1895</td>
+<td align="right">5</td>
+<td align="right">2017</td>
+<td align="right">11</td>
+<td align="right">52.37</td>
+<td align="right">-126.68</td>
+<td align="right">18</td>
+<td align="right">123</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>méthode <b>pop()</b></p>
+
+<pre><code class="language-python">print (&quot;Deleting 'stnid' column using POP function:&quot;)
+dataframe = pd.read_excel(&quot;./DATA/Homog_Temperature_Stations.xls&quot;, skiprows = range(0, 3))
+dataframe.pop('stnid')
+</code></pre>
+
+<p>Deleting &lsquo;stnid&rsquo; column using POP function:
+|    | Prov   | Nom de station   |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |
+|&mdash;:|:&mdash;&mdash;-|:&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;|&mdash;&mdash;&mdash;&mdash;-:|&mdash;&mdash;&mdash;&mdash;:|&mdash;&mdash;&mdash;&mdash;-:|&mdash;&mdash;&mdash;&mdash;:|&mdash;&mdash;&mdash;&mdash;:|&mdash;&mdash;&mdash;&mdash;-:|&mdash;&mdash;&mdash;&ndash;:|:&mdash;&mdash;&mdash;&mdash;&mdash;|
+|  0 | BC     | AGASSIZ          |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              |
+|  1 | BC     | ATLIN            |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |
+|  2 | BC     | BARKERVILLE      |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              |
+|  3 | BC     | BEAVERDELL       |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |
+|  4 | BC     | BELLA COOLA      |         1895 |           5 |         2017 |          11 |       52.37 |      -126.68 |         18 | Y              |</p></li>
+
+<li><p>fonction <b>del()</b></p>
+
+<pre><code class="language-python">print (&quot;Deleting 'stns jointes' column using DEL function:&quot;)
+del dataframe['stns jointes']
+dataframe.head()
+
+</code></pre>
+
+<p>Deleting &lsquo;stns jointes&rsquo; column using DEL function:
+|    | Prov   | Nom de station   |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) |
+|&mdash;:|:&mdash;&mdash;-|:&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;|&mdash;&mdash;&mdash;&mdash;-:|&mdash;&mdash;&mdash;&mdash;:|&mdash;&mdash;&mdash;&mdash;-:|&mdash;&mdash;&mdash;&mdash;:|&mdash;&mdash;&mdash;&mdash;:|&mdash;&mdash;&mdash;&mdash;-:|&mdash;&mdash;&mdash;&ndash;:|
+|  0 | BC     | AGASSIZ          |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 |
+|  1 | BC     | ATLIN            |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 |
+|  2 | BC     | BARKERVILLE      |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 |
+|  3 | BC     | BEAVERDELL       |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 |
+|  4 | BC     | BELLA COOLA      |         1895 |           5 |         2017 |          11 |       52.37 |      -126.68 |         18 |</p></li>
+</ul>
+
+<h2 id="8-5-4-appliquer-des-fonctions">8.5.4- Appliquer des fonctions:</h2>
+
+<p>Pour appliquer vos propres fonctions ou celles d&rsquo;une autre bibliothèque à des objets Pandas, vous devez connaître les trois méthodes importantes. La méthode appropriée à utiliser dépend du fait que votre fonction prévoit de fonctionner sur un DataFrame entier, par ligne ou par colonne ou par élément.</p>
+
+<ul>
+<li><p>Application d&rsquo;une fonction au niveau de la table: <b> .pipe () </b></p></li>
+
+<li><p>Application d&rsquo;une fonction de ligne ou de colonne: <b> .apply () </b></p></li>
+
+<li><p>Application d&rsquo;une fonction par élément: <b> .applymap () </b></p></li>
+</ul>
+
+<h2 id="8-5-4-1-la-méthode-b-apply-b">8.5.4.1- La méthode <b>.apply()</b>:</h2>
+
+<ul>
+<li>La méthode <b>.apply()</b> permet d&rsquo;appliquer une fonction sur l&rsquo;ensemble des valeurs d&rsquo;une colonnes.</li>
+</ul>
+
+<p>Des fonctions arbitraires peuvent être appliquées le long des axes d&rsquo;un DataFrame ou d&rsquo;un Panel à l&rsquo;aide de la méthode apply (), qui, comme les méthodes de statistiques descriptives, prend un argument d&rsquo;axe facultatif. Par défaut, l&rsquo;opération s&rsquo;effectue en colonnes, en prenant chaque colonne comme un tableau.</p>
+
+<pre><code class="language-python">dataframe = pd.read_csv(&quot;./DATA/Climato_Stations_ECCC_1981_2010_YEAR.csv&quot;, encoding='latin-1')
+dataframe[&quot;stns jointes&quot;]=dataframe[&quot;stns jointes&quot;].apply(lambda x: x.replace(&quot;N&quot;, &quot;NaN&quot;))
+dataframe[&quot;stns jointes&quot;]=dataframe[&quot;stns jointes&quot;].apply(lambda x: x.replace(&quot;Y&quot;, &quot;1&quot;))
+dataframe = dataframe.dropna() 
+print(tabulate(dataframe.head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) |   stns jointes |     Tmax |   Tmax90p |     Tmin |   Tmin10p |      DG0 |
+|---:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|---------------:|---------:|----------:|---------:|----------:|---------:|
+|  1 |            1 | BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 |            nan |  5.63043 |   18.9033 | -3.46052 | -19.235   |  860.083 |
+|  3 |            3 | BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 |              1 | 12.628   |   23.6417 |  4.01748 |  -3.646   | 1798.09  |
+|  4 |            4 | BC     | BLIND CHANNEL    | 1021480 |         1958 |           7 |         2016 |           2 |       50.42 |      -125.5  |         23 |            nan | 12.1556  |   20.2007 |  6.77689 |   1.09467 | 2518.68  |
+|  5 |            5 | BC     | BLUE RIVER       | 1160899 |         1946 |           9 |         2017 |          12 |       52.13 |      -119.28 |        683 |              1 | 10.4408  |   25.9917 | -1.12501 | -12.5823  |  987.363 |
+|  9 |            9 | BC     | COMOX            | 1021830 |         1935 |          11 |         2017 |          12 |       49.72 |      -124.9  |         26 |              1 | 13.7376  |   23.1023 |  6.42485 |  -0.526   | 2444.39  |
+</code></pre>
+
+<pre><code class="language-python">dataframe = dataframe.dropna(axis=0)
+dataframe[&quot;Tmin&quot;]=dataframe[&quot;Tmin&quot;].apply(lambda x: int(x))
+print(tabulate(dataframe.head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) |   stns jointes |     Tmax |   Tmax90p |   Tmin |   Tmin10p |      DG0 |
+|---:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|---------------:|---------:|----------:|-------:|----------:|---------:|
+|  1 |            1 | BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 |            nan |  5.63043 |   18.9033 |     -3 | -19.235   |  860.083 |
+|  3 |            3 | BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 |              1 | 12.628   |   23.6417 |      4 |  -3.646   | 1798.09  |
+|  4 |            4 | BC     | BLIND CHANNEL    | 1021480 |         1958 |           7 |         2016 |           2 |       50.42 |      -125.5  |         23 |            nan | 12.1556  |   20.2007 |      6 |   1.09467 | 2518.68  |
+|  5 |            5 | BC     | BLUE RIVER       | 1160899 |         1946 |           9 |         2017 |          12 |       52.13 |      -119.28 |        683 |              1 | 10.4408  |   25.9917 |     -1 | -12.5823  |  987.363 |
+|  9 |            9 | BC     | COMOX            | 1021830 |         1935 |          11 |         2017 |          12 |       49.72 |      -124.9  |         26 |              1 | 13.7376  |   23.1023 |      6 |  -0.526   | 2444.39  |
+</code></pre>
+
+<h2 id="8-5-5-filtrer-des-données">8.5.5- Filtrer des données:</h2>
+
+<pre><code class="language-python">#On veut toutes les valeurs mais uniquement pour une Province
+print(tabulate(dataframe.loc[dataframe[&quot;Prov&quot;]==&quot;NB&quot;,:], headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|     |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) |   stns jointes |    Tmax |   Tmax90p |   Tmin |   Tmin10p |     DG0 |
+|----:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|---------------:|--------:|----------:|-------:|----------:|--------:|
+| 256 |          256 | NB     | CHATHAM MIRA.    | 8100989 |         1873 |           1 |         2017 |          12 |       47.02 |       -65.47 |         33 |              1 | 10.6661 |   26.0853 |      0 |  -16.9597 | 1564.13 |
+| 258 |          258 | NB     | FREDERICTON      | 8101505 |         1871 |          12 |         2017 |          12 |       45.87 |       -66.53 |         21 |              1 | 11.4353 |   26.306  |      0 |  -14.8207 | 1747.27 |
+| 259 |          259 | NB     | MONCTON          | 8103201 |         1898 |           5 |         2017 |          12 |       46.1  |       -64.68 |         71 |              1 | 10.7642 |   25.392  |      0 |  -13.9483 | 1715.35 |
+| 260 |          260 | NB     | SAINT JOHN       | 8104901 |         1871 |           1 |         2017 |          12 |       45.32 |       -65.88 |        109 |              1 | 10.4343 |   23.0513 |      0 |  -14.5553 | 1548.77 |
+</code></pre>
+
+<pre><code class="language-python">print(tabulate(dataframe.loc[dataframe[&quot;DG0&quot;]&gt;=2500,:], headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|     |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) |   stns jointes |    Tmax |   Tmax90p |   Tmin |   Tmin10p |     DG0 |
+|----:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|---------------:|--------:|----------:|-------:|----------:|--------:|
+|   4 |            4 | BC     | BLIND CHANNEL    | 1021480 |         1958 |           7 |         2016 |           2 |       50.42 |      -125.5  |         23 |            nan | 12.1556 |   20.2007 |      6 |  1.09467  | 2518.68 |
+|  27 |           27 | BC     | MCINNES ISLAND   | 1065010 |         1955 |           1 |         2017 |          12 |       52.27 |      -128.72 |         26 |            nan | 11.3032 |   17.164  |      7 |  1.949    | 2587.88 |
+|  44 |           44 | BC     | VANCOUVER        | 1108395 |         1896 |           2 |         2017 |          12 |       49.2  |      -123.18 |          4 |              1 | 13.9542 |   22.404  |      7 | -0.182667 | 2673.56 |
+| 190 |          190 | ON     | HARROW           | 6130257 |         1917 |           4 |         2017 |          12 |       42.03 |       -82.9  |        182 |              1 | 14.7701 |   29.0533 |      5 | -8.03733  | 2655.17 |
+| 210 |          210 | ON     | TORONTO          | 6158355 |         1840 |           3 |         2017 |          12 |       43.67 |       -79.4  |        113 |              1 | 13.1046 |   27.0743 |      5 | -7.532    | 2807.09 |
+| 211 |          211 | ON     | VINELAND         | 6139148 |         1924 |          10 |         2017 |          12 |       43.18 |       -79.68 |         79 |              1 | 13.4847 |   27.5757 |      5 | -7.63633  | 2551.13 |
+| 214 |          214 | ON     | WINDSOR          | 6139527 |         1940 |           8 |         2017 |          12 |       42.27 |       -82.97 |        190 |              1 | 14.4231 |   28.7953 |      5 | -7.38467  | 2803.45 |
+</code></pre>
+
+<p>On peut combiner des filtres:</p>
+
+<pre><code class="language-python">print(tabulate(dataframe.loc[(dataframe[&quot;Prov&quot;]==&quot;QC&quot;) &amp; (dataframe[&quot;Tmin&quot;]&gt;0),:], headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|     |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) |   stns jointes |    Tmax |   Tmax90p |   Tmin |   Tmin10p |     DG0 |
+|----:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|---------------:|--------:|----------:|-------:|----------:|--------:|
+| 224 |          224 | QC     | DRUMMONDVILLE    | 7022160 |         1913 |          11 |         2017 |           8 |       45.88 |       -72.48 |         82 |            nan | 11.0868 |   26.6117 |      1 |  -15.8633 | 2110.86 |
+</code></pre>
+
+<p>## 8.5.6- Grouper un DataFrame sur une ou plusieurs colonnes (groupby):</p>
+
+<p>Toute opération groupby implique l&rsquo;une des opérations suivantes sur l&rsquo;objet d&rsquo;origine. Ce sont -</p>
+
+<pre><code>- Fractionner l'objet
+
+- Application d'une fonction
+
+- Combiner les résultats
+</code></pre>
+
+<p>Dans de nombreuses situations, nous divisons les données en ensembles et nous appliquons certaines fonctionnalités à chaque sous-ensemble. Nous pouvons effectuer les opérations suivantes -</p>
+
+<pre><code>- Agrégation - calcul d'une statistique récapitulative
+
+- Transformation - effectuer une opération spécifique au groupe
+
+- Filtration - rejet des données avec certaines conditions
+</code></pre>
+
+<p>Créons maintenant un objet DataFrame et effectuons toutes les opérations dessus -</p>
+
+<pre><code class="language-python">dataframe = pd.read_csv(&quot;./DATA/Climato_Stations_ECCC_1981_2010_YEAR.csv&quot;, encoding='latin-1')
+print(tabulate(dataframe.head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |      Tmax |   Tmax90p |      Tmin |   Tmin10p |      DG0 |
+|---:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|----------:|----------:|----------:|----------:|---------:|
+|  0 |            0 | BC     | AGASSIZ          | 1100120 |         1893 |           1 |         2017 |          12 |       49.25 |      -121.77 |         15 | N              | nan       |  nan      | nan       | nan       |  nan     |
+|  1 |            1 | BC     | ATLIN            | 1200560 |         1905 |           8 |         2017 |          12 |       59.57 |      -133.7  |        674 | N              |   5.63043 |   18.9033 |  -3.46052 | -19.235   |  860.083 |
+|  2 |            2 | BC     | BARKERVILLE      | 1090660 |         1888 |           2 |         2015 |           3 |       53.07 |      -121.52 |       1265 | N              | nan       |  nan      | nan       | nan       |  nan     |
+|  3 |            3 | BC     | BEAVERDELL       | 1130771 |         1939 |           1 |         2006 |           9 |       49.48 |      -119.05 |        838 | Y              |  12.628   |   23.6417 |   4.01748 |  -3.646   | 1798.09  |
+|  4 |            4 | BC     | BLIND CHANNEL    | 1021480 |         1958 |           7 |         2016 |           2 |       50.42 |      -125.5  |         23 | N              |  12.1556  |   20.2007 |   6.77689 |   1.09467 | 2518.68  |
+</code></pre>
+
+<p>En observant le DataFrame ci-dessus, nous voyons qu&rsquo;il y a, au minimum, 3 variables que nous pouvons utiliser pour grouper notre jeu de données. On peut par exemple grouper nos données par province (Prov) , par année de début d&rsquo;enregistrement ou année de fin d&rsquo;enregistrement .</p>
+
+<p>Nous allons utiliser le module groupeby de Pandas pour grouper nos données.</p>
+
+<ul>
+<li><p>Méthode <b>.unique()</b> : méthode permet d&rsquo;extraire les valeurs uniques d&rsquo;une colonne. On peut ainsi s&rsquo;assurer que notre variable à grouper possède plusieurs catégories.</p>
+
+<pre><code class="language-python">dataframe[&quot;Prov&quot;].unique() 
+</code></pre>
+
+<p>array([&lsquo;BC&rsquo;, &lsquo;YT&rsquo;, &lsquo;N   YT&rsquo;, &lsquo;NT&rsquo;, &lsquo;NU&rsquo;, &lsquo;AB&rsquo;, &lsquo;SK&rsquo;, &lsquo;MB&rsquo;, &lsquo;ON&rsquo;, &lsquo;QC&rsquo;,
+       &lsquo;NB&rsquo;, &lsquo;NS&rsquo;, &lsquo;PE&rsquo;, &lsquo;NL&rsquo;], dtype=object)</p></li>
+</ul>
+
+<h2 id="8-5-6-1-fractionner-les-données-en-groupes">8.5.6.1- Fractionner les données en groupes:</h2>
+
+<pre><code class="language-python">df_Prov = dataframe.groupby('Prov')
+df_Prov.groups
+</code></pre>
+
+<pre><code>{'AB': Int64Index([ 96,  97,  98,  99, 100, 101, 102, 103, 104, 105, 106, 107, 108,
+             109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121,
+             122, 123, 124, 125, 126, 127, 128, 129, 130],
+            dtype='int64'),
+ 'BC': Int64Index([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+             17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+             34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+             50],
+            dtype='int64'),
+ 'MB': Int64Index([156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168,
+             169, 170, 171, 172, 173, 174, 175],
+            dtype='int64'),
+ 'N   YT': Int64Index([52], dtype='int64'),
+ 'NB': Int64Index([254, 255, 256, 257, 258, 259, 260, 261], dtype='int64'),
+ 'NL': Int64Index([275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287,
+             288],
+            dtype='int64'),
+ 'NS': Int64Index([262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273], dtype='int64'),
+ 'NT': Int64Index([61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73], dtype='int64'),
+ 'NU': Int64Index([74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+             91, 92, 93, 94, 95],
+            dtype='int64'),
+ 'ON': Int64Index([176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188,
+             189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201,
+             202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214,
+             215],
+            dtype='int64'),
+ 'PE': Int64Index([274], dtype='int64'),
+ 'QC': Int64Index([216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228,
+             229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241,
+             242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253],
+            dtype='int64'),
+ 'SK': Int64Index([131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143,
+             144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155],
+            dtype='int64'),
+ 'YT': Int64Index([51, 53, 54, 55, 56, 57, 58, 59, 60], dtype='int64')}
+</code></pre>
+
+<ul>
+<li><p>Sélectionner un groupe: méthode <b>.get_group()</b></p>
+
+<pre><code class="language-python">print(tabulate(df_Prov.get_group('QC').head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">Unnamed: 0</th>
+<th align="left">Prov</th>
+<th align="left">Nom de station</th>
+<th align="left">stnid</th>
+<th align="right">année déb.</th>
+<th align="right">mois déb.</th>
+<th align="right">année fin.</th>
+<th align="right">mois fin.</th>
+<th align="right">lat (deg)</th>
+<th align="right">long (deg)</th>
+<th align="right">élév (m)</th>
+<th align="left">stns jointes</th>
+<th align="right">Tmax</th>
+<th align="right">Tmax90p</th>
+<th align="right">Tmin</th>
+<th align="right">Tmin10p</th>
+<th align="right">DG0</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">216</td>
+<td align="right">216</td>
+<td align="left">QC</td>
+<td align="left">AMOS</td>
+<td align="left">709CEE9</td>
+<td align="right">1913</td>
+<td align="right">6</td>
+<td align="right">2017</td>
+<td align="right">8</td>
+<td align="right">48.57</td>
+<td align="right">-78.13</td>
+<td align="right">305</td>
+<td align="left">Y</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+
+<tr>
+<td align="right">217</td>
+<td align="right">217</td>
+<td align="left">QC</td>
+<td align="left">BAGOTVILLE</td>
+<td align="left">7060400</td>
+<td align="right">1880</td>
+<td align="right">11</td>
+<td align="right">2017</td>
+<td align="right">12</td>
+<td align="right">48.33</td>
+<td align="right">-71</td>
+<td align="right">159</td>
+<td align="left">Y</td>
+<td align="right">8.28139</td>
+<td align="right">25.2973</td>
+<td align="right">-1.83359</td>
+<td align="right">-20.8117</td>
+<td align="right">1528.41</td>
+</tr>
+
+<tr>
+<td align="right">218</td>
+<td align="right">218</td>
+<td align="left">QC</td>
+<td align="left">BEAUCEVILLE</td>
+<td align="left">7027283</td>
+<td align="right">1913</td>
+<td align="right">8</td>
+<td align="right">2017</td>
+<td align="right">8</td>
+<td align="right">46.15</td>
+<td align="right">-70.7</td>
+<td align="right">168</td>
+<td align="left">Y</td>
+<td align="right">10.5515</td>
+<td align="right">26.0783</td>
+<td align="right">-1.37634</td>
+<td align="right">-19.6283</td>
+<td align="right">1509.36</td>
+</tr>
+
+<tr>
+<td align="right">219</td>
+<td align="right">219</td>
+<td align="left">QC</td>
+<td align="left">BROME</td>
+<td align="left">7020840</td>
+<td align="right">1890</td>
+<td align="right">9</td>
+<td align="right">2014</td>
+<td align="right">7</td>
+<td align="right">45.18</td>
+<td align="right">-72.57</td>
+<td align="right">206</td>
+<td align="left">N</td>
+<td align="right">11.1409</td>
+<td align="right">26.1767</td>
+<td align="right">-0.294151</td>
+<td align="right">-17.56</td>
+<td align="right">1676.23</td>
+</tr>
+
+<tr>
+<td align="right">220</td>
+<td align="right">220</td>
+<td align="left">QC</td>
+<td align="left">CAUSAPSCAL</td>
+<td align="left">7051200</td>
+<td align="right">1913</td>
+<td align="right">11</td>
+<td align="right">2017</td>
+<td align="right">8</td>
+<td align="right">48.37</td>
+<td align="right">-67.23</td>
+<td align="right">168</td>
+<td align="left">N</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+<td align="right">nan</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+
+<p>On peut faire un .groupeby() sur plusieurs catégories.</p>
+
+<pre><code class="language-python">print(tabulate(dataframe.groupby([&quot;Prov&quot;, &quot;année fin.&quot;])[&quot;Tmin&quot;].describe().head(), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|              |   count |      mean |       std |       min |       25% |       50% |       75% |       max |
+|:-------------|--------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
+| ('AB', 2011) |       0 | nan       | nan       | nan       | nan       | nan       | nan       | nan       |
+| ('AB', 2013) |       1 |  -4.21653 | nan       |  -4.21653 |  -4.21653 |  -4.21653 |  -4.21653 |  -4.21653 |
+| ('AB', 2016) |       1 |  -2.49021 | nan       |  -2.49021 |  -2.49021 |  -2.49021 |  -2.49021 |  -2.49021 |
+| ('AB', 2017) |      17 |  -3.01535 |   1.45026 |  -6.54421 |  -3.42227 |  -3.11709 |  -2.92727 |  -0.1559  |
+| ('BC', 2006) |       1 |   4.01748 | nan       |   4.01748 |   4.01748 |   4.01748 |   4.01748 |   4.01748 |
+</code></pre>
+
+<h2 id="8-5-6-2-itérer-au-travers-des-groupes">8.5.6.2- Itérer au travers des  groupes:</h2>
+
+<pre><code class="language-python">grouped = dataframe.groupby('Prov')
+
+for name,group in grouped:
+   print(name)
+   print(group)
+</code></pre>
+
+<pre><code>AB
+     Unnamed: 0 Prov   Nom de station    stnid  année déb.  mois déb.  \
+96           96   AB        ATHABASCA  3060L20        1918          6   
+97           97   AB            BANFF  3050519        1887         11   
+98           98   AB      BEAVERLODGE  3070600        1913          4   
+99           99   AB          CALGARY  3031092        1885          1   
+100         100   AB           CALMAR  3011120        1915         11   
+101         101   AB          CAMPSIE  3061200        1912          9   
+102         102   AB          CAMROSE  3011240        1946          3   
+103         103   AB           CARWAY  3031402        1914          8   
+104         104   AB        COLD LAKE  3081680        1925          7   
+105         105   AB       CORONATION  3011887        1924          4   
+106         106   AB         EDMONTON  3012216        1880          7   
+107         107   AB            EDSON  3062246        1914          2   
+108         108   AB         ENTRANCE  306A009        1917          6   
+109         109   AB         FAIRVIEW  3072525        1931         10   
+110         110   AB   FORT CHIPEWYAN  3072655        1883         10   
+111         111   AB    FORT MCMURRAY  3062696        1916          1   
+112         112   AB   FORT VERMILION  3072723        1908          7   
+113         113   AB         GLEICHEN  3032801        1903          7   
+114         114   AB   GRANDE PRAIRIE  3072921        1922          8   
+115         115   AB     HIGH PRAIRIE  3063165        1926          9   
+116         116   AB       HIGH RIVER  3033250        1902          8   
+117         117   AB           JASPER  3053536        1926          9   
+118         118   AB          LACOMBE  3023722        1907         12   
+119         119   AB       LETHBRIDGE  3033890        1902          1   
+120         120   AB      MANYBERRIES  3044923        1928          8   
+121         121   AB     MEDICINE HAT  3034485        1883          8   
+122         122   AB             OLDS  3024925        1914          4   
+123         123   AB      PEACE RIVER  3075041        1907         10   
+124         124   AB    PINCHER CREEK  3035198        1893          8   
+125         125   AB         RANFURLY  3015401        1905          1   
+126         126   AB  ROCKY MTN HOUSE  3015523        1915          8   
+127         127   AB       SLAVE LAKE  3065995        1922          8   
+128         128   AB   STETTLER NORTH  3016124        1918          9   
+129         129   AB         VAUXHALL  3036682        1913         10   
+130         130   AB       WHITECOURT  3067373        1942         12   
+
+     année fin.  mois fin.  lat (deg)  long (deg)  élév (m) stns jointes  \
+96         2017         12      54.82     -113.53       626            Y   
+97         2017         12      51.20     -115.55      1397            Y   
+98         2017         12      55.20     -119.40       745            Y   
+99         2017         12      51.12     -114.02      1084            Y   
+100        2016         12      53.28     -113.85       720            N   
+101        2013         10      54.13     -114.68       671            N   
+102        2017         12      53.03     -112.82       739            N   
+103        2017         12      49.00     -113.37      1354            Y   
+104        2017         12      54.42     -110.28       541            Y   
+105        2017         12      52.08     -111.45       791            Y   
+106        2017         12      53.57     -113.52       723            Y   
+107        2017         12      53.58     -116.47       927            Y   
+108        2017         12      53.37     -117.70       991            Y   
+109        2017         12      56.07     -118.38       655            Y   
+110        2017         12      58.77     -111.12       238            Y   
+111        2017         12      56.65     -111.22       369            Y   
+112        2017         12      58.38     -116.03       289            Y   
+113        2017         12      50.88     -113.05       905            Y   
+114        2017         12      55.18     -118.88       669            Y   
+115        2017          9      55.40     -116.48       602            Y   
+116        2011          9      50.48     -114.17      1580            Y   
+117        2017         12      52.93     -118.03      1020            Y   
+118        2017         12      52.45     -113.75       860            Y   
+119        2017         12      49.63     -112.80       929            Y   
+120        2017         12      49.12     -110.47       935            Y   
+121        2017         12      50.02     -110.72       717            Y   
+122        2017         12      51.78     -114.10      1046            Y   
+123        2017         12      56.23     -117.43       571            Y   
+124        2017         12      49.52     -113.98      1190            Y   
+125        2017         12      53.42     -111.73       673            Y   
+126        2017         12      52.43     -114.92       988            Y   
+127        2017         12      55.30     -114.78       583            Y   
+128        2017         12      52.33     -112.72       821            Y   
+129        2017         12      50.05     -112.13       779            Y   
+130        2016          6      54.15     -115.78       782            Y   
+
+          Tmax    Tmax90p      Tmin    Tmin10p          DG0  
+96    8.240395  24.018667 -3.362346 -21.040000  1168.233333  
+97    8.906518  23.132000 -3.084884 -15.858333   750.370000  
+98    8.158459  23.086667 -2.927270 -18.997667  1051.916667  
+99   10.834976  24.467333 -1.444606 -15.235000  1172.050000  
+100        NaN        NaN       NaN        NaN          NaN  
+101   9.214514  24.548333 -4.216529 -21.218333   979.166667  
+102   8.964966  24.175667 -3.714421 -20.588000  1048.130000  
+103  11.139694  24.925000 -1.618858 -13.980000   956.836667  
+104   7.724485  24.273667 -3.037595 -21.203667  1303.950000  
+105        NaN        NaN       NaN        NaN          NaN  
+106   8.982117  24.328000 -3.117089 -19.190667  1095.933333  
+107        NaN        NaN       NaN        NaN          NaN  
+108        NaN        NaN       NaN        NaN          NaN  
+109        NaN        NaN       NaN        NaN          NaN  
+110   4.282190  23.566000 -6.544206 -28.629667  1135.113333  
+111   7.080704  24.609667 -4.511516 -23.883667  1145.983333  
+112        NaN        NaN       NaN        NaN          NaN  
+113        NaN        NaN       NaN        NaN          NaN  
+114   8.185239  23.771333 -3.374008 -20.712667  1126.333333  
+115        NaN        NaN       NaN        NaN          NaN  
+116        NaN        NaN       NaN        NaN          NaN  
+117   9.831020  24.132000 -3.341606 -16.509667   761.946667  
+118        NaN        NaN       NaN        NaN          NaN  
+119        NaN        NaN       NaN        NaN          NaN  
+120        NaN        NaN       NaN        NaN          NaN  
+121  12.648926  28.497333 -0.155900 -15.783333  1563.866667  
+122        NaN        NaN       NaN        NaN          NaN  
+123   7.358369  23.566333 -3.784061 -21.467667  1121.106667  
+124  10.973669  25.435000 -0.837767 -14.170000  1166.016667  
+125   8.434513  24.951667 -2.982488 -19.998333  1204.603333  
+126        NaN        NaN       NaN        NaN          NaN  
+127   7.481366  22.464333 -3.422267 -20.380333  1131.030000  
+128        NaN        NaN       NaN        NaN          NaN  
+129        NaN        NaN       NaN        NaN          NaN  
+130   8.458045  23.313333 -2.490207 -17.834000  1104.916667  
+BC
+</code></pre>
+
+<h2 id="8-5-6-3-fonctions-dites-d-agrégation">8.5.6.3- Fonctions dites d&rsquo;agrégation:</h2>
+
+<p>Une fonction agrégée renvoie une seule valeur agrégée pour chaque groupe. Une fois le groupe par objet créé, plusieurs opérations d&rsquo;agrégation peuvent être effectuées sur les données groupées.</p>
+
+<pre><code class="language-python">dataframe = pd.read_csv(&quot;./DATA/Climato_Stations_ECCC_1981_2010_YEAR.csv&quot;, encoding='latin-1')
+grouped = dataframe.groupby('Prov')
+grouped['Tmin'].agg(np.mean)
+</code></pre>
+
+<pre><code>Prov
+AB        -3.050928
+BC         1.578024
+MB        -4.493900
+N   YT          NaN
+NB         0.341750
+NL        -1.324334
+NS         2.542629
+NT        -8.518655
+NU       -16.522658
+ON         0.031970
+PE         1.986827
+QC        -1.992695
+SK        -3.208984
+YT        -8.995421
+Name: Tmin, dtype: float64
+</code></pre>
+
+<h2 id="8-5-6-4-appliquer-plusieurs-fonctions">8.5.6.4-  Appliquer plusieurs fonctions:</h2>
+
+<pre><code class="language-python">print(tabulate(grouped['Tmin'].agg([np.min, np.mean, np.max, np.std]), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>| Prov   |       amin |        mean |       amax |        std |
+|:-------|-----------:|------------:|-----------:|-----------:|
+| AB     |  -6.54421  |  -3.05093   |  -0.1559   |   1.40133  |
+| BC     |  -6.06858  |   1.57802   |   7.01629  |   3.89638  |
+| MB     | -10.0943   |  -4.4939    |  -1.98027  |   2.61835  |
+| N   YT | nan        | nan         | nan        | nan        |
+| NB     |  -0.491043 |   0.34175   |   0.840796 |   0.598429 |
+| NL     |  -8.02478  |  -1.32433   |   1.81275  |   3.42585  |
+| NS     |   1.21413  |   2.54263   |   3.75946  |   0.982653 |
+| NT     | -12.4518   |  -8.51865   |  -6.68323  |   2.16937  |
+| NU     | -21.9351   | -16.5227    | -12.2332   |   3.0491   |
+| ON     |  -7.48484  |   0.0319696 |   5.91872  |   3.64788  |
+| PE     |   1.98683  |   1.98683   |   1.98683  | nan        |
+| QC     |  -8.76805  |  -1.99269   |   1.62212  |   2.70668  |
+| SK     |  -5.01656  |  -3.20898   |  -1.42885  |   1.03055  |
+| YT     | -10.2177   |  -8.99542   |  -7.77313  |   1.72858  |
+</code></pre>
+
+<h2 id="8-5-6-5-transformations">8.5.6.5- Transformations:</h2>
+
+<p>La transformation sur un groupe ou une colonne renvoie un objet indexé de la même taille que celui en cours de regroupement.</p>
+
+<p>Par conséquent, la transformation doit renvoyer un résultat de la même taille que celui d&rsquo;un bloc de groupe.</p>
+
+<pre><code class="language-python">grouped = dataframe.groupby('Prov')
+and_stand = lambda x: (x - x.mean()) / x.std()
+grouped['Tmin'].transform(and_stand).head()
+</code></pre>
+
+<pre><code>0         NaN
+1   -1.293133
+2         NaN
+3    0.626082
+4    1.334280
+Name: Tmin, dtype: float64
+</code></pre>
+
+<h2 id="8-5-6-6-filtration">8.5.6.6- Filtration:</h2>
+
+<p>La filtration filtre les données selon des critères définis et renvoie le sous-ensemble de données. La fonction filter () est utilisée pour filtrer les données.</p>
+
+<pre><code class="language-python">print(tabulate(dataframe.groupby('Prov').filter(lambda x: len(x) == 1), headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|     |   Unnamed: 0 | Prov   | Nom de station   |   stnid |   année déb. |   mois déb. |   année fin. |   mois fin. |   lat (deg) |   long (deg) |   élév (m) | stns jointes   |     Tmax |   Tmax90p |      Tmin |   Tmin10p |     DG0 |
+|----:|-------------:|:-------|:-----------------|--------:|-------------:|------------:|-------------:|------------:|------------:|-------------:|-----------:|:---------------|---------:|----------:|----------:|----------:|--------:|
+|  52 |           52 | N   YT | HAINES JUNCTIO   | 2100630 |         1944 |          10 |         2017 |          12 |       60.75 |      -137.5  |        596 | N              | nan      |  nan      | nan       |  nan      |  nan    |
+| 274 |          274 | PE     | CHARLOTTETOWN    | 8300301 |         1872 |          11 |         2017 |          12 |       46.28 |       -63.13 |         49 | Y              |  10.0063 |   23.7683 |   1.98683 |  -12.0367 | 1912.16 |
+</code></pre>
+
+<h2 id="8-6-rassembler-plusieurs-dataframes">8.6-  Rassembler plusieurs Dataframes:</h2>
+
+<h2 id="8-6-1-jointure-de-dataframes">8.6.1- Jointure de DataFrames:</h2>
+
+<p>Il s’agit de &ldquo;jointer&rdquo; deux tables partageant la même clef ou encore de concaténer horizontalement les lignes en faisant correspondre les valeurs d’une variable clef qui peuvent ne pas être uniques.</p>
+
+<p><img src="/img/formation/join.png" alt="image0" /></p>
+
+<pre><code class="language-python">left_dataframe = pd.DataFrame({
+   'id':[1,2,3,4],
+   'Nom de station': ['MONTREAL TAVISH', 'QUEBEC', 'TADOUSSAC','OKA'],
+   'variable':['var1','var2','var6','var5']})
+
+right_dataframe = pd.DataFrame(
+   {'id':[1,2,3,4],
+   'Nom de station': ['TORONTO', 'OTTAWA', 'KINGSTON','CHAPLEAU'],
+   'variable':['var3','var1','var6','var5']})
+left_dataframe
+print(tabulate(left_dataframe, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id | Nom de station   | variable   |
+|---:|-----:|:-----------------|:-----------|
+|  0 |    1 | MONTREAL TAVISH  | var1       |
+|  1 |    2 | QUEBEC           | var2       |
+|  2 |    3 | TADOUSSAC        | var6       |
+|  3 |    4 | OKA              | var5       |
+</code></pre>
+
+<pre><code class="language-python">print(tabulate(right_dataframe, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id | Nom de station   | variable   |
+|---:|-----:|:-----------------|:-----------|
+|  0 |    1 | TORONTO          | var3       |
+|  1 |    2 | OTTAWA           | var1       |
+|  2 |    3 | KINGSTON         | var6       |
+|  3 |    4 | CHAPLEAU         | var5       |
+</code></pre>
+
+<h2 id="8-6-1-1-assembler-deux-dataframes-sur-une-clé">8.6.1.1-  Assembler deux DataFrames sur une clé:</h2>
+
+<pre><code class="language-python">data=pd.merge(left_dataframe,right_dataframe,on='id')
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id | Nom de station_x   | variable_x   | Nom de station_y   | variable_y   |
+|---:|-----:|:-------------------|:-------------|:-------------------|:-------------|
+|  0 |    1 | MONTREAL TAVISH    | var1         | TORONTO            | var3         |
+|  1 |    2 | QUEBEC             | var2         | OTTAWA             | var1         |
+|  2 |    3 | TADOUSSAC          | var6         | KINGSTON           | var6         |
+|  3 |    4 | OKA                | var5         | CHAPLEAU           | var5         |
+</code></pre>
+
+<pre><code class="language-python">data=pd.merge(left_dataframe,right_dataframe,on=['id','variable'])
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id | Nom de station_x   | variable   | Nom de station_y   |
+|---:|-----:|:-------------------|:-----------|:-------------------|
+|  0 |    3 | TADOUSSAC          | var6       | KINGSTON           |
+|  1 |    4 | OKA                | var5       | CHAPLEAU           |
+</code></pre>
+
+<h2 id="8-6-1-2-fusionner-deux-dataframes-en-utilisant-l-argument-how">8.6.1.2-  Fusionner deux DataFrames en utilisant l&rsquo;argument &lsquo;How&rsquo;:</h2>
+
+<p>L&rsquo;argument &ldquo;how&rdquo; permet de  déterminer les clés à inclure dans la table résultante.</p>
+
+<p>Si aucune combinaison de clés n&rsquo;apparaît dans les tableaux de gauche ou de droite, les valeurs du tableau joint seront NaN.</p>
+
+<pre><code class="language-python"># Left Join
+data=pd.merge(left_dataframe, right_dataframe, on='variable', how='left')
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id_x | Nom de station_x   | variable   |   id_y | Nom de station_y   |
+|---:|-------:|:-------------------|:-----------|-------:|:-------------------|
+|  0 |      1 | MONTREAL TAVISH    | var1       |      2 | OTTAWA             |
+|  1 |      2 | QUEBEC             | var2       |    nan | nan                |
+|  2 |      3 | TADOUSSAC          | var6       |      3 | KINGSTON           |
+|  3 |      4 | OKA                | var5       |      4 | CHAPLEAU           |
+</code></pre>
+
+<pre><code class="language-python"># right Join
+data=pd.merge(left_dataframe, right_dataframe, on='variable', how='right')
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id_x | Nom de station_x   | variable   |   id_y | Nom de station_y   |
+|---:|-------:|:-------------------|:-----------|-------:|:-------------------|
+|  0 |      1 | MONTREAL TAVISH    | var1       |      2 | OTTAWA             |
+|  1 |      3 | TADOUSSAC          | var6       |      3 | KINGSTON           |
+|  2 |      4 | OKA                | var5       |      4 | CHAPLEAU           |
+|  3 |    nan | nan                | var3       |      1 | TORONTO            |
+</code></pre>
+
+<pre><code class="language-python"># inner Join
+data=pd.merge(left_dataframe, right_dataframe, on='variable', how='inner')
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id_x | Nom de station_x   | variable   |   id_y | Nom de station_y   |
+|---:|-------:|:-------------------|:-----------|-------:|:-------------------|
+|  0 |      1 | MONTREAL TAVISH    | var1       |      2 | OTTAWA             |
+|  1 |      3 | TADOUSSAC          | var6       |      3 | KINGSTON           |
+|  2 |      4 | OKA                | var5       |      4 | CHAPLEAU           |
+</code></pre>
+
+<pre><code class="language-python"># outer Join
+data=pd.merge(left_dataframe, right_dataframe, on='variable', how='outer')
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id_x | Nom de station_x   | variable   |   id_y | Nom de station_y   |
+|---:|-------:|:-------------------|:-----------|-------:|:-------------------|
+|  0 |      1 | MONTREAL TAVISH    | var1       |      2 | OTTAWA             |
+|  1 |      2 | QUEBEC             | var2       |    nan | nan                |
+|  2 |      3 | TADOUSSAC          | var6       |      3 | KINGSTON           |
+|  3 |      4 | OKA                | var5       |      4 | CHAPLEAU           |
+|  4 |    nan | nan                | var3       |      1 | TORONTO            |
+</code></pre>
+
+<h2 id="8-6-2-concatenation-de-dataframes">8.6.2- Concatenation de DataFrames:</h2>
+
+<p>Pandas offre diverses fonctionnalités pour combiner facilement des objets DataFrame.</p>
+
 <table border="1" class="docutils">
 <colgroup>
 <col width="27%">
 <col width="57%">
 </colgroup>
-<thead valign="bottom">
-<tr><th class="head">Opérateurs</th>
-<th class="head">Signification</th>
-</tr>
-</thead>
-<tbody valign="top"></p>
+<tbody valign="top">
 
-<p><tr><td><tt class="docutils literal"><span class="pre">=</span></tt></td>
-<td>Affecte la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche </td>
+<tr><td><tt class="docutils literal"><span class="pre">objs</span></tt></td>
+<td>This is a sequence or mapping of Series, DataFrame objects.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">+=</span></tt></td>
-<td>Ajoute la valeur de l&rsquo;opérande droit à l&rsquo;opérande de gauche et place le résultat dans l&rsquo;opérande gauche</td>
+<tr><td><tt class="docutils literal"><span class="pre">axis</span></tt></td>
+<td> {0, 1, ...}, default 0. This is the axis to concatenate along.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">-=</span></tt></td>
-<td>Soustrait la valeur de l&rsquo;opérande droit de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande gauche</td>
+<tr><td><tt class="docutils literal"><span class="pre">join</span></tt></td>
+<td>{‘inner’, ‘outer’}, default ‘outer’. How to handle indexes on other axis(es). Outer for union and inner for intersection.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">*=</span></tt></td>
-<td>Multiplie la valeur de l&rsquo;opérande droit par celle de l&rsquo;opérande gauche et place le résultat dans l&rsquo;opérande de gauche</td>
+<tr><td><tt class="docutils literal"><span class="pre">ignore_index</span></tt></td>
+<td>boolean, default False. If True, do not use the index values on the concatenation axis. The resulting axis will be labeled 0, ..., n - 1.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">/=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande de gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">%=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le reste dans l&rsquo;opérande de gauche</td>
-</tr></p>
+<tr><td><tt class="docutils literal"><span class="pre">join_axes</span></tt></td>
+<td> This is the list of Index objects. Specific indexes to use for the other (n-1) axes instead of performing inner/outer set logic.</td>
 
-<p><tr><td><tt class="docutils literal"><span class="pre">**=</span></tt></td>
-<td>Calcule la valeur exponentielle de l&rsquo;opérande de gauche par celle de l&rsquo;opérande droit et place le résultat dans l&rsquo;opérande gauche</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">//=</span></tt></td>
-<td>Divise la valeur de l&rsquo;opérande gauche par celle de l&rsquo;opérande droit et place le résultat entier dans l&rsquo;opérande gauche</td></p>
+</tbody>
+</table>    
 
-<p></tr>
+<pre><code class="language-python">dataframe1 = pd.DataFrame({
+   'id':[1,2,3,4],
+   'Nom de station': ['MONTREAL TAVISH', 'QUEBEC', 'TADOUSSAC','OKA'],
+   'variable':['var1','var2','var6','var5']})
+
+dataframe2 = pd.DataFrame(
+   {'id':[1,2,3,4],
+   'Nom de station': ['TORONTO', 'OTTAWA', 'KINGSTON','CHAPLEAU'],
+   'variable':['var3','var1','var6','var5']})
+
+data=pd.concat([dataframe1,dataframe2])
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id | Nom de station   | variable   |
+|---:|-----:|:-----------------|:-----------|
+|  0 |    1 | MONTREAL TAVISH  | var1       |
+|  1 |    2 | QUEBEC           | var2       |
+|  2 |    3 | TADOUSSAC        | var6       |
+|  3 |    4 | OKA              | var5       |
+|  0 |    1 | TORONTO          | var3       |
+|  1 |    2 | OTTAWA           | var1       |
+|  2 |    3 | KINGSTON         | var6       |
+|  3 |    4 | CHAPLEAU         | var5       |
+</code></pre>
+
+<pre><code class="language-python">data=pd.concat([dataframe1,dataframe2],keys=['QC','ON'])
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|           |   id | Nom de station   | variable   |
+|:----------|-----:|:-----------------|:-----------|
+| ('QC', 0) |    1 | MONTREAL TAVISH  | var1       |
+| ('QC', 1) |    2 | QUEBEC           | var2       |
+| ('QC', 2) |    3 | TADOUSSAC        | var6       |
+| ('QC', 3) |    4 | OKA              | var5       |
+| ('ON', 0) |    1 | TORONTO          | var3       |
+| ('ON', 1) |    2 | OTTAWA           | var1       |
+| ('ON', 2) |    3 | KINGSTON         | var6       |
+| ('ON', 3) |    4 | CHAPLEAU         | var5       |
+</code></pre>
+
+<pre><code class="language-python">data=pd.concat([dataframe1,dataframe2],axis=1)
+data
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>Nom de station</th>
+      <th>variable</th>
+      <th>id</th>
+      <th>Nom de station</th>
+      <th>variable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>MONTREAL TAVISH</td>
+      <td>var1</td>
+      <td>1</td>
+      <td>TORONTO</td>
+      <td>var3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>QUEBEC</td>
+      <td>var2</td>
+      <td>2</td>
+      <td>OTTAWA</td>
+      <td>var1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>TADOUSSAC</td>
+      <td>var6</td>
+      <td>3</td>
+      <td>KINGSTON</td>
+      <td>var6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>OKA</td>
+      <td>var5</td>
+      <td>4</td>
+      <td>CHAPLEAU</td>
+      <td>var5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="concaténation-avec-append">Concaténation avec append</h2>
+
+<p>Un raccourci utile pour concatérer sont les méthodes d&rsquo;instance d&rsquo;ajout sur DataFrame. Ils concaténent le long de l&rsquo;axe = 0, à savoir l&rsquo;indice</p>
+
+<pre><code class="language-python">data=dataframe1.append(dataframe2)
+print(tabulate(data, headers='keys', tablefmt='pipe'))
+</code></pre>
+
+<pre><code>|    |   id | Nom de station   | variable   |
+|---:|-----:|:-----------------|:-----------|
+|  0 |    1 | MONTREAL TAVISH  | var1       |
+|  1 |    2 | QUEBEC           | var2       |
+|  2 |    3 | TADOUSSAC        | var6       |
+|  3 |    4 | OKA              | var5       |
+|  0 |    1 | TORONTO          | var3       |
+|  1 |    2 | OTTAWA           | var1       |
+|  2 |    3 | KINGSTON         | var6       |
+|  3 |    4 | CHAPLEAU         | var5       |
+</code></pre>
+
+<h2 id="9-sauver-un-dataframe">9-  Sauver un DataFrame:</h2>
+
+<p>Pour l’écriture d&rsquo;un DataFrame on utilise les fonctions <b>.to_csv</b> ou <b>_table</b> avec des options similaires que read_csv() vues précédemment.</p>
+
+<pre><code class="language-python">dataframe.to_csv(&quot;./DATA/mon_nouveau_dataframe.csv&quot;, index = False, header = True, sep = ',')
+</code></pre>
+
+<h2 id="10-les-dates">10- Les dates:</h2>
+
+<p>Une fois un Dataframe crée, il peut être très pertinent d&rsquo;ajouter au besoin un index temporel afin de faciliter nos analyses.</p>
+
+<p>En utilisant la fonction <b> date.range () </b>, nous pouvons créer la série de dates.</p>
+
+<pre><code class="language-python">pd.date_range('1/1/2011', periods=5)
+</code></pre>
+
+<pre><code>DatetimeIndex(['2011-01-01', '2011-01-02', '2011-01-03', '2011-01-04',
+               '2011-01-05'],
+              dtype='datetime64[ns]', freq='D')
+</code></pre>
+
+<p>Pour modifier la fréquence:</p>
+
+<pre><code class="language-python">pd.date_range('1/1/2011', periods=5,freq='M')
+</code></pre>
+
+<pre><code>DatetimeIndex(['2011-01-31', '2011-02-28', '2011-03-31', '2011-04-30',
+               '2011-05-31'],
+              dtype='datetime64[ns]', freq='M')
+</code></pre>
+
+<ul>
+<li><p><b>bdate_range()</b> permet de travailler avec des ours ouvrés.</p>
+
+<pre><code class="language-python">pd.bdate_range('1/1/2011', periods=10)
+</code></pre>
+
+<p>DatetimeIndex([&lsquo;2011-01-03&rsquo;, &lsquo;2011-01-04&rsquo;, &lsquo;2011-01-05&rsquo;, &lsquo;2011-01-06&rsquo;,
+               &lsquo;2011-01-07&rsquo;, &lsquo;2011-01-10&rsquo;, &lsquo;2011-01-11&rsquo;, &lsquo;2011-01-12&rsquo;,
+               &lsquo;2011-01-13&rsquo;, &lsquo;2011-01-14&rsquo;],
+              dtype=&lsquo;datetime64[ns]&lsquo;, freq=&lsquo;B&rsquo;)</p>
+
+<pre><code class="language-python">start = pd.datetime(2011, 1, 1)
+end = pd.datetime(2011, 1, 5)
+pd.date_range(start, end)
+</code></pre>
+
+<p>DatetimeIndex([&lsquo;2011-01-01&rsquo;, &lsquo;2011-01-02&rsquo;, &lsquo;2011-01-03&rsquo;, &lsquo;2011-01-04&rsquo;,
+               &lsquo;2011-01-05&rsquo;],
+              dtype=&lsquo;datetime64[ns]&lsquo;, freq=&rsquo;D&rsquo;)</p></li>
+</ul>
+
+<h2> 11- Formater des dates avec le module Datetime:</h2>   
+
+<p>Python fournit ne nombreuses fonctionnalités pour travailler avec des dates et le temps de manière plus générale.</p>
+
+<p>Datetime est un module qui permet de manipuler des dates et des durées sous forme d’objets. L’idée est simple: vous manipulez l’objet pour faire tous vos calculs, et quand vous avez besoin de l’afficher, vous formatez l’objet en chaîne de caractères.</p>
+
+<p><a href="https://docs.python.org/2/library/datetime.html" target="_blank">https://docs.python.org/2/library/datetime.html</a></p>
+
+<p>On peut créer artificiellement un objet datetime suivant les paramètres suivant:</p>
+
+<pre><code>    datetime(année, mois, jour, heure, minute, seconde, microseconde, fuseau horaire)
+</code></pre>
+
+<p>Les paramètres “année”, “mois” et “jour” sont obligatoires.</p>
+
+<p>Le module datetime fournit les classes suivantes:
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<tbody valign="top">
+   <tr>
+    <th>Classe</th>
+    <th>Description</th>
+  </tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>datetime.date</b></span></tt></td>
+<td>Une instance de date représente une date</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>datetime.datetime</b></span></tt></td>
+<td>Une instance de datetime représente une date et l&rsquo;heure selon le calendrier Gregorian
+</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>datetime.time</b></span></tt></td>
+<td>Une instance de time représente le temps (time), à l&rsquo;exception de la date (date).</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>datetime.timedelta</b></span></tt></td>
+<td>La classe timedelta est utilisée pour conserver les différences entre deux objets temporels ou datés.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre"><b>datetime.tzinfo</b></span></tt></td>
+<td>La classe tzinfo est utilisée pour implémenter la prise en charge du fuseau horaire pour les objets time et datetime.</td>
+</tr>
 </tbody>
 </table></p>
 
-<pre><code class="language-python">Mavariable = 2
-Mavariable
+<p>Nous allons voir dans ce qui suit quelques exemples d&rsquo;utilisation de DateTime et de ses classes.  Par la suite, nous verrons qu&rsquo;une combinaise du module de datetime nous offre une grande aisance dans le traitement des données.</p>
+
+<h2 id="11-1-la-classe-b-datetime-b-du-module-datetime">11.1- La classe <b>datetime</b> du module datetime:</h2>
+
+<h2 id="11-1-1-création-d-un-objet-datetime">11.1.1- Création d&rsquo;un objet datetime:</h2>
+
+<pre><code class="language-python">from datetime import datetime
+datetime(2019, 3, 1)       # ceci est une instance de datetime
 </code></pre>
 
-<pre><code>2
+<pre><code>datetime.datetime(2019, 3, 1, 0, 0)
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable += 2 
-Mavariable
+<pre><code class="language-python">maintenant = datetime.now()
+maintenant
 </code></pre>
 
-<pre><code>7
+<pre><code>datetime.datetime(2020, 9, 8, 11, 24, 42, 424718)
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable -= 2 
-Mavariable
+<pre><code class="language-python">maintenant = datetime.utcnow()
+maintenant
 </code></pre>
 
-<pre><code>3
+<pre><code>datetime.datetime(2020, 9, 8, 15, 24, 42, 649731)
 </code></pre>
 
-<pre><code class="language-python">Mavariable = 5 
-Mavariable **= 2 
-Mavariable
+<p>Lors de l&rsquo;ouverture d&rsquo;un fichier csv ou text, nous avons une information sur la date et le temps des mesures mais sous forme de chaînes de caractères: &ldquo;2018-11-01 15:20&rdquo; ou &ldquo;2017/12/1 16:35:22&rdquo; &hellip;</p>
+
+<p>Il est possible lors de la lecture de convertir ces chaînes de caractères en objet datetime.</p>
+
+<pre><code class="language-python">dt = datetime.strptime(&quot;2018/11/01 15:20&quot;, &quot;%Y/%m/%d %H:%M&quot;)
+dt
 </code></pre>
 
-<pre><code>25
+<pre><code>datetime.datetime(2018, 11, 1, 15, 20)
 </code></pre>
 
-<h2 id="2-6-maitrise-de-jupyter-notebook-execution-du-code-à-travers-les-cellules-commentaires">2.6- Maitrise de jupyter notebook: execution du code à travers les cellules &amp; commentaires</h2>
+<pre><code class="language-python">dt = datetime.strptime(&quot;2017/12/1 16:35:22&quot;, &quot;%Y/%m/%d %H:%M:%S&quot;)
+dt
+</code></pre>
+
+<pre><code>datetime.datetime(2017, 12, 1, 16, 35, 22)
+</code></pre>
+
+<pre><code class="language-python">dt = datetime.strptime(&quot;01/11/19 10-35:22&quot;, &quot;%d/%m/%y %H-%M:%S&quot;)
+dt
+
+</code></pre>
+
+<pre><code>datetime.datetime(2019, 11, 1, 10, 35, 22)
+</code></pre>
+
+<pre><code class="language-python">dt = datetime.strptime(&quot;1Mar 2019 à 09h35&quot;, &quot;%d%b %Y à %Hh%M&quot;)
+dt
+</code></pre>
+
+<pre><code>datetime.datetime(2019, 3, 1, 9, 35)
+</code></pre>
+
+<h2 id="11-1-2-manipuler-un-objet-datetime">11.1.2- Manipuler un objet datetime:</h2>
+
+<p>Depuis un objet ou instance de datetime, on peut récupérer l&rsquo;heure et la date.</p>
+
+<pre><code class="language-python">maintenant.year
+#maintenant.month
+#maintenant.day
+#maintenant.hour
+maintenant.minute
+#maintenant.second
+#maintenant.microsecond
+</code></pre>
+
+<pre><code>24
+</code></pre>
+
+<p>On peut modifier une instance datetime.</p>
+
+<pre><code class="language-python">maintenant.replace(year=1995) # on créer un nouvel objet
+</code></pre>
+
+<pre><code>datetime.datetime(1995, 9, 8, 15, 24, 42, 649731)
+</code></pre>
+
+<pre><code class="language-python">maintenant.replace(month=1)
+</code></pre>
+
+<pre><code>datetime.datetime(2020, 1, 8, 15, 24, 42, 649731)
+</code></pre>
+
+<p>On peut ensuite écrire en format string un objet datetime</p>
+
+<pre><code class="language-python">d = datetime.now(); print(d)
+</code></pre>
+
+<pre><code>2020-09-08 11:24:46.451948
+</code></pre>
+
+<pre><code class="language-python">#Heures et minutes
+d.strftime(&quot;%H:%M&quot;), d.strftime(&quot;%Hh%Mmin&quot;)
+</code></pre>
+
+<pre><code>('11:24', '11h24min')
+</code></pre>
+
+<pre><code class="language-python">#Année ,mois , heure
+d.strftime(&quot;%Y-%m %H:%M&quot;)
+</code></pre>
+
+<pre><code>'2020-09 11:24'
+</code></pre>
+
+<pre><code class="language-python">'Nous sommes le {0:%d} {0:%B} et il est {0:%Hh%Mmin} '.format(d, &quot;day&quot;, &quot;month&quot;, &quot;time&quot;)
+</code></pre>
+
+<pre><code>'Nous sommes le 08 September et il est 11h24min '
+</code></pre>
 
 <ul>
-<li><p>Modification de la variable au fil du script (la dernière valeur est conservé)</p>
-
-<pre><code class="language-python">number = 1.1
-print(number)
-print(type(number))
-
-number = 1
-print(number)
-print(type(number))
-
-number = '1'
-print(number)
-print(type(number))
-</code></pre>
-
-<p>1.1
-<class 'float'>
-1
-<class 'int'>
-1
-<class 'str'></p>
-
-<pre><code class="language-python">print(number)
-print(type(number))
-</code></pre>
-
-<p>1
-<class 'str'></p></li>
-
-<li><p>Ordre d&rsquo;execution des cellules important (erreur fréquente)</p>
-
-<pre><code class="language-python">number = 1
-print(number)
-</code></pre>
-
-<p>1</p>
-
-<pre><code class="language-python">number = 2
-print(number)
-</code></pre>
-
-<p>2</p>
-
-<pre><code class="language-python">print(number)
-</code></pre>
-
-<p>2</p></li>
-
-<li><p>Les commentaires</p>
-
-<pre><code class="language-python">''' Premier 
-commentaire '''
-print(number) #Deuxième commentaire
-print('voici un #commentaire')
-</code></pre>
-
-<p>2
-voici un #commentaire</p></li>
+<li>Les classes <b>date</b> et <b>time</b></li>
 </ul>
 
-<p>Exercices + corrections</p>
+<p>Ces deux classes peuvent être utilisées pour créer une instance datetime</p>
+
+<pre><code class="language-python">from datetime import datetime, date, time
+d = date(2005, 7, 14)
+t = time(12, 30)
+</code></pre>
+
+<pre><code class="language-python">datetime.combine(d, t)
+</code></pre>
+
+<pre><code>datetime.datetime(2005, 7, 14, 12, 30)
+</code></pre>
+
+<pre><code class="language-python">maintenant = datetime.utcnow()
+maintenant.date()
+maintenant.time()
+
+</code></pre>
+
+<pre><code>datetime.time(15, 24, 48, 669075)
+</code></pre>
+
+<ul>
+<li>La classe <b>timedelta</b> du module datetime</li>
+</ul>
+
+<p>Cette classe permet de calculer la différence entre deux dates.</p>
+
+<pre><code class="language-python">from datetime import timedelta
+delta = timedelta(days=3, seconds=100)    # on crée notre propre timedelta
+</code></pre>
+
+<pre><code class="language-python">datetime.now() + delta
+</code></pre>
+
+<pre><code>datetime.datetime(2020, 9, 11, 11, 26, 29, 150102)
+</code></pre>
+
+<pre><code class="language-python">datetime.now() + timedelta(days=2, hours=4, minutes=3, seconds=12)
+</code></pre>
+
+<pre><code>datetime.datetime(2020, 9, 10, 15, 28, 1, 290110)
+</code></pre>
+
+<pre><code class="language-python">duree = datetime(2010, 12, 31) - datetime(1981, 12, 31)
+duree
+</code></pre>
+
+<pre><code>datetime.timedelta(days=10592)
+</code></pre>
+
+<p>On peut ainsi générer des dates pour des séries temporelles avec un pas de temps arbitraire:</p>
+
+<pre><code class="language-python">from datetime import timedelta
+dt = timedelta(days = 5, hours = 6, minutes = 25)
+d0 = datetime(2000, 2, 21)
+[str(d0 + i * dt) for i in range(10)]
+</code></pre>
+
+<pre><code>['2000-02-21 00:00:00',
+ '2000-02-26 06:25:00',
+ '2000-03-02 12:50:00',
+ '2000-03-07 19:15:00',
+ '2000-03-13 01:40:00',
+ '2000-03-18 08:05:00',
+ '2000-03-23 14:30:00',
+ '2000-03-28 20:55:00',
+ '2000-04-03 03:20:00',
+ '2000-04-08 09:45:00']
+</code></pre>
+
+<h2 id="13-bonus-modifier-le-paramétrage-de-pandas">13- bonus : modifier le paramétrage de pandas:</h2>
+
+<pre><code class="language-python">pd.set_option(&quot;display.max_row&quot;,30)  
+</code></pre>
+
+<pre><code class="language-python">pd.reset_option(&quot;display.max_rows&quot;)
+#https://www.programcreek.com/python/example/101355/pandas.set_option
+#https://pandas.pydata.org/pandas-docs/stable/generated/pandas.set_option.html
+</code></pre>
 
 <pre><code class="language-python">
 </code></pre>
