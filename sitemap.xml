@@ -23,6 +23,11 @@
   </url>
   
   <url>
+    <loc>/courses/formation_python/11-web-scraping-cours/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/courses/formation_python/11-web-scraping-exercices/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
@@ -44,6 +49,36 @@
   
   <url>
     <loc>/courses/formation_python/14-statistique-descriptive-cours/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/formation_python/15.1-netcdf_tutorial/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/formation_python/15.2-cartopy_library/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/formation_python/15.3-xarray_library/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/formation_python/16-1-niveau_facile/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/formation_python/16-2-niveau_intermediaire/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/formation_python/16-3-niveau-difficile/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
@@ -118,22 +153,22 @@
   </url>
   
   <url>
-    <loc>/courses/formation_python/9-visualisation-exercice/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/courses/formation_python/9-visualisation/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/formation_python/project2-eccc_precipitation/</loc>
+    <loc>/courses/formation_python/9-visualisation-exercice/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>/courses/formation_python/project1-eccc_temperature/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/formation_python/project2-eccc_precipitation/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   

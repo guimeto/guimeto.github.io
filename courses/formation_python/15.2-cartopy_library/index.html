@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="La bibliothèque Cartopy python vous permet d&rsquo;analyser, de traiter et de tracer des données géoréférencées à l&rsquo;aide de Matplotlib.
+Pour installer la librairie sous anaconda: conda install -c conda-forge cartopy
+15.1 - Tracer un champs Netcdf 2D  Nous allons travailler avec la climatologie mensuelle (1981-2010) de la température minimale journalière obtenue avec le produit ANUSPLIN_NLDAS_10km  La classe Dataset du module netCDF4 est utilisée pour ouvrir et lire des fichiers Netcdf.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/15.2-cartopy_library/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/15.2-cartopy_library/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/15.2-cartopy_library/">
+  <meta property="og:title" content="15-2- La librairie Cartopy - Cours | GDueymes">
+  <meta property="og:description" content="La bibliothèque Cartopy python vous permet d&rsquo;analyser, de traiter et de tracer des données géoréférencées à l&rsquo;aide de Matplotlib.
+Pour installer la librairie sous anaconda: conda install -c conda-forge cartopy
+15.1 - Tracer un champs Netcdf 2D  Nous allons travailler avec la climatologie mensuelle (1981-2010) de la température minimale journalière obtenue avec le produit ANUSPLIN_NLDAS_10km  La classe Dataset du module netCDF4 est utilisée pour ouvrir et lire des fichiers Netcdf."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>15-2- La librairie Cartopy - Cours | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes/">3- Les listes en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires/">4- Les dictionnaires en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires-exercice/">4- Les dictionnaires en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles/">5- Les boucles en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles-exercice/">5- Les boucles en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions/">6- Les fonctions en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions-exercice/">6- Les fonctions en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy/">7- La librairie Numpy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas/">8- La lirairie Pandas - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas-exercice/">8- La librairie Pandas - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation-exercice/">9- La visualisation graphique avec Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">9.1- Projet sur les données de températures ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">9.2- Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-cours/">10- Travailler avec des API sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-exercices/">10- Travailler avec des API sous Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-cours/">11- Web Scrapping - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-exercices/">11- Web scrapping - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-cours/">12- SQL et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/">12- SQL et Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/13-regex-cours/">13- Regex et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/14-statistique-descriptive-cours/">14- La statistique descriptive - Rappels</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.1-netcdf_tutorial/">15-1- Le format Netcdf sous Python - Cours</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/15.2-cartopy_library/">15-2- La librairie Cartopy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.3-xarray_library/">15-3 La librairie Xarray- Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-1-niveau_facile/">16.1- Exercices Python - Niveau facile</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-2-niveau_intermediaire/">16.2- Exercices Python - Niveau intermédiaire</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-3-niveau-difficile/">16.3- Exercices Python - Niveau difficile</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#15-1-tracer-un-champs-netcdf-2d">15.1 - Tracer un champs Netcdf 2D</a></li>
+<li><a href="#15-2-utiliser-la-fonction-overplot-de-matplotlib-avec-cartopy">15.2 - Utiliser la fonction overplot de Matplotlib avec Cartopy</a></li>
+<li><a href="#cartopy-modis">Cartopy:  MODIS</a></li>
+</ul></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>15-2- La librairie Cartopy - Cours</h1>
+
+          <div class="article-style">
+            
+
+<p><img src="/img/formation/cartopy.png" alt="image0" /></p>
+
+<p>La bibliothèque <a href="https://scitools.org.uk/cartopy/docs/latest/#">Cartopy</a>  python vous permet d&rsquo;analyser, de traiter et de tracer des données géoréférencées à l&rsquo;aide de Matplotlib.</p>
+
+<p>Pour installer la librairie sous anaconda:
+ conda install -c conda-forge cartopy</p>
+
+<h2 id="15-1-tracer-un-champs-netcdf-2d">15.1 - Tracer un champs Netcdf 2D</h2>
+
+<ul>
+<li>Nous allons travailler avec la climatologie mensuelle (1981-2010) de la température minimale journalière obtenue avec le produit ANUSPLIN_NLDAS_10km</li>
+</ul>
+
+<p>La classe Dataset du module netCDF4 est utilisée pour ouvrir et lire des fichiers Netcdf.
+Ici, nous allons stocker le fichier Netcdf dans la variable nc_fid.</p>
+
+<pre><code class="language-python">from netCDF4 import Dataset
+import warnings
+warnings.filterwarnings(&quot;ignore&quot;)
+
+filename='./DATA/ANUSPLIN/ANUSPLIN_NLDAS_10km_CLIMATO_TASMIN_1981_2010_06.nc'
+nc_fid=Dataset(filename,'r')
+</code></pre>
+
+<p>Nons allons lire les variales TASMIN, lat et lon du fichier Netcdf:</p>
+
+<pre><code class="language-python">lats = nc_fid.variables['lat'][:]
+lons = nc_fid.variables['lon'][:]
+time = nc_fid.variables['time'][:]
+Vals = nc_fid.variables['TASMIN'][:].squeeze()
+</code></pre>
+
+<p>Nous allons maintenant appeler les bibliothèques cartopy et matplotlib de Python pour créer une instance graphique.</p>
+
+<p>La bibliothèque carto.py est une bibliothèque maison qui apporte des fonctions pour enrichir visuellement les cartes réalisées avec cartopy: ajout d&rsquo;une échelle &hellip;</p>
+
+<pre><code class="language-python">import matplotlib.pylab as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import numpy as np
+import matplotlib as mpl
+from carto import scale_bar
+import carto
+help(carto)
+</code></pre>
+
+<pre><code>Help on module carto:
+
+NAME
+    carto
+
+FUNCTIONS
+    find_side(ls, side)
+        Given a shapely LineString which is assumed to be rectangular, return the
+        line corresponding to a given side of the rectangle.
+
+    lambert_xticks(ax, ticks)
+        Draw ticks on the bottom x-axis of a Lambert Conformal projection.
+
+    lambert_yticks(ax, ticks)
+        Draw ricks on the left y-axis of a Lamber Conformal projection.
+
+    scale_bar(ax, location, length, metres_per_unit=1000, unit_name='km', tol=0.01, angle=0, color='black', linewidth=3, text_offset=0.005, ha='center', va='bottom', plot_kwargs=None, text_kwargs=None, **kwargs)
+        Add a scale bar to CartoPy axes.
+
+        For angles between 0 and 90 the text and line may be plotted at
+        slightly different angles for unknown reasons. To work around this,
+        override the 'rotation' keyword argument with text_kwargs.
+
+        Args:
+            ax:              CartoPy axes.
+            location:        Position of left-side of bar in axes coordinates.
+            length:          Geodesic length of the scale bar.
+            metres_per_unit: Number of metres in the given unit. Default: 1000
+            unit_name:       Name of the given unit. Default: 'km'
+            tol:             Allowed relative error in length of bar. Default: 0.01
+            angle:           Anti-clockwise rotation of the bar.
+            color:           Color of the bar and text. Default: 'black'
+            linewidth:       Same argument as for plot.
+            text_offset:     Perpendicular offset for text in axes coordinates.
+                             Default: 0.005
+            ha:              Horizontal alignment. Default: 'center'
+            va:              Vertical alignment. Default: 'bottom'
+            **plot_kwargs:   Keyword arguments for plot, overridden by **kwargs.
+            **text_kwargs:   Keyword arguments for text, overridden by **kwargs.
+            **kwargs:        Keyword arguments for both plot and text.
+
+FILE
+    d:\utilisateurs\guillaume\documents\github\formation_python\15_netcdf\carto.py
+</code></pre>
+
+<p>Nous créons une instance de Cartopy pour créer une carte. Nous choisissons ici notre projection, l&rsquo;orientation de la grille et la couverture totale.</p>
+
+<p>Voici un <a href="https://scitools.org.uk/cartopy/docs/latest/crs/projections.html">lien</a> très utile pour choisir un type de projection.</p>
+
+<pre><code class="language-python">projections = [ccrs.PlateCarree(),
+               ccrs.Robinson(),
+               ccrs.Mercator(),
+               ccrs.Orthographic(),
+               ccrs.InterruptedGoodeHomolosine(),
+               ccrs.LambertConformal(),
+              ]
+
+for proj in projections:
+    plt.figure(figsize=(18, 10))
+    ax = plt.axes(projection=proj)
+    ax.stock_img()
+    ax.coastlines()
+    ax.set_title(f'{type(proj)}')
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_7_0.png" alt="png" /></p>
+
+<p><img src="/img/formation/netcdf2/output_7_1.png" alt="png" /></p>
+
+<p><img src="/img/formation/netcdf2/output_7_2.png" alt="png" /></p>
+
+<p><img src="/img/formation/netcdf2/output_7_3.png" alt="png" /></p>
+
+<p><img src="/img/formation/netcdf2/output_7_4.png" alt="png" /></p>
+
+<p><img src="/img/formation/netcdf2/output_7_5.png" alt="png" /></p>
+
+<p>Dans notre exemple, nous travaillerons avec une projection dite &ldquo;LambertConformal&rdquo;.</p>
+
+<p>Pour créer une carte régionale, nous utilisons la méthode set_extent de GeoAxis pour limiter la taille de notre région.</p>
+
+<pre><code class="language-python">fig=plt.figure(figsize=(5,3), frameon=True)   
+ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-100,-60,18,62])
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_9_0.png" alt="png" /></p>
+
+<p>Nous ajouterons quelques produits à notre carte avec la méthode cartopy.feature de Cartopy:
+<a href="https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html" target="_blank">https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html</a></p>
+
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<tbody valign="top">
+
+<tr><td><tt class="docutils literal"><span class="pre">cartopy.feature.<b>BORDERS</b></span></tt></td>
+<td>Borders</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">cartopy.feature.<b>COASTLINE</b></span></tt></td>
+<td>Coast </td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">cartopy.feature.<b>LAKES</b></span></tt></td>
+<td>Lakes</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">cartopy.feature.<b>LAND</b></span></tt></td>
+<td>Continents</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">cartopy.feature.<b>OCEAN</b></span></tt></td>
+<td>Ocean</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">cartopy.feature.<b>RIVERS</b></span></tt></td>
+<td>Rivers</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">cartopy.feature.<b>STATES</b></span></tt></td>
+<td>States</td>
+</tr>
+
+</tbody>
+</table>
+
+<p>Nous ajouterons également les provinces avec la classe NaturalEarthFeature de Cartopy:
+<a href="https://scitools.org.uk/cartopy/docs/v0.16/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature" target="_blank">https://scitools.org.uk/cartopy/docs/v0.16/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature</a></p>
+
+<p><b>-Ajout des côtes:</b></p>
+
+<pre><code class="language-python">ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-60,18,62])
+ax.coastlines(resolution='110m');
+plt.show()
+
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_12_0.png" alt="png" /></p>
+
+<p><b>-Ajout du continent et des océans:</b></p>
+
+<pre><code class="language-python">ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-60,18,62])
+ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))
+ax.add_feature(cfeature.LAND.with_scale('50m'))
+plt.show()
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_14_0.png" alt="png" /></p>
+
+<p><b>-Ajout des lacs et des rivières:</b></p>
+
+<pre><code class="language-python">ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-60,18,62])
+ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))
+ax.add_feature(cfeature.LAKES.with_scale('50m'))
+ax.add_feature(cfeature.LAND.with_scale('50m'))
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+plt.show()
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_16_0.png" alt="png" /></p>
+
+<p><b>-Ajout des états et des provinces:</b></p>
+
+<pre><code class="language-python">ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-60,18,62])
+ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))
+ax.add_feature(cfeature.LAND.with_scale('50m'))
+ax.add_feature(cfeature.LAKES.with_scale('50m'))
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+states_provinces = cfeature.NaturalEarthFeature(
+        category='cultural',
+        name='admin_1_states_provinces_lines',
+        scale='50m',
+        facecolor='none')
+
+ax.add_feature(states_provinces, edgecolor='gray')
+plt.show()
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_18_0.png" alt="png" /></p>
+
+<p>Nous pouvons maintenant remplir notre carte avec notre champ géoréférencé avec la méthode <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html">pcolormesh</a> de matplotlib:</p>
+
+<p>Ici, les coordonnées de Lat Lon sont en 2D, donc à chaque point de la grille, nous connaissons la latitude et la longitude de nos champs.</p>
+
+<p>Il est possible que pour un fichier netcdf Lat et Lon soient en 1D. Il faut ensuite les écrire en 2D avec la commande suivante:</p>
+
+<p>-lon, lat = np.meshgrid (lons, lats)</p>
+
+<p>Nous produirons également notre propre palette de couleurs. Voici un  <a href="http://colorbrewer2.org/#type=diverging&scheme=RdYlBu&n=8">lien</a> utile pour sélectionner nos couleurs et créer notre palette.</p>
+
+<p>Vous pouvez également utiliser l&rsquo;une des <a href="https://matplotlib.org/examples/color/colormaps_reference.html">palettes de couleurs prédéfinies</a> palettes de couleurs prédéfinies par Matplotlip.</p>
+
+<p>Nous utiliserons pour dessiner notre type de carte pcolormesh matplotib. D&rsquo;autres types de <a href="https://matplotlib.org/basemap/users/examples.html">tracés</a> sont disponibles.</p>
+
+<p>Pour améliorer la lecture de notre carte, on peut à ce niveau ajouter:</p>
+
+<ul>
+<li>une légende sous la carte: cbar.set_label</li>
+
+<li><p>ajouter une barre de couleur avec un intervalle d&rsquo;affichage: plt.colorbar</p>
+
+<pre><code class="language-python">Y=np.array([[77,0,111],[115,14,181],[160,17,222],[195,14,240],\
+           [0,0,93],[21,38,177],[33,95,227],[32,162,247],[59,224,248],[202,255,250],\
+           [4,255,179],[37,181,139],[32,132,81],[72,162,60],[157,240,96],[213,255,166],\
+           [241,247,132],[248,185,68],[255,124,4],[235,78,14],[215,32,24],[189,24,40],[162,16,56],[135,16,65],[107,15,73]])/255.
+
+colbar=mpl.colors.ListedColormap(Y)
+fig=plt.figure(figsize=(10,6), frameon=True)  
+ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-60,18,62])
+
+mm = ax.pcolormesh(lons,\
+               lats,\
+               Vals,\
+               vmin=-28,\
+               vmax=28, \
+               transform=ccrs.PlateCarree(),\
+               cmap=colbar )
+
+
+ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))
+ax.add_feature(cfeature.LAND.with_scale('50m'))
+ax.add_feature(cfeature.LAKES.with_scale('50m'))
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+
+states_provinces = cfeature.NaturalEarthFeature(
+    category='cultural',
+    name='admin_1_states_provinces_lines',
+    scale='50m',
+    facecolor='none')
+
+ax.add_feature(states_provinces, edgecolor='gray')  
+ax.stock_img();
+plt.show() 
+
+</code></pre></li>
+</ul>
+
+<p><img src="/img/formation/netcdf2/output_20_0.png" alt="png" /></p>
+
+<p>Si la palette ne convient pas, il est possible d&rsquo;utiliser une palette de Matplotlib.</p>
+
+<pre><code class="language-python">fig=plt.figure(figsize=(10,6), frameon=True)  
+ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-60,18,62])
+
+mm = ax.pcolormesh(lons,\
+                   lats,\
+                   Vals,\
+                   vmin=-28,\
+                   vmax=28, \
+                   transform=ccrs.PlateCarree(),\
+                   cmap='jet' )
+
+
+ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))
+ax.add_feature(cfeature.LAND.with_scale('50m'))
+ax.add_feature(cfeature.LAKES.with_scale('50m'))
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+
+states_provinces = cfeature.NaturalEarthFeature(
+        category='cultural',
+        name='admin_1_states_provinces_lines',
+        scale='50m',
+        facecolor='none')
+
+ax.add_feature(states_provinces, edgecolor='gray')  
+ax.stock_img();
+plt.show() 
+
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_22_0.png" alt="png" /></p>
+
+<p>On peut enfin ajouter:
+    - un titre à notre graphique: plt.title
+    - une barre de couleur: plt.colorbar
+    - un titre à notre barre de couleur: plt.xlabel
+    - latitudes et longitudes avec la fonction: gridlines()
+    - une barre d&rsquo;échelle: scale_bar ()</p>
+
+<p>Enregistrez ensuite notre graphique avec la commande: plt.savefig</p>
+
+<pre><code class="language-python">Y=np.array([[77,0,111],[115,14,181],[160,17,222],[195,14,240],\
+               [0,0,93],[21,38,177],[33,95,227],[32,162,247],[59,224,248],[202,255,250],\
+               [4,255,179],[37,181,139],[32,132,81],[72,162,60],[157,240,96],[213,255,166],\
+               [241,247,132],[248,185,68],[255,124,4],[235,78,14],[215,32,24],[189,24,40],[162,16,56],[135,16,65],[107,15,73]])/255.
+
+colbar=mpl.colors.ListedColormap(Y)
+fig=plt.figure(figsize=(22,12), frameon=True)  
+ax = plt.subplot(111, projection=ccrs.LambertConformal())
+ax.set_extent([-130,-60,18,62])
+
+mm = ax.pcolormesh(lons,\
+                   lats,\
+                   Vals,\
+                   vmin=-28,\
+                   vmax=28, \
+                   transform=ccrs.PlateCarree(),\
+                   cmap=colbar )
+
+
+ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))
+ax.add_feature(cfeature.LAND.with_scale('50m'))
+ax.add_feature(cfeature.LAKES.with_scale('50m'))
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+
+states_provinces = cfeature.NaturalEarthFeature(
+        category='cultural',
+        name='admin_1_states_provinces_lines',
+        scale='50m',
+        facecolor='none')
+
+ax.add_feature(states_provinces, edgecolor='gray')  
+ax.stock_img();
+
+# Define gridline locations and draw the lines using cartopy's built-in gridliner:
+xticks = np.arange(-150.0,-40.0,20)
+yticks =np.arange(10,80,10)
+ax.gridlines()
+
+# Standard 6,000 km scale bar.
+scale_bar(ax, (0.85, 0.2), 500 ,plot_kwargs = dict(linestyle='dashed', color='black'))
+
+cbar = plt.colorbar(mm, orientation='horizontal', shrink=0.75, drawedges='True', ticks=np.arange(-28, 28.1, 4),extend='both')
+cbar.set_label(u'\n Projection = Lambert Conformal Conic / Lambert Conique Conforme\nResolution: 5 Arcs-Minutes (10 km)\nData provided by Natural Resources Canada and the University of Washington/ Données fournies par Ressources Naturelles Canada et l Université de Washington', size='medium') # Affichage de la légende de la barre de couleur
+cbar.ax.tick_params(labelsize=17) 
+ 
+plt.xlabel(u'\n\n\nTemperature / Température (°C)',size='x-large')
+string_title=u'Daily Minimum Temperature / Température Minimale Quotidienne\n in June / en Juin \nMonthly Mean Climatology / Climatologie Moyenne Mensuelle (1981 - 2010)\n\n'
+plt.title(string_title, size='xx-large')
+plt.savefig('./figures/ANUSPLIN_NLDAS_10km_CLIM_TASMIN_06_1981-2010.png', bbox_inches='tight', pad_inches=0.1)
+plt.show() 
+
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_24_0.png" alt="png" /></p>
+
+<h2 id="15-2-utiliser-la-fonction-overplot-de-matplotlib-avec-cartopy">15.2 - Utiliser la fonction overplot de Matplotlib avec Cartopy</h2>
+
+<p>Parfois, nous voulons avoir plusieurs cartes sur la même image.</p>
+
+<ul>
+<li><p>Nous travaillerons ici avec les climatologies de l&rsquo;accumulation mensuelle totale des précipitations (1981-2010) pour tous les mois de l&rsquo;année.</p>
+
+<pre><code class="language-python">## we import librairies that we need
+
+from netCDF4 import Dataset
+import matplotlib.pylab as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import numpy as np
+from carto import scale_bar
+
+month_name=[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;June&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;]
+rep_data='./DATA/ANUSPLIN/'
+
+fig=plt.figure(figsize=(12,15))
+clevs=np.arange(5,150.1,5)
+## Colormap we will use
+cmap0=plt.cm.jet_r
+cmap0.set_under('w') 
+cmap0.set_over('darkblue')
+
+for imonth in np.arange(1,13):  # loop over 12 months
+ax=fig.add_subplot(4,3,imonth, projection=ccrs.LambertConformal())   
+fic=rep_data+'ANUSPLIN_NLDAS_10km_CLIMATO_PrecTOT_1981_2010_'+'{:02d}'.format(imonth)+'.nc'
+dset=Dataset(fic)
+precip=dset.variables['PrecTOT'][:].squeeze()
+lon=dset.variables['lon'][:].squeeze()
+lat=dset.variables['lat'][:].squeeze()
+    
+ax.set_extent([-130,-60,18,62])
+ax.coastlines(resolution='110m');
+ax.add_feature(cfeature.LAND.with_scale('50m'))
+ax.add_feature(cfeature.OCEAN.with_scale('50m'))
+ax.add_feature(cfeature.LAKES.with_scale('50m'))
+ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+
+mm = ax.pcolormesh(lon,\
+               lat,\
+               precip,\
+               vmin=0,\
+               vmax=150, \
+               transform=ccrs.PlateCarree(),\
+               cmap=cmap0 )
+plt.title('Normale '+ month_name[imonth-1],fontsize=12)
+states_provinces = cfeature.NaturalEarthFeature(
+    category='cultural',
+    name='admin_1_states_provinces_lines',
+    scale='50m',
+    facecolor='none')
+
+ax.add_feature(states_provinces, edgecolor='gray')  
+ax.stock_img();
+ax.gridlines();
+# Standard 6,000 km scale bar.
+scale_bar(ax, (0.85, 0.2), 500 ,plot_kwargs = dict(linestyle='dashed', color='black'))
+
+plt.savefig('./figures/My_2Dlalon_multipanel_plot.png')
+plt.show()
+</code></pre></li>
+</ul>
+
+<p><img src="/img/formation/netcdf2/output_26_0.png" alt="png" /></p>
+
+<h2 id="cartopy-modis">Cartopy:  MODIS</h2>
+
+<p><a href="https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.2km.jpg" target="_blank">https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.2km.jpg</a></p>
+
+<p><a href="https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.txt" target="_blank">https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.txt</a></p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(12, 20))
+
+fname = './figures/Miriam.A2012270.2050.1km.jpg'
+img_extent = (-120.67660000000001, -106.32104523100001, 13.2301484511245, 30.766899999999502)
+img = plt.imread(fname)
+
+ax = plt.axes(projection=ccrs.PlateCarree())
+
+# set a margin around the data
+ax.set_xmargin(0.05)
+ax.set_ymargin(0.10)
+
+# ajout de l'image
+ax.imshow(img, origin='upper', extent=img_extent, transform=ccrs.PlateCarree())
+ax.coastlines(resolution='50m', color='black', linewidth=1)
+
+# ajout d'une ville
+ax.plot(-117.1625, 32.715, 'bo', markersize=7, transform=ccrs.Geodetic())
+ax.text(-117, 33, 'San Diego', transform=ccrs.Geodetic())
+</code></pre>
+
+<pre><code>Text(-117, 33, 'San Diego')
+</code></pre>
+
+<p><img src="/img/formation/netcdf2/output_28_1.png" alt="png" /></p>
+
+<pre><code class="language-python">
+</code></pre>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/15.1-netcdf_tutorial/" rel="next">15-1- Le format Netcdf sous Python - Cours</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/15.3-xarray_library/" rel="prev">15-3 La librairie Xarray- Cours</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/15.2-Cartopy_Library.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

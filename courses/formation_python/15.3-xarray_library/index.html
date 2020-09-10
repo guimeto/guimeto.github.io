@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Dans ce tutoriel, nous utiliserons les fonctionnalités de la bibliothèque Xarray pour traiter et analyser des produits au format Netcdf.
+Xarray possède deux structures de données de base, qui s&rsquo;appuient sur et étendent les forces de base de NumPy et Pandas. Les deux structures de données sont fondamentalement N-dimensionnelles:
+1- DataArray 
+xarray.DataArray est l&rsquo;implémentation par xarray d&rsquo;un tableau multidimensionnel étiqueté. Il possède plusieurs propriétés clés:
+  values  a numpy.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/15.3-xarray_library/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/15.3-xarray_library/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/15.3-xarray_library/">
+  <meta property="og:title" content="15-3 La librairie Xarray- Cours | GDueymes">
+  <meta property="og:description" content="Dans ce tutoriel, nous utiliserons les fonctionnalités de la bibliothèque Xarray pour traiter et analyser des produits au format Netcdf.
+Xarray possède deux structures de données de base, qui s&rsquo;appuient sur et étendent les forces de base de NumPy et Pandas. Les deux structures de données sont fondamentalement N-dimensionnelles:
+1- DataArray 
+xarray.DataArray est l&rsquo;implémentation par xarray d&rsquo;un tableau multidimensionnel étiqueté. Il possède plusieurs propriétés clés:
+  values  a numpy."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>15-3 La librairie Xarray- Cours | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes/">3- Les listes en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires/">4- Les dictionnaires en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires-exercice/">4- Les dictionnaires en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles/">5- Les boucles en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles-exercice/">5- Les boucles en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions/">6- Les fonctions en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions-exercice/">6- Les fonctions en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy/">7- La librairie Numpy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas/">8- La lirairie Pandas - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas-exercice/">8- La librairie Pandas - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation-exercice/">9- La visualisation graphique avec Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">9.1- Projet sur les données de températures ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">9.2- Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-cours/">10- Travailler avec des API sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-exercices/">10- Travailler avec des API sous Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-cours/">11- Web Scrapping - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-exercices/">11- Web scrapping - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-cours/">12- SQL et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/">12- SQL et Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/13-regex-cours/">13- Regex et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/14-statistique-descriptive-cours/">14- La statistique descriptive - Rappels</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.1-netcdf_tutorial/">15-1- Le format Netcdf sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.2-cartopy_library/">15-2- La librairie Cartopy - Cours</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/15.3-xarray_library/">15-3 La librairie Xarray- Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-1-niveau_facile/">16.1- Exercices Python - Niveau facile</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-2-niveau_intermediaire/">16.2- Exercices Python - Niveau intermédiaire</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-3-niveau-difficile/">16.3- Exercices Python - Niveau difficile</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#15-1-ouvrir-un-fichier-netcdf">15.1 - Ouvrir un fichier Netcdf</a></li>
+<li><a href="#15-2-explorer-un-jeu-de-données-netcdf">15.2 - Explorer un jeu de données Netcdf</a></li>
+<li><a href="#15-3-opérations-de-base-avec-xarray">15.3 - Opérations de base avec Xarray</a></li>
+<li><a href="#15-3-1-sélectionner-une-date">15.3.1 - Sélectionner une date:</a></li>
+<li><a href="#15-3-2-sélectionner-une-période-de-temps">15.3.2 - Sélectionner une période de temps:</a></li>
+<li><a href="#15-3-3-exporter-un-dataset-en-dataframe">15.3.3 - Exporter un dataset en dataframe:</a></li>
+<li><a href="#15-3-4-opérations-de-base-avec-xarray">15.3.4 - Opérations de base avec Xarray:</a></li>
+<li><a href="#15-3-5-select-grid-points-from-netcdf-file-using-xarray">15.3.5- Select grid points from Netcdf file using Xarray</a></li>
+<li><a href="#gridpoint-to-extract-the-closest-grid-point-of-a-latitude-longitude">Gridpoint:  to extract the closest grid point of a latitude / longitude:</a></li>
+<li><a href="#gridpoints-to-extract-a-list-of-points">Gridpoints:  to extract a list of points</a></li>
+<li><a href="#to-extract-an-area-or-subdomain-delimited-by-latitude-and-longitude-values-slicing">To extract an area or subdomain delimited by latitude and longitude values: .slicing()</a></li>
+<li><a href="#to-mask-an-area-delimited-by-a-shapefile">To mask an area delimited by a Shapefile:</a></li>
+<li><a href="#15-3-6-last-example-using-xarray">15.3.6- Last example using Xarray:</a></li>
+</ul></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>15-3 La librairie Xarray- Cours</h1>
+
+          <div class="article-style">
+            
+
+<p>Dans ce tutoriel, nous utiliserons les fonctionnalités de la bibliothèque  Xarray pour traiter et analyser des produits au format Netcdf.</p>
+
+<p><img src="/img/formation/xarray.png" alt="image0" /></p>
+
+<p>Xarray possède deux structures de données de base, qui s&rsquo;appuient sur et étendent les forces de base de NumPy et  Pandas. Les deux structures de données sont fondamentalement N-dimensionnelles:</p>
+
+<p><b>1-  DataArray </b></p>
+
+<p>xarray.DataArray est l&rsquo;implémentation par xarray d&rsquo;un tableau multidimensionnel étiqueté. Il possède plusieurs propriétés clés:</p>
+
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%">
+<col width="57%">
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">values</span></tt></td>
+<td> a numpy.ndarray holding the array’s values</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">dims</span></tt></td>
+<td>dimension names for each axis (e.g., ('x', 'y', 'z','time'))</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">coords</span></tt></td>
+<td>a dict-like container of arrays (coordinates) that label each point (e.g., 1-dimensional arrays of numbers, datetime objects or strings)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">attrs</span></tt></td>
+<td>an OrderedDict to hold arbitrary metadata (attributes)</td>
+</tr>
+</tbody>
+</table>
+
+<p><b>2- DataSet </b></p>
+
+<p>xarray.Dataset est l&rsquo;équivalent multidimensionnel d&rsquo;un DataFrame. Il s&rsquo;agit d&rsquo;un conteneur de type dict de tableaux étiquetés (objets DataArray) avec des dimensions alignées. Il est conçu comme une représentation en mémoire du modèle de données du format de fichier netCDF.</p>
+
+<p>xarray.DataSet est une collection de DataArrays. Chaque fichier NEtcdf contient un Dataset.</p>
+
+<h2 id="15-1-ouvrir-un-fichier-netcdf">15.1 - Ouvrir un fichier Netcdf</h2>
+
+<p>Nous allons ouvrir et stocker les données d&rsquo;un fichier Netcdf dans un ensemble de données.</p>
+
+<p>Nous devons d&rsquo;abord importer des bibliothèques et créer des alias.</p>
+
+<pre><code class="language-python">import xarray as xr
+import warnings; warnings.filterwarnings(action='ignore')
+from matplotlib import pyplot as plt
+%matplotlib inline
+plt.rcParams['figure.figsize'] = (8,5)
+</code></pre>
+
+<ul>
+<li>Pour importer et stocker en tant que Dataset un seul fichier Netcdf:</li>
+</ul>
+
+<p>Nous allons travailler ici avec les champs de température issus de la réanalyse globale de CERA20C.</p>
+
+<pre><code class="language-python">unique_dataDIR = './DATA/CERA20C/cera20c_member0_TAS_197101_day.nc'
+TAS = xr.open_dataset(unique_dataDIR)
+TAS
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 31)
+Coordinates:
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-01-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] ...
+    t2m        (time, latitude, longitude) float32 ...
+Attributes:
+    CDI:          Climate Data Interface version 1.6.9 (http://mpimet.mpg.de/...
+    Conventions:  CF-1.6
+    history:      Thu Oct 25 14:29:40 2018: cdo daymean ./TAS/cera20c_member0...
+    CDO:          Climate Data Operators version 1.6.9 (http://mpimet.mpg.de/...</pre>
+
+<ul>
+<li>Pour importer plusieurs fichier Netcdf:</li>
+</ul>
+
+<p>Ici, nous voulons stocker tous les noms de fichiers commençant par «cera20c_member0_TAS_» et situés dans le chemin «./data/cera20c/».</p>
+
+<pre><code class="language-python">multi_dataDIR = './DATA/CERA20C/cera20c_member0_TAS_*.nc'
+TAS2 = xr.open_mfdataset(multi_dataDIR)
+TAS2
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(31, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 145, 288), meta=np.ndarray&gt;
+Attributes:
+    CDI:          Climate Data Interface version 1.6.9 (http://mpimet.mpg.de/...
+    Conventions:  CF-1.6
+    history:      Thu Oct 25 14:29:40 2018: cdo daymean ./TAS/cera20c_member0...
+    CDO:          Climate Data Operators version 1.6.9 (http://mpimet.mpg.de/...</pre>
+
+<ul>
+<li>Combiner des fichiers Netcdf:</li>
+</ul>
+
+<p>Pour combiner des variables et des coordonnées entre plusieurs objets DataArray et/ou Dataset, on utilise la méthode <b>.merge()</b>. Il peut fusionner une liste de Dataset, DataArray ou des dictionnaires d&rsquo;objets convertibles en objets DataArray:</p>
+
+<pre><code class="language-python">multi_dataDIR = './DATA/CERA20C/cera20c_member0_TAS_*.nc'
+TAS2 = xr.open_mfdataset(multi_dataDIR)
+multi_dataDIR2 = './DATA/CERA20C/cera20c_member0_SIC_*.nc'
+SIC2 = xr.open_mfdataset(multi_dataDIR2)
+
+DS_new = xr.merge([TAS2,SIC2])
+DS_new
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(31, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 145, 288), meta=np.ndarray&gt;
+    siconc     (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 145, 288), meta=np.ndarray&gt;</pre>
+
+<h2 id="15-2-explorer-un-jeu-de-données-netcdf">15.2 - Explorer un jeu de données Netcdf</h2>
+
+<p>Nous pouvons rapidement explorer nos ensembles de données en utilisant certaines méthodes de la bibliothèque xarray:</p>
+
+<pre><code>- DS.var
+- DS.dims
+- DS.coords
+- DS.attrs
+</code></pre>
+
+<pre><code class="language-python">DS_new.var
+</code></pre>
+
+<pre><code>&lt;bound method ImplementsDatasetReduce._reduce_method.&lt;locals&gt;.wrapped_func of &lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(31, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 145, 288), meta=np.ndarray&gt;
+    siconc     (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 145, 288), meta=np.ndarray&gt;&gt;
+</code></pre>
+
+<pre><code class="language-python">DS_new.dims
+</code></pre>
+
+<pre><code>Frozen(SortedKeysDict({'latitude': 145, 'longitude': 288, 'time': 365, 'bnds': 2}))
+</code></pre>
+
+<pre><code class="language-python">DS_new.coords
+</code></pre>
+
+<pre><code>Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+</code></pre>
+
+<h2 id="15-3-opérations-de-base-avec-xarray">15.3 - Opérations de base avec Xarray</h2>
+
+<h2 id="15-3-1-sélectionner-une-date">15.3.1 - Sélectionner une date:</h2>
+
+<p>Nous pouvons utiliser la méthode .sel() pour sélectionner un pas de temps de notre Dataset.</p>
+
+<pre><code class="language-python">DS_date = DS_new.sel(time='1971-01-01')
+DS_date
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 1)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(1, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;
+    siconc     (time, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;</pre>
+
+<h2 id="15-3-2-sélectionner-une-période-de-temps">15.3.2 - Sélectionner une période de temps:</h2>
+
+<p>On peut sélectionner une période de temps avec le &ldquo;slicing&rdquo;:</p>
+
+<pre><code class="language-python">DS_date_range = DS_new.sel(time=slice('1971-06-01', '1971-08-31'))
+DS_date_range
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 92)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * time       (time) datetime64[ns] 1971-06-01T10:30:00 ... 1971-08-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(30, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(30, 145, 288), meta=np.ndarray&gt;
+    siconc     (time, latitude, longitude) float32 dask.array&lt;chunksize=(30, 145, 288), meta=np.ndarray&gt;</pre>
+
+<h2 id="15-3-3-exporter-un-dataset-en-dataframe">15.3.3 - Exporter un dataset en dataframe:</h2>
+
+<p>Nous pouvons exporter notre ensemble de données dans un DataFrame de Pandas, puis utiliser la bibliothèque Pandas pour effectuer une analyse.</p>
+
+<pre><code class="language-python">df = DS_date_range.to_dataframe()
+</code></pre>
+
+<pre><code class="language-python">df.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>time_bnds</th>
+      <th>t2m</th>
+      <th>siconc</th>
+    </tr>
+    <tr>
+      <th>bnds</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">0</th>
+      <th rowspan="5" valign="top">90.0</th>
+      <th rowspan="5" valign="top">0.0</th>
+      <th>1971-06-01 10:30:00</th>
+      <td>1971-06-01</td>
+      <td>266.296448</td>
+      <td>0.990234</td>
+    </tr>
+    <tr>
+      <th>1971-06-02 10:30:00</th>
+      <td>1971-06-02</td>
+      <td>264.760101</td>
+      <td>0.988525</td>
+    </tr>
+    <tr>
+      <th>1971-06-03 10:30:00</th>
+      <td>1971-06-03</td>
+      <td>265.866272</td>
+      <td>0.987502</td>
+    </tr>
+    <tr>
+      <th>1971-06-04 10:30:00</th>
+      <td>1971-06-04</td>
+      <td>265.946930</td>
+      <td>0.987380</td>
+    </tr>
+    <tr>
+      <th>1971-06-05 10:30:00</th>
+      <td>1971-06-05</td>
+      <td>266.125519</td>
+      <td>0.987152</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df.describe()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>t2m</th>
+      <th>siconc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>7.683840e+06</td>
+      <td>7.683840e+06</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2.670016e+02</td>
+      <td>1.417524e-01</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2.585196e+01</td>
+      <td>3.120009e-01</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.925624e+02</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.732214e+02</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2.857340e+02</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2.963880e+02</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>3.148035e+02</td>
+      <td>1.000000e+00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="15-3-4-opérations-de-base-avec-xarray">15.3.4 - Opérations de base avec Xarray:</h2>
+
+<h4>Moyenne temporelle:</h4>
+
+<pre><code class="language-python">Mean_array = DS_date_range.mean(dim='time')
+Mean_array.values
+</code></pre>
+
+<pre><code>&lt;bound method Mapping.values of &lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+Data variables:
+    t2m        (latitude, longitude) float32 dask.array&lt;chunksize=(145, 288), meta=np.ndarray&gt;
+    siconc     (latitude, longitude) float32 dask.array&lt;chunksize=(145, 288), meta=np.ndarray&gt;&gt;
+</code></pre>
+
+<ul>
+<li><p>Pour sauvegarder nos résultats en csv:</p>
+
+<pre><code class="language-python">Mean_array.t2m.to_dataframe().to_csv('./DATA/CERA20C_T2m_mean.csv')
+</code></pre></li>
+</ul>
+
+<h4>Moyenne spatiale:</h4>
+
+<p>Moyenne suivant toutes les latitudes et longitudes:</p>
+
+<pre><code class="language-python">DS_date_range.t2m.mean(dim=('latitude', 'longitude'))
+</code></pre>
+
+<pre>&lt;xarray.DataArray &#x27;t2m&#x27; (time: 92)&gt;
+dask.array&lt;mean_agg-aggregate, shape=(92,), dtype=float32, chunksize=(31,)&gt;
+Coordinates:
+  * time     (time) datetime64[ns] 1971-06-01T10:30:00 ... 1971-08-31T10:30:00</pre>
+
+<pre><code class="language-python">DS_date_range.t2m.mean(dim=('latitude', 'longitude')).plot()
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0xbbb52e8&gt;]
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_26_1.png" alt="png" /></p>
+
+<ul>
+<li><p>Pour sauvegarder nos résultats en csv:</p>
+
+<pre><code class="language-python">DS_date_range.t2m.mean(dim=('time', 'longitude')).to_dataframe().to_csv('./DATA/CERA20C_T2m_2Dmean.csv')
+</code></pre></li>
+
+<li><p>Quick plot with Xarray</p>
+
+<pre><code class="language-python">import cartopy.crs as ccrs
+fig=plt.figure(figsize=(10,10), frameon=True) 
+
+ax = plt.axes(projection=ccrs.Orthographic(-80, 35))
+Mean_array.t2m.plot.contourf(ax=ax, transform=ccrs.PlateCarree());
+ax.set_global(); ax.coastlines();
+</code></pre></li>
+</ul>
+
+<p><img src="/img/formation/netcdf3/output_30_0.png" alt="png" /></p>
+
+<h4>Opérations arythmétiques:</h4>
+
+<p>Dans cette exemple, nous allons moyenne le Dataset DS_date_range et appliquer une simple opération arythmétique pour changer les unités.</p>
+
+<pre><code class="language-python">centigrade = DS_date_range.t2m.mean(dim='time') - 273.16
+centigrade.values
+</code></pre>
+
+<pre><code>array([[ -1.2229004,  -1.2229004,  -1.2229004, ...,  -1.2229004,
+         -1.2229004,  -1.2229004],
+       [ -1.3348389,  -1.3311157,  -1.3274231, ...,  -1.3488159,
+         -1.3442383,  -1.3395386],
+       [ -1.6027222,  -1.5914001,  -1.5804138, ...,  -1.6451721,
+         -1.631012 ,  -1.6168518],
+       ...,
+       [-58.547928 , -58.5663   , -58.58455  , ..., -58.314026 ,
+        -58.391983 , -58.46997  ],
+       [-59.556473 , -59.577957 , -59.59955  , ..., -59.478424 ,
+        -59.50441  , -59.53041  ],
+       [-60.739105 , -60.739105 , -60.739105 , ..., -60.739105 ,
+        -60.739105 , -60.739105 ]], dtype=float32)
+</code></pre>
+
+<pre><code class="language-python">fig=plt.figure(figsize=(10,10), frameon=True)
+ax = plt.axes(projection=ccrs.Orthographic(-80, 35))
+centigrade.plot.contourf(ax=ax, transform=ccrs.PlateCarree());
+ax.set_global(); ax.coastlines();
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_34_0.png" alt="png" /></p>
+
+<h4>La méthode groupby():</h4>
+
+<p>Tout comme une manipulation de jeux de données sous Pandas, la méthode groupdby() avec Xarray est très utile pour regrouper nos Dataset par mois, saison, année &hellip; puis y appliquer des fonctions.</p>
+
+<pre><code class="language-python">TAS2
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(31, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 145, 288), meta=np.ndarray&gt;
+Attributes:
+    CDI:          Climate Data Interface version 1.6.9 (http://mpimet.mpg.de/...
+    Conventions:  CF-1.6
+    history:      Thu Oct 25 14:29:40 2018: cdo daymean ./TAS/cera20c_member0...
+    CDO:          Climate Data Operators version 1.6.9 (http://mpimet.mpg.de/...</pre>
+
+<ul>
+<li><p>Calcul des moyennes mensuelles:</p>
+
+<pre><code class="language-python">DS_month = TAS2.groupby('time.month').mean('time')
+DS_month
+</code></pre></li>
+</ul>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288, month: 12)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * month      (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
+Data variables:
+    t2m        (month, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;</pre>
+
+<p>On peut ainsi s&rsquo;appuyer sur une méthode groupby() pour calculer des climatologies et des anomalies associées.</p>
+
+<pre><code class="language-python">climatology = TAS2.groupby('time.month').mean('time')
+anomalies = TAS2.groupby('time.month') - climatology
+</code></pre>
+
+<p>Autre exemple, on va calculer les anomalies standardisées mensuelles de la température</p>
+
+<pre><code class="language-python">data_clim = TAS2.groupby('time.month').mean(&quot;time&quot;)
+data_std = TAS2.groupby('time.month').std(&quot;time&quot;)
+data_std
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288, month: 12)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * month      (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
+Data variables:
+    t2m        (month, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;</pre>
+
+<pre><code class="language-python"># seaon mean:
+DS_season = DS_new.groupby('time.season').mean('time')
+DS_season
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288, season: 4)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * season     (season) object &#x27;DJF&#x27; &#x27;JJA&#x27; &#x27;MAM&#x27; &#x27;SON&#x27;
+Data variables:
+    t2m        (season, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;
+    siconc     (season, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;</pre>
+
+<pre><code class="language-python"># year mean:
+DS_year = DS_new.groupby('time.year').mean('time')
+DS_year
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288, year: 1)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * year       (year) int64 1971
+Data variables:
+    t2m        (year, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;
+    siconc     (year, latitude, longitude) float32 dask.array&lt;chunksize=(1, 145, 288), meta=np.ndarray&gt;</pre>
+
+<ul>
+<li><p>to select a specific season:</p>
+
+<pre><code class="language-python">DS_winter = DS_season.sel(season='DJF')
+DS_winter
+</code></pre></li>
+</ul>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288)
+Coordinates:
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+    season     &lt;U3 &#x27;DJF&#x27;
+Data variables:
+    t2m        (latitude, longitude) float32 dask.array&lt;chunksize=(145, 288), meta=np.ndarray&gt;
+    siconc     (latitude, longitude) float32 dask.array&lt;chunksize=(145, 288), meta=np.ndarray&gt;</pre>
+
+<p>In the example below, we will group the xarray.DataArray data by season, calculate the average, apply a simple arrhythmic operation and plot the resulting fields for each season.</p>
+
+<pre><code class="language-python">DS_Season = DS_new.t2m.groupby('time.season').mean('time')- 273.15
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(9,5))
+j = 0
+for i, season in enumerate(('DJF', 'MAM', 'JJA', 'SON')):
+    if season =='JJA':
+        j += 1
+        i = 0
+    elif season =='SON':
+        i = 1
+        
+    DS_Season.sel(season=season).plot.pcolormesh(
+        ax=axes[i, j], vmin=-30, vmax=30, cmap='Spectral_r',
+        add_colorbar=True, extend='both')
+
+for ax in axes.flat:
+    ax.axes.get_xaxis().set_ticklabels([])
+    ax.axes.get_yaxis().set_ticklabels([])
+    ax.axes.axis('tight')
+   
+plt.tight_layout()
+fig.suptitle('Seasonal Surface Air Temperature', fontsize=16, y=1.02)
+</code></pre>
+
+<pre><code>Text(0.5, 1.02, 'Seasonal Surface Air Temperature')
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_49_1.png" alt="png" /></p>
+
+<pre><code class="language-python">
+lat_bnd = [80, 50]
+lon_bnd = [250, 310]
+DS_Season = DS_new.sel(longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),).siconc.groupby('time.season').mean('time') *100
+
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(16,10))
+j = 0
+for i, season in enumerate(('DJF', 'MAM', 'JJA', 'SON')):
+    if season =='JJA':
+        j += 1
+        i = 0
+    elif season =='SON':
+        i = 1
+        
+    DS_Season.sel(season=season).plot.pcolormesh(
+        ax=axes[i, j], vmin=0, vmax=100, cmap='Spectral_r',
+        add_colorbar=True, extend='both')
+for ax in axes.flat:
+    ax.axes.get_xaxis().set_ticklabels([])
+    ax.axes.get_yaxis().set_ticklabels([])
+    ax.axes.axis('tight')
+   
+plt.tight_layout()
+fig.suptitle('Seasonal Sea Ice Concentration', fontsize=16, y=1.02)
+</code></pre>
+
+<pre><code>Text(0.5, 1.02, 'Seasonal Sea Ice Concentration')
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_50_1.png" alt="png" /></p>
+
+<p>To save our result into Netcdf:</p>
+
+<pre><code class="language-python">DS_season = DS_new.groupby('time.season').mean('time')
+dataDIR = './DATA/CERA20C_season.nc'
+DS_Season.to_netcdf(dataDIR)
+
+</code></pre>
+
+<h2 id="15-3-5-select-grid-points-from-netcdf-file-using-xarray">15.3.5- Select grid points from Netcdf file using Xarray</h2>
+
+<p>In the previous section we applied the .sel () method to work on the time dimension. This method can be used on spatial dimensions to extract points or study areas from our netcdf file.</p>
+
+<h2 id="gridpoint-to-extract-the-closest-grid-point-of-a-latitude-longitude">Gridpoint:  to extract the closest grid point of a latitude / longitude:</h2>
+
+<pre><code class="language-python">lati = 45.5
+loni = 269.2
+data  = DS_new.sel(longitude=loni  , latitude=lati  , method='nearest') 
+data
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, time: 365)
+Coordinates:
+    latitude   float32 45.0
+    longitude  float32 268.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(31, 2), meta=np.ndarray&gt;
+    t2m        (time) float32 dask.array&lt;chunksize=(31,), meta=np.ndarray&gt;
+    siconc     (time) float32 dask.array&lt;chunksize=(31,), meta=np.ndarray&gt;</pre>
+
+<pre><code class="language-python">data['t2m'] = data['t2m'] - 273.15
+</code></pre>
+
+<pre><code class="language-python">data.t2m
+</code></pre>
+
+<pre>&lt;xarray.DataArray &#x27;t2m&#x27; (time: 365)&gt;
+dask.array&lt;sub, shape=(365,), dtype=float32, chunksize=(31,)&gt;
+Coordinates:
+    latitude   float32 45.0
+    longitude  float32 268.75
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00</pre>
+
+<p>We can convert our selection into a DataFrame and then use Pandas to analyse our results.</p>
+
+<pre><code class="language-python">df = data.t2m.to_dataframe()
+fig = plt.figure(figsize=(16,8))
+df['t2m'].plot()
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10446e48&gt;
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_59_1.png" alt="png" /></p>
+
+<h2 id="gridpoints-to-extract-a-list-of-points">Gridpoints:  to extract a list of points</h2>
+
+<pre><code class="language-python">lats =  [20.0,50.0,90.0]
+lons =  [60.0,80.0,120.0]
+
+data  = DS_new.sel(longitude=lons  , latitude=lats  , method='nearest')
+data['t2m'] = data['t2m']-273.15
+data
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 3, longitude: 3, time: 365)
+Coordinates:
+  * latitude   (latitude) float32 20.0 50.0 90.0
+  * longitude  (longitude) float32 60.0 80.0 120.0
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(31, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 3, 3), meta=np.ndarray&gt;
+    siconc     (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 3, 3), meta=np.ndarray&gt;</pre>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(16,8))
+data.t2m.sel(longitude=60.0, latitude=[20.0,50.0,90.0]).plot.line(x='time')
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x10ded080&gt;,
+ &lt;matplotlib.lines.Line2D at 0x112c9588&gt;,
+ &lt;matplotlib.lines.Line2D at 0x112c97f0&gt;]
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_62_1.png" alt="png" /></p>
+
+<h2 id="to-extract-an-area-or-subdomain-delimited-by-latitude-and-longitude-values-slicing">To extract an area or subdomain delimited by latitude and longitude values: .slicing()</h2>
+
+<pre><code class="language-python">lat_bnd = [80, 50]
+lon_bnd = [250, 310]
+area = DS_new.sel(longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),)
+area
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (bnds: 2, latitude: 25, longitude: 49, time: 365)
+Coordinates:
+  * latitude   (latitude) float32 80.0 78.75 77.5 76.25 ... 52.5 51.25 50.0
+  * longitude  (longitude) float32 250.0 251.25 252.5 ... 307.5 308.75 310.0
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+Dimensions without coordinates: bnds
+Data variables:
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;chunksize=(31, 2), meta=np.ndarray&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 25, 49), meta=np.ndarray&gt;
+    siconc     (time, latitude, longitude) float32 dask.array&lt;chunksize=(31, 25, 49), meta=np.ndarray&gt;</pre>
+
+<pre><code class="language-python">area.longitude.values
+</code></pre>
+
+<pre><code>array([250.  , 251.25, 252.5 , 253.75, 255.  , 256.25, 257.5 , 258.75,
+       260.  , 261.25, 262.5 , 263.75, 265.  , 266.25, 267.5 , 268.75,
+       270.  , 271.25, 272.5 , 273.75, 275.  , 276.25, 277.5 , 278.75,
+       280.  , 281.25, 282.5 , 283.75, 285.  , 286.25, 287.5 , 288.75,
+       290.  , 291.25, 292.5 , 293.75, 295.  , 296.25, 297.5 , 298.75,
+       300.  , 301.25, 302.5 , 303.75, 305.  , 306.25, 307.5 , 308.75,
+       310.  ], dtype=float32)
+</code></pre>
+
+<p>To visualize our area::</p>
+
+<pre><code class="language-python">import cartopy.crs as ccrs
+import cartopy.feature as cfeat
+def make_figure():
+    fig = plt.figure(figsize=(22, 12))
+    ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
+
+    # generate a basemap with country borders, oceans and coastlines
+    ax.add_feature(cfeat.LAND)
+    ax.add_feature(cfeat.OCEAN)
+    ax.add_feature(cfeat.COASTLINE)
+    ax.add_feature(cfeat.BORDERS, linestyle='dotted')
+    return fig, ax
+
+make_figure();
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_67_0.png" alt="png" /></p>
+
+<pre><code class="language-python">_, ax = make_figure()
+# plot the temperature field
+area.t2m[0].plot()
+</code></pre>
+
+<pre><code>&lt;matplotlib.collections.QuadMesh at 0xec83630&gt;
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_68_1.png" alt="png" /></p>
+
+<h2 id="to-mask-an-area-delimited-by-a-shapefile">To mask an area delimited by a Shapefile:</h2>
+
+<p>To do this, we need to import two more librairies:
+- Geopandas: conda install -c conda-forge geopandas
+- osgeo: conda install -c conda-forge gdal</p>
+
+<p>The next function will open a shapefile, read the polygons and make a mask from each grid points of our Netcdf inside the polygons.</p>
+
+<pre><code class="language-python">from osgeo import ogr
+import geopandas as gpd
+import numpy as np
+def get_mask(lons2d, lats2d, shp_path=&quot;&quot;, polygon_name=None):
+    &quot;&quot;&quot;
+    Assumes that the shape file contains polygons in lat lon coordinates
+    :param lons2d:
+    :param lats2d:
+    :param shp_path:
+    :rtype : np.ndarray
+    The mask is 1 for the points inside of the polygons
+    &quot;&quot;&quot;
+    ds = ogr.Open(shp_path)
+    &quot;&quot;&quot;
+    :type : ogr.DataSource
+    &quot;&quot;&quot;
+
+    xx = lons2d.copy()
+    yy = lats2d
+
+    # set longitudes to be from -180 to 180
+    xx[xx &gt; 180] -= 360
+
+    mask = np.zeros(lons2d.shape, dtype=int)
+    nx, ny = mask.shape
+
+    pt = ogr.Geometry(ogr.wkbPoint)
+
+    for i in range(ds.GetLayerCount()):
+        layer = ds.GetLayer(i)
+        &quot;&quot;&quot;
+        :type : ogr.Layer
+        &quot;&quot;&quot;
+
+        for j in range(layer.GetFeatureCount()):
+            feat = layer.GetFeature(j)
+            &quot;&quot;&quot;
+            :type : ogr.Feature
+            &quot;&quot;&quot;
+
+            # Select polygons by the name property
+            if polygon_name is not None:
+                if not feat.GetFieldAsString(&quot;NAME&quot;) == polygon_name:
+                    continue
+
+            g = feat.GetGeometryRef()
+            &quot;&quot;&quot;
+            :type : ogr.Geometry
+            &quot;&quot;&quot;
+
+            assert isinstance(g, ogr.Geometry)
+
+            for pi in range(nx):
+                for pj in range(ny):
+                    pt.SetPoint_2D(0, float(xx[pi, pj]), float(yy[pi, pj]))
+
+                    mask[pi, pj] += int(g.Contains(pt))
+
+    return mask
+
+</code></pre>
+
+<p>We first read the Netcdf file and store informations in a Xarray.dataset.</p>
+
+<pre><code class="language-python">ds = xr.open_dataset('./DATA/CERA20C/cera20c_member0_TAS_197101_day.nc')
+</code></pre>
+
+<p>We then need to extract latitudes and longitudes values and compute a 2D matrix.</p>
+
+<pre><code class="language-python">Imp_Lats =  ds['latitude'].values
+Imp_Lons =  ds['longitude'].values
+lon2d, lat2d = np.meshgrid(Imp_Lons, Imp_Lats)
+</code></pre>
+
+<pre><code class="language-python">ds_mean = ds.mean('time') - 273.15
+ds_mean
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288)
+Coordinates:
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+Data variables:
+    t2m        (latitude, longitude) float32 -34.067184 ... -25.249802</pre>
+
+<p>We open the shape file with Geopandas library.</p>
+
+<pre><code class="language-python">shapes = gpd.read_file(&quot;./DATA/Shapefiles/Countries_Final-polygon.shp&quot;)
+list(shapes.columns.values)
+</code></pre>
+
+<pre><code>['FIPS',
+ 'ISO2',
+ 'ISO3',
+ 'UN',
+ 'NAME',
+ 'AREA',
+ 'POP2005',
+ 'REGION',
+ 'SUBREGION',
+ 'LON',
+ 'LAT',
+ 'layer',
+ 'path',
+ 'geometry']
+</code></pre>
+
+<pre><code class="language-python">shapes.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FIPS</th>
+      <th>ISO2</th>
+      <th>ISO3</th>
+      <th>UN</th>
+      <th>NAME</th>
+      <th>AREA</th>
+      <th>POP2005</th>
+      <th>REGION</th>
+      <th>SUBREGION</th>
+      <th>LON</th>
+      <th>LAT</th>
+      <th>layer</th>
+      <th>path</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NT</td>
+      <td>AN</td>
+      <td>ANT</td>
+      <td>530</td>
+      <td>Bonaire</td>
+      <td>80</td>
+      <td>186392</td>
+      <td>19</td>
+      <td>29</td>
+      <td>-68.870</td>
+      <td>12.123</td>
+      <td>Single parts</td>
+      <td>C:/Users/Aspire/Desktop/ZIKA analysis with new...</td>
+      <td>POLYGON ((-68.19528200000002 12.22110899999996...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NT</td>
+      <td>AN</td>
+      <td>ANT</td>
+      <td>530</td>
+      <td>Curacao</td>
+      <td>80</td>
+      <td>186392</td>
+      <td>19</td>
+      <td>29</td>
+      <td>-68.870</td>
+      <td>12.123</td>
+      <td>Single parts</td>
+      <td>C:/Users/Aspire/Desktop/ZIKA analysis with new...</td>
+      <td>POLYGON ((-68.96556099999998 12.19888900000001...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NT</td>
+      <td>AN</td>
+      <td>ANT</td>
+      <td>530</td>
+      <td>Netherlands Antilles</td>
+      <td>80</td>
+      <td>186392</td>
+      <td>19</td>
+      <td>29</td>
+      <td>-68.870</td>
+      <td>12.123</td>
+      <td>Single parts</td>
+      <td>C:/Users/Aspire/Desktop/ZIKA analysis with new...</td>
+      <td>POLYGON ((-62.96111299999995 17.4608310000001,...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AC</td>
+      <td>AG</td>
+      <td>ATG</td>
+      <td>28</td>
+      <td>Antigua and Barbuda</td>
+      <td>44</td>
+      <td>83039</td>
+      <td>19</td>
+      <td>29</td>
+      <td>-61.783</td>
+      <td>17.078</td>
+      <td>Studied_countries</td>
+      <td>C:\Users\Aspire\Desktop\ZIKA analysis with new...</td>
+      <td>(POLYGON ((-61.686668 17.02444100000014, -61.7...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AR</td>
+      <td>AR</td>
+      <td>ARG</td>
+      <td>32</td>
+      <td>Argentina</td>
+      <td>273669</td>
+      <td>38747148</td>
+      <td>19</td>
+      <td>5</td>
+      <td>-65.167</td>
+      <td>-35.377</td>
+      <td>Studied_countries</td>
+      <td>C:\Users\Aspire\Desktop\ZIKA analysis with new...</td>
+      <td>(POLYGON ((-68.60861199999994 -54.891395999999...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">shapes.loc[27, 'geometry']
+shapes.plot()
+</code></pre>
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xee1c668&gt;
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_80_1.png" alt="png" /></p>
+
+<p>We want in our study to extract information inside Mexico shapefile.</p>
+
+<pre><code class="language-python">mask=get_mask(lon2d,lat2d,shp_path=&quot;./DATA/Shapefiles/Countries_Final-polygon.shp&quot;, polygon_name='Mexico') 
+np.max(mask)
+</code></pre>
+
+<pre><code>1
+</code></pre>
+
+<p>We will convert our mask into numpy 2D array. We&rsquo;ll be later able to apply this matrix to mask our Netcdf file.</p>
+
+<pre><code class="language-python">np.save('DATA/Mexico.npy',mask) # saving our mask in numpy.array
+</code></pre>
+
+<p>We will mask our area using .where() method.</p>
+
+<pre><code class="language-python">ds_mask = ds_mean.where(mask == 1) 
+ds_mask.to_netcdf('DATA/Mexico.nc')  # we want to save our shapefile mask in Netcdf format
+</code></pre>
+
+<pre><code class="language-python">ds_mask
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288)
+Coordinates:
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+Data variables:
+    t2m        (latitude, longitude) float32 nan nan nan nan ... nan nan nan nan</pre>
+
+<pre><code class="language-python">np.max(ds_mask.t2m)
+</code></pre>
+
+<pre>&lt;xarray.DataArray &#x27;t2m&#x27; ()&gt;
+array(24.01031494)</pre>
+
+<pre><code class="language-python">_, ax = make_figure()
+# plot the temperature field
+lat_bnd = [90, 0]
+lon_bnd = [200, 320]
+ds_mask.t2m.sel(longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),).plot.pcolormesh(vmin=0, vmax=30, cmap='Spectral',add_colorbar=True, extend='both')
+</code></pre>
+
+<pre><code>&lt;matplotlib.collections.QuadMesh at 0x14beada0&gt;
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_89_1.png" alt="png" /></p>
+
+<h2 id="15-3-6-last-example-using-xarray">15.3.6- Last example using Xarray:</h2>
+
+<p>In this section, We will calculate the seasonal accumulation of the precipitation, extract a region, plot the domain and record our result in Netcdf:</p>
+
+<pre><code class="language-python"># Let's open cera20c_enda_ep_PR_*.nc netcdf files 
+multi_dataDIR = './DATA/CERA20C/cera20c_enda_ep_PR_*.nc'
+array = xr.open_mfdataset(multi_dataDIR)
+array.tp
+</code></pre>
+
+<pre>&lt;xarray.DataArray &#x27;tp&#x27; (time: 365, latitude: 181, longitude: 360)&gt;
+dask.array&lt;concatenate, shape=(365, 181, 360), dtype=float32, chunksize=(31, 181, 360)&gt;
+Coordinates:
+  * latitude   (latitude) float32 90.0 89.0 88.0 87.0 ... -88.0 -89.0 -90.0
+  * longitude  (longitude) float32 0.0 1.0 2.0 3.0 ... 356.0 357.0 358.0 359.0
+  * time       (time) datetime64[ns] 1971-01-02T18:00:00 ... 1972-01-01T18:00:00
+Attributes:
+    units:      m
+    long_name:  Total precipitation</pre>
+
+<p>All Netcdf files are stored in DataArray container, we can now group our Datasets by season, apply a simple sum() method over time and then change units from meters to mm.</p>
+
+<pre><code class="language-python">array_season = array.groupby('time.season').sum('time')*1000
+array_season
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 181, longitude: 360, season: 4)
+Coordinates:
+  * latitude   (latitude) float32 90.0 89.0 88.0 87.0 ... -88.0 -89.0 -90.0
+  * longitude  (longitude) float32 0.0 1.0 2.0 3.0 ... 356.0 357.0 358.0 359.0
+  * season     (season) object &#x27;DJF&#x27; &#x27;JJA&#x27; &#x27;MAM&#x27; &#x27;SON&#x27;
+Data variables:
+    tp         (season, latitude, longitude) float32 dask.array&lt;chunksize=(1, 181, 360), meta=np.ndarray&gt;</pre>
+
+<p>We want to extract a specific domain delimited:
+    - latitude boundaries: 50N to 70N
+    - longitude boudaries: 250E to 310E</p>
+
+<p>We finally want to extract winter season.</p>
+
+<pre><code class="language-python">lat_bnd = [70, 50]
+lon_bnd = [250, 310]
+subset_season_DJF = array_season.sel(season = 'DJF', longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),)
+subset_season_DJF
+</code></pre>
+
+<pre>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 21, longitude: 61)
+Coordinates:
+  * latitude   (latitude) float32 70.0 69.0 68.0 67.0 ... 53.0 52.0 51.0 50.0
+  * longitude  (longitude) float32 250.0 251.0 252.0 253.0 ... 308.0 309.0 310.0
+    season     &lt;U3 &#x27;DJF&#x27;
+Data variables:
+    tp         (latitude, longitude) float32 dask.array&lt;chunksize=(21, 61), meta=np.ndarray&gt;</pre>
+
+<p>Let&rsquo;s save the Dataset to Netcdf.</p>
+
+<pre><code class="language-python">dataDIR = './DATA/subset_season.nc'
+subset_season_DJF.to_netcdf(dataDIR)
+</code></pre>
+
+<p>We can call our make_figure() function to quick plot our Dataset.</p>
+
+<pre><code class="language-python">_, ax = make_figure()
+# plot the temperature field
+subset_season_DJF.tp.plot.pcolormesh(vmin=0, vmax=200, cmap='Spectral',add_colorbar=True, extend='both')
+</code></pre>
+
+<pre><code>&lt;matplotlib.collections.QuadMesh at 0x150a4240&gt;
+</code></pre>
+
+<p><img src="/img/formation/netcdf3/output_99_1.png" alt="png" /></p>
+
+<pre><code class="language-python">
+</code></pre>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/15.2-cartopy_library/" rel="next">15-2- La librairie Cartopy - Cours</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/16-1-niveau_facile/" rel="prev">16.1- Exercices Python - Niveau facile</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/15.3-Xarray_Library.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

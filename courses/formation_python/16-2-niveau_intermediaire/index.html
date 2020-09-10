@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="- 1: Additionner les chiffres d&rsquo;un nombre 
+nombre = 209812 list(str(nombre)) total = 0 for i in list(str(nombre)): total = total &#43; int(i) print(total)  22  nombre = 209812 somme = sum([int(i) for i in str(nombre)]) print(somme)  22  POINTS IMPORTANTS À RETENIR
+Pour boucler sur chaque chiffre d&rsquo;un nombre, on convertit le nombre en chaîne de caractère.
+Pour additionner ensemble tous les nombres contenus dans une liste, on utilise la fonction sum.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/16-2-niveau_intermediaire/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/16-2-niveau_intermediaire/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/16-2-niveau_intermediaire/">
+  <meta property="og:title" content="16.2- Exercices Python - Niveau intermédiaire | GDueymes">
+  <meta property="og:description" content="- 1: Additionner les chiffres d&rsquo;un nombre 
+nombre = 209812 list(str(nombre)) total = 0 for i in list(str(nombre)): total = total &#43; int(i) print(total)  22  nombre = 209812 somme = sum([int(i) for i in str(nombre)]) print(somme)  22  POINTS IMPORTANTS À RETENIR
+Pour boucler sur chaque chiffre d&rsquo;un nombre, on convertit le nombre en chaîne de caractère.
+Pour additionner ensemble tous les nombres contenus dans une liste, on utilise la fonction sum."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>16.2- Exercices Python - Niveau intermédiaire | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes/">3- Les listes en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires/">4- Les dictionnaires en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires-exercice/">4- Les dictionnaires en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles/">5- Les boucles en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles-exercice/">5- Les boucles en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions/">6- Les fonctions en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions-exercice/">6- Les fonctions en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy/">7- La librairie Numpy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas/">8- La lirairie Pandas - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas-exercice/">8- La librairie Pandas - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation-exercice/">9- La visualisation graphique avec Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">9.1- Projet sur les données de températures ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">9.2- Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-cours/">10- Travailler avec des API sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-exercices/">10- Travailler avec des API sous Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-cours/">11- Web Scrapping - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-exercices/">11- Web scrapping - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-cours/">12- SQL et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/">12- SQL et Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/13-regex-cours/">13- Regex et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/14-statistique-descriptive-cours/">14- La statistique descriptive - Rappels</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.1-netcdf_tutorial/">15-1- Le format Netcdf sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.2-cartopy_library/">15-2- La librairie Cartopy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.3-xarray_library/">15-3 La librairie Xarray- Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-1-niveau_facile/">16.1- Exercices Python - Niveau facile</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/16-2-niveau_intermediaire/">16.2- Exercices Python - Niveau intermédiaire</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-3-niveau-difficile/">16.3- Exercices Python - Niveau difficile</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>16.2- Exercices Python - Niveau intermédiaire</h1>
+
+          <div class="article-style">
+            <p><b> - 1: Additionner les chiffres d&rsquo;un nombre </b></p>
+
+<pre><code class="language-python">nombre = 209812
+list(str(nombre))
+total = 0
+for i in list(str(nombre)):
+    total = total + int(i)
+print(total)
+</code></pre>
+
+<pre><code>22
+</code></pre>
+
+<pre><code class="language-python">nombre = 209812
+somme = sum([int(i) for i in str(nombre)])
+print(somme)
+</code></pre>
+
+<pre><code>22
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour boucler sur chaque chiffre d&rsquo;un nombre, on convertit le nombre en chaîne de caractère.</p>
+
+<p>Pour additionner ensemble tous les nombres contenus dans une liste, on utilise la fonction sum.</p>
+
+<p><b> - 2: Remplacer un élément d&rsquo;une liste </b></p>
+
+<pre><code class="language-python">liste = [&quot;Pierre&quot;, &quot;Marie&quot;, &quot;Julie&quot;, &quot;Adrien&quot;, &quot;Julie&quot;]
+ 
+nom_a_chercher = &quot;Julie&quot;
+nouveau_nom = &quot;Julien&quot;
+ 
+liste = [x.replace(nom_a_chercher, nouveau_nom) for x in liste]
+print(liste)
+</code></pre>
+
+<pre><code>['Pierre', 'Marie', 'Julien', 'Adrien', 'Julien']
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour remplacer un mot par un autre, on utilise la fonction replace.</p>
+
+<p><b> - 3: Enlever les doublons d&rsquo;une liste </b></p>
+
+<pre><code class="language-python">nombres = [1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7, 8, 9, 10]
+ 
+nombres_sans_duplicats = []
+ 
+for i in nombres:
+    if i not in nombres_sans_duplicats:
+        nombres_sans_duplicats.append(i)
+ 
+print(nombres_sans_duplicats)
+</code></pre>
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour vérifier si un élément est déjà présent ou non dans une liste, on utilise la syntaxe i in liste. Si le nombre est déjà dans la liste, cette syntaxe retournera True, si non, False.</p>
+
+<p><b> - 4: Ajouter des éléments à un dictionnaire </b></p>
+
+<pre><code class="language-python">employes = {}
+ 
+liste = [10, 2329, 5, &quot;Pierre&quot;, 203, &quot;Marie&quot;, 867, &quot;Adrien&quot;]
+ 
+i = 1
+ 
+for element in liste:
+    if not str(element).isdigit():
+        employes[&quot;id-{:02d}&quot;.format(i)] = element
+        i += 1
+ 
+print(employes)
+</code></pre>
+
+<pre><code>{'id-01': 'Pierre', 'id-02': 'Marie', 'id-03': 'Adrien'}
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour vérifier si une chaîne de caractère ne contient que des nombres, on utilise la fonction isdigit.</p>
+
+<p>Pour formatter un nombre pour qu&rsquo;il contienne toujours 2 chiffres, on utilise la syntaxe 02d à l&rsquo;intérieur d&rsquo;accolades utilisées pour la fonction format.</p>
+
+<p><b> - 5: Créer un dictionnaire avec les lettres de l&rsquo;alphabet </b></p>
+
+<pre><code class="language-python">import string
+ 
+alphabet = string.ascii_lowercase
+indices = range(1, len(alphabet) + 1)
+liste_zip = zip(range(1, len(alphabet) + 1), alphabet)
+resultat = dict(liste_zip)
+ 
+print(resultat)
+</code></pre>
+
+<pre><code>{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
+</code></pre>
+
+<p>EXPLICATION</p>
+
+<p>Dans cet exercice, nous utilisons la fonction zip, pour construire un dictionnaire comprenant les lettres de l&rsquo;alphabet et leur position dans l&rsquo;alphabet.</p>
+
+<p>Pour commencer, nous récupérons toutes les lettres de l&rsquo;alphabet en minuscule, grâce au module string :</p>
+
+<pre><code class="language-python">alphabet = string.ascii_lowercase
+print(alphabet)
+</code></pre>
+
+<pre><code>abcdefghijklmnopqrstuvwxyz
+</code></pre>
+
+<p>Ensuite, on créé une liste qui contient les nombres de 1 à la longueur de l&rsquo;alphabet, grâce à la fonction range et la fonction len :</p>
+
+<pre><code class="language-python">indices = range(1, len(alphabet) + 1)
+print(indices)
+</code></pre>
+
+<pre><code>range(1, 27)
+</code></pre>
+
+<p>On utilise ensuite la fonction zip, qui permet de créer une liste de tuples à partir de deux listes (la liste de nombres et les lettres de l&rsquo;alphabet) :</p>
+
+<pre><code class="language-python">liste_zip = zip(range(1, len(alphabet) + 1), alphabet)
+</code></pre>
+
+<p>Il ne nous reste plus qu&rsquo;à utiliser la fonction dict pour convertir cette liste de tuple en dictionnaire.
+En effet, vous pouvez passer une liste contenant des tuples contenant deux éléments et la fonction dict va utiliser le premier élément comme clé et le deuxième élément comme valeur :</p>
+
+<pre><code class="language-python">resultat = dict(liste_zip)
+print(resultat)
+</code></pre>
+
+<pre><code>{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour créer une liste de tuple à partir de deux listes, on utilise la fonction zip.</p>
+
+<p>Pour créer un dictionnaire à partir d&rsquo;une liste de tuple, on peut utiliser la fonction dict.</p>
+
+<p><b> - 6: Recréer la fonction len </b></p>
+
+<pre><code class="language-python">def longueur(variable):
+    total = 0
+    for i in list(str(variable)):
+        total = total + 1
+    return(total)
+    
+print(longueur(&quot;bonjour&quot;))
+</code></pre>
+
+<pre><code>7
+</code></pre>
+
+<p><b> - 7: Créer un motif avec des print </b></p>
+
+<pre><code class="language-python">n = 8
+symbole = &quot;*&quot;
+nombres = list(range(1, n+1)) + list(range(n-1, 0, -1))
+for i in nombres:
+    print(symbole*i)
+</code></pre>
+
+<pre><code>*
+**
+***
+****
+*****
+******
+*******
+********
+*******
+******
+*****
+****
+***
+**
+*
+</code></pre>
+
+<pre><code class="language-python">symbole = &quot;$&quot;
+ 
+taille = 10
+ 
+for i in range(1, taille + 1):
+    espaces = &quot; &quot; * (taille - i)
+    print(espaces + (symbole + &quot; &quot;) * i)
+</code></pre>
+
+<pre><code>         $ 
+        $ $ 
+       $ $ $ 
+      $ $ $ $ 
+     $ $ $ $ $ 
+    $ $ $ $ $ $ 
+   $ $ $ $ $ $ $ 
+  $ $ $ $ $ $ $ $ 
+ $ $ $ $ $ $ $ $ $ 
+$ $ $ $ $ $ $ $ $ $ 
+</code></pre>
+
+<pre><code class="language-python">for i in range(1,taille+1):
+    print(&quot;{:^{}}&quot;.format((symbole+&quot; &quot;)*i, taille*2))
+</code></pre>
+
+<pre><code>         $          
+        $ $         
+       $ $ $        
+      $ $ $ $       
+     $ $ $ $ $      
+    $ $ $ $ $ $     
+   $ $ $ $ $ $ $    
+  $ $ $ $ $ $ $ $   
+ $ $ $ $ $ $ $ $ $  
+$ $ $ $ $ $ $ $ $ $ 
+</code></pre>
+
+<p><b> - 8: Formater un texte avec la fonction format </b></p>
+
+<p><a href="https://www.programiz.com/python-programming/methods/string/format" target="_blank">https://www.programiz.com/python-programming/methods/string/format</a></p>
+
+<pre><code class="language-python">texte = &quot;Bonjour Udemy&quot;
+longueur = len(texte)
+ 
+symbole1 = &quot;-&quot;
+symbole2 = &quot;|&quot;
+ 
+print(symbole1*longueur)
+ 
+for lettre in texte:
+    print(&quot;{0}{1:^{2}}{0}&quot;.format(symbole2, lettre, longueur - 2))
+ 
+print(symbole1*longueur)
+</code></pre>
+
+<pre><code>-------------
+|     B     |
+|     o     |
+|     n     |
+|     j     |
+|     o     |
+|     u     |
+|     r     |
+|           |
+|     U     |
+|     d     |
+|     e     |
+|     m     |
+|     y     |
+-------------
+</code></pre>
+
+<p>Nous utilisons toute la puissance que nous permet la méthode format avec la syntaxe suivante :</p>
+
+<pre><code class="language-python">print(&quot;{0}{1:^{2}}{0}&quot;.format(symbole2, lettre, longueur - 2))
+</code></pre>
+
+<pre><code>|     y     |
+</code></pre>
+
+<p>Tout d&rsquo;abord, nous définissons deux balises au début et à la fin de la chaîne de caractère, représentées par les accolades entourant le 0 : {0}</p>
+
+<p>Cela nous permet d&rsquo;afficher la symbole 2 au début et à la fin.</p>
+
+<p>Puis, nous utilisons la syntaxe suivante : {1:^{2}}</p>
+
+<p>Le 1 signifie que l&rsquo;on insère à l&rsquo;intérieur de cette accolade le 2e argument passé à la méthode format (la variable &lsquo;lettre&rsquo;, donc chaque lettre de notre variable texte, récupérée grâce à la boucle for).</p>
+
+<p>La deuxième partie, avec les deux points et l&rsquo;accent circonflexe, signifie que l&rsquo;on veut ajouter un &lsquo;padding&rsquo; avant et après cette lettre : en gros, python va ajouter autant d&rsquo;espaces que nécessaire avant et après la variable que l&rsquo;on insère dans l&rsquo;accolade, afin que le nombre total de caractère soit égal au nombre passé.
+Ce nombre, on lui passe grâce à l&rsquo;accolade qui contient le 2, signifiant que l&rsquo;on va passer ce nombre comme 3e argument à la méthode format. On passe comme nombre &lsquo;longueur - 2&rsquo;, donc la longueur du texte, minus les 2 symboles que l&rsquo;on place au début et à la fin de la chaîne de caractère (rappelez-vous, les accolades avec le 0) :</p>
+
+<pre><code class="language-python">print(&quot;{0}{1:^{2}}{0}&quot;.format(symbole2, lettre, longueur - 2))
+</code></pre>
+
+<pre><code>|     y     |
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Vous pouvez afficher plusieurs fois le même élément dans une chaîne de caractère avec la méthode format, en utilisant plusieurs fois le même indice à l&rsquo;intérieur des accolades.
+Pour faire en sorte qu&rsquo;une chaîne de caractère occupe un nombre précis de caractère, vous pouvez la &lsquo;padder&rsquo; avec des espaces, en utilisant l&rsquo;accent circonflexe à l&rsquo;intérieur de votre chaîne de caractère et la méthode format.</p>
+
+<p><b> - 9: Ajouter un séparateur de milliers à un nombre </b></p>
+
+<pre><code class="language-python">nombre = 52039480394023
+def ajout_separateur(nombre):
+    nombre = str(nombre)[::-1]
+    resultat = &quot;&quot;
+ 
+    for i, chiffre in enumerate(nombre, 1):
+        chiffre_formatte = chiffre + &quot;,&quot; if i % 3 == 0 and i != len(nombre) else chiffre
+        #print(chiffre_formatte)
+        resultat += chiffre_formatte
+ 
+    return resultat[::-1]
+ 
+print(ajout_separateur(nombre))
+</code></pre>
+
+<pre><code>52,039,480,394,023
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour inverser une chaîne de caractère, on peut utiliser la syntaxe [::-1]</p>
+
+<p>On peut passer un deuxième argument à la fonction enumerate pour commencer à un indice autre que 0.</p>
+
+<p>L&rsquo;opérateur modulo permet de réaliser une opération tous les x itérations (car n % n est égal à 0).</p>
+
+<p><b> - 10: Calculer l&rsquo;année de naissance à partir d&rsquo;un âge donné </b></p>
+
+<pre><code class="language-python">from datetime import datetime
+age = 25
+mois_de_naissance = 10
+
+if datetime.today().month &lt; mois_de_naissance:
+    year = (datetime.today().year - age) - 1 
+else:
+    year = (datetime.today().year - age)
+print(year)
+
+</code></pre>
+
+<pre><code>1994
+</code></pre>
+
+<pre><code class="language-python">from datetime import datetime
+ 
+age = 25
+mois_de_naissance = 10
+ 
+annee_actuelle = datetime.today().year
+mois_actuel = datetime.today().month
+ 
+resultat = annee_actuelle - age - (1 if mois_de_naissance &gt; mois_actuel else 0)
+print(resultat)
+</code></pre>
+
+<pre><code>1994
+</code></pre>
+
+<p><b> - 11: Calculer la somme des nombres entre deux nombres </b></p>
+
+<pre><code class="language-python">def somme(a, b):
+    result = [] 
+    i = a 
+    while i &lt;= b:
+        result.append(i) 
+        i +=1
+    return sum(result)
+
+print(somme(2,6))
+
+</code></pre>
+
+<pre><code>20
+</code></pre>
+
+<pre><code class="language-python">def somme(a, b):
+    return sum(range(min(a, b), max(a, b) + 1))
+ 
+print(somme(2, 6))
+</code></pre>
+
+<pre><code>20
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>La fonction range retourne une liste vide si le premier nombre est plus grand que le second.
+Pour récupérer le nombre le plus petit ou le plus grand entre plusieurs nombres, on utilise les fonctions min et max.
+La fonction sum permet d&rsquo;additionner une liste de nombres.</p>
+
+<p><b> - 12: Trier une liste d&rsquo;employés par rapport à leur  position dans l&rsquo;alphabet </b></p>
+
+<pre><code class="language-python">import string
+
+employes = [&quot;Pierre&quot;,&quot;Marie&quot;,&quot;Julien&quot;,&quot;Astrid&quot;,&quot;Zoé&quot;]
+alphabet = string.ascii_lowercase
+
+list1 = list(alphabet)[0:(int(len(alphabet)/2))]
+list2 = list(alphabet)[(int(len(alphabet)/2)):-1]
+employe1 = []
+employe2 = []
+for employe in employes: 
+    if employe[0].lower().split()[0][0] in list1:
+        employe1.append(employe)
+    else:
+        employe2.append(employe)
+        
+print('Employés de A à M: ' + ' , '.join(employe1))
+print('Employés de N à Z: ' + ' , '.join(employe2))
+</code></pre>
+
+<pre><code>Employés de A à M: Marie , Julien , Astrid
+Employés de N à Z: Pierre , Zoé
+</code></pre>
+
+<pre><code class="language-python">import string
+ 
+employes = [&quot;Pierre&quot;, &quot;Marie&quot;, &quot;Julien&quot;, &quot;Astrid&quot;, &quot;Zoé&quot;]
+ 
+alphabet = string.ascii_uppercase
+milieu = int(len(alphabet) / 2)
+alphabet_01, alphabet_02 = alphabet[:milieu], alphabet[milieu:]
+ 
+employes_a_m = []
+employes_n_z = []
+ 
+for employe in employes:
+    premiere_lettre = employe[0].lower()
+    if premiere_lettre in alphabet_01:
+        employes_a_m.append(employe)
+    elif premiere_lettre in alphabet_02:
+        employes_n_z.append(employe)
+        
+print(&quot;Employés de A à M:&quot;, &quot;, &quot;.join(sorted(employes_a_m)))
+print(&quot;Employés de N à Z:&quot;, &quot;, &quot;.join(sorted(employes_n_z)))
+</code></pre>
+
+<pre><code>Employés de A à M: 
+Employés de N à Z: 
+</code></pre>
+
+<pre><code class="language-python">import string
+ 
+employes = [&quot;Pierre&quot;, &quot;Marie&quot;, &quot;Julien&quot;, &quot;Astrid&quot;, &quot;Zoé&quot;]
+ 
+alphabet = string.ascii_lowercase
+employes_a_m = [e for e in employes if e[0].lower() in alphabet[:13]]
+employes_n_z = [e for e in employes if e[0].lower() in alphabet[13:]]
+ 
+print(&quot;Employés de A à M:&quot;, &quot;, &quot;.join(sorted(employes_a_m)))
+print(&quot;Employés de N à Z:&quot;, &quot;, &quot;.join(sorted(employes_n_z)))
+</code></pre>
+
+<pre><code>Employés de A à M: Astrid, Julien, Marie
+Employés de N à Z: Pierre, Zoé
+</code></pre>
+
+<p><b> - 12: Créer une fonction pour remonter dans une strucure de dossiers </b></p>
+
+<pre><code class="language-python">import os
+dossier = &quot;/Users/Thibh/Desktop/Dossier_01/Tutoriel/Udemy&quot;
+
+def remonter_dossier(dossier, iterations):
+    i = 0
+    while i &lt; iterations:
+        dossier = os.path.dirname(dossier)
+        i += 1
+ 
+    return dossier
+print(remonter_dossier(dossier, 3))
+</code></pre>
+
+<pre><code>/Users/Thibh/Desktop
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour récupérer le dossier parent d&rsquo;un fichier ou d&rsquo;un dossier, on utilise la fonction os.path.dirname du module os.path.</p>
+
+<p>Pour répéter une opération un nombre défini de fois, on peut utiliser une boucle while.</p>
+
+<p><b> - 13: Changer un chemin relatif en chemin absolu </b></p>
+
+<pre><code class="language-python">import os
+chemin = &quot;/Users/Thibh/Desktop/Dossier_01/../Dossier_02/Udemy&quot;
+ 
+def normalize_path(chemin):
+    chemin_parts = chemin.split(&quot;/&quot;)
+    while &quot;..&quot; in chemin_parts:
+        index = chemin_parts.index(&quot;..&quot;)
+        chemin_parts.pop(index)
+        chemin_parts.pop(index-1)
+    return os.sep.join(chemin_parts)
+ 
+a = normalize_path(chemin)
+print(a)
+</code></pre>
+
+<pre><code>\Users\Thibh\Desktop\Dossier_02\Udemy
+</code></pre>
+
+<p><b> - 14: Écrire un fichier </b></p>
+
+<pre><code class="language-python">import os
+ 
+cur_dir = os.path.realpath(os.path.dirname('__file__'))
+fichier = os.path.join(cur_dir, &quot;fichier.txt&quot;)
+ 
+with open(fichier, &quot;w&quot;) as f:
+    f.write(&quot;Bonjour tout le monde !&quot;)
+</code></pre>
+
+<p><b> - 15: Fixer erreur de variable dans un fichier </b></p>
+
+<p>Utilisation du module distutils</p>
+
+<pre><code class="language-python">import os
+import distutils.util
+ 
+cur_dir = os.path.realpath(os.path.dirname('__file__'))
+fichier = os.path.join(cur_dir, &quot;variable.txt&quot;)
+ 
+with open(fichier, &quot;r&quot;) as f:
+    variable = f.read()
+ 
+vraie_variable = bool(distutils.util.strtobool(variable))
+if vraie_variable:
+    print(&quot;La variable est un boolean True&quot;)
+else: 
+    print(&quot;La variable est un boolean False&quot;)
+</code></pre>
+
+<pre><code>La variable est un boolean False
+</code></pre>
+
+<p><b> - 15: Trouver les diviseurs d&rsquo;un nombre </b></p>
+
+<pre><code class="language-python">nombre = 50
+liste_nombres = list(range(1, nombre+1))
+diviseurs = []
+ 
+for i in liste_nombres:
+    if nombre % i == 0:
+        diviseurs.append(i)
+ 
+print(diviseurs)   
+</code></pre>
+
+<pre><code>[1, 2, 5, 10, 25, 50]
+</code></pre>
+
+<p><b> - 16: Trouver les nombres divisibles par 7 mais qui ne sont pas des multiples de 3  </b></p>
+
+<pre><code class="language-python">nombre = 1000
+liste_nombres = list(range(0, nombre+1))
+diviseurs = []
+
+for i in liste_nombres:
+    if (i % 7 == 0) &amp; (i % 3 != 0):
+        diviseurs.append(i)
+print(diviseurs)
+</code></pre>
+
+<pre><code>[7, 14, 28, 35, 49, 56, 70, 77, 91, 98, 112, 119, 133, 140, 154, 161, 175, 182, 196, 203, 217, 224, 238, 245, 259, 266, 280, 287, 301, 308, 322, 329, 343, 350, 364, 371, 385, 392, 406, 413, 427, 434, 448, 455, 469, 476, 490, 497, 511, 518, 532, 539, 553, 560, 574, 581, 595, 602, 616, 623, 637, 644, 658, 665, 679, 686, 700, 707, 721, 728, 742, 749, 763, 770, 784, 791, 805, 812, 826, 833, 847, 854, 868, 875, 889, 896, 910, 917, 931, 938, 952, 959, 973, 980, 994]
+</code></pre>
+
+<p><b> - 17: Calculer la factorielle d&rsquo;un nombre  </b></p>
+
+<p>Dans cet exercice, nous cherchons la factorielle d&rsquo;un nombre, dans ce cas-ci le nombre 5.</p>
+
+<pre><code class="language-python">nombre = 5
+ 
+if nombre == 0:
+    resultat = 1
+else:
+    resultat = 1
+    for i in range(1, nombre + 1):
+        resultat *= i
+ 
+print(resultat)
+</code></pre>
+
+<pre><code>120
+</code></pre>
+
+<p><b> - 18: Trouver un fichier à l&rsquo;intérieur d&rsquo;un dossier </b></p>
+
+<p>module glob pertmet de faire des recherches récursives</p>
+
+<pre><code class="language-python">import os 
+from glob import glob
+
+dossier = &quot;D:/Utilisateurs/guillaume/Documents&quot;
+fichier_a_trouver = &quot;fichier.txt&quot;
+
+fichiers = glob(dossier + &quot;/**&quot;, recursive = True)
+fichiers_trouves = [f for f in fichiers if os.path.split(f)[1] == fichier_a_trouver]
+print(fichiers_trouves)
+</code></pre>
+
+<pre><code>['D:/Utilisateurs/guillaume/Documents\\GitHub\\Formation_Python\\16_Defis_Python\\fichier.txt', 'D:/Utilisateurs/guillaume/Documents\\GitHub\\Scripts_Python\\Exercices_tuto\\fichier.txt']
+</code></pre>
+
+<p><b> - 19: Créer un programme pour surveiller un dossier </b></p>
+
+<pre><code class="language-python">import os 
+import time 
+
+dossier = &quot;D:/Utilisateurs/guillaume/Desktop&quot;
+dossier_a_chercher = &quot;CODES_R&quot;
+
+attente = input(&quot;Entrez un temps de rafraichissement: &quot;)
+while dossier_a_chercher not in os.listdir(dossier):
+    print(&quot;Dossier introuvable ... &quot;)
+    time.sleep(int(attente))
+               
+print(&quot;trouvé&quot;)
+</code></pre>
+
+<pre><code>Entrez un temps de rafraichissement: 10
+Dossier introuvable ... 
+Dossier introuvable ... 
+Dossier introuvable ... 
+trouvé
+</code></pre>
+
+<p><b> - 20: Compter le nombre de fichiers et dossiers dans un dossier </b></p>
+
+<pre><code class="language-python">from glob import glob
+
+dossier = &quot;D:/Utilisateurs/guillaume/Documents&quot;
+fichiers = glob(f&quot;{dossier}/**&quot;, recursive = True)
+print(len(fichiers))
+</code></pre>
+
+<pre><code>17653
+</code></pre>
+
+<p><b> - 21: Générer un octet aléatoire </b></p>
+
+<p>Dans cet exercice, le but était de générer un octet aléatoire. Un octet est composé uniquement des chiffres 0 et 1, et contient 8 chiffres.</p>
+
+<p>Il faut générer une séquence aléatoire de 8 chiffres de 0 à 1.</p>
+
+<p>En Python, pour tout ce qui touche aux fonctions aléatoires, on utilise le module random.</p>
+
+<p>Nous utilisons donc une compréhension de liste pour créer une suite de 8 chiffres aléatoire allant de 0 à 1.</p>
+
+<p>Pour récupérer un nombre aléatoire entre 0 et 1, on utilise la fonction &ldquo;choice&rdquo; du module random. La fonction range(2) nous retourne une liste contenant les nombres 0 et 1, et la fonction choice du module random va choisir un nombre aléatoire entre tous les nombres de la liste (donc soit 0 soit 1).</p>
+
+<p>Vous noterez qu&rsquo;on utilise un nom de variable quelque peu particulier pour la boucle for. En effet, cette boucle sert uniquement à répéter une opération un certains nombre de fois, mais on ne fait aucune utilisation de la variable générée à chaque itération de la boucle for. Par convention, quand on déclare une variable qui n&rsquo;est pas utilisée, on utilise un tiret du bas.</p>
+
+<pre><code class="language-python">import random
+octet = []
+for _ in range(8):
+    octet.append(str(random.choice(range(2))))
+print(&quot;&quot;.join(octet))
+</code></pre>
+
+<pre><code>00111010
+</code></pre>
+
+<pre><code class="language-python">liste_random = [str(random.choice(range(2))) for _ in range(8)]
+print(&quot;&quot;.join(liste_random))
+</code></pre>
+
+<pre><code>10111000
+</code></pre>
+
+<p><b> - 21: Calculer le nombre de jours entre deux dates </b></p>
+
+<pre><code class="language-python">from datetime import date
+start = date(2014,7,2)
+end = date(2018,7,11)
+nb_days = (end - start).days 
+print(nb_days)
+</code></pre>
+
+<pre><code>1470
+</code></pre>
+
+<p><b> - 22: Créer un générateur de mot de passe </b></p>
+
+<p>Le but de cet exercice était de générer un mot de passe aléatoire.</p>
+
+<p>Le mot de passe devait être d&rsquo;une longueur définie dans la variable &ldquo;taille&rdquo;.</p>
+
+<p>La première chose à faire était de récupérer toutes les lettres de l&rsquo;alphabet, les nombres et tous les symboles.</p>
+
+<p>Pour récupérer ces informations, nous utilisons le module string.</p>
+
+<pre><code class="language-python">import string
+symboles = string.ascii_letters + string.digits + string.punctuation
+print(symboles)
+</code></pre>
+
+<pre><code>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
+</code></pre>
+
+<p>On utilise ensuite le module random et la fonction choice comme vu dans un exercice précédent. Cette fonction va nous permettre de sélectionner une lettre aléatoire parmi la chaîne de caractère &ldquo;symboles&rdquo; que nous avons déclaré plus haut.</p>
+
+<p>Pour répéter l&rsquo;opération autant de fois que nécessaire, on utilise une boucle et une compréhension de liste</p>
+
+<pre><code class="language-python">import string
+import random
+ 
+taille = 8
+ 
+symboles = string.ascii_letters + string.digits + string.punctuation
+mot_de_passe = ''.join(random.choice(symboles) for _ in range(taille))
+ 
+print(mot_de_passe)
+</code></pre>
+
+<pre><code>Z=)f+KV&quot;
+</code></pre>
+
+<p><b> - 22: Vérifier la validité d&rsquo;un mot de passe </b></p>
+
+<p>En partant du code précédent, on doit vérifier sur le mot de passe contient au moins 2 nombres et une majuscule et s&rsquo;il fait au moins 8 caractères.</p>
+
+<pre><code class="language-python">import string
+import random
+ 
+taille = 8
+ 
+symboles = string.ascii_letters + string.digits + string.punctuation
+mot_de_passe = ''.join(random.choice(symboles) for _ in range(taille))
+ 
+print(mot_de_passe)
+</code></pre>
+
+<pre><code>z%n{,&amp;tS
+</code></pre>
+
+<pre><code class="language-python">import sys
+def Valid_password_numdigit(password):
+    
+    sufficient_digits = len([n for n in password if n.isdigit()]) &gt;= 2     
+    if not sufficient_digits:
+        print(&quot;Invalid password: Must have at least 2 digits&quot;, file=sys.stderr)
+    return sufficient_digits
+
+def Valid_password_length(password):
+    correct_length = len(password) &gt;= 8
+    if not correct_length:
+        print(&quot;Invalid password: too short&quot;, file=sys.stderr)
+    return correct_length
+
+def Valid_password_mixed_case(password):
+    letters = set(password)
+
+    lower = any(letter.islower() for letter in letters)
+    upper = any(letter.isupper() for letter in letters)
+    if not upper:
+        print(&quot;Invalid password: No uppercase characters detected&quot;, file=sys.stderr)
+
+    if not lower:
+        print(&quot;Invalid password: No lowercase characters detected&quot;, file=sys.stderr)
+
+    return lower and upper
+
+def password_checker(password):
+    if Valid_password_length(password) and \
+        Valid_password_mixed_case(password) and \
+        Valid_password_numdigit(password):
+
+        print(&quot;Congratulations! This password is valid&quot;)
+</code></pre>
+
+<pre><code class="language-python">password_checker('tesTTTbverytherbrtby22')
+</code></pre>
+
+<pre><code>Congratulations! This password is valid
+</code></pre>
+
+<pre><code class="language-python">import string
+import random
+ 
+taille = random.randint(4, 12)
+ 
+lettres = string.ascii_letters + string.digits + string.punctuation
+mot_de_passe = ''.join(random.choice(lettres) for l in range(taille))
+ 
+print(mot_de_passe)
+ 
+def verificateur_mdp(mdp):
+    if len(mdp) &gt;= 8 and any(l.isupper() for l in mdp) and len([n for n in mdp if n.isdigit()]) &gt;= 2:
+        return True
+    return False
+ 
+succes = verificateur_mdp(mot_de_passe)
+#check = password_checker(mot_de_passe)
+print(succes)
+</code></pre>
+
+<pre><code>Z}&amp;]PG;Mb
+False
+</code></pre>
+
+<p><b> - 23: Compter le nombre d&rsquo;occurence d&rsquo;un mot dans un texte </b></p>
+
+<pre><code class="language-python">lorem = &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
+lorem = lorem.replace(&quot;,&quot;, &quot;&quot;).replace(&quot;.&quot;, &quot;&quot;)
+mot_to_find = &quot;elit&quot;
+lorem = lorem.lower()
+text = lorem.split(' ')
+count = 0
+for mot in text:
+    if mot == mot_to_find:
+        print('find!')
+        count += 1
+print(count)
+</code></pre>
+
+<pre><code>find!
+1
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour remplacer un caractère par un autre, ou l&rsquo;effacer, on utilise la fonction replace.</p>
+
+<p>Pour convertir une chaîne de caractère en minuscule, on utilise la fonction lower.</p>
+
+<p>Pour séparer une chaîne de caractère sur les espaces, on utilise la fonction split.</p>
+
+<p>Pour compter le nombre d&rsquo;occurrence d&rsquo;un élément dans une liste, on utilise la fonction count.</p>
+
+<p><b> - 24: Convertir une chaîne de caractères en camelCase </b></p>
+
+<pre><code class="language-python">phrase = &quot;Phrase en camel case&quot;
+phrase_split = phrase.split()
+print(phrase_split)
+</code></pre>
+
+<pre><code>['Phrase', 'en', 'camel', 'case']
+</code></pre>
+
+<pre><code class="language-python">phrase = &quot;Phrase en camel case&quot;
+phrase_split = phrase.split()
+ 
+resultat = [phrase_split.pop(0)]
+print(resultat)
+</code></pre>
+
+<pre><code>['Phrase']
+</code></pre>
+
+<pre><code class="language-python">phrase = &quot;Phrase en camel case&quot;
+phrase_split = phrase.split()
+ 
+resultat = [phrase_split.pop(0).lower()]
+
+for mot in phrase_split:
+    resultat.append(mot.capitalize())
+ 
+resultat_formate = &quot;&quot;.join(resultat)
+ 
+print(resultat_formate)
+</code></pre>
+
+<pre><code>phraseEnCamelCase
+</code></pre>
+
+<p><b> - 25: Inverser l&rsquo;ordre des mots dans une phrase </b></p>
+
+<pre><code class="language-python">phrase = &quot;Bonjour tout le monde&quot;
+phrase_split = phrase.split()
+ 
+resultat = []
+ 
+for mot in reversed(phrase_split):
+    resultat.append(mot)
+ 
+resultat_formate = &quot; &quot;.join(resultat).capitalize()
+print(resultat_formate)
+               
+</code></pre>
+
+<pre><code>Monde le tout bonjour
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour inverser une liste, on peut utiliser la fonction reversed ou la syntaxe [::-1]</p>
+
+<p><b> - 26: Vérifier si un élément est un palindrome </b></p>
+
+<pre><code class="language-python">mot = &quot;Un roc cornu&quot;
+mot_lower = mot.lower().replace(&quot; &quot;, &quot;&quot;)
+
+if mot_lower == mot_lower[::-1]:
+    print(True)
+else:
+    print(False)
+
+
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour enlever tous les espaces d&rsquo;une chaîne de caractère, on peut utiliser la méthode replace.</p>
+
+<p>Pour inverser une chaîne de caractère, on peut utiliser la syntaxe [::-1]</p>
+
+<p><b> - 27: Vérifier si une phrase est un pangramme </b></p>
+
+<p>Un pangramme est une phrase qui contient toutes les lettres de l&rsquo;alphabet au moins une fois.</p>
+
+<pre><code class="language-python">import string
+phrase = &quot;Joyeux, ivre, fatigué, le nez qui pique, Clown Hary skie dans l’ombre&quot;
+phrase_lower = phrase.lower()
+alphabet = list(string.ascii_lowercase)
+
+for l in phrase_lower:
+    if l in alphabet:
+        alphabet.remove(l)
+ 
+if alphabet:
+    print(&quot;La phrase n'est pas un Pangramme&quot;)
+else:
+    print(&quot;La phrase est un Pangramme&quot;)
+</code></pre>
+
+<pre><code>La phrase est un Pangramme
+</code></pre>
+
+<p>POINTS IMPORTANTS À RETENIR</p>
+
+<p>Pour récupérer toutes les lettres de l&rsquo;alphabet, on utilise le module string et la constante &ldquo;ascii_lowercase&rdquo;.</p>
+
+<p>Pour enlever un élément d&rsquo;une liste, on utilise la méthode remove.</p>
+
+<p>Une liste vide est évaluée comme False.</p>
+
+<p><b> - 28: Vérificateur de code python</b></p>
+
+<p>Vérifier si les parathèses sont bien définies dans un code.</p>
+
+<pre><code class="language-python">code = &quot;print(any(('py' or 'txt') in ext for ext in ['.py', '.obj', '.json'])&quot;
+code.count('(') == code.count(')')
+</code></pre>
+
+<pre><code>False
+</code></pre>
+
+<p><b> - 29: Compter le nombre de phrases dans un texte</b></p>
+
+<pre><code class="language-python">lorem = &quot;&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;&quot;
+
+print(lorem.count(&quot;.&quot;))
+</code></pre>
+
+<pre><code>4
+</code></pre>
+
+<p><b> - 30: Compter le nombre d&rsquo;occurence de chaque lettre de l&rsquo;alphabet dans un texte</b></p>
+
+<pre><code class="language-python">import string
+lorem = &quot;&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;&quot;
+lorem = lorem.lower()
+resultat = {}
+alphabet = list(string.ascii_lowercase)
+for l in alphabet: 
+    resultat[l]=lorem.count(l)
+print(resultat)    
+</code></pre>
+
+<pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
+</code></pre>
+
+<pre><code class="language-python">alphabet = dict([(a, lorem.lower().count(a)) for a in string.ascii_lowercase])
+print(alphabet)
+</code></pre>
+
+<pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
+</code></pre>
+
+<pre><code class="language-python">import string
+ 
+lorem = &quot;&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;&quot;
+ 
+alphabet = string.ascii_lowercase
+resultat = dict(zip(alphabet, [0] * len(alphabet)))
+
+for lettre in lorem.lower():
+    if resultat.get(lettre) is not None:
+        resultat[lettre] += 1
+ 
+print(resultat)
+</code></pre>
+
+<pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
+</code></pre>
+
+<p>Nous utilisons ci-dessus la fonction zip et la fonction dict pour créer un dictionnaire qui contient chaque lettre de l&rsquo;alphabet comme clé et le nombre 0 comme valeur :</p>
+
+<pre><code class="language-python">resultat = dict(zip(alphabet, [0] * len(alphabet)))
+print(resultat)
+</code></pre>
+
+<pre><code>{'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 0, 'v': 0, 'w': 0, 'x': 0, 'y': 0, 'z': 0}
+</code></pre>
+
+<p>Pour créer une liste de tuple à partir de deux listes, on utilise la fonction zip.</p>
+
+<p>Pour créer un dictionnaire à partir d&rsquo;une liste de tuple, on utilise la fonction dict.</p>
+
+<p>Pour récupérer la valeur d&rsquo;une clé dans un dictionnaire sans risquer de faire planter notre script si la clé n&rsquo;existe pas, on utilise la méthode get.</p>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/16-1-niveau_facile/" rel="next">16.1- Exercices Python - Niveau facile</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/16-3-niveau-difficile/" rel="prev">16.3- Exercices Python - Niveau difficile</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/16-2%20Niveau_intermediaire.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

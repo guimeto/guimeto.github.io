@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.2">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Guillaume Dueymes">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Le format Netcdf (de l&rsquo;anglais Network Common Data Form) est un moyen de créer, d&rsquo;accéder et de partager des données scientifiques dans un format auto-documenté et transparent pour de nombreux types de machines.
+ Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.
+Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un petit exemple de fichier NetCDF, pour illustrer ces concepts de dimensions, variables et attributs.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/formation_python/15.1-netcdf_tutorial/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/formation_python/15.1-netcdf_tutorial/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="GDueymes">
+  <meta property="og:url" content="/courses/formation_python/15.1-netcdf_tutorial/">
+  <meta property="og:title" content="15-1- Le format Netcdf sous Python - Cours | GDueymes">
+  <meta property="og:description" content="Le format Netcdf (de l&rsquo;anglais Network Common Data Form) est un moyen de créer, d&rsquo;accéder et de partager des données scientifiques dans un format auto-documenté et transparent pour de nombreux types de machines.
+ Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.
+Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un petit exemple de fichier NetCDF, pour illustrer ces concepts de dimensions, variables et attributs."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>15-1- Le format Netcdf sous Python - Cours | GDueymes</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">GDueymes</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/Guillaume_Dueymes2019.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/formation_python/1-introduction/">Formation en Python</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/courses/formation_python/1-introduction/">1- Introduction</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases/">2- Les bases du language Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/2-les_bases-exercice/">2- Les bases du language Python - Exercices</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes/">3- Les listes en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/3-les_listes-exercice/">3- Les listes en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires/">4- Les dictionnaires en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/4-les_dictionnaires-exercice/">4- Les dictionnaires en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles/">5- Les boucles en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/5-les_boucles-exercice/">5- Les boucles en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions/">6- Les fonctions en Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/6-les_fonctions-exercice/">6- Les fonctions en Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy/">7- La librairie Numpy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/7-numpy-exercice/">7- La librairie Numpy - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas/">8- La lirairie Pandas - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/8-pandas-exercice/">8- La librairie Pandas - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation/">9- La visualisation graphique avec Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/9-visualisation-exercice/">9- La visualisation graphique avec Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project1-eccc_temperature/">9.1- Projet sur les données de températures ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/project2-eccc_precipitation/">9.2- Projet sur les données de précipitations ECCC</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-cours/">10- Travailler avec des API sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/10-api-exercices/">10- Travailler avec des API sous Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-cours/">11- Web Scrapping - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/11-web-scraping-exercices/">11- Web scrapping - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-cours/">12- SQL et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/12-requeter-une-base-sql-exercices/">12- SQL et Python - Exercice</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/13-regex-cours/">13- Regex et Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/14-statistique-descriptive-cours/">14- La statistique descriptive - Rappels</a>
+      </li>
+      
+      <li class="active">
+        <a href="/courses/formation_python/15.1-netcdf_tutorial/">15-1- Le format Netcdf sous Python - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.2-cartopy_library/">15-2- La librairie Cartopy - Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/15.3-xarray_library/">15-3 La librairie Xarray- Cours</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-1-niveau_facile/">16.1- Exercices Python - Niveau facile</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-2-niveau_intermediaire/">16.2- Exercices Python - Niveau intermédiaire</a>
+      </li>
+      
+      <li >
+        <a href="/courses/formation_python/16-3-niveau-difficile/">16.3- Exercices Python - Niveau difficile</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#image0-img-formation-xarray-png"><img src="/img/formation/xarray.png" alt="image0" /></a></li>
+<li><a href="#15-1-créer-un-fichier-netcdf">15.1- Créer un fichier Netcdf:</a></li>
+<li><a href="#15-2-lire-un-fichier-netcdf">15.2- Lire un fichier Netcdf:</a></li>
+<li><a href="#15-3-manipuler-un-fichier-netcdf">15.3- Manipuler un fichier Netcdf:</a></li>
+<li><a href="#15-4-extraire-un-point-de-grille">15.4- Extraire un point de grille:</a></li>
+<li><a href="#15-5-extraire-un-domaine-délimité-par-une-boite-2d">15.5- Extraire un domaine délimité par une boite 2D:</a></li>
+</ul></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>15-1- Le format Netcdf sous Python - Cours</h1>
+
+          <div class="article-style">
+            
+
+<p>Le format Netcdf (de l&rsquo;anglais Network Common Data Form) est un moyen de créer, d&rsquo;accéder et de partager des données scientifiques dans un format auto-documenté et transparent pour de nombreux types de machines.</p>
+
+<hr />
+
+<h2 id="image0-img-formation-xarray-png"><img src="/img/formation/xarray.png" alt="image0" /></h2>
+
+<p>Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.</p>
+
+<p>Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un petit exemple de fichier NetCDF, pour illustrer ces concepts de dimensions, variables et attributs.</p>
+
+<p>La notation utilisée pour décrire ce fichier NetCDF est appelée Network Common Data Language (CDL). Il donne une version &ldquo;texte&rdquo; qui permet de comprendre facilement la structure et le contenu d&rsquo;un fichier binaire NetCDF:</p>
+
+<pre><code>netcdf ./data/NARR_tasmax_201701.nc {
+  dimensions:
+x = 349;
+y = 277;
+time = 31;
+  variables:
+float lon(y=277, x=349);
+  :units = &quot;degrees_east&quot;;
+  :long_name = &quot;Longitude&quot;;
+  :CoordinateAxisType = &quot;Lon&quot;;
+
+float lat(y=277, x=349);
+  :units = &quot;degrees_north&quot;;
+  :long_name = &quot;Latitude&quot;;
+  :CoordinateAxisType = &quot;Lat&quot;;
+
+double time(time=31);
+  :long_name = &quot;Time&quot;;
+  :delta_t = &quot;&quot;;
+
+float tasmax(time=31, y=277, x=349);
+  :long_name = &quot;Daily maximum temperature&quot;;
+  :units = &quot;Celcius&quot;;
+  :missing_value = -999.0; // double
+  :coordinates = &quot;lon lat&quot;;
+</code></pre>
+
+<p>}</p>
+
+<ul>
+<li><p><a href="https://www.giss.nasa.gov/tools/panoply/download/">Panoply</a> est un logiciel open source utilisé pour lire rapidement et visualiser un fichier Netcdf:</p></li>
+
+<li><p>Le module python que nous utiliserons dans cette section est <a href="https://pypi.org/project/netCDF4/">netCDF4</a>.</p></li>
+</ul>
+
+<p>Pour installer le module sous Anaconda: <b>conda install -c anaconda netcdf4</b></p>
+
+<p><img src="/img/formation/CanESM2_rcp85_r1i1p1_global_tos.jpg" alt="image0" /></p>
+
+<h2 id="15-1-créer-un-fichier-netcdf">15.1- Créer un fichier Netcdf:</h2>
+
+<pre><code class="language-python">from netCDF4 import Dataset
+import os 
+import warnings
+warnings.filterwarnings(&quot;ignore&quot;)
+
+file_name = &quot;./DATA/2D_Temperature.nc&quot;
+if os.path.isfile(file_name):
+    os.remove(file_name)
+    
+# Ouverture du fichier pour écriture, on peut spécifier le format=&quot;NETCDF4_CLASSIC&quot; ou &quot;NETCDF3_CLASSIC&quot;
+# par défault on aura NETCDF4
+
+ds = Dataset(file_name, mode=&quot;w&quot;)
+</code></pre>
+
+<ul>
+<li>Netcdf4-python: <b>createDimension</b></li>
+</ul>
+
+<p>Nous allons créer un champs 2D: (20,20)</p>
+
+<pre><code class="language-python">ds.createDimension(&quot;x&quot;, 20)
+ds.createDimension(&quot;y&quot;, 20)
+ds.createDimension(&quot;time&quot;, None)
+</code></pre>
+
+<pre><code>&lt;class 'netCDF4._netCDF4.Dimension'&gt; (unlimited): name = 'time', size = 0
+</code></pre>
+
+<ul>
+<li>Netcdf4-python: <b>createVariable</b></li>
+</ul>
+
+<p>Nous allons créer deux variables : var1 et var2 et définir leurs dimensions.</p>
+
+<pre><code class="language-python">var1 = ds.createVariable(&quot;field1&quot;, &quot;f4&quot;, (&quot;time&quot;, &quot;x&quot;, &quot;y&quot;))
+var2 = ds.createVariable(&quot;field2&quot;, &quot;f4&quot;, (&quot;time&quot;, &quot;x&quot;, &quot;y&quot;))
+
+#add netcdf attributes
+var1.units = &quot;Celcius&quot;
+var1.long_name = &quot;Surface air temperature&quot;
+
+var2.units = &quot;Kelvin&quot;
+var2.long_name = &quot;Surface air temperature&quot;
+
+</code></pre>
+
+<p>Nous pouvons maintenant assigner notre champs ou variable.
+Dans notre exemple on va générer des données aléatoires et indiquer au programme où il doit les assigner.</p>
+
+<pre><code class="language-python">import numpy as np
+data = np.random.randn(10, 20, 20)
+var1[:] = data
+var2[:] =  data + 273.15
+ds.close();
+</code></pre>
+
+<p>Voilà, notre fichier est écrit sur notre disque.</p>
+
+<h2 id="15-2-lire-un-fichier-netcdf">15.2- Lire un fichier Netcdf:</h2>
+
+<p>Nous allons lire le fichier Netcdf4 que nous avons créer dans la section précédente.</p>
+
+<pre><code class="language-python">from netCDF4 import Dataset
+ds = Dataset(&quot;./DATA/2D_Temperature.nc&quot;)
+</code></pre>
+
+<p>Nous allons sélectionner les variables d&rsquo;intérêt: aucune donnée n&rsquo;est chargée à ce stade.</p>
+
+<p>Pour connaitre quelles sont les variables présentes dans notre fichier Netcdf:</p>
+
+<pre><code class="language-python">print(ds.variables.keys())
+
+print(ds.variables[&quot;field1&quot;].dimensions, ds.variables[&quot;field1&quot;].shape)
+</code></pre>
+
+<pre><code>odict_keys(['field1', 'field2'])
+('time', 'x', 'y') (10, 20, 20)
+</code></pre>
+
+<p>Nous allons lire les données, à ce stade, les données sont chargées en mémoire.</p>
+
+<pre><code class="language-python">data1_var = ds.variables[&quot;field1&quot;]
+all_data = data1_var[:]
+print(all_data.shape)
+</code></pre>
+
+<pre><code>(10, 20, 20)
+</code></pre>
+
+<p>On va par exemple aller chercher le premier pas de temps:</p>
+
+<pre><code class="language-python">data_step1 = data1_var[1,:,:]
+print(data_step1.shape, data_step1.shape, data_step1.mean())
+</code></pre>
+
+<pre><code>(20, 20) (20, 20) -0.022204468
+</code></pre>
+
+<h2 id="15-3-manipuler-un-fichier-netcdf">15.3- Manipuler un fichier Netcdf:</h2>
+
+<p>Dans cet exemple, nous travaillerons avec des données de températures maximales quotidiennes pour tous les mois de janvier de 1971 à 2000 à partir du modèle régional CRCM5 développé au centre ESCER.</p>
+
+<p>Nous allons importer notre propre module de calcul des indices de température, ce module est appelé Indices_Température.</p>
+
+<p>Dans un premier temps, nous importons les bibliothèques nécessaires.</p>
+
+<pre><code class="language-python">from netCDF4 import Dataset
+import Indices_Temperature
+import numpy as np
+</code></pre>
+
+<ul>
+<li><p>Ouvrons le premier fichier Netcdf &lsquo;CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical_tasmax_197101.nc&rsquo;:</p>
+
+<pre><code class="language-python">nc_Modc=Dataset('./DATA/CRCM5/CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical_tasmax_197101.nc','r')
+lats=nc_Modc.variables['lat'][:]
+lons=nc_Modc.variables['lon'][:]
+varc=nc_Modc.variables[variable][:]
+</code></pre></li>
+
+<li><p>Rapide vue d&rsquo;ensemble de notre fichier:</p>
+
+<pre><code class="language-python">nc_Modc.variables
+
+
+
+
+
+OrderedDict([('lon', &lt;class 'netCDF4._netCDF4.Variable'&gt;
+              float32 lon(y, x)
+                  standard_name: longitude
+                  long_name: Longitude
+                  units: degrees_east
+                  _CoordinateAxisType: Lon
+              unlimited dimensions: 
+              current shape = (130, 155)
+              filling on, default _FillValue of 9.969209968386869e+36 used),
+             ('lat', &lt;class 'netCDF4._netCDF4.Variable'&gt;
+              float32 lat(y, x)
+                  standard_name: latitude
+                  long_name: Latitude
+                  units: degrees_north
+                  _CoordinateAxisType: Lat
+              unlimited dimensions: 
+              current shape = (130, 155)
+              filling on, default _FillValue of 9.969209968386869e+36 used),
+             ('time', &lt;class 'netCDF4._netCDF4.Variable'&gt;
+              float64 time(time)
+                  standard_name: time
+                  long_name: time
+                  bounds: time_bnds
+                  units: days since 1949-12-01 00:00:00
+                  calendar: proleptic_gregorian
+              unlimited dimensions: time
+              current shape = (31,)
+              filling on, default _FillValue of 9.969209968386869e+36 used),
+             ('time_bnds', &lt;class 'netCDF4._netCDF4.Variable'&gt;
+              float64 time_bnds(time, nb2)
+              unlimited dimensions: time
+              current shape = (31, 2)
+              filling on, default _FillValue of 9.969209968386869e+36 used),
+             ('tasmax', &lt;class 'netCDF4._netCDF4.Variable'&gt;
+              float32 tasmax(time, y, x)
+                  standard_name: air_temperature
+                  long_name: Daily Maximum Near-Surface Air Temperature
+                  units: Celcius
+                  coordinates: lon lat
+                  _FillValue: 1e+20
+                  missing_value: 1e+20
+                  actual_range: [206.04226685 321.55471802]
+                  grid_desc: rotated_pole
+                  cell_methods: time: maximum
+              unlimited dimensions: time
+              current shape = (31, 130, 155)
+              filling on)])
+</code></pre>
+
+<pre><code class="language-python">print('-----------------------------------------')
+print('Temperature dimension = ',varc.shape)
+print('Minimum of temperature = ', np.nanmin(varc))
+print('Maximum of temperature = ', np.nanmax(varc))
+print('-----------------------------------------')
+print('-----------------------------------------')
+print('Latitude dimension= ',lats.shape)
+print('Minimum of latitude = ', np.min(lats))
+print('Maximum of latitude = ', np.max(lats))
+print('-----------------------------------------')
+print('-----------------------------------------')
+print('Longitude dimesion = ',lons.shape)
+print('Minimum of longitude = ', np.min(lons))
+print('Maximum of longitude = ', np.max(lons))
+print('-----------------------------------------')
+
+
+-----------------------------------------
+Temperature dimension =  (31, 130, 155)
+Minimum of temperature =  -57.66677
+Maximum of temperature =  30.657953
+-----------------------------------------
+-----------------------------------------
+Latitude dimension=  (130, 155)
+Minimum of latitude =  12.538727
+Maximum of latitude =  75.86
+-----------------------------------------
+-----------------------------------------
+Longitude dimesion =  (130, 155)
+Minimum of longitude =  -170.71053
+Maximum of longitude =  -23.28948
+-----------------------------------------
+</code></pre></li>
+</ul>
+
+<p>Nous allons appliquer la fonction Tmax90p() du module Indices_Temperature que nous avons importer.</p>
+
+<pre><code class="language-python">help(Indices_Temperature)
+</code></pre>
+
+<pre><code>Help on module Indices_Temperature:
+
+NAME
+    Indices_Temperature - Created on Mon Feb  5 13:56:30 2018
+
+DESCRIPTION
+    @author: guillaume
+
+FUNCTIONS
+    MOY(S)
+
+    Tmax90p(S)
+
+    Tmin10p(S)
+
+FILE
+    d:\utilisateurs\guillaume\documents\github\formation_python\15_netcdf\indices_temperature.py
+</code></pre>
+
+<pre><code class="language-python">varc.shape[-2:]
+</code></pre>
+
+<pre><code>(130, 155)
+</code></pre>
+
+<pre><code class="language-python">###### boucle sur tous les points de grille et calcul de l'indice
+###### Nous allons stocker le résultat dans la matrice IND de tailler 
+
+IND = np.zeros(varc.shape[-2:],dtype=float)
+
+for ni in range(0, varc.shape[-2:][0]):
+    for nj in range(0, varc.shape[-2:][1]):
+        IND[ni,nj]=Indices_Temperature.Tmax90p(varc[:,ni,nj])
+        description='Monthly Mean of Tmax90p' 
+        unite='°Celcius' 
+</code></pre>
+
+<pre><code class="language-python">IND
+print(IND.shape)
+</code></pre>
+
+<pre><code>(130, 155)
+</code></pre>
+
+<p>Nous pouvons faire maintenant le même exercice mais sur l&rsquo;ensemble des années de 1971 à 2000 pour le mois de Janvier.</p>
+
+<pre><code class="language-python">Mois='01'
+indice = 'Tmax90p'
+path_model='CRCM5-v1_CCCma-CanESM2_historical'
+variable='tasmax'
+rep_data='./DATA/CRCM5/'
+model='CRCM5-v1_NAM-44_ll_CCCma-CanESM2'
+yi = 1971
+yf = 2000
+tot=(yf-yi)+1 
+</code></pre>
+
+<p>Notre matrice finale IND aura ainsi 3 dimensions: (time, lat, lon) telle que:</p>
+
+<pre><code class="language-python">IND = np.zeros((tot,varc.shape[-2:][0],varc.shape[-2:][1]),dtype=float)
+IND.shape
+</code></pre>
+
+<pre><code>(30, 130, 155)
+</code></pre>
+
+<pre><code class="language-python">nt=0
+for year in range(yi,yf+1):
+    ###### ouverture et lecture des fichiers Netcdf
+    hist=model+'_historical_'+variable+'_'+str(year)+Mois+'.nc'     
+    modelc=rep_data+'/'+hist
+    nc_Modc=Dataset(modelc,'r')
+    lats=nc_Modc.variables['lat'][:]
+    lons=nc_Modc.variables['lon'][:]
+    varc=nc_Modc.variables[variable][:]
+    
+    ###### boucle sur tous les points de grille et calcul de l'indice
+    for ni in range(0, varc.shape[-2:][0]):
+        for nj in range(0, varc.shape[-2:][1]):
+            IND[nt,ni,nj]=Indices_Temperature.Tmax90p(varc[:,ni,nj])
+            description='Monthly Mean of Tmax90p' 
+            unite='°Celcius'      
+            
+    nt+=1 # incrément sur les années
+    
+    ###### Écriture du fichier Netcdf en sortie
+C = Dataset(rep_out+model+'_historical_'+indice+'_'+str(yi)+'-'+str(yf)+'_'+Mois+'.nc', 'w')
+C.description = 'Indice temperature'
+C.conventions = 'CF-1.0'  
+C.model_id = model
+C.grid='latlon'
+C.CDO = 'Climate Data Operators version 1.6.2 (http://code.zmaw.de/projects/cdo)'
+C.institution = 'UQAM - ESCER Center, University of Quebec in Montreal'
+C.contact = 'Guillaume Dueymes'
+########################################
+# Dimensions
+C.createDimension('x', len(varc[0][0]))
+C.createDimension('y', len(varc[0]))
+C.createDimension('time', tot)
+
+var=C.createVariable(str(indice), np.float32, ('time','y','x')) 
+var.long_name = str(description)
+var.unit = str(unite)
+lat=C.createVariable('lat', np.float32, ('y','x'))
+lon=C.createVariable('lon', np.float32, ('y','x')) 
+
+time = C.createVariable('time', np.float64, ('time',))
+time.long_name = 'time'
+
+for var in ['lon','lat','time']:
+    for att in nc_Modc.variables[var].ncattrs():
+        setattr(C.variables[var],att,getattr(nc_Modc.variables[var],att))
+
+time[:]=range(1,nt+1)
+lat[:,:] = lats
+lon[:,:] = lons
+C.variables[str(indice)][:,:,:] = IND[::]
+C.close()
+    
+</code></pre>
+
+<h2 id="15-4-extraire-un-point-de-grille">15.4- Extraire un point de grille:</h2>
+
+<p><img src="/img/formation/positions_points_de_grille.png" alt="image0" /></p>
+
+<p>Dans cet exemple, nous travaillerons avec les données de température quotidienne maximale de la réanalyse régionale (NARR). Pour plus d&rsquo;informations sur ce produit:</p>
+
+<p>www.emc.ncep.noaa.gov/mmb/rreanl</p>
+
+<p>Les fichiers Netcdf que nous ouvrirons sont des valeurs quotidiennes du 1er janvier 2017 au 31 décembre 2017. Les fichiers sont archivés par mois.</p>
+
+<p>Le point de grille NARR le plus proche de la station météorologique ECCC Montréal / McTavish (45,5 N, -73,8 W) sera extrait ici.</p>
+
+<p>Importons d&rsquo;abord les bibliothèques nécessaires.</p>
+
+<pre><code class="language-python">import netCDF4
+import numpy as np
+import pandas as pd
+import datetime
+from datetime import date, timedelta
+from dateutil.relativedelta import relativedelta
+</code></pre>
+
+<p>On définit nos paramètres d&rsquo;entrée.</p>
+
+<pre><code class="language-python">rep1='./DATA/NARR/'
+model='NARR'
+variable='tasmax'
+variable_name='Temperature maximale'
+yeari=2017
+monthi=1
+yearf = 2017
+monthf = 12
+station='Montreal' 
+lati = 45.5
+loni = -73.8
+</code></pre>
+
+<p>Nous allons travailler sur une série temporelle quotidienne entre le 1er janvier 2017 et le 31 décembre 2017. On peut définir les dimensions de notre résultat:</p>
+
+<pre><code class="language-python">day_start=1
+day_end = pd.date_range('{}-{}'.format(yearf, monthf), periods=1, freq='M').day.tolist()[0]
+start=datetime.datetime(yeari,monthi,day_start)
+end=datetime.datetime(yearf,monthf,day_end)
+d0 = date(yeari, monthi, day_start)
+d1 = date(yearf, monthf, day_end)
+delta = d1 - d0
+nb_days = delta.days+1
+var_data=np.zeros(nb_days)
+</code></pre>
+
+<pre><code class="language-python">var_data.shape
+</code></pre>
+
+<pre><code>(365,)
+</code></pre>
+
+<p>Nous définissons une fonction qui calculera la distance entre chaque point de grille du fichier Netcdf et notre latitude / longitude de référence. On déduit alors la distance minimale.</p>
+
+<pre><code class="language-python">def getclosest_ij(lats,lons,latpt,lonpt):
+     # find squared distance of every point on grid
+     dist_sq = (lats-latpt)**2 + (lons-lonpt)**2 
+     # 1D index of minimum dist_sq element
+     minindex_flattened = dist_sq.argmin()
+     # Get 2D index for latvals and lonvals arrays from 1D index
+     return np.unravel_index(minindex_flattened, lats.shape)
+</code></pre>
+
+<p>La fonction suivante nous permet d&rsquo;incrémenter nos mois lors de la lecture des fichiers Netcdf.</p>
+
+<pre><code class="language-python">def add_month(now):
+    try:
+        then = (now + relativedelta(months=1)).replace(day=now.day)
+    except ValueError:
+        then = (now + relativedelta(months=2)).replace(day=1)
+    return then
+</code></pre>
+
+<p>Nous pouvons  appliquer notre fonction sur chaque point de la grille, mois par mois et enregistrer la valeur du point de grille sélectionner dans un DataFrame.</p>
+
+<pre><code class="language-python">i=0
+# Début de notre boucle temporelle
+incr=start
+IND=[]
+while incr &lt;= end:
+    filename= rep1 + model + '_' + variable + '_' + str(incr.year) + '{:02d}'.format(incr.month) + '.nc'   
+    f = netCDF4.Dataset(filename)
+    var = f.variables[variable] 
+    lat, lon = f.variables['lat'], f.variables['lon']
+    # extract lat/lon values (in degrees) to numpy arrays
+    latvals = lat[:]; lonvals = lon[:] 
+    # a function to find the index of the point closest pt
+    # (in squared distance) to give lat/lon value.    
+    iy_min, ix_min = getclosest_ij(latvals, lonvals, lati, loni)
+    IND.append(var[:,iy_min,ix_min])
+    incr=add_month(incr)
+    
+flattened_list = [y for x in IND for y in x]
+start=datetime.datetime(yeari,monthi,day_start)
+TIME=[]
+for i in range(0,nb_days,1): 
+    TIME.append((start+timedelta(days=i)))
+    
+dataFrame_NARR = pd.DataFrame({'Date': TIME, variable_name: flattened_list}, columns = ['Date',variable_name]) 
+dataFrame_NARR = dataFrame_NARR.set_index('Date')   
+dataFrame_NARR.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Temperature maximale</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-01-01</th>
+      <td>-0.893957</td>
+    </tr>
+    <tr>
+      <th>2017-01-02</th>
+      <td>-1.531439</td>
+    </tr>
+    <tr>
+      <th>2017-01-03</th>
+      <td>-1.737830</td>
+    </tr>
+    <tr>
+      <th>2017-01-04</th>
+      <td>-0.240698</td>
+    </tr>
+    <tr>
+      <th>2017-01-05</th>
+      <td>-0.791754</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Nous pouvons sauvegarder notre résultat au format csv.</p>
+
+<pre><code class="language-python">dataFrame_NARR.to_csv('./DATA/NARR/NARR_'+station+'_1pt_'+str(variable)+'_'+ '{:02d}'.format(monthi) + str(yeari)+'_'+ '{:02d}'.format(monthf) + str(yearf)+'.csv')    
+</code></pre>
+
+<ul>
+<li>Observation vs NARR</li>
+</ul>
+
+<p>Maintenant que nous avons extrait notre grille près de Montréal, nous pouvons comparer ces valeurs avec des observations.</p>
+
+<p>Nous allons extraire les données de la station de Montréal McTavish et les inclure dans le DataFrame précédent. On pourra ainsi aisément comparer nos séries.</p>
+
+<pre><code class="language-python">dataframe_station = pd.read_csv('./DATA/station/MONTREAL_TAVISH_tasmax_1948_2017.csv', header=None, names=['Maximum temperature: OBS'])
+start = date(1948, 1, 1)
+end = date(2017, 12, 31)
+delta=(end-start) 
+nb_days = delta.days + 1 
+rng = pd.date_range(start, periods=nb_days, freq='D')
+
+dataframe_station['datetime'] = rng
+dataframe_station.index = dataframe_station['datetime'] 
+dataframe_station = dataframe_station.drop([&quot;datetime&quot;], axis=1)
+</code></pre>
+
+<pre><code class="language-python">dataframe_station.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Maximum temperature: OBS</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1948-01-01</th>
+      <td>-10.0</td>
+    </tr>
+    <tr>
+      <th>1948-01-02</th>
+      <td>-3.9</td>
+    </tr>
+    <tr>
+      <th>1948-01-03</th>
+      <td>-0.6</td>
+    </tr>
+    <tr>
+      <th>1948-01-04</th>
+      <td>-2.8</td>
+    </tr>
+    <tr>
+      <th>1948-01-05</th>
+      <td>-2.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">dataFrame_NARR = dataFrame_NARR.rename(columns={&quot;Temperature maximale&quot;: &quot;Maximum temperature: NARR&quot;})
+df_NARR_Station = pd.concat([dataframe_station,dataFrame_NARR],axis=1)
+df_NARR_Station.tail()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Maximum temperature: OBS</th>
+      <th>Maximum temperature: NARR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-12-27</th>
+      <td>-17.6</td>
+      <td>-18.818960</td>
+    </tr>
+    <tr>
+      <th>2017-12-28</th>
+      <td>-20.5</td>
+      <td>-19.372122</td>
+    </tr>
+    <tr>
+      <th>2017-12-29</th>
+      <td>-18.4</td>
+      <td>-16.453222</td>
+    </tr>
+    <tr>
+      <th>2017-12-30</th>
+      <td>-17.3</td>
+      <td>-16.208838</td>
+    </tr>
+    <tr>
+      <th>2017-12-31</th>
+      <td>-18.3</td>
+      <td>-16.772772</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Traçons les années 2016 et 2017 en appliquant la librairie Matplotlib sur le DataFrame .</p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+df=df_NARR_Station.loc['2016' : '2017']
+color = ['black', 'red']
+fig = plt.figure(figsize=(16,8))
+plt.plot(df.index, df['Maximum temperature: NARR'][:],  label='NARR Temperature', linewidth=2, c=color[0])
+plt.plot(df.index, df['Maximum temperature: OBS'][:],  label='Observation Temperature', linewidth=2, c=color[1])
+
+# Autre méthode pour tracer avec Pandas
+#df_NARR_Station['2017'].plot(figsize=(10,5))
+
+plt.xlabel(&quot;Time&quot;)
+plt.ylabel(&quot;Temperature&quot;, {'color': 'black', 'fontsize': 10})
+plt.title(&quot;Time serie: Station MTL vs NARR&quot;, y=1.05)
+plt.legend(loc='upper left', ncol=1, bbox_to_anchor=(0, 1, 1, 0),fontsize =10)
+plt.savefig(&quot;figures/NARR_time_Serie_temperature.png&quot;, dpi=300, bbox_inches='tight')   # bbox_inches= : option qui permet de propostionner le graphique lors de l'enregistrement
+plt.show()
+
+</code></pre>
+
+<p><img src="/img/formation/netcdf1/output_59_0.png" alt="png" /></p>
+
+<ul>
+<li><p>appliquons la fonction <b> .rolling () </b> pour calculer une moyenne mobile sur notre signal</p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+df_NARR_Station['rollingmean5 Station']=  df_NARR_Station['Maximum temperature: OBS'].rolling(window=5).mean()
+df_NARR_Station['rollingmean5 NARR']=  df_NARR_Station['Maximum temperature: NARR'].rolling(window=5).mean()
+df_NARR_Station.tail()
+</code></pre></li>
+</ul>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Maximum temperature: OBS</th>
+      <th>Maximum temperature: NARR</th>
+      <th>rollingmean5 Station</th>
+      <th>rollingmean5 NARR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-12-27</th>
+      <td>-17.6</td>
+      <td>-18.818960</td>
+      <td>-8.04</td>
+      <td>-8.318930</td>
+    </tr>
+    <tr>
+      <th>2017-12-28</th>
+      <td>-20.5</td>
+      <td>-19.372122</td>
+      <td>-11.12</td>
+      <td>-11.099524</td>
+    </tr>
+    <tr>
+      <th>2017-12-29</th>
+      <td>-18.4</td>
+      <td>-16.453222</td>
+      <td>-13.88</td>
+      <td>-13.647839</td>
+    </tr>
+    <tr>
+      <th>2017-12-30</th>
+      <td>-17.3</td>
+      <td>-16.208838</td>
+      <td>-16.12</td>
+      <td>-15.613794</td>
+    </tr>
+    <tr>
+      <th>2017-12-31</th>
+      <td>-18.3</td>
+      <td>-16.772772</td>
+      <td>-18.42</td>
+      <td>-17.525183</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df_NARR_Station['2017-01':'2017-12'].plot(figsize=(16,8))
+plt.xlabel(&quot;Temps&quot;)
+plt.ylabel(&quot;Température&quot;)
+plt.title(&quot;Maximum temperature time serie: Station MTL vs NARR&quot;, y=1.05)
+plt.savefig(&quot;figures/NARR_time_Serie_temperature2.png&quot;, dpi=300, bbox_inches='tight')   # bbox_inches= : option qui permet de propostionner le graphique lors de l'enregistrement
+plt.show()
+</code></pre>
+
+<p><img src="/img/formation/netcdf1/output_63_0.png" alt="png" /></p>
+
+<h2 id="15-5-extraire-un-domaine-délimité-par-une-boite-2d">15.5- Extraire un domaine délimité par une boite 2D:</h2>
+
+<p><img src="/img/formation/CORDEX_domaine.png" alt="png" /></p>
+
+<p>Au lieu d&rsquo;extraire un point de grille, on peut vouloir extraire un domaine / box délimité par des latitudes et des longitudes.</p>
+
+<p>Dans cet exemple, nous travaillerons avec la moyenne annuelle des données de températures maximales quotidiennes de plusieurs modèles régionaux de CORDEX-NAM44.</p>
+
+<p>Nous allons extraire tous les points de grille de la région entre</p>
+
+<pre><code>- 47degN et 51degN de latitude 
+- -72degW et -64degW de longitude.
+</code></pre>
+
+<p>Nous tracerons ensuite la variabilité interannuelle des anomalies moyennes annuelles de température.</p>
+
+<h3> - Travail sur un fichier Netcdf</h3>
+
+<pre><code class="language-python">
+import netCDF4
+import numpy as np
+import pandas as pd
+from datetime import datetime
+import matplotlib.pylab as plt
+import warnings; warnings.filterwarnings(action='ignore')
+import seaborn as sns
+from matplotlib import gridspec
+import matplotlib as mpl
+
+rep='./DATA/Inter_annual_anomaly/'
+
+# Region à extraire 
+latbounds = [ 47 , 51 ]
+lonbounds = [ -72 , -64 ] 
+
+# Lecture du fichier Netcdf
+filename= rep +'anomalie_CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp45_Mean_tasmax_2011-2040_1971-2000.nc'   
+nc = netCDF4.Dataset(filename)
+
+# Lecture des variables
+var = nc.variables['Mean_tasmax'][:]  
+lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]
+
+# Extraction du sous-domaine 
+subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
+        (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
+
+data=pd.DataFrame(var[:,subset], dtype='float') 
+        
+</code></pre>
+
+<pre><code class="language-python">data.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>101</th>
+      <th>102</th>
+      <th>103</th>
+      <th>104</th>
+      <th>105</th>
+      <th>106</th>
+      <th>107</th>
+      <th>108</th>
+      <th>109</th>
+      <th>110</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.477689</td>
+      <td>1.457037</td>
+      <td>1.581675</td>
+      <td>1.502043</td>
+      <td>1.512367</td>
+      <td>1.435976</td>
+      <td>1.451433</td>
+      <td>1.586266</td>
+      <td>1.577248</td>
+      <td>1.527665</td>
+      <td>...</td>
+      <td>1.893243</td>
+      <td>1.836880</td>
+      <td>1.716371</td>
+      <td>1.633053</td>
+      <td>1.621840</td>
+      <td>2.184239</td>
+      <td>2.217251</td>
+      <td>2.116752</td>
+      <td>2.056826</td>
+      <td>2.168939</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.809766</td>
+      <td>0.822760</td>
+      <td>0.837009</td>
+      <td>0.830208</td>
+      <td>0.879807</td>
+      <td>0.874870</td>
+      <td>0.808254</td>
+      <td>0.928231</td>
+      <td>0.892883</td>
+      <td>0.937235</td>
+      <td>...</td>
+      <td>2.078122</td>
+      <td>2.018263</td>
+      <td>1.847656</td>
+      <td>1.770287</td>
+      <td>1.723371</td>
+      <td>2.283811</td>
+      <td>2.412838</td>
+      <td>2.383081</td>
+      <td>2.181507</td>
+      <td>2.310836</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.123789</td>
+      <td>0.068485</td>
+      <td>0.160753</td>
+      <td>0.161486</td>
+      <td>0.227988</td>
+      <td>0.263271</td>
+      <td>0.237639</td>
+      <td>0.184735</td>
+      <td>0.249564</td>
+      <td>0.232046</td>
+      <td>...</td>
+      <td>1.195626</td>
+      <td>1.082461</td>
+      <td>0.926054</td>
+      <td>0.945262</td>
+      <td>0.908978</td>
+      <td>1.321545</td>
+      <td>1.230734</td>
+      <td>1.172349</td>
+      <td>1.053613</td>
+      <td>1.175336</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.446947</td>
+      <td>0.419797</td>
+      <td>0.525159</td>
+      <td>0.467538</td>
+      <td>0.557181</td>
+      <td>0.430283</td>
+      <td>0.459588</td>
+      <td>0.499041</td>
+      <td>0.501688</td>
+      <td>0.558993</td>
+      <td>...</td>
+      <td>0.184572</td>
+      <td>0.199441</td>
+      <td>0.421587</td>
+      <td>0.536298</td>
+      <td>0.436308</td>
+      <td>0.182898</td>
+      <td>0.186108</td>
+      <td>0.120251</td>
+      <td>0.140952</td>
+      <td>0.006168</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.083132</td>
+      <td>1.143277</td>
+      <td>1.122769</td>
+      <td>1.168139</td>
+      <td>1.212790</td>
+      <td>1.286812</td>
+      <td>1.313845</td>
+      <td>1.080200</td>
+      <td>1.208669</td>
+      <td>1.277381</td>
+      <td>...</td>
+      <td>1.212881</td>
+      <td>1.081511</td>
+      <td>0.897174</td>
+      <td>0.755252</td>
+      <td>0.856003</td>
+      <td>1.263626</td>
+      <td>1.261042</td>
+      <td>1.326922</td>
+      <td>1.264701</td>
+      <td>1.376395</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 111 columns</p>
+</div>
+
+<h3> - Travail sur un ensemble de modèles</h3>
+
+<p>On va effectuer le même exercice mais en bouclant sur deux simulations RCP45 et deux périodes de temps.
+Pour chaque année et chaque simulation, nous allons calculer la moyenne spatiale sur l&rsquo;ensemble du domaine .</p>
+
+<pre><code class="language-python"># path and variable name
+rep='./DATA/Inter_annual_anomaly/'
+variable_in = 'Mean_tasmax'
+
+# list of periods we want to use
+list_period = ['2011-2040','2041-2070','2071-2100']
+
+# list of models
+list_rcp45 = ['CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp45', 'CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_rcp45' ]
+
+# Area to extract
+latbounds = [ 47 , 51 ]
+lonbounds = [ -72 , -64 ] 
+
+# 
+df_rcp45 = []
+matrix_45 = []
+for period in list_period: 
+    globals()['flattened_list_'+period] = []  # we define a global variable 
+    for i in range(0,len(list_rcp45)):
+        filename= rep +'anomalie_' +  list_rcp45[i] +  '_' + variable_in + '_' + period  + '_1971-2000.nc'   
+        nc = netCDF4.Dataset(filename)
+        # we here read netcdf values
+        var = nc.variables[variable_in][:]  
+        lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]
+        # in this part, we extract our domain 
+        subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
+             (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
+        data=pd.DataFrame(var[:,subset], dtype='float') 
+        globals()['flattened_list_'+period].append(data.mean(axis=1))
+        
+    df_rcp45.append(pd.DataFrame(globals()['flattened_list_'+period]).T) 
+    
+df_rcp45 = pd.concat(df_rcp45)
+df_rcp45.head()
+
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.720843</td>
+      <td>-0.288691</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.476198</td>
+      <td>0.885357</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.581686</td>
+      <td>0.541863</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.390671</td>
+      <td>-0.014199</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.148421</td>
+      <td>1.294169</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>On peut ajouter un index de type datetime:</p>
+
+<pre><code class="language-python">TIME=[]
+for y in range(int(list_period[0].split('-')[0]),int(list_period[-1].split('-')[-1])+1,1):
+    TIME.append(datetime.strptime(str(y), '%Y'))
+    
+df_rcp45['Date'] = TIME   
+df_rcp45.index = df_rcp45['Date']
+df_rcp45 = df_rcp45.drop([&quot;Date&quot;], axis=1) 
+df_rcp45.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2011-01-01</th>
+      <td>1.720843</td>
+      <td>-0.288691</td>
+    </tr>
+    <tr>
+      <th>2012-01-01</th>
+      <td>1.476198</td>
+      <td>0.885357</td>
+    </tr>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.581686</td>
+      <td>0.541863</td>
+    </tr>
+    <tr>
+      <th>2014-01-01</th>
+      <td>0.390671</td>
+      <td>-0.014199</td>
+    </tr>
+    <tr>
+      <th>2015-01-01</th>
+      <td>1.148421</td>
+      <td>1.294169</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Nous voulons ensuite, pour chaque année, la variabilité inter-modèle. Pour cela, nous calculerons les valeurs minimum et maximum en appliquant la méthode .apply.</p>
+
+<pre><code class="language-python">df_rcp45['min'] = df_rcp45.apply(np.min, axis=1)
+df_rcp45['max'] = df_rcp45.apply(np.max, axis=1)
+df_rcp45['mean'] = df_rcp45.apply(np.mean, axis=1)
+df_rcp45.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>min</th>
+      <th>max</th>
+      <th>mean</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2011-01-01</th>
+      <td>1.720843</td>
+      <td>-0.288691</td>
+      <td>-0.288691</td>
+      <td>1.720843</td>
+      <td>0.716076</td>
+    </tr>
+    <tr>
+      <th>2012-01-01</th>
+      <td>1.476198</td>
+      <td>0.885357</td>
+      <td>0.885357</td>
+      <td>1.476198</td>
+      <td>1.180777</td>
+    </tr>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.581686</td>
+      <td>0.541863</td>
+      <td>0.541863</td>
+      <td>0.581686</td>
+      <td>0.561774</td>
+    </tr>
+    <tr>
+      <th>2014-01-01</th>
+      <td>0.390671</td>
+      <td>-0.014199</td>
+      <td>-0.014199</td>
+      <td>0.390671</td>
+      <td>0.188236</td>
+    </tr>
+    <tr>
+      <th>2015-01-01</th>
+      <td>1.148421</td>
+      <td>1.294169</td>
+      <td>1.148421</td>
+      <td>1.294169</td>
+      <td>1.221295</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>On peut faire maintenant le même travail sur les simulations RCP8 et les simulations historiques:</p>
+
+<pre><code class="language-python">list_rcp85 = ['CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp85','CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-MR_rcp85']
+df_rcp85 = []
+matrix_85 = []
+for period in list_period: 
+    globals()['flattened_list_'+period] = []
+    for i in range(0,len(list_rcp85)):
+        filename= rep + 'anomalie_' +  list_rcp85[i] +  '_' + variable_in + '_' + period  + '_1971-2000.nc'   
+        nc = netCDF4.Dataset(filename)
+        var = nc.variables[variable_in][:]  
+        lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]            
+        subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
+             (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
+        #mask = np.where(subset)
+        data=pd.DataFrame(var[:,subset], dtype='float') 
+        globals()['flattened_list_'+period].append(data.mean(axis=1))        
+    df_rcp85.append(pd.DataFrame(globals()['flattened_list_'+period]).T) 
+    
+df_rcp85 = pd.concat(df_rcp85)
+df_rcp85['Date'] = TIME   
+df_rcp85.index = df_rcp85['Date']
+df_rcp85 = df_rcp85.drop([&quot;Date&quot;], axis=1)  
+
+df_rcp85['min'] = df_rcp85.apply(np.min, axis=1)
+df_rcp85['max'] = df_rcp85.apply(np.max, axis=1)
+df_rcp85['mean'] = df_rcp85.apply(np.mean, axis=1)
+
+### historical RCMs
+list_histo = ['CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical', 'CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_historical']
+df_histo = []
+globals()['flattened_list_'+period] = []
+for i in range(0,len(list_histo)):
+    filename= rep + 'anomalie_' +  list_histo[i] +  '_' + variable_in + '_1971-2000_1971-2000.nc'   
+    nc = netCDF4.Dataset(filename)
+    var = nc.variables[variable_in][:]  
+    lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]
+    
+    subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
+         (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
+    #mask = np.where(subset)
+    data=pd.DataFrame(var[:,subset], dtype='float') 
+    globals()['flattened_list_'+period].append(data.mean(axis=1))        
+df_histo.append(pd.DataFrame(globals()['flattened_list_'+period]).T) 
+TIME=[]
+for y in range(1971,2001,1):
+    TIME.append(datetime.strptime(str(y), '%Y'))  
+    
+df_histo = pd.concat(df_histo)
+df_histo['Date'] = TIME   
+df_histo.index = df_histo['Date']
+df_histo = df_histo.drop([&quot;Date&quot;], axis=1)  
+
+df_histo['min'] = df_histo.apply(np.min, axis=1)
+df_histo['max'] = df_histo.apply(np.max, axis=1)
+df_histo['mean'] = df_histo.apply(np.mean, axis=1)
+</code></pre>
+
+<p>On combine le tout dans un seul et même DataFrame:</p>
+
+<pre><code class="language-python">result = []
+result = pd.DataFrame({'min_rcp45': df_rcp45['min'], 'max_rcp45': df_rcp45['max'],'mean_rcp45': df_rcp45['mean'],
+                       'min_rcp85': df_rcp85['min'], 'max_rcp85': df_rcp85['max'],'mean_rcp85': df_rcp85['mean'],
+                       'min_histo': df_histo['min'], 'max_histo': df_histo['max'],'mean_histo': df_histo['mean']},
+        columns = ['min_rcp45','max_rcp45','mean_rcp45','min_rcp85','max_rcp85','mean_rcp85','min_histo','max_histo','mean_histo']) 
+
+result.tail()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>min_rcp45</th>
+      <th>max_rcp45</th>
+      <th>mean_rcp45</th>
+      <th>min_rcp85</th>
+      <th>max_rcp85</th>
+      <th>mean_rcp85</th>
+      <th>min_histo</th>
+      <th>max_histo</th>
+      <th>mean_histo</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2096-01-01</th>
+      <td>1.890078</td>
+      <td>4.496284</td>
+      <td>3.193181</td>
+      <td>5.441835</td>
+      <td>8.036326</td>
+      <td>6.739081</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2097-01-01</th>
+      <td>3.863885</td>
+      <td>5.062620</td>
+      <td>4.463252</td>
+      <td>6.105060</td>
+      <td>7.355627</td>
+      <td>6.730344</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2098-01-01</th>
+      <td>2.289962</td>
+      <td>4.603645</td>
+      <td>3.446804</td>
+      <td>6.583062</td>
+      <td>7.147783</td>
+      <td>6.865423</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2099-01-01</th>
+      <td>2.949836</td>
+      <td>4.268922</td>
+      <td>3.609379</td>
+      <td>6.405183</td>
+      <td>7.043156</td>
+      <td>6.724169</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2100-01-01</th>
+      <td>2.998667</td>
+      <td>3.276854</td>
+      <td>3.137760</td>
+      <td>6.167938</td>
+      <td>6.966082</td>
+      <td>6.567010</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>On peut maintenant visualiser notre variabilité inter-annuelle.</p>
+
+<pre><code class="language-python">color = ['black','blue', 'red']
+fig = plt.figure(figsize=(18, 10)) 
+gs = gridspec.GridSpec(1, 2, width_ratios=[6, 1]) 
+gs.update( wspace=0.04)
+ax1 = plt.subplot(gs[0])
+
+plt.rcParams[&quot;figure.figsize&quot;]=[16,9]       #  
+plt.plot(result.index.year, result['mean_histo'][:],  label='RCMs historical', linewidth=2, c=color[0])
+plt.plot(result.index.year, result['mean_rcp45'][:],  label='RCMs scenario rcp 4.5', linewidth=2, c=color[1])
+plt.plot(result.index.year, result['mean_rcp85'][:],  label='RCMs scenario rcp 8.5', linewidth=2, c=color[2])
+
+plt.fill_between(result.index.year,result['min_histo'],result['max_histo'], color = color[0], alpha=.2)
+plt.fill_between(result.index.year,result['min_rcp45'],result['max_rcp45'], color =  color[1], alpha=.2)
+plt.fill_between(result.index.year,result['min_rcp85'],result['max_rcp85'], color =  color[2], alpha=.2)
+plt.legend(loc=&quot;upper left&quot;, markerscale=1., scatterpoints=1, fontsize=20)
+
+plt.xticks(range(result.index.year[0]-1, result.index.year[-1]+1, 10), fontsize=14)
+plt.yticks( fontsize=14)
+
+ax1.grid(axis = &quot;x&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
+ax1.grid(axis = &quot;y&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
+
+plt.setp(plt.gca().get_xticklabels(), rotation=45, ha=&quot;right&quot;)
+
+plt.xlabel('Date', fontsize=20, color='black', weight='semibold')
+plt.ylabel('°C', fontsize=20, color='black', weight='semibold')
+plt.title('Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)', fontsize=20, color='black', weight='semibold')
+ 
+ax1.set_facecolor('white')
+plt.yticks( fontsize=14)
+plt.show()  
+</code></pre>
+
+<p><img src="/img/formation/netcdf1/output_78_0.png" alt="png" /></p>
+
+<p>Ajoutons à côté de notre graphique un boxplot sur tous les modèles pour la période 1971-2000 et 2071-2100 uniquement.</p>
+
+<p>Nous allons extraire ces périodes de notre résultat matriciel = []</p>
+
+<pre><code class="language-python">list_to_remove = ['min','max','mean']
+df_histo = df_histo.drop(list_to_remove, axis=1)  
+df_rcp45 = df_rcp45.drop(list_to_remove, axis=1)  
+df_rcp85 = df_rcp85.drop(list_to_remove, axis=1) 
+df_histo = df_histo.loc['1971' : '2010'].stack()
+df_rcp45 = df_rcp45.loc['2071' : '2100'].stack()
+df_rcp85 = df_rcp85.loc['2071' : '2100'].stack()
+
+matrix_box = pd.DataFrame({'RCMs_histo': df_histo, 'RCMs_rcp45': df_rcp45,'RCMs_rcp85': df_rcp85},
+        columns = ['RCMs_histo','RCMs_rcp45','RCMs_rcp85'])
+matrix_box.head()
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>RCMs_histo</th>
+      <th>RCMs_rcp45</th>
+      <th>RCMs_rcp85</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">1971-01-01</th>
+      <th>0</th>
+      <td>-1.341567</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.124120</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1972-01-01</th>
+      <th>0</th>
+      <td>-0.641267</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.035067</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1973-01-01</th>
+      <th>0</th>
+      <td>0.054164</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">color = ['black','blue', 'red']
+fig = plt.figure(figsize=(22, 12)) 
+gs = gridspec.GridSpec(1, 2, width_ratios=[6, 1]) 
+gs.update( wspace=0.04)
+ax1 = plt.subplot(gs[0])
+
+plt.rcParams[&quot;figure.figsize&quot;]=[16,9]       #  
+plt.plot(result.index.year, result['mean_histo'][:],  label='RCMs historical', linewidth=2, c=color[0])
+plt.plot(result.index.year, result['mean_rcp45'][:],  label='RCMs scenario rcp 4.5', linewidth=2, c=color[1])
+plt.plot(result.index.year, result['mean_rcp85'][:],  label='RCMs scenario rcp 8.5', linewidth=2, c=color[2])
+
+plt.fill_between(result.index.year,result['min_histo'],result['max_histo'], color = color[0], alpha=.2)
+plt.fill_between(result.index.year,result['min_rcp45'],result['max_rcp45'], color =  color[1], alpha=.2)
+plt.fill_between(result.index.year,result['min_rcp85'],result['max_rcp85'], color =  color[2], alpha=.2)
+plt.legend(loc=&quot;upper left&quot;, markerscale=1., scatterpoints=1, fontsize=20)
+
+#ax.set_xlim(result.index.year[0], result.index.year[-1])
+plt.xticks(range(result.index.year[0]-1, result.index.year[-1]+1, 10), fontsize=14)
+plt.yticks( fontsize=14)
+
+ax1.grid(axis = &quot;x&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
+ax1.grid(axis = &quot;y&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
+
+plt.setp(plt.gca().get_xticklabels(), rotation=45, ha=&quot;right&quot;)
+
+plt.xlabel('Date', fontsize=20, color='black', weight='semibold')
+plt.ylabel('°C', fontsize=20, color='black', weight='semibold')
+plt.title('Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)', fontsize=20, color='black', weight='semibold')
+
+
+my_pal = {&quot;RCMs_histo&quot;: &quot;grey&quot;, &quot;RCMs_rcp45&quot;: &quot;blue&quot;, &quot;RCMs_rcp85&quot;:&quot;red&quot;}
+ax2 = plt.subplot(gs[1])
+#ax2 = matrix_box.boxplot(column=['RCMs_histo', 'RCMs_rcp45', 'RCMs_rcp85'])
+ax2 = sns.boxplot(data=matrix_box, palette=my_pal)  
+# Add transparency to colors
+for patch in ax2.artists:
+ r, g, b, a = patch.get_facecolor()
+ patch.set_facecolor((r, g, b, .2))
+plt.setp(plt.gca().get_xticklabels(), rotation=45, ha=&quot;right&quot;)
+ 
+ax1.set_facecolor('white')
+ax2.set_facecolor('white')
+ax2.spines['top'].set_visible(False)
+ax2.spines['bottom'].set_visible(False)
+ax2.spines['right'].set_visible(False)
+ax2.spines['left'].set_visible(False)
+
+medians = matrix_box.median().values
+median_labels = [str(np.round(s, 2))+' °C' for s in medians]
+pos = range(len(medians))
+i=0
+for tick,label in zip(pos,ax2.get_xticklabels()):
+    ax2.text(pos[tick], medians[tick] + 0.1, median_labels[tick], 
+            horizontalalignment='center', size='medium', color = color[i], weight='semibold')
+    i+=1
+x1, x2, x3 = 0, 1, 2
+ax2.text(x1, matrix_box.min().min().round()-0.15 , &quot;1971-2000&quot;, ha='center', va='bottom', size='medium', color='black', weight='semibold')   
+ax2.text((x2+x3)*.5, matrix_box.min().median()-0.4 , &quot;2071-2100&quot;, ha='center', va='bottom', size='medium', color='black', weight='semibold')
+plt.yticks( fontsize=14)
+    
+plt.savefig('./figures/VI_YEAR_Mean_tasmax.png', bbox_inches='tight', format='png', dpi=1000)
+plt.show()  
+</code></pre>
+
+<p><img src="/img/formation/netcdf1/output_81_0.png" alt="png" /></p>
+
+<pre><code class="language-python">
+</code></pre>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/formation_python/14-statistique-descriptive-cours/" rel="next">14- La statistique descriptive - Rappels</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/formation_python/15.2-cartopy_library/" rel="prev">15-2- La librairie Cartopy - Cours</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/15.1-Netcdf_Tutorial.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.bcfae8267aba63cc55af53a503896bd9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
