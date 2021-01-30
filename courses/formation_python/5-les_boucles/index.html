@@ -28,8 +28,9 @@
   
     
   
-  <meta name="description" content="5- Les boucles ou contrôles de flux en Python: Objectifs  Comprendre les structures conditionnelles Comprendre ce qu&rsquo;est une boucle Savoir créer une boucle While Savoir créer une boucle For  5.1- La struture conditionnelle : If, else Les structures de contrôle de flux peuvent être classées en structure conditionnelle et structure d&rsquo;itération.
- Les instructions conditionnelles sélectionnent un ensemble particulier d&rsquo;instructions à exécuter en fonction d&rsquo;une condition spécifiée.">
+  <meta name="description" content="5- Les boucles ou contrôles de flux en Python:  Comprendre les structures conditionnelles Comprendre ce qu&rsquo;est une boucle Savoir créer une boucle While Savoir créer une boucle For  5.1- La struture conditionnelle : If, else Les structures de contrôle de flux peuvent être classées en structure conditionnelle et structure d&rsquo;itération.
+  Les instructions conditionnelles sélectionnent un ensemble particulier d&rsquo;instructions à exécuter en fonction d&rsquo;une condition spécifiée.
+  L&rsquo;instruction de contrôle conditionnelle la plus populaire est «if else».">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/5-les_boucles/">
@@ -116,8 +117,9 @@
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/5-les_boucles/">
   <meta property="og:title" content="5- Les boucles en Python - Cours | GDueymes">
-  <meta property="og:description" content="5- Les boucles ou contrôles de flux en Python: Objectifs  Comprendre les structures conditionnelles Comprendre ce qu&rsquo;est une boucle Savoir créer une boucle While Savoir créer une boucle For  5.1- La struture conditionnelle : If, else Les structures de contrôle de flux peuvent être classées en structure conditionnelle et structure d&rsquo;itération.
- Les instructions conditionnelles sélectionnent un ensemble particulier d&rsquo;instructions à exécuter en fonction d&rsquo;une condition spécifiée."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="5- Les boucles ou contrôles de flux en Python:  Comprendre les structures conditionnelles Comprendre ce qu&rsquo;est une boucle Savoir créer une boucle While Savoir créer une boucle For  5.1- La struture conditionnelle : If, else Les structures de contrôle de flux peuvent être classées en structure conditionnelle et structure d&rsquo;itération.
+  Les instructions conditionnelles sélectionnent un ensemble particulier d&rsquo;instructions à exécuter en fonction d&rsquo;une condition spécifiée.
+  L&rsquo;instruction de contrôle conditionnelle la plus populaire est «if else»."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -579,17 +581,14 @@
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#5-les-boucles-ou-contrôles-de-flux-en-python">5- Les boucles ou contrôles de flux en Python:</a></li>
-<li><a href="#5-1-la-struture-conditionnelle-if-else">5.1- La struture conditionnelle : If, else</a></li>
-<li><a href="#5-2-la-boucle-for">5.2- La boucle for</a></li>
-<li><a href="#5-3-la-boucle-while">5.3- La boucle  while()</a></li>
-<li><a href="#5-4-création-de-listes-de-chiffres-la-boucle-range">5.4- Création de listes de chiffres: la boucle  range()</a></li>
-<li><a href="#5-5-interrompre-une-boucle">5.5- Interrompre une boucle</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#5--les-boucles-ou-contrôles-de-flux-en-python">5- Les boucles ou contrôles de flux en Python:</a></li>
+    <li><a href="#51--la-struture-conditionnelle--if-else">5.1- La struture conditionnelle : If, else</a></li>
+    <li><a href="#52--la-boucle-for">5.2- La boucle for</a></li>
+    <li><a href="#53--la-boucle--while">5.3- La boucle  while()</a></li>
+    <li><a href="#54--création-de-listes-de-chiffres-la-boucle--range">5.4- Création de listes de chiffres: la boucle  range()</a></li>
+    <li><a href="#55--interrompre-une-boucle">5.5- Interrompre une boucle</a></li>
+  </ul>
 </nav>
 
       
@@ -604,102 +603,79 @@
           <h1>5- Les boucles en Python - Cours</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/pylogo.png" alt="image0" /></p>
-
-<h2 id="5-les-boucles-ou-contrôles-de-flux-en-python">5- Les boucles ou contrôles de flux en Python:</h2>
-
-<h2>Objectifs</h2>
-
+            <p><img src="/img/pylogo.png" alt="image0"></p>
+<h2 id="5--les-boucles-ou-contrôles-de-flux-en-python">5- Les boucles ou contrôles de flux en Python:</h2>
+<!-- raw HTML omitted -->
 <ul>
 <li>Comprendre les structures conditionnelles</li>
 <li>Comprendre ce qu&rsquo;est une boucle</li>
 <li>Savoir créer une boucle While</li>
 <li>Savoir créer une boucle For</li>
 </ul>
-
-<h2 id="5-1-la-struture-conditionnelle-if-else">5.1- La struture conditionnelle : If, else</h2>
-
+<h2 id="51--la-struture-conditionnelle--if-else">5.1- La struture conditionnelle : If, else</h2>
 <p>Les structures de contrôle de flux peuvent être classées en structure conditionnelle et structure d&rsquo;itération.</p>
-
 <ul>
-<li><p>Les instructions conditionnelles sélectionnent un ensemble particulier d&rsquo;instructions à exécuter en fonction d&rsquo;une condition spécifiée.</p></li>
-
-<li><p>L&rsquo;instruction de contrôle conditionnelle la plus populaire est «if else».</p></li>
-
-<li><p>Cette contruction de langage nous permet de décrire des branches possibles que prendra notre programme python en fonction des conditions données:
-                          Syntaxe IF:</p>
-
-<pre><code>                                 if condition:
-                                     action 1
-                                 elif:
-                                     action 2
-                                 else:
-                                     action 3
-</code></pre></li>
-
-<li><p>ATTENTION: python travaille en indentation</p></li>
-</ul>
-
-<p><img src="/img/indentation.png" alt="image0" /></p>
-
-<ul>
-<li><p>On peut affecter des tâches multiples dans des structures conditionnelles.</p>
-
-<pre><code class="language-python">ma_variable = 5
+<li>
+<p>Les instructions conditionnelles sélectionnent un ensemble particulier d&rsquo;instructions à exécuter en fonction d&rsquo;une condition spécifiée.</p>
+</li>
+<li>
+<p>L&rsquo;instruction de contrôle conditionnelle la plus populaire est «if else».</p>
+</li>
+<li>
+<p>Cette contruction de langage nous permet de décrire des branches possibles que prendra notre programme python en fonction des conditions données:
+Syntaxe IF:</p>
+<pre><code>                                   if condition:
+                                       action 1
+                                   elif:
+                                       action 2
+                                   else:
+                                       action 3
 </code></pre>
-
-<pre><code class="language-python">if (ma_variable &gt; 5 ):
-ma_variable = ma_variable + 1 
+</li>
+<li>
+<p>ATTENTION: python travaille en indentation</p>
+</li>
+</ul>
+<p><img src="/img/indentation.png" alt="image0"></p>
+<ul>
+<li>On peut affecter des tâches multiples dans des structures conditionnelles.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ma_variable <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> (ma_variable <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span> ):
+    ma_variable <span style="color:#f92672">=</span> ma_variable <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
 ma_variable    
+</code></pre></div><pre><code>5
 </code></pre>
-
-<p>5</p>
-
-<pre><code class="language-python">if (ma_variable &gt; 5 ):
-ma_variable = ma_variable + 1 
-else:
-ma_variable = ma_variable - 1 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> (ma_variable <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span> ):
+    ma_variable <span style="color:#f92672">=</span> ma_variable <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
+<span style="color:#66d9ef">else</span>:
+    ma_variable <span style="color:#f92672">=</span> ma_variable <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> 
 ma_variable   
 
+</code></pre></div><pre><code>4
 </code></pre>
-
-<p>4</p>
-
-<pre><code class="language-python">if (ma_variable &gt; 5 ):
-ma_variable = ma_variable + 1 
-elif (ma_variable == 5) :
-ma_variable = ma_variable * 10 
-else:
-ma_variable = ma_variable - 1 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> (ma_variable <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span> ):
+    ma_variable <span style="color:#f92672">=</span> ma_variable <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
+<span style="color:#66d9ef">elif</span> (ma_variable <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span>) :
+    ma_variable <span style="color:#f92672">=</span> ma_variable <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> 
+<span style="color:#66d9ef">else</span>:
+    ma_variable <span style="color:#f92672">=</span> ma_variable <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> 
 ma_variable   
+</code></pre></div><pre><code>3
 </code></pre>
-
-<p>3</p></li>
-</ul>
-
-<h2 id="5-2-la-boucle-for">5.2- La boucle for</h2>
-
+<h2 id="52--la-boucle-for">5.2- La boucle for</h2>
 <p>Une boucle vous permet de répéter des instructions selon vos besoins.</p>
-
 <pre><code>                         Syntaxe FOR:  
                                      items = [1,2,3]
                                      for i in items:
                                          print(i) # 1,2,3
 </code></pre>
-
 <p>Attention une fois de plus à bien respecter l&rsquo;indentation.</p>
-
-<pre><code class="language-python">ma_liste=[1,2,3,4,5]
-</code></pre>
-
-<pre><code class="language-python">for ma_valeur in ma_liste:
-    print(ma_valeur*2)
-    print(&quot;---&quot;)
-</code></pre>
-
-<pre><code>2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ma_liste<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> ma_valeur <span style="color:#f92672">in</span> ma_liste:
+    <span style="color:#66d9ef">print</span>(ma_valeur<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;---&#34;</span>)
+</code></pre></div><pre><code>2
 ---
 4
 ---
@@ -710,27 +686,21 @@ ma_variable
 10
 ---
 </code></pre>
-
-<pre><code class="language-python">for ma_valeur in ma_liste:
-    ma_nouvelle_variable=ma_valeur*2
-    print(&quot;La multiplication de 2 * %d = %d&quot; % (ma_valeur,ma_nouvelle_variable))  # pour concatener du texte et une variable
-                               # %d: python sait qu'on va afficher un variable en entier
-                               # %s: python sait qu'on va afficher un variable mot 
-                               # %f: python sait qu'on va afficher une variable décimale
-                               # on donne un tuple à afficher
-</code></pre>
-
-<pre><code>La multiplication de 2 * 1 = 2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> ma_valeur <span style="color:#f92672">in</span> ma_liste:
+    ma_nouvelle_variable<span style="color:#f92672">=</span>ma_valeur<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;La multiplication de 2 * </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> = </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (ma_valeur,ma_nouvelle_variable))  <span style="color:#75715e"># pour concatener du texte et une variable</span>
+                               <span style="color:#75715e"># %d: python sait qu&#39;on va afficher un variable en entier</span>
+                               <span style="color:#75715e"># %s: python sait qu&#39;on va afficher un variable mot </span>
+                               <span style="color:#75715e"># %f: python sait qu&#39;on va afficher une variable décimale</span>
+                               <span style="color:#75715e"># on donne un tuple à afficher</span>
+</code></pre></div><pre><code>La multiplication de 2 * 1 = 2
 La multiplication de 2 * 2 = 4
 La multiplication de 2 * 3 = 6
 La multiplication de 2 * 4 = 8
 La multiplication de 2 * 5 = 10
 </code></pre>
-
-<h2 id="5-3-la-boucle-while">5.3- La boucle  while()</h2>
-
+<h2 id="53--la-boucle--while">5.3- La boucle  while()</h2>
 <p>Même principe que la structure conditionnelle if mais répétée:</p>
-
 <pre><code>                        Syntaxe WHILE:
                                        run = True
                                        while run:
@@ -738,19 +708,15 @@ La multiplication de 2 * 5 = 10
                                            if &lt;condition&gt;:
                                                run = False
 </code></pre>
-
-<p>Tant que la condition est respectée, l&rsquo;iterration dans la boucle continue.
+<p>Tant que la condition est respectée, l&rsquo;iterration dans la boucle continue. 
 Attention à bien respecter l&rsquo;indentation.</p>
-
-<pre><code class="language-python">ma_liste=[1,2,3,4,5]
-compteur=0
-while (compteur &lt; 5):
-    print(&quot;Mon compteur = %d&quot; % (compteur))
-    print(&quot;Ma valeur = %d&quot; % (ma_liste[compteur]))   # dans le tuple, on veut la valeur de notre liste
-    compteur=compteur+1
-</code></pre>
-
-<pre><code>Mon compteur = 0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ma_liste<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
+compteur<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">while</span> (compteur <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Mon compteur = </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (compteur))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Ma valeur = </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (ma_liste[compteur]))   <span style="color:#75715e"># dans le tuple, on veut la valeur de notre liste</span>
+    compteur<span style="color:#f92672">=</span>compteur<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</code></pre></div><pre><code>Mon compteur = 0
 Ma valeur = 1
 Mon compteur = 1
 Ma valeur = 2
@@ -761,74 +727,55 @@ Ma valeur = 4
 Mon compteur = 4
 Ma valeur = 5
 </code></pre>
-
 <p>On peut imbriquer des conditions dans une boucle while. En reprennant la structure précédente, on va par exemple extraire uniquement les valeurs paires. Si modulo de la valeur = 0 =&gt; nombre pair</p>
-
-<pre><code class="language-python">compteur=0
-compteur_resultat_vrai=0
-while (compteur &lt; 5):
-    if ma_liste[compteur] % 2 == 0:
-        print(&quot;Mon compteur = %d&quot; % (compteur))
-        print(&quot;Ma valeur = %d&quot; % (ma_liste[compteur]))  
-        compteur_resultat_vrai=compteur_resultat_vrai+1
-    compteur=compteur+1
-print(compteur_resultat_vrai)
-</code></pre>
-
-<pre><code>Mon compteur = 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">compteur<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+compteur_resultat_vrai<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">while</span> (compteur <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>):
+    <span style="color:#66d9ef">if</span> ma_liste[compteur] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Mon compteur = </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (compteur))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Ma valeur = </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (ma_liste[compteur]))  
+        compteur_resultat_vrai<span style="color:#f92672">=</span>compteur_resultat_vrai<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+    compteur<span style="color:#f92672">=</span>compteur<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(compteur_resultat_vrai)
+</code></pre></div><pre><code>Mon compteur = 1
 Ma valeur = 2
 Mon compteur = 3
 Ma valeur = 4
 2
 </code></pre>
-
-<p>Avec les structures while(), on peut facilement faire une boucle infine et faire planter son code.
+<p>Avec les structures while(), on peut facilement faire une boucle infine et faire planter son code. 
 i= 0
 while i == 0:
-    print(&lsquo;boucle infiniiiiiiie&rsquo;)</p>
-
-<h2 id="5-4-création-de-listes-de-chiffres-la-boucle-range">5.4- Création de listes de chiffres: la boucle  range()</h2>
-
+print(&lsquo;boucle infiniiiiiiie&rsquo;)</p>
+<h2 id="54--création-de-listes-de-chiffres-la-boucle--range">5.4- Création de listes de chiffres: la boucle  range()</h2>
 <p>Si on a besoin d&rsquo;avoir une liste de chiffres et qu&rsquo;on souhaite éviter une structure while(), il est possible de créer une boucle facilement avec range():</p>
-
-<pre><code class="language-python">for i in range(5):
-    print(i)
-</code></pre>
-
-<pre><code>0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>):
+    <span style="color:#66d9ef">print</span>(i)
+</code></pre></div><pre><code>0
 1
 2
 3
 4
 </code></pre>
-
-<pre><code class="language-python">for i in range(2,7):
-    print(i)
-</code></pre>
-
-<pre><code>2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>):
+    <span style="color:#66d9ef">print</span>(i)
+</code></pre></div><pre><code>2
 3
 4
 5
 6
 </code></pre>
-
-<pre><code class="language-python">for i in range(0,10,2):
-    print(i)
-</code></pre>
-
-<pre><code>0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">2</span>):
+    <span style="color:#66d9ef">print</span>(i)
+</code></pre></div><pre><code>0
 2
 4
 6
 8
 </code></pre>
-
-<pre><code class="language-python">for i in range(5,-5,-1):
-    print(i)
-</code></pre>
-
-<pre><code>5
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+    <span style="color:#66d9ef">print</span>(i)
+</code></pre></div><pre><code>5
 4
 3
 2
@@ -839,64 +786,49 @@ while i == 0:
 -3
 -4
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">produits <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;smartphone&#39;</span>,<span style="color:#e6db74">&#39;chaussures&#39;</span>,<span style="color:#e6db74">&#39;console&#39;</span>]
+caParJour <span style="color:#f92672">=</span> [<span style="color:#ae81ff">10000</span>,<span style="color:#ae81ff">15000</span>,<span style="color:#ae81ff">12000</span>]
 
-<pre><code class="language-python">produits = ['smartphone','chaussures','console']
-caParJour = [10000,15000,12000]
-
-for i in range(len(produits)):
-    print(produits[i])
-    print(caParJour[i])
-</code></pre>
-
-<pre><code>smartphone
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(produits)):
+    <span style="color:#66d9ef">print</span>(produits[i])
+    <span style="color:#66d9ef">print</span>(caParJour[i])
+</code></pre></div><pre><code>smartphone
 10000
 chaussures
 15000
 console
 12000
 </code></pre>
-
-<h2 id="5-5-interrompre-une-boucle">5.5- Interrompre une boucle</h2>
-
+<h2 id="55--interrompre-une-boucle">5.5- Interrompre une boucle</h2>
 <p>Il est possible de stopper une boucle avec la commande break.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ma_liste<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> ma_liste:
+     <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>:
+             <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;On stoppe la boucle: les valeurs qui suivent sont supérieures à 5.&#34;</span>)
+             <span style="color:#66d9ef">break</span>
+     <span style="color:#66d9ef">print</span>(i)
 
-<pre><code class="language-python">ma_liste=[1,2,3,4,5,6,7,8,9,10]
-for i in ma_liste:
-     if i &gt; 5:
-             print(&quot;On stoppe la boucle: les valeurs qui suivent sont supérieures à 5.&quot;)
-             break
-     print(i)
-
-</code></pre>
-
-<pre><code>1
+</code></pre></div><pre><code>1
 2
 3
 4
 5
 On stoppe la boucle: les valeurs qui suivent sont supérieures à 5.
 </code></pre>
-
-<pre><code class="language-python">produits = ['smartphone','chaussures','console']
-for i in produits:
-    if i =='chaussures':
-        break
-    print(i)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">produits <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;smartphone&#39;</span>,<span style="color:#e6db74">&#39;chaussures&#39;</span>,<span style="color:#e6db74">&#39;console&#39;</span>]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> produits:
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span><span style="color:#e6db74">&#39;chaussures&#39;</span>:
+        <span style="color:#66d9ef">break</span>
+    <span style="color:#66d9ef">print</span>(i)
+</code></pre></div><pre><code>smartphone
 </code></pre>
-
-<pre><code>smartphone
-</code></pre>
-
 <p>On peut  lire la suite du code et passer directement à la boucle suivante avec continue</p>
-
-<pre><code class="language-python">#ne pas lire la suite du code et passer directement à la boucle suivante avec continue
-for i in produits:
-    if i =='chaussures':
-        continue
-    print(i)
-</code></pre>
-
-<pre><code>smartphone
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#ne pas lire la suite du code et passer directement à la boucle suivante avec continue</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> produits:
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span><span style="color:#e6db74">&#39;chaussures&#39;</span>:
+        <span style="color:#66d9ef">continue</span>
+    <span style="color:#66d9ef">print</span>(i)
+</code></pre></div><pre><code>smartphone
 console
 </code></pre>
 
@@ -944,7 +876,7 @@ console
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/5-Les_boucles.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c5-Les_boucles.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

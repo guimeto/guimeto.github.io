@@ -32,8 +32,7 @@
 To install the library under anaconda:
 $ conda install xarray
 Here is an example of structure of a Netcdf file under xarray:
- DataArray 
-xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional array. It has several key properties: | | | |&ndash;|&ndash;| | values | a numpy.ndarray holding the array’s values | | dims | dimension names for each axis (e.">
+DataArray xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional array. It has several key properties: | | | |&ndash;|&ndash;| | values| a numpy.ndarray holding the array’s values | | dims| dimension names for each axis (e.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/tutorial_python_netcdf/4-xarray_library/">
@@ -124,8 +123,7 @@ xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional ar
 To install the library under anaconda:
 $ conda install xarray
 Here is an example of structure of a Netcdf file under xarray:
- DataArray 
-xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional array. It has several key properties: | | | |&ndash;|&ndash;| | values | a numpy.ndarray holding the array’s values | | dims | dimension names for each axis (e."><meta property="og:image" content="/img/icon-192.png">
+DataArray xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional array. It has several key properties: | | | |&ndash;|&ndash;| | values| a numpy.ndarray holding the array’s values | | dims| dimension names for each axis (e."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -471,22 +469,20 @@ xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional ar
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-open-a-netcdf-file">1- Open a Netcdf file</a></li>
-<li><a href="#2-exploring-the-data">2- Exploring the data</a></li>
-<li><a href="#3-basic-operations-with-xarray">3- Basic operations with Xarray:</a></li>
-<li><a href="#4-select-grid-points-from-netcdf-file-using-xarray">4- Select grid points from Netcdf file using Xarray</a>
-<ul>
-<li><a href="#gridpoint-to-extract-the-closest-grid-point-of-a-latitude-longitude">Gridpoint:  to extract the closest grid point of a latitude / longitude:</a></li>
-<li><a href="#gridpoints-to-extract-a-list-of-points">Gridpoints:  to extract a list of points</a></li>
-<li><a href="#to-extract-an-area-or-subdomain-delimited-by-latitude-and-longitude-values-slicing">To extract an area or subdomain delimited by latitude and longitude values: .slicing()</a></li>
-<li><a href="#to-mask-an-area-delimited-by-a-shapefile">To mask an area delimited by a Shapefile:</a></li>
-</ul></li>
-<li><a href="#5-last-example-using-xarray">5- Last example using Xarray:</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1--open-a-netcdf-file">1- Open a Netcdf file</a></li>
+    <li><a href="#2--exploring-the-data">2- Exploring the data</a></li>
+    <li><a href="#3--basic-operations-with-xarray">3- Basic operations with Xarray:</a></li>
+    <li><a href="#4--select-grid-points-from-netcdf-file-using-xarray">4- Select grid points from Netcdf file using Xarray</a>
+      <ul>
+        <li><a href="#gridpoint--to-extract-the-closest-grid-point-of-a-latitude--longitude">Gridpoint:  to extract the closest grid point of a latitude / longitude:</a></li>
+        <li><a href="#gridpoints--to-extract-a-list-of-points">Gridpoints:  to extract a list of points</a></li>
+        <li><a href="#to-extract-an-area-or-subdomain-delimited-by-latitude-and-longitude-values-slicing">To extract an area or subdomain delimited by latitude and longitude values: .slicing()</a></li>
+        <li><a href="#to-mask-an-area-delimited-by-a-shapefile">To mask an area delimited by a Shapefile:</a></li>
+      </ul>
+    </li>
+    <li><a href="#5--last-example-using-xarray">5- Last example using Xarray:</a></li>
+  </ul>
 </nav>
 
       
@@ -501,59 +497,38 @@ xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional ar
           <h1>4 Xarray</h1>
 
           <div class="article-style">
-            
-
-<p>In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files.</p>
-
+            <p>In this tutorial, we will use the features of the Python xarray library to process and analyze Netcdf files.</p>
 <p>To install the library under anaconda:</p>
-
 <p>$ conda install xarray</p>
-
 <p>Here is an example of structure of a Netcdf file under xarray:</p>
-
-<p><img src="/img/netcdf/xarray.png" alt="image0" /></p>
-
-<p><b> DataArray </b></p>
-
+<p><img src="/img/netcdf/xarray.png" alt="image0"></p>
+<p><!-- raw HTML omitted --> DataArray <!-- raw HTML omitted --></p>
 <p>xarray.DataArray is xarray’s implementation of a labeled, multi-dimensional array. It has several key properties:
 |  |  |
 |&ndash;|&ndash;|
-| <b>values</b> |  a numpy.ndarray holding the array’s values |
-| <b>dims</b> |  dimension names for each axis (e.g., (&lsquo;x&rsquo;, &lsquo;y&rsquo;, &lsquo;z&rsquo;,&lsquo;time&rsquo;)) |
-| <b>coords</b> | a dict-like container of arrays (coordinates) that label each point (e.g., 1-dimensional arrays of numbers, datetime objects or strings) |
-| <b>attrs</b> |  an OrderedDict to hold arbitrary metadata (attributes) |</p>
-
-<p><b> DataSet </b></p>
-
+| <!-- raw HTML omitted -->values<!-- raw HTML omitted --> |  a numpy.ndarray holding the array’s values |
+| <!-- raw HTML omitted -->dims<!-- raw HTML omitted --> |  dimension names for each axis (e.g., (&lsquo;x&rsquo;, &lsquo;y&rsquo;, &lsquo;z&rsquo;,&lsquo;time&rsquo;)) |
+| <!-- raw HTML omitted -->coords<!-- raw HTML omitted --> | a dict-like container of arrays (coordinates) that label each point (e.g., 1-dimensional arrays of numbers, datetime objects or strings) |
+| <!-- raw HTML omitted -->attrs<!-- raw HTML omitted --> |  an OrderedDict to hold arbitrary metadata (attributes) |</p>
+<p><!-- raw HTML omitted --> DataSet <!-- raw HTML omitted --></p>
 <p>xarray.Dataset is xarray’s multi-dimensional equivalent of a DataFrame. It is a dict-like container of labeled arrays (DataArray objects) with aligned dimensions. It is designed as an in-memory representation of the data model from the netCDF file format.</p>
-
 <p>xarray.DataSet is a collection of DataArrays. Each NetCDF file contains a DataSet.</p>
-
-<h2 id="1-open-a-netcdf-file">1- Open a Netcdf file</h2>
-
+<h2 id="1--open-a-netcdf-file">1- Open a Netcdf file</h2>
 <p>We will open and store the data of a Netcdf file in a Dataset.</p>
-
 <p>First we need to import librairies and create aliases.</p>
-
-<pre><code class="language-python">import xarray as xr
-import warnings; warnings.filterwarnings(action='ignore')
-from matplotlib import pyplot as plt
-%matplotlib inline
-plt.rcParams['figure.figsize'] = (8,5)
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ignore&#39;</span>)
+<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> pyplot <span style="color:#66d9ef">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#39;figure.figsize&#39;</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><ul>
 <li>To import and store as dataset only one Netcdf file:</li>
 </ul>
-
 <p>We will work with temperature fields from cera20c reanalysis.</p>
-
-<pre><code class="language-python">unique_dataDIR = './DATA/CERA20C/cera20c_member0_TAS_197101_day.nc'
-TAS = xr.open_dataset(unique_dataDIR)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">unique_dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./DATA/CERA20C/cera20c_member0_TAS_197101_day.nc&#39;</span>
+TAS <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(unique_dataDIR)
 TAS
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 31)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -569,19 +544,14 @@ Attributes:
     history:      Thu Oct 25 14:29:40 2018: cdo daymean ./TAS/cera20c_member0...
     CDO:          Climate Data Operators version 1.6.9 (http://mpimet.mpg.de/...
 </code></pre>
-
 <ul>
 <li>If we want to import several Netcdf files:</li>
 </ul>
-
-<p>Here, we want to store all files&rsquo; names starting with &lsquo;cera20c_member0<em>TAS</em>&rsquo; and located in &lsquo;./data/cera20c/&rsquo; path.</p>
-
-<pre><code class="language-python">multi_dataDIR = './DATA/CERA20C/cera20c_member0_TAS_*.nc'
-TAS2 = xr.open_mfdataset(multi_dataDIR)
+<p>Here, we want to store all files&rsquo; names starting with &lsquo;cera20c_member0_TAS_&rsquo; and located in &lsquo;./data/cera20c/&rsquo; path.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">multi_dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./DATA/CERA20C/cera20c_member0_TAS_*.nc&#39;</span>
+TAS2 <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(multi_dataDIR)
 TAS2
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -597,23 +567,18 @@ Attributes:
     history:      Thu Oct 25 14:29:40 2018: cdo daymean ./TAS/cera20c_member0...
     CDO:          Climate Data Operators version 1.6.9 (http://mpimet.mpg.de/...
 </code></pre>
-
 <ul>
 <li>Combine Netcdf:</li>
 </ul>
-
 <p>To combine variables and coordinates between multiple DataArray and/or Dataset objects, use merge(). It can merge a list of Dataset, DataArray or dictionaries of objects convertible to DataArray objects:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">multi_dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./DATA/CERA20C/cera20c_member0_TAS_*.nc&#39;</span>
+TAS2 <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(multi_dataDIR)
+multi_dataDIR2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./DATA/CERA20C/cera20c_member0_SIC_*.nc&#39;</span>
+SIC2 <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(multi_dataDIR2)
 
-<pre><code class="language-python">multi_dataDIR = './DATA/CERA20C/cera20c_member0_TAS_*.nc'
-TAS2 = xr.open_mfdataset(multi_dataDIR)
-multi_dataDIR2 = './DATA/CERA20C/cera20c_member0_SIC_*.nc'
-SIC2 = xr.open_mfdataset(multi_dataDIR2)
-
-DS_new = xr.merge([TAS2,SIC2])
+DS_new <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>merge([TAS2,SIC2])
 DS_new
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -625,69 +590,47 @@ Data variables:
     t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;
     siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;
 </code></pre>
-
-<h2 id="2-exploring-the-data">2- Exploring the data</h2>
-
+<h2 id="2--exploring-the-data">2- Exploring the data</h2>
 <p>We can quickly explore our datasets by using some methods of the xarray library:</p>
-
 <ul>
 <li>DS.var</li>
 <li>DS.dims</li>
 <li>DS.coords</li>
-
-<li><p>DS.attrs</p>
-
-<pre><code class="language-python">DS_new.var
-</code></pre>
-
-<p><bound method ImplementsDatasetReduce._reduce_method.<locals>.wrapped_func of <xarray.Dataset>
+<li>DS.attrs</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_new<span style="color:#f92672">.</span>var
+</code></pre></div><pre><code>&lt;bound method ImplementsDatasetReduce._reduce_method.&lt;locals&gt;.wrapped_func of &lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
-Coordinates:</p>
-
-<ul>
-<li>longitude  (longitude) float32 0.0 1.25 2.5 3.75 &hellip; 356.25 357.5 358.75</li>
-<li>latitude   (latitude) float32 90.0 88.75 87.5 86.25 &hellip; -87.5 -88.75 -90.0</li>
-
-<li><p>time       (time) datetime64[ns] 1971-01-01T10:30:00 &hellip; 1971-12-31T10:30:00
+Coordinates:
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
 Dimensions without coordinates: bnds
 Data variables:
-time_bnds  (time, bnds) datetime64[ns] dask.array<shape=(365, 2), chunksize=(31, 2)>
-t2m        (time, latitude, longitude) float32 dask.array<shape=(365, 145, 288), chunksize=(31, 145, 288)>
-siconc     (time, latitude, longitude) float32 dask.array<shape=(365, 145, 288), chunksize=(31, 145, 288)>&gt;</p>
-
-<pre><code class="language-python">DS_new.dims
-</code></pre></li>
-</ul>
-
-<p>Frozen(SortedKeysDict({&lsquo;longitude&rsquo;: 288, &lsquo;latitude&rsquo;: 145, &lsquo;time&rsquo;: 365, &lsquo;bnds&rsquo;: 2}))</p>
-
-<pre><code class="language-python">DS_new.coords
+    time_bnds  (time, bnds) datetime64[ns] dask.array&lt;shape=(365, 2), chunksize=(31, 2)&gt;
+    t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;
+    siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;&gt;
 </code></pre>
-
-<p>Coordinates:
-  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 &hellip; 356.25 357.5 358.75
-  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 &hellip; -87.5 -88.75 -90.0
-  * time       (time) datetime64[ns] 1971-01-01T10:30:00 &hellip; 1971-12-31T10:30:00</p>
-
-<pre><code class="language-python">DS_new.attrs
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_new<span style="color:#f92672">.</span>dims
+</code></pre></div><pre><code>Frozen(SortedKeysDict({'longitude': 288, 'latitude': 145, 'time': 365, 'bnds': 2}))
 </code></pre>
-
-<p>OrderedDict()</p></li>
-</ul>
-
-<h2 id="3-basic-operations-with-xarray">3- Basic operations with Xarray:</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_new<span style="color:#f92672">.</span>coords
+</code></pre></div><pre><code>Coordinates:
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+  * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_new<span style="color:#f92672">.</span>attrs
+</code></pre></div><pre><code>OrderedDict()
+</code></pre>
+<h2 id="3--basic-operations-with-xarray">3- Basic operations with Xarray:</h2>
 <ul>
 <li>Select a date:</li>
 </ul>
-
 <p>We can use .sel() method to select one timestamp from our Dataset.</p>
-
-<pre><code class="language-python">DS_date = DS_new.sel(time='1971-01-01')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_date <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1971-01-01&#39;</span>)
 DS_date
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 1)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -699,18 +642,13 @@ Data variables:
     t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(1, 145, 288), chunksize=(1, 145, 288)&gt;
     siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(1, 145, 288), chunksize=(1, 145, 288)&gt;
 </code></pre>
-
 <ul>
 <li>Select time range</li>
 </ul>
-
 <p>We can select a time range with slicing</p>
-
-<pre><code class="language-python">DS_date_range = DS_new.sel(time=slice('1971-06-01', '1971-08-31'))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_date_range <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>slice(<span style="color:#e6db74">&#39;1971-06-01&#39;</span>, <span style="color:#e6db74">&#39;1971-08-31&#39;</span>))
 DS_date_range
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 92)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -722,20 +660,13 @@ Data variables:
     t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(92, 145, 288), chunksize=(30, 145, 288)&gt;
     siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(92, 145, 288), chunksize=(30, 145, 288)&gt;
 </code></pre>
-
 <ul>
 <li>Export a dataset</li>
 </ul>
-
 <p>We can export our dataset into dataframe and then use Pandas library to make analysis.</p>
-
-<pre><code class="language-python">df = DS_date_range.to_dataframe()
-</code></pre>
-
-<pre><code class="language-python">df.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df <span style="color:#f92672">=</span> DS_date_range<span style="color:#f92672">.</span>to_dataframe()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left"></th>
@@ -744,7 +675,6 @@ Data variables:
 <th align="right">siconc</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">(0, 90.0, 0.0, Timestamp(&lsquo;1971-06-01 10:30:00&rsquo;))</td>
@@ -752,28 +682,24 @@ Data variables:
 <td align="right">266.296</td>
 <td align="right">0.990234</td>
 </tr>
-
 <tr>
 <td align="left">(0, 90.0, 0.0, Timestamp(&lsquo;1971-06-02 10:30:00&rsquo;))</td>
 <td align="left">1971-06-02 00:00:00</td>
 <td align="right">264.76</td>
 <td align="right">0.988525</td>
 </tr>
-
 <tr>
 <td align="left">(0, 90.0, 0.0, Timestamp(&lsquo;1971-06-03 10:30:00&rsquo;))</td>
 <td align="left">1971-06-03 00:00:00</td>
 <td align="right">265.866</td>
 <td align="right">0.987502</td>
 </tr>
-
 <tr>
 <td align="left">(0, 90.0, 0.0, Timestamp(&lsquo;1971-06-04 10:30:00&rsquo;))</td>
 <td align="left">1971-06-04 00:00:00</td>
 <td align="right">265.947</td>
 <td align="right">0.98738</td>
 </tr>
-
 <tr>
 <td align="left">(0, 90.0, 0.0, Timestamp(&lsquo;1971-06-05 10:30:00&rsquo;))</td>
 <td align="left">1971-06-05 00:00:00</td>
@@ -782,11 +708,8 @@ Data variables:
 </tr>
 </tbody>
 </table>
-
-<pre><code class="language-python">df.describe()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>describe()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left"></th>
@@ -794,50 +717,42 @@ Data variables:
 <th align="right">siconc</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">count</td>
 <td align="right">7.68384e+06</td>
 <td align="right">7.68384e+06</td>
 </tr>
-
 <tr>
 <td align="left">mean</td>
 <td align="right">267.002</td>
 <td align="right">0.141752</td>
 </tr>
-
 <tr>
 <td align="left">std</td>
 <td align="right">25.852</td>
 <td align="right">0.312001</td>
 </tr>
-
 <tr>
 <td align="left">min</td>
 <td align="right">192.562</td>
 <td align="right">0</td>
 </tr>
-
 <tr>
 <td align="left">25%</td>
 <td align="right">273.221</td>
 <td align="right">0</td>
 </tr>
-
 <tr>
 <td align="left">50%</td>
 <td align="right">285.734</td>
 <td align="right">0</td>
 </tr>
-
 <tr>
 <td align="left">75%</td>
 <td align="right">296.388</td>
 <td align="right">0</td>
 </tr>
-
 <tr>
 <td align="left">max</td>
 <td align="right">314.804</td>
@@ -845,82 +760,58 @@ Data variables:
 </tr>
 </tbody>
 </table>
-
 <ul>
-<li><p>Time mean</p>
-
-<pre><code class="language-python">Mean_array = DS_date_range.mean(dim='time')
-Mean_array.values
-</code></pre>
-
-<p><bound method Mapping.values of <xarray.Dataset>
+<li>Time mean</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mean_array <span style="color:#f92672">=</span> DS_date_range<span style="color:#f92672">.</span>mean(dim<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;time&#39;</span>)
+Mean_array<span style="color:#f92672">.</span>values
+</code></pre></div><pre><code>&lt;bound method Mapping.values of &lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 145, longitude: 288)
-Coordinates:</p>
-
-<ul>
-<li>longitude  (longitude) float32 0.0 1.25 2.5 3.75 &hellip; 356.25 357.5 358.75</li>
-<li>latitude   (latitude) float32 90.0 88.75 87.5 86.25 &hellip; -87.5 -88.75 -90.0
+Coordinates:
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
 Data variables:
-t2m        (latitude, longitude) float32 dask.array<shape=(145, 288), chunksize=(145, 288)>
-siconc     (latitude, longitude) float32 dask.array<shape=(145, 288), chunksize=(145, 288)>&gt;</li>
-</ul></li>
-
-<li><p>To save our results into csv:</p>
-
-<pre><code class="language-python">Mean_array.t2m.to_dataframe().to_csv('./DATA/CERA20C_T2m_mean.csv')
-</code></pre></li>
-
-<li><p>Mean over all latitudes and longitudes grid points:</p>
-
-<pre><code class="language-python">DS_date_range.t2m.mean(dim=('latitude', 'longitude'))
+    t2m        (latitude, longitude) float32 dask.array&lt;shape=(145, 288), chunksize=(145, 288)&gt;
+    siconc     (latitude, longitude) float32 dask.array&lt;shape=(145, 288), chunksize=(145, 288)&gt;&gt;
 </code></pre>
-
-<p><xarray.DataArray 't2m' (time: 92)>
-dask.array<shape=(92,), dtype=float32, chunksize=(30,)>
-Coordinates:</p>
-
 <ul>
-<li><p>time     (time) datetime64[ns] 1971-06-01T10:30:00 &hellip; 1971-08-31T10:30:00</p>
-
-<pre><code class="language-python">DS_date_range.t2m.mean(dim=('latitude', 'longitude')).plot()
-</code></pre></li>
+<li>To save our results into csv:</li>
 </ul>
-
-<p>[<matplotlib.lines.Line2D at 0xabe86a0>]</p></li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mean_array<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>to_dataframe()<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;./DATA/CERA20C_T2m_mean.csv&#39;</span>)
+</code></pre></div><ul>
+<li>Mean over all latitudes and longitudes grid points:</li>
 </ul>
-
-<p><img src="/img/netcdf/output_27_1.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_date_range<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>mean(dim<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;latitude&#39;</span>, <span style="color:#e6db74">&#39;longitude&#39;</span>))
+</code></pre></div><pre><code>&lt;xarray.DataArray 't2m' (time: 92)&gt;
+dask.array&lt;shape=(92,), dtype=float32, chunksize=(30,)&gt;
+Coordinates:
+  * time     (time) datetime64[ns] 1971-06-01T10:30:00 ... 1971-08-31T10:30:00
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_date_range<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>mean(dim<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;latitude&#39;</span>, <span style="color:#e6db74">&#39;longitude&#39;</span>))<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0xabe86a0&gt;]
+</code></pre>
+<p><img src="/img/netcdf/output_27_1.png" alt="png"></p>
 <ul>
-<li><p>To save into csv:</p>
-
-<pre><code class="language-python">DS_date_range.t2m.mean(dim=('time', 'longitude')).to_dataframe().to_csv('./DATA/CERA20C_T2m_2Dmean.csv')
-</code></pre></li>
-
-<li><p>Quick plot with Xarray</p>
-
-<pre><code class="language-python">import cartopy.crs as ccrs
-fig=plt.figure(figsize=(10,10), frameon=True) 
-
-ax = plt.axes(projection=ccrs.Orthographic(-80, 35))
-Mean_array.t2m.plot.contourf(ax=ax, transform=ccrs.PlateCarree());
-ax.set_global(); ax.coastlines();
-</code></pre></li>
+<li>To save into csv:</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_date_range<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>mean(dim<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;time&#39;</span>, <span style="color:#e6db74">&#39;longitude&#39;</span>))<span style="color:#f92672">.</span>to_dataframe()<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;./DATA/CERA20C_T2m_2Dmean.csv&#39;</span>)
+</code></pre></div><ul>
+<li>Quick plot with Xarray</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>), frameon<span style="color:#f92672">=</span>True) 
 
-<p><img src="/img/netcdf/output_31_0.png" alt="png" /></p>
-
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Orthographic(<span style="color:#f92672">-</span><span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">35</span>))
+Mean_array<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>contourf(ax<span style="color:#f92672">=</span>ax, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree());
+ax<span style="color:#f92672">.</span>set_global(); ax<span style="color:#f92672">.</span>coastlines();
+</code></pre></div><p><img src="/img/netcdf/output_31_0.png" alt="png"></p>
 <ul>
 <li>Basic operations with Xarray:</li>
 </ul>
-
 <p>In this example, we will mean DS_date_range over time and apply a substration to change units.</p>
-
-<pre><code class="language-python">centigrade = DS_date_range.t2m.mean(dim='time') - 273.16
-centigrade.values
-</code></pre>
-
-<pre><code>array([[ -1.2229004,  -1.2229004,  -1.2229004, ...,  -1.2229004,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">centigrade <span style="color:#f92672">=</span> DS_date_range<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>mean(dim<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;time&#39;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">273.16</span>
+centigrade<span style="color:#f92672">.</span>values
+</code></pre></div><pre><code>array([[ -1.2229004,  -1.2229004,  -1.2229004, ...,  -1.2229004,
          -1.2229004,  -1.2229004],
        [ -1.3348389,  -1.3311157,  -1.3274231, ...,  -1.3488159,
          -1.3442383,  -1.3395386],
@@ -934,25 +825,17 @@ centigrade.values
        [-60.739105 , -60.739105 , -60.739105 , ..., -60.739105 ,
         -60.739105 , -60.739105 ]], dtype=float32)
 </code></pre>
-
-<pre><code class="language-python">fig=plt.figure(figsize=(10,10), frameon=True)
-ax = plt.axes(projection=ccrs.Orthographic(-80, 35))
-centigrade.plot.contourf(ax=ax, transform=ccrs.PlateCarree());
-ax.set_global(); ax.coastlines();
-</code></pre>
-
-<p><img src="/img/netcdf/output_34_0.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>), frameon<span style="color:#f92672">=</span>True)
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Orthographic(<span style="color:#f92672">-</span><span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">35</span>))
+centigrade<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>contourf(ax<span style="color:#f92672">=</span>ax, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree());
+ax<span style="color:#f92672">.</span>set_global(); ax<span style="color:#f92672">.</span>coastlines();
+</code></pre></div><p><img src="/img/netcdf/output_34_0.png" alt="png"></p>
 <ul>
 <li>Groupby() method:</li>
 </ul>
-
 <p>groupdby() method with Xarray is very usefull to group our datasets by month, season, year&hellip; and then apply function to compute indices.</p>
-
-<pre><code class="language-python">DS_new
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_new
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 145, longitude: 288, time: 365)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -964,14 +847,11 @@ Data variables:
     t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;
     siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;
 </code></pre>
-
-<pre><code class="language-python"># monthly mean:
-DS_month = DS_new.groupby('time.month').mean('time')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># monthly mean:</span>
+DS_month <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.month&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>)
 DS_month
-#DS_month.to_dataframe()
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+<span style="color:#75715e">#DS_month.to_dataframe()</span>
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 145, longitude: 288, month: 12)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -981,15 +861,11 @@ Data variables:
     t2m        (month, latitude, longitude) float32 dask.array&lt;shape=(12, 145, 288), chunksize=(1, 145, 288)&gt;
     siconc     (month, latitude, longitude) float32 dask.array&lt;shape=(12, 145, 288), chunksize=(1, 145, 288)&gt;
 </code></pre>
-
 <p>We can use this method to compute climatology and then anomalies.</p>
-
-<pre><code class="language-python">climatology = DS_new.groupby('time.month').mean('time')
-anomalies = DS_new.groupby('time.month') - climatology
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">climatology <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.month&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>)
+anomalies <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.month&#39;</span>) <span style="color:#f92672">-</span> climatology
 anomalies
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 145, longitude: 288, time: 365)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -1000,13 +876,10 @@ Data variables:
     t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;
     siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(365, 145, 288), chunksize=(31, 145, 288)&gt;
 </code></pre>
-
-<pre><code class="language-python"># seaon mean:
-DS_season = DS_new.groupby('time.season').mean('time')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># seaon mean:</span>
+DS_season <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.season&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>)
 DS_season
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 145, longitude: 288, season: 4)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -1016,13 +889,10 @@ Data variables:
     t2m        (season, latitude, longitude) float32 dask.array&lt;shape=(4, 145, 288), chunksize=(1, 145, 288)&gt;
     siconc     (season, latitude, longitude) float32 dask.array&lt;shape=(4, 145, 288), chunksize=(1, 145, 288)&gt;
 </code></pre>
-
-<pre><code class="language-python"># year mean:
-DS_year = DS_new.groupby('time.year').mean('time')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># year mean:</span>
+DS_year <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.year&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>)
 DS_year
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 145, longitude: 288, year: 1)
 Coordinates:
   * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
@@ -1032,110 +902,86 @@ Data variables:
     t2m        (year, latitude, longitude) float32 dask.array&lt;shape=(1, 145, 288), chunksize=(1, 145, 288)&gt;
     siconc     (year, latitude, longitude) float32 dask.array&lt;shape=(1, 145, 288), chunksize=(1, 145, 288)&gt;
 </code></pre>
-
 <ul>
-<li><p>to select a specific season:</p>
-
-<pre><code class="language-python">DS_winter = DS_season.sel(season='DJF')
-DS_winter
-</code></pre>
-
-<p><xarray.Dataset>
-Dimensions:    (latitude: 145, longitude: 288)
-Coordinates:</p>
-
-<ul>
-<li>longitude  (longitude) float32 0.0 1.25 2.5 3.75 &hellip; 356.25 357.5 358.75</li>
-<li>latitude   (latitude) float32 90.0 88.75 87.5 86.25 &hellip; -87.5 -88.75 -90.0
-season     <U3 'DJF'
-Data variables:
-t2m        (latitude, longitude) float32 dask.array<shape=(145, 288), chunksize=(145, 288)>
-siconc     (latitude, longitude) float32 dask.array<shape=(145, 288), chunksize=(145, 288)></li>
-</ul></li>
+<li>to select a specific season:</li>
 </ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_winter <span style="color:#f92672">=</span> DS_season<span style="color:#f92672">.</span>sel(season<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;DJF&#39;</span>)
+DS_winter
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 145, longitude: 288)
+Coordinates:
+  * longitude  (longitude) float32 0.0 1.25 2.5 3.75 ... 356.25 357.5 358.75
+  * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
+    season     &lt;U3 'DJF'
+Data variables:
+    t2m        (latitude, longitude) float32 dask.array&lt;shape=(145, 288), chunksize=(145, 288)&gt;
+    siconc     (latitude, longitude) float32 dask.array&lt;shape=(145, 288), chunksize=(145, 288)&gt;
+</code></pre>
 <p>In the example below, we will group the xarray.DataArray data by season, calculate the average, apply a simple arrhythmic operation and plot the resulting fields for each season.</p>
-
-<pre><code class="language-python">DS_Season = DS_new.t2m.groupby('time.season').mean('time')- 273.15
-fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(9,5))
-j = 0
-for i, season in enumerate(('DJF', 'MAM', 'JJA', 'SON')):
-    if season =='JJA':
-        j += 1
-        i = 0
-    elif season =='SON':
-        i = 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_Season <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.season&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>)<span style="color:#f92672">-</span> <span style="color:#ae81ff">273.15</span>
+fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(nrows<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, ncols<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">5</span>))
+j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i, season <span style="color:#f92672">in</span> enumerate((<span style="color:#e6db74">&#39;DJF&#39;</span>, <span style="color:#e6db74">&#39;MAM&#39;</span>, <span style="color:#e6db74">&#39;JJA&#39;</span>, <span style="color:#e6db74">&#39;SON&#39;</span>)):
+    <span style="color:#66d9ef">if</span> season <span style="color:#f92672">==</span><span style="color:#e6db74">&#39;JJA&#39;</span>:
+        j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">elif</span> season <span style="color:#f92672">==</span><span style="color:#e6db74">&#39;SON&#39;</span>:
+        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
         
-    DS_Season.sel(season=season).plot.pcolormesh(
-        ax=axes[i, j], vmin=-30, vmax=30, cmap='Spectral_r',
-        add_colorbar=True, extend='both')
+    DS_Season<span style="color:#f92672">.</span>sel(season<span style="color:#f92672">=</span>season)<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>pcolormesh(
+        ax<span style="color:#f92672">=</span>axes[i, j], vmin<span style="color:#f92672">=-</span><span style="color:#ae81ff">30</span>, vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spectral_r&#39;</span>,
+        add_colorbar<span style="color:#f92672">=</span>True, extend<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
 
-for ax in axes.flat:
-    ax.axes.get_xaxis().set_ticklabels([])
-    ax.axes.get_yaxis().set_ticklabels([])
-    ax.axes.axis('tight')
+<span style="color:#66d9ef">for</span> ax <span style="color:#f92672">in</span> axes<span style="color:#f92672">.</span>flat:
+    ax<span style="color:#f92672">.</span>axes<span style="color:#f92672">.</span>get_xaxis()<span style="color:#f92672">.</span>set_ticklabels([])
+    ax<span style="color:#f92672">.</span>axes<span style="color:#f92672">.</span>get_yaxis()<span style="color:#f92672">.</span>set_ticklabels([])
+    ax<span style="color:#f92672">.</span>axes<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;tight&#39;</span>)
    
-plt.tight_layout()
-fig.suptitle('Seasonal Surface Air Temperature', fontsize=16, y=1.02)
+plt<span style="color:#f92672">.</span>tight_layout()
+fig<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#39;Seasonal Surface Air Temperature&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.02</span>)
+</code></pre></div><pre><code>Text(0.5, 1.02, 'Seasonal Surface Air Temperature')
 </code></pre>
+<p><img src="/img/netcdf/output_45_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+lat_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">50</span>]
+lon_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">250</span>, <span style="color:#ae81ff">310</span>]
+DS_Season <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lon_bnd), latitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lat_bnd),)<span style="color:#f92672">.</span>siconc<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.season&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>) <span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>
 
-<pre><code>Text(0.5, 1.02, 'Seasonal Surface Air Temperature')
-</code></pre>
-
-<p><img src="/img/netcdf/output_45_1.png" alt="png" /></p>
-
-<pre><code class="language-python">
-lat_bnd = [80, 50]
-lon_bnd = [250, 310]
-DS_Season = DS_new.sel(longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),).siconc.groupby('time.season').mean('time') *100
-
-fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(16,10))
-j = 0
-for i, season in enumerate(('DJF', 'MAM', 'JJA', 'SON')):
-    if season =='JJA':
-        j += 1
-        i = 0
-    elif season =='SON':
-        i = 1
+fig, axes <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(nrows<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, ncols<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">10</span>))
+j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i, season <span style="color:#f92672">in</span> enumerate((<span style="color:#e6db74">&#39;DJF&#39;</span>, <span style="color:#e6db74">&#39;MAM&#39;</span>, <span style="color:#e6db74">&#39;JJA&#39;</span>, <span style="color:#e6db74">&#39;SON&#39;</span>)):
+    <span style="color:#66d9ef">if</span> season <span style="color:#f92672">==</span><span style="color:#e6db74">&#39;JJA&#39;</span>:
+        j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">elif</span> season <span style="color:#f92672">==</span><span style="color:#e6db74">&#39;SON&#39;</span>:
+        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
         
-    DS_Season.sel(season=season).plot.pcolormesh(
-        ax=axes[i, j], vmin=0, vmax=100, cmap='Spectral_r',
-        add_colorbar=True, extend='both')
-for ax in axes.flat:
-    ax.axes.get_xaxis().set_ticklabels([])
-    ax.axes.get_yaxis().set_ticklabels([])
-    ax.axes.axis('tight')
+    DS_Season<span style="color:#f92672">.</span>sel(season<span style="color:#f92672">=</span>season)<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>pcolormesh(
+        ax<span style="color:#f92672">=</span>axes[i, j], vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spectral_r&#39;</span>,
+        add_colorbar<span style="color:#f92672">=</span>True, extend<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
+<span style="color:#66d9ef">for</span> ax <span style="color:#f92672">in</span> axes<span style="color:#f92672">.</span>flat:
+    ax<span style="color:#f92672">.</span>axes<span style="color:#f92672">.</span>get_xaxis()<span style="color:#f92672">.</span>set_ticklabels([])
+    ax<span style="color:#f92672">.</span>axes<span style="color:#f92672">.</span>get_yaxis()<span style="color:#f92672">.</span>set_ticklabels([])
+    ax<span style="color:#f92672">.</span>axes<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;tight&#39;</span>)
    
-plt.tight_layout()
-fig.suptitle('Seasonal Sea Ice Concentration', fontsize=16, y=1.02)
+plt<span style="color:#f92672">.</span>tight_layout()
+fig<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#39;Seasonal Sea Ice Concentration&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.02</span>)
+</code></pre></div><pre><code>Text(0.5, 1.02, 'Seasonal Sea Ice Concentration')
 </code></pre>
-
-<pre><code>Text(0.5, 1.02, 'Seasonal Sea Ice Concentration')
-</code></pre>
-
-<p><img src="/img/netcdf/output_46_1.png" alt="png" /></p>
-
+<p><img src="/img/netcdf/output_46_1.png" alt="png"></p>
 <p>To save our result into Netcdf:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DS_season <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.season&#39;</span>)<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>)
+dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./DATA/CERA20C_season.nc&#39;</span>
+DS_Season<span style="color:#f92672">.</span>to_netcdf(dataDIR)
 
-<pre><code class="language-python">DS_season = DS_new.groupby('time.season').mean('time')
-dataDIR = './DATA/CERA20C_season.nc'
-DS_Season.to_netcdf(dataDIR)
-
-</code></pre>
-
-<h2 id="4-select-grid-points-from-netcdf-file-using-xarray">4- Select grid points from Netcdf file using Xarray</h2>
-
+</code></pre></div><h2 id="4--select-grid-points-from-netcdf-file-using-xarray">4- Select grid points from Netcdf file using Xarray</h2>
 <p>In the previous section we applied the .sel () method to work on the time dimension. This method can be used on spatial dimensions to extract points or study areas from our netcdf file.</p>
-
-<h3 id="gridpoint-to-extract-the-closest-grid-point-of-a-latitude-longitude">Gridpoint:  to extract the closest grid point of a latitude / longitude:</h3>
-
-<pre><code class="language-python">lati = 45.5
-loni = 269.2
-data  = DS_new.sel(longitude=loni  , latitude=lati  , method='nearest') 
+<h3 id="gridpoint--to-extract-the-closest-grid-point-of-a-latitude--longitude">Gridpoint:  to extract the closest grid point of a latitude / longitude:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lati <span style="color:#f92672">=</span> <span style="color:#ae81ff">45.5</span>
+loni <span style="color:#f92672">=</span> <span style="color:#ae81ff">269.2</span>
+data  <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>loni  , latitude<span style="color:#f92672">=</span>lati  , method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>) 
 data
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, time: 365)
 Coordinates:
     longitude  float32 268.75
@@ -1147,44 +993,30 @@ Data variables:
     t2m        (time) float32 dask.array&lt;shape=(365,), chunksize=(31,)&gt;
     siconc     (time) float32 dask.array&lt;shape=(365,), chunksize=(31,)&gt;
 </code></pre>
-
-<pre><code class="language-python">data['t2m'] = data['t2m'] - 273.15
-</code></pre>
-
-<pre><code class="language-python">data.t2m
-</code></pre>
-
-<pre><code>&lt;xarray.DataArray 't2m' (time: 365)&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data[<span style="color:#e6db74">&#39;t2m&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;t2m&#39;</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">273.15</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>t2m
+</code></pre></div><pre><code>&lt;xarray.DataArray 't2m' (time: 365)&gt;
 dask.array&lt;shape=(365,), dtype=float32, chunksize=(31,)&gt;
 Coordinates:
     longitude  float32 268.75
     latitude   float32 45.0
   * time       (time) datetime64[ns] 1971-01-01T10:30:00 ... 1971-12-31T10:30:00
 </code></pre>
-
 <p>We can convert our selection into a DataFrame and then use Pandas to analyse our results.</p>
-
-<pre><code class="language-python">df = data.t2m.to_dataframe()
-fig = plt.figure(figsize=(16,8))
-df['t2m'].plot()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>to_dataframe()
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+df[<span style="color:#e6db74">&#39;t2m&#39;</span>]<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x13660400&gt;
 </code></pre>
+<p><img src="/img/netcdf/output_55_1.png" alt="png"></p>
+<h3 id="gridpoints--to-extract-a-list-of-points">Gridpoints:  to extract a list of points</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lats <span style="color:#f92672">=</span>  [<span style="color:#ae81ff">20.0</span>,<span style="color:#ae81ff">50.0</span>,<span style="color:#ae81ff">90.0</span>]
+lons <span style="color:#f92672">=</span>  [<span style="color:#ae81ff">60.0</span>,<span style="color:#ae81ff">80.0</span>,<span style="color:#ae81ff">120.0</span>]
 
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x13660400&gt;
-</code></pre>
-
-<p><img src="/img/netcdf/output_55_1.png" alt="png" /></p>
-
-<h3 id="gridpoints-to-extract-a-list-of-points">Gridpoints:  to extract a list of points</h3>
-
-<pre><code class="language-python">lats =  [20.0,50.0,90.0]
-lons =  [60.0,80.0,120.0]
-
-data  = DS_new.sel(longitude=lons  , latitude=lats  , method='nearest')
-data['t2m'] = data['t2m']-273.15
+data  <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>lons  , latitude<span style="color:#f92672">=</span>lats  , method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>)
+data[<span style="color:#e6db74">&#39;t2m&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;t2m&#39;</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">273.15</span>
 data
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 3, longitude: 3, time: 365)
 Coordinates:
   * longitude  (longitude) float32 60.0 80.0 120.0
@@ -1196,27 +1028,19 @@ Data variables:
     t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(365, 3, 3), chunksize=(31, 3, 3)&gt;
     siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(365, 3, 3), chunksize=(31, 3, 3)&gt;
 </code></pre>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(16,8))
-data.t2m.sel(longitude=60.0, latitude=[20.0,50.0,90.0]).plot.line(x='time')
-</code></pre>
-
-<pre><code>[&lt;matplotlib.lines.Line2D at 0xdf31ac8&gt;,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+data<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span><span style="color:#ae81ff">60.0</span>, latitude<span style="color:#f92672">=</span>[<span style="color:#ae81ff">20.0</span>,<span style="color:#ae81ff">50.0</span>,<span style="color:#ae81ff">90.0</span>])<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>line(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;time&#39;</span>)
+</code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0xdf31ac8&gt;,
  &lt;matplotlib.lines.Line2D at 0xdd0bf28&gt;,
  &lt;matplotlib.lines.Line2D at 0xdd0b4a8&gt;]
 </code></pre>
-
-<p><img src="/img/netcdf/output_58_1.png" alt="png" /></p>
-
+<p><img src="/img/netcdf/output_58_1.png" alt="png"></p>
 <h3 id="to-extract-an-area-or-subdomain-delimited-by-latitude-and-longitude-values-slicing">To extract an area or subdomain delimited by latitude and longitude values: .slicing()</h3>
-
-<pre><code class="language-python">lat_bnd = [80, 50]
-lon_bnd = [250, 310]
-area = DS_new.sel(longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lat_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">50</span>]
+lon_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">250</span>, <span style="color:#ae81ff">310</span>]
+area <span style="color:#f92672">=</span> DS_new<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lon_bnd), latitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lat_bnd),)
 area
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (bnds: 2, latitude: 25, longitude: 49, time: 365)
 Coordinates:
   * longitude  (longitude) float32 250.0 251.25 252.5 ... 307.5 308.75 310.0
@@ -1228,11 +1052,8 @@ Data variables:
     t2m        (time, latitude, longitude) float32 dask.array&lt;shape=(365, 25, 49), chunksize=(31, 25, 49)&gt;
     siconc     (time, latitude, longitude) float32 dask.array&lt;shape=(365, 25, 49), chunksize=(31, 25, 49)&gt;
 </code></pre>
-
-<pre><code class="language-python">area.longitude.values
-</code></pre>
-
-<pre><code>array([250.  , 251.25, 252.5 , 253.75, 255.  , 256.25, 257.5 , 258.75,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">area<span style="color:#f92672">.</span>longitude<span style="color:#f92672">.</span>values
+</code></pre></div><pre><code>array([250.  , 251.25, 252.5 , 253.75, 255.  , 256.25, 257.5 , 258.75,
        260.  , 261.25, 262.5 , 263.75, 265.  , 266.25, 267.5 , 268.75,
        270.  , 271.25, 272.5 , 273.75, 275.  , 276.25, 277.5 , 278.75,
        280.  , 281.25, 282.5 , 283.75, 285.  , 286.25, 287.5 , 288.75,
@@ -1240,124 +1061,104 @@ Data variables:
        300.  , 301.25, 302.5 , 303.75, 305.  , 306.25, 307.5 , 308.75,
        310.  ], dtype=float32)
 </code></pre>
-
 <p>To visualize our area::</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeat
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_figure</span>():
+    fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">12</span>))
+    ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
 
-<pre><code class="language-python">import cartopy.crs as ccrs
-import cartopy.feature as cfeat
-def make_figure():
-    fig = plt.figure(figsize=(22, 12))
-    ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
-
-    # generate a basemap with country borders, oceans and coastlines
-    ax.add_feature(cfeat.LAND)
-    ax.add_feature(cfeat.OCEAN)
-    ax.add_feature(cfeat.COASTLINE)
-    ax.add_feature(cfeat.BORDERS, linestyle='dotted')
-    return fig, ax
+    <span style="color:#75715e"># generate a basemap with country borders, oceans and coastlines</span>
+    ax<span style="color:#f92672">.</span>add_feature(cfeat<span style="color:#f92672">.</span>LAND)
+    ax<span style="color:#f92672">.</span>add_feature(cfeat<span style="color:#f92672">.</span>OCEAN)
+    ax<span style="color:#f92672">.</span>add_feature(cfeat<span style="color:#f92672">.</span>COASTLINE)
+    ax<span style="color:#f92672">.</span>add_feature(cfeat<span style="color:#f92672">.</span>BORDERS, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dotted&#39;</span>)
+    <span style="color:#66d9ef">return</span> fig, ax
 
 make_figure();
+</code></pre></div><p><img src="/img/netcdf/output_63_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">_, ax <span style="color:#f92672">=</span> make_figure()
+<span style="color:#75715e"># plot the temperature field</span>
+area<span style="color:#f92672">.</span>t2m[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.collections.QuadMesh at 0xb2e9240&gt;
 </code></pre>
-
-<p><img src="/img/netcdf/output_63_0.png" alt="png" /></p>
-
-<pre><code class="language-python">_, ax = make_figure()
-# plot the temperature field
-area.t2m[0].plot()
-</code></pre>
-
-<pre><code>&lt;matplotlib.collections.QuadMesh at 0xb2e9240&gt;
-</code></pre>
-
-<p><img src="/img/netcdf/output_64_1.png" alt="png" /></p>
-
+<p><img src="/img/netcdf/output_64_1.png" alt="png"></p>
 <h3 id="to-mask-an-area-delimited-by-a-shapefile">To mask an area delimited by a Shapefile:</h3>
-
-<p>To do this, we need to import two more librairies:
-- Geopandas: conda install -c conda-forge geopandas
-- osgeo: conda install -c conda-forge gdal</p>
-
+<p>To do this, we need to import two more librairies:</p>
+<ul>
+<li>Geopandas: conda install -c conda-forge geopandas</li>
+<li>osgeo: conda install -c conda-forge gdal</li>
+</ul>
 <p>The next function will open a shapefile, read the polygons and make a mask from each grid points of our Netcdf inside the polygons.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> osgeo <span style="color:#f92672">import</span> ogr
+<span style="color:#f92672">import</span> geopandas <span style="color:#f92672">as</span> gpd
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_mask</span>(lons2d, lats2d, shp_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>, polygon_name<span style="color:#f92672">=</span>None):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Assumes that the shape file contains polygons in lat lon coordinates
+</span><span style="color:#e6db74">    :param lons2d:
+</span><span style="color:#e6db74">    :param lats2d:
+</span><span style="color:#e6db74">    :param shp_path:
+</span><span style="color:#e6db74">    :rtype : np.ndarray
+</span><span style="color:#e6db74">    The mask is 1 for the points inside of the polygons
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    ds <span style="color:#f92672">=</span> ogr<span style="color:#f92672">.</span>Open(shp_path)
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    :type : ogr.DataSource
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
 
-<pre><code class="language-python">from osgeo import ogr
-import geopandas as gpd
-import numpy as np
-def get_mask(lons2d, lats2d, shp_path=&quot;&quot;, polygon_name=None):
-    &quot;&quot;&quot;
-    Assumes that the shape file contains polygons in lat lon coordinates
-    :param lons2d:
-    :param lats2d:
-    :param shp_path:
-    :rtype : np.ndarray
-    The mask is 1 for the points inside of the polygons
-    &quot;&quot;&quot;
-    ds = ogr.Open(shp_path)
-    &quot;&quot;&quot;
-    :type : ogr.DataSource
-    &quot;&quot;&quot;
+    xx <span style="color:#f92672">=</span> lons2d<span style="color:#f92672">.</span>copy()
+    yy <span style="color:#f92672">=</span> lats2d
 
-    xx = lons2d.copy()
-    yy = lats2d
+    <span style="color:#75715e"># set longitudes to be from -180 to 180</span>
+    xx[xx <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">180</span>] <span style="color:#f92672">-=</span> <span style="color:#ae81ff">360</span>
 
-    # set longitudes to be from -180 to 180
-    xx[xx &gt; 180] -= 360
+    mask <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(lons2d<span style="color:#f92672">.</span>shape, dtype<span style="color:#f92672">=</span>int)
+    nx, ny <span style="color:#f92672">=</span> mask<span style="color:#f92672">.</span>shape
 
-    mask = np.zeros(lons2d.shape, dtype=int)
-    nx, ny = mask.shape
+    pt <span style="color:#f92672">=</span> ogr<span style="color:#f92672">.</span>Geometry(ogr<span style="color:#f92672">.</span>wkbPoint)
 
-    pt = ogr.Geometry(ogr.wkbPoint)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(ds<span style="color:#f92672">.</span>GetLayerCount()):
+        layer <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>GetLayer(i)
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        :type : ogr.Layer
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
 
-    for i in range(ds.GetLayerCount()):
-        layer = ds.GetLayer(i)
-        &quot;&quot;&quot;
-        :type : ogr.Layer
-        &quot;&quot;&quot;
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(layer<span style="color:#f92672">.</span>GetFeatureCount()):
+            feat <span style="color:#f92672">=</span> layer<span style="color:#f92672">.</span>GetFeature(j)
+            <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">            :type : ogr.Feature
+</span><span style="color:#e6db74">            &#34;&#34;&#34;</span>
 
-        for j in range(layer.GetFeatureCount()):
-            feat = layer.GetFeature(j)
-            &quot;&quot;&quot;
-            :type : ogr.Feature
-            &quot;&quot;&quot;
+            <span style="color:#75715e"># Select polygons by the name property</span>
+            <span style="color:#66d9ef">if</span> polygon_name <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> feat<span style="color:#f92672">.</span>GetFieldAsString(<span style="color:#e6db74">&#34;NAME&#34;</span>) <span style="color:#f92672">==</span> polygon_name:
+                    <span style="color:#66d9ef">continue</span>
 
-            # Select polygons by the name property
-            if polygon_name is not None:
-                if not feat.GetFieldAsString(&quot;NAME&quot;) == polygon_name:
-                    continue
+            g <span style="color:#f92672">=</span> feat<span style="color:#f92672">.</span>GetGeometryRef()
+            <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">            :type : ogr.Geometry
+</span><span style="color:#e6db74">            &#34;&#34;&#34;</span>
 
-            g = feat.GetGeometryRef()
-            &quot;&quot;&quot;
-            :type : ogr.Geometry
-            &quot;&quot;&quot;
+            <span style="color:#66d9ef">assert</span> isinstance(g, ogr<span style="color:#f92672">.</span>Geometry)
 
-            assert isinstance(g, ogr.Geometry)
+            <span style="color:#66d9ef">for</span> pi <span style="color:#f92672">in</span> range(nx):
+                <span style="color:#66d9ef">for</span> pj <span style="color:#f92672">in</span> range(ny):
+                    pt<span style="color:#f92672">.</span>SetPoint_2D(<span style="color:#ae81ff">0</span>, float(xx[pi, pj]), float(yy[pi, pj]))
 
-            for pi in range(nx):
-                for pj in range(ny):
-                    pt.SetPoint_2D(0, float(xx[pi, pj]), float(yy[pi, pj]))
+                    mask[pi, pj] <span style="color:#f92672">+=</span> int(g<span style="color:#f92672">.</span>Contains(pt))
 
-                    mask[pi, pj] += int(g.Contains(pt))
+    <span style="color:#66d9ef">return</span> mask
 
-    return mask
-
-</code></pre>
-
-<p>We first read the Netcdf file and store informations in a Xarray.dataset.</p>
-
-<pre><code class="language-python">ds = xr.open_dataset('./DATA/CERA20C/cera20c_member0_TAS_197101_day.nc')
-</code></pre>
-
-<p>We then need to extract latitudes and longitudes values and compute a 2D matrix.</p>
-
-<pre><code class="language-python">Imp_Lats =  ds['latitude'].values
-Imp_Lons =  ds['longitude'].values
-lon2d, lat2d = np.meshgrid(Imp_Lons, Imp_Lats)
-</code></pre>
-
-<pre><code class="language-python">ds_mean = ds.mean('time') - 273.15
+</code></pre></div><p>We first read the Netcdf file and store informations in a Xarray.dataset.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74">&#39;./DATA/CERA20C/cera20c_member0_TAS_197101_day.nc&#39;</span>)
+</code></pre></div><p>We then need to extract latitudes and longitudes values and compute a 2D matrix.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Imp_Lats <span style="color:#f92672">=</span>  ds[<span style="color:#e6db74">&#39;latitude&#39;</span>]<span style="color:#f92672">.</span>values
+Imp_Lons <span style="color:#f92672">=</span>  ds[<span style="color:#e6db74">&#39;longitude&#39;</span>]<span style="color:#f92672">.</span>values
+lon2d, lat2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(Imp_Lons, Imp_Lats)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds_mean <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>mean(<span style="color:#e6db74">&#39;time&#39;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">273.15</span>
 ds_mean
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 145, longitude: 288)
 Coordinates:
   * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
@@ -1365,14 +1166,10 @@ Coordinates:
 Data variables:
     t2m        (latitude, longitude) float32 -34.067184 ... -25.249802
 </code></pre>
-
 <p>We open the shape file with Geopandas library.</p>
-
-<pre><code class="language-python">shapes = gpd.read_file(&quot;./DATA/Shapefiles/Countries_Final-polygon.shp&quot;)
-list(shapes.columns.values)
-</code></pre>
-
-<pre><code>['FIPS',
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(<span style="color:#e6db74">&#34;./DATA/Shapefiles/Countries_Final-polygon.shp&#34;</span>)
+list(shapes<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>values)
+</code></pre></div><pre><code>['FIPS',
  'ISO2',
  'ISO3',
  'UN',
@@ -1387,43 +1184,24 @@ list(shapes.columns.values)
  'path',
  'geometry']
 </code></pre>
-
-<pre><code class="language-python">shapes.head()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>head()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shapes<span style="color:#f92672">.</span>loc[<span style="color:#ae81ff">27</span>, <span style="color:#e6db74">&#39;geometry&#39;</span>]
+shapes<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xd8b4b70&gt;
 </code></pre>
-
-<pre><code class="language-python">shapes.loc[27, 'geometry']
-shapes.plot()
-</code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xd8b4b70&gt;
-</code></pre>
-
-<p><img src="/img/netcdf/output_75_1.png" alt="png" /></p>
-
+<p><img src="/img/netcdf/output_75_1.png" alt="png"></p>
 <p>We want in our study to extract information inside Mexico shapefile.</p>
-
-<pre><code class="language-python">mask=get_mask(lon2d,lat2d,shp_path=&quot;./DATA/Shapefiles/Countries_Final-polygon.shp&quot;, polygon_name='Mexico') 
-np.max(mask)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask<span style="color:#f92672">=</span>get_mask(lon2d,lat2d,shp_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./DATA/Shapefiles/Countries_Final-polygon.shp&#34;</span>, polygon_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Mexico&#39;</span>) 
+np<span style="color:#f92672">.</span>max(mask)
+</code></pre></div><pre><code>1
 </code></pre>
-
-<pre><code>1
-</code></pre>
-
 <p>We will convert our mask into numpy 2D array. We&rsquo;ll be later able to apply this matrix to mask our Netcdf file.</p>
-
-<pre><code class="language-python">np.save('DATA/Mexico.npy',mask) # saving our mask in numpy.array
-</code></pre>
-
-<p>We will mask our area using .where() method.</p>
-
-<pre><code class="language-python">ds_mask = ds_mean.where(mask == 1) 
-ds_mask.to_netcdf('DATA/Mexico.nc')  # we want to save our shapefile mask in Netcdf format
-</code></pre>
-
-<pre><code class="language-python">ds_mask
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;DATA/Mexico.npy&#39;</span>,mask) <span style="color:#75715e"># saving our mask in numpy.array</span>
+</code></pre></div><p>We will mask our area using .where() method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds_mask <span style="color:#f92672">=</span> ds_mean<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) 
+ds_mask<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74">&#39;DATA/Mexico.nc&#39;</span>)  <span style="color:#75715e"># we want to save our shapefile mask in Netcdf format</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds_mask
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 145, longitude: 288)
 Coordinates:
   * latitude   (latitude) float32 90.0 88.75 87.5 86.25 ... -87.5 -88.75 -90.0
@@ -1431,37 +1209,25 @@ Coordinates:
 Data variables:
     t2m        (latitude, longitude) float32 nan nan nan nan ... nan nan nan nan
 </code></pre>
-
-<pre><code class="language-python">np.max(ds_mask.t2m)
-</code></pre>
-
-<pre><code>&lt;xarray.DataArray 't2m' ()&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>max(ds_mask<span style="color:#f92672">.</span>t2m)
+</code></pre></div><pre><code>&lt;xarray.DataArray 't2m' ()&gt;
 array(24.010315)
 </code></pre>
-
-<pre><code class="language-python">_, ax = make_figure()
-# plot the temperature field
-lat_bnd = [35, 0]
-lon_bnd = [240, 280]
-ds_mask.t2m.sel(longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),).plot.pcolormesh(vmin=0, vmax=30, cmap='Spectral',add_colorbar=True, extend='both')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">_, ax <span style="color:#f92672">=</span> make_figure()
+<span style="color:#75715e"># plot the temperature field</span>
+lat_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">0</span>]
+lon_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">240</span>, <span style="color:#ae81ff">280</span>]
+ds_mask<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lon_bnd), latitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lat_bnd),)<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>pcolormesh(vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spectral&#39;</span>,add_colorbar<span style="color:#f92672">=</span>True, extend<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
+</code></pre></div><pre><code>&lt;matplotlib.collections.QuadMesh at 0xdc65400&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.collections.QuadMesh at 0xdc65400&gt;
-</code></pre>
-
-<p><img src="/img/netcdf/output_84_1.png" alt="png" /></p>
-
-<h2 id="5-last-example-using-xarray">5- Last example using Xarray:</h2>
-
+<p><img src="/img/netcdf/output_84_1.png" alt="png"></p>
+<h2 id="5--last-example-using-xarray">5- Last example using Xarray:</h2>
 <p>In this section, We will calculate the seasonal accumulation of the precipitation, extract a region, plot the domain and record our result in Netcdf:</p>
-
-<pre><code class="language-python"># Let's open cera20c_enda_ep_PR_*.nc netcdf files 
-multi_dataDIR = './DATA/CERA20C/cera20c_enda_ep_PR_*.nc'
-array = xr.open_mfdataset(multi_dataDIR)
-array.tp
-</code></pre>
-
-<pre><code>&lt;xarray.DataArray 'tp' (time: 365, latitude: 181, longitude: 360)&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Let&#39;s open cera20c_enda_ep_PR_*.nc netcdf files </span>
+multi_dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./DATA/CERA20C/cera20c_enda_ep_PR_*.nc&#39;</span>
+array <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(multi_dataDIR)
+array<span style="color:#f92672">.</span>tp
+</code></pre></div><pre><code>&lt;xarray.DataArray 'tp' (time: 365, latitude: 181, longitude: 360)&gt;
 dask.array&lt;shape=(365, 181, 360), dtype=float32, chunksize=(31, 181, 360)&gt;
 Coordinates:
   * longitude  (longitude) float32 0.0 1.0 2.0 3.0 ... 356.0 357.0 358.0 359.0
@@ -1471,14 +1237,10 @@ Attributes:
     units:      m
     long_name:  Total precipitation
 </code></pre>
-
 <p>All Netcdf files are stored in DataArray container, we can now group our Datasets by season, apply a simple sum() method over time and then change units from meters to mm.</p>
-
-<pre><code class="language-python">array_season = array.groupby('time.season').sum('time')*1000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array_season <span style="color:#f92672">=</span> array<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time.season&#39;</span>)<span style="color:#f92672">.</span>sum(<span style="color:#e6db74">&#39;time&#39;</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">1000</span>
 array_season
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 181, longitude: 360, season: 4)
 Coordinates:
   * latitude   (latitude) float32 90.0 89.0 88.0 87.0 ... -88.0 -89.0 -90.0
@@ -1487,20 +1249,15 @@ Coordinates:
 Data variables:
     tp         (season, latitude, longitude) float32 dask.array&lt;shape=(4, 181, 360), chunksize=(1, 181, 360)&gt;
 </code></pre>
-
-<p>We want to extract a specific domain delimited:
-    - latitude boundaries: 50N to 70N
-    - longitude boudaries: 250E to 310E</p>
-
+<p>We want to extract a specific domain delimited: 
+- latitude boundaries: 50N to 70N
+- longitude boudaries: 250E to 310E</p>
 <p>We finally want to extract winter season.</p>
-
-<pre><code class="language-python">lat_bnd = [70, 50]
-lon_bnd = [250, 310]
-subset_season_DJF = array_season.sel(season = 'DJF', longitude=slice(*lon_bnd), latitude=slice(*lat_bnd),)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lat_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">50</span>]
+lon_bnd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">250</span>, <span style="color:#ae81ff">310</span>]
+subset_season_DJF <span style="color:#f92672">=</span> array_season<span style="color:#f92672">.</span>sel(season <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;DJF&#39;</span>, longitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lon_bnd), latitude<span style="color:#f92672">=</span>slice(<span style="color:#f92672">*</span>lat_bnd),)
 subset_season_DJF
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 21, longitude: 61)
 Coordinates:
   * latitude   (latitude) float32 70.0 69.0 68.0 67.0 ... 53.0 52.0 51.0 50.0
@@ -1509,29 +1266,18 @@ Coordinates:
 Data variables:
     tp         (latitude, longitude) float32 dask.array&lt;shape=(21, 61), chunksize=(21, 61)&gt;
 </code></pre>
-
 <p>Let&rsquo;s save the Dataset to Netcdf.</p>
-
-<pre><code class="language-python">dataDIR = './DATA/subset_season.nc'
-subset_season_DJF.to_netcdf(dataDIR)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./DATA/subset_season.nc&#39;</span>
+subset_season_DJF<span style="color:#f92672">.</span>to_netcdf(dataDIR)
+</code></pre></div><p>We can call our make_figure() function to quick plot our Dataset.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">_, ax <span style="color:#f92672">=</span> make_figure()
+<span style="color:#75715e"># plot the temperature field</span>
+subset_season_DJF<span style="color:#f92672">.</span>tp<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>pcolormesh(vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spectral&#39;</span>,add_colorbar<span style="color:#f92672">=</span>True, extend<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
+</code></pre></div><pre><code>&lt;matplotlib.collections.QuadMesh at 0x130aedd8&gt;
 </code></pre>
-
-<p>We can call our make_figure() function to quick plot our Dataset.</p>
-
-<pre><code class="language-python">_, ax = make_figure()
-# plot the temperature field
-subset_season_DJF.tp.plot.pcolormesh(vmin=0, vmax=200, cmap='Spectral',add_colorbar=True, extend='both')
-</code></pre>
-
-<pre><code>&lt;matplotlib.collections.QuadMesh at 0x130aedd8&gt;
-</code></pre>
-
-<p><img src="/img/netcdf/output_94_1.png" alt="png" /></p>
-
-<pre><code class="language-python">array_season
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+<p><img src="/img/netcdf/output_94_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array_season
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 181, longitude: 360, season: 4)
 Coordinates:
   * latitude   (latitude) float32 90.0 89.0 88.0 87.0 ... -88.0 -89.0 -90.0
@@ -1579,7 +1325,7 @@ Data variables:
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Tutorial_Python_Netcdf/4-Xarray_Library.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cTutorial_Python_Netcdf%5c4-Xarray_Library.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

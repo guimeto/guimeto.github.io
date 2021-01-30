@@ -491,23 +491,22 @@ import pandas as pd import numpy as np import warnings; warnings.filterwarnings(
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#8-1-introduction-to-matplotlib">8.1 Introduction to Matplotlib</a>
-<ul>
-<li><a href="#conda-install-matplotlib">conda install matplotlib</a></li>
-</ul></li>
-<li><a href="#8-2-add-data-to-our-charts">8.2 Add data to our charts</a></li>
-<li><a href="#8-3-matplotlib-classes">8.3 Matplotlib classes</a></li>
-<li><a href="#8-4-add-some-data">8.4 Add some data</a></li>
-<li><a href="#8-5-improvement-of-the-graph">8.5 Improvement of the graph</a></li>
-<li><a href="#8-6-example">8.6 Example</a>
-<ul>
-<li><a href="#objectives-to-draw-a-meteogram-of-the-uqam-station-for-the-day-of-14-12-2018">Objectives: to draw a meteogram of the UQAM station for the day of 14/12/2018</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#81-introduction-to-matplotlib">8.1 Introduction to Matplotlib</a>
+      <ul>
+        <li><a href="#conda-install-matplotlib">conda install matplotlib</a></li>
+      </ul>
+    </li>
+    <li><a href="#82-add-data-to-our-charts">8.2 Add data to our charts</a></li>
+    <li><a href="#83-matplotlib-classes">8.3 Matplotlib classes</a></li>
+    <li><a href="#84-add-some-data">8.4 Add some data</a></li>
+    <li><a href="#85-improvement-of-the-graph">8.5 Improvement of the graph</a></li>
+    <li><a href="#86-example">8.6 Example</a>
+      <ul>
+        <li><a href="#objectives-to-draw-a-meteogram-of-the-uqam-station-for-the-day-of-14122018">Objectives: to draw a meteogram of the UQAM station for the day of 14/12/2018</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
       
@@ -522,28 +521,20 @@ import pandas as pd import numpy as np import warnings; warnings.filterwarnings(
           <h1>8 Matplotlib library</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/matplotlib.png" alt="image0" /></p>
-
+            <p><img src="/img/matplotlib.png" alt="image0"></p>
 <p>The Matplotlib library is one of the most used libraries for plotting data in Python.</p>
-
 <p>Many types of graphics can be developed with this library:
-<a href="https://matplotlib.org/gallery/index.html" target="_blank">https://matplotlib.org/gallery/index.html</a></p>
-
+<a href="https://matplotlib.org/gallery/index.html">https://matplotlib.org/gallery/index.html</a></p>
 <p>To illustrate some features of the Python matplotlib.pyplot module (which provides a plotting system similar to that of MATLAB), we will use a database from the UQAM station.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd 
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ignore&#39;</span>)
 
-<pre><code class="language-python">import pandas as pd 
-import numpy as np
-import warnings; warnings.filterwarnings(action='ignore')
-
-dataframe_UQAM = pd.read_csv('./DATA/UQAM_DATA_STATION_2018.csv')
-dataframe_UQAM['Date']=pd.to_datetime(dataframe_UQAM['Date'])
-dataframe_UQAM = dataframe_UQAM.set_index(&quot;Date&quot;, drop=True)
-dataframe_UQAM.head()
-</code></pre>
-
-<table>
+dataframe_UQAM <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./DATA/UQAM_DATA_STATION_2018.csv&#39;</span>)
+dataframe_UQAM[<span style="color:#e6db74">&#39;Date&#39;</span>]<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>to_datetime(dataframe_UQAM[<span style="color:#e6db74">&#39;Date&#39;</span>])
+dataframe_UQAM <span style="color:#f92672">=</span> dataframe_UQAM<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#34;Date&#34;</span>, drop<span style="color:#f92672">=</span>True)
+dataframe_UQAM<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">Date</th>
@@ -555,7 +546,6 @@ dataframe_UQAM.head()
 <th align="right">Mod_wind</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">2014-02-01 00:00:00</td>
@@ -566,7 +556,6 @@ dataframe_UQAM.head()
 <td align="right">244</td>
 <td align="right">4</td>
 </tr>
-
 <tr>
 <td align="left">2014-02-02 00:00:00</td>
 <td align="right">-6.2</td>
@@ -576,7 +565,6 @@ dataframe_UQAM.head()
 <td align="right">163</td>
 <td align="right">2</td>
 </tr>
-
 <tr>
 <td align="left">2014-02-03 00:00:00</td>
 <td align="right">-4.8</td>
@@ -586,7 +574,6 @@ dataframe_UQAM.head()
 <td align="right">255</td>
 <td align="right">3</td>
 </tr>
-
 <tr>
 <td align="left">2014-02-04 00:00:00</td>
 <td align="right">-9.9</td>
@@ -596,7 +583,6 @@ dataframe_UQAM.head()
 <td align="right">148</td>
 <td align="right">2</td>
 </tr>
-
 <tr>
 <td align="left">2014-02-05 00:00:00</td>
 <td align="right">-9.9</td>
@@ -608,31 +594,17 @@ dataframe_UQAM.head()
 </tr>
 </tbody>
 </table>
-
-<h2 id="8-1-introduction-to-matplotlib">8.1 Introduction to Matplotlib</h2>
-
+<h2 id="81-introduction-to-matplotlib">8.1 Introduction to Matplotlib</h2>
 <h3 id="conda-install-matplotlib">conda install matplotlib</h3>
-
 <p>By running this special iPython command, we will be displaying plots inline:</p>
-
-<pre><code class="language-python">%matplotlib inline
-</code></pre>
-
-<pre><code class="language-python">import matplotlib.pyplot as plt
-</code></pre>
-
-<pre><code class="language-python">plt.plot() # you create an empty graph or instance and then add layers.
-plt.show()
-</code></pre>
-
-<p><img src="/img/output_6_0.png" alt="png" /></p>
-
-<h2 id="8-2-add-data-to-our-charts">8.2 Add data to our charts</h2>
-
-<pre><code class="language-python">dataframe_UQAM['2015'].head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>plot() <span style="color:#75715e"># you create an empty graph or instance and then add layers.</span>
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/output_6_0.png" alt="png"></p>
+<h2 id="82-add-data-to-our-charts">8.2 Add data to our charts</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">Date</th>
@@ -644,7 +616,6 @@ plt.show()
 <th align="right">Mod_wind</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">2015-01-01 00:00:00</td>
@@ -655,7 +626,6 @@ plt.show()
 <td align="right">254</td>
 <td align="right">3</td>
 </tr>
-
 <tr>
 <td align="left">2015-01-02 00:00:00</td>
 <td align="right">-7.3</td>
@@ -665,7 +635,6 @@ plt.show()
 <td align="right">231</td>
 <td align="right">3</td>
 </tr>
-
 <tr>
 <td align="left">2015-01-03 00:00:00</td>
 <td align="right">-12</td>
@@ -675,7 +644,6 @@ plt.show()
 <td align="right">282</td>
 <td align="right">4</td>
 </tr>
-
 <tr>
 <td align="left">2015-01-04 00:00:00</td>
 <td align="right">-15.3</td>
@@ -685,7 +653,6 @@ plt.show()
 <td align="right">113</td>
 <td align="right">2</td>
 </tr>
-
 <tr>
 <td align="left">2015-01-05 00:00:00</td>
 <td align="right">-8.8</td>
@@ -697,164 +664,114 @@ plt.show()
 </tr>
 </tbody>
 </table>
-
-<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
-plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'])
-plt.show()
-</code></pre>
-
-<p><img src="/img/output_9_0.png" alt="png" /></p>
-
-<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
-plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'], marker='x')
-plt.show()
-</code></pre>
-
-<p><img src="/img/output_10_0.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_to_plot <span style="color:#f92672">=</span> dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/output_9_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_to_plot <span style="color:#f92672">=</span> dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/output_10_0.png" alt="png"></p>
 <ul>
-<li><b>marker</b> option :</li>
+<li><!-- raw HTML omitted -->marker<!-- raw HTML omitted --> option :</li>
 </ul>
-
-<p><a href="https://matplotlib.org/api/markers_api.html" target="_blank">https://matplotlib.org/api/markers_api.html</a></p>
-
+<p><a href="https://matplotlib.org/api/markers_api.html">https://matplotlib.org/api/markers_api.html</a></p>
 <ul>
-<li><p><b>linestyle</b> option: to delete or not the lines</p>
-
-<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
-plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'], marker='x', linestyle=&quot;--&quot;)
-plt.show()
-</code></pre></li>
+<li><!-- raw HTML omitted -->linestyle<!-- raw HTML omitted --> option: to delete or not the lines</li>
 </ul>
-
-<p><img src="/img/output_12_0.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_to_plot <span style="color:#f92672">=</span> dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/output_12_0.png" alt="png"></p>
 <ul>
-<li><b>scatter </b> fonction: function allows you to create scatter plot</li>
-
-<li><p><b>.rcParams</b> method is used to enlarge the graphic window</p>
-
-<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]  
-plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'])
-plt.show()
-</code></pre></li>
+<li><!-- raw HTML omitted -->scatter <!-- raw HTML omitted --> fonction: function allows you to create scatter plot</li>
+<li><!-- raw HTML omitted -->.rcParams<!-- raw HTML omitted --> method is used to enlarge the graphic window</li>
 </ul>
-
-<p><img src="/img/output_14_0.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]  
+plt<span style="color:#f92672">.</span>scatter(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/output_14_0.png" alt="png"></p>
 <ul>
 <li>to use the scatter color option, python wants an input list and not a dictionary</li>
-
-<li><p>color option : c=list()</p>
-
-<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]
-plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'], c=list(year_to_plot['Temperature moyenne']))
-plt.xlabel(&quot;Temps&quot;)
-plt.ylabel(&quot;Température&quot;)
-plt.title(&quot;Temperature&quot;, y=1.05)
-plt.show()
-</code></pre></li>
+<li>color option : c=list()</li>
 </ul>
-
-<p><img src="/img/output_16_0.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]
+plt<span style="color:#f92672">.</span>scatter(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], c<span style="color:#f92672">=</span>list(year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>]))
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Temps&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Température&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Temperature&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/output_16_0.png" alt="png"></p>
 <ul>
 <li>We used default scatter color ()</li>
-<li>with the <b> cmap </b> option, we can choose our color panel: <a href="https://matplotlib.org/examples/color/colormaps_reference.html" target="_blank">https://matplotlib.org/examples/color/colormaps_reference.html</a></li>
-<li>we will for example choose the color palette &ldquo;seismic&rdquo; via the option <b> cmap </b></li>
-<li>to change the shape and size of the points: use the <b> marker </b> and <b> s </b> options</li>
-<li>to save a graph: pyplot function: <b> savefig () </b></li>
-<li>To add a color bar: <b> colorbar () </b> function</li>
-
-<li><p>To rotate the labels in x: function <b> xticks () </b></p>
-
-<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]
-plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'], c=list(year_to_plot['Temperature moyenne']),
-        cmap=&quot;seismic&quot;,
-        marker=&quot;D&quot;, 
-        s=100)
-plt.xlabel(&quot;Time&quot;)
-plt.ylabel(&quot;Temperature&quot;)
-plt.title(&quot;Temperature&quot;, y=1.05)
-plt.colorbar()
-plt.xticks(rotation=45)
-plt.show()
-plt.savefig(&quot;figures/my_graph.png&quot;, bbox_inches=&quot;tight&quot;) 
-</code></pre></li>
+<li>with the <!-- raw HTML omitted --> cmap <!-- raw HTML omitted --> option, we can choose our color panel: <a href="https://matplotlib.org/examples/color/colormaps_reference.html">https://matplotlib.org/examples/color/colormaps_reference.html</a></li>
+<li>we will for example choose the color palette &ldquo;seismic&rdquo; via the option <!-- raw HTML omitted --> cmap <!-- raw HTML omitted --></li>
+<li>to change the shape and size of the points: use the <!-- raw HTML omitted --> marker <!-- raw HTML omitted --> and <!-- raw HTML omitted --> s <!-- raw HTML omitted --> options</li>
+<li>to save a graph: pyplot function: <!-- raw HTML omitted --> savefig () <!-- raw HTML omitted --></li>
+<li>To add a color bar: <!-- raw HTML omitted --> colorbar () <!-- raw HTML omitted --> function</li>
+<li>To rotate the labels in x: function <!-- raw HTML omitted --> xticks () <!-- raw HTML omitted --></li>
 </ul>
-
-<p><img src="/img/output_18_0.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]
+plt<span style="color:#f92672">.</span>scatter(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], c<span style="color:#f92672">=</span>list(year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>]),
+            cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;seismic&#34;</span>,
+            marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D&#34;</span>, 
+            s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Temperature&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Temperature&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>colorbar()
+plt<span style="color:#f92672">.</span>xticks(rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
+plt<span style="color:#f92672">.</span>show()
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#34;figures/my_graph.png&#34;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tight&#34;</span>) 
+</code></pre></div><p><img src="/img/output_18_0.png" alt="png"></p>
 <pre><code>&lt;Figure size 1152x648 with 0 Axes&gt;
 </code></pre>
-
-<h2 id="8-3-matplotlib-classes">8.3 Matplotlib classes</h2>
-
+<h2 id="83-matplotlib-classes">8.3 Matplotlib classes</h2>
 <p>When creating a graph, matplotlib:</p>
-
 <ul>
 <li>stores a container for all the graphics</li>
 <li>stores a container so that the graphic is positioned on a grid</li>
 <li>stores visual symbols on the graph</li>
 </ul>
-
 <p>You can plot different things in the same figure using the subplot function. Here is an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>) <span style="color:#75715e"># up and left </span>
+ax2 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>) <span style="color:#75715e"># up and right </span>
+ax3 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>) <span style="color:#75715e"># down and left </span>
+ax4 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>) <span style="color:#75715e"># down and right</span>
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/output_21_0.png" alt="png"></p>
+<p>Here is a documentation on subplot: 
+<a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot</a></p>
+<h2 id="84-add-some-data">8.4 Add some data</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) 
+ax2 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
 
-<pre><code class="language-python">fig = plt.figure()
-ax1 = fig.add_subplot(2,2,1) # up and left 
-ax2 = fig.add_subplot(2,2,2) # up and right 
-ax3 = fig.add_subplot(2,2,3) # down and left 
-ax4 = fig.add_subplot(2,2,4) # down and right
-plt.show()
+ax1<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2017&#39;</span>]<span style="color:#f92672">.</span>index,dataframe_UQAM[<span style="color:#e6db74">&#39;2017&#39;</span>][<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>])
+ax2<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2016&#39;</span>]<span style="color:#f92672">.</span>index,dataframe_UQAM[<span style="color:#e6db74">&#39;2016&#39;</span>][<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>])
+
+</code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0xa516dd8&gt;]
 </code></pre>
+<p><img src="/img/output_24_1.png" alt="png"></p>
+<h2 id="85-improvement-of-the-graph">8.5 Improvement of the graph</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">8</span>))
+colors <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;green&#39;</span>, <span style="color:#e6db74">&#39;blue&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>):
+    ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">1</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+    year <span style="color:#f92672">=</span> str(<span style="color:#ae81ff">2014</span><span style="color:#f92672">+</span>i)
+    label<span style="color:#f92672">=</span>year
+    plt<span style="color:#f92672">.</span>plot(dataframe_UQAM[year]<span style="color:#f92672">.</span>index,dataframe_UQAM[year][<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], c<span style="color:#f92672">=</span>colors[i], label <span style="color:#f92672">=</span> label)
+    plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
 
-<p><img src="/img/output_21_0.png" alt="png" /></p>
-
-<p>Here is a documentation on subplot:
-<a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" target="_blank">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot</a></p>
-
-<h2 id="8-4-add-some-data">8.4 Add some data</h2>
-
-<pre><code class="language-python">fig = plt.figure()
-ax1 = fig.add_subplot(2,1,1) 
-ax2 = fig.add_subplot(2,1,2)
-
-ax1.plot(dataframe_UQAM['2017'].index,dataframe_UQAM['2017']['Temperature moyenne'])
-ax2.plot(dataframe_UQAM['2016'].index,dataframe_UQAM['2016']['Temperature moyenne'])
-
-</code></pre>
-
-<pre><code>[&lt;matplotlib.lines.Line2D at 0xa516dd8&gt;]
-</code></pre>
-
-<p><img src="/img/output_24_1.png" alt="png" /></p>
-
-<h2 id="8-5-improvement-of-the-graph">8.5 Improvement of the graph</h2>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(15, 8))
-colors = ['green', 'blue', 'red']
-for i in range(3):
-    ax = fig.add_subplot(3,1,i+1)
-    year = str(2014+i)
-    label=year
-    plt.plot(dataframe_UQAM[year].index,dataframe_UQAM[year]['Temperature moyenne'], c=colors[i], label = label)
-    plt.legend(loc='upper left')
-plt.show()
-
-</code></pre>
-
-<p><img src="/img/output_26_0.png" alt="png" /></p>
-
-<h2 id="8-6-example">8.6 Example</h2>
-
-<h3 id="objectives-to-draw-a-meteogram-of-the-uqam-station-for-the-day-of-14-12-2018">Objectives: to draw a meteogram of the UQAM station for the day of 14/12/2018</h3>
-
-<pre><code class="language-python">import pandas as pd 
-dataframe_UQAM = pd.read_csv('./DATA/UQAM_DATA_STATION.csv')
-print(dataframe_UQAM.head())
-</code></pre>
-
-<pre><code>          Time  Precipitation  pressure  humidex  Rosee  Temperature  Chill  \
+</code></pre></div><p><img src="/img/output_26_0.png" alt="png"></p>
+<h2 id="86-example">8.6 Example</h2>
+<h3 id="objectives-to-draw-a-meteogram-of-the-uqam-station-for-the-day-of-14122018">Objectives: to draw a meteogram of the UQAM station for the day of 14/12/2018</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd 
+dataframe_UQAM <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./DATA/UQAM_DATA_STATION.csv&#39;</span>)
+<span style="color:#66d9ef">print</span>(dataframe_UQAM<span style="color:#f92672">.</span>head())
+</code></pre></div><pre><code>          Time  Precipitation  pressure  humidex  Rosee  Temperature  Chill  \
 0  18-12-09_09           0.14    1038.0     -8.0   -7.8         -5.1   -8.0   
 1  18-12-09_10           0.00    1039.0     -7.0   -6.7         -3.9   -7.0   
 2  18-12-09_11           0.00    1033.0     -5.0   -6.0         -2.7   -5.0   
@@ -868,13 +785,10 @@ print(dataframe_UQAM.head())
 3      66.0     208.0       8.0  
 4      64.0     268.0      18.0  
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataframe_UQAM2 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./DATA/UQAM_DATA_STATION.csv&#39;</span>, parse_dates<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Time&#34;</span>],date_parser<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: pd<span style="color:#f92672">.</span>to_datetime(x, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">_%H&#34;</span>))
+dataframe_UQAM2<span style="color:#f92672">.</span>head()
 
-<pre><code class="language-python">dataframe_UQAM2 = pd.read_csv('./DATA/UQAM_DATA_STATION.csv', parse_dates=[&quot;Time&quot;],date_parser=lambda x: pd.to_datetime(x, format=&quot;%y-%m-%d_%H&quot;))
-dataframe_UQAM2.head()
-
-</code></pre>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -890,7 +804,6 @@ dataframe_UQAM2.head()
 <th align="right">Mod_wind</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -905,7 +818,6 @@ dataframe_UQAM2.head()
 <td align="right">208</td>
 <td align="right">6</td>
 </tr>
-
 <tr>
 <td align="right">1</td>
 <td align="left">2018-12-09 10:00:00</td>
@@ -919,7 +831,6 @@ dataframe_UQAM2.head()
 <td align="right">201</td>
 <td align="right">6</td>
 </tr>
-
 <tr>
 <td align="right">2</td>
 <td align="left">2018-12-09 11:00:00</td>
@@ -933,7 +844,6 @@ dataframe_UQAM2.head()
 <td align="right">184</td>
 <td align="right">5</td>
 </tr>
-
 <tr>
 <td align="right">3</td>
 <td align="left">2018-12-09 12:00:00</td>
@@ -947,7 +857,6 @@ dataframe_UQAM2.head()
 <td align="right">208</td>
 <td align="right">8</td>
 </tr>
-
 <tr>
 <td align="right">4</td>
 <td align="left">2018-12-09 13:00:00</td>
@@ -963,20 +872,17 @@ dataframe_UQAM2.head()
 </tr>
 </tbody>
 </table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># We just want data for 14/12/2018</span>
+start_date <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2018-12-14&#39;</span>
+end_date <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2018-12-15&#39;</span>
+df<span style="color:#f92672">=</span> dataframe_UQAM2
+mask <span style="color:#f92672">=</span> (df[<span style="color:#e6db74">&#39;Time&#39;</span>] <span style="color:#f92672">&gt;</span> start_date) <span style="color:#f92672">&amp;</span> (df[<span style="color:#e6db74">&#39;Time&#39;</span>] <span style="color:#f92672">&lt;=</span> end_date)
 
-<pre><code class="language-python"># We just want data for 14/12/2018
-start_date = '2018-12-14'
-end_date = '2018-12-15'
-df= dataframe_UQAM2
-mask = (df['Time'] &gt; start_date) &amp; (df['Time'] &lt;= end_date)
 
-
-dataframe_jour = dataframe_UQAM2.loc[mask]
-print(dataframe_jour.head())
-print(len(dataframe_jour))
-</code></pre>
-
-<pre><code>                   Time  Precipitation  pressure  humidex  Rosee  Temperature  \
+dataframe_jour <span style="color:#f92672">=</span> dataframe_UQAM2<span style="color:#f92672">.</span>loc[mask]
+<span style="color:#66d9ef">print</span>(dataframe_jour<span style="color:#f92672">.</span>head())
+<span style="color:#66d9ef">print</span>(len(dataframe_jour))
+</code></pre></div><pre><code>                   Time  Precipitation  pressure  humidex  Rosee  Temperature  \
 112 2018-12-14 01:00:00            0.0    1039.0    -10.0  -10.0         -6.3   
 113 2018-12-14 02:00:00            0.0    1039.0     -9.0   -9.0         -5.8   
 114 2018-12-14 03:00:00            0.0    1036.0     -9.0   -8.5         -5.4   
@@ -991,96 +897,90 @@ print(len(dataframe_jour))
 116   -7.0      81.0      92.0       4.0  
 24
 </code></pre>
-
-<pre><code class="language-python">from matplotlib.font_manager import FontProperties
-import matplotlib.dates as mdates
-from datetime import datetime
-from datetime import timedelta as td
-
-
-daylabels = []
-i = 0 
-for index, row in dataframe_jour.iterrows():
-    daylabels.append(dataframe_jour.iloc[i][0].replace(minute=0, second=0, microsecond=0).strftime('%Hh'))
-    i += 1
-print(daylabels)
-
-start_date = '2018-12-14'
-end_date = '2018-12-15'
-fig = plt.figure(figsize=(20, 8))
-fontP = FontProperties()
-fontP.set_size('xx-small')
-t = np.arange(0, 24, 1)
-##### on trace les températures
-ax1 = plt.subplot(411)
-ax1.grid(True)
-plt.plot(t, dataframe_jour['Temperature'], 'r-', label='Temperature de l\'air', linewidth=2)
-plt.plot(t, dataframe_jour['Rosee'], 'r--',label='Temperature du point de rosee', linewidth=2)
-plt.plot(t, dataframe_jour['Chill'], 'g--',label='Wind Chill', linewidth=2)
-plt.legend(loc='upper left', ncol=1, bbox_to_anchor=(0, 1, 1, 0),fontsize =15)
-plt.ylabel('Température ($^\circ$C)', {'color': 'black', 'fontsize': 15})
-
-plt.setp(ax1.get_xticklabels(), fontsize=15)
-plt.title('Meteogram station UQAM:'+ start_date + ' / ' + end_date, weight='bold').set_fontsize('20')
-plt.setp(ax1.get_xticklabels(), visible=False)
-
-##########  TRACE DES ACCUMULATIONS PRECIPITATION  ##########  
-# share x only
-ax2 = plt.subplot(412, sharex=ax1)
-ax2.grid(True)
-t = np.arange(0, 24, 1)
-width=1
-ax2.bar(t,dataframe_jour['Precipitation'].values,width,color='b', label='Pluie', linewidth=2)
-plt.setp(ax2.get_xticklabels(), visible=False)
-plt.ylim(0,  np.round(dataframe_jour['Precipitation'].max() ) +1)
-plt.ylabel('Accumulation (mm)', {'color': 'black', 'fontsize': 15})
-plt.legend(loc='upper left', ncol=1, bbox_to_anchor=(0, 0, 1, 1), fontsize =15)
-
-# share x only
-##### on trace l humidite
-ax2 = plt.subplot(413, sharex=ax1)
-ax2.grid(True)
-plt.plot(t, dataframe_jour['Humidite'], 'b-', linewidth=2)
-plt.setp(ax2.get_xticklabels(), visible=False)
-plt.ylabel('Humidite relative (%)', {'color': 'black', 'fontsize': 15})
-plt.legend(loc='upper left', ncol=1, bbox_to_anchor=(0, 0, 1, 1), fontsize =15)
-
-##### on trace la pression
-ax3 = plt.subplot(414, sharex=ax1)
-plt.plot(t, dataframe_jour['pressure'], 'g-', linewidth=2)
-plt.xlim(0.01, 24)
-plt.ylim(np.round(min(dataframe_jour['pressure'])) - 2, np.round(max(dataframe_jour['pressure'])) + 2)
-plt.ylabel('Pression (hPa)', {'color': 'black', 'fontsize': 15})
-plt.legend(loc='upper left', ncol=1, bbox_to_anchor=(0, 0, 1, 1), fontsize =15)
-ax3.grid(True)
-
-for label in ax3.get_yticklabels():
-    label.set_color(&quot;black&quot;)
-
-ax3.set(xticks=np.arange(0,len(daylabels),1), xticklabels=daylabels) #Same as plt.xticks
-spacing = 1
-visible = ax3.xaxis.get_ticklabels()[::spacing]
-for label in ax3.xaxis.get_ticklabels():
-    if label not in visible:
-        label.set_visible(False)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> matplotlib.font_manager <span style="color:#f92672">import</span> FontProperties
+<span style="color:#f92672">import</span> matplotlib.dates <span style="color:#f92672">as</span> mdates
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> timedelta <span style="color:#66d9ef">as</span> td
 
 
-fig.autofmt_xdate()
-fig.set_size_inches(18.5, 10.5)
-fileout='figures/Meteogram_UQAM.png'
-plt.savefig(fileout)
-fig.autofmt_xdate()
-plt.show()
+daylabels <span style="color:#f92672">=</span> []
+i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
+<span style="color:#66d9ef">for</span> index, row <span style="color:#f92672">in</span> dataframe_jour<span style="color:#f92672">.</span>iterrows():
+    daylabels<span style="color:#f92672">.</span>append(dataframe_jour<span style="color:#f92672">.</span>iloc[i][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>replace(minute<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, second<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, microsecond<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Hh&#39;</span>))
+    i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(daylabels)
+
+start_date <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2018-12-14&#39;</span>
+end_date <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2018-12-15&#39;</span>
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">8</span>))
+fontP <span style="color:#f92672">=</span> FontProperties()
+fontP<span style="color:#f92672">.</span>set_size(<span style="color:#e6db74">&#39;xx-small&#39;</span>)
+t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">1</span>)
+<span style="color:#75715e">##### on trace les températures</span>
+ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">411</span>)
+ax1<span style="color:#f92672">.</span>grid(True)
+plt<span style="color:#f92672">.</span>plot(t, dataframe_jour[<span style="color:#e6db74">&#39;Temperature&#39;</span>], <span style="color:#e6db74">&#39;r-&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Temperature de l</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">air&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>plot(t, dataframe_jour[<span style="color:#e6db74">&#39;Rosee&#39;</span>], <span style="color:#e6db74">&#39;r--&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Temperature du point de rosee&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>plot(t, dataframe_jour[<span style="color:#e6db74">&#39;Chill&#39;</span>], <span style="color:#e6db74">&#39;g--&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Wind Chill&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>),fontsize <span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Température ($^\circ$C)&#39;</span>, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;fontsize&#39;</span>: <span style="color:#ae81ff">15</span>})
+
+plt<span style="color:#f92672">.</span>setp(ax1<span style="color:#f92672">.</span>get_xticklabels(), fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Meteogram station UQAM:&#39;</span><span style="color:#f92672">+</span> start_date <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; / &#39;</span> <span style="color:#f92672">+</span> end_date, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)<span style="color:#f92672">.</span>set_fontsize(<span style="color:#e6db74">&#39;20&#39;</span>)
+plt<span style="color:#f92672">.</span>setp(ax1<span style="color:#f92672">.</span>get_xticklabels(), visible<span style="color:#f92672">=</span>False)
+
+<span style="color:#75715e">##########  TRACE DES ACCUMULATIONS PRECIPITATION  ##########  </span>
+<span style="color:#75715e"># share x only</span>
+ax2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">412</span>, sharex<span style="color:#f92672">=</span>ax1)
+ax2<span style="color:#f92672">.</span>grid(True)
+t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">1</span>)
+width<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+ax2<span style="color:#f92672">.</span>bar(t,dataframe_jour[<span style="color:#e6db74">&#39;Precipitation&#39;</span>]<span style="color:#f92672">.</span>values,width,color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;b&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Pluie&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>setp(ax2<span style="color:#f92672">.</span>get_xticklabels(), visible<span style="color:#f92672">=</span>False)
+plt<span style="color:#f92672">.</span>ylim(<span style="color:#ae81ff">0</span>,  np<span style="color:#f92672">.</span>round(dataframe_jour[<span style="color:#e6db74">&#39;Precipitation&#39;</span>]<span style="color:#f92672">.</span>max() ) <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Accumulation (mm)&#39;</span>, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;fontsize&#39;</span>: <span style="color:#ae81ff">15</span>})
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), fontsize <span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>)
+
+<span style="color:#75715e"># share x only</span>
+<span style="color:#75715e">##### on trace l humidite</span>
+ax2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">413</span>, sharex<span style="color:#f92672">=</span>ax1)
+ax2<span style="color:#f92672">.</span>grid(True)
+plt<span style="color:#f92672">.</span>plot(t, dataframe_jour[<span style="color:#e6db74">&#39;Humidite&#39;</span>], <span style="color:#e6db74">&#39;b-&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>setp(ax2<span style="color:#f92672">.</span>get_xticklabels(), visible<span style="color:#f92672">=</span>False)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Humidite relative (%)&#39;</span>, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;fontsize&#39;</span>: <span style="color:#ae81ff">15</span>})
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), fontsize <span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>)
+
+<span style="color:#75715e">##### on trace la pression</span>
+ax3 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">414</span>, sharex<span style="color:#f92672">=</span>ax1)
+plt<span style="color:#f92672">.</span>plot(t, dataframe_jour[<span style="color:#e6db74">&#39;pressure&#39;</span>], <span style="color:#e6db74">&#39;g-&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>xlim(<span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">24</span>)
+plt<span style="color:#f92672">.</span>ylim(np<span style="color:#f92672">.</span>round(min(dataframe_jour[<span style="color:#e6db74">&#39;pressure&#39;</span>])) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, np<span style="color:#f92672">.</span>round(max(dataframe_jour[<span style="color:#e6db74">&#39;pressure&#39;</span>])) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Pression (hPa)&#39;</span>, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;fontsize&#39;</span>: <span style="color:#ae81ff">15</span>})
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), fontsize <span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>)
+ax3<span style="color:#f92672">.</span>grid(True)
+
+<span style="color:#66d9ef">for</span> label <span style="color:#f92672">in</span> ax3<span style="color:#f92672">.</span>get_yticklabels():
+    label<span style="color:#f92672">.</span>set_color(<span style="color:#e6db74">&#34;black&#34;</span>)
+
+ax3<span style="color:#f92672">.</span>set(xticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,len(daylabels),<span style="color:#ae81ff">1</span>), xticklabels<span style="color:#f92672">=</span>daylabels) <span style="color:#75715e">#Same as plt.xticks</span>
+spacing <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+visible <span style="color:#f92672">=</span> ax3<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>get_ticklabels()[::spacing]
+<span style="color:#66d9ef">for</span> label <span style="color:#f92672">in</span> ax3<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>get_ticklabels():
+    <span style="color:#66d9ef">if</span> label <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> visible:
+        label<span style="color:#f92672">.</span>set_visible(False)
+
+
+fig<span style="color:#f92672">.</span>autofmt_xdate()
+fig<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">18.5</span>, <span style="color:#ae81ff">10.5</span>)
+fileout<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;figures/Meteogram_UQAM.png&#39;</span>
+plt<span style="color:#f92672">.</span>savefig(fileout)
+fig<span style="color:#f92672">.</span>autofmt_xdate()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>['01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h', '00h']
 </code></pre>
-
-<pre><code>['01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h', '00h']
-</code></pre>
-
-<p><img src="/img/output_31_1.png" alt="png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
-
+<p><img src="/img/output_31_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -1125,7 +1025,7 @@ plt.show()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Tutorial_Python/8-Matplotlib_Library.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cTutorial_Python%5c8-Matplotlib_Library.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

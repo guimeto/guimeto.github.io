@@ -29,7 +29,7 @@
     
   
   <meta name="description" content="Le format Netcdf (de l&rsquo;anglais Network Common Data Form) est un moyen de créer, d&rsquo;accéder et de partager des données scientifiques dans un format auto-documenté et transparent pour de nombreux types de machines.
- Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.
+  Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.
 Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un petit exemple de fichier NetCDF, pour illustrer ces concepts de dimensions, variables et attributs.">
 
   
@@ -118,7 +118,7 @@ Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un pet
   <meta property="og:url" content="/courses/formation_python/15.1-netcdf_tutorial/">
   <meta property="og:title" content="15-1- Le format Netcdf sous Python - Cours | GDueymes">
   <meta property="og:description" content="Le format Netcdf (de l&rsquo;anglais Network Common Data Form) est un moyen de créer, d&rsquo;accéder et de partager des données scientifiques dans un format auto-documenté et transparent pour de nombreux types de machines.
- Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.
+  Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.
 Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un petit exemple de fichier NetCDF, pour illustrer ces concepts de dimensions, variables et attributs."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -581,17 +581,14 @@ Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un pet
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#image0-img-formation-xarray-png"><img src="/img/formation/xarray.png" alt="image0" /></a></li>
-<li><a href="#15-1-créer-un-fichier-netcdf">15.1- Créer un fichier Netcdf:</a></li>
-<li><a href="#15-2-lire-un-fichier-netcdf">15.2- Lire un fichier Netcdf:</a></li>
-<li><a href="#15-3-manipuler-un-fichier-netcdf">15.3- Manipuler un fichier Netcdf:</a></li>
-<li><a href="#15-4-extraire-un-point-de-grille">15.4- Extraire un point de grille:</a></li>
-<li><a href="#15-5-extraire-un-domaine-délimité-par-une-boite-2d">15.5- Extraire un domaine délimité par une boite 2D:</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#image0imgformationxarraypng"><img src="/img/formation/xarray.png" alt="image0"></a></li>
+    <li><a href="#151--créer-un-fichier-netcdf">15.1- Créer un fichier Netcdf:</a></li>
+    <li><a href="#152--lire-un-fichier-netcdf">15.2- Lire un fichier Netcdf:</a></li>
+    <li><a href="#153--manipuler-un-fichier-netcdf">15.3- Manipuler un fichier Netcdf:</a></li>
+    <li><a href="#154--extraire-un-point-de-grille">15.4- Extraire un point de grille:</a></li>
+    <li><a href="#155--extraire-un-domaine-délimité-par-une-boite-2d">15.5- Extraire un domaine délimité par une boite 2D:</a></li>
+  </ul>
 </nav>
 
       
@@ -606,20 +603,12 @@ Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un pet
           <h1>15-1- Le format Netcdf sous Python - Cours</h1>
 
           <div class="article-style">
-            
-
-<p>Le format Netcdf (de l&rsquo;anglais Network Common Data Form) est un moyen de créer, d&rsquo;accéder et de partager des données scientifiques dans un format auto-documenté et transparent pour de nombreux types de machines.</p>
-
-<hr />
-
-<h2 id="image0-img-formation-xarray-png"><img src="/img/formation/xarray.png" alt="image0" /></h2>
-
+            <p>Le format Netcdf (de l&rsquo;anglais Network Common Data Form) est un moyen de créer, d&rsquo;accéder et de partager des données scientifiques dans un format auto-documenté et transparent pour de nombreux types de machines.</p>
+<hr>
+<h2 id="image0imgformationxarraypng"><img src="/img/formation/xarray.png" alt="image0"></h2>
 <p>Le fichier Netcdf lui-même contient des informations décrivant les données qu&rsquo;il contient.</p>
-
 <p>Un fichier NetCDF a des dimensions, des variables et des attributs. Voici un petit exemple de fichier NetCDF, pour illustrer ces concepts de dimensions, variables et attributs.</p>
-
 <p>La notation utilisée pour décrire ce fichier NetCDF est appelée Network Common Data Language (CDL). Il donne une version &ldquo;texte&rdquo; qui permet de comprendre facilement la structure et le contenu d&rsquo;un fichier binaire NetCDF:</p>
-
 <pre><code>netcdf ./data/NARR_tasmax_201701.nc {
   dimensions:
 x = 349;
@@ -646,240 +635,190 @@ float tasmax(time=31, y=277, x=349);
   :missing_value = -999.0; // double
   :coordinates = &quot;lon lat&quot;;
 </code></pre>
-
 <p>}</p>
-
 <ul>
-<li><p><a href="https://www.giss.nasa.gov/tools/panoply/download/">Panoply</a> est un logiciel open source utilisé pour lire rapidement et visualiser un fichier Netcdf:</p></li>
-
-<li><p>Le module python que nous utiliserons dans cette section est <a href="https://pypi.org/project/netCDF4/">netCDF4</a>.</p></li>
+<li>
+<p><!-- raw HTML omitted -->Panoply<!-- raw HTML omitted --> est un logiciel open source utilisé pour lire rapidement et visualiser un fichier Netcdf:</p>
+</li>
+<li>
+<p>Le module python que nous utiliserons dans cette section est <!-- raw HTML omitted -->netCDF4<!-- raw HTML omitted -->.</p>
+</li>
 </ul>
+<p>Pour installer le module sous Anaconda: <!-- raw HTML omitted -->conda install -c anaconda netcdf4<!-- raw HTML omitted --></p>
+<p><img src="/img/formation/CanESM2_rcp85_r1i1p1_global_tos.jpg" alt="image0"></p>
+<h2 id="151--créer-un-fichier-netcdf">15.1- Créer un fichier Netcdf:</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> os 
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#34;ignore&#34;</span>)
 
-<p>Pour installer le module sous Anaconda: <b>conda install -c anaconda netcdf4</b></p>
-
-<p><img src="/img/formation/CanESM2_rcp85_r1i1p1_global_tos.jpg" alt="image0" /></p>
-
-<h2 id="15-1-créer-un-fichier-netcdf">15.1- Créer un fichier Netcdf:</h2>
-
-<pre><code class="language-python">from netCDF4 import Dataset
-import os 
-import warnings
-warnings.filterwarnings(&quot;ignore&quot;)
-
-file_name = &quot;./DATA/2D_Temperature.nc&quot;
-if os.path.isfile(file_name):
-    os.remove(file_name)
+file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./DATA/2D_Temperature.nc&#34;</span>
+<span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(file_name):
+    os<span style="color:#f92672">.</span>remove(file_name)
     
-# Ouverture du fichier pour écriture, on peut spécifier le format=&quot;NETCDF4_CLASSIC&quot; ou &quot;NETCDF3_CLASSIC&quot;
-# par défault on aura NETCDF4
+<span style="color:#75715e"># Ouverture du fichier pour écriture, on peut spécifier le format=&#34;NETCDF4_CLASSIC&#34; ou &#34;NETCDF3_CLASSIC&#34;</span>
+<span style="color:#75715e"># par défault on aura NETCDF4</span>
 
-ds = Dataset(file_name, mode=&quot;w&quot;)
-</code></pre>
-
-<ul>
-<li>Netcdf4-python: <b>createDimension</b></li>
+ds <span style="color:#f92672">=</span> Dataset(file_name, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;w&#34;</span>)
+</code></pre></div><ul>
+<li>Netcdf4-python: <!-- raw HTML omitted -->createDimension<!-- raw HTML omitted --></li>
 </ul>
-
 <p>Nous allons créer un champs 2D: (20,20)</p>
-
-<pre><code class="language-python">ds.createDimension(&quot;x&quot;, 20)
-ds.createDimension(&quot;y&quot;, 20)
-ds.createDimension(&quot;time&quot;, None)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#ae81ff">20</span>)
+ds<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74">&#34;y&#34;</span>, <span style="color:#ae81ff">20</span>)
+ds<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74">&#34;time&#34;</span>, None)
+</code></pre></div><pre><code>&lt;class 'netCDF4._netCDF4.Dimension'&gt; (unlimited): name = 'time', size = 0
 </code></pre>
-
-<pre><code>&lt;class 'netCDF4._netCDF4.Dimension'&gt; (unlimited): name = 'time', size = 0
-</code></pre>
-
 <ul>
-<li>Netcdf4-python: <b>createVariable</b></li>
+<li>Netcdf4-python: <!-- raw HTML omitted -->createVariable<!-- raw HTML omitted --></li>
 </ul>
-
 <p>Nous allons créer deux variables : var1 et var2 et définir leurs dimensions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">var1 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74">&#34;field1&#34;</span>, <span style="color:#e6db74">&#34;f4&#34;</span>, (<span style="color:#e6db74">&#34;time&#34;</span>, <span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#e6db74">&#34;y&#34;</span>))
+var2 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74">&#34;field2&#34;</span>, <span style="color:#e6db74">&#34;f4&#34;</span>, (<span style="color:#e6db74">&#34;time&#34;</span>, <span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#e6db74">&#34;y&#34;</span>))
 
-<pre><code class="language-python">var1 = ds.createVariable(&quot;field1&quot;, &quot;f4&quot;, (&quot;time&quot;, &quot;x&quot;, &quot;y&quot;))
-var2 = ds.createVariable(&quot;field2&quot;, &quot;f4&quot;, (&quot;time&quot;, &quot;x&quot;, &quot;y&quot;))
+<span style="color:#75715e">#add netcdf attributes</span>
+var1<span style="color:#f92672">.</span>units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Celcius&#34;</span>
+var1<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Surface air temperature&#34;</span>
 
-#add netcdf attributes
-var1.units = &quot;Celcius&quot;
-var1.long_name = &quot;Surface air temperature&quot;
+var2<span style="color:#f92672">.</span>units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Kelvin&#34;</span>
+var2<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Surface air temperature&#34;</span>
 
-var2.units = &quot;Kelvin&quot;
-var2.long_name = &quot;Surface air temperature&quot;
-
-</code></pre>
-
-<p>Nous pouvons maintenant assigner notre champs ou variable.
+</code></pre></div><p>Nous pouvons maintenant assigner notre champs ou variable. 
 Dans notre exemple on va générer des données aléatoires et indiquer au programme où il doit les assigner.</p>
-
-<pre><code class="language-python">import numpy as np
-data = np.random.randn(10, 20, 20)
-var1[:] = data
-var2[:] =  data + 273.15
-ds.close();
-</code></pre>
-
-<p>Voilà, notre fichier est écrit sur notre disque.</p>
-
-<h2 id="15-2-lire-un-fichier-netcdf">15.2- Lire un fichier Netcdf:</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>)
+var1[:] <span style="color:#f92672">=</span> data
+var2[:] <span style="color:#f92672">=</span>  data <span style="color:#f92672">+</span> <span style="color:#ae81ff">273.15</span>
+ds<span style="color:#f92672">.</span>close();
+</code></pre></div><p>Voilà, notre fichier est écrit sur notre disque.</p>
+<h2 id="152--lire-un-fichier-netcdf">15.2- Lire un fichier Netcdf:</h2>
 <p>Nous allons lire le fichier Netcdf4 que nous avons créer dans la section précédente.</p>
-
-<pre><code class="language-python">from netCDF4 import Dataset
-ds = Dataset(&quot;./DATA/2D_Temperature.nc&quot;)
-</code></pre>
-
-<p>Nous allons sélectionner les variables d&rsquo;intérêt: aucune donnée n&rsquo;est chargée à ce stade.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+ds <span style="color:#f92672">=</span> Dataset(<span style="color:#e6db74">&#34;./DATA/2D_Temperature.nc&#34;</span>)
+</code></pre></div><p>Nous allons sélectionner les variables d&rsquo;intérêt: aucune donnée n&rsquo;est chargée à ce stade.</p>
 <p>Pour connaitre quelles sont les variables présentes dans notre fichier Netcdf:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(ds<span style="color:#f92672">.</span>variables<span style="color:#f92672">.</span>keys())
 
-<pre><code class="language-python">print(ds.variables.keys())
-
-print(ds.variables[&quot;field1&quot;].dimensions, ds.variables[&quot;field1&quot;].shape)
-</code></pre>
-
-<pre><code>odict_keys(['field1', 'field2'])
+<span style="color:#66d9ef">print</span>(ds<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#34;field1&#34;</span>]<span style="color:#f92672">.</span>dimensions, ds<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#34;field1&#34;</span>]<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>odict_keys(['field1', 'field2'])
 ('time', 'x', 'y') (10, 20, 20)
 </code></pre>
-
 <p>Nous allons lire les données, à ce stade, les données sont chargées en mémoire.</p>
-
-<pre><code class="language-python">data1_var = ds.variables[&quot;field1&quot;]
-all_data = data1_var[:]
-print(all_data.shape)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data1_var <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#34;field1&#34;</span>]
+all_data <span style="color:#f92672">=</span> data1_var[:]
+<span style="color:#66d9ef">print</span>(all_data<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>(10, 20, 20)
 </code></pre>
-
-<pre><code>(10, 20, 20)
-</code></pre>
-
 <p>On va par exemple aller chercher le premier pas de temps:</p>
-
-<pre><code class="language-python">data_step1 = data1_var[1,:,:]
-print(data_step1.shape, data_step1.shape, data_step1.mean())
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_step1 <span style="color:#f92672">=</span> data1_var[<span style="color:#ae81ff">1</span>,:,:]
+<span style="color:#66d9ef">print</span>(data_step1<span style="color:#f92672">.</span>shape, data_step1<span style="color:#f92672">.</span>shape, data_step1<span style="color:#f92672">.</span>mean())
+</code></pre></div><pre><code>(20, 20) (20, 20) -0.022204468
 </code></pre>
-
-<pre><code>(20, 20) (20, 20) -0.022204468
-</code></pre>
-
-<h2 id="15-3-manipuler-un-fichier-netcdf">15.3- Manipuler un fichier Netcdf:</h2>
-
+<h2 id="153--manipuler-un-fichier-netcdf">15.3- Manipuler un fichier Netcdf:</h2>
 <p>Dans cet exemple, nous travaillerons avec des données de températures maximales quotidiennes pour tous les mois de janvier de 1971 à 2000 à partir du modèle régional CRCM5 développé au centre ESCER.</p>
-
 <p>Nous allons importer notre propre module de calcul des indices de température, ce module est appelé Indices_Température.</p>
-
 <p>Dans un premier temps, nous importons les bibliothèques nécessaires.</p>
-
-<pre><code class="language-python">from netCDF4 import Dataset
-import Indices_Temperature
-import numpy as np
-</code></pre>
-
-<ul>
-<li><p>Ouvrons le premier fichier Netcdf &lsquo;CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical_tasmax_197101.nc&rsquo;:</p>
-
-<pre><code class="language-python">nc_Modc=Dataset('./DATA/CRCM5/CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical_tasmax_197101.nc','r')
-lats=nc_Modc.variables['lat'][:]
-lons=nc_Modc.variables['lon'][:]
-varc=nc_Modc.variables[variable][:]
-</code></pre></li>
-
-<li><p>Rapide vue d&rsquo;ensemble de notre fichier:</p>
-
-<pre><code class="language-python">nc_Modc.variables
-
-
-
-
-
-OrderedDict([('lon', &lt;class 'netCDF4._netCDF4.Variable'&gt;
-              float32 lon(y, x)
-                  standard_name: longitude
-                  long_name: Longitude
-                  units: degrees_east
-                  _CoordinateAxisType: Lon
-              unlimited dimensions: 
-              current shape = (130, 155)
-              filling on, default _FillValue of 9.969209968386869e+36 used),
-             ('lat', &lt;class 'netCDF4._netCDF4.Variable'&gt;
-              float32 lat(y, x)
-                  standard_name: latitude
-                  long_name: Latitude
-                  units: degrees_north
-                  _CoordinateAxisType: Lat
-              unlimited dimensions: 
-              current shape = (130, 155)
-              filling on, default _FillValue of 9.969209968386869e+36 used),
-             ('time', &lt;class 'netCDF4._netCDF4.Variable'&gt;
-              float64 time(time)
-                  standard_name: time
-                  long_name: time
-                  bounds: time_bnds
-                  units: days since 1949-12-01 00:00:00
-                  calendar: proleptic_gregorian
-              unlimited dimensions: time
-              current shape = (31,)
-              filling on, default _FillValue of 9.969209968386869e+36 used),
-             ('time_bnds', &lt;class 'netCDF4._netCDF4.Variable'&gt;
-              float64 time_bnds(time, nb2)
-              unlimited dimensions: time
-              current shape = (31, 2)
-              filling on, default _FillValue of 9.969209968386869e+36 used),
-             ('tasmax', &lt;class 'netCDF4._netCDF4.Variable'&gt;
-              float32 tasmax(time, y, x)
-                  standard_name: air_temperature
-                  long_name: Daily Maximum Near-Surface Air Temperature
-                  units: Celcius
-                  coordinates: lon lat
-                  _FillValue: 1e+20
-                  missing_value: 1e+20
-                  actual_range: [206.04226685 321.55471802]
-                  grid_desc: rotated_pole
-                  cell_methods: time: maximum
-              unlimited dimensions: time
-              current shape = (31, 130, 155)
-              filling on)])
-</code></pre>
-
-<pre><code class="language-python">print('-----------------------------------------')
-print('Temperature dimension = ',varc.shape)
-print('Minimum of temperature = ', np.nanmin(varc))
-print('Maximum of temperature = ', np.nanmax(varc))
-print('-----------------------------------------')
-print('-----------------------------------------')
-print('Latitude dimension= ',lats.shape)
-print('Minimum of latitude = ', np.min(lats))
-print('Maximum of latitude = ', np.max(lats))
-print('-----------------------------------------')
-print('-----------------------------------------')
-print('Longitude dimesion = ',lons.shape)
-print('Minimum of longitude = ', np.min(lons))
-print('Maximum of longitude = ', np.max(lons))
-print('-----------------------------------------')
-
-
------------------------------------------
-Temperature dimension =  (31, 130, 155)
-Minimum of temperature =  -57.66677
-Maximum of temperature =  30.657953
------------------------------------------
------------------------------------------
-Latitude dimension=  (130, 155)
-Minimum of latitude =  12.538727
-Maximum of latitude =  75.86
------------------------------------------
------------------------------------------
-Longitude dimesion =  (130, 155)
-Minimum of longitude =  -170.71053
-Maximum of longitude =  -23.28948
------------------------------------------
-</code></pre></li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> Indices_Temperature
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+</code></pre></div><ul>
+<li>Ouvrons le premier fichier Netcdf &lsquo;CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical_tasmax_197101.nc&rsquo;:</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nc_Modc<span style="color:#f92672">=</span>Dataset(<span style="color:#e6db74">&#39;./DATA/CRCM5/CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical_tasmax_197101.nc&#39;</span>,<span style="color:#e6db74">&#39;r&#39;</span>)
+lats<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]
+lons<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
+varc<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[variable][:]
+</code></pre></div><ul>
+<li>Rapide vue d&rsquo;ensemble de notre fichier:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nc_Modc<span style="color:#f92672">.</span>variables
 
-<p>Nous allons appliquer la fonction Tmax90p() du module Indices_Temperature que nous avons importer.</p>
 
-<pre><code class="language-python">help(Indices_Temperature)
-</code></pre>
 
-<pre><code>Help on module Indices_Temperature:
+
+
+    OrderedDict([(<span style="color:#e6db74">&#39;lon&#39;</span>, <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">netCDF4</span><span style="color:#f92672">.</span>_netCDF4<span style="color:#f92672">.</span>Variable<span style="color:#e6db74">&#39;&gt;</span>
+                  float32 lon(y, x)
+                      standard_name: longitude
+                      long_name: Longitude
+                      units: degrees_east
+                      _CoordinateAxisType: Lon
+                  unlimited dimensions: 
+                  current shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">155</span>)
+                  filling on, default _FillValue of <span style="color:#ae81ff">9.969209968386869e+36</span> used),
+                 (<span style="color:#e6db74">&#39;lat&#39;</span>, <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">netCDF4</span><span style="color:#f92672">.</span>_netCDF4<span style="color:#f92672">.</span>Variable<span style="color:#e6db74">&#39;&gt;</span>
+                  float32 lat(y, x)
+                      standard_name: latitude
+                      long_name: Latitude
+                      units: degrees_north
+                      _CoordinateAxisType: Lat
+                  unlimited dimensions: 
+                  current shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">155</span>)
+                  filling on, default _FillValue of <span style="color:#ae81ff">9.969209968386869e+36</span> used),
+                 (<span style="color:#e6db74">&#39;time&#39;</span>, <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">netCDF4</span><span style="color:#f92672">.</span>_netCDF4<span style="color:#f92672">.</span>Variable<span style="color:#e6db74">&#39;&gt;</span>
+                  float64 time(time)
+                      standard_name: time
+                      long_name: time
+                      bounds: time_bnds
+                      units: days since <span style="color:#ae81ff">1949</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span> <span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">00</span>
+                      calendar: proleptic_gregorian
+                  unlimited dimensions: time
+                  current shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">31</span>,)
+                  filling on, default _FillValue of <span style="color:#ae81ff">9.969209968386869e+36</span> used),
+                 (<span style="color:#e6db74">&#39;time_bnds&#39;</span>, <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">netCDF4</span><span style="color:#f92672">.</span>_netCDF4<span style="color:#f92672">.</span>Variable<span style="color:#e6db74">&#39;&gt;</span>
+                  float64 time_bnds(time, nb2)
+                  unlimited dimensions: time
+                  current shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">2</span>)
+                  filling on, default _FillValue of <span style="color:#ae81ff">9.969209968386869e+36</span> used),
+                 (<span style="color:#e6db74">&#39;tasmax&#39;</span>, <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">netCDF4</span><span style="color:#f92672">.</span>_netCDF4<span style="color:#f92672">.</span>Variable<span style="color:#e6db74">&#39;&gt;</span>
+                  float32 tasmax(time, y, x)
+                      standard_name: air_temperature
+                      long_name: Daily Maximum Near<span style="color:#f92672">-</span>Surface Air Temperature
+                      units: Celcius
+                      coordinates: lon lat
+                      _FillValue: <span style="color:#ae81ff">1e+20</span>
+                      missing_value: <span style="color:#ae81ff">1e+20</span>
+                      actual_range: [<span style="color:#ae81ff">206.04226685</span> <span style="color:#ae81ff">321.55471802</span>]
+                      grid_desc: rotated_pole
+                      cell_methods: time: maximum
+                  unlimited dimensions: time
+                  current shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">155</span>)
+                  filling on)])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Temperature dimension = &#39;</span>,varc<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Minimum of temperature = &#39;</span>, np<span style="color:#f92672">.</span>nanmin(varc))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Maximum of temperature = &#39;</span>, np<span style="color:#f92672">.</span>nanmax(varc))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Latitude dimension= &#39;</span>,lats<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Minimum of latitude = &#39;</span>, np<span style="color:#f92672">.</span>min(lats))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Maximum of latitude = &#39;</span>, np<span style="color:#f92672">.</span>max(lats))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Longitude dimesion = &#39;</span>,lons<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Minimum of longitude = &#39;</span>, np<span style="color:#f92672">.</span>min(lons))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Maximum of longitude = &#39;</span>, np<span style="color:#f92672">.</span>max(lons))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+
+
+    <span style="color:#f92672">-----------------------------------------</span>
+    Temperature dimension <span style="color:#f92672">=</span>  (<span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">155</span>)
+    Minimum of temperature <span style="color:#f92672">=</span>  <span style="color:#f92672">-</span><span style="color:#ae81ff">57.66677</span>
+    Maximum of temperature <span style="color:#f92672">=</span>  <span style="color:#ae81ff">30.657953</span>
+    <span style="color:#f92672">-----------------------------------------</span>
+    <span style="color:#f92672">-----------------------------------------</span>
+    Latitude dimension<span style="color:#f92672">=</span>  (<span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">155</span>)
+    Minimum of latitude <span style="color:#f92672">=</span>  <span style="color:#ae81ff">12.538727</span>
+    Maximum of latitude <span style="color:#f92672">=</span>  <span style="color:#ae81ff">75.86</span>
+    <span style="color:#f92672">-----------------------------------------</span>
+    <span style="color:#f92672">-----------------------------------------</span>
+    Longitude dimesion <span style="color:#f92672">=</span>  (<span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">155</span>)
+    Minimum of longitude <span style="color:#f92672">=</span>  <span style="color:#f92672">-</span><span style="color:#ae81ff">170.71053</span>
+    Maximum of longitude <span style="color:#f92672">=</span>  <span style="color:#f92672">-</span><span style="color:#ae81ff">23.28948</span>
+    <span style="color:#f92672">-----------------------------------------</span>
+</code></pre></div><p>Nous allons appliquer la fonction Tmax90p() du module Indices_Temperature que nous avons importer.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">help(Indices_Temperature)
+</code></pre></div><pre><code>Help on module Indices_Temperature:
 
 NAME
     Indices_Temperature - Created on Mon Feb  5 13:56:30 2018
@@ -889,1354 +828,612 @@ DESCRIPTION
 
 FUNCTIONS
     MOY(S)
-
+    
     Tmax90p(S)
-
+    
     Tmin10p(S)
 
 FILE
     d:\utilisateurs\guillaume\documents\github\formation_python\15_netcdf\indices_temperature.py
 </code></pre>
-
-<pre><code class="language-python">varc.shape[-2:]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:]
+</code></pre></div><pre><code>(130, 155)
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">###### boucle sur tous les points de grille et calcul de l&#39;indice</span>
+<span style="color:#75715e">###### Nous allons stocker le résultat dans la matrice IND de tailler </span>
 
-<pre><code>(130, 155)
+IND <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:],dtype<span style="color:#f92672">=</span>float)
+
+<span style="color:#66d9ef">for</span> ni <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:][<span style="color:#ae81ff">0</span>]):
+    <span style="color:#66d9ef">for</span> nj <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:][<span style="color:#ae81ff">1</span>]):
+        IND[ni,nj]<span style="color:#f92672">=</span>Indices_Temperature<span style="color:#f92672">.</span>Tmax90p(varc[:,ni,nj])
+        description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Monthly Mean of Tmax90p&#39;</span> 
+        unite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;°Celcius&#39;</span> 
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">IND
+<span style="color:#66d9ef">print</span>(IND<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>(130, 155)
 </code></pre>
-
-<pre><code class="language-python">###### boucle sur tous les points de grille et calcul de l'indice
-###### Nous allons stocker le résultat dans la matrice IND de tailler 
-
-IND = np.zeros(varc.shape[-2:],dtype=float)
-
-for ni in range(0, varc.shape[-2:][0]):
-    for nj in range(0, varc.shape[-2:][1]):
-        IND[ni,nj]=Indices_Temperature.Tmax90p(varc[:,ni,nj])
-        description='Monthly Mean of Tmax90p' 
-        unite='°Celcius' 
-</code></pre>
-
-<pre><code class="language-python">IND
-print(IND.shape)
-</code></pre>
-
-<pre><code>(130, 155)
-</code></pre>
-
 <p>Nous pouvons faire maintenant le même exercice mais sur l&rsquo;ensemble des années de 1971 à 2000 pour le mois de Janvier.</p>
-
-<pre><code class="language-python">Mois='01'
-indice = 'Tmax90p'
-path_model='CRCM5-v1_CCCma-CanESM2_historical'
-variable='tasmax'
-rep_data='./DATA/CRCM5/'
-model='CRCM5-v1_NAM-44_ll_CCCma-CanESM2'
-yi = 1971
-yf = 2000
-tot=(yf-yi)+1 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Mois<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;01&#39;</span>
+indice <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Tmax90p&#39;</span>
+path_model<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;CRCM5-v1_CCCma-CanESM2_historical&#39;</span>
+variable<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tasmax&#39;</span>
+rep_data<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./DATA/CRCM5/&#39;</span>
+model<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;CRCM5-v1_NAM-44_ll_CCCma-CanESM2&#39;</span>
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1971</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
+tot<span style="color:#f92672">=</span>(yf<span style="color:#f92672">-</span>yi)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> 
+</code></pre></div><p>Notre matrice finale IND aura ainsi 3 dimensions: (time, lat, lon) telle que:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">IND <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((tot,varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:][<span style="color:#ae81ff">0</span>],varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:][<span style="color:#ae81ff">1</span>]),dtype<span style="color:#f92672">=</span>float)
+IND<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>(30, 130, 155)
 </code></pre>
-
-<p>Notre matrice finale IND aura ainsi 3 dimensions: (time, lat, lon) telle que:</p>
-
-<pre><code class="language-python">IND = np.zeros((tot,varc.shape[-2:][0],varc.shape[-2:][1]),dtype=float)
-IND.shape
-</code></pre>
-
-<pre><code>(30, 130, 155)
-</code></pre>
-
-<pre><code class="language-python">nt=0
-for year in range(yi,yf+1):
-    ###### ouverture et lecture des fichiers Netcdf
-    hist=model+'_historical_'+variable+'_'+str(year)+Mois+'.nc'     
-    modelc=rep_data+'/'+hist
-    nc_Modc=Dataset(modelc,'r')
-    lats=nc_Modc.variables['lat'][:]
-    lons=nc_Modc.variables['lon'][:]
-    varc=nc_Modc.variables[variable][:]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nt<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+    <span style="color:#75715e">###### ouverture et lecture des fichiers Netcdf</span>
+    hist<span style="color:#f92672">=</span>model<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_historical_&#39;</span><span style="color:#f92672">+</span>variable<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span>Mois<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.nc&#39;</span>     
+    modelc<span style="color:#f92672">=</span>rep_data<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">+</span>hist
+    nc_Modc<span style="color:#f92672">=</span>Dataset(modelc,<span style="color:#e6db74">&#39;r&#39;</span>)
+    lats<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]
+    lons<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
+    varc<span style="color:#f92672">=</span>nc_Modc<span style="color:#f92672">.</span>variables[variable][:]
     
-    ###### boucle sur tous les points de grille et calcul de l'indice
-    for ni in range(0, varc.shape[-2:][0]):
-        for nj in range(0, varc.shape[-2:][1]):
-            IND[nt,ni,nj]=Indices_Temperature.Tmax90p(varc[:,ni,nj])
-            description='Monthly Mean of Tmax90p' 
-            unite='°Celcius'      
+    <span style="color:#75715e">###### boucle sur tous les points de grille et calcul de l&#39;indice</span>
+    <span style="color:#66d9ef">for</span> ni <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:][<span style="color:#ae81ff">0</span>]):
+        <span style="color:#66d9ef">for</span> nj <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, varc<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:][<span style="color:#ae81ff">1</span>]):
+            IND[nt,ni,nj]<span style="color:#f92672">=</span>Indices_Temperature<span style="color:#f92672">.</span>Tmax90p(varc[:,ni,nj])
+            description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Monthly Mean of Tmax90p&#39;</span> 
+            unite<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;°Celcius&#39;</span>      
             
-    nt+=1 # incrément sur les années
+    nt<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span> <span style="color:#75715e"># incrément sur les années</span>
     
-    ###### Écriture du fichier Netcdf en sortie
-C = Dataset(rep_out+model+'_historical_'+indice+'_'+str(yi)+'-'+str(yf)+'_'+Mois+'.nc', 'w')
-C.description = 'Indice temperature'
-C.conventions = 'CF-1.0'  
-C.model_id = model
-C.grid='latlon'
-C.CDO = 'Climate Data Operators version 1.6.2 (http://code.zmaw.de/projects/cdo)'
-C.institution = 'UQAM - ESCER Center, University of Quebec in Montreal'
-C.contact = 'Guillaume Dueymes'
-########################################
-# Dimensions
-C.createDimension('x', len(varc[0][0]))
-C.createDimension('y', len(varc[0]))
-C.createDimension('time', tot)
+    <span style="color:#75715e">###### Écriture du fichier Netcdf en sortie</span>
+C <span style="color:#f92672">=</span> Dataset(rep_out<span style="color:#f92672">+</span>model<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_historical_&#39;</span><span style="color:#f92672">+</span>indice<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>str(yi)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+</span>str(yf)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>Mois<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.nc&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)
+C<span style="color:#f92672">.</span>description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Indice temperature&#39;</span>
+C<span style="color:#f92672">.</span>conventions <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;CF-1.0&#39;</span>  
+C<span style="color:#f92672">.</span>model_id <span style="color:#f92672">=</span> model
+C<span style="color:#f92672">.</span>grid<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;latlon&#39;</span>
+C<span style="color:#f92672">.</span>CDO <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Climate Data Operators version 1.6.2 (http://code.zmaw.de/projects/cdo)&#39;</span>
+C<span style="color:#f92672">.</span>institution <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UQAM - ESCER Center, University of Quebec in Montreal&#39;</span>
+C<span style="color:#f92672">.</span>contact <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Guillaume Dueymes&#39;</span>
+<span style="color:#75715e">########################################</span>
+<span style="color:#75715e"># Dimensions</span>
+C<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74">&#39;x&#39;</span>, len(varc[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]))
+C<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74">&#39;y&#39;</span>, len(varc[<span style="color:#ae81ff">0</span>]))
+C<span style="color:#f92672">.</span>createDimension(<span style="color:#e6db74">&#39;time&#39;</span>, tot)
 
-var=C.createVariable(str(indice), np.float32, ('time','y','x')) 
-var.long_name = str(description)
-var.unit = str(unite)
-lat=C.createVariable('lat', np.float32, ('y','x'))
-lon=C.createVariable('lon', np.float32, ('y','x')) 
+var<span style="color:#f92672">=</span>C<span style="color:#f92672">.</span>createVariable(str(indice), np<span style="color:#f92672">.</span>float32, (<span style="color:#e6db74">&#39;time&#39;</span>,<span style="color:#e6db74">&#39;y&#39;</span>,<span style="color:#e6db74">&#39;x&#39;</span>)) 
+var<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> str(description)
+var<span style="color:#f92672">.</span>unit <span style="color:#f92672">=</span> str(unite)
+lat<span style="color:#f92672">=</span>C<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74">&#39;lat&#39;</span>, np<span style="color:#f92672">.</span>float32, (<span style="color:#e6db74">&#39;y&#39;</span>,<span style="color:#e6db74">&#39;x&#39;</span>))
+lon<span style="color:#f92672">=</span>C<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74">&#39;lon&#39;</span>, np<span style="color:#f92672">.</span>float32, (<span style="color:#e6db74">&#39;y&#39;</span>,<span style="color:#e6db74">&#39;x&#39;</span>)) 
 
-time = C.createVariable('time', np.float64, ('time',))
-time.long_name = 'time'
+time <span style="color:#f92672">=</span> C<span style="color:#f92672">.</span>createVariable(<span style="color:#e6db74">&#39;time&#39;</span>, np<span style="color:#f92672">.</span>float64, (<span style="color:#e6db74">&#39;time&#39;</span>,))
+time<span style="color:#f92672">.</span>long_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;time&#39;</span>
 
-for var in ['lon','lat','time']:
-    for att in nc_Modc.variables[var].ncattrs():
-        setattr(C.variables[var],att,getattr(nc_Modc.variables[var],att))
+<span style="color:#66d9ef">for</span> var <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;lon&#39;</span>,<span style="color:#e6db74">&#39;lat&#39;</span>,<span style="color:#e6db74">&#39;time&#39;</span>]:
+    <span style="color:#66d9ef">for</span> att <span style="color:#f92672">in</span> nc_Modc<span style="color:#f92672">.</span>variables[var]<span style="color:#f92672">.</span>ncattrs():
+        setattr(C<span style="color:#f92672">.</span>variables[var],att,getattr(nc_Modc<span style="color:#f92672">.</span>variables[var],att))
 
-time[:]=range(1,nt+1)
-lat[:,:] = lats
-lon[:,:] = lons
-C.variables[str(indice)][:,:,:] = IND[::]
-C.close()
+time[:]<span style="color:#f92672">=</span>range(<span style="color:#ae81ff">1</span>,nt<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+lat[:,:] <span style="color:#f92672">=</span> lats
+lon[:,:] <span style="color:#f92672">=</span> lons
+C<span style="color:#f92672">.</span>variables[str(indice)][:,:,:] <span style="color:#f92672">=</span> IND[::]
+C<span style="color:#f92672">.</span>close()
     
-</code></pre>
-
-<h2 id="15-4-extraire-un-point-de-grille">15.4- Extraire un point de grille:</h2>
-
-<p><img src="/img/formation/positions_points_de_grille.png" alt="image0" /></p>
-
+</code></pre></div><h2 id="154--extraire-un-point-de-grille">15.4- Extraire un point de grille:</h2>
+<p><img src="/img/formation/positions_points_de_grille.png" alt="image0"></p>
 <p>Dans cet exemple, nous travaillerons avec les données de température quotidienne maximale de la réanalyse régionale (NARR). Pour plus d&rsquo;informations sur ce produit:</p>
-
-<p>www.emc.ncep.noaa.gov/mmb/rreanl</p>
-
+<p><a href="http://www.emc.ncep.noaa.gov/mmb/rreanl">www.emc.ncep.noaa.gov/mmb/rreanl</a></p>
 <p>Les fichiers Netcdf que nous ouvrirons sont des valeurs quotidiennes du 1er janvier 2017 au 31 décembre 2017. Les fichiers sont archivés par mois.</p>
-
 <p>Le point de grille NARR le plus proche de la station météorologique ECCC Montréal / McTavish (45,5 N, -73,8 W) sera extrait ici.</p>
-
 <p>Importons d&rsquo;abord les bibliothèques nécessaires.</p>
-
-<pre><code class="language-python">import netCDF4
-import numpy as np
-import pandas as pd
-import datetime
-from datetime import date, timedelta
-from dateutil.relativedelta import relativedelta
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> netCDF4
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date, timedelta
+<span style="color:#f92672">from</span> dateutil.relativedelta <span style="color:#f92672">import</span> relativedelta
+</code></pre></div><p>On définit nos paramètres d&rsquo;entrée.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">rep1<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./DATA/NARR/&#39;</span>
+model<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;NARR&#39;</span>
+variable<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tasmax&#39;</span>
+variable_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Temperature maximale&#39;</span>
+yeari<span style="color:#f92672">=</span><span style="color:#ae81ff">2017</span>
+monthi<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+yearf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2017</span>
+monthf <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
+station<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Montreal&#39;</span> 
+lati <span style="color:#f92672">=</span> <span style="color:#ae81ff">45.5</span>
+loni <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">73.8</span>
+</code></pre></div><p>Nous allons travailler sur une série temporelle quotidienne entre le 1er janvier 2017 et le 31 décembre 2017. On peut définir les dimensions de notre résultat:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">day_start<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+day_end <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(<span style="color:#e6db74">&#39;{}-{}&#39;</span><span style="color:#f92672">.</span>format(yearf, monthf), periods<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, freq<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>day<span style="color:#f92672">.</span>tolist()[<span style="color:#ae81ff">0</span>]
+start<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime(yeari,monthi,day_start)
+end<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime(yearf,monthf,day_end)
+d0 <span style="color:#f92672">=</span> date(yeari, monthi, day_start)
+d1 <span style="color:#f92672">=</span> date(yearf, monthf, day_end)
+delta <span style="color:#f92672">=</span> d1 <span style="color:#f92672">-</span> d0
+nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+var_data<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>zeros(nb_days)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">var_data<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>(365,)
 </code></pre>
-
-<p>On définit nos paramètres d&rsquo;entrée.</p>
-
-<pre><code class="language-python">rep1='./DATA/NARR/'
-model='NARR'
-variable='tasmax'
-variable_name='Temperature maximale'
-yeari=2017
-monthi=1
-yearf = 2017
-monthf = 12
-station='Montreal' 
-lati = 45.5
-loni = -73.8
-</code></pre>
-
-<p>Nous allons travailler sur une série temporelle quotidienne entre le 1er janvier 2017 et le 31 décembre 2017. On peut définir les dimensions de notre résultat:</p>
-
-<pre><code class="language-python">day_start=1
-day_end = pd.date_range('{}-{}'.format(yearf, monthf), periods=1, freq='M').day.tolist()[0]
-start=datetime.datetime(yeari,monthi,day_start)
-end=datetime.datetime(yearf,monthf,day_end)
-d0 = date(yeari, monthi, day_start)
-d1 = date(yearf, monthf, day_end)
-delta = d1 - d0
-nb_days = delta.days+1
-var_data=np.zeros(nb_days)
-</code></pre>
-
-<pre><code class="language-python">var_data.shape
-</code></pre>
-
-<pre><code>(365,)
-</code></pre>
-
 <p>Nous définissons une fonction qui calculera la distance entre chaque point de grille du fichier Netcdf et notre latitude / longitude de référence. On déduit alors la distance minimale.</p>
-
-<pre><code class="language-python">def getclosest_ij(lats,lons,latpt,lonpt):
-     # find squared distance of every point on grid
-     dist_sq = (lats-latpt)**2 + (lons-lonpt)**2 
-     # 1D index of minimum dist_sq element
-     minindex_flattened = dist_sq.argmin()
-     # Get 2D index for latvals and lonvals arrays from 1D index
-     return np.unravel_index(minindex_flattened, lats.shape)
-</code></pre>
-
-<p>La fonction suivante nous permet d&rsquo;incrémenter nos mois lors de la lecture des fichiers Netcdf.</p>
-
-<pre><code class="language-python">def add_month(now):
-    try:
-        then = (now + relativedelta(months=1)).replace(day=now.day)
-    except ValueError:
-        then = (now + relativedelta(months=2)).replace(day=1)
-    return then
-</code></pre>
-
-<p>Nous pouvons  appliquer notre fonction sur chaque point de la grille, mois par mois et enregistrer la valeur du point de grille sélectionner dans un DataFrame.</p>
-
-<pre><code class="language-python">i=0
-# Début de notre boucle temporelle
-incr=start
-IND=[]
-while incr &lt;= end:
-    filename= rep1 + model + '_' + variable + '_' + str(incr.year) + '{:02d}'.format(incr.month) + '.nc'   
-    f = netCDF4.Dataset(filename)
-    var = f.variables[variable] 
-    lat, lon = f.variables['lat'], f.variables['lon']
-    # extract lat/lon values (in degrees) to numpy arrays
-    latvals = lat[:]; lonvals = lon[:] 
-    # a function to find the index of the point closest pt
-    # (in squared distance) to give lat/lon value.    
-    iy_min, ix_min = getclosest_ij(latvals, lonvals, lati, loni)
-    IND.append(var[:,iy_min,ix_min])
-    incr=add_month(incr)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getclosest_ij</span>(lats,lons,latpt,lonpt):
+     <span style="color:#75715e"># find squared distance of every point on grid</span>
+     dist_sq <span style="color:#f92672">=</span> (lats<span style="color:#f92672">-</span>latpt)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (lons<span style="color:#f92672">-</span>lonpt)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> 
+     <span style="color:#75715e"># 1D index of minimum dist_sq element</span>
+     minindex_flattened <span style="color:#f92672">=</span> dist_sq<span style="color:#f92672">.</span>argmin()
+     <span style="color:#75715e"># Get 2D index for latvals and lonvals arrays from 1D index</span>
+     <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>unravel_index(minindex_flattened, lats<span style="color:#f92672">.</span>shape)
+</code></pre></div><p>La fonction suivante nous permet d&rsquo;incrémenter nos mois lors de la lecture des fichiers Netcdf.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_month</span>(now):
+    <span style="color:#66d9ef">try</span>:
+        then <span style="color:#f92672">=</span> (now <span style="color:#f92672">+</span> relativedelta(months<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>replace(day<span style="color:#f92672">=</span>now<span style="color:#f92672">.</span>day)
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+        then <span style="color:#f92672">=</span> (now <span style="color:#f92672">+</span> relativedelta(months<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>))<span style="color:#f92672">.</span>replace(day<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">return</span> then
+</code></pre></div><p>Nous pouvons  appliquer notre fonction sur chaque point de la grille, mois par mois et enregistrer la valeur du point de grille sélectionner dans un DataFrame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#75715e"># Début de notre boucle temporelle</span>
+incr<span style="color:#f92672">=</span>start
+IND<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">while</span> incr <span style="color:#f92672">&lt;=</span> end:
+    filename<span style="color:#f92672">=</span> rep1 <span style="color:#f92672">+</span> model <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> variable <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> str(incr<span style="color:#f92672">.</span>year) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(incr<span style="color:#f92672">.</span>month) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.nc&#39;</span>   
+    f <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+    var <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>variables[variable] 
+    lat, lon <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>], f<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>]
+    <span style="color:#75715e"># extract lat/lon values (in degrees) to numpy arrays</span>
+    latvals <span style="color:#f92672">=</span> lat[:]; lonvals <span style="color:#f92672">=</span> lon[:] 
+    <span style="color:#75715e"># a function to find the index of the point closest pt</span>
+    <span style="color:#75715e"># (in squared distance) to give lat/lon value.    </span>
+    iy_min, ix_min <span style="color:#f92672">=</span> getclosest_ij(latvals, lonvals, lati, loni)
+    IND<span style="color:#f92672">.</span>append(var[:,iy_min,ix_min])
+    incr<span style="color:#f92672">=</span>add_month(incr)
     
-flattened_list = [y for x in IND for y in x]
-start=datetime.datetime(yeari,monthi,day_start)
-TIME=[]
-for i in range(0,nb_days,1): 
-    TIME.append((start+timedelta(days=i)))
+flattened_list <span style="color:#f92672">=</span> [y <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> IND <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> x]
+start<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime(yeari,monthi,day_start)
+TIME<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,nb_days,<span style="color:#ae81ff">1</span>): 
+    TIME<span style="color:#f92672">.</span>append((start<span style="color:#f92672">+</span>timedelta(days<span style="color:#f92672">=</span>i)))
     
-dataFrame_NARR = pd.DataFrame({'Date': TIME, variable_name: flattened_list}, columns = ['Date',variable_name]) 
-dataFrame_NARR = dataFrame_NARR.set_index('Date')   
-dataFrame_NARR.head()
+dataFrame_NARR <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;Date&#39;</span>: TIME, variable_name: flattened_list}, columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Date&#39;</span>,variable_name]) 
+dataFrame_NARR <span style="color:#f92672">=</span> dataFrame_NARR<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;Date&#39;</span>)   
+dataFrame_NARR<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Temperature maximale</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2017-01-01</th>
-      <td>-0.893957</td>
-    </tr>
-    <tr>
-      <th>2017-01-02</th>
-      <td>-1.531439</td>
-    </tr>
-    <tr>
-      <th>2017-01-03</th>
-      <td>-1.737830</td>
-    </tr>
-    <tr>
-      <th>2017-01-04</th>
-      <td>-0.240698</td>
-    </tr>
-    <tr>
-      <th>2017-01-05</th>
-      <td>-0.791754</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Nous pouvons sauvegarder notre résultat au format csv.</p>
-
-<pre><code class="language-python">dataFrame_NARR.to_csv('./DATA/NARR/NARR_'+station+'_1pt_'+str(variable)+'_'+ '{:02d}'.format(monthi) + str(yeari)+'_'+ '{:02d}'.format(monthf) + str(yearf)+'.csv')    
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataFrame_NARR<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;./DATA/NARR/NARR_&#39;</span><span style="color:#f92672">+</span>station<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_1pt_&#39;</span><span style="color:#f92672">+</span>str(variable)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(monthi) <span style="color:#f92672">+</span> str(yeari)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(monthf) <span style="color:#f92672">+</span> str(yearf)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.csv&#39;</span>)    
+</code></pre></div><ul>
 <li>Observation vs NARR</li>
 </ul>
-
 <p>Maintenant que nous avons extrait notre grille près de Montréal, nous pouvons comparer ces valeurs avec des observations.</p>
-
 <p>Nous allons extraire les données de la station de Montréal McTavish et les inclure dans le DataFrame précédent. On pourra ainsi aisément comparer nos séries.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataframe_station <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./DATA/station/MONTREAL_TAVISH_tasmax_1948_2017.csv&#39;</span>, header<span style="color:#f92672">=</span>None, names<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Maximum temperature: OBS&#39;</span>])
+start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">1948</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
+delta<span style="color:#f92672">=</span>(end<span style="color:#f92672">-</span>start) 
+nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
+rng <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(start, periods<span style="color:#f92672">=</span>nb_days, freq<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;D&#39;</span>)
 
-<pre><code class="language-python">dataframe_station = pd.read_csv('./DATA/station/MONTREAL_TAVISH_tasmax_1948_2017.csv', header=None, names=['Maximum temperature: OBS'])
-start = date(1948, 1, 1)
-end = date(2017, 12, 31)
-delta=(end-start) 
-nb_days = delta.days + 1 
-rng = pd.date_range(start, periods=nb_days, freq='D')
+dataframe_station[<span style="color:#e6db74">&#39;datetime&#39;</span>] <span style="color:#f92672">=</span> rng
+dataframe_station<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> dataframe_station[<span style="color:#e6db74">&#39;datetime&#39;</span>] 
+dataframe_station <span style="color:#f92672">=</span> dataframe_station<span style="color:#f92672">.</span>drop([<span style="color:#e6db74">&#34;datetime&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataframe_station<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-dataframe_station['datetime'] = rng
-dataframe_station.index = dataframe_station['datetime'] 
-dataframe_station = dataframe_station.drop([&quot;datetime&quot;], axis=1)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataFrame_NARR <span style="color:#f92672">=</span> dataFrame_NARR<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;Temperature maximale&#34;</span>: <span style="color:#e6db74">&#34;Maximum temperature: NARR&#34;</span>})
+df_NARR_Station <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([dataframe_station,dataFrame_NARR],axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_NARR_Station<span style="color:#f92672">.</span>tail()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">dataframe_station.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Maximum temperature: OBS</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1948-01-01</th>
-      <td>-10.0</td>
-    </tr>
-    <tr>
-      <th>1948-01-02</th>
-      <td>-3.9</td>
-    </tr>
-    <tr>
-      <th>1948-01-03</th>
-      <td>-0.6</td>
-    </tr>
-    <tr>
-      <th>1948-01-04</th>
-      <td>-2.8</td>
-    </tr>
-    <tr>
-      <th>1948-01-05</th>
-      <td>-2.2</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">dataFrame_NARR = dataFrame_NARR.rename(columns={&quot;Temperature maximale&quot;: &quot;Maximum temperature: NARR&quot;})
-df_NARR_Station = pd.concat([dataframe_station,dataFrame_NARR],axis=1)
-df_NARR_Station.tail()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Maximum temperature: OBS</th>
-      <th>Maximum temperature: NARR</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2017-12-27</th>
-      <td>-17.6</td>
-      <td>-18.818960</td>
-    </tr>
-    <tr>
-      <th>2017-12-28</th>
-      <td>-20.5</td>
-      <td>-19.372122</td>
-    </tr>
-    <tr>
-      <th>2017-12-29</th>
-      <td>-18.4</td>
-      <td>-16.453222</td>
-    </tr>
-    <tr>
-      <th>2017-12-30</th>
-      <td>-17.3</td>
-      <td>-16.208838</td>
-    </tr>
-    <tr>
-      <th>2017-12-31</th>
-      <td>-18.3</td>
-      <td>-16.772772</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Traçons les années 2016 et 2017 en appliquant la librairie Matplotlib sur le DataFrame .</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+df<span style="color:#f92672">=</span>df_NARR_Station<span style="color:#f92672">.</span>loc[<span style="color:#e6db74">&#39;2016&#39;</span> : <span style="color:#e6db74">&#39;2017&#39;</span>]
+color <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>]
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>plot(df<span style="color:#f92672">.</span>index, df[<span style="color:#e6db74">&#39;Maximum temperature: NARR&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;NARR Temperature&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">0</span>])
+plt<span style="color:#f92672">.</span>plot(df<span style="color:#f92672">.</span>index, df[<span style="color:#e6db74">&#39;Maximum temperature: OBS&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Observation Temperature&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">1</span>])
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
-df=df_NARR_Station.loc['2016' : '2017']
-color = ['black', 'red']
-fig = plt.figure(figsize=(16,8))
-plt.plot(df.index, df['Maximum temperature: NARR'][:],  label='NARR Temperature', linewidth=2, c=color[0])
-plt.plot(df.index, df['Maximum temperature: OBS'][:],  label='Observation Temperature', linewidth=2, c=color[1])
+<span style="color:#75715e"># Autre méthode pour tracer avec Pandas</span>
+<span style="color:#75715e">#df_NARR_Station[&#39;2017&#39;].plot(figsize=(10,5))</span>
 
-# Autre méthode pour tracer avec Pandas
-#df_NARR_Station['2017'].plot(figsize=(10,5))
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Temperature&#34;</span>, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;fontsize&#39;</span>: <span style="color:#ae81ff">10</span>})
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Time serie: Station MTL vs NARR&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>),fontsize <span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#34;figures/NARR_time_Serie_temperature.png&#34;</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tight&#39;</span>)   <span style="color:#75715e"># bbox_inches= : option qui permet de propostionner le graphique lors de l&#39;enregistrement</span>
+plt<span style="color:#f92672">.</span>show()
 
-plt.xlabel(&quot;Time&quot;)
-plt.ylabel(&quot;Temperature&quot;, {'color': 'black', 'fontsize': 10})
-plt.title(&quot;Time serie: Station MTL vs NARR&quot;, y=1.05)
-plt.legend(loc='upper left', ncol=1, bbox_to_anchor=(0, 1, 1, 0),fontsize =10)
-plt.savefig(&quot;figures/NARR_time_Serie_temperature.png&quot;, dpi=300, bbox_inches='tight')   # bbox_inches= : option qui permet de propostionner le graphique lors de l'enregistrement
-plt.show()
-
-</code></pre>
-
-<p><img src="/img/formation/netcdf1/output_59_0.png" alt="png" /></p>
-
+</code></pre></div><p><img src="/img/formation/netcdf1/output_59_0.png" alt="png"></p>
 <ul>
-<li><p>appliquons la fonction <b> .rolling () </b> pour calculer une moyenne mobile sur notre signal</p>
-
-<pre><code class="language-python">import matplotlib.pyplot as plt
-df_NARR_Station['rollingmean5 Station']=  df_NARR_Station['Maximum temperature: OBS'].rolling(window=5).mean()
-df_NARR_Station['rollingmean5 NARR']=  df_NARR_Station['Maximum temperature: NARR'].rolling(window=5).mean()
-df_NARR_Station.tail()
-</code></pre></li>
+<li>appliquons la fonction <!-- raw HTML omitted --> .rolling () <!-- raw HTML omitted --> pour calculer une moyenne mobile sur notre signal</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+df_NARR_Station[<span style="color:#e6db74">&#39;rollingmean5 Station&#39;</span>]<span style="color:#f92672">=</span>  df_NARR_Station[<span style="color:#e6db74">&#39;Maximum temperature: OBS&#39;</span>]<span style="color:#f92672">.</span>rolling(window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>mean()
+df_NARR_Station[<span style="color:#e6db74">&#39;rollingmean5 NARR&#39;</span>]<span style="color:#f92672">=</span>  df_NARR_Station[<span style="color:#e6db74">&#39;Maximum temperature: NARR&#39;</span>]<span style="color:#f92672">.</span>rolling(window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>mean()
+df_NARR_Station<span style="color:#f92672">.</span>tail()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Maximum temperature: OBS</th>
-      <th>Maximum temperature: NARR</th>
-      <th>rollingmean5 Station</th>
-      <th>rollingmean5 NARR</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2017-12-27</th>
-      <td>-17.6</td>
-      <td>-18.818960</td>
-      <td>-8.04</td>
-      <td>-8.318930</td>
-    </tr>
-    <tr>
-      <th>2017-12-28</th>
-      <td>-20.5</td>
-      <td>-19.372122</td>
-      <td>-11.12</td>
-      <td>-11.099524</td>
-    </tr>
-    <tr>
-      <th>2017-12-29</th>
-      <td>-18.4</td>
-      <td>-16.453222</td>
-      <td>-13.88</td>
-      <td>-13.647839</td>
-    </tr>
-    <tr>
-      <th>2017-12-30</th>
-      <td>-17.3</td>
-      <td>-16.208838</td>
-      <td>-16.12</td>
-      <td>-15.613794</td>
-    </tr>
-    <tr>
-      <th>2017-12-31</th>
-      <td>-18.3</td>
-      <td>-16.772772</td>
-      <td>-18.42</td>
-      <td>-17.525183</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">df_NARR_Station['2017-01':'2017-12'].plot(figsize=(16,8))
-plt.xlabel(&quot;Temps&quot;)
-plt.ylabel(&quot;Température&quot;)
-plt.title(&quot;Maximum temperature time serie: Station MTL vs NARR&quot;, y=1.05)
-plt.savefig(&quot;figures/NARR_time_Serie_temperature2.png&quot;, dpi=300, bbox_inches='tight')   # bbox_inches= : option qui permet de propostionner le graphique lors de l'enregistrement
-plt.show()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<p><img src="/img/formation/netcdf1/output_63_0.png" alt="png" /></p>
-
-<h2 id="15-5-extraire-un-domaine-délimité-par-une-boite-2d">15.5- Extraire un domaine délimité par une boite 2D:</h2>
-
-<p><img src="/img/formation/CORDEX_domaine.png" alt="png" /></p>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_NARR_Station[<span style="color:#e6db74">&#39;2017-01&#39;</span>:<span style="color:#e6db74">&#39;2017-12&#39;</span>]<span style="color:#f92672">.</span>plot(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Temps&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Température&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Maximum temperature time serie: Station MTL vs NARR&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#34;figures/NARR_time_Serie_temperature2.png&#34;</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tight&#39;</span>)   <span style="color:#75715e"># bbox_inches= : option qui permet de propostionner le graphique lors de l&#39;enregistrement</span>
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/netcdf1/output_63_0.png" alt="png"></p>
+<h2 id="155--extraire-un-domaine-délimité-par-une-boite-2d">15.5- Extraire un domaine délimité par une boite 2D:</h2>
+<p><img src="/img/formation/CORDEX_domaine.png" alt="png"></p>
 <p>Au lieu d&rsquo;extraire un point de grille, on peut vouloir extraire un domaine / box délimité par des latitudes et des longitudes.</p>
-
 <p>Dans cet exemple, nous travaillerons avec la moyenne annuelle des données de températures maximales quotidiennes de plusieurs modèles régionaux de CORDEX-NAM44.</p>
-
 <p>Nous allons extraire tous les points de grille de la région entre</p>
-
 <pre><code>- 47degN et 51degN de latitude 
 - -72degW et -64degW de longitude.
 </code></pre>
-
 <p>Nous tracerons ensuite la variabilité interannuelle des anomalies moyennes annuelles de température.</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">import</span> netCDF4
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ignore&#39;</span>)
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> gridspec
+<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
 
-<h3> - Travail sur un fichier Netcdf</h3>
+rep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./DATA/Inter_annual_anomaly/&#39;</span>
 
-<pre><code class="language-python">
-import netCDF4
-import numpy as np
-import pandas as pd
-from datetime import datetime
-import matplotlib.pylab as plt
-import warnings; warnings.filterwarnings(action='ignore')
-import seaborn as sns
-from matplotlib import gridspec
-import matplotlib as mpl
+<span style="color:#75715e"># Region à extraire </span>
+latbounds <span style="color:#f92672">=</span> [ <span style="color:#ae81ff">47</span> , <span style="color:#ae81ff">51</span> ]
+lonbounds <span style="color:#f92672">=</span> [ <span style="color:#f92672">-</span><span style="color:#ae81ff">72</span> , <span style="color:#f92672">-</span><span style="color:#ae81ff">64</span> ] 
 
-rep='./DATA/Inter_annual_anomaly/'
+<span style="color:#75715e"># Lecture du fichier Netcdf</span>
+filename<span style="color:#f92672">=</span> rep <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;anomalie_CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp45_Mean_tasmax_2011-2040_1971-2000.nc&#39;</span>   
+nc <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
 
-# Region à extraire 
-latbounds = [ 47 , 51 ]
-lonbounds = [ -72 , -64 ] 
+<span style="color:#75715e"># Lecture des variables</span>
+var <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;Mean_tasmax&#39;</span>][:]  
+lats <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]; lons <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
 
-# Lecture du fichier Netcdf
-filename= rep +'anomalie_CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp45_Mean_tasmax_2011-2040_1971-2000.nc'   
-nc = netCDF4.Dataset(filename)
+<span style="color:#75715e"># Extraction du sous-domaine </span>
+subset <span style="color:#f92672">=</span> ((lats <span style="color:#f92672">&gt;</span> latbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lats <span style="color:#f92672">&lt;</span> latbounds[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&amp;</span> 
+        (lons <span style="color:#f92672">&gt;</span> lonbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lons <span style="color:#f92672">&lt;</span> lonbounds[<span style="color:#ae81ff">1</span>]))
 
-# Lecture des variables
-var = nc.variables['Mean_tasmax'][:]  
-lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]
-
-# Extraction du sous-domaine 
-subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
-        (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
-
-data=pd.DataFrame(var[:,subset], dtype='float') 
+data<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame(var[:,subset], dtype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;float&#39;</span>) 
         
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<pre><code class="language-python">data.head()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>...</th>
-      <th>101</th>
-      <th>102</th>
-      <th>103</th>
-      <th>104</th>
-      <th>105</th>
-      <th>106</th>
-      <th>107</th>
-      <th>108</th>
-      <th>109</th>
-      <th>110</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1.477689</td>
-      <td>1.457037</td>
-      <td>1.581675</td>
-      <td>1.502043</td>
-      <td>1.512367</td>
-      <td>1.435976</td>
-      <td>1.451433</td>
-      <td>1.586266</td>
-      <td>1.577248</td>
-      <td>1.527665</td>
-      <td>...</td>
-      <td>1.893243</td>
-      <td>1.836880</td>
-      <td>1.716371</td>
-      <td>1.633053</td>
-      <td>1.621840</td>
-      <td>2.184239</td>
-      <td>2.217251</td>
-      <td>2.116752</td>
-      <td>2.056826</td>
-      <td>2.168939</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.809766</td>
-      <td>0.822760</td>
-      <td>0.837009</td>
-      <td>0.830208</td>
-      <td>0.879807</td>
-      <td>0.874870</td>
-      <td>0.808254</td>
-      <td>0.928231</td>
-      <td>0.892883</td>
-      <td>0.937235</td>
-      <td>...</td>
-      <td>2.078122</td>
-      <td>2.018263</td>
-      <td>1.847656</td>
-      <td>1.770287</td>
-      <td>1.723371</td>
-      <td>2.283811</td>
-      <td>2.412838</td>
-      <td>2.383081</td>
-      <td>2.181507</td>
-      <td>2.310836</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.123789</td>
-      <td>0.068485</td>
-      <td>0.160753</td>
-      <td>0.161486</td>
-      <td>0.227988</td>
-      <td>0.263271</td>
-      <td>0.237639</td>
-      <td>0.184735</td>
-      <td>0.249564</td>
-      <td>0.232046</td>
-      <td>...</td>
-      <td>1.195626</td>
-      <td>1.082461</td>
-      <td>0.926054</td>
-      <td>0.945262</td>
-      <td>0.908978</td>
-      <td>1.321545</td>
-      <td>1.230734</td>
-      <td>1.172349</td>
-      <td>1.053613</td>
-      <td>1.175336</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.446947</td>
-      <td>0.419797</td>
-      <td>0.525159</td>
-      <td>0.467538</td>
-      <td>0.557181</td>
-      <td>0.430283</td>
-      <td>0.459588</td>
-      <td>0.499041</td>
-      <td>0.501688</td>
-      <td>0.558993</td>
-      <td>...</td>
-      <td>0.184572</td>
-      <td>0.199441</td>
-      <td>0.421587</td>
-      <td>0.536298</td>
-      <td>0.436308</td>
-      <td>0.182898</td>
-      <td>0.186108</td>
-      <td>0.120251</td>
-      <td>0.140952</td>
-      <td>0.006168</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.083132</td>
-      <td>1.143277</td>
-      <td>1.122769</td>
-      <td>1.168139</td>
-      <td>1.212790</td>
-      <td>1.286812</td>
-      <td>1.313845</td>
-      <td>1.080200</td>
-      <td>1.208669</td>
-      <td>1.277381</td>
-      <td>...</td>
-      <td>1.212881</td>
-      <td>1.081511</td>
-      <td>0.897174</td>
-      <td>0.755252</td>
-      <td>0.856003</td>
-      <td>1.263626</td>
-      <td>1.261042</td>
-      <td>1.326922</td>
-      <td>1.264701</td>
-      <td>1.376395</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 111 columns</p>
-</div>
-
-<h3> - Travail sur un ensemble de modèles</h3>
-
-<p>On va effectuer le même exercice mais en bouclant sur deux simulations RCP45 et deux périodes de temps.
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>On va effectuer le même exercice mais en bouclant sur deux simulations RCP45 et deux périodes de temps. 
 Pour chaque année et chaque simulation, nous allons calculer la moyenne spatiale sur l&rsquo;ensemble du domaine .</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># path and variable name</span>
+rep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./DATA/Inter_annual_anomaly/&#39;</span>
+variable_in <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Mean_tasmax&#39;</span>
 
-<pre><code class="language-python"># path and variable name
-rep='./DATA/Inter_annual_anomaly/'
-variable_in = 'Mean_tasmax'
+<span style="color:#75715e"># list of periods we want to use</span>
+list_period <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;2011-2040&#39;</span>,<span style="color:#e6db74">&#39;2041-2070&#39;</span>,<span style="color:#e6db74">&#39;2071-2100&#39;</span>]
 
-# list of periods we want to use
-list_period = ['2011-2040','2041-2070','2071-2100']
+<span style="color:#75715e"># list of models</span>
+list_rcp45 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp45&#39;</span>, <span style="color:#e6db74">&#39;CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_rcp45&#39;</span> ]
 
-# list of models
-list_rcp45 = ['CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp45', 'CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_rcp45' ]
+<span style="color:#75715e"># Area to extract</span>
+latbounds <span style="color:#f92672">=</span> [ <span style="color:#ae81ff">47</span> , <span style="color:#ae81ff">51</span> ]
+lonbounds <span style="color:#f92672">=</span> [ <span style="color:#f92672">-</span><span style="color:#ae81ff">72</span> , <span style="color:#f92672">-</span><span style="color:#ae81ff">64</span> ] 
 
-# Area to extract
-latbounds = [ 47 , 51 ]
-lonbounds = [ -72 , -64 ] 
-
-# 
-df_rcp45 = []
-matrix_45 = []
-for period in list_period: 
-    globals()['flattened_list_'+period] = []  # we define a global variable 
-    for i in range(0,len(list_rcp45)):
-        filename= rep +'anomalie_' +  list_rcp45[i] +  '_' + variable_in + '_' + period  + '_1971-2000.nc'   
-        nc = netCDF4.Dataset(filename)
-        # we here read netcdf values
-        var = nc.variables[variable_in][:]  
-        lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]
-        # in this part, we extract our domain 
-        subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
-             (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
-        data=pd.DataFrame(var[:,subset], dtype='float') 
-        globals()['flattened_list_'+period].append(data.mean(axis=1))
+<span style="color:#75715e"># </span>
+df_rcp45 <span style="color:#f92672">=</span> []
+matrix_45 <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> period <span style="color:#f92672">in</span> list_period: 
+    globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period] <span style="color:#f92672">=</span> []  <span style="color:#75715e"># we define a global variable </span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,len(list_rcp45)):
+        filename<span style="color:#f92672">=</span> rep <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;anomalie_&#39;</span> <span style="color:#f92672">+</span>  list_rcp45[i] <span style="color:#f92672">+</span>  <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> variable_in <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> period  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_1971-2000.nc&#39;</span>   
+        nc <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+        <span style="color:#75715e"># we here read netcdf values</span>
+        var <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[variable_in][:]  
+        lats <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]; lons <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
+        <span style="color:#75715e"># in this part, we extract our domain </span>
+        subset <span style="color:#f92672">=</span> ((lats <span style="color:#f92672">&gt;</span> latbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lats <span style="color:#f92672">&lt;</span> latbounds[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&amp;</span> 
+             (lons <span style="color:#f92672">&gt;</span> lonbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lons <span style="color:#f92672">&lt;</span> lonbounds[<span style="color:#ae81ff">1</span>]))
+        data<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame(var[:,subset], dtype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;float&#39;</span>) 
+        globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period]<span style="color:#f92672">.</span>append(data<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
         
-    df_rcp45.append(pd.DataFrame(globals()['flattened_list_'+period]).T) 
+    df_rcp45<span style="color:#f92672">.</span>append(pd<span style="color:#f92672">.</span>DataFrame(globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period])<span style="color:#f92672">.</span>T) 
     
-df_rcp45 = pd.concat(df_rcp45)
-df_rcp45.head()
+df_rcp45 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(df_rcp45)
+df_rcp45<span style="color:#f92672">.</span>head()
 
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1.720843</td>
-      <td>-0.288691</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1.476198</td>
-      <td>0.885357</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.581686</td>
-      <td>0.541863</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.390671</td>
-      <td>-0.014199</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.148421</td>
-      <td>1.294169</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>On peut ajouter un index de type datetime:</p>
-
-<pre><code class="language-python">TIME=[]
-for y in range(int(list_period[0].split('-')[0]),int(list_period[-1].split('-')[-1])+1,1):
-    TIME.append(datetime.strptime(str(y), '%Y'))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TIME<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(int(list_period[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;-&#39;</span>)[<span style="color:#ae81ff">0</span>]),int(list_period[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;-&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>):
+    TIME<span style="color:#f92672">.</span>append(datetime<span style="color:#f92672">.</span>strptime(str(y), <span style="color:#e6db74">&#39;%Y&#39;</span>))
     
-df_rcp45['Date'] = TIME   
-df_rcp45.index = df_rcp45['Date']
-df_rcp45 = df_rcp45.drop([&quot;Date&quot;], axis=1) 
-df_rcp45.head()
+df_rcp45[<span style="color:#e6db74">&#39;Date&#39;</span>] <span style="color:#f92672">=</span> TIME   
+df_rcp45<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_rcp45[<span style="color:#e6db74">&#39;Date&#39;</span>]
+df_rcp45 <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>drop([<span style="color:#e6db74">&#34;Date&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
+df_rcp45<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2011-01-01</th>
-      <td>1.720843</td>
-      <td>-0.288691</td>
-    </tr>
-    <tr>
-      <th>2012-01-01</th>
-      <td>1.476198</td>
-      <td>0.885357</td>
-    </tr>
-    <tr>
-      <th>2013-01-01</th>
-      <td>0.581686</td>
-      <td>0.541863</td>
-    </tr>
-    <tr>
-      <th>2014-01-01</th>
-      <td>0.390671</td>
-      <td>-0.014199</td>
-    </tr>
-    <tr>
-      <th>2015-01-01</th>
-      <td>1.148421</td>
-      <td>1.294169</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Nous voulons ensuite, pour chaque année, la variabilité inter-modèle. Pour cela, nous calculerons les valeurs minimum et maximum en appliquant la méthode .apply.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_rcp45[<span style="color:#e6db74">&#39;min&#39;</span>] <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>min, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp45[<span style="color:#e6db74">&#39;max&#39;</span>] <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>max, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp45[<span style="color:#e6db74">&#39;mean&#39;</span>] <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>mean, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp45<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">df_rcp45['min'] = df_rcp45.apply(np.min, axis=1)
-df_rcp45['max'] = df_rcp45.apply(np.max, axis=1)
-df_rcp45['mean'] = df_rcp45.apply(np.mean, axis=1)
-df_rcp45.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>min</th>
-      <th>max</th>
-      <th>mean</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2011-01-01</th>
-      <td>1.720843</td>
-      <td>-0.288691</td>
-      <td>-0.288691</td>
-      <td>1.720843</td>
-      <td>0.716076</td>
-    </tr>
-    <tr>
-      <th>2012-01-01</th>
-      <td>1.476198</td>
-      <td>0.885357</td>
-      <td>0.885357</td>
-      <td>1.476198</td>
-      <td>1.180777</td>
-    </tr>
-    <tr>
-      <th>2013-01-01</th>
-      <td>0.581686</td>
-      <td>0.541863</td>
-      <td>0.541863</td>
-      <td>0.581686</td>
-      <td>0.561774</td>
-    </tr>
-    <tr>
-      <th>2014-01-01</th>
-      <td>0.390671</td>
-      <td>-0.014199</td>
-      <td>-0.014199</td>
-      <td>0.390671</td>
-      <td>0.188236</td>
-    </tr>
-    <tr>
-      <th>2015-01-01</th>
-      <td>1.148421</td>
-      <td>1.294169</td>
-      <td>1.148421</td>
-      <td>1.294169</td>
-      <td>1.221295</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>On peut faire maintenant le même travail sur les simulations RCP8 et les simulations historiques:</p>
-
-<pre><code class="language-python">list_rcp85 = ['CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp85','CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-MR_rcp85']
-df_rcp85 = []
-matrix_85 = []
-for period in list_period: 
-    globals()['flattened_list_'+period] = []
-    for i in range(0,len(list_rcp85)):
-        filename= rep + 'anomalie_' +  list_rcp85[i] +  '_' + variable_in + '_' + period  + '_1971-2000.nc'   
-        nc = netCDF4.Dataset(filename)
-        var = nc.variables[variable_in][:]  
-        lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]            
-        subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
-             (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
-        #mask = np.where(subset)
-        data=pd.DataFrame(var[:,subset], dtype='float') 
-        globals()['flattened_list_'+period].append(data.mean(axis=1))        
-    df_rcp85.append(pd.DataFrame(globals()['flattened_list_'+period]).T) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_rcp85 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;CRCM5-v1_NAM-44_ll_CCCma-CanESM2_rcp85&#39;</span>,<span style="color:#e6db74">&#39;CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-MR_rcp85&#39;</span>]
+df_rcp85 <span style="color:#f92672">=</span> []
+matrix_85 <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> period <span style="color:#f92672">in</span> list_period: 
+    globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period] <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,len(list_rcp85)):
+        filename<span style="color:#f92672">=</span> rep <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;anomalie_&#39;</span> <span style="color:#f92672">+</span>  list_rcp85[i] <span style="color:#f92672">+</span>  <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> variable_in <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> period  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_1971-2000.nc&#39;</span>   
+        nc <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+        var <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[variable_in][:]  
+        lats <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]; lons <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]            
+        subset <span style="color:#f92672">=</span> ((lats <span style="color:#f92672">&gt;</span> latbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lats <span style="color:#f92672">&lt;</span> latbounds[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&amp;</span> 
+             (lons <span style="color:#f92672">&gt;</span> lonbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lons <span style="color:#f92672">&lt;</span> lonbounds[<span style="color:#ae81ff">1</span>]))
+        <span style="color:#75715e">#mask = np.where(subset)</span>
+        data<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame(var[:,subset], dtype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;float&#39;</span>) 
+        globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period]<span style="color:#f92672">.</span>append(data<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))        
+    df_rcp85<span style="color:#f92672">.</span>append(pd<span style="color:#f92672">.</span>DataFrame(globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period])<span style="color:#f92672">.</span>T) 
     
-df_rcp85 = pd.concat(df_rcp85)
-df_rcp85['Date'] = TIME   
-df_rcp85.index = df_rcp85['Date']
-df_rcp85 = df_rcp85.drop([&quot;Date&quot;], axis=1)  
+df_rcp85 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(df_rcp85)
+df_rcp85[<span style="color:#e6db74">&#39;Date&#39;</span>] <span style="color:#f92672">=</span> TIME   
+df_rcp85<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_rcp85[<span style="color:#e6db74">&#39;Date&#39;</span>]
+df_rcp85 <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>drop([<span style="color:#e6db74">&#34;Date&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
 
-df_rcp85['min'] = df_rcp85.apply(np.min, axis=1)
-df_rcp85['max'] = df_rcp85.apply(np.max, axis=1)
-df_rcp85['mean'] = df_rcp85.apply(np.mean, axis=1)
+df_rcp85[<span style="color:#e6db74">&#39;min&#39;</span>] <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>min, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp85[<span style="color:#e6db74">&#39;max&#39;</span>] <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>max, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_rcp85[<span style="color:#e6db74">&#39;mean&#39;</span>] <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>mean, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 
-### historical RCMs
-list_histo = ['CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical', 'CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_historical']
-df_histo = []
-globals()['flattened_list_'+period] = []
-for i in range(0,len(list_histo)):
-    filename= rep + 'anomalie_' +  list_histo[i] +  '_' + variable_in + '_1971-2000_1971-2000.nc'   
-    nc = netCDF4.Dataset(filename)
-    var = nc.variables[variable_in][:]  
-    lats = nc.variables['lat'][:]; lons = nc.variables['lon'][:]
+<span style="color:#75715e">### historical RCMs</span>
+list_histo <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;CRCM5-v1_NAM-44_ll_CCCma-CanESM2_historical&#39;</span>, <span style="color:#e6db74">&#39;CRCM5-v1_NAM-44_ll_MPI-M-MPI-ESM-LR_historical&#39;</span>]
+df_histo <span style="color:#f92672">=</span> []
+globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period] <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,len(list_histo)):
+    filename<span style="color:#f92672">=</span> rep <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;anomalie_&#39;</span> <span style="color:#f92672">+</span>  list_histo[i] <span style="color:#f92672">+</span>  <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> variable_in <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_1971-2000_1971-2000.nc&#39;</span>   
+    nc <span style="color:#f92672">=</span> netCDF4<span style="color:#f92672">.</span>Dataset(filename)
+    var <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[variable_in][:]  
+    lats <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]; lons <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
     
-    subset = ((lats &gt; latbounds[0]) &amp; (lats &lt; latbounds[1]) &amp; 
-         (lons &gt; lonbounds[0]) &amp; (lons &lt; lonbounds[1]))
-    #mask = np.where(subset)
-    data=pd.DataFrame(var[:,subset], dtype='float') 
-    globals()['flattened_list_'+period].append(data.mean(axis=1))        
-df_histo.append(pd.DataFrame(globals()['flattened_list_'+period]).T) 
-TIME=[]
-for y in range(1971,2001,1):
-    TIME.append(datetime.strptime(str(y), '%Y'))  
+    subset <span style="color:#f92672">=</span> ((lats <span style="color:#f92672">&gt;</span> latbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lats <span style="color:#f92672">&lt;</span> latbounds[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&amp;</span> 
+         (lons <span style="color:#f92672">&gt;</span> lonbounds[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;</span> (lons <span style="color:#f92672">&lt;</span> lonbounds[<span style="color:#ae81ff">1</span>]))
+    <span style="color:#75715e">#mask = np.where(subset)</span>
+    data<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame(var[:,subset], dtype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;float&#39;</span>) 
+    globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period]<span style="color:#f92672">.</span>append(data<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))        
+df_histo<span style="color:#f92672">.</span>append(pd<span style="color:#f92672">.</span>DataFrame(globals()[<span style="color:#e6db74">&#39;flattened_list_&#39;</span><span style="color:#f92672">+</span>period])<span style="color:#f92672">.</span>T) 
+TIME<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1971</span>,<span style="color:#ae81ff">2001</span>,<span style="color:#ae81ff">1</span>):
+    TIME<span style="color:#f92672">.</span>append(datetime<span style="color:#f92672">.</span>strptime(str(y), <span style="color:#e6db74">&#39;%Y&#39;</span>))  
     
-df_histo = pd.concat(df_histo)
-df_histo['Date'] = TIME   
-df_histo.index = df_histo['Date']
-df_histo = df_histo.drop([&quot;Date&quot;], axis=1)  
+df_histo <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(df_histo)
+df_histo[<span style="color:#e6db74">&#39;Date&#39;</span>] <span style="color:#f92672">=</span> TIME   
+df_histo<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_histo[<span style="color:#e6db74">&#39;Date&#39;</span>]
+df_histo <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>drop([<span style="color:#e6db74">&#34;Date&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
 
-df_histo['min'] = df_histo.apply(np.min, axis=1)
-df_histo['max'] = df_histo.apply(np.max, axis=1)
-df_histo['mean'] = df_histo.apply(np.mean, axis=1)
+df_histo[<span style="color:#e6db74">&#39;min&#39;</span>] <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>min, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_histo[<span style="color:#e6db74">&#39;max&#39;</span>] <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>max, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_histo[<span style="color:#e6db74">&#39;mean&#39;</span>] <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>apply(np<span style="color:#f92672">.</span>mean, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><p>On combine le tout dans un seul et même DataFrame:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">result <span style="color:#f92672">=</span> []
+result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;min_rcp45&#39;</span>: df_rcp45[<span style="color:#e6db74">&#39;min&#39;</span>], <span style="color:#e6db74">&#39;max_rcp45&#39;</span>: df_rcp45[<span style="color:#e6db74">&#39;max&#39;</span>],<span style="color:#e6db74">&#39;mean_rcp45&#39;</span>: df_rcp45[<span style="color:#e6db74">&#39;mean&#39;</span>],
+                       <span style="color:#e6db74">&#39;min_rcp85&#39;</span>: df_rcp85[<span style="color:#e6db74">&#39;min&#39;</span>], <span style="color:#e6db74">&#39;max_rcp85&#39;</span>: df_rcp85[<span style="color:#e6db74">&#39;max&#39;</span>],<span style="color:#e6db74">&#39;mean_rcp85&#39;</span>: df_rcp85[<span style="color:#e6db74">&#39;mean&#39;</span>],
+                       <span style="color:#e6db74">&#39;min_histo&#39;</span>: df_histo[<span style="color:#e6db74">&#39;min&#39;</span>], <span style="color:#e6db74">&#39;max_histo&#39;</span>: df_histo[<span style="color:#e6db74">&#39;max&#39;</span>],<span style="color:#e6db74">&#39;mean_histo&#39;</span>: df_histo[<span style="color:#e6db74">&#39;mean&#39;</span>]},
+        columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;min_rcp45&#39;</span>,<span style="color:#e6db74">&#39;max_rcp45&#39;</span>,<span style="color:#e6db74">&#39;mean_rcp45&#39;</span>,<span style="color:#e6db74">&#39;min_rcp85&#39;</span>,<span style="color:#e6db74">&#39;max_rcp85&#39;</span>,<span style="color:#e6db74">&#39;mean_rcp85&#39;</span>,<span style="color:#e6db74">&#39;min_histo&#39;</span>,<span style="color:#e6db74">&#39;max_histo&#39;</span>,<span style="color:#e6db74">&#39;mean_histo&#39;</span>]) 
+
+result<span style="color:#f92672">.</span>tail()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<p>On combine le tout dans un seul et même DataFrame:</p>
-
-<pre><code class="language-python">result = []
-result = pd.DataFrame({'min_rcp45': df_rcp45['min'], 'max_rcp45': df_rcp45['max'],'mean_rcp45': df_rcp45['mean'],
-                       'min_rcp85': df_rcp85['min'], 'max_rcp85': df_rcp85['max'],'mean_rcp85': df_rcp85['mean'],
-                       'min_histo': df_histo['min'], 'max_histo': df_histo['max'],'mean_histo': df_histo['mean']},
-        columns = ['min_rcp45','max_rcp45','mean_rcp45','min_rcp85','max_rcp85','mean_rcp85','min_histo','max_histo','mean_histo']) 
-
-result.tail()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>min_rcp45</th>
-      <th>max_rcp45</th>
-      <th>mean_rcp45</th>
-      <th>min_rcp85</th>
-      <th>max_rcp85</th>
-      <th>mean_rcp85</th>
-      <th>min_histo</th>
-      <th>max_histo</th>
-      <th>mean_histo</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2096-01-01</th>
-      <td>1.890078</td>
-      <td>4.496284</td>
-      <td>3.193181</td>
-      <td>5.441835</td>
-      <td>8.036326</td>
-      <td>6.739081</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2097-01-01</th>
-      <td>3.863885</td>
-      <td>5.062620</td>
-      <td>4.463252</td>
-      <td>6.105060</td>
-      <td>7.355627</td>
-      <td>6.730344</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2098-01-01</th>
-      <td>2.289962</td>
-      <td>4.603645</td>
-      <td>3.446804</td>
-      <td>6.583062</td>
-      <td>7.147783</td>
-      <td>6.865423</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2099-01-01</th>
-      <td>2.949836</td>
-      <td>4.268922</td>
-      <td>3.609379</td>
-      <td>6.405183</td>
-      <td>7.043156</td>
-      <td>6.724169</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2100-01-01</th>
-      <td>2.998667</td>
-      <td>3.276854</td>
-      <td>3.137760</td>
-      <td>6.167938</td>
-      <td>6.966082</td>
-      <td>6.567010</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>On peut maintenant visualiser notre variabilité inter-annuelle.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">color <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;black&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>]
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">10</span>)) 
+gs <span style="color:#f92672">=</span> gridspec<span style="color:#f92672">.</span>GridSpec(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, width_ratios<span style="color:#f92672">=</span>[<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>]) 
+gs<span style="color:#f92672">.</span>update( wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.04</span>)
+ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>])
 
-<pre><code class="language-python">color = ['black','blue', 'red']
-fig = plt.figure(figsize=(18, 10)) 
-gs = gridspec.GridSpec(1, 2, width_ratios=[6, 1]) 
-gs.update( wspace=0.04)
-ax1 = plt.subplot(gs[0])
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]       <span style="color:#75715e">#  </span>
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74">&#39;mean_histo&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RCMs historical&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">0</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74">&#39;mean_rcp45&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RCMs scenario rcp 4.5&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">1</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74">&#39;mean_rcp85&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RCMs scenario rcp 8.5&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">2</span>])
 
-plt.rcParams[&quot;figure.figsize&quot;]=[16,9]       #  
-plt.plot(result.index.year, result['mean_histo'][:],  label='RCMs historical', linewidth=2, c=color[0])
-plt.plot(result.index.year, result['mean_rcp45'][:],  label='RCMs scenario rcp 4.5', linewidth=2, c=color[1])
-plt.plot(result.index.year, result['mean_rcp85'][:],  label='RCMs scenario rcp 8.5', linewidth=2, c=color[2])
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74">&#39;min_histo&#39;</span>],result[<span style="color:#e6db74">&#39;max_histo&#39;</span>], color <span style="color:#f92672">=</span> color[<span style="color:#ae81ff">0</span>], alpha<span style="color:#f92672">=.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74">&#39;min_rcp45&#39;</span>],result[<span style="color:#e6db74">&#39;max_rcp45&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">1</span>], alpha<span style="color:#f92672">=.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74">&#39;min_rcp85&#39;</span>],result[<span style="color:#e6db74">&#39;max_rcp85&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">2</span>], alpha<span style="color:#f92672">=.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;upper left&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
 
-plt.fill_between(result.index.year,result['min_histo'],result['max_histo'], color = color[0], alpha=.2)
-plt.fill_between(result.index.year,result['min_rcp45'],result['max_rcp45'], color =  color[1], alpha=.2)
-plt.fill_between(result.index.year,result['min_rcp85'],result['max_rcp85'], color =  color[2], alpha=.2)
-plt.legend(loc=&quot;upper left&quot;, markerscale=1., scatterpoints=1, fontsize=20)
+plt<span style="color:#f92672">.</span>xticks(range(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>), fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
 
-plt.xticks(range(result.index.year[0]-1, result.index.year[-1]+1, 10), fontsize=14)
-plt.yticks( fontsize=14)
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;--&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;y&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;--&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
 
-ax1.grid(axis = &quot;x&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
-ax1.grid(axis = &quot;y&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
+plt<span style="color:#f92672">.</span>setp(plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>get_xticklabels(), rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;right&#34;</span>)
 
-plt.setp(plt.gca().get_xticklabels(), rotation=45, ha=&quot;right&quot;)
-
-plt.xlabel('Date', fontsize=20, color='black', weight='semibold')
-plt.ylabel('°C', fontsize=20, color='black', weight='semibold')
-plt.title('Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)', fontsize=20, color='black', weight='semibold')
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Date&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;°C&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
  
-ax1.set_facecolor('white')
-plt.yticks( fontsize=14)
-plt.show()  
-</code></pre>
-
-<p><img src="/img/formation/netcdf1/output_78_0.png" alt="png" /></p>
-
+ax1<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74">&#39;white&#39;</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+plt<span style="color:#f92672">.</span>show()  
+</code></pre></div><p><img src="/img/formation/netcdf1/output_78_0.png" alt="png"></p>
 <p>Ajoutons à côté de notre graphique un boxplot sur tous les modèles pour la période 1971-2000 et 2071-2100 uniquement.</p>
-
 <p>Nous allons extraire ces périodes de notre résultat matriciel = []</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_to_remove <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;min&#39;</span>,<span style="color:#e6db74">&#39;max&#39;</span>,<span style="color:#e6db74">&#39;mean&#39;</span>]
+df_histo <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>drop(list_to_remove, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
+df_rcp45 <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>drop(list_to_remove, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  
+df_rcp85 <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>drop(list_to_remove, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
+df_histo <span style="color:#f92672">=</span> df_histo<span style="color:#f92672">.</span>loc[<span style="color:#e6db74">&#39;1971&#39;</span> : <span style="color:#e6db74">&#39;2010&#39;</span>]<span style="color:#f92672">.</span>stack()
+df_rcp45 <span style="color:#f92672">=</span> df_rcp45<span style="color:#f92672">.</span>loc[<span style="color:#e6db74">&#39;2071&#39;</span> : <span style="color:#e6db74">&#39;2100&#39;</span>]<span style="color:#f92672">.</span>stack()
+df_rcp85 <span style="color:#f92672">=</span> df_rcp85<span style="color:#f92672">.</span>loc[<span style="color:#e6db74">&#39;2071&#39;</span> : <span style="color:#e6db74">&#39;2100&#39;</span>]<span style="color:#f92672">.</span>stack()
 
-<pre><code class="language-python">list_to_remove = ['min','max','mean']
-df_histo = df_histo.drop(list_to_remove, axis=1)  
-df_rcp45 = df_rcp45.drop(list_to_remove, axis=1)  
-df_rcp85 = df_rcp85.drop(list_to_remove, axis=1) 
-df_histo = df_histo.loc['1971' : '2010'].stack()
-df_rcp45 = df_rcp45.loc['2071' : '2100'].stack()
-df_rcp85 = df_rcp85.loc['2071' : '2100'].stack()
+matrix_box <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;RCMs_histo&#39;</span>: df_histo, <span style="color:#e6db74">&#39;RCMs_rcp45&#39;</span>: df_rcp45,<span style="color:#e6db74">&#39;RCMs_rcp85&#39;</span>: df_rcp85},
+        columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;RCMs_histo&#39;</span>,<span style="color:#e6db74">&#39;RCMs_rcp45&#39;</span>,<span style="color:#e6db74">&#39;RCMs_rcp85&#39;</span>])
+matrix_box<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-matrix_box = pd.DataFrame({'RCMs_histo': df_histo, 'RCMs_rcp45': df_rcp45,'RCMs_rcp85': df_rcp85},
-        columns = ['RCMs_histo','RCMs_rcp45','RCMs_rcp85'])
-matrix_box.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">color <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;black&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>]
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">12</span>)) 
+gs <span style="color:#f92672">=</span> gridspec<span style="color:#f92672">.</span>GridSpec(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, width_ratios<span style="color:#f92672">=</span>[<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>]) 
+gs<span style="color:#f92672">.</span>update( wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.04</span>)
+ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">0</span>])
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]       <span style="color:#75715e">#  </span>
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74">&#39;mean_histo&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RCMs historical&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">0</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74">&#39;mean_rcp45&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RCMs scenario rcp 4.5&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">1</span>])
+plt<span style="color:#f92672">.</span>plot(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year, result[<span style="color:#e6db74">&#39;mean_rcp85&#39;</span>][:],  label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RCMs scenario rcp 8.5&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span>color[<span style="color:#ae81ff">2</span>])
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74">&#39;min_histo&#39;</span>],result[<span style="color:#e6db74">&#39;max_histo&#39;</span>], color <span style="color:#f92672">=</span> color[<span style="color:#ae81ff">0</span>], alpha<span style="color:#f92672">=.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74">&#39;min_rcp45&#39;</span>],result[<span style="color:#e6db74">&#39;max_rcp45&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">1</span>], alpha<span style="color:#f92672">=.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>fill_between(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year,result[<span style="color:#e6db74">&#39;min_rcp85&#39;</span>],result[<span style="color:#e6db74">&#39;max_rcp85&#39;</span>], color <span style="color:#f92672">=</span>  color[<span style="color:#ae81ff">2</span>], alpha<span style="color:#f92672">=.</span><span style="color:#ae81ff">2</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;upper left&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>, scatterpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>RCMs_histo</th>
-      <th>RCMs_rcp45</th>
-      <th>RCMs_rcp85</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">1971-01-01</th>
-      <th>0</th>
-      <td>-1.341567</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.124120</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">1972-01-01</th>
-      <th>0</th>
-      <td>-0.641267</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.035067</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1973-01-01</th>
-      <th>0</th>
-      <td>0.054164</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<span style="color:#75715e">#ax.set_xlim(result.index.year[0], result.index.year[-1])</span>
+plt<span style="color:#f92672">.</span>xticks(range(result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, result<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>), fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
 
-<pre><code class="language-python">color = ['black','blue', 'red']
-fig = plt.figure(figsize=(22, 12)) 
-gs = gridspec.GridSpec(1, 2, width_ratios=[6, 1]) 
-gs.update( wspace=0.04)
-ax1 = plt.subplot(gs[0])
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;--&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+ax1<span style="color:#f92672">.</span>grid(axis <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;y&#34;</span>, linestyle <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;--&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
 
-plt.rcParams[&quot;figure.figsize&quot;]=[16,9]       #  
-plt.plot(result.index.year, result['mean_histo'][:],  label='RCMs historical', linewidth=2, c=color[0])
-plt.plot(result.index.year, result['mean_rcp45'][:],  label='RCMs scenario rcp 4.5', linewidth=2, c=color[1])
-plt.plot(result.index.year, result['mean_rcp85'][:],  label='RCMs scenario rcp 8.5', linewidth=2, c=color[2])
+plt<span style="color:#f92672">.</span>setp(plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>get_xticklabels(), rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;right&#34;</span>)
 
-plt.fill_between(result.index.year,result['min_histo'],result['max_histo'], color = color[0], alpha=.2)
-plt.fill_between(result.index.year,result['min_rcp45'],result['max_rcp45'], color =  color[1], alpha=.2)
-plt.fill_between(result.index.year,result['min_rcp85'],result['max_rcp85'], color =  color[2], alpha=.2)
-plt.legend(loc=&quot;upper left&quot;, markerscale=1., scatterpoints=1, fontsize=20)
-
-#ax.set_xlim(result.index.year[0], result.index.year[-1])
-plt.xticks(range(result.index.year[0]-1, result.index.year[-1]+1, 10), fontsize=14)
-plt.yticks( fontsize=14)
-
-ax1.grid(axis = &quot;x&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
-ax1.grid(axis = &quot;y&quot;, linestyle = &quot;--&quot;, color='black', linewidth=0.25, alpha=0.5)
-
-plt.setp(plt.gca().get_xticklabels(), rotation=45, ha=&quot;right&quot;)
-
-plt.xlabel('Date', fontsize=20, color='black', weight='semibold')
-plt.ylabel('°C', fontsize=20, color='black', weight='semibold')
-plt.title('Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)', fontsize=20, color='black', weight='semibold')
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Date&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;°C&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Annual change in daily maximum temperature: (1971-2100) compared with normal (1971-2000)&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
 
 
-my_pal = {&quot;RCMs_histo&quot;: &quot;grey&quot;, &quot;RCMs_rcp45&quot;: &quot;blue&quot;, &quot;RCMs_rcp85&quot;:&quot;red&quot;}
-ax2 = plt.subplot(gs[1])
-#ax2 = matrix_box.boxplot(column=['RCMs_histo', 'RCMs_rcp45', 'RCMs_rcp85'])
-ax2 = sns.boxplot(data=matrix_box, palette=my_pal)  
-# Add transparency to colors
-for patch in ax2.artists:
- r, g, b, a = patch.get_facecolor()
- patch.set_facecolor((r, g, b, .2))
-plt.setp(plt.gca().get_xticklabels(), rotation=45, ha=&quot;right&quot;)
+my_pal <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;RCMs_histo&#34;</span>: <span style="color:#e6db74">&#34;grey&#34;</span>, <span style="color:#e6db74">&#34;RCMs_rcp45&#34;</span>: <span style="color:#e6db74">&#34;blue&#34;</span>, <span style="color:#e6db74">&#34;RCMs_rcp85&#34;</span>:<span style="color:#e6db74">&#34;red&#34;</span>}
+ax2 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(gs[<span style="color:#ae81ff">1</span>])
+<span style="color:#75715e">#ax2 = matrix_box.boxplot(column=[&#39;RCMs_histo&#39;, &#39;RCMs_rcp45&#39;, &#39;RCMs_rcp85&#39;])</span>
+ax2 <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>boxplot(data<span style="color:#f92672">=</span>matrix_box, palette<span style="color:#f92672">=</span>my_pal)  
+<span style="color:#75715e"># Add transparency to colors</span>
+<span style="color:#66d9ef">for</span> patch <span style="color:#f92672">in</span> ax2<span style="color:#f92672">.</span>artists:
+ r, g, b, a <span style="color:#f92672">=</span> patch<span style="color:#f92672">.</span>get_facecolor()
+ patch<span style="color:#f92672">.</span>set_facecolor((r, g, b, <span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>))
+plt<span style="color:#f92672">.</span>setp(plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>get_xticklabels(), rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;right&#34;</span>)
  
-ax1.set_facecolor('white')
-ax2.set_facecolor('white')
-ax2.spines['top'].set_visible(False)
-ax2.spines['bottom'].set_visible(False)
-ax2.spines['right'].set_visible(False)
-ax2.spines['left'].set_visible(False)
+ax1<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74">&#39;white&#39;</span>)
+ax2<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74">&#39;white&#39;</span>)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74">&#39;top&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74">&#39;bottom&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74">&#39;right&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
+ax2<span style="color:#f92672">.</span>spines[<span style="color:#e6db74">&#39;left&#39;</span>]<span style="color:#f92672">.</span>set_visible(False)
 
-medians = matrix_box.median().values
-median_labels = [str(np.round(s, 2))+' °C' for s in medians]
-pos = range(len(medians))
-i=0
-for tick,label in zip(pos,ax2.get_xticklabels()):
-    ax2.text(pos[tick], medians[tick] + 0.1, median_labels[tick], 
-            horizontalalignment='center', size='medium', color = color[i], weight='semibold')
-    i+=1
-x1, x2, x3 = 0, 1, 2
-ax2.text(x1, matrix_box.min().min().round()-0.15 , &quot;1971-2000&quot;, ha='center', va='bottom', size='medium', color='black', weight='semibold')   
-ax2.text((x2+x3)*.5, matrix_box.min().median()-0.4 , &quot;2071-2100&quot;, ha='center', va='bottom', size='medium', color='black', weight='semibold')
-plt.yticks( fontsize=14)
+medians <span style="color:#f92672">=</span> matrix_box<span style="color:#f92672">.</span>median()<span style="color:#f92672">.</span>values
+median_labels <span style="color:#f92672">=</span> [str(np<span style="color:#f92672">.</span>round(s, <span style="color:#ae81ff">2</span>))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; °C&#39;</span> <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> medians]
+pos <span style="color:#f92672">=</span> range(len(medians))
+i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> tick,label <span style="color:#f92672">in</span> zip(pos,ax2<span style="color:#f92672">.</span>get_xticklabels()):
+    ax2<span style="color:#f92672">.</span>text(pos[tick], medians[tick] <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.1</span>, median_labels[tick], 
+            horizontalalignment<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;center&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;medium&#39;</span>, color <span style="color:#f92672">=</span> color[i], weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
+    i<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+x1, x2, x3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>
+ax2<span style="color:#f92672">.</span>text(x1, matrix_box<span style="color:#f92672">.</span>min()<span style="color:#f92672">.</span>min()<span style="color:#f92672">.</span>round()<span style="color:#f92672">-</span><span style="color:#ae81ff">0.15</span> , <span style="color:#e6db74">&#34;1971-2000&#34;</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;center&#39;</span>, va<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bottom&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;medium&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)   
+ax2<span style="color:#f92672">.</span>text((x2<span style="color:#f92672">+</span>x3)<span style="color:#f92672">*.</span><span style="color:#ae81ff">5</span>, matrix_box<span style="color:#f92672">.</span>min()<span style="color:#f92672">.</span>median()<span style="color:#f92672">-</span><span style="color:#ae81ff">0.4</span> , <span style="color:#e6db74">&#34;2071-2100&#34;</span>, ha<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;center&#39;</span>, va<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bottom&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;medium&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;semibold&#39;</span>)
+plt<span style="color:#f92672">.</span>yticks( fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
     
-plt.savefig('./figures/VI_YEAR_Mean_tasmax.png', bbox_inches='tight', format='png', dpi=1000)
-plt.show()  
-</code></pre>
-
-<p><img src="/img/formation/netcdf1/output_81_0.png" alt="png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
-
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#39;./figures/VI_YEAR_Mean_tasmax.png&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tight&#39;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;png&#39;</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>)
+plt<span style="color:#f92672">.</span>show()  
+</code></pre></div><p><img src="/img/formation/netcdf1/output_81_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -2281,7 +1478,7 @@ plt.show()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/15.1-Netcdf_Tutorial.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c15.1-Netcdf_Tutorial.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

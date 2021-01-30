@@ -467,15 +467,12 @@ To install the library under the prompt of anaconda: conda install -c conda-forg
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-example-of-drawing-a-2d-netcdf-field">1 - Example of drawing a 2D Netcdf field</a></li>
-<li><a href="#2-another-example-2d-netcdf">2 - Another example  2D Netcdf</a></li>
-<li><a href="#3-cartopy-example-with-overplot">3 - Cartopy: example with overplot</a></li>
-<li><a href="#4-cartopy-modis">4 - Cartopy:  MODIS</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1---example-of-drawing-a-2d-netcdf-field">1 - Example of drawing a 2D Netcdf field</a></li>
+    <li><a href="#2---another-example--2d-netcdf">2 - Another example  2D Netcdf</a></li>
+    <li><a href="#3---cartopy-example-with-overplot">3 - Cartopy: example with overplot</a></li>
+    <li><a href="#4---cartopy--modis">4 - Cartopy:  MODIS</a></li>
+  </ul>
 </nav>
 
       
@@ -490,37 +487,26 @@ To install the library under the prompt of anaconda: conda install -c conda-forg
           <h1>3 Cartopy</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/netcdf/cartopy.png" alt="image0" /></p>
-
+            <p><img src="/img/netcdf/cartopy.png" alt="image0"></p>
 <p>The Cartopy python library allows you to analyze, process and plot georeferenced data with the help of Matplotlib.</p>
-
-<p><a href="https://scitools.org.uk/cartopy/docs/latest/#" target="_blank">https://scitools.org.uk/cartopy/docs/latest/#</a></p>
-
+<p><a href="https://scitools.org.uk/cartopy/docs/latest/#">https://scitools.org.uk/cartopy/docs/latest/#</a></p>
 <p>To install the library under the prompt of anaconda:
- conda install -c conda-forge cartopy</p>
-
-<h2 id="1-example-of-drawing-a-2d-netcdf-field">1 - Example of drawing a 2D Netcdf field</h2>
-
+conda install -c conda-forge cartopy</p>
+<h2 id="1---example-of-drawing-a-2d-netcdf-field">1 - Example of drawing a 2D Netcdf field</h2>
 <ul>
 <li>We will work climatology (1981-2010) monthly minimum daily temperature</li>
 <li>At first we will import the Python libraries and open the Netcdf file</li>
 </ul>
-
 <p>The Dataset class of the netCDF4 module is used to open and read Netcdf files.
 Here we will store the Netcdf file in the variable nc_fid.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#34;ignore&#34;</span>)
 
-<pre><code class="language-python">from netCDF4 import Dataset
-import warnings
-warnings.filterwarnings(&quot;ignore&quot;)
-
-filename='./DATA/ANUSPLIN/ANUSPLIN_NLDAS_10km_CLIMATO_TASMIN_1981_2010_06.nc'
-nc_fid=Dataset(filename,'r')
-nc_fid.variables
-</code></pre>
-
-<pre><code>OrderedDict([('lon', &lt;class 'netCDF4._netCDF4.Variable'&gt;
+filename<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./DATA/ANUSPLIN/ANUSPLIN_NLDAS_10km_CLIMATO_TASMIN_1981_2010_06.nc&#39;</span>
+nc_fid<span style="color:#f92672">=</span>Dataset(filename,<span style="color:#e6db74">&#39;r&#39;</span>)
+nc_fid<span style="color:#f92672">.</span>variables
+</code></pre></div><pre><code>OrderedDict([('lon', &lt;class 'netCDF4._netCDF4.Variable'&gt;
               float32 lon(y, x)
                   units: degrees_east
                   long_name: Longitude
@@ -554,515 +540,458 @@ nc_fid.variables
               current shape = (1, 1068, 420)
               filling on, default _FillValue of 9.969209968386869e+36 used)])
 </code></pre>
-
 <p>We will read TASMIN, lat and lon variables.</p>
-
-<pre><code class="language-python">lats = nc_fid.variables['lat'][:]
-lons = nc_fid.variables['lon'][:]
-time = nc_fid.variables['time'][:]
-Vals = nc_fid.variables['TASMIN'][:].squeeze()
-print( Vals.shape)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lats <span style="color:#f92672">=</span> nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]
+lons <span style="color:#f92672">=</span> nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
+time <span style="color:#f92672">=</span> nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;time&#39;</span>][:]
+Vals <span style="color:#f92672">=</span> nc_fid<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;TASMIN&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+<span style="color:#66d9ef">print</span>( Vals<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>(1068, 420)
 </code></pre>
-
-<pre><code>(1068, 420)
-</code></pre>
-
 <p>We will now call the cartopy and matplotlib libraries from Python to create a graphical instance.
 The carto library brings functions to visually enrich maps made with cartopy: adding a scale &hellip;</p>
-
-<pre><code class="language-python">import matplotlib.pylab as plt
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import numpy as np
-import matplotlib as mpl
-from carto import scale_bar
-</code></pre>
-
-<p>We create an instance of Cartopy to create a map. We choose here our projection, grid orientation and total coverage.</p>
-
-<p>Here is a very useful link to choose a projection type: <a href="https://scitools.org.uk/cartopy/docs/latest/crs/projections.html" target="_blank">https://scitools.org.uk/cartopy/docs/latest/crs/projections.html</a></p>
-
-<pre><code class="language-python">projections = [ccrs.PlateCarree(),
-               ccrs.Robinson(),
-               ccrs.Mercator(),
-               ccrs.Orthographic(),
-               ccrs.InterruptedGoodeHomolosine(),
-               ccrs.LambertConformal(),
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
+<span style="color:#f92672">from</span> carto <span style="color:#f92672">import</span> scale_bar
+</code></pre></div><p>We create an instance of Cartopy to create a map. We choose here our projection, grid orientation and total coverage.</p>
+<p>Here is a very useful link to choose a projection type: <a href="https://scitools.org.uk/cartopy/docs/latest/crs/projections.html">https://scitools.org.uk/cartopy/docs/latest/crs/projections.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">projections <span style="color:#f92672">=</span> [ccrs<span style="color:#f92672">.</span>PlateCarree(),
+               ccrs<span style="color:#f92672">.</span>Robinson(),
+               ccrs<span style="color:#f92672">.</span>Mercator(),
+               ccrs<span style="color:#f92672">.</span>Orthographic(),
+               ccrs<span style="color:#f92672">.</span>InterruptedGoodeHomolosine(),
+               ccrs<span style="color:#f92672">.</span>LambertConformal(),
               ]
 
 
-for proj in projections:
-    plt.figure()
-    ax = plt.axes(projection=proj)
-    ax.stock_img()
-    ax.coastlines()
-    ax.set_title(f'{type(proj)}')
-</code></pre>
-
-<p><img src="/img/netcdf/output_7_0.png" alt="png" /></p>
-
-<p><img src="/img/netcdf/output_7_1.png" alt="png" /></p>
-
-<p><img src="/img/netcdf/output_7_2.png" alt="png" /></p>
-
-<p><img src="/img/netcdf/output_7_3.png" alt="png" /></p>
-
-<p><img src="/img/netcdf/output_7_4.png" alt="png" /></p>
-
-<p><img src="/img/netcdf/output_7_5.png" alt="png" /></p>
-
+<span style="color:#66d9ef">for</span> proj <span style="color:#f92672">in</span> projections:
+    plt<span style="color:#f92672">.</span>figure()
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>proj)
+    ax<span style="color:#f92672">.</span>stock_img()
+    ax<span style="color:#f92672">.</span>coastlines()
+    ax<span style="color:#f92672">.</span>set_title(f<span style="color:#e6db74">&#39;{type(proj)}&#39;</span>)
+</code></pre></div><p><img src="/img/netcdf/output_7_0.png" alt="png"></p>
+<p><img src="/img/netcdf/output_7_1.png" alt="png"></p>
+<p><img src="/img/netcdf/output_7_2.png" alt="png"></p>
+<p><img src="/img/netcdf/output_7_3.png" alt="png"></p>
+<p><img src="/img/netcdf/output_7_4.png" alt="png"></p>
+<p><img src="/img/netcdf/output_7_5.png" alt="png"></p>
 <p>In this example, we will work with a so-called &ldquo;LambertConformal&rdquo; projection.
 To create a regional map, we use the GeoAxis set_extent method to limit the size of our region.</p>
-
-<pre><code class="language-python">fig=plt.figure(figsize=(5,3), frameon=True)   
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-100,-60,18,62])
-</code></pre>
-
-<p><img src="/img/netcdf/output_9_0.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">3</span>), frameon<span style="color:#f92672">=</span>True)   
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
+</code></pre></div><p><img src="/img/netcdf/output_9_0.png" alt="png"></p>
 <p>We will add some products to our map with Cartopy&rsquo;s cartopy.feature method:
-<a href="https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html" target="_blank">https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html</a></p>
-
-<p>|  |  |
-|&ndash;|&ndash;|
-| cartopy.feature.<b>BORDERS</b> | Borders |
-| cartopy.feature.<b>COASTLINE</b> | Coast |
-| cartopy.feature.<b>LAKES</b> | Lakes |
-| cartopy.feature.<b>LAND</b> | Continents |
-| cartopy.feature.<b>OCEAN</b> | Ocean |
-| cartopy.feature.<b>RIVERS</b> | Rivers |
-| cartopy.feature.<b>STATES</b> | States |</p>
-
+<a href="https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html">https://scitools.org.uk/cartopy/docs/v0.14/matplotlib/feature_interface.html</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cartopy.feature.<!-- raw HTML omitted -->BORDERS<!-- raw HTML omitted --></td>
+<td>Borders</td>
+</tr>
+<tr>
+<td>cartopy.feature.<!-- raw HTML omitted -->COASTLINE<!-- raw HTML omitted --></td>
+<td>Coast</td>
+</tr>
+<tr>
+<td>cartopy.feature.<!-- raw HTML omitted -->LAKES<!-- raw HTML omitted --></td>
+<td>Lakes</td>
+</tr>
+<tr>
+<td>cartopy.feature.<!-- raw HTML omitted -->LAND<!-- raw HTML omitted --></td>
+<td>Continents</td>
+</tr>
+<tr>
+<td>cartopy.feature.<!-- raw HTML omitted -->OCEAN<!-- raw HTML omitted --></td>
+<td>Ocean</td>
+</tr>
+<tr>
+<td>cartopy.feature.<!-- raw HTML omitted -->RIVERS<!-- raw HTML omitted --></td>
+<td>Rivers</td>
+</tr>
+<tr>
+<td>cartopy.feature.<!-- raw HTML omitted -->STATES<!-- raw HTML omitted --></td>
+<td>States</td>
+</tr>
+</tbody>
+</table>
 <p>We will also add the provinces with Cartopy&rsquo;s NaturalEarthFeature class:
-<a href="https://scitools.org.uk/cartopy/docs/v0.16/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature" target="_blank">https://scitools.org.uk/cartopy/docs/v0.16/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature</a></p>
-
+<a href="https://scitools.org.uk/cartopy/docs/v0.16/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature">https://scitools.org.uk/cartopy/docs/v0.16/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature</a></p>
 <p>We work here by adding layers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># adding caost:</span>
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+plt<span style="color:#f92672">.</span>show()
 
-<pre><code class="language-python"># adding caost:
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-ax.coastlines(resolution='110m');
-plt.show()
+</code></pre></div><p><img src="/img/netcdf/output_11_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># adding land and oceanss:</span>
 
-</code></pre>
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf/output_12_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># adding lakes and rivers</span>
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf/output_13_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Adding states</span>
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-<p><img src="/img/netcdf/output_11_0.png" alt="png" /></p>
-
-<pre><code class="language-python"># adding land and oceanss:
-
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-ax.add_feature(cfeature.LAND.with_scale('50m'))
-plt.show()
-</code></pre>
-
-<p><img src="/img/netcdf/output_12_0.png" alt="png" /></p>
-
-<pre><code class="language-python"># adding lakes and rivers
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-ax.add_feature(cfeature.LAKES.with_scale('50m'))
-ax.add_feature(cfeature.LAND.with_scale('50m'))
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))
-plt.show()
-</code></pre>
-
-<p><img src="/img/netcdf/output_13_0.png" alt="png" /></p>
-
-<pre><code class="language-python"># Adding states
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-ax.add_feature(cfeature.LAND.with_scale('50m'))
-ax.add_feature(cfeature.LAKES.with_scale('50m'))
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))
-states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='50m',
-        facecolor='none')
-
-ax.add_feature(states_provinces, edgecolor='gray')
-plt.show()
-</code></pre>
-
-<p><img src="/img/netcdf/output_14_0.png" alt="png" /></p>
-
-<p>We can now fill our map with our georeferenced field with the method pcolormesh of matplotlib: <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html" target="_blank">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html</a></p>
-
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf/output_14_0.png" alt="png"></p>
+<p>We can now fill our map with our georeferenced field with the method pcolormesh of matplotlib: <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html</a></p>
 <p>Here Lat Lon coordinates are in 2D, so in each grid point we know the latitude and longitude of our fields.</p>
-
 <p>It is possible that for a netcdf file Lat and Lon are in 1D. We must then write them in 2D with the following command:</p>
-
 <p>-lon, lat = np.meshgrid (lons, lats)</p>
-
-<p>We will also produce our own color palette. Here is a useful link to select our colors and create our palette: <a href="http://colorbrewer2.org/#type=diverging&amp;scheme=RdYlBu&amp;n=8" target="_blank">http://colorbrewer2.org/#type=diverging&amp;scheme=RdYlBu&amp;n=8</a></p>
-
-<p>You can also use one of the color palettes predefined by Matplotlip: <a href="https://matplotlib.org/examples/color/colormaps_reference.html" target="_blank">https://matplotlib.org/examples/color/colormaps_reference.html</a></p>
-
-<p>We will use to draw our map type pcolormesh matplotib. Other types of plots are available: <a href="https://matplotlib.org/basemap/users/examples.html" target="_blank">https://matplotlib.org/basemap/users/examples.html</a></p>
-
+<p>We will also produce our own color palette. Here is a useful link to select our colors and create our palette: <a href="http://colorbrewer2.org/#type=diverging&amp;scheme=RdYlBu&amp;n=8">http://colorbrewer2.org/#type=diverging&amp;scheme=RdYlBu&amp;n=8</a></p>
+<p>You can also use one of the color palettes predefined by Matplotlip: <a href="https://matplotlib.org/examples/color/colormaps_reference.html">https://matplotlib.org/examples/color/colormaps_reference.html</a></p>
+<p>We will use to draw our map type pcolormesh matplotib. Other types of plots are available: <a href="https://matplotlib.org/basemap/users/examples.html">https://matplotlib.org/basemap/users/examples.html</a></p>
 <p>To improve the reading of our map, we can at this level add:</p>
-
 <ul>
 <li>a legend under the map: cbar.set_label</li>
-
-<li><p>add a color bar with a display interval: plt.colorbar</p>
-
-<pre><code class="language-python">Y=np.array([[77,0,111],[115,14,181],[160,17,222],[195,14,240],\
-           [0,0,93],[21,38,177],[33,95,227],[32,162,247],[59,224,248],[202,255,250],\
-           [4,255,179],[37,181,139],[32,132,81],[72,162,60],[157,240,96],[213,255,166],\
-           [241,247,132],[248,185,68],[255,124,4],[235,78,14],[215,32,24],[189,24,40],[162,16,56],[135,16,65],[107,15,73]])/255.
-
-colbar=mpl.colors.ListedColormap(Y)
-fig=plt.figure(figsize=(10,6), frameon=True)  
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-
-mm = ax.pcolormesh(lons,\
-               lats,\
-               Vals,\
-               vmin=-28,\
-               vmax=28, \
-               transform=ccrs.PlateCarree(),\
-               cmap=colbar )
-
-
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-ax.add_feature(cfeature.LAND.with_scale('50m'))
-ax.add_feature(cfeature.LAKES.with_scale('50m'))
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))
-
-states_provinces = cfeature.NaturalEarthFeature(
-    category='cultural',
-    name='admin_1_states_provinces_lines',
-    scale='50m',
-    facecolor='none')
-
-ax.add_feature(states_provinces, edgecolor='gray')  
-ax.stock_img();
-plt.show() 
-
-</code></pre></li>
+<li>add a color bar with a display interval: plt.colorbar</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Y<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">77</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">111</span>],[<span style="color:#ae81ff">115</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">181</span>],[<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">222</span>],[<span style="color:#ae81ff">195</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">240</span>],\
+               [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">93</span>],[<span style="color:#ae81ff">21</span>,<span style="color:#ae81ff">38</span>,<span style="color:#ae81ff">177</span>],[<span style="color:#ae81ff">33</span>,<span style="color:#ae81ff">95</span>,<span style="color:#ae81ff">227</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">247</span>],[<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">224</span>,<span style="color:#ae81ff">248</span>],[<span style="color:#ae81ff">202</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">250</span>],\
+               [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">179</span>],[<span style="color:#ae81ff">37</span>,<span style="color:#ae81ff">181</span>,<span style="color:#ae81ff">139</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">132</span>,<span style="color:#ae81ff">81</span>],[<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">60</span>],[<span style="color:#ae81ff">157</span>,<span style="color:#ae81ff">240</span>,<span style="color:#ae81ff">96</span>],[<span style="color:#ae81ff">213</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">166</span>],\
+               [<span style="color:#ae81ff">241</span>,<span style="color:#ae81ff">247</span>,<span style="color:#ae81ff">132</span>],[<span style="color:#ae81ff">248</span>,<span style="color:#ae81ff">185</span>,<span style="color:#ae81ff">68</span>],[<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">124</span>,<span style="color:#ae81ff">4</span>],[<span style="color:#ae81ff">235</span>,<span style="color:#ae81ff">78</span>,<span style="color:#ae81ff">14</span>],[<span style="color:#ae81ff">215</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">24</span>],[<span style="color:#ae81ff">189</span>,<span style="color:#ae81ff">24</span>,<span style="color:#ae81ff">40</span>],[<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">56</span>],[<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">65</span>],[<span style="color:#ae81ff">107</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">73</span>]])<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
 
-<p><img src="/img/netcdf/output_16_0.png" alt="png" /></p>
+colbar<span style="color:#f92672">=</span>mpl<span style="color:#f92672">.</span>colors<span style="color:#f92672">.</span>ListedColormap(Y)
+fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">6</span>), frameon<span style="color:#f92672">=</span>True)  
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
 
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>pcolormesh(lons,\
+                   lats,\
+                   Vals,\
+                   vmin<span style="color:#f92672">=-</span><span style="color:#ae81ff">28</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">28</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   cmap<span style="color:#f92672">=</span>colbar )
+
+
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
+
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)  
+ax<span style="color:#f92672">.</span>stock_img();
+plt<span style="color:#f92672">.</span>show() 
+
+</code></pre></div><p><img src="/img/netcdf/output_16_0.png" alt="png"></p>
 <p>If the pallet is not suitable, it is possible to use a palette of Matplotlib.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">6</span>), frameon<span style="color:#f92672">=</span>True)  
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
 
-<pre><code class="language-python">fig=plt.figure(figsize=(10,6), frameon=True)  
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-
-mm = ax.pcolormesh(lons,\
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>pcolormesh(lons,\
                    lats,\
                    Vals,\
-                   vmin=-28,\
-                   vmax=28, \
-                   transform=ccrs.PlateCarree(),\
-                   cmap='jet' )
+                   vmin<span style="color:#f92672">=-</span><span style="color:#ae81ff">28</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">28</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;jet&#39;</span> )
 
 
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-ax.add_feature(cfeature.LAND.with_scale('50m'))
-ax.add_feature(cfeature.LAKES.with_scale('50m'))
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
 
-states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='50m',
-        facecolor='none')
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-ax.add_feature(states_provinces, edgecolor='gray')  
-ax.stock_img();
-plt.show() 
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)  
+ax<span style="color:#f92672">.</span>stock_img();
+plt<span style="color:#f92672">.</span>show() 
 
-</code></pre>
-
-<p><img src="/img/netcdf/output_18_0.png" alt="png" /></p>
-
+</code></pre></div><p><img src="/img/netcdf/output_18_0.png" alt="png"></p>
 <p>We can finally add:
-    - a title to our chart: plt.title
-    - a color bar plt.colorbar
-    - a title to our color bar: plt.xlabel
-    - latitudes and longitudes with the function: gridlines ()
-    - a scale bar: scale_bar ()</p>
-
+- a title to our chart: plt.title
+- a color bar plt.colorbar
+- a title to our color bar: plt.xlabel
+- latitudes and longitudes with the function: gridlines ()
+- a scale bar: scale_bar ()</p>
 <p>Then save our chart with the command: plt.savefig</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Y<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">77</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">111</span>],[<span style="color:#ae81ff">115</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">181</span>],[<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">222</span>],[<span style="color:#ae81ff">195</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">240</span>],\
+               [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">93</span>],[<span style="color:#ae81ff">21</span>,<span style="color:#ae81ff">38</span>,<span style="color:#ae81ff">177</span>],[<span style="color:#ae81ff">33</span>,<span style="color:#ae81ff">95</span>,<span style="color:#ae81ff">227</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">247</span>],[<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">224</span>,<span style="color:#ae81ff">248</span>],[<span style="color:#ae81ff">202</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">250</span>],\
+               [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">179</span>],[<span style="color:#ae81ff">37</span>,<span style="color:#ae81ff">181</span>,<span style="color:#ae81ff">139</span>],[<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">132</span>,<span style="color:#ae81ff">81</span>],[<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">60</span>],[<span style="color:#ae81ff">157</span>,<span style="color:#ae81ff">240</span>,<span style="color:#ae81ff">96</span>],[<span style="color:#ae81ff">213</span>,<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">166</span>],\
+               [<span style="color:#ae81ff">241</span>,<span style="color:#ae81ff">247</span>,<span style="color:#ae81ff">132</span>],[<span style="color:#ae81ff">248</span>,<span style="color:#ae81ff">185</span>,<span style="color:#ae81ff">68</span>],[<span style="color:#ae81ff">255</span>,<span style="color:#ae81ff">124</span>,<span style="color:#ae81ff">4</span>],[<span style="color:#ae81ff">235</span>,<span style="color:#ae81ff">78</span>,<span style="color:#ae81ff">14</span>],[<span style="color:#ae81ff">215</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">24</span>],[<span style="color:#ae81ff">189</span>,<span style="color:#ae81ff">24</span>,<span style="color:#ae81ff">40</span>],[<span style="color:#ae81ff">162</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">56</span>],[<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">65</span>],[<span style="color:#ae81ff">107</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">73</span>]])<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
 
-<pre><code class="language-python">Y=np.array([[77,0,111],[115,14,181],[160,17,222],[195,14,240],\
-               [0,0,93],[21,38,177],[33,95,227],[32,162,247],[59,224,248],[202,255,250],\
-               [4,255,179],[37,181,139],[32,132,81],[72,162,60],[157,240,96],[213,255,166],\
-               [241,247,132],[248,185,68],[255,124,4],[235,78,14],[215,32,24],[189,24,40],[162,16,56],[135,16,65],[107,15,73]])/255.
+colbar<span style="color:#f92672">=</span>mpl<span style="color:#f92672">.</span>colors<span style="color:#f92672">.</span>ListedColormap(Y)
+fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">12</span>), frameon<span style="color:#f92672">=</span>True)  
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
 
-colbar=mpl.colors.ListedColormap(Y)
-fig=plt.figure(figsize=(22,12), frameon=True)  
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-
-mm = ax.pcolormesh(lons,\
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>pcolormesh(lons,\
                    lats,\
                    Vals,\
-                   vmin=-28,\
-                   vmax=28, \
-                   transform=ccrs.PlateCarree(),\
-                   cmap=colbar )
+                   vmin<span style="color:#f92672">=-</span><span style="color:#ae81ff">28</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">28</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   cmap<span style="color:#f92672">=</span>colbar )
 
 
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-ax.add_feature(cfeature.LAND.with_scale('50m'))
-ax.add_feature(cfeature.LAKES.with_scale('50m'))
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
 
-states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='50m',
-        facecolor='none')
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-ax.add_feature(states_provinces, edgecolor='gray')  
-ax.stock_img();
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)  
+ax<span style="color:#f92672">.</span>stock_img();
 
-# Define gridline locations and draw the lines using cartopy's built-in gridliner:
-xticks = np.arange(-150.0,-40.0,20)
-yticks =np.arange(10,80,10)
-ax.gridlines()
+<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
+xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
+yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+ax<span style="color:#f92672">.</span>gridlines()
 
-# Standard 6,000 km scale bar.
-scale_bar(ax, (0.85, 0.2), 500 ,plot_kwargs = dict(linestyle='dashed', color='black'))
+<span style="color:#75715e"># Standard 6,000 km scale bar.</span>
+scale_bar(ax, (<span style="color:#ae81ff">0.85</span>, <span style="color:#ae81ff">0.2</span>), <span style="color:#ae81ff">500</span> ,plot_kwargs <span style="color:#f92672">=</span> dict(linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dashed&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>))
 
-cbar = plt.colorbar(mm, orientation='horizontal', shrink=0.75, drawedges='True', ticks=np.arange(-28, 28.1, 4),extend='both')
-cbar.set_label(u'\n Projection = Lambert Conformal Conic / Lambert Conique Conforme\nResolution: 5 Arcs-Minutes (10 km)\nData provided by Natural Resources Canada and the University of Washington/ Données fournies par Ressources Naturelles Canada et l Université de Washington', size='medium') # Affichage de la légende de la barre de couleur
-cbar.ax.tick_params(labelsize=17) 
+cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm, orientation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;horizontal&#39;</span>, shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;True&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28.1</span>, <span style="color:#ae81ff">4</span>),extend<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
+cbar<span style="color:#f92672">.</span>set_label(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> Projection = Lambert Conformal Conic / Lambert Conique Conforme</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Resolution: 5 Arcs-Minutes (10 km)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Data provided by Natural Resources Canada and the University of Washington/ Données fournies par Ressources Naturelles Canada et l Université de Washington&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;medium&#39;</span>) <span style="color:#75715e"># Affichage de la légende de la barre de couleur</span>
+cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>) 
  
-plt.xlabel(u'\n\n\nTemperature / Température (°C)',size='x-large')
-string_title=u'Daily Minimum Temperature / Température Minimale Quotidienne\n in June / en Juin \nMonthly Mean Climatology / Climatologie Moyenne Mensuelle (1981 - 2010)\n\n'
-plt.title(string_title, size='xx-large')
-plt.savefig('./figures/ANUSPLIN_NLDAS_10km_CLIM_TASMIN_06_1981-2010.png', bbox_inches='tight', pad_inches=0.1)
-plt.show() 
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n\n</span><span style="color:#e6db74">Temperature / Température (°C)&#39;</span>,size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x-large&#39;</span>)
+string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;Daily Minimum Temperature / Température Minimale Quotidienne</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> in June / en Juin </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Monthly Mean Climatology / Climatologie Moyenne Mensuelle (1981 - 2010)</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>
+plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xx-large&#39;</span>)
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#39;./figures/ANUSPLIN_NLDAS_10km_CLIM_TASMIN_06_1981-2010.png&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tight&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+plt<span style="color:#f92672">.</span>show() 
 
-</code></pre>
-
-<p><img src="/img/netcdf/output_20_0.png" alt="png" /></p>
-
-<h2 id="2-another-example-2d-netcdf">2 - Another example  2D Netcdf</h2>
-
+</code></pre></div><p><img src="/img/netcdf/output_20_0.png" alt="png"></p>
+<h2 id="2---another-example--2d-netcdf">2 - Another example  2D Netcdf</h2>
 <ul>
-<li><p>We will work with the climatology of the total monthly precipitation accumulation  (1981-2010) for the month of December.</p>
-
-<pre><code class="language-python">from netCDF4 import Dataset
-import matplotlib.pylab as plt
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import numpy as np
-from carto import scale_bar
-</code></pre>
-
-<pre><code class="language-python">rep_data='./DATA/ANUSPLIN/'
-fic=rep_data+'ANUSPLIN_NLDAS_10km_CLIMATO_PrecTOT_1981_2010_12.nc'
-dset=Dataset(fic)
-</code></pre>
-
-<pre><code class="language-python">precip=dset.variables['PrecTOT'][:].squeeze()
-lon=dset.variables['lon'][:].squeeze()
-lat=dset.variables['lat'][:].squeeze()
-</code></pre>
-
-<pre><code class="language-python">## Interrogeons un peu chaque variable
-print('-----------------------------------------')
-print('dimension de precipitation = ',precip.shape)
-print('Min de precip est = ', np.nanmin(precip))
-print('Max de precip est = ', np.nanmax(precip))
-print('-----------------------------------------')
-print('-----------------------------------------')
-print('dimension de latitude = ',lat.shape)
-print('Min de lat est = ', np.min(lat))
-print('Max de lat est = ', np.max(lat))
-print('-----------------------------------------')
-print('-----------------------------------------')
-print('dimension de longitude = ',lon.shape)
-print('Min de lon est = ', np.min(lon))
-print('Max de lon est = ', np.max(lon))
-print('-----------------------------------------')
-dimension de precipitation =  (1068, 420)
-Min de precip est =  2.2327309
-Max de precip est =  809.1944
-dimension de latitude =  (1068, 420)
-Min de lat est =  25.125
-Max de lat est =  60.041664
-dimension de longitude =  (1068, 420)
-Min de lon est =  -140.95833
-Max de lon est =  -52.04167
-</code></pre>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(22,12))
-
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-130,-60,18,62])
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-ax.add_feature(cfeature.LAND.with_scale('50m'))
-ax.add_feature(cfeature.LAKES.with_scale('50m'))
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))
-
-## Choisissons une colormap
-cmap0=plt.cm.jet_r
-cmap0.set_under('w') ## on met en blanc les valeurs inferieures au min de clev
-cmap0.set_over('darkblue') ## bleu fonce pour les valeurs extremes de pluie
-
-mm = ax.pcolormesh(lon,\
-               lat,\
-               precip,\
-               vmin=0,\
-               vmax=150, \
-               transform=ccrs.PlateCarree(),\
-               cmap=cmap0 )
-
-states_provinces = cfeature.NaturalEarthFeature(
-    category='cultural',
-    name='admin_1_states_provinces_lines',
-    scale='50m',
-    facecolor='none')
-
-ax.add_feature(states_provinces, edgecolor='gray')  
-ax.stock_img();
-
-ax.gridlines()
-
-# Define gridline locations and draw the lines using cartopy's built-in gridliner:
-xticks = np.arange(-150.0,-40.0,20)
-yticks =np.arange(10,80,10)
-
-fig.canvas.draw()
-
-# Standard 6,000 km scale bar.
-scale_bar(ax, (0.85, 0.2), 500 ,plot_kwargs = dict(linestyle='dashed', color='black'))
-
-cbar = plt.colorbar(mm, shrink=0.75, drawedges='True', ticks=np.arange(0, 150.1, 20),extend='both')
-cbar.ax.tick_params(labelsize=17) 
-
-plt.xlabel(u'\Precipitation (mm)',size='x-large')
-string_title=u'Precipitation climatology ANUSPLIN: December 1981-2010'
-plt.title(string_title, size='xx-large')
-plt.savefig('./figures/My_2Dlalon_plot.png', bbox_inches='tight', pad_inches=0.1,  dpi=150)
-plt.show()  
-plt.close()
-</code></pre></li>
+<li>We will work with the climatology of the total monthly precipitation accumulation  (1981-2010) for the month of December.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> carto <span style="color:#f92672">import</span> scale_bar
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">rep_data<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./DATA/ANUSPLIN/&#39;</span>
+fic<span style="color:#f92672">=</span>rep_data<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;ANUSPLIN_NLDAS_10km_CLIMATO_PrecTOT_1981_2010_12.nc&#39;</span>
+dset<span style="color:#f92672">=</span>Dataset(fic)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">precip<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;PrecTOT&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+lon<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+lat<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## Interrogeons un peu chaque variable</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;dimension de precipitation = &#39;</span>,precip<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Min de precip est = &#39;</span>, np<span style="color:#f92672">.</span>nanmin(precip))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Max de precip est = &#39;</span>, np<span style="color:#f92672">.</span>nanmax(precip))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;dimension de latitude = &#39;</span>,lat<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Min de lat est = &#39;</span>, np<span style="color:#f92672">.</span>min(lat))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Max de lat est = &#39;</span>, np<span style="color:#f92672">.</span>max(lat))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;dimension de longitude = &#39;</span>,lon<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Min de lon est = &#39;</span>, np<span style="color:#f92672">.</span>min(lon))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Max de lon est = &#39;</span>, np<span style="color:#f92672">.</span>max(lon))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-----------------------------------------&#39;</span>)
+    dimension de precipitation <span style="color:#f92672">=</span>  (<span style="color:#ae81ff">1068</span>, <span style="color:#ae81ff">420</span>)
+    Min de precip est <span style="color:#f92672">=</span>  <span style="color:#ae81ff">2.2327309</span>
+    Max de precip est <span style="color:#f92672">=</span>  <span style="color:#ae81ff">809.1944</span>
+    dimension de latitude <span style="color:#f92672">=</span>  (<span style="color:#ae81ff">1068</span>, <span style="color:#ae81ff">420</span>)
+    Min de lat est <span style="color:#f92672">=</span>  <span style="color:#ae81ff">25.125</span>
+    Max de lat est <span style="color:#f92672">=</span>  <span style="color:#ae81ff">60.041664</span>
+    dimension de longitude <span style="color:#f92672">=</span>  (<span style="color:#ae81ff">1068</span>, <span style="color:#ae81ff">420</span>)
+    Min de lon est <span style="color:#f92672">=</span>  <span style="color:#f92672">-</span><span style="color:#ae81ff">140.95833</span>
+    Max de lon est <span style="color:#f92672">=</span>  <span style="color:#f92672">-</span><span style="color:#ae81ff">52.04167</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">12</span>))
 
-<p><img src="/img/netcdf/output_26_0.png" alt="png" /></p>
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
 
-<h2 id="3-cartopy-example-with-overplot">3 - Cartopy: example with overplot</h2>
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet_r
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74">&#39;darkblue&#39;</span>) <span style="color:#75715e">## bleu fonce pour les valeurs extremes de pluie</span>
 
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>pcolormesh(lon,\
+                   lat,\
+                   precip,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
+
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)  
+ax<span style="color:#f92672">.</span>stock_img();
+
+ax<span style="color:#f92672">.</span>gridlines()
+
+<span style="color:#75715e"># Define gridline locations and draw the lines using cartopy&#39;s built-in gridliner:</span>
+xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
+yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)
+
+fig<span style="color:#f92672">.</span>canvas<span style="color:#f92672">.</span>draw()
+
+<span style="color:#75715e"># Standard 6,000 km scale bar.</span>
+scale_bar(ax, (<span style="color:#ae81ff">0.85</span>, <span style="color:#ae81ff">0.2</span>), <span style="color:#ae81ff">500</span> ,plot_kwargs <span style="color:#f92672">=</span> dict(linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dashed&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>))
+
+cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm, shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;True&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">150.1</span>, <span style="color:#ae81ff">20</span>),extend<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
+cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>) 
+
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;\Precipitation (mm)&#39;</span>,size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x-large&#39;</span>)
+string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;Precipitation climatology ANUSPLIN: December 1981-2010&#39;</span>
+plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xx-large&#39;</span>)
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#39;./figures/My_2Dlalon_plot.png&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tight&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,  dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>)
+plt<span style="color:#f92672">.</span>show()  
+plt<span style="color:#f92672">.</span>close()
+</code></pre></div><p><img src="/img/netcdf/output_26_0.png" alt="png"></p>
+<h2 id="3---cartopy-example-with-overplot">3 - Cartopy: example with overplot</h2>
 <p>Sometimes we want to have many plots on the same picture.</p>
-
 <ul>
 <li>We will work the climatologies of the total monthly accumulation of precipitation (1981-2010) for all the months of the year.</li>
 </ul>
-
 <p>We will produce the same previous operation but for each month using a loop for.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## we import librairies that we need</span>
 
-<pre><code class="language-python">## we import librairies that we need
+<span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> carto <span style="color:#f92672">import</span> scale_bar
 
-from netCDF4 import Dataset
-import matplotlib.pylab as plt
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import numpy as np
-from carto import scale_bar
+month_name<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Jan&#34;</span>,<span style="color:#e6db74">&#34;Feb&#34;</span>,<span style="color:#e6db74">&#34;Mar&#34;</span>,<span style="color:#e6db74">&#34;Apr&#34;</span>,<span style="color:#e6db74">&#34;May&#34;</span>,<span style="color:#e6db74">&#34;June&#34;</span>,<span style="color:#e6db74">&#34;Jul&#34;</span>,<span style="color:#e6db74">&#34;Aug&#34;</span>,<span style="color:#e6db74">&#34;Sep&#34;</span>,<span style="color:#e6db74">&#34;Oct&#34;</span>,<span style="color:#e6db74">&#34;Nov&#34;</span>,<span style="color:#e6db74">&#34;Dec&#34;</span>]
+rep_data<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./DATA/ANUSPLIN/&#39;</span>
 
-month_name=[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;June&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;]
-rep_data='./DATA/ANUSPLIN/'
+fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">15</span>))
+clevs<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">150.1</span>,<span style="color:#ae81ff">5</span>)
+<span style="color:#75715e">## Colormap we will use</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet_r
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74">&#39;w&#39;</span>) 
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74">&#39;darkblue&#39;</span>)
 
-fig=plt.figure(figsize=(12,15))
-clevs=np.arange(5,150.1,5)
-## Colormap we will use
-cmap0=plt.cm.jet_r
-cmap0.set_under('w') 
-cmap0.set_over('darkblue')
-
-for imonth in np.arange(1,13):  # loop over 12 months
-    ax=fig.add_subplot(4,3,imonth, projection=ccrs.LambertConformal())   
-    fic=rep_data+'ANUSPLIN_NLDAS_10km_CLIMATO_PrecTOT_1981_2010_'+'{:02d}'.format(imonth)+'.nc'
-    dset=Dataset(fic)
-    precip=dset.variables['PrecTOT'][:].squeeze()
-    lon=dset.variables['lon'][:].squeeze()
-    lat=dset.variables['lat'][:].squeeze()
+<span style="color:#66d9ef">for</span> imonth <span style="color:#f92672">in</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">13</span>):  <span style="color:#75715e"># loop over 12 months</span>
+    ax<span style="color:#f92672">=</span>fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>,imonth, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())   
+    fic<span style="color:#f92672">=</span>rep_data<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;ANUSPLIN_NLDAS_10km_CLIMATO_PrecTOT_1981_2010_&#39;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(imonth)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.nc&#39;</span>
+    dset<span style="color:#f92672">=</span>Dataset(fic)
+    precip<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;PrecTOT&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+    lon<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+    lat<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
     
-    ax.set_extent([-130,-60,18,62])
-    ax.coastlines(resolution='110m');
-    ax.add_feature(cfeature.LAND.with_scale('50m'))
-    ax.add_feature(cfeature.OCEAN.with_scale('50m'))
-    ax.add_feature(cfeature.LAKES.with_scale('50m'))
-    ax.add_feature(cfeature.BORDERS.with_scale('50m'))
+    ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">130</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">62</span>])
+    ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))
 
-    mm = ax.pcolormesh(lon,\
+    mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>pcolormesh(lon,\
                    lat,\
                    precip,\
-                   vmin=0,\
-                   vmax=150, \
-                   transform=ccrs.PlateCarree(),\
-                   cmap=cmap0 )
-    plt.title('Normale '+ month_name[imonth-1],fontsize=12)
-    states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='50m',
-        facecolor='none')
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Normale &#39;</span><span style="color:#f92672">+</span> month_name[imonth<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>],fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+    states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-    ax.add_feature(states_provinces, edgecolor='gray')  
-    ax.stock_img();
-    ax.gridlines();
-    # Standard 6,000 km scale bar.
-    scale_bar(ax, (0.85, 0.2), 500 ,plot_kwargs = dict(linestyle='dashed', color='black'))
+    ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)  
+    ax<span style="color:#f92672">.</span>stock_img();
+    ax<span style="color:#f92672">.</span>gridlines();
+    <span style="color:#75715e"># Standard 6,000 km scale bar.</span>
+    scale_bar(ax, (<span style="color:#ae81ff">0.85</span>, <span style="color:#ae81ff">0.2</span>), <span style="color:#ae81ff">500</span> ,plot_kwargs <span style="color:#f92672">=</span> dict(linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dashed&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>))
 
-plt.savefig('./figures/My_2Dlalon_multipanel_plot.png')
-plt.show()
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#39;./figures/My_2Dlalon_multipanel_plot.png&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf/output_28_0.png" alt="png"></p>
+<h2 id="4---cartopy--modis">4 - Cartopy:  MODIS</h2>
+<p><a href="https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.2km.jpg">https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.2km.jpg</a></p>
+<p><a href="https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.txt">https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.txt</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">20</span>))
+
+fname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./figures/Miriam.A2012270.2050.1km.jpg&#39;</span>
+img_extent <span style="color:#f92672">=</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">120.67660000000001</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">106.32104523100001</span>, <span style="color:#ae81ff">13.2301484511245</span>, <span style="color:#ae81ff">30.766899999999502</span>)
+img <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>imread(fname)
+
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
+
+<span style="color:#75715e"># set a margin around the data</span>
+ax<span style="color:#f92672">.</span>set_xmargin(<span style="color:#ae81ff">0.05</span>)
+ax<span style="color:#f92672">.</span>set_ymargin(<span style="color:#ae81ff">0.10</span>)
+
+<span style="color:#75715e"># ajout de l&#39;image</span>
+ax<span style="color:#f92672">.</span>imshow(img, origin<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper&#39;</span>, extent<span style="color:#f92672">=</span>img_extent, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree())
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50m&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># ajout d&#39;une ville</span>
+ax<span style="color:#f92672">.</span>plot(<span style="color:#f92672">-</span><span style="color:#ae81ff">117.1625</span>, <span style="color:#ae81ff">32.715</span>, <span style="color:#e6db74">&#39;bo&#39;</span>, markersize<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic())
+ax<span style="color:#f92672">.</span>text(<span style="color:#f92672">-</span><span style="color:#ae81ff">117</span>, <span style="color:#ae81ff">33</span>, <span style="color:#e6db74">&#39;San Diego&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>Geodetic())
+</code></pre></div><pre><code>Text(-117, 33, 'San Diego')
 </code></pre>
-
-<p><img src="/img/netcdf/output_28_0.png" alt="png" /></p>
-
-<h2 id="4-cartopy-modis">4 - Cartopy:  MODIS</h2>
-
-<p><a href="https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.2km.jpg" target="_blank">https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.2km.jpg</a></p>
-
-<p><a href="https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.txt" target="_blank">https://lance-modis.eosdis.nasa.gov/imagery/gallery/2012270-0926/Miriam.A2012270.2050.txt</a></p>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(12, 20))
-
-fname = './figures/Miriam.A2012270.2050.1km.jpg'
-img_extent = (-120.67660000000001, -106.32104523100001, 13.2301484511245, 30.766899999999502)
-img = plt.imread(fname)
-
-ax = plt.axes(projection=ccrs.PlateCarree())
-
-# set a margin around the data
-ax.set_xmargin(0.05)
-ax.set_ymargin(0.10)
-
-# ajout de l'image
-ax.imshow(img, origin='upper', extent=img_extent, transform=ccrs.PlateCarree())
-ax.coastlines(resolution='50m', color='black', linewidth=1)
-
-# ajout d'une ville
-ax.plot(-117.1625, 32.715, 'bo', markersize=7, transform=ccrs.Geodetic())
-ax.text(-117, 33, 'San Diego', transform=ccrs.Geodetic())
-</code></pre>
-
-<pre><code>Text(-117, 33, 'San Diego')
-</code></pre>
-
-<p><img src="/img/netcdf/output_30_1.png" alt="png" /></p>
+<p><img src="/img/netcdf/output_30_1.png" alt="png"></p>
 
           </div>
 
@@ -1108,7 +1037,7 @@ ax.text(-117, 33, 'San Diego', transform=ccrs.Geodetic())
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Tutorial_Python_Netcdf/3-Cartopy_Library.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cTutorial_Python_Netcdf%5c3-Cartopy_Library.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

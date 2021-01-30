@@ -32,7 +32,7 @@
 - Netcdf: Select closest points using CKDTree In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.
 To select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.
 Different method are considered here:
-- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared: - \begin{equation*} $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$) \end{equation*} - query ball point : Find all pairs of points whose distance is at most one distance  1- Let&rsquo;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy.">
+- nearest neighbour- nearest neighbours, weighting with the inverse of distance squared: - \begin{equation*}$T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)\end{equation*}- query ball point : Find all pairs of points whose distance is at most one distance 1- Let&rsquo;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/ckdtree_netcdf/">
@@ -122,7 +122,7 @@ Different method are considered here:
 - Netcdf: Select closest points using CKDTree In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.
 To select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.
 Different method are considered here:
-- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared: - \begin{equation*} $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$) \end{equation*} - query ball point : Find all pairs of points whose distance is at most one distance  1- Let&rsquo;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy."><meta property="og:image" content="/post/ckdtree_netcdf/featured.png">
+- nearest neighbour- nearest neighbours, weighting with the inverse of distance squared: - \begin{equation*}$T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)\end{equation*}- query ball point : Find all pairs of points whose distance is at most one distance 1- Let&rsquo;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy."><meta property="og:image" content="/post/ckdtree_netcdf/featured.png">
   <meta property="twitter:image" content="/post/ckdtree_netcdf/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -178,7 +178,7 @@ Different method are considered here:
       "url": "/img/icon-512.png"
     }
   },
-  "description": "﻿\n- Netcdf: Select closest points using CKDTree In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.\nTo select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.\nDifferent method are considered here:\n- nearest neighbour - nearest neighbours, weighting with the inverse of distance squared: - \\begin{equation*} $T_t = \\frac{\\sum_{i=1}^{m}T_{s,i}w_i}{\\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$) \\end{equation*} - query ball point : Find all pairs of points whose distance is at most one distance  1- Let\u0026rsquo;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy."
+  "description": "﻿\n- Netcdf: Select closest points using CKDTree In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.\nTo select closest grid points, we will use here one approach using cKDTree class from scipy.spatial package.\nDifferent method are considered here:\n- nearest neighbour\r- nearest neighbours, weighting with the inverse of distance squared: - \\begin{equation*}\r$T_t = \\frac{\\sum_{i=1}^{m}T_{s,i}w_i}{\\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)\r\\end{equation*}\r- query ball point : Find all pairs of points whose distance is at most one distance\r 1- Let\u0026rsquo;s import Python librairies #for Netcdf manipulation #import netCDF4 #from netCDF4 import Dataset import xarray as xr #for array manipulation import numpy as np import pandas as pd #for plotting import cartopy."
 }
 </script>
 
@@ -542,18 +542,11 @@ Different method are considered here:
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<p>﻿</p>
-
-<h2 id="netcdf-select-closest-points-using-ckdtree">- Netcdf: Select closest points using CKDTree</h2>
-
+      <p>﻿</p>
+<h2 id="--netcdf-select-closest-points-using-ckdtree">- Netcdf: Select closest points using CKDTree</h2>
 <p>In this post, we are going to define an algorithm to locate the closest points to a reference point, by using coordinate transformations, k-dimensional trees, and xarray pointwise indexing.</p>
-
-<p>To select closest grid points, we will use here one approach using <a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html" target="_blank">cKDTree</a> class from scipy.spatial package.</p>
-
+<p>To select closest grid points, we will use here one approach using <a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html">cKDTree</a> class from scipy.spatial package.</p>
 <p>Different method are considered here:</p>
-
 <pre><code>- nearest neighbour
 - nearest neighbours, weighting with the inverse of distance squared: 
 - 
@@ -563,479 +556,394 @@ $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$)
 
 - query ball point : Find all pairs of points whose distance is at most one distance
 </code></pre>
+<h3 id="1--lets-import-python-librairies">1- Let&rsquo;s import Python librairies</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#for Netcdf manipulation</span>
+<span style="color:#75715e">#import netCDF4</span>
+<span style="color:#75715e">#from netCDF4 import Dataset</span>
+<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
 
-<h3 id="1-let-s-import-python-librairies">1- Let&rsquo;s import Python librairies</h3>
+<span style="color:#75715e">#for array manipulation</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-<pre><code class="language-python">#for Netcdf manipulation
-#import netCDF4
-#from netCDF4 import Dataset
-import xarray as xr
+<span style="color:#75715e">#for plotting</span>
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
 
-#for array manipulation
-import numpy as np
-import pandas as pd
-
-#for plotting
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import matplotlib.pylab as plt
-
-#for interpolation
-from scipy.spatial import cKDTree
-</code></pre>
-
-<h3 id="2-loading-netcdf-files">2- Loading Netcdf files</h3>
-
+<span style="color:#75715e">#for interpolation</span>
+<span style="color:#f92672">from</span> scipy.spatial <span style="color:#f92672">import</span> cKDTree
+</code></pre></div><h3 id="2--loading-netcdf-files">2- Loading Netcdf files</h3>
 <p>We are going to use daily ERA5 reanalysis data from April 1st to 31th of october 2018.</p>
-
-<pre><code class="language-python">unique_dataDIR = 'K:/PROJETS/PROJET_FIRE_INDEX/ERA5_FWI_Netcdf/ERA5_FWI_QC_SNOW_New_2018_from_4_to_8.nc'
-TAS = xr.open_dataset(unique_dataDIR)
-TAS.lon.shape, TAS.lat.shape,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">unique_dataDIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;K:/PROJETS/PROJET_FIRE_INDEX/ERA5_FWI_Netcdf/ERA5_FWI_QC_SNOW_New_2018_from_4_to_8.nc&#39;</span>
+TAS <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(unique_dataDIR)
+TAS<span style="color:#f92672">.</span>lon<span style="color:#f92672">.</span>shape, TAS<span style="color:#f92672">.</span>lat<span style="color:#f92672">.</span>shape,
+</code></pre></div><pre><code>((121,), (77,))
 </code></pre>
-
-<pre><code>((121,), (77,))
-</code></pre>
-
 <p>Regrid 1D latitude and longitude to 2D grid.</p>
-
-<pre><code class="language-python">lon2d, lat2d = np.meshgrid(TAS.lon, TAS.lat)
-lon2d.shape, lat2d.shape
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lon2d, lat2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(TAS<span style="color:#f92672">.</span>lon, TAS<span style="color:#f92672">.</span>lat)
+lon2d<span style="color:#f92672">.</span>shape, lat2d<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>((77, 121), (77, 121))
 </code></pre>
-
-<pre><code>((77, 121), (77, 121))
-</code></pre>
-
 <p>Let’s have a quick look at our dataset, we will plot one day in our time range:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">6</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">75</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">52</span>])
+ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))       
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))     
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))    
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))    
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;physical&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,    
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coastline&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
 
-<pre><code class="language-python">fig = plt.figure(figsize=(12,6))
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-75,-60,50,52])
-ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))      
-ax.add_feature(cfeature.LAND.with_scale('50m'))       
-ax.add_feature(cfeature.LAKES.with_scale('50m'))     
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))    
-ax.add_feature(cfeature.RIVERS.with_scale('50m'))    
-coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',    
-                        facecolor='none', name='coastline')
-ax.add_feature(coast, edgecolor='black')
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='10m',
-        facecolor='none')
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
 
-ax.add_feature(states_provinces, edgecolor='gray')
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74">&#39;darkblue&#39;</span>) 
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74">&#39;darkred&#39;</span>) 
 
-cmap0=plt.cm.jet
-cmap0.set_under('darkblue') 
-cmap0.set_over('darkred') 
-
-mm = ax.contourf(TAS.lon,\
-                   TAS.lat,\
-                   TAS.sel(time='2018-08-01').FWI,\
-                   vmin=0,\
-                   vmax=20, \
-                   transform=ccrs.PlateCarree(),\
-                   levels=np.arange(0, 20, 1.0),\
-                   cmap=cmap0 )
-ax.scatter(lon2d, lat2d, transform=ccrs.PlateCarree(), s=5)
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>&lt;matplotlib.collections.PathCollection at 0xc7d6828&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.collections.PathCollection at 0xc7d6828&gt;
-</code></pre>
-
-<p><img src="output_8_1.png" alt="png" /></p>
-
+<p><img src="output_8_1.png" alt="png"></p>
 <p>The blue dots in the plot identify the grid points.</p>
-
 <p>What we want to achieve is to come up with a way to compare distances between a reference point (defined by latitude and longitude values), and all grid points, and pick the minimum value.</p>
-
 <p>But first, we need to measure distances between two points on our planet, given their geodetic (latitude/longitude/altitude) coordinates.</p>
-
 <p>In this post, we are going to use the cartesian or ECEF (“earth-centered, earth-fixed”) geographic coordinate system, which represents positions (in meters) as X, Y, and Z coordinates, approximating the earth surface as an ellipsoid of revolution (close enough for our purposes).</p>
-
 <p>Once we convert our latitude/longitude coordinates to cartesian coordinates, measuring the distance between two points is as simple as computing the Euclidean distance between them.</p>
-
 <p>The conversion between cartesian and geodetic coordinates latitude, longitude is done according to:</p>
-
-<p><a href="https://www.codecogs.com/eqnedit.php?latex=\begin{bmatrix}&space;X\\&space;Y\\&space;Z&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;r.\cos&space;\phi&space;.\cos&space;\lambda&space;\\&space;r.\cos&space;\phi&space;.\sin&space;\lambda&space;\\&space;(1-e^{2}))r.\sin&space;\phi&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix}&space;X\\&space;Y\\&space;Z&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;r.\cos&space;\phi&space;.\cos&space;\lambda&space;\\&space;r.\cos&space;\phi&space;.\sin&space;\lambda&space;\\&space;(1-e^{2}))r.\sin&space;\phi&space;\end{bmatrix}" title="\begin{bmatrix} X\\ Y\\ Z \end{bmatrix} = \begin{bmatrix} r.\cos \phi .\cos \lambda \\ r.\cos \phi .\sin \lambda \\ (1-e^{2}))r.\sin \phi \end{bmatrix}" /></a></p>
-
-<p>Where <a href="https://www.codecogs.com/eqnedit.php?latex=r&space;=&space;\frac{a}{\sqrt{1-e^2&space;sin^2&space;\phi&space;}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r&space;=&space;\frac{a}{\sqrt{1-e^2&space;sin^2&space;\phi&space;}}" title="r = \frac{a}{\sqrt{1-e^2 sin^2 \phi }}" /></a>    is the local curvature of the ellipsoid along the first vertical, and where e, the first eccentricity, and a, the semi-major axis, are the parameters defining the ellipsoid.</p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>Where <!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->    is the local curvature of the ellipsoid along the first vertical, and where e, the first eccentricity, and a, the semi-major axis, are the parameters defining the ellipsoid.</p>
 <ul>
 <li>Finding the closest</li>
 </ul>
-
-<p>Our problem falls into the class of nearest neighbour searches. A common approach when it comes to finding the nearest neighbour in a number of points with k dimensions is to use a KD-tree, or k-dimensional tree.
+<p>Our problem falls into the class of nearest neighbour searches. A common approach when it comes to finding the nearest neighbour in a number of points with k dimensions is to use a KD-tree, or k-dimensional tree. 
 SciPy library provides a very efficient KD-tree implementation . Once we have constructed our tree, all we have to do is to populate it with a (n,m) shaped array of points and then query it the nearest neighbor to a reference point.</p>
-
 <p>We will have to make use of some NumPy acrobatics to reshape our data structures from a two-dimensional grid to a one-dimensional array, and to convert the returned one-dimensional index to a set of two indices on our original grid.</p>
-
-<pre><code class="language-python">class KDTreeIndex():    
-    &quot;&quot;&quot; A KD-tree implementation for fast point lookup on a 2D grid
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KDTreeIndex</span>():    
+    <span style="color:#e6db74">&#34;&#34;&#34; A KD-tree implementation for fast point lookup on a 2D grid
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Keyword arguments: 
+</span><span style="color:#e6db74">    dataset -- a xarray DataArray containing lat/lon coordinates
+</span><span style="color:#e6db74">               (named &#39;lat&#39; and &#39;lon&#39; respectively)               
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>    
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">transform_coordinates</span>(self, coords):
+        <span style="color:#e6db74">&#34;&#34;&#34; Transform coordinates from geodetic to cartesian
+</span><span style="color:#e6db74">        
+</span><span style="color:#e6db74">        Keyword arguments:
+</span><span style="color:#e6db74">        coords - a set of lan/lon coordinates (e.g. a tuple or 
+</span><span style="color:#e6db74">                 an array of tuples)
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#75715e"># WGS 84 reference coordinate system parameters</span>
+        A <span style="color:#f92672">=</span> <span style="color:#ae81ff">6378.137</span> <span style="color:#75715e"># major axis [km]   </span>
+        E2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">6.69437999014e-3</span> <span style="color:#75715e"># eccentricity squared    </span>
+        
+        coords <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(coords)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float)
+        
+        <span style="color:#75715e"># is coords a tuple? Convert it to an one-element array of tuples</span>
+        <span style="color:#66d9ef">if</span> coords<span style="color:#f92672">.</span>ndim <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+            coords <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([coords])
+        
+        <span style="color:#75715e"># convert to radiants</span>
+        lat_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(coords[:,<span style="color:#ae81ff">0</span>])
+        lon_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(coords[:,<span style="color:#ae81ff">1</span>]) 
+        
+        <span style="color:#75715e"># convert to cartesian coordinates</span>
+        r_n <span style="color:#f92672">=</span> A <span style="color:#f92672">/</span> (np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2 <span style="color:#f92672">*</span> (np<span style="color:#f92672">.</span>sin(lat_rad) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>)))
+        x <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lon_rad)
+        y <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lon_rad)
+        z <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lat_rad)
+        
+        <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>column_stack((x, y, z))
     
-    Keyword arguments: 
-    dataset -- a xarray DataArray containing lat/lon coordinates
-               (named 'lat' and 'lon' respectively)               
-    &quot;&quot;&quot;    
-    def transform_coordinates(self, coords):
-        &quot;&quot;&quot; Transform coordinates from geodetic to cartesian
+    <span style="color:#66d9ef">def</span> __init__(self, dataset):
+        <span style="color:#75715e"># store original dataset shape</span>
+        self<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>shape
+        lon2d, lat2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(dataset<span style="color:#f92672">.</span>lon, dataset<span style="color:#f92672">.</span>lat)
+        <span style="color:#75715e"># reshape and stack coordinates</span>
+        coords <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>column_stack((lat2d<span style="color:#f92672">.</span>ravel(),
+                                  lon2d<span style="color:#f92672">.</span>ravel()))
         
-        Keyword arguments:
-        coords - a set of lan/lon coordinates (e.g. a tuple or 
-                 an array of tuples)
-        &quot;&quot;&quot;
-        # WGS 84 reference coordinate system parameters
-        A = 6378.137 # major axis [km]   
-        E2 = 6.69437999014e-3 # eccentricity squared    
+        <span style="color:#75715e"># construct KD-tree</span>
+        self<span style="color:#f92672">.</span>tree <span style="color:#f92672">=</span> cKDTree(self<span style="color:#f92672">.</span>transform_coordinates(coords))
         
-        coords = np.asarray(coords).astype(np.float)
-        
-        # is coords a tuple? Convert it to an one-element array of tuples
-        if coords.ndim == 1:
-            coords = np.array([coords])
-        
-        # convert to radiants
-        lat_rad = np.radians(coords[:,0])
-        lon_rad = np.radians(coords[:,1]) 
-        
-        # convert to cartesian coordinates
-        r_n = A / (np.sqrt(1 - E2 * (np.sin(lat_rad) ** 2)))
-        x = r_n * np.cos(lat_rad) * np.cos(lon_rad)
-        y = r_n * np.cos(lat_rad) * np.sin(lon_rad)
-        z = r_n * (1 - E2) * np.sin(lat_rad)
-        
-        return np.column_stack((x, y, z))
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query</span>(self, point, k):
+        <span style="color:#e6db74">&#34;&#34;&#34; Query the kd-tree for nearest neighbour.
+</span><span style="color:#e6db74">        Keyword arguments:
+</span><span style="color:#e6db74">        point -- a (lat, lon) tuple or array of tuples
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        d, inds  <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tree<span style="color:#f92672">.</span>query(self<span style="color:#f92672">.</span>transform_coordinates(point),k<span style="color:#f92672">=</span>k)
+        w <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> d<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+        <span style="color:#75715e"># regrid to 2D grid</span>
+        indslatlon <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>unravel_index(inds, self<span style="color:#f92672">.</span>shape)
+        <span style="color:#66d9ef">return</span> d, inds, w, indslatlon
     
-    def __init__(self, dataset):
-        # store original dataset shape
-        self.shape = dataset.shape
-        lon2d, lat2d = np.meshgrid(dataset.lon, dataset.lat)
-        # reshape and stack coordinates
-        coords = np.column_stack((lat2d.ravel(),
-                                  lon2d.ravel()))
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query_ball_point</span>(self, point, radius):
+        <span style="color:#e6db74">&#34;&#34;&#34; Query the kd-tree for all point within distance 
+</span><span style="color:#e6db74">        radius of point(s) x
+</span><span style="color:#e6db74">        
+</span><span style="color:#e6db74">        Keyword arguments:
+</span><span style="color:#e6db74">        point -- a (lat, lon) tuple or array of tuples
+</span><span style="color:#e6db74">        radius -- the search radius (km)
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
         
-        # construct KD-tree
-        self.tree = cKDTree(self.transform_coordinates(coords))
-        
-    def query(self, point, k):
-        &quot;&quot;&quot; Query the kd-tree for nearest neighbour.
-        Keyword arguments:
-        point -- a (lat, lon) tuple or array of tuples
-        &quot;&quot;&quot;
-        d, inds  = self.tree.query(self.transform_coordinates(point),k=k)
-        w = 1.0 / d**2
-        # regrid to 2D grid
-        indslatlon = np.unravel_index(inds, self.shape)
-        return d, inds, w, indslatlon
-    
-    def query_ball_point(self, point, radius):
-        &quot;&quot;&quot; Query the kd-tree for all point within distance 
-        radius of point(s) x
-        
-        Keyword arguments:
-        point -- a (lat, lon) tuple or array of tuples
-        radius -- the search radius (km)
-        &quot;&quot;&quot;
-        
-        index = self.tree.query_ball_point(self.transform_coordinates(point),
+        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tree<span style="color:#f92672">.</span>query_ball_point(self<span style="color:#f92672">.</span>transform_coordinates(point),
                                            radius)
 
-        # regrid to 2D grid 
-        index = np.unravel_index(index[0], self.shape)
+        <span style="color:#75715e"># regrid to 2D grid </span>
+        index <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>unravel_index(index[<span style="color:#ae81ff">0</span>], self<span style="color:#f92672">.</span>shape)
         
-        # return DataArray indexers
-        return xr.DataArray(index[0], dims='lat'), \
-               xr.DataArray(index[1], dims='lon')
+        <span style="color:#75715e"># return DataArray indexers</span>
+        <span style="color:#66d9ef">return</span> xr<span style="color:#f92672">.</span>DataArray(index[<span style="color:#ae81ff">0</span>], dims<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lat&#39;</span>), \
+               xr<span style="color:#f92672">.</span>DataArray(index[<span style="color:#ae81ff">1</span>], dims<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lon&#39;</span>)
     
-</code></pre>
-
-<p>We will construct our cKDTree object using one time step from our xarray.</p>
-
-<pre><code class="language-python">latlon_tree = KDTreeIndex(TAS.sel(time='2018-08-01').FWI)
-</code></pre>
-
-<p>We can now query the tree the nearest grid point to one reference point:</p>
-
-<h3 id="3-nearest-neighbour-k-1">3- Nearest neighbour k=1:</h3>
-
+</code></pre></div><p>We will construct our cKDTree object using one time step from our xarray.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latlon_tree <span style="color:#f92672">=</span> KDTreeIndex(TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI)
+</code></pre></div><p>We can now query the tree the nearest grid point to one reference point:</p>
+<h3 id="3--nearest-neighbour-k1">3- Nearest neighbour k=1:</h3>
 <p>Let&rsquo;s select reference point defined by:
-    - latitude = 50 degN
-    - longitude = -68.1461 degE</p>
-
+- latitude = 50 degN
+- longitude = -68.1461 degE</p>
 <p>We can now query the tree the nearest point :</p>
-
-<pre><code class="language-python">site = (50, -68.1461)
-d, inds, w, indslatlon = latlon_tree.query(site, k=1)
-print(inds)
-print(indslatlon)
-</code></pre>
-
-<pre><code>[5871]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">site <span style="color:#f92672">=</span> (<span style="color:#ae81ff">50</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>)
+d, inds, w, indslatlon <span style="color:#f92672">=</span> latlon_tree<span style="color:#f92672">.</span>query(site, k<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">print</span>(inds)
+<span style="color:#66d9ef">print</span>(indslatlon)
+</code></pre></div><pre><code>[5871]
 (array([48], dtype=int64), array([63], dtype=int64))
 </code></pre>
-
-<pre><code class="language-python">latpt = indslatlon[0][0]
-lonpt = indslatlon[1][0]
-print(latpt, lonpt)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latpt <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+lonpt <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(latpt, lonpt)
+</code></pre></div><pre><code>48 63
 </code></pre>
-
-<pre><code>48 63
-</code></pre>
-
-<p>The query method actually  returns:
-- two array objects a latitude and a longitude indexer
-- one 1D indexer
-- one distance value
-- one corresponding weighting.</p>
-
-<pre><code>*inds value (ie 5871) represents the index found for our one-dimensional array. 
-
-*indslatlon are the corresponding longitude and latitude values for the closest point found.
-</code></pre>
-
+<p>The query method actually  returns:</p>
+<ul>
+<li>
+<p>two array objects a latitude and a longitude indexer</p>
+</li>
+<li>
+<p>one 1D indexer</p>
+</li>
+<li>
+<p>one distance value</p>
+</li>
+<li>
+<p>one corresponding weighting.</p>
+<p>*inds value (ie 5871) represents the index found for our one-dimensional array.</p>
+<p>*indslatlon are the corresponding longitude and latitude values for the closest point found.</p>
+</li>
+</ul>
 <p>To extract the xarray field value using our previous index, first we need to convert a two-dimensional grid to a one-dimensional array and then select index value.</p>
-
-<pre><code class="language-python">TAS.sel(time='2018-08-01').FWI.values.flatten()[inds]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds]
+</code></pre></div><pre><code>array([10.517308])
 </code></pre>
-
-<pre><code>array([10.517308])
-</code></pre>
-
-<pre><code class="language-python">TAS.sel(time='2018-08-01').FWI[latpt,lonpt]
-</code></pre>
-
-<pre><code>&lt;xarray.DataArray 'FWI' ()&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[latpt,lonpt]
+</code></pre></div><pre><code>&lt;xarray.DataArray 'FWI' ()&gt;
 array(10.517308)
 Coordinates:
     lon      float64 -68.25
     lat      float32 50.0
     time     datetime64[ns] 2018-08-01
 </code></pre>
-
 <p>Let&rsquo;s make a quick look:</p>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(25,12))
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-72,-65,49,51])
-   # ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
-ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
-ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac    
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
-ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières 
-coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
-                        facecolor='none', name='coastline')
-ax.add_feature(coast, edgecolor='black')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">12</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">72</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">51</span>])
+   <span style="color:#75715e"># ax.coastlines(resolution=&#39;110m&#39;);</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      <span style="color:#75715e"># couche lac    </span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;physical&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coastline&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
 
   
-states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='10m',
-        facecolor='none')
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-ax.add_feature(states_provinces, edgecolor='gray')
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
 
-## Choisissons une colormap
-cmap0=plt.cm.jet
-cmap0.set_under('darkblue') ## on met en blanc les valeurs inferieures au min de clev
-cmap0.set_over('darkred') ## bleu fonce pour les valeurs extremes de pluie
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74">&#39;darkblue&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74">&#39;darkred&#39;</span>) <span style="color:#75715e">## bleu fonce pour les valeurs extremes de pluie</span>
 
-mm = ax.contourf(TAS.lon,\
-                   TAS.lat,\
-                   TAS.sel(time='2018-08-01').FWI,\
-                   vmin=0,\
-                   vmax=20, \
-                   transform=ccrs.PlateCarree(),\
-                   levels=np.arange(0, 20, 1.0),\
-                   cmap=cmap0 )
-ax.scatter(lon2d, lat2d, transform=ccrs.PlateCarree(), s=5, label='ERA5 grid points')
-ax.scatter(TAS.sel(time='2018-08-01').FWI[latpt,lonpt].lon, 
-           TAS.sel(time='2018-08-01').FWI[latpt,lonpt].lat, 
-           color='r', transform=ccrs.PlateCarree(), s=100, label='closest grid point')
-ax.scatter(-68.1461, 50, transform=ccrs.PlateCarree(), marker='x', color='black', s=300, label='reference point')
-plt.legend(loc='upper left', numpoints=1, ncol=3, fontsize=20)
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ERA5 grid points&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[latpt,lonpt]<span style="color:#f92672">.</span>lon, 
+           TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[latpt,lonpt]<span style="color:#f92672">.</span>lat, 
+           color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;closest grid point&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(<span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>, <span style="color:#ae81ff">50</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;reference point&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, numpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
 
+</code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0xc7d6358&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.legend.Legend at 0xc7d6358&gt;
-</code></pre>
-
-<p><img src="output_22_1.png" alt="png" /></p>
-
-<h3 id="4-nearest-neighbours-k-10">4- Nearest neighbours k=10</h3>
-
+<p><img src="output_22_1.png" alt="png"></p>
+<h3 id="4--nearest-neighbours-k10">4- Nearest neighbours k=10</h3>
 <p>We will now make the same exercice using k=10.</p>
-
-<pre><code class="language-python">site = (50, -68.1461)
-d, inds, w, indslatlon = ground_pixel_tree.query(site, k=10)
-print(d)
-print(w)
-print(inds)
-print(indslatlon)
-</code></pre>
-
-<pre><code>[[ 7.44918778 10.47474677 25.37308687 28.39863145 28.78330094 28.79213291
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">site <span style="color:#f92672">=</span> (<span style="color:#ae81ff">50</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>)
+d, inds, w, indslatlon <span style="color:#f92672">=</span> ground_pixel_tree<span style="color:#f92672">.</span>query(site, k<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+<span style="color:#66d9ef">print</span>(d)
+<span style="color:#66d9ef">print</span>(w)
+<span style="color:#66d9ef">print</span>(inds)
+<span style="color:#66d9ef">print</span>(indslatlon)
+</code></pre></div><pre><code>[[ 7.44918778 10.47474677 25.37308687 28.39863145 28.78330094 28.79213291
   29.70566615 29.72368634 37.59953757 37.68733316]]
 [[0.01802114 0.00911408 0.00155329 0.00123995 0.00120703 0.00120629
   0.00113324 0.00113187 0.00070735 0.00070406]]
 [[5871 5872 5870 5873 5750 5992 5751 5993 5749 5991]]
 (array([[48, 48, 48, 48, 47, 49, 47, 49, 47, 49]], dtype=int64), array([[63, 64, 62, 65, 63, 63, 64, 64, 62, 62]], dtype=int64))
 </code></pre>
-
-<pre><code class="language-python">TAS.sel(time='2018-08-01').FWI.values.flatten()[inds]
-</code></pre>
-
-<pre><code>array([[10.517308  ,  9.87137321,  8.57146189, 11.99096501,  9.32552318,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds]
+</code></pre></div><pre><code>array([[10.517308  ,  9.87137321,  8.57146189, 11.99096501,  9.32552318,
         10.0954969 ,  9.84150618, 11.8046335 ,  9.26170112,  8.3454113 ]])
 </code></pre>
-
-<pre><code class="language-python">latpts = indslatlon[0][0]
-lonpts = indslatlon[1][0]
-print(latpts, lonpts)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+lonpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(latpts, lonpts)
+</code></pre></div><pre><code>[48 48 48 48 47 49 47 49 47 49] [63 64 62 65 63 63 64 64 62 62]
 </code></pre>
-
-<pre><code>[48 48 48 48 47 49 47 49 47 49] [63 64 62 65 63 63 64 64 62 62]
-</code></pre>
-
 <p>We can know Interpolate our field using inverse distance weighting, using 10 nearest neighbours (k=10):</p>
-
 <p>(i.e. Tt=∑mi=1Ts,iwi∑mi=1wi, wi=1/d2i).</p>
-
-<pre><code class="language-python">np.sum(w * TAS.sel(time='2018-08-01').FWI.values.flatten()[inds], axis=1) / np.sum(w, axis=1)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>sum(w <span style="color:#f92672">*</span> TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>sum(w, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>array([10.21868978])
 </code></pre>
-
-<pre><code>array([10.21868978])
-</code></pre>
-
 <p>Let&rsquo;s make a quick look:</p>
-
-<pre><code class="language-python">latpts = indslatlon[0][0]
-lonpts = indslatlon[1][0]
-</code></pre>
-
-<pre><code class="language-python">TAS.sel(time='2018-08-01').FWI[latpts,lonpts].lon
-</code></pre>
-
-<pre><code>&lt;xarray.DataArray 'lon' (lon: 10)&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">latpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+lonpts <span style="color:#f92672">=</span> indslatlon[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[latpts,lonpts]<span style="color:#f92672">.</span>lon
+</code></pre></div><pre><code>&lt;xarray.DataArray 'lon' (lon: 10)&gt;
 array([-68.25, -68.  , -68.5 , -67.75, -68.25, -68.25, -68.  , -68.  , -68.5 ,
        -68.5 ])
 Coordinates:
   * lon      (lon) float64 -68.25 -68.0 -68.5 -67.75 ... -68.0 -68.0 -68.5 -68.5
     time     datetime64[ns] 2018-08-01
 </code></pre>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(25,12))
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-72,-65,49,51])
-   # ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
-ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
-ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac    
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
-ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières 
-coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
-                        facecolor='none', name='coastline')
-ax.add_feature(coast, edgecolor='black')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">12</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">72</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">51</span>])
+   <span style="color:#75715e"># ax.coastlines(resolution=&#39;110m&#39;);</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      <span style="color:#75715e"># couche lac    </span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;physical&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coastline&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
 
   
-states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='10m',
-        facecolor='none')
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-ax.add_feature(states_provinces, edgecolor='gray')
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
 
-## Choisissons une colormap
-cmap0=plt.cm.jet
-cmap0.set_under('darkblue') ## on met en blanc les valeurs inferieures au min de clev
-cmap0.set_over('darkred') ## bleu fonce pour les valeurs extremes de pluie
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74">&#39;darkblue&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74">&#39;darkred&#39;</span>) <span style="color:#75715e">## bleu fonce pour les valeurs extremes de pluie</span>
 
-mm = ax.contourf(TAS.lon,\
-                   TAS.lat,\
-                   TAS.sel(time='2018-08-01').FWI,\
-                   vmin=0,\
-                   vmax=20, \
-                   transform=ccrs.PlateCarree(),\
-                   levels=np.arange(0, 20, 1.0),\
-                   cmap=cmap0 )
-ax.scatter(lon2d, lat2d, transform=ccrs.PlateCarree(), s=5, label='ERA5 grid points')
-ax.scatter(TAS.sel(time='2018-08-01').FWI[latpts,lonpts].lon, 
-           TAS.sel(time='2018-08-01').FWI[latpts,lonpts].lat, 
-           color='r', transform=ccrs.PlateCarree(), s=100, label='closest grid points')
-ax.scatter(-68.1461, 50, transform=ccrs.PlateCarree(), marker='x', color='black', s=300, label='reference point')
-plt.legend(loc='upper left', numpoints=1, ncol=3, fontsize=20)
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ERA5 grid points&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[latpts,lonpts]<span style="color:#f92672">.</span>lon, 
+           TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[latpts,lonpts]<span style="color:#f92672">.</span>lat, 
+           color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;closest grid points&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(<span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>, <span style="color:#ae81ff">50</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;reference point&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, numpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0xcb78ac8&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.legend.Legend at 0xcb78ac8&gt;
-</code></pre>
-
-<p><img src="output_32_1.png" alt="png" /></p>
-
+<p><img src="output_32_1.png" alt="png"></p>
 <p>Now we will find all grid points  within a given distance from a reference point, by using the query_ball_point method in SciPy’s KD-tree implementation.</p>
-
 <p>Let’s find out which ground pixels fall into a 700km radius from our reference point:</p>
-
-<pre><code class="language-python">ball_point_index = ground_pixel_tree.query_ball_point(site, 50)
-lons = TAS.sel(time='2018-08-01').FWI[ball_point_index].lon
-lats = TAS.sel(time='2018-08-01').FWI[ball_point_index].lat
-</code></pre>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(25,12))
-ax = plt.subplot(111, projection=ccrs.LambertConformal())
-ax.set_extent([-72,-65,49,51])
-   # ax.coastlines(resolution='110m');
-ax.add_feature(cfeature.OCEAN.with_scale('50m'))      # couche ocean
-ax.add_feature(cfeature.LAND.with_scale('50m'))       # couche land
-ax.add_feature(cfeature.LAKES.with_scale('50m'))      # couche lac    
-ax.add_feature(cfeature.BORDERS.with_scale('50m'))    # couche frontieres
-ax.add_feature(cfeature.RIVERS.with_scale('50m'))     # couche rivières 
-coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',     # ajout de la couche cotière 
-                        facecolor='none', name='coastline')
-ax.add_feature(coast, edgecolor='black')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ball_point_index <span style="color:#f92672">=</span> ground_pixel_tree<span style="color:#f92672">.</span>query_ball_point(site, <span style="color:#ae81ff">50</span>)
+lons <span style="color:#f92672">=</span> TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[ball_point_index]<span style="color:#f92672">.</span>lon
+lats <span style="color:#f92672">=</span> TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI[ball_point_index]<span style="color:#f92672">.</span>lat
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">12</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">111</span>, projection<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal())
+ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">72</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">51</span>])
+   <span style="color:#75715e"># ax.coastlines(resolution=&#39;110m&#39;);</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      <span style="color:#75715e"># couche ocean</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))       <span style="color:#75715e"># couche land</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      <span style="color:#75715e"># couche lac    </span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))    <span style="color:#75715e"># couche frontieres</span>
+ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))     <span style="color:#75715e"># couche rivières </span>
+coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;physical&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,     <span style="color:#75715e"># ajout de la couche cotière </span>
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coastline&#39;</span>)
+ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
 
   
-states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='10m',
-        facecolor='none')
+states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-ax.add_feature(states_provinces, edgecolor='gray')
+ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
 
-## Choisissons une colormap
-cmap0=plt.cm.jet
-cmap0.set_under('darkblue') ## on met en blanc les valeurs inferieures au min de clev
-cmap0.set_over('darkred') ## bleu fonce pour les valeurs extremes de pluie
+<span style="color:#75715e">## Choisissons une colormap</span>
+cmap0<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>jet
+cmap0<span style="color:#f92672">.</span>set_under(<span style="color:#e6db74">&#39;darkblue&#39;</span>) <span style="color:#75715e">## on met en blanc les valeurs inferieures au min de clev</span>
+cmap0<span style="color:#f92672">.</span>set_over(<span style="color:#e6db74">&#39;darkred&#39;</span>) <span style="color:#75715e">## bleu fonce pour les valeurs extremes de pluie</span>
 
-mm = ax.contourf(TAS.lon,\
-                   TAS.lat,\
-                   TAS.sel(time='2018-08-01').FWI,\
-                   vmin=0,\
-                   vmax=20, \
-                   transform=ccrs.PlateCarree(),\
-                   levels=np.arange(0, 20, 1.0),\
-                   cmap=cmap0 )
-ax.scatter(lon2d, lat2d, transform=ccrs.PlateCarree(), s=5, label='ERA5 grid points')
-ax.scatter(lons, 
+mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(TAS<span style="color:#f92672">.</span>lon,\
+                   TAS<span style="color:#f92672">.</span>lat,\
+                   TAS<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2018-08-01&#39;</span>)<span style="color:#f92672">.</span>FWI,\
+                   vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,\
+                   vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, \
+                   transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                   levels<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1.0</span>),\
+                   cmap<span style="color:#f92672">=</span>cmap0 )
+ax<span style="color:#f92672">.</span>scatter(lon2d, lat2d, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ERA5 grid points&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(lons, 
            lats, 
-           color='r', transform=ccrs.PlateCarree(), s=100, label='grid points within 50 km from reference point')
-ax.scatter(-68.1461, 50, transform=ccrs.PlateCarree(), marker='x', color='black', s=300, label='reference point')
-plt.legend(loc='upper left', numpoints=1, ncol=3, fontsize=20)
+           color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;grid points within 50 km from reference point&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter(<span style="color:#f92672">-</span><span style="color:#ae81ff">68.1461</span>, <span style="color:#ae81ff">50</span>, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;reference point&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>, numpoints<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0xcb86b38&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.legend.Legend at 0xcb86b38&gt;
-</code></pre>
-
-<p><img src="output_35_1.png" alt="png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
-
+<p><img src="output_35_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
     </div>
 
     

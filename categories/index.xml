@@ -12,21 +12,5 @@
       <link>/categories/</link>
     </image>
     
-    <item>
-      <title>2</title>
-      <link>/categories/2/</link>
-      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>4</title>
-      <link>/categories/4/</link>
-      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
-      <guid>/categories/4/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

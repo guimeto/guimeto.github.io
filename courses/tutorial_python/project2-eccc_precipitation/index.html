@@ -489,20 +489,18 @@ We will use &lsquo;MONTREAL_preacc_1961_2010.dat&rsquo; file in .data/ directory
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#eccc-precipitation-data">ECCC Precipitation Data</a>
-<ul>
-<li><a href="#1-opening-and-reading-our-time-series">1- Opening and reading our time series</a></li>
-<li><a href="#2-applying-functions-to-datafram-precipitation-indices">2- Applying functions to DataFram:  precipitation indices:</a></li>
-<li><a href="#3-filter-the-data-directly-on-a-dataframe">3- Filter the data directly on a dataframe</a></li>
-<li><a href="#4-updating-our-initial-dataframe">4- Updating our initial DataFrame</a></li>
-<li><a href="#4-viewing-the-results">4- Viewing the results</a></li>
-<li><a href="#bonus-add-correlation-indices-with-the-scipy-library">Bonus: add correlation indices with the scipy library</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#eccc-precipitation-data">ECCC Precipitation Data</a>
+      <ul>
+        <li><a href="#1--opening-and-reading-our-time-series">1- Opening and reading our time series</a></li>
+        <li><a href="#2--applying-functions-to-datafram--precipitation-indices">2- Applying functions to DataFram:  precipitation indices:</a></li>
+        <li><a href="#3--filter-the-data-directly-on-a-dataframe">3- Filter the data directly on a dataframe</a></li>
+        <li><a href="#4--updating-our-initial-dataframe">4- Updating our initial DataFrame</a></li>
+        <li><a href="#4--viewing-the-results">4- Viewing the results</a></li>
+        <li><a href="#bonus-add-correlation-indices-with-the-scipy-library">Bonus: add correlation indices with the scipy library</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
       
@@ -517,55 +515,44 @@ We will use &lsquo;MONTREAL_preacc_1961_2010.dat&rsquo; file in .data/ directory
           <h1>Project 2 ECCC precipitation data</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/pylogo.png" alt="image0" /></p>
-
+            <p><img src="/img/pylogo.png" alt="image0"></p>
 <h2 id="eccc-precipitation-data">ECCC Precipitation Data</h2>
-
 <p>We will continue to discover the functionality of these libraries in a practical case by now analyzing the daily precipitation data recorded by the ECCC stations located at the Montreal Trudeau Airport between the period 1961 and 2010.</p>
-
 <p>We will use &lsquo;MONTREAL_preacc_1961_2010.dat&rsquo; file in .data/ directory.</p>
+<h3 id="1--opening-and-reading-our-time-series">1- Opening and reading our time series</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np 
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#34;ignore&#34;</span>)
 
-<h3 id="1-opening-and-reading-our-time-series">1- Opening and reading our time series</h3>
+df_Precipitation <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame()
+<span style="color:#75715e"># Ouverture du fichier text  </span>
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./DATA/MONTREAL_preacc_1961_2010.dat&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+     rows <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
+data_EC_Montreal <span style="color:#f92672">=</span> [float(row) <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows<span style="color:#f92672">.</span>split()]  
 
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-import datetime
-from datetime import date
-import numpy as np 
-import warnings
-warnings.filterwarnings(&quot;ignore&quot;)
+<span style="color:#75715e"># We know that the time series begins on January 1, 1961</span>
+<span style="color:#75715e"># and ends on December 31, 2010</span>
+<span style="color:#75715e"># We can rebuild the index of Dataframes</span>
 
-df_Precipitation = pd.DataFrame()
-# Ouverture du fichier text  
-with open('./DATA/MONTREAL_preacc_1961_2010.dat', 'r') as file:
-     rows = file.read()
-data_EC_Montreal = [float(row) for row in rows.split()]  
+start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">1961</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2010</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
+delta<span style="color:#f92672">=</span>(end<span style="color:#f92672">-</span>start) 
+nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
+rng <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(start, periods<span style="color:#f92672">=</span>nb_days, freq<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;D&#39;</span>)
 
-# We know that the time series begins on January 1, 1961
-# and ends on December 31, 2010
-# We can rebuild the index of Dataframes
+<span style="color:#75715e"># Create a column from the datetime datatype</span>
+df_Precipitation[<span style="color:#e6db74">&#39;datetime&#39;</span>] <span style="color:#f92672">=</span> rng
+<span style="color:#75715e"># Set the datetime column as the index</span>
+df_Precipitation<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_Precipitation[<span style="color:#e6db74">&#39;datetime&#39;</span>] 
 
-start = date(1961, 1, 1)
-end = date(2010, 12, 31)
-delta=(end-start) 
-nb_days = delta.days + 1 
-rng = pd.date_range(start, periods=nb_days, freq='D')
-
-# Create a column from the datetime datatype
-df_Precipitation['datetime'] = rng
-# Set the datetime column as the index
-df_Precipitation.index = df_Precipitation['datetime'] 
-
-# Create a column from the numeric score variable
-df_Precipitation['Precipitation Montreal'] = data_EC_Montreal
-</code></pre>
-
-<pre><code class="language-python">df_Precipitation.head()
-</code></pre>
-
-<table>
+<span style="color:#75715e"># Create a column from the numeric score variable</span>
+df_Precipitation[<span style="color:#e6db74">&#39;Precipitation Montreal&#39;</span>] <span style="color:#f92672">=</span> data_EC_Montreal
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_Precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -573,32 +560,27 @@ df_Precipitation['Precipitation Montreal'] = data_EC_Montreal
 <th align="right">Precipitation Montreal</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-01 00:00:00</td>
 <td align="left">1961-01-01 00:00:00</td>
 <td align="right">22.66</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-02 00:00:00</td>
 <td align="left">1961-01-02 00:00:00</td>
 <td align="right">1.05</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-03 00:00:00</td>
 <td align="left">1961-01-03 00:00:00</td>
 <td align="right">1.05</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-04 00:00:00</td>
 <td align="left">1961-01-04 00:00:00</td>
 <td align="right">0.66</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-05 00:00:00</td>
 <td align="left">1961-01-05 00:00:00</td>
@@ -606,119 +588,108 @@ df_Precipitation['Precipitation Montreal'] = data_EC_Montreal
 </tr>
 </tbody>
 </table>
-
-<h3 id="2-applying-functions-to-datafram-precipitation-indices">2- Applying functions to DataFram:  precipitation indices:</h3>
-
+<h3 id="2--applying-functions-to-datafram--precipitation-indices">2- Applying functions to DataFram:  precipitation indices:</h3>
 <ul>
 <li>CDD: calculation of the maximum number of consecutive dry days (Precipitation &lt;1mm)</li>
 <li>CWD: calculation of the maximum number of consecutive wet days (Precipitation&gt; 1mm)</li>
 <li>Prcp1: calculation of the percentage of precipitation days (Precipitation&gt; 1mm)</li>
-
-<li><p>SDII: calculation of the precipitation intensity average for wet days (Precipitation&gt; 1mm</p>
-
-<pre><code class="language-python"># calculation of the maximum number of consecutive dry days (inf to 1mm) 
-# on the incoming signal (less than 20% of missing values) 
-def CDD(S):
- import numpy as np
- ind_CDD=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if ((N2/N) &lt; 0.8): 
-     ind_CDD = np.empty(1)
-     ind_CDD = np.nan
- else:
-     temp = 0
-     ind_CDD = 0 
-     j =0
-     while (j &lt; N2):
-         while (j &lt; N2 ) and (S_no_nan[j] &lt; 1.0 ):
-             j += 1
-             temp +=1
-         if ind_CDD &lt; temp:
-             ind_CDD = temp
-         temp = 0
-         j += 1 
- return ind_CDD      
- 
-# calculation of the maximum number of consecutive wet days (sup to 1mm) 
-# on the incoming signal (less than 20% of missing values) 
-def CWD(S):
- import numpy as np
- ind_CWD=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if ((N2/N) &lt; 0.8): 
-     ind_CWD = np.empty(1)
-     ind_CWD = np.nan
- else:
-     temp = 0
-     ind_CWD = 0 
-     j =0
-     while (j &lt; N2):
-         while (j &lt; N2 ) and (S_no_nan[j] &gt; 1.0 ):
-             j += 1
-             temp +=1
-         if ind_CWD &lt; temp:
-             ind_CWD = temp
-         temp = 0
-         j += 1 
- return ind_CWD  
-
-# Calculation of the percentage of precipitation days 
-# on the incoming signal (less than 20% of missing values)
-def Prcp1(S):
- import numpy as np
- ind_Prcp1=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if (N2 == 0):
-     N2=1
-         
- if ((N2/N) &lt; 0.8): 
-     ind_Prcp1 = np.empty(1)
-     ind_Prcp1 = np.nan
- else:
-     ind_Prcp1 = 0
-     for row in S_no_nan:
-         if row &gt;= 1 :
-             ind_Prcp1 += 1 
-                 
-     ind_Prcp1 = 100 * (ind_Prcp1/N2)
- return ind_Prcp1     
-
-# average precipitation intensity for wet days (PR greater than 1mm) (less than 20% missing values)
-
-def SDII(S):
- import numpy as np
- ind_SDII=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if ((N2/N) &lt; 0.8): 
-     ind_SDII = np.empty(1)
-     ind_SDII = np.nan
- else:
-     SS = S[S &gt; 1]        
-     ind_SDII = np.nanmean(SS)
- return ind_SDII      
-</code></pre></li>
+<li>SDII: calculation of the precipitation intensity average for wet days (Precipitation&gt; 1mm</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># calculation of the maximum number of consecutive dry days (inf to 1mm) </span>
+<span style="color:#75715e"># on the incoming signal (less than 20% of missing values) </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">CDD</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_CDD<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_CDD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_CDD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+         ind_CDD <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
+         j <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+         <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2):
+             <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2 ) <span style="color:#f92672">and</span> (S_no_nan[j] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span> ):
+                 j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+                 temp <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+             <span style="color:#66d9ef">if</span> ind_CDD <span style="color:#f92672">&lt;</span> temp:
+                 ind_CDD <span style="color:#f92672">=</span> temp
+             temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+             j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+     <span style="color:#66d9ef">return</span> ind_CDD      
+ 
+<span style="color:#75715e"># calculation of the maximum number of consecutive wet days (sup to 1mm) </span>
+<span style="color:#75715e"># on the incoming signal (less than 20% of missing values) </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">CWD</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_CWD<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_CWD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_CWD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+         ind_CWD <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
+         j <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+         <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2):
+             <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2 ) <span style="color:#f92672">and</span> (S_no_nan[j] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1.0</span> ):
+                 j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+                 temp <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+             <span style="color:#66d9ef">if</span> ind_CWD <span style="color:#f92672">&lt;</span> temp:
+                 ind_CWD <span style="color:#f92672">=</span> temp
+             temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+             j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+     <span style="color:#66d9ef">return</span> ind_CWD  
 
-<p>The previous functions make it possible to calculate precipitation indices on a daily signal. We want to apply these functions per month.</p>
+<span style="color:#75715e"># Calculation of the percentage of precipitation days </span>
+<span style="color:#75715e"># on the incoming signal (less than 20% of missing values)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Prcp1</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_Prcp1<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> (N2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>):
+         N2<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+         
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_Prcp1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_Prcp1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         ind_Prcp1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+         <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> S_no_nan:
+             <span style="color:#66d9ef">if</span> row <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span> :
+                 ind_Prcp1 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+                 
+         ind_Prcp1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> (ind_Prcp1<span style="color:#f92672">/</span>N2)
+     <span style="color:#66d9ef">return</span> ind_Prcp1     
 
-<p>So we have to work with a subset of our <b> df_Precipitation </b> dataframe grouped by month.</p>
+<span style="color:#75715e"># average precipitation intensity for wet days (PR greater than 1mm) (less than 20% missing values)</span>
 
-<p>In the same way as the previous section on temperatures, we will apply the <b> .resample (&rsquo;M&rsquo;) </b> method: &ldquo;M&rdquo; for months (it&rsquo;s possible here to work at week , season or year scale)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">SDII</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_SDII<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_SDII <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_SDII <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         SS <span style="color:#f92672">=</span> S[S <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>]        
+         ind_SDII <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nanmean(SS)
+     <span style="color:#66d9ef">return</span> ind_SDII      
+</code></pre></div><p>The previous functions make it possible to calculate precipitation indices on a daily signal. We want to apply these functions per month.</p>
+<p>So we have to work with a subset of our <!-- raw HTML omitted --> df_Precipitation <!-- raw HTML omitted --> dataframe grouped by month.</p>
+<p>In the same way as the previous section on temperatures, we will apply the <!-- raw HTML omitted --> .resample (&lsquo;M&rsquo;) <!-- raw HTML omitted --> method: &ldquo;M&rdquo; for months (it&rsquo;s possible here to work at week , season or year scale)
 As a reminder, at this stage there is no calculation, the data are simply sorted on a monthly basis.</p>
-
-<pre><code class="language-python">df_Precipitation_resamp = df_Precipitation.resample('M')
-df_Precipitation_resamp.count().head()            
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_Precipitation_resamp <span style="color:#f92672">=</span> df_Precipitation<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)
+df_Precipitation_resamp<span style="color:#f92672">.</span>count()<span style="color:#f92672">.</span>head()            
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -726,32 +697,27 @@ df_Precipitation_resamp.count().head()
 <th align="right">Precipitation Montreal</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
 <td align="right">31</td>
 <td align="right">31</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">28</td>
 <td align="right">28</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">31</td>
 <td align="right">31</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">30</td>
 <td align="right">30</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">31</td>
@@ -759,14 +725,10 @@ df_Precipitation_resamp.count().head()
 </tr>
 </tbody>
 </table>
-
-<p>We can now apply our functions defined previously for each month of our DataFrame. For this, we will use the <b> .agg () </b> method on our subset grouped by month.</p>
-
-<pre><code class="language-python">indice_precipitation = df_Precipitation_resamp.agg([CDD, CWD, Prcp1, SDII, np.sum, np.mean])
-indice_precipitation.head()
-</code></pre>
-
-<table>
+<p>We can now apply our functions defined previously for each month of our DataFrame. For this, we will use the <!-- raw HTML omitted --> .agg () <!-- raw HTML omitted --> method on our subset grouped by month.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation <span style="color:#f92672">=</span> df_Precipitation_resamp<span style="color:#f92672">.</span>agg([CDD, CWD, Prcp1, SDII, np<span style="color:#f92672">.</span>sum, np<span style="color:#f92672">.</span>mean])
+indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -778,7 +740,6 @@ indice_precipitation.head()
 <th align="right">(&lsquo;Precipitation Montreal&rsquo;, &lsquo;mean&rsquo;)</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
@@ -789,7 +750,6 @@ indice_precipitation.head()
 <td align="right">55.09</td>
 <td align="right">1.7771</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">12</td>
@@ -799,7 +759,6 @@ indice_precipitation.head()
 <td align="right">80.87</td>
 <td align="right">2.88821</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">16</td>
@@ -809,7 +768,6 @@ indice_precipitation.head()
 <td align="right">97.59</td>
 <td align="right">3.14806</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">4</td>
@@ -819,7 +777,6 @@ indice_precipitation.head()
 <td align="right">102.7</td>
 <td align="right">3.42333</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5</td>
@@ -831,20 +788,14 @@ indice_precipitation.head()
 </tr>
 </tbody>
 </table>
-
-<h3 id="3-filter-the-data-directly-on-a-dataframe">3- Filter the data directly on a dataframe</h3>
-
+<h3 id="3--filter-the-data-directly-on-a-dataframe">3- Filter the data directly on a dataframe</h3>
 <ul>
 <li>the data can be filtered according to a condition on a column.</li>
 </ul>
-
 <p>We will for example only extract precipitation data greater than or equal to 1mm.</p>
-
-<pre><code class="language-python">SDII2=df_Precipitation[df_Precipitation[&quot;Precipitation Montreal&quot;]&gt;=1.0]
-SDII2.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">SDII2<span style="color:#f92672">=</span>df_Precipitation[df_Precipitation[<span style="color:#e6db74">&#34;Precipitation Montreal&#34;</span>]<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">1.0</span>]
+SDII2<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -852,32 +803,27 @@ SDII2.head()
 <th align="right">Precipitation Montreal</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-01 00:00:00</td>
 <td align="left">1961-01-01 00:00:00</td>
 <td align="right">22.66</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-02 00:00:00</td>
 <td align="left">1961-01-02 00:00:00</td>
 <td align="right">1.05</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-03 00:00:00</td>
 <td align="left">1961-01-03 00:00:00</td>
 <td align="right">1.05</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-06 00:00:00</td>
 <td align="left">1961-01-06 00:00:00</td>
 <td align="right">8.65</td>
 </tr>
-
 <tr>
 <td align="left">1961-01-07 00:00:00</td>
 <td align="left">1961-01-07 00:00:00</td>
@@ -885,13 +831,9 @@ SDII2.head()
 </tr>
 </tbody>
 </table>
-
 <p>We first created a Boolean type mask on the column &lsquo;Precipitation Montreal&rsquo; which was then applied to our DataFrame.</p>
-
-<pre><code class="language-python">(df_Precipitation[&quot;Precipitation Montreal&quot;]&gt;1.0).head()
-</code></pre>
-
-<pre><code>datetime
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(df_Precipitation[<span style="color:#e6db74">&#34;Precipitation Montreal&#34;</span>]<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1.0</span>)<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>datetime
 1961-01-01     True
 1961-01-02     True
 1961-01-03     True
@@ -899,60 +841,44 @@ SDII2.head()
 1961-01-05    False
 Name: Precipitation Montreal, dtype: bool
 </code></pre>
-
 <p>We then group our DataFrame by month and we apply a function by calling .agg() method.</p>
-
-<pre><code class="language-python">SDII2 = SDII2.resample('M').agg({'SDII2': lambda x: x.mean()})
-SDII2.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">SDII2 <span style="color:#f92672">=</span> SDII2<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>agg({<span style="color:#e6db74">&#39;SDII2&#39;</span>: <span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>mean()})
+SDII2<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
 <th align="right">(&lsquo;SDII2&rsquo;, &lsquo;Precipitation Montreal&rsquo;)</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
 <td align="right">5.69111</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">9.895</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">11.8688</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">6.68333</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5.13</td>
 </tr>
 </tbody>
 </table>
-
-<h3 id="4-updating-our-initial-dataframe">4- Updating our initial DataFrame</h3>
-
+<h3 id="4--updating-our-initial-dataframe">4- Updating our initial DataFrame</h3>
 <p>We want to add to our initial DataFrame the variable SDII2 previously created.</p>
-
-<pre><code class="language-python">indice_precipitation[&quot;SDII2&quot;]=SDII2[:].values
-</code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation[<span style="color:#e6db74">&#34;SDII2&#34;</span>]<span style="color:#f92672">=</span>SDII2[:]<span style="color:#f92672">.</span>values
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -962,10 +888,9 @@ SDII2.head()
 <th align="right">(&lsquo;Precipitation Montreal&rsquo;, &lsquo;SDII&rsquo;)</th>
 <th align="right">(&lsquo;Precipitation Montreal&rsquo;, &lsquo;sum&rsquo;)</th>
 <th align="right">(&lsquo;Precipitation Montreal&rsquo;, &lsquo;mean&rsquo;)</th>
-<th align="right">(&lsquo;SDII2&rsquo;, &ldquo;)</th>
+<th align="right">(&lsquo;SDII2&rsquo;, &lsquo;')</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
@@ -977,7 +902,6 @@ SDII2.head()
 <td align="right">1.7771</td>
 <td align="right">5.69111</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">12</td>
@@ -988,7 +912,6 @@ SDII2.head()
 <td align="right">2.88821</td>
 <td align="right">9.895</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">16</td>
@@ -999,7 +922,6 @@ SDII2.head()
 <td align="right">3.14806</td>
 <td align="right">11.8688</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">4</td>
@@ -1010,7 +932,6 @@ SDII2.head()
 <td align="right">3.42333</td>
 <td align="right">6.68333</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5</td>
@@ -1023,14 +944,9 @@ SDII2.head()
 </tr>
 </tbody>
 </table>
-
-<pre><code class="language-python">indice_precipitation.columns = indice_precipitation.columns.droplevel(0)
-</code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>droplevel(<span style="color:#ae81ff">0</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1043,7 +959,6 @@ SDII2.head()
 <th align="right"></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
@@ -1055,7 +970,6 @@ SDII2.head()
 <td align="right">1.7771</td>
 <td align="right">5.69111</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">12</td>
@@ -1066,7 +980,6 @@ SDII2.head()
 <td align="right">2.88821</td>
 <td align="right">9.895</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">16</td>
@@ -1077,7 +990,6 @@ SDII2.head()
 <td align="right">3.14806</td>
 <td align="right">11.8688</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">4</td>
@@ -1088,7 +1000,6 @@ SDII2.head()
 <td align="right">3.42333</td>
 <td align="right">6.68333</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5</td>
@@ -1101,18 +1012,12 @@ SDII2.head()
 </tr>
 </tbody>
 </table>
-
 <p>Using index datetime column, we want to create new columns with year and month.</p>
-
-<pre><code class="language-python">indice_precipitation['year']  = indice_precipitation.index.year
-indice_precipitation['month']  = indice_precipitation.index.month
-indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
-</code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation[<span style="color:#e6db74">&#39;year&#39;</span>]  <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year
+indice_precipitation[<span style="color:#e6db74">&#39;month&#39;</span>]  <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>month
+indice_precipitation[<span style="color:#e6db74">&#39;month&#39;</span>] <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%b&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1127,7 +1032,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <th align="left">month</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
@@ -1141,7 +1045,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">12</td>
@@ -1154,7 +1057,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Feb</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">16</td>
@@ -1167,7 +1069,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Mar</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">4</td>
@@ -1180,7 +1081,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Apr</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5</td>
@@ -1195,26 +1095,18 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 </tr>
 </tbody>
 </table>
-
-<p>We want to save our Dataframe <b>indice_precipitation</b>.</p>
-
-<pre><code class="language-python">indice_precipitation.to_csv('indice_precipitation.csv')
-</code></pre>
-
-<h3 id="4-viewing-the-results">4- Viewing the results</h3>
-
-<p>We will visualize our final dataframe <b> index_precipitation </b> with the Seaborn library.
-<img src = "./figures/seaborn.png" alt = "Seaborn" width = "60%" height = "70%"></p>
-
-<p>However, we will see some examples with multi-dimensional graphics.
-- Boxplot: <b>boxplot()</b> function</p>
-
+<p>We want to save our Dataframe <!-- raw HTML omitted -->indice_precipitation<!-- raw HTML omitted -->.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;indice_precipitation.csv&#39;</span>)
+</code></pre></div><h3 id="4--viewing-the-results">4- Viewing the results</h3>
+<p>We will visualize our final dataframe <!-- raw HTML omitted --> index_precipitation <!-- raw HTML omitted --> with the Seaborn library.
+<!-- raw HTML omitted --></p>
+<p>However, we will see some examples with multi-dimensional graphics.</p>
+<ul>
+<li>Boxplot: <!-- raw HTML omitted -->boxplot()<!-- raw HTML omitted --> function</li>
+</ul>
 <p>Let&rsquo;s use our precipitation DataFrame:</p>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1229,7 +1121,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <th align="left">month</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
@@ -1243,7 +1134,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">12</td>
@@ -1256,7 +1146,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Feb</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">16</td>
@@ -1269,7 +1158,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Mar</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">4</td>
@@ -1282,7 +1170,6 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 <td align="right">1961</td>
 <td align="left">Apr</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5</td>
@@ -1297,102 +1184,78 @@ indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
 </tr>
 </tbody>
 </table>
-
 <p>We want to visualize the nomber of days with precipitation by month. We will then plot Prcp1 variable from our DataFrame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt 
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;month&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Prcp1&#34;</span>, data<span style="color:#f92672">=</span>indice_precipitation, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Set1&#34;</span>) 
 
-<pre><code class="language-python">import seaborn as sns
-import matplotlib.pyplot as plt 
-ax = plt.axes()
-sns.boxplot(x=&quot;month&quot;, y=&quot;Prcp1&quot;, data=indice_precipitation, palette=&quot;Set1&quot;) 
+ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Number of days with precipitation in Montreal from 1948 to 2017&#39;</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;%&#39;</span>)
 
-ax.set_title('Number of days with precipitation in Montreal from 1948 to 2017')
-ax.set_ylabel('%')
-
-figure = ax.get_figure()    
-figure.set_size_inches(12, 8) 
-plt.show()
-</code></pre>
-
-<p><img src="/img/netcdf2_29_0.png" alt="png" /></p>
-
+figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
+figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>) 
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf2_29_0.png" alt="png"></p>
 <ul>
-<li>Histogram: <b>barplot()</b> function</li>
+<li>Histogram: <!-- raw HTML omitted -->barplot()<!-- raw HTML omitted --> function</li>
 </ul>
-
 <p>For this example, we will plot the mean accumulation of prepicipitation by month, to do this we must use &lsquo;sum&rsquo; variable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;month&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sum&#34;</span>, data<span style="color:#f92672">=</span>indice_precipitation)
+ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Monthly mean of cumulated precipitation in Montréal from 1948 to 2017&#39;</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;mm&#39;</span>)
 
-<pre><code class="language-python">ax = plt.axes()
-sns.barplot(x=&quot;month&quot;, y=&quot;sum&quot;, data=indice_precipitation)
-ax.set_title('Monthly mean of cumulated precipitation in Montréal from 1948 to 2017')
-ax.set_ylabel('mm')
-
-figure = ax.get_figure()    
-figure.set_size_inches(12, 8) 
-plt.show()
-</code></pre>
-
-<p><img src="/img/netcdf2_31_0.png" alt="png" /></p>
-
+figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
+figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>) 
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf2_31_0.png" alt="png"></p>
 <ul>
-<li>bivariate graph: <b>jointplot()</b> function</li>
+<li>bivariate graph: <!-- raw HTML omitted -->jointplot()<!-- raw HTML omitted --> function</li>
 </ul>
-
 <p>Jointplot displays a relationship between 2 variables (bivariate)</p>
+<p><a href="https://seaborn.pydata.org/generated/seaborn.jointplot.html">https://seaborn.pydata.org/generated/seaborn.jointplot.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Prcp1&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sum&#34;</span>, data<span style="color:#f92672">=</span>indice_precipitation,kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;reg&#39;</span>,
+                   space<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, ratio<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+plt<span style="color:#f92672">.</span>show()
 
-<p><a href="https://seaborn.pydata.org/generated/seaborn.jointplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.jointplot.html</a></p>
-
-<pre><code class="language-python">sns.jointplot(x=&quot;Prcp1&quot;, y=&quot;sum&quot;, data=indice_precipitation,kind='reg',
-                   space=0, height=6, ratio=4)
-plt.show()
-
-# kind = 'kde' 
-# kind=&quot;hex&quot;
-# kind=&quot;reg&quot;
-</code></pre>
-
-<p><img src="/img/netcdf2_33_0.png" alt="png" /></p>
-
+<span style="color:#75715e"># kind = &#39;kde&#39; </span>
+<span style="color:#75715e"># kind=&#34;hex&#34;</span>
+<span style="color:#75715e"># kind=&#34;reg&#34;</span>
+</code></pre></div><p><img src="/img/netcdf2_33_0.png" alt="png"></p>
 <ul>
-<li><p>bivariate graph: <b>pairplot()</b> function
-<a href="https://seaborn.pydata.org/generated/seaborn.pairplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.pairplot.html</a></p>
-
-<pre><code class="language-python"># Attributes of interest
-cols = ['CWD', 
-    'SDII', 
-    'sum', 
-    'Prcp1', 
-    'mean']
-
-pp = sns.pairplot(indice_precipitation[cols], 
-              height=1.8, aspect=1.2, markers=&quot;+&quot;,
-              plot_kws=dict(edgecolor=&quot;k&quot;, linewidth=0.5),
-              diag_kws=dict(shade=True), # &quot;diag&quot; adjusts/tunes the diagonal plots
-              diag_kind=&quot;kde&quot;) # use &quot;kde&quot; for diagonal plots
-
-fig = pp.fig 
-fig.subplots_adjust(top=0.93, wspace=0.3)
-fig.suptitle('Indice de précipitation Pairwise Plots', 
-          fontsize=14, fontweight='bold')
-plt.show()
-
-
-
-</code></pre></li>
+<li>bivariate graph: <!-- raw HTML omitted -->pairplot()<!-- raw HTML omitted --> function
+<a href="https://seaborn.pydata.org/generated/seaborn.pairplot.html">https://seaborn.pydata.org/generated/seaborn.pairplot.html</a></li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Attributes of interest</span>
+cols <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;CWD&#39;</span>, 
+        <span style="color:#e6db74">&#39;SDII&#39;</span>, 
+        <span style="color:#e6db74">&#39;sum&#39;</span>, 
+        <span style="color:#e6db74">&#39;Prcp1&#39;</span>, 
+        <span style="color:#e6db74">&#39;mean&#39;</span>]
 
-<p><img src="/img/netcdf2_35_0.png" alt="png" /></p>
+pp <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>pairplot(indice_precipitation[cols], 
+                  height<span style="color:#f92672">=</span><span style="color:#ae81ff">1.8</span>, aspect<span style="color:#f92672">=</span><span style="color:#ae81ff">1.2</span>, markers<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;+&#34;</span>,
+                  plot_kws<span style="color:#f92672">=</span>dict(edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;k&#34;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>),
+                  diag_kws<span style="color:#f92672">=</span>dict(shade<span style="color:#f92672">=</span>True), <span style="color:#75715e"># &#34;diag&#34; adjusts/tunes the diagonal plots</span>
+                  diag_kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kde&#34;</span>) <span style="color:#75715e"># use &#34;kde&#34; for diagonal plots</span>
 
+fig <span style="color:#f92672">=</span> pp<span style="color:#f92672">.</span>fig 
+fig<span style="color:#f92672">.</span>subplots_adjust(top<span style="color:#f92672">=</span><span style="color:#ae81ff">0.93</span>, wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>)
+fig<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#39;Indice de précipitation Pairwise Plots&#39;</span>, 
+              fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+
+
+</code></pre></div><p><img src="/img/netcdf2_35_0.png" alt="png"></p>
 <ul>
 <li>Correlation matrix:
 The Pandas library has a method for calculating the correlations between each column of a DataFrame.</li>
 </ul>
-
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html" target="_blank">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html</a></p>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<table>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1407,7 +1270,6 @@ The Pandas library has a method for calculating the correlations between each co
 <th align="left">month</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
@@ -1421,7 +1283,6 @@ The Pandas library has a method for calculating the correlations between each co
 <td align="right">1961</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">12</td>
@@ -1434,7 +1295,6 @@ The Pandas library has a method for calculating the correlations between each co
 <td align="right">1961</td>
 <td align="left">Feb</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">16</td>
@@ -1447,7 +1307,6 @@ The Pandas library has a method for calculating the correlations between each co
 <td align="right">1961</td>
 <td align="left">Mar</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">4</td>
@@ -1460,7 +1319,6 @@ The Pandas library has a method for calculating the correlations between each co
 <td align="right">1961</td>
 <td align="left">Apr</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5</td>
@@ -1475,15 +1333,11 @@ The Pandas library has a method for calculating the correlations between each co
 </tr>
 </tbody>
 </table>
-
 <p>We first drop &lsquo;year&rsquo; column and then apply .corr() method.</p>
-
-<pre><code class="language-python">indice_precipitation2 = indice_precipitation.drop([&quot;year&quot;], axis=1)
-corr_matrix = indice_precipitation2.corr()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation2 <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>drop([<span style="color:#e6db74">&#34;year&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+corr_matrix <span style="color:#f92672">=</span> indice_precipitation2<span style="color:#f92672">.</span>corr()
 corr_matrix
-</code></pre>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left"></th>
@@ -1496,7 +1350,6 @@ corr_matrix
 <th align="right"></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">CDD</td>
@@ -1508,7 +1361,6 @@ corr_matrix
 <td align="right">-0.481019</td>
 <td align="right">0.0251715</td>
 </tr>
-
 <tr>
 <td align="left">CWD</td>
 <td align="right">-0.288579</td>
@@ -1519,7 +1371,6 @@ corr_matrix
 <td align="right">0.417954</td>
 <td align="right">-0.0396542</td>
 </tr>
-
 <tr>
 <td align="left">Prcp1</td>
 <td align="right">-0.687758</td>
@@ -1530,7 +1381,6 @@ corr_matrix
 <td align="right">0.663935</td>
 <td align="right">-0.0645538</td>
 </tr>
-
 <tr>
 <td align="left">SDII</td>
 <td align="right">0.0253577</td>
@@ -1541,7 +1391,6 @@ corr_matrix
 <td align="right">0.661113</td>
 <td align="right">0.999642</td>
 </tr>
-
 <tr>
 <td align="left">sum</td>
 <td align="right">-0.480416</td>
@@ -1552,7 +1401,6 @@ corr_matrix
 <td align="right">0.997694</td>
 <td align="right">0.660287</td>
 </tr>
-
 <tr>
 <td align="left">mean</td>
 <td align="right">-0.481019</td>
@@ -1563,7 +1411,6 @@ corr_matrix
 <td align="right">1</td>
 <td align="right">0.661422</td>
 </tr>
-
 <tr>
 <td align="left"></td>
 <td align="right">0.0251715</td>
@@ -1576,91 +1423,79 @@ corr_matrix
 </tr>
 </tbody>
 </table>
+<p>We can call the <!-- raw HTML omitted --> .heatmap () <!-- raw HTML omitted --> function to visualize our correlation matrix and thus facilitate our interpretations.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, (ax) <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">6</span>))
+hm <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>heatmap(corr_matrix, 
+                 ax<span style="color:#f92672">=</span>ax,           <span style="color:#75715e"># Axes in which to draw the plot, otherwise use the currently-active Axes.</span>
+                 cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;coolwarm&#34;</span>, <span style="color:#75715e"># Color Map.</span>
+                 <span style="color:#75715e">#square=True,    # If True, set the Axes aspect to “equal” so each cell will be square-shaped.</span>
+                 annot<span style="color:#f92672">=</span>True, 
+                 fmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.2f&#39;</span>,       <span style="color:#75715e"># String formatting code to use when adding annotations.</span>
+                 <span style="color:#75715e">#annot_kws={&#34;size&#34;: 14},</span>
+                 linewidths<span style="color:#f92672">=.</span><span style="color:#ae81ff">05</span>)
 
-<p>We can call the <b> .heatmap () </b> function to visualize our correlation matrix and thus facilitate our interpretations.</p>
-
-<pre><code class="language-python">fig, (ax) = plt.subplots(1, 1, figsize=(10,6))
-hm = sns.heatmap(corr_matrix, 
-                 ax=ax,           # Axes in which to draw the plot, otherwise use the currently-active Axes.
-                 cmap=&quot;coolwarm&quot;, # Color Map.
-                 #square=True,    # If True, set the Axes aspect to “equal” so each cell will be square-shaped.
-                 annot=True, 
-                 fmt='.2f',       # String formatting code to use when adding annotations.
-                 #annot_kws={&quot;size&quot;: 14},
-                 linewidths=.05)
-
-fig.subplots_adjust(top=0.93)
-fig.suptitle('Correlation Matrix: Precipitation Indices Montreal Station', 
-              fontsize=14, 
-              fontweight='bold')
-plt.show()
-</code></pre>
-
-<p><img src="/img/netcdf2_41_0.png" alt="png" /></p>
-
+fig<span style="color:#f92672">.</span>subplots_adjust(top<span style="color:#f92672">=</span><span style="color:#ae81ff">0.93</span>)
+fig<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#39;Correlation Matrix: Precipitation Indices Montreal Station&#39;</span>, 
+              fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>, 
+              fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf2_41_0.png" alt="png"></p>
 <ul>
 <li>Graphiques 3D:</li>
 </ul>
-
 <h3 id="bonus-add-correlation-indices-with-the-scipy-library">Bonus: add correlation indices with the scipy library</h3>
-
-<p>The <b> stats </b> module of the <b> Scipy library </b> has many statistical functions.
-<a href="https://docs.scipy.org/doc/scipy/reference/stats.html" target="_blank">https://docs.scipy.org/doc/scipy/reference/stats.html</a></p>
-
-<pre><code class="language-python">def corr_pearson(x, y, **kws):
-    r, p = stats.pearsonr(x, y)
-    p_stars = ''
-    if p &lt;= 0.05:
-        p_stars = '*'
-    if p &lt;= 0.01:
-        p_stars = '**'
-    if p &lt;= 0.001:
-        p_stars = '***'
-   # r, _ = stats.spearmanr(x, y)
-    ax = plt.gca()   
-    pos = (0, .9) 
-    color2='red'                                                                   
-    ax.annotate(&quot;Pearson = {:.2f}&quot;.format(r) + p_stars,
-                xy=pos, xycoords=ax.transAxes, color=color2, fontweight='bold')
+<p>The <!-- raw HTML omitted --> stats <!-- raw HTML omitted --> module of the <!-- raw HTML omitted --> Scipy library <!-- raw HTML omitted --> has many statistical functions.
+<a href="https://docs.scipy.org/doc/scipy/reference/stats.html">https://docs.scipy.org/doc/scipy/reference/stats.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corr_pearson</span>(x, y, <span style="color:#f92672">**</span>kws):
+    r, p <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>pearsonr(x, y)
+    p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.05</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;*&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.01</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;**&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;***&#39;</span>
+   <span style="color:#75715e"># r, _ = stats.spearmanr(x, y)</span>
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>gca()   
+    pos <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">9</span>) 
+    color2<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>                                                                   
+    ax<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Pearson = {:.2f}&#34;</span><span style="color:#f92672">.</span>format(r) <span style="color:#f92672">+</span> p_stars,
+                xy<span style="color:#f92672">=</span>pos, xycoords<span style="color:#f92672">=</span>ax<span style="color:#f92672">.</span>transAxes, color<span style="color:#f92672">=</span>color2, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
     
 
-def corr_spearman(x, y, **kws):
-    r, p = stats.spearmanr(x, y)
-    p_stars = ''
-    if p &lt;= 0.05:
-        p_stars = '*'
-    if p &lt;= 0.01:
-        p_stars = '**'
-    if p &lt;= 0.001:
-        p_stars = '***'
-   # r, _ = stats.spearmanr(x, y)
-    ax = plt.gca()  
-    pos = (0, .6) 
-    color2='darkgreen' 
-    ax.annotate(&quot;Spearman = {:.2f}&quot;.format(r) + p_stars,
-                xy=pos, xycoords=ax.transAxes, color=color2, fontweight='bold')
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corr_spearman</span>(x, y, <span style="color:#f92672">**</span>kws):
+    r, p <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>spearmanr(x, y)
+    p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.05</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;*&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.01</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;**&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;***&#39;</span>
+   <span style="color:#75715e"># r, _ = stats.spearmanr(x, y)</span>
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>gca()  
+    pos <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">6</span>) 
+    color2<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkgreen&#39;</span> 
+    ax<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Spearman = {:.2f}&#34;</span><span style="color:#f92672">.</span>format(r) <span style="color:#f92672">+</span> p_stars,
+                xy<span style="color:#f92672">=</span>pos, xycoords<span style="color:#f92672">=</span>ax<span style="color:#f92672">.</span>transAxes, color<span style="color:#f92672">=</span>color2, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
 
-def corr_kendall(x, y, **kws):
-    r, p = stats.kendalltau(x, y)
-    p_stars = ''
-    if p &lt;= 0.05:
-        p_stars = '*'
-    if p &lt;= 0.01:
-        p_stars = '**'
-    if p &lt;= 0.001:
-        p_stars = '***'
-   # r, _ = stats.spearmanr(x, y)
-    ax = plt.gca()   
-    pos = (0, .3) 
-    color2='darkorange' 
-    ax.annotate(&quot;Kendall = {:.2f}&quot;.format(r) + p_stars,
-                xy=pos, xycoords=ax.transAxes, color=color2, fontweight='bold')
-</code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<table>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corr_kendall</span>(x, y, <span style="color:#f92672">**</span>kws):
+    r, p <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>kendalltau(x, y)
+    p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.05</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;*&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.01</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;**&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;***&#39;</span>
+   <span style="color:#75715e"># r, _ = stats.spearmanr(x, y)</span>
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>gca()   
+    pos <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">3</span>) 
+    color2<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkorange&#39;</span> 
+    ax<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Kendall = {:.2f}&#34;</span><span style="color:#f92672">.</span>format(r) <span style="color:#f92672">+</span> p_stars,
+                xy<span style="color:#f92672">=</span>pos, xycoords<span style="color:#f92672">=</span>ax<span style="color:#f92672">.</span>transAxes, color<span style="color:#f92672">=</span>color2, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">datetime</th>
@@ -1675,7 +1510,6 @@ def corr_kendall(x, y, **kws):
 <th align="left">month</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">1961-01-31 00:00:00</td>
@@ -1689,7 +1523,6 @@ def corr_kendall(x, y, **kws):
 <td align="right">1961</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">1961-02-28 00:00:00</td>
 <td align="right">12</td>
@@ -1702,7 +1535,6 @@ def corr_kendall(x, y, **kws):
 <td align="right">1961</td>
 <td align="left">Feb</td>
 </tr>
-
 <tr>
 <td align="left">1961-03-31 00:00:00</td>
 <td align="right">16</td>
@@ -1715,7 +1547,6 @@ def corr_kendall(x, y, **kws):
 <td align="right">1961</td>
 <td align="left">Mar</td>
 </tr>
-
 <tr>
 <td align="left">1961-04-30 00:00:00</td>
 <td align="right">4</td>
@@ -1728,7 +1559,6 @@ def corr_kendall(x, y, **kws):
 <td align="right">1961</td>
 <td align="left">Apr</td>
 </tr>
-
 <tr>
 <td align="left">1961-05-31 00:00:00</td>
 <td align="right">5</td>
@@ -1743,25 +1573,20 @@ def corr_kendall(x, y, **kws):
 </tr>
 </tbody>
 </table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_month<span style="color:#f92672">=</span>indice_precipitation[[<span style="color:#e6db74">&#34;CWD&#34;</span>, <span style="color:#e6db74">&#34;SDII&#34;</span>, <span style="color:#e6db74">&#34;sum&#34;</span>, <span style="color:#e6db74">&#34;Prcp1&#34;</span>]]<span style="color:#f92672">.</span>loc[(indice_precipitation[<span style="color:#e6db74">&#34;month&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;Jan&#34;</span>)]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> scipy <span style="color:#f92672">import</span> stats
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns; sns<span style="color:#f92672">.</span>set()
 
-<pre><code class="language-python">indice_month=indice_precipitation[[&quot;CWD&quot;, &quot;SDII&quot;, &quot;sum&quot;, &quot;Prcp1&quot;]].loc[(indice_precipitation[&quot;month&quot;]==&quot;Jan&quot;)]
-</code></pre>
+g <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>PairGrid(indice_month[[<span style="color:#e6db74">&#34;CWD&#34;</span>, <span style="color:#e6db74">&#34;SDII&#34;</span>, <span style="color:#e6db74">&#34;sum&#34;</span>, <span style="color:#e6db74">&#34;Prcp1&#34;</span>g]]) 
 
-<pre><code class="language-python">from scipy import stats
-import seaborn as sns; sns.set()
-
-g = sns.PairGrid(indice_month[[&quot;CWD&quot;, &quot;SDII&quot;, &quot;sum&quot;, &quot;Prcp1&quot;g]]) 
-
-g.map_upper(corr_pearson) 
-g.map_upper(corr_spearman) 
-g.map_upper(corr_kendall) 
-g.map_lower(sns.regplot) 
-g.map_diag(plt.hist) 
-g.set(alpha=0.5)
-plt.show()
-</code></pre>
-
-<p><img src="/img/netcdf2_47_0.png" alt="png" /></p>
+g<span style="color:#f92672">.</span>map_upper(corr_pearson) 
+g<span style="color:#f92672">.</span>map_upper(corr_spearman) 
+g<span style="color:#f92672">.</span>map_upper(corr_kendall) 
+g<span style="color:#f92672">.</span>map_lower(sns<span style="color:#f92672">.</span>regplot) 
+g<span style="color:#f92672">.</span>map_diag(plt<span style="color:#f92672">.</span>hist) 
+g<span style="color:#f92672">.</span>set(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/netcdf2_47_0.png" alt="png"></p>
 
           </div>
 
@@ -1801,7 +1626,7 @@ plt.show()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Tutorial_Python/Project2-ECCC_Precipitation.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cTutorial_Python%5cProject2-ECCC_Precipitation.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

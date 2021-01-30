@@ -540,28 +540,30 @@ For each province or territory, one file for one specific hour contains:"><meta 
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<p>﻿
+      <p>﻿
 In this tutorial, we will extract Hourly Observation from ECCC and display hourly temperature using plotly library.</p>
-
 <p>We are going to work here with the hourly weather observations data found on the ECCC Datamart.</p>
-
 <p>These observations data are subject to quality control.
 Any value that does not pass quality control is deleted.
 This includes values that are categorized as questionable.</p>
-
 <p>For each province or territory, one file for one specific hour contains:</p>
-
 <ul>
-<li>The coldest place and temperature in Canada for this hour</li>
-<li>The hottest location and temperature in Canada for this hour</li>
-<li>The coldest place and temperature in the province or territory for this hour</li>
-
-<li><p>The hottest location and temperature in the province for territory for this hour</p></li>
-
-<li><p>The observations and the records of the stations available in this province:</p>
-
+<li>
+<p>The coldest place and temperature in Canada for this hour</p>
+</li>
+<li>
+<p>The hottest location and temperature in Canada for this hour</p>
+</li>
+<li>
+<p>The coldest place and temperature in the province or territory for this hour</p>
+</li>
+<li>
+<p>The hottest location and temperature in the province for territory for this hour</p>
+</li>
+<li>
+<p>The observations and the records of the stations available in this province:</p>
+</li>
+</ul>
 <ul>
 <li>Present condition (expression)</li>
 <li>Sea level pressure (kPa)</li>
@@ -577,367 +579,290 @@ This includes values that are categorized as questionable.</p>
 <li>Cloud cover</li>
 <li>Wind Chill</li>
 <li>Humidex</li>
-</ul></li>
 </ul>
-
-<hr />
-
+<hr>
 <h2 id="stations-information">Stations information:</h2>
-
-<hr />
-
-<p>For each station, the following information is available:
-* Station name
-* Latitude (decimal degree)
-* Longitude (decimal degree)
-* Transport Canada identification number
-* Observation times are in UTC time and local time
-* Climate station ID
-* WMO station number</p>
-
+<hr>
+<p>For each station, the following information is available:</p>
+<ul>
+<li>Station name</li>
+<li>Latitude (decimal degree)</li>
+<li>Longitude (decimal degree)</li>
+<li>Transport Canada identification number</li>
+<li>Observation times are in UTC time and local time</li>
+<li>Climate station ID</li>
+<li>WMO station number</li>
+</ul>
 <p>There are over 500 observation stations in Canada. However, this number is constantly evolving. The stations are present in the files only if observation data are available.</p>
-
-<p>&lsquo;swob-xml_station_list.csv&rsquo; document on this <a href="https://dd.weather.gc.ca/observations/doc/" target="_blank">link</a> is a list of XML observations available.</p>
-
-<p><a href="http://dd.weather.gc.ca/observations/doc/Met-ML-SchemaDescriptionV2_e.pdf" target="_blank">Here</a> is a full documentation for XML description of observation point meteorological:</p>
-
-<p><a href="http://www.opengeospatial.org/standards/om" target="_blank">OpenGIS</a> : Standards for observations and measurement.</p>
-
-<p><a href="http://www.weatheroffice.gc.ca/mainmenu/faq_f.html" target="_blank">Frequently Asked Questions from Environment and Change Weather Service Climate Canada</a> Frequently Asked Questions from Environment and Change Weather Service Climate Canada. Miscellaneous information about meteorology and climatology.</p>
-
-<p>Historical climatic data are available on this <a href="http://climate.weatheroffice.gc.ca" target="_blank">site</a>.</p>
-
-<p>Synoptic and METAR bulletins can also be found on the <a href="http://dd.weather.gc.ca/bulletins/doc/README_bulletins.txt" target="_blank">MSC HTTP data server</a>.</p>
-
+<p>&lsquo;swob-xml_station_list.csv&rsquo; document on this <a href="https://dd.weather.gc.ca/observations/doc/">link</a> is a list of XML observations available.</p>
+<p><a href="http://dd.weather.gc.ca/observations/doc/Met-ML-SchemaDescriptionV2_e.pdf">Here</a> is a full documentation for XML description of observation point meteorological:</p>
+<p><a href="http://www.opengeospatial.org/standards/om">OpenGIS</a> : Standards for observations and measurement.</p>
+<p><a href="http://www.weatheroffice.gc.ca/mainmenu/faq_f.html">Frequently Asked Questions from Environment and Change Weather Service Climate Canada</a> Frequently Asked Questions from Environment and Change Weather Service Climate Canada. Miscellaneous information about meteorology and climatology.</p>
+<p>Historical climatic data are available on this <a href="http://climate.weatheroffice.gc.ca">site</a>.</p>
+<p>Synoptic and METAR bulletins can also be found on the <a href="http://dd.weather.gc.ca/bulletins/doc/README_bulletins.txt">MSC HTTP data server</a>.</p>
 <p>First, we import python librairies and define the date we want to extract:</p>
-
-<pre><code class="language-python">from datetime import datetime, timedelta
-import pandas as pd 
-import xml.etree.ElementTree as ET
-import wget
-import warnings
-warnings.filterwarnings(&quot;ignore&quot;)
-import os 
-from os.path import exists
-import requests
-import numpy as np
-</code></pre>
-
-<p>We will work first with all the stations over Quebec (ie file with prefix hourly<em>qc</em>):</p>
-
-<p>We will work on this <a href="https://dd.weather.gc.ca/observations/xml/" target="_blank">directory</a>.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime, timedelta
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd 
+<span style="color:#f92672">import</span> xml.etree.ElementTree <span style="color:#f92672">as</span> ET
+<span style="color:#f92672">import</span> wget
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#34;ignore&#34;</span>)
+<span style="color:#f92672">import</span> os 
+<span style="color:#f92672">from</span> os.path <span style="color:#f92672">import</span> exists
+<span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+</code></pre></div><p>We will work first with all the stations over Quebec (ie file with prefix hourly_qc_):</p>
+<p>We will work on this <a href="https://dd.weather.gc.ca/observations/xml/">directory</a>.</p>
 <p>We want to extreact the latest value recorded.</p>
-
-<pre><code class="language-python">now = datetime.utcnow() - timedelta(hours=1)
-tmp_file = 'http://dd.weather.ec.gc.ca/observations/xml/QC/hourly/hourly_qc_'+now.strftime(&quot;%Y%m%d%H&quot;)+'_e.xml'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">now <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>utcnow() <span style="color:#f92672">-</span> timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+tmp_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://dd.weather.ec.gc.ca/observations/xml/QC/hourly/hourly_qc_&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_e.xml&#39;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">wget<span style="color:#f92672">.</span>download(tmp_file)
+</code></pre></div><pre><code>'hourly_qc_2020031017_e (1).xml'
 </code></pre>
-
-<pre><code class="language-python">wget.download(tmp_file)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tree <span style="color:#f92672">=</span> ET<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#39;hourly_qc_&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_e.xml&#39;</span>)
+root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()
+children <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>getchildren()
+</code></pre></div><p>Number of elements in our file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># total amount of items</span>
+<span style="color:#66d9ef">print</span>(len(root))
+</code></pre></div><pre><code>122
 </code></pre>
-
-<pre><code>'hourly_qc_2020031017_e (1).xml'
-</code></pre>
-
-<pre><code class="language-python">tree = ET.parse('hourly_qc_'+now.strftime(&quot;%Y%m%d%H&quot;)+'_e.xml')
-root=tree.getroot()
-children = root.getchildren()
-</code></pre>
-
-<p>Number of elements in our file:</p>
-
-<pre><code class="language-python"># total amount of items
-print(len(root))
-</code></pre>
-
-<pre><code>122
-</code></pre>
-
 <h3 id="to-scan-the-elements-of-our-set-ie-the-children-of-our-root">To scan the elements of our set, ie the children of our &lsquo;root&rsquo;:</h3>
-
-<p>for child in root.iter(&rsquo;*&lsquo;):<br />
-    #print(child)
-    #print(child.attrib)
-    #print(child.attrib.get(&lsquo;value&rsquo;))
-    print(child.attrib.get(&lsquo;name&rsquo;))</p>
-
+<p>for child in root.iter('*'):<br>
+#print(child)
+#print(child.attrib)
+#print(child.attrib.get(&lsquo;value&rsquo;))
+print(child.attrib.get(&lsquo;name&rsquo;))</p>
 <h3 id="example-of-station-detection">Example of station detection:</h3>
-
-<pre><code class="language-python">for child in root.iter('*'): 
-    if child.attrib.get('value') == '7110600':
-        print(child.tag)
-        print('station trouvee')
-        print(child.attrib.get('name') + ': 7110600' )
-        print(child.items())
-        print(child.get('value'))
-        test = tree.find('.//%s/' % child.tag)
-</code></pre>
-
-<pre><code>{http://dms.ec.gc.ca/schema/point-observation/2.1}element
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>iter(<span style="color:#e6db74">&#39;*&#39;</span>): 
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;7110600&#39;</span>:
+        <span style="color:#66d9ef">print</span>(child<span style="color:#f92672">.</span>tag)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;station trouvee&#39;</span>)
+        <span style="color:#66d9ef">print</span>(child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;: 7110600&#39;</span> )
+        <span style="color:#66d9ef">print</span>(child<span style="color:#f92672">.</span>items())
+        <span style="color:#66d9ef">print</span>(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+        test <span style="color:#f92672">=</span> tree<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;.//</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/&#39;</span> <span style="color:#f92672">%</span> child<span style="color:#f92672">.</span>tag)
+</code></pre></div><pre><code>{http://dms.ec.gc.ca/schema/point-observation/2.1}element
 station trouvee
 climate_station_number: 7110600
 [('name', 'climate_station_number'), ('uom', 'unitless'), ('value', '7110600')]
 7110600
 </code></pre>
-
-<p>The list of variables is available on this <a href="https://dd.weather.gc.ca/observations/doc/Met-ML-SchemaDescriptionV2_f.pdf" target="_blank">document</a>.</p>
-
-<h2 id="1-observations-extraction">1- Observations extraction:</h2>
-
+<p>The list of variables is available on this <a href="https://dd.weather.gc.ca/observations/doc/Met-ML-SchemaDescriptionV2_f.pdf">document</a>.</p>
+<h2 id="1--observations-extraction">1- Observations extraction:</h2>
 <p>We will loop over all stations in Quebec and extract some meteorological values.</p>
-
-<pre><code class="language-python">mslp=[]
-air=[]  
-dew=[]
-rel=[]
-winds=[]
-windd=[]
-windc=[]
-humidex=[]
-stid=[]
-present_weather = []
-horizontal_visibility = []
-station_name = []
-latitude = []
-longitude = []
-for child in root.iter('*'):      
-    if child.attrib.get('name') == 'present_weather':
-        present_weather.append(child.get('value'))        
-    if child.attrib.get('name') == 'mean_sea_level':
-        mslp.append(child.get('value'))
-    if child.attrib.get('name') == 'air_temperature':
-        air.append(child.get('value'))
-    if child.attrib.get('name') == 'dew_point':
-        dew.append(child.get('value'))
-    if child.attrib.get('name') == 'relative_humidity':
-        rel.append(child.get('value'))
-    if child.attrib.get('name') == 'wind_speed':
-        winds.append(child.get('value'))
-    if child.attrib.get('name') == 'wind_direction':
-        windd.append(child.get('value'))
-    if child.attrib.get('name') == 'wind_chill':
-        windc.append(child.get('value'))
-    if child.attrib.get('name') == 'humidex':
-        humidex.append(child.get('value'))
-    if child.attrib.get('name') == 'horizontal_visibility':
-        horizontal_visibility.append(child.get('value')) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mslp<span style="color:#f92672">=</span>[]
+air<span style="color:#f92672">=</span>[]  
+dew<span style="color:#f92672">=</span>[]
+rel<span style="color:#f92672">=</span>[]
+winds<span style="color:#f92672">=</span>[]
+windd<span style="color:#f92672">=</span>[]
+windc<span style="color:#f92672">=</span>[]
+humidex<span style="color:#f92672">=</span>[]
+stid<span style="color:#f92672">=</span>[]
+present_weather <span style="color:#f92672">=</span> []
+horizontal_visibility <span style="color:#f92672">=</span> []
+station_name <span style="color:#f92672">=</span> []
+latitude <span style="color:#f92672">=</span> []
+longitude <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>iter(<span style="color:#e6db74">&#39;*&#39;</span>):      
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;present_weather&#39;</span>:
+        present_weather<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))        
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;mean_sea_level&#39;</span>:
+        mslp<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;air_temperature&#39;</span>:
+        air<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;dew_point&#39;</span>:
+        dew<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;relative_humidity&#39;</span>:
+        rel<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;wind_speed&#39;</span>:
+        winds<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;wind_direction&#39;</span>:
+        windd<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;wind_chill&#39;</span>:
+        windc<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;humidex&#39;</span>:
+        humidex<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;horizontal_visibility&#39;</span>:
+        horizontal_visibility<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>)) 
         
-    if child.attrib.get('name') == 'climate_station_number':
-        stid.append(child.get('value')) 
-    if child.attrib.get('name') == 'station_name':
-        station_name.append(child.get('value'))    
-    if child.attrib.get('name') == 'latitude':
-        latitude.append(child.get('value'))
-    if child.attrib.get('name') == 'longitude':
-        longitude.append(child.get('value'))        
-</code></pre>
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;climate_station_number&#39;</span>:
+        stid<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>)) 
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;station_name&#39;</span>:
+        station_name<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))    
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;latitude&#39;</span>:
+        latitude<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+    <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;longitude&#39;</span>:
+        longitude<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))        
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">date <span style="color:#f92672">=</span> now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:00&#34;</span>)
+month <span style="color:#f92672">=</span>  now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y%m&#34;</span>)
+os<span style="color:#f92672">.</span>makedirs(month, exist_ok<span style="color:#f92672">=</span>True)  
 
-<pre><code class="language-python">date = now.strftime(&quot;%Y-%m-%d %H:00&quot;)
-month =  now.strftime(&quot;%Y%m&quot;)
-os.makedirs(month, exist_ok=True)  
+data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;climate_station_number&#39;</span>:stid,
+        <span style="color:#e6db74">&#39;station_name&#39;</span>: station_name,
+        <span style="color:#e6db74">&#39;latitude&#39;</span>: latitude,
+        <span style="color:#e6db74">&#39;longitude&#39;</span>: longitude,
+        <span style="color:#e6db74">&#39;date&#39;</span>:date, 
+        <span style="color:#e6db74">&#39;mean_sea_level&#39;</span>:mslp,
+        <span style="color:#e6db74">&#39;air_temperature&#39;</span>:air,
+        <span style="color:#e6db74">&#39;dew_point&#39;</span>:dew,
+        <span style="color:#e6db74">&#39;relative_humidity&#39;</span>: rel,
+        <span style="color:#e6db74">&#39;wind_speed&#39;</span>:winds,
+        <span style="color:#e6db74">&#39;wind_direction&#39;</span>:windd,
+        <span style="color:#e6db74">&#39;wind_chill&#39;</span>:windc,
+        <span style="color:#e6db74">&#39;humidex&#39;</span>:humidex,
+        <span style="color:#e6db74">&#39;horizontal_visibility&#39;</span>:horizontal_visibility } 
 
-data = {'climate_station_number':stid,
-        'station_name': station_name,
-        'latitude': latitude,
-        'longitude': longitude,
-        'date':date, 
-        'mean_sea_level':mslp,
-        'air_temperature':air,
-        'dew_point':dew,
-        'relative_humidity': rel,
-        'wind_speed':winds,
-        'wind_direction':windd,
-        'wind_chill':windc,
-        'humidex':humidex,
-        'horizontal_visibility':horizontal_visibility } 
-
-data= pd.DataFrame(data).set_index(&quot;climate_station_number&quot;)   
-</code></pre>
-
-<p>If we want to select a specific station:</p>
-
-<pre><code class="language-python">data[data['station_name']== 'Montréal']
-</code></pre>
-
-<pre><code>| climate_station_number   | station_name   |   latitude |   longitude | date             |   mean_sea_level |   air_temperature |   dew_point |   relative_humidity |   wind_speed | wind_direction   | wind_chill   | humidex   | horizontal_visibility   |
+data<span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#34;climate_station_number&#34;</span>)   
+</code></pre></div><p>If we want to select a specific station:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data[data[<span style="color:#e6db74">&#39;station_name&#39;</span>]<span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Montréal&#39;</span>]
+</code></pre></div><pre><code>| climate_station_number   | station_name   |   latitude |   longitude | date             |   mean_sea_level |   air_temperature |   dew_point |   relative_humidity |   wind_speed | wind_direction   | wind_chill   | humidex   | horizontal_visibility   |
 |:-------------------------|:---------------|-----------:|------------:|:-----------------|-----------------:|------------------:|------------:|--------------------:|-------------:|:-----------------|:-------------|:----------|:------------------------|
 | 702S006                  | Montréal       |    45.4678 |    -73.7417 | 2020-03-10 17:00 |            100.7 |               2.1 |         1.5 |                  96 |           10 | NNE              |              |           |                         |
 </code></pre>
-
 <p>To save our data by stations:</p>
-
-<pre><code class="language-python">for index, row in data.iterrows(): 
-    file = 'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/'+month+'/'+index+'_'+month+'.csv'
-    if exists(file):
-        #print (&quot;File exist&quot;)
-        pd.DataFrame(row).T.to_csv(r'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/'+month+'/'+index+'_'+month+'.csv',mode='a',index=False,header=False) 
-    else:
-        #print (&quot;File not exist&quot;)
-        pd.DataFrame(row).T.to_csv(r'D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/'+month+'/'+index+'_'+month+'.csv',index=False) 
-</code></pre>
-
-<p>We now have everything we need to use Plotly library in order to have interactive scatter plots on maps.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> index, row <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>iterrows(): 
+    file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">+</span>index<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.csv&#39;</span>
+    <span style="color:#66d9ef">if</span> exists(file):
+        <span style="color:#75715e">#print (&#34;File exist&#34;)</span>
+        pd<span style="color:#f92672">.</span>DataFrame(row)<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">+</span>index<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.csv&#39;</span>,mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;a&#39;</span>,index<span style="color:#f92672">=</span>False,header<span style="color:#f92672">=</span>False) 
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#75715e">#print (&#34;File not exist&#34;)</span>
+        pd<span style="color:#f92672">.</span>DataFrame(row)<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:/Utilisateurs/guillaume/Documents/GitHub/Python_XML/&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">+</span>index<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.csv&#39;</span>,index<span style="color:#f92672">=</span>False) 
+</code></pre></div><p>We now have everything we need to use Plotly library in order to have interactive scatter plots on maps.</p>
 <p>We use the Plotly Express function px.scatter_mapbox to display current temperature observations over Canada.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list_province <span style="color:#f92672">=</span>  [<span style="color:#e6db74">&#39;AB&#39;</span>,<span style="color:#e6db74">&#39;BC&#39;</span>,<span style="color:#e6db74">&#39;MB&#39;</span>,<span style="color:#e6db74">&#39;NB&#39;</span>,<span style="color:#e6db74">&#39;NL&#39;</span>,<span style="color:#e6db74">&#39;NS&#39;</span>,<span style="color:#e6db74">&#39;NT&#39;</span>,<span style="color:#e6db74">&#39;NU&#39;</span>,<span style="color:#e6db74">&#39;ON&#39;</span>,<span style="color:#e6db74">&#39;PE&#39;</span>,<span style="color:#e6db74">&#39;QC&#39;</span>,<span style="color:#e6db74">&#39;SK&#39;</span>,<span style="color:#e6db74">&#39;YT&#39;</span>]
 
-<pre><code class="language-python">list_province =  ['AB','BC','MB','NB','NL','NS','NT','NU','ON','PE','QC','SK','YT']
-
-dataset = []
-for province in list_province:    
-    tmp_file = 'http://dd.weather.ec.gc.ca/observations/xml/'+province+'/hourly/hourly_'+province.lower()+'_'+now.strftime(&quot;%Y%m%d%H&quot;)+'_e.xml'
-    r = requests.get(tmp_file)
-    root = ET.fromstring(r.content)
-    latitude = []
-    longitude = []
-    air=[]  
-    stid=[]
-    station_name = []
-    latitude = []
-    longitude = []
-    data = []
+dataset <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> province <span style="color:#f92672">in</span> list_province:    
+    tmp_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://dd.weather.ec.gc.ca/observations/xml/&#39;</span><span style="color:#f92672">+</span>province<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/hourly/hourly_&#39;</span><span style="color:#f92672">+</span>province<span style="color:#f92672">.</span>lower()<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_e.xml&#39;</span>
+    r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(tmp_file)
+    root <span style="color:#f92672">=</span> ET<span style="color:#f92672">.</span>fromstring(r<span style="color:#f92672">.</span>content)
+    latitude <span style="color:#f92672">=</span> []
+    longitude <span style="color:#f92672">=</span> []
+    air<span style="color:#f92672">=</span>[]  
+    stid<span style="color:#f92672">=</span>[]
+    station_name <span style="color:#f92672">=</span> []
+    latitude <span style="color:#f92672">=</span> []
+    longitude <span style="color:#f92672">=</span> []
+    data <span style="color:#f92672">=</span> []
     
-    for child in root.iter('*'):      
-        if child.attrib.get('name') == 'air_temperature':
-            air.append(child.get('value'))       
-        if child.attrib.get('name') == 'climate_station_number':
-            stid.append(child.get('value')) 
-        if child.attrib.get('name') == 'station_name':
-            station_name.append(child.get('value'))    
-        if child.attrib.get('name') == 'latitude':
-            latitude.append(child.get('value'))
-        if child.attrib.get('name') == 'longitude':
-            longitude.append(child.get('value'))    
-    data = {'climate_station_number':stid,
-            'station_name': station_name,
-            'latitude': latitude,
-            'longitude': longitude,
-            'date':date, 
-            'air_temperature':air } 
+    <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>iter(<span style="color:#e6db74">&#39;*&#39;</span>):      
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;air_temperature&#39;</span>:
+            air<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))       
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;climate_station_number&#39;</span>:
+            stid<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>)) 
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;station_name&#39;</span>:
+            station_name<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))    
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;latitude&#39;</span>:
+            latitude<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;longitude&#39;</span>:
+            longitude<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))    
+    data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;climate_station_number&#39;</span>:stid,
+            <span style="color:#e6db74">&#39;station_name&#39;</span>: station_name,
+            <span style="color:#e6db74">&#39;latitude&#39;</span>: latitude,
+            <span style="color:#e6db74">&#39;longitude&#39;</span>: longitude,
+            <span style="color:#e6db74">&#39;date&#39;</span>:date, 
+            <span style="color:#e6db74">&#39;air_temperature&#39;</span>:air } 
 
-    data = pd.DataFrame(data)
-    dataset.append(data)
+    data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+    dataset<span style="color:#f92672">.</span>append(data)
 
-</code></pre>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(dataset)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset[[<span style="color:#e6db74">&#39;latitude&#39;</span>, <span style="color:#e6db74">&#39;longitude&#39;</span>]] <span style="color:#f92672">=</span> dataset[[<span style="color:#e6db74">&#39;latitude&#39;</span>, <span style="color:#e6db74">&#39;longitude&#39;</span>]]<span style="color:#f92672">.</span>astype(float)
+dataset[[<span style="color:#e6db74">&#39;air_temperature&#39;</span>]] <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>to_numeric(dataset[<span style="color:#e6db74">&#39;air_temperature&#39;</span>]<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39; &#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>))<span style="color:#f92672">.</span>astype(float)
+dataset[<span style="color:#e6db74">&#39;Size&#39;</span>]<span style="color:#f92672">=</span>([<span style="color:#ae81ff">0.5</span>] <span style="color:#f92672">*</span> len(dataset))
+</code></pre></div><p>We can now create our scatter plot using plotly:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> plotly.express <span style="color:#f92672">as</span> px
+<span style="color:#75715e"># Create a token in mapbox</span>
+token <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;**** &#39;</span>
 
-<pre><code class="language-python">dataset = pd.concat(dataset)
-</code></pre>
-
-<pre><code class="language-python">dataset[['latitude', 'longitude']] = dataset[['latitude', 'longitude']].astype(float)
-dataset[['air_temperature']] = pd.to_numeric(dataset['air_temperature'].str.replace(' ', '')).astype(float)
-dataset['Size']=([0.5] * len(dataset))
-</code></pre>
-
-<p>We can now create our scatter plot using plotly:</p>
-
-<pre><code class="language-python">import plotly.express as px
-# Create a token in mapbox
-token = '**** '
-
-fig = px.scatter_mapbox(dataset,
-        lat = 'latitude',
-        lon = 'longitude',
-        zoom=2.5,
-        hover_name='date',
-        range_color=(-30, 5),
-        size='Size',
-        color='air_temperature',
-        color_continuous_scale=px.colors.sequential.Jet,
-        width = 1000,
-        height = 1000
+fig <span style="color:#f92672">=</span> px<span style="color:#f92672">.</span>scatter_mapbox(dataset,
+        lat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;latitude&#39;</span>,
+        lon <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;longitude&#39;</span>,
+        zoom<span style="color:#f92672">=</span><span style="color:#ae81ff">2.5</span>,
+        hover_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;date&#39;</span>,
+        range_color<span style="color:#f92672">=</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">5</span>),
+        size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Size&#39;</span>,
+        color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;air_temperature&#39;</span>,
+        color_continuous_scale<span style="color:#f92672">=</span>px<span style="color:#f92672">.</span>colors<span style="color:#f92672">.</span>sequential<span style="color:#f92672">.</span>Jet,
+        width <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>,
+        height <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
         )
-# Configure the style of the map
-fig.update_layout(
-        mapbox_style=&quot;light&quot;, 
-        mapbox_accesstoken=token
+<span style="color:#75715e"># Configure the style of the map</span>
+fig<span style="color:#f92672">.</span>update_layout(
+        mapbox_style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;light&#34;</span>, 
+        mapbox_accesstoken<span style="color:#f92672">=</span>token
     )
 
-</code></pre>
-
-<p><img src="scatter.png" alt="png" /></p>
-
+</code></pre></div><p><img src="scatter.png" alt="png"></p>
 <p>We can push our visualization to our plotly account using the following lines of code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> chart_studio
 
-<pre><code class="language-python">import chart_studio
+username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;username&#39;</span>
+api_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;******&#39;</span>
 
-username = 'username'
-api_key = '******'
-
-chart_studio.tools.set_credentials_file(username = username, api_key = api_key)
-import chart_studio.plotly as py 
-py.plot(fig, filename = 'scatter_plot', auto_open = True)
-</code></pre>
-
-<p>If done correctly, this code should open a new window with your visualization on your account and return the link in your notebook.</p>
-
+chart_studio<span style="color:#f92672">.</span>tools<span style="color:#f92672">.</span>set_credentials_file(username <span style="color:#f92672">=</span> username, api_key <span style="color:#f92672">=</span> api_key)
+<span style="color:#f92672">import</span> chart_studio.plotly <span style="color:#f92672">as</span> py 
+py<span style="color:#f92672">.</span>plot(fig, filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;scatter_plot&#39;</span>, auto_open <span style="color:#f92672">=</span> True)
+</code></pre></div><p>If done correctly, this code should open a new window with your visualization on your account and return the link in your notebook.</p>
 <pre><code>'https://plot.ly/~guimeteo/19/'
 </code></pre>
+<p>Now we have the <a href="https://plot.ly/~guimeteo/19/">link</a>  to our plotly visualization (either hosted on plotly or github pages).</p>
+<h2 id="2--plot-timeserie-for-one-station">2- Plot timeserie for one station:</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+end_date <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>utcnow() <span style="color:#f92672">-</span> timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
+start_date <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>utcnow() <span style="color:#f92672">-</span> timedelta(days<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mydate <span style="color:#f92672">=</span> start_date
+<span style="color:#66d9ef">while</span> mydate <span style="color:#f92672">&lt;</span> end_date:    
+    <span style="color:#75715e">#print((mydate).strftime(&#34;%Y-%m-%d %H:00&#34;))</span>
+    mydate <span style="color:#f92672">+=</span> timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+end_date <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>utcnow() <span style="color:#f92672">-</span> timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
+start_date <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>utcnow() <span style="color:#f92672">-</span> timedelta(days<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+mydate <span style="color:#f92672">=</span> start_date
+dataset <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">while</span> mydate <span style="color:#f92672">&lt;</span> end_date:    
+    <span style="color:#75715e">#print((mydate).strftime(&#34;%Y-%m-%d %H:00&#34;))  </span>
+    tmp_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://dd.weather.ec.gc.ca/observations/xml/QC/hourly/hourly_qc_&#39;</span><span style="color:#f92672">+</span>mydate<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H&#34;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_e.xml&#39;</span>
+    r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(tmp_file)
+    root <span style="color:#f92672">=</span> ET<span style="color:#f92672">.</span>fromstring(r<span style="color:#f92672">.</span>content)
+    air<span style="color:#f92672">=</span>[]  
+    stid<span style="color:#f92672">=</span>[]
+    latitude <span style="color:#f92672">=</span> []
+    longitude <span style="color:#f92672">=</span> []
+    data  <span style="color:#f92672">=</span> []
+    station <span style="color:#f92672">=</span> [] 
+    <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>iter(<span style="color:#e6db74">&#39;*&#39;</span>):      
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;air_temperature&#39;</span>:
+            air<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;climate_station_number&#39;</span>:
+            stid<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))       
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;latitude&#39;</span>:
+            latitude<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;longitude&#39;</span>:
+            longitude<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))
+        <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>attrib<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;station_name&#39;</span>:
+            station<span style="color:#f92672">.</span>append(child<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;value&#39;</span>))    
 
-<p>Now we have the <a href="https://plot.ly/~guimeteo/19/" target="_blank">link</a>  to our plotly visualization (either hosted on plotly or github pages).</p>
+    date <span style="color:#f92672">=</span> now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:00&#34;</span>)
+    month <span style="color:#f92672">=</span>  now<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y%m&#34;</span>)
 
-<h2 id="2-plot-timeserie-for-one-station">2- Plot timeserie for one station:</h2>
-
-<pre><code class="language-python">from datetime import datetime
-end_date = datetime.utcnow() - timedelta(hours=1) 
-start_date = datetime.utcnow() - timedelta(days=14)
-</code></pre>
-
-<pre><code class="language-python">mydate = start_date
-while mydate &lt; end_date:    
-    #print((mydate).strftime(&quot;%Y-%m-%d %H:00&quot;))
-    mydate += timedelta(hours=1)
-</code></pre>
-
-<pre><code class="language-python">from datetime import datetime
-end_date = datetime.utcnow() - timedelta(hours=1) 
-start_date = datetime.utcnow() - timedelta(days=14)
-mydate = start_date
-dataset = []
-while mydate &lt; end_date:    
-    #print((mydate).strftime(&quot;%Y-%m-%d %H:00&quot;))  
-    tmp_file = 'http://dd.weather.ec.gc.ca/observations/xml/QC/hourly/hourly_qc_'+mydate.strftime(&quot;%Y%m%d%H&quot;)+'_e.xml'
-    r = requests.get(tmp_file)
-    root = ET.fromstring(r.content)
-    air=[]  
-    stid=[]
-    latitude = []
-    longitude = []
-    data  = []
-    station = [] 
-    for child in root.iter('*'):      
-        if child.attrib.get('name') == 'air_temperature':
-            air.append(child.get('value'))
-        if child.attrib.get('name') == 'climate_station_number':
-            stid.append(child.get('value'))       
-        if child.attrib.get('name') == 'latitude':
-            latitude.append(child.get('value'))
-        if child.attrib.get('name') == 'longitude':
-            longitude.append(child.get('value'))
-        if child.attrib.get('name') == 'station_name':
-            station.append(child.get('value'))    
-
-    date = now.strftime(&quot;%Y-%m-%d %H:00&quot;)
-    month =  now.strftime(&quot;%Y%m&quot;)
-
-    data = {'climate_station_number':stid,
-            'latitude': latitude,
-            'longitude': longitude,
-            'date':mydate.strftime(&quot;%Y-%m-%d:%H&quot;), 
-            'air_temperature':air,
-            'name station': station} 
+    data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;climate_station_number&#39;</span>:stid,
+            <span style="color:#e6db74">&#39;latitude&#39;</span>: latitude,
+            <span style="color:#e6db74">&#39;longitude&#39;</span>: longitude,
+            <span style="color:#e6db74">&#39;date&#39;</span>:mydate<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">:%H&#34;</span>), 
+            <span style="color:#e6db74">&#39;air_temperature&#39;</span>:air,
+            <span style="color:#e6db74">&#39;name station&#39;</span>: station} 
     
-    mydate += timedelta(hours=1) 
+    mydate <span style="color:#f92672">+=</span> timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) 
     
-    data = pd.DataFrame(data)
-    dataset.append(data)   
-</code></pre>
-
-<pre><code class="language-python">dataset = pd.concat(dataset)
-</code></pre>
-
-<pre><code class="language-python">dataset.head()
-</code></pre>
-
-<pre><code>|    | climate_station_number   |   latitude |   longitude | date          |   air_temperature | name station        |
+    data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+    dataset<span style="color:#f92672">.</span>append(data)   
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(dataset)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>|    | climate_station_number   |   latitude |   longitude | date          |   air_temperature | name station        |
 |---:|:-------------------------|-----------:|------------:|:--------------|------------------:|:--------------------|
 |  0 | 7100071                  |    60.8186 |    -78.1486 | 2020-02-25:18 |             -29.9 | Akulivik Airport    |
 |  1 | 7110600                  |    59.2967 |    -69.5997 | 2020-02-25:18 |             -26.6 | Aupaluk Airport     |
@@ -945,16 +870,10 @@ while mydate &lt; end_date:
 |  3 | 7040444                  |    49.1325 |    -68.2044 | 2020-02-25:18 |               2.1 | Baie-Comeau Airport |
 |  4 | 7040442                  |    49.1333 |    -68.2    | 2020-02-25:18 |               1.7 | Baie-Comeau Climate |
 </code></pre>
-
 <p>We will plot daily timeserie for station with climate_station_number = &lsquo;702S006&rsquo;</p>
-
-<pre><code class="language-python">dataset1 =  dataset[dataset['climate_station_number']=='702S006']
-</code></pre>
-
-<pre><code class="language-python">dataset1.head()
-</code></pre>
-
-<pre><code>|    | climate_station_number   |   latitude |   longitude | date          |   air_temperature | name station   |
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset1 <span style="color:#f92672">=</span>  dataset[dataset[<span style="color:#e6db74">&#39;climate_station_number&#39;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;702S006&#39;</span>]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset1<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>|    | climate_station_number   |   latitude |   longitude | date          |   air_temperature | name station   |
 |---:|:-------------------------|-----------:|------------:|:--------------|------------------:|:---------------|
 | 64 | 702S006                  |    45.4678 |    -73.7417 | 2020-02-25:18 |               4.2 | Montréal       |
 | 66 | 702S006                  |    45.4678 |    -73.7417 | 2020-02-25:19 |               3.5 | Montréal       |
@@ -962,22 +881,16 @@ while mydate &lt; end_date:
 | 65 | 702S006                  |    45.4678 |    -73.7417 | 2020-02-25:21 |               5   | Montréal       |
 | 65 | 702S006                  |    45.4678 |    -73.7417 | 2020-02-25:22 |               5   | Montréal       |
 </code></pre>
-
-<pre><code class="language-python">import datetime
-fig = px.line(dataset1, x='date', y='air_temperature')
-fig.update_layout(title_text='Hourly mean temperature in Montreal',
-                  xaxis_rangeslider_visible=True)
-fig.show()
-</code></pre>
-
-<pre><code class="language-python">import plotly.io as pio
-pio.write_html(fig, file = 'timeserie.html', auto_open = True)
-fig.write_image(&quot;timeserie.png&quot;)
-</code></pre>
-
-<p><img src="timeserie.png" alt="png" /></p>
-
-<p>Follow this <a href="https://plot.ly/~guimeteo/22/" target="_blank">link</a> for interactive plot.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+fig <span style="color:#f92672">=</span> px<span style="color:#f92672">.</span>line(dataset1, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;date&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;air_temperature&#39;</span>)
+fig<span style="color:#f92672">.</span>update_layout(title_text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Hourly mean temperature in Montreal&#39;</span>,
+                  xaxis_rangeslider_visible<span style="color:#f92672">=</span>True)
+fig<span style="color:#f92672">.</span>show()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> plotly.io <span style="color:#f92672">as</span> pio
+pio<span style="color:#f92672">.</span>write_html(fig, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;timeserie.html&#39;</span>, auto_open <span style="color:#f92672">=</span> True)
+fig<span style="color:#f92672">.</span>write_image(<span style="color:#e6db74">&#34;timeserie.png&#34;</span>)
+</code></pre></div><p><img src="timeserie.png" alt="png"></p>
+<p>Follow this <a href="https://plot.ly/~guimeteo/22/">link</a> for interactive plot.</p>
 
     </div>
 

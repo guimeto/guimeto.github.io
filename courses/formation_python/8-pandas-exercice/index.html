@@ -28,9 +28,10 @@
   
     
   
-  <meta name="description" content="TP: Analyse d&#39;un listing de 10 000 chaussures vendues en ligne source du dataset : https://www.kaggle.com/datafiniti/womens-shoes-prices
+  <meta name="description" content="source du dataset : https://www.kaggle.com/datafiniti/womens-shoes-prices
 Nous allons analyser un data set contenant 10 000 chaussures avec de nombreuse caractéristiques comme le prix, les couleurs disponibles, les tailles disponibles, leurs poids&hellip;
-Voici une traduction de la description des colonnes principales : - asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit. - brand : Le nom de marque de ce produit.">
+Voici une traduction de la description des colonnes principales :
+ asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit. brand : Le nom de marque de ce produit. categories : Une liste de mots-clés de catégorie utilisés pour ce produit dans plusieurs sources.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/8-pandas-exercice/">
@@ -117,9 +118,10 @@ Voici une traduction de la description des colonnes principales : - asins : Une 
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/8-pandas-exercice/">
   <meta property="og:title" content="8- La librairie Pandas - Exercice | GDueymes">
-  <meta property="og:description" content="TP: Analyse d&#39;un listing de 10 000 chaussures vendues en ligne source du dataset : https://www.kaggle.com/datafiniti/womens-shoes-prices
+  <meta property="og:description" content="source du dataset : https://www.kaggle.com/datafiniti/womens-shoes-prices
 Nous allons analyser un data set contenant 10 000 chaussures avec de nombreuse caractéristiques comme le prix, les couleurs disponibles, les tailles disponibles, leurs poids&hellip;
-Voici une traduction de la description des colonnes principales : - asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit. - brand : Le nom de marque de ce produit."><meta property="og:image" content="/img/icon-192.png">
+Voici une traduction de la description des colonnes principales :
+ asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit. brand : Le nom de marque de ce produit. categories : Une liste de mots-clés de catégorie utilisés pour ce produit dans plusieurs sources."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -580,7 +582,7 @@ Voici une traduction de la description des colonnes principales : - asins : Une 
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -594,79 +596,69 @@ Voici une traduction de la description des colonnes principales : - asins : Une 
           <h1>8- La librairie Pandas - Exercice</h1>
 
           <div class="article-style">
-            <h1>TP: Analyse d'un listing de 10 000 chaussures vendues en ligne</h1>
-
-<p>source du dataset : <a href="https://www.kaggle.com/datafiniti/womens-shoes-prices" target="_blank">https://www.kaggle.com/datafiniti/womens-shoes-prices</a></p>
-
+            <!-- raw HTML omitted -->
+<p>source du dataset : <a href="https://www.kaggle.com/datafiniti/womens-shoes-prices">https://www.kaggle.com/datafiniti/womens-shoes-prices</a></p>
 <p>Nous allons analyser un data set contenant 10 000 chaussures avec de nombreuse caractéristiques comme le prix, les couleurs disponibles, les tailles disponibles, leurs poids&hellip;</p>
-
-<p>Voici une traduction de la description des colonnes principales :
-- asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit.
-- brand : Le nom de marque de ce produit.
-- categories : Une liste de mots-clés de catégorie utilisés pour ce produit dans plusieurs sources.
-- colors : Une liste de couleurs disponibles pour ce produit.
-- count : Le nombre d&rsquo;unités incluses dans l&rsquo;emballage du produit. Peut inclure une description de l&rsquo;unité.
-- dateAdded : La date à laquelle ce produit a été ajouté pour la première fois à la base de données des produits.
-- dateUpdated : La date la plus récente à laquelle ce produit a été mis à jour ou vu par notre système.
-- descriptions : Une liste des descriptions de ce produit provenant de diverses sources. Chaque description contient :
-- dimension : La longueur, la largeur et la hauteur de ce produit. Unités incluses.
-- ean : Les codes EAN de ce produit. Il peut y avoir plus d&rsquo;un EAN dans la liste lorsqu&rsquo;un produit a plusieurs variantes,
-- financingAndLeasing : Une liste des conditions de financement ou de location associées à ce produit
-- features : Une liste des caractéristiques associées à ce produit. La liste des caractéristiques peut être obtenue à partir des sections de caractéristiques spécifiques disponibles dans la liste des produits du produit.
-- manufacturer : Numéro du fabricant
-- merchants : Une liste des marchands qui vendent ce produit. Il s&rsquo;agit généralement de marchands tiers que l&rsquo;on trouve sur les sites Web de commerce électronique.
-- name : dénomination du produit
-- prices : Une liste de prix pour ce produit.
-- primaryCategories : Une liste des catégories normalisées auxquelles ce produit appartient. Les valeurs des catégories peuvent être trouvées ici.
-- quantities : Une liste des quantités disponibles pour ce produit. Les quantités indiquent combien d&rsquo;unités du produit sont disponibles auprès d&rsquo;une source spécifique à un moment donné.
-- reviews : Une liste de commentaires pour ce produit.
-- sizes : Une liste des tailles disponibles pour ce produit.
-- skus : Une liste des références de ce produit. Les SKU sont typiquement spécifiques aux détaillants individuels ou aux sites Web.
-- sourceURLs : Une liste d&rsquo;URLs utilisées pour générer les données de ce produit.
-- upc : Le code CUP de ce produit.
-- websiteIDs : Une liste d&rsquo;identifiants de site Web pour ce produit. Les ID de site Web sont liés à un détaillant en ligne spécifique. Il s&rsquo;agit de l&rsquo;identifiant unique utilisé par le site Web. Ils sont utilisés par Datafiniti lorsque d&rsquo;autres identificateurs uniques ne sont pas disponibles pour un produit.
-- weight : Le poids du produit. Unités incluses.</p>
-
-<p>La source <a href="https://developer.datafiniti.co/docs/product-data-schema" target="_blank">https://developer.datafiniti.co/docs/product-data-schema</a></p>
-
-<p><b> Exercices </b></p>
-
-<p><b>Découverte du data set</b><br>
-1) à l&rsquo;aide de la fonction read_csv, importez entièrement le data set de enregistrez dans le dataframe &lsquo;Shoes&rsquo; <br>
-2) Utilisez la méthode .head() pour afficher les premières lignes <br>
-3) Il y a trop de colonnes&hellip;Pour avoir une vue d&rsquo;ensemble changez le paramétrage de pandas avec set_option pour afficher les 34 colonnes. Une fois cela fait, affichez à nouveau le head de la page <br>
-4) On va garder uniquement les colonnes qui nous interessent. grace à la méthode de sélection de plusieurs colonnes, créez un dataframe &lsquo;ShoesLight&rsquo;, comprenant unique les colonnes suivantes :&lsquo;id&rsquo;,&lsquo;name&rsquo;,&lsquo;dateUpdated&rsquo;,&lsquo;colors&rsquo;,&lsquo;prices.amountMax&rsquo;,&lsquo;prices.amountMin&rsquo;,&lsquo;prices.merchant&rsquo;. <br>Affichez le head de ShoesLight.<br></p>
-
-<p><b> data cleaning </b> <br>
-5) A l&rsquo;aide de la méthode .dtypes, consultez les types de chaque colonne. Ecrivez en markdown celles devant être corrigées et comment. <br>
-6) A l&rsquo;aide des méthodes .isnull, .sum() et len(), calculez le % de valeurs maquantes par colonne. Notez en markdown celles qui sont problématiques. <br>
-7) Il manque trop de valeurs pour les colonnes des e-commercant et des couleurs. Retirez les du dataframe shoesLight <br>
+<p>Voici une traduction de la description des colonnes principales :</p>
+<ul>
+<li>asins : Une liste des ASIN (identificateurs d&rsquo;Amazon) utilisés pour ce produit.</li>
+<li>brand : Le nom de marque de ce produit.</li>
+<li>categories : Une liste de mots-clés de catégorie utilisés pour ce produit dans plusieurs sources.</li>
+<li>colors : Une liste de couleurs disponibles pour ce produit.</li>
+<li>count : Le nombre d&rsquo;unités incluses dans l&rsquo;emballage du produit. Peut inclure une description de l&rsquo;unité.</li>
+<li>dateAdded : La date à laquelle ce produit a été ajouté pour la première fois à la base de données des produits.</li>
+<li>dateUpdated : La date la plus récente à laquelle ce produit a été mis à jour ou vu par notre système.</li>
+<li>descriptions : Une liste des descriptions de ce produit provenant de diverses sources. Chaque description contient :</li>
+<li>dimension : La longueur, la largeur et la hauteur de ce produit. Unités incluses.</li>
+<li>ean : Les codes EAN de ce produit. Il peut y avoir plus d&rsquo;un EAN dans la liste lorsqu&rsquo;un produit a plusieurs variantes,</li>
+<li>financingAndLeasing : Une liste des conditions de financement ou de location associées à ce produit</li>
+<li>features : Une liste des caractéristiques associées à ce produit. La liste des caractéristiques peut être obtenue à partir des sections de caractéristiques spécifiques disponibles dans la liste des produits du produit.</li>
+<li>manufacturer : Numéro du fabricant</li>
+<li>merchants : Une liste des marchands qui vendent ce produit. Il s&rsquo;agit généralement de marchands tiers que l&rsquo;on trouve sur les sites Web de commerce électronique.</li>
+<li>name : dénomination du produit</li>
+<li>prices : Une liste de prix pour ce produit.</li>
+<li>primaryCategories : Une liste des catégories normalisées auxquelles ce produit appartient. Les valeurs des catégories peuvent être trouvées ici.</li>
+<li>quantities : Une liste des quantités disponibles pour ce produit. Les quantités indiquent combien d&rsquo;unités du produit sont disponibles auprès d&rsquo;une source spécifique à un moment donné.</li>
+<li>reviews : Une liste de commentaires pour ce produit.</li>
+<li>sizes : Une liste des tailles disponibles pour ce produit.</li>
+<li>skus : Une liste des références de ce produit. Les SKU sont typiquement spécifiques aux détaillants individuels ou aux sites Web.</li>
+<li>sourceURLs : Une liste d&rsquo;URLs utilisées pour générer les données de ce produit.</li>
+<li>upc : Le code CUP de ce produit.</li>
+<li>websiteIDs : Une liste d&rsquo;identifiants de site Web pour ce produit. Les ID de site Web sont liés à un détaillant en ligne spécifique. Il s&rsquo;agit de l&rsquo;identifiant unique utilisé par le site Web. Ils sont utilisés par Datafiniti lorsque d&rsquo;autres identificateurs uniques ne sont pas disponibles pour un produit.</li>
+<li>weight : Le poids du produit. Unités incluses.</li>
+</ul>
+<p>La source <a href="https://developer.datafiniti.co/docs/product-data-schema">https://developer.datafiniti.co/docs/product-data-schema</a></p>
+<p><!-- raw HTML omitted --> Exercices <!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted -->Découverte du data set<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<ol>
+<li>à l&rsquo;aide de la fonction read_csv, importez entièrement le data set de enregistrez dans le dataframe &lsquo;Shoes&rsquo; <!-- raw HTML omitted --></li>
+<li>Utilisez la méthode .head() pour afficher les premières lignes <!-- raw HTML omitted --></li>
+<li>Il y a trop de colonnes&hellip;Pour avoir une vue d&rsquo;ensemble changez le paramétrage de pandas avec set_option pour afficher les 34 colonnes. Une fois cela fait, affichez à nouveau le head de la page <!-- raw HTML omitted --></li>
+<li>On va garder uniquement les colonnes qui nous interessent. grace à la méthode de sélection de plusieurs colonnes, créez un dataframe &lsquo;ShoesLight&rsquo;, comprenant unique les colonnes suivantes :&lsquo;id&rsquo;,&lsquo;name&rsquo;,&lsquo;dateUpdated&rsquo;,&lsquo;colors&rsquo;,&lsquo;prices.amountMax&rsquo;,&lsquo;prices.amountMin&rsquo;,&lsquo;prices.merchant&rsquo;. <!-- raw HTML omitted -->Affichez le head de ShoesLight.<!-- raw HTML omitted --></li>
+</ol>
+<p><!-- raw HTML omitted --> data cleaning <!-- raw HTML omitted --> <!-- raw HTML omitted -->
+5) A l&rsquo;aide de la méthode .dtypes, consultez les types de chaque colonne. Ecrivez en markdown celles devant être corrigées et comment. <!-- raw HTML omitted -->
+6) A l&rsquo;aide des méthodes .isnull, .sum() et len(), calculez le % de valeurs maquantes par colonne. Notez en markdown celles qui sont problématiques. <!-- raw HTML omitted -->
+7) Il manque trop de valeurs pour les colonnes des e-commercant et des couleurs. Retirez les du dataframe shoesLight <!-- raw HTML omitted -->
 8) A l&rsquo;aide de la méthode .to_datetime, transformez la colonne &lsquo;dateUpdated&rsquo;</p>
-
-<p><b> features modeling </b> <br>
-9) caculez la colonne &lsquo;prices.amountAverage&rsquo; en additionnant les colonnes &lsquo;prices.amountMax&rsquo; et &lsquo;prices.amountMin&rsquo; et en divisant par 2 <br>
+<p><!-- raw HTML omitted --> features modeling <!-- raw HTML omitted --> <!-- raw HTML omitted -->
+9) caculez la colonne &lsquo;prices.amountAverage&rsquo; en additionnant les colonnes &lsquo;prices.amountMax&rsquo; et &lsquo;prices.amountMin&rsquo; et en divisant par 2 <!-- raw HTML omitted -->
 10) grace à la méthode dt.weekday, créez une colonne &lsquo;dayOfweekUpdated&rsquo;, permettant de connaitre à partir de dateUpdated le jour de la semaine où les produits sont mis à jour</p>
-
-<p><b> data analyse </b> <br></p>
-
-<p>11) Analyser le prix moyen des chaussures avec la methode .desribe() <br>
-12) Y-a-t-il de grandes différences de prix en fonction de la marque ? A l&rsquo;aide des methodes groupby(), mean() et sort_values(), créez une varaible &lsquo;Luxe&rsquo; contenant les 10 marques les plus chères, puis la variable &lsquo;lowCost&rsquo; contenant les 10 marques les moins chères. <br>
-13) grace à la méthode value_counts(), determinez le jour de la semaine où les produits sont le plus souvent mis à jour <br>
-14) (optionnel) donnez le prix moyen des produits de la marque &lsquo;easy street&rsquo; mis à jour un jeudi</p>
-
-<pre><code class="language-python">
-</code></pre>
-
-<p><b>Découverte du data set</b><br></p>
-
-<pre><code class="language-python">import pandas as pd 
-from tabulate import tabulate
-shoes = pd.read_csv('Datafiniti_Womens_Shoes.csv', encoding = 'latin-1', sep=',')
-pd.set_option(&quot;display.max_columns&quot;, 35)
-print(tabulate(shoes.head(), headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>|    | id                   | dateAdded            | dateUpdated          |   asins | brand       | categories                                                          | primaryCategories   | colors                         | dimension                |          ean | imageURLs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | keys                                                                                                                                                                                                                           | manufacturer   | manufacturerNumber   | name                                                          |   prices.amountMax |   prices.amountMin | prices.availability   | prices.color       | prices.condition   | prices.currency   | prices.dateAdded     | prices.dateSeen                                   | prices.isSale   | prices.merchant   |   prices.offer |   prices.returnPolicy | prices.shipping   | prices.size   | prices.sourceURLs                                                                                                                                                                                                                             | sizes                                                                                                                             | sourceURLs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |          upc |   weight |
+<p><!-- raw HTML omitted --> data analyse <!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<ol start="11">
+<li>Analyser le prix moyen des chaussures avec la methode .desribe() <!-- raw HTML omitted --></li>
+<li>Y-a-t-il de grandes différences de prix en fonction de la marque ? A l&rsquo;aide des methodes groupby(), mean() et sort_values(), créez une varaible &lsquo;Luxe&rsquo; contenant les 10 marques les plus chères, puis la variable &lsquo;lowCost&rsquo; contenant les 10 marques les moins chères. <!-- raw HTML omitted --></li>
+<li>grace à la méthode value_counts(), determinez le jour de la semaine où les produits sont le plus souvent mis à jour <!-- raw HTML omitted --></li>
+<li>(optionnel) donnez le prix moyen des produits de la marque &lsquo;easy street&rsquo; mis à jour un jeudi</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><p><!-- raw HTML omitted -->Découverte du data set<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd 
+<span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+shoes <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;Datafiniti_Womens_Shoes.csv&#39;</span>, encoding <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;latin-1&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>)
+pd<span style="color:#f92672">.</span>set_option(<span style="color:#e6db74">&#34;display.max_columns&#34;</span>, <span style="color:#ae81ff">35</span>)
+<span style="color:#66d9ef">print</span>(tabulate(shoes<span style="color:#f92672">.</span>head(), headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>|    | id                   | dateAdded            | dateUpdated          |   asins | brand       | categories                                                          | primaryCategories   | colors                         | dimension                |          ean | imageURLs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | keys                                                                                                                                                                                                                           | manufacturer   | manufacturerNumber   | name                                                          |   prices.amountMax |   prices.amountMin | prices.availability   | prices.color       | prices.condition   | prices.currency   | prices.dateAdded     | prices.dateSeen                                   | prices.isSale   | prices.merchant   |   prices.offer |   prices.returnPolicy | prices.shipping   | prices.size   | prices.sourceURLs                                                                                                                                                                                                                             | sizes                                                                                                                             | sourceURLs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |          upc |   weight |
 |---:|:---------------------|:---------------------|:---------------------|--------:|:------------|:--------------------------------------------------------------------|:--------------------|:-------------------------------|:-------------------------|-------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:---------------------|:--------------------------------------------------------------|-------------------:|-------------------:|:----------------------|:-------------------|:-------------------|:------------------|:---------------------|:--------------------------------------------------|:----------------|:------------------|---------------:|----------------------:|:------------------|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------:|---------:|
 |  0 | AVpfEf_hLJeJML431ueH | 2015-05-04T12:13:08Z | 2018-01-29T04:38:43Z |     nan | Naturalizer | Clothing,Shoes,Women's Shoes,All Women's Shoes,Heels,Sandals        | Shoes               | Silver,Cream Watercolor Floral | nan                      | nan          | https://i5.walmartimages.com/asr/861ca6cf-fa55-4a48-904d-b764d7c00f0c_1.1a2bb39923e1486d05bdafe37ad832e3.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/efe9ba1e-daed-4534-9e2e-11804bbb30f1_1.62e3e7f0268f641323a245d5caebdd6d.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/0c717815-228e-4c9b-a8fc-d033576461c9_1.f08402e0a5165746e133ddeb589c73e0.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/f46703c8-2cdb-4bf2-a3ea-819f24aab134_1.df725b76ca0112d64bdf566ad97760a9.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/f652f354-a1fb-47ac-b507-7f97eb216b14_1.39e78b87e2328421803115869ee8b950.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,http://ak1.ostkcdn.com/images/products/84/146/P16141204.jpg,http://s1.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_tp.jpg,http://s3.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_sl.jpg,http://s2.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_rt.jpg,http://s3.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_45.jpg,http://s2.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_hl.jpg,http://s1.shoes.com/images/br021/womens-naturalizer-danya-soft-silver-crosshatch-shiny-377672_366_lt.jpg,http://ak1.ostkcdn.com/images/products/85/115/P16454357.jpg | naturalizer/47147sc022,017136472311,womensnaturalizerdanyasoftsilvercrosshatchshinypatent/16141204,womensnaturalizerdanyasoftsilvercrosshatchshinypatent/377672,womensnaturalizerdanyasoftsilvercrosshatchshinypatent/16454357 | nan            | 47147SC022           | Naturalizer Danya Women N/S Open Toe Synthetic Silver Sandals |              55.99 |              55.99 | nan                   | UWomens  M Regular | nan                | USD               | 2017-03-28T11:40:25Z | 2017-03-25T09:19:24.819Z,2017-03-25T09:19:19.600Z | False           | Overstock.com     |            nan |                   nan | nan               | S             | https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Soft-Silver-Crosshatch-Shiny-Patent/8925023/product.html,https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html | 6W,9W,7.5W,12W,8.5M,9N,9M,9.5M,10.5M,10W,8.5W,7M,7.5M,7N,9.5W,10N,10M,5M,12M,5.5M,8W,11W,8N,8M,4.5M,6.5M,6M,11M,6N,11N,6.5W,4M,7W | https://www.walmart.com/ip/Naturalizer-Danya-Women-N-S-Open-Toe-Synthetic-Silver-Sandals/136041884,https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Soft-Silver-Crosshatch-Shiny-Patent/8925023/product.html,http://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Soft-Silver-Crosshatch-Shiny-Patent/8925023/product.html?refccid=O7POPZJCH6AJFPCMWNSBVDYJGI&amp;searchidx=6749,https://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html,http://www.shoes.com/womens-naturalizer-danya-soft-silver-crosshatch-shiny-p2_id332635,http://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html?refccid=JEHJMDO4H2ZK5FKIT6XGVPS7B4&amp;searchidx=4871,http://www.overstock.com/Clothing-Shoes/Womens-Naturalizer-Danya-Silver-Crosshatch-Patent-PU/9291843/product.html?refccid=Y6DKPF6YL5DIRFCPAK7JMVETL4&amp;searchidx=4245 | 017136472311 |      nan |
 |  1 | AVpi74XfLJeJML43qZAc | 2017-01-27T01:23:39Z | 2018-01-03T05:21:54Z |     nan | MUK LUKS    | Clothing,Shoes,Women's Shoes,Women's Casual Shoes,All Women's Shoes | Shoes               | Grey                           | nan                      |   3.3977e+10 | https://i5.walmartimages.com/asr/421de5d5-3a74-4ca2-ae91-a75787f7da41_1.375e3cf74dc82303ce37bdf6a9742610.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/202d5a0e-b2aa-4d47-b63c-661fc3f9cd69_1.a61c1848859953067192fb2ce1c4f916.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/55a10ffd-de74-406b-8aa5-ae5be3569ee3_1.4b179b9702f0076cdf701afd0e7dcda2.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/138e9ecf-fac8-4e9d-946a-7ca33dfa46aa_1.e4211c14f2a6ecf891e3d440402b5f82.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/8c6c1ee4-7708-4d45-b48a-b30f974a5f2f_1.857088c50496451990583941d955218d.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/a486d1cf-f2b5-49ca-b0f8-3e2db896c51c_1.de1c99ac6fdfcf3dc3ddbd9c1c6c72b1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | mukluks/00173650206,033977045743,muklukswomensjanesuedemoccasin/553406801,0033977045743                                                                                                                                        | Muk Luks       | 0017365020-6         | MUK LUKS Womens Jane Suede Moccasin                           |              47    |              35.25 | In Stock              | Grey               | New                | USD               | 2018-01-03T05:21:54Z | 2017-12-08T14:24:00.000Z,2017-11-01T02:52:00.000Z | True            | Walmart.com       |            nan |                   nan | Standard          | 6             | https://www.walmart.com/ip/MUK-LUKS-Womens-Jane-Suede-Moccasin/41271362                                                                                                                                                                       | 10,7,6,9,8                                                                                                                        | https://www.walmart.com/ip/MUK-LUKS-Womens-Jane-Suede-Moccasin/41271362                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 033977045743 |      nan |
@@ -674,12 +666,9 @@ print(tabulate(shoes.head(), headers='keys', tablefmt='pipe'))
 |  3 | AVpjXyCc1cnluZ0-V-Gj | 2017-01-27T01:25:56Z | 2018-01-04T11:52:35Z |     nan | MUK LUKS    | Clothing,Shoes,Women's Shoes,All Women's Shoes,Women's Slippers     | Shoes,Shoes         | Black                          | 6.0 in x 6.0 in x 1.0 in |   3.3977e+10 | https://i5.walmartimages.com/asr/950d38a5-0113-4111-952d-33fdcde53902_1.d2dd17888ccb2856f3227e0273d911f8.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/cd183ae0-efea-4771-b3fd-d341a57887cf_1.24ec8674bb4d7a783a92fe8c33656327.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/68891305-0fb3-4249-b7de-7dabd8702994_1.0f4a323222d690fca9dc9bb8f70f2761.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/d43b85d9-b4de-43fc-a9ca-0979e2f50455_1.5e4d5516a1443339e7dc329feb348cd1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/0ef94daa-fa39-420d-bb4c-e6156c441ce3_1.52cd0a9a611b0238ce83767b4dcf205e.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/3fece502-09aa-4981-ac4f-e1b7c4d5f954_1.e12aa766531546eea0f4143b37b8e4c1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,http://i5.walmartimages.com/dfw/dce07b8c-a7ea/k2-_46c4321b-d9d6-43b8-bc25-375ae7b82de0.v1.jpg,http://i5.walmartimages.com/dfw/dce07b8c-5142/k2-_74fbfb19-88d1-4a20-bd31-58b6a4b908ef.v1.jpg,http://i5.walmartimages.com/dfw/dce07b8c-2bb2/k2-_70437d33-1a05-4563-8eb6-a2b5f303580d.v2.jpg                                                                                                                                                                                                                                                                                                                               | 033977045903,muklukswomensdawnsuedescuffslipper/553409417,mukluks/00173660016,0033977045903                                                                                                                                    | Muk Luks       | 0017366001-6         | MUK LUKS Womens Dawn Suede Scuff Slipper                      |              24.75 |              24.75 | In Stock              | Black              | New                | USD               | 2018-01-04T11:52:35Z | 2017-12-07T16:37:00.000Z                          | False           | Slippers Dot Com  |            nan |                   nan | Value             | 6             | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288600                                                                                                                                                                  | 10,7,6,9,8                                                                                                                        | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288600,http://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288600                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 033977045903 |      nan |
 |  4 | AVphGKLPilAPnD_x1Nrm | 2017-01-27T01:25:56Z | 2018-01-18T03:55:18Z |     nan | MUK LUKS    | Clothing,Shoes,Women's Shoes,All Women's Shoes,Women's Slippers     | Shoes               | Grey                           | 6.0 in x 6.0 in x 1.0 in |   3.3977e+10 | https://i5.walmartimages.com/asr/5e137bc3-c900-4886-8b34-b668151f701b_1.84e3c472b6a11bf7a4591a29bc82e9d2.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/7daeac49-7810-406f-9c26-d4114c95f45d_1.a15e4690332f4ff0ff36ca920e8e524c.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/91daf35f-626a-4fbd-8f18-5eda881bd8c9_1.37f9328c0a254b6448fb81cd45161967.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/4189df99-e20a-4d15-8c84-2d2099b22268_1.fb873895715fea71bc31f0e89abca53d.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/366cacbc-afd6-4f00-a9e4-0f55dbb0ecfc_1.5d03f6fc3bff935a2295ed3ec1653da1.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF,https://i5.walmartimages.com/asr/5752e61a-01c2-4791-85a1-726a40accaf8_1.64d856d974c88497ac10a6ca5444291f.jpeg?odnHeight=450&amp;odnWidth=450&amp;odnBg=FFFFFF                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | mukluks/00173660206,033977045958,0033977045958,muklukswomensdawnsuedescuffslipper/553409491                                                                                                                                    | nan            | 0017366020-6         | MUK LUKS Womens Dawn Suede Scuff Slipper                      |              33    |              30.39 | In Stock              | Grey               | New                | USD               | 2017-12-04T21:35:47Z | 2017-11-17T21:15:00.000Z                          | True            | Walmart.com       |            nan |                   nan | Expedited         | 6             | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288525                                                                                                                                                                  | 10,7,6,9,8                                                                                                                        | https://www.walmart.com/ip/MUK-LUKS-Womens-Dawn-Suede-Scuff-Slipper/41288525,https://www.walmart.com/ip/Women-s-MUK-LUKS-Dawn-Suede-Scuff/41288525,https://www.walmart.com/ip/41288525                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 033977045958 |      nan |
 </code></pre>
-
-<pre><code class="language-python">shoesLight = shoes[['id','name','dateUpdated','colors','prices.amountMax','prices.amountMin','prices.merchant']]
-print(tabulate(shoesLight.head(), headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>|    | id                   | name                                                          | dateUpdated          | colors                         |   prices.amountMax |   prices.amountMin | prices.merchant   |
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shoesLight <span style="color:#f92672">=</span> shoes[[<span style="color:#e6db74">&#39;id&#39;</span>,<span style="color:#e6db74">&#39;name&#39;</span>,<span style="color:#e6db74">&#39;dateUpdated&#39;</span>,<span style="color:#e6db74">&#39;colors&#39;</span>,<span style="color:#e6db74">&#39;prices.amountMax&#39;</span>,<span style="color:#e6db74">&#39;prices.amountMin&#39;</span>,<span style="color:#e6db74">&#39;prices.merchant&#39;</span>]]
+<span style="color:#66d9ef">print</span>(tabulate(shoesLight<span style="color:#f92672">.</span>head(), headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>|    | id                   | name                                                          | dateUpdated          | colors                         |   prices.amountMax |   prices.amountMin | prices.merchant   |
 |---:|:---------------------|:--------------------------------------------------------------|:---------------------|:-------------------------------|-------------------:|-------------------:|:------------------|
 |  0 | AVpfEf_hLJeJML431ueH | Naturalizer Danya Women N/S Open Toe Synthetic Silver Sandals | 2018-01-29T04:38:43Z | Silver,Cream Watercolor Floral |              55.99 |              55.99 | Overstock.com     |
 |  1 | AVpi74XfLJeJML43qZAc | MUK LUKS Womens Jane Suede Moccasin                           | 2018-01-03T05:21:54Z | Grey                           |              47    |              35.25 | Walmart.com       |
@@ -687,11 +676,8 @@ print(tabulate(shoesLight.head(), headers='keys', tablefmt='pipe'))
 |  3 | AVpjXyCc1cnluZ0-V-Gj | MUK LUKS Womens Dawn Suede Scuff Slipper                      | 2018-01-04T11:52:35Z | Black                          |              24.75 |              24.75 | Slippers Dot Com  |
 |  4 | AVphGKLPilAPnD_x1Nrm | MUK LUKS Womens Dawn Suede Scuff Slipper                      | 2018-01-18T03:55:18Z | Grey                           |              33    |              30.39 | Walmart.com       |
 </code></pre>
-
-<pre><code class="language-python">shoesLight.dtypes
-</code></pre>
-
-<pre><code>id                   object
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shoesLight<span style="color:#f92672">.</span>dtypes
+</code></pre></div><pre><code>id                   object
 name                 object
 dateUpdated          object
 colors               object
@@ -700,32 +686,24 @@ prices.amountMin    float64
 prices.merchant      object
 dtype: object
 </code></pre>
-
 <ul>
 <li>dateUpdated doit etre passé en datetime</li>
-
-<li><p>colors doit etre passé en liste</p>
-
-<pre><code class="language-python">shoesLight.isnull().sum()/len(shoesLight)
-</code></pre>
-
-<p>id                  0.0000
+<li>colors doit etre passé en liste</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shoesLight<span style="color:#f92672">.</span>isnull()<span style="color:#f92672">.</span>sum()<span style="color:#f92672">/</span>len(shoesLight)
+</code></pre></div><pre><code>id                  0.0000
 name                0.0000
 dateUpdated         0.0000
 colors              0.7369
 prices.amountMax    0.0000
 prices.amountMin    0.0000
 prices.merchant     0.9565
-dtype: float64</p></li>
-</ul>
-
-<p>Il manque 75% des valeurs pour les couelurs et quasi tous les noms des e-commercants.</p>
-
-<pre><code class="language-python">shoesLight = shoes[['id','name','brand','dateUpdated','prices.amountMax','prices.amountMin']]
-print(tabulate(shoesLight.head(), headers='keys', tablefmt='pipe'))
+dtype: float64
 </code></pre>
-
-<pre><code>|    | id                   | name                                                          | brand       | dateUpdated          |   prices.amountMax |   prices.amountMin |
+<p>Il manque 75% des valeurs pour les couelurs et quasi tous les noms des e-commercants.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shoesLight <span style="color:#f92672">=</span> shoes[[<span style="color:#e6db74">&#39;id&#39;</span>,<span style="color:#e6db74">&#39;name&#39;</span>,<span style="color:#e6db74">&#39;brand&#39;</span>,<span style="color:#e6db74">&#39;dateUpdated&#39;</span>,<span style="color:#e6db74">&#39;prices.amountMax&#39;</span>,<span style="color:#e6db74">&#39;prices.amountMin&#39;</span>]]
+<span style="color:#66d9ef">print</span>(tabulate(shoesLight<span style="color:#f92672">.</span>head(), headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>|    | id                   | name                                                          | brand       | dateUpdated          |   prices.amountMax |   prices.amountMin |
 |---:|:---------------------|:--------------------------------------------------------------|:------------|:---------------------|-------------------:|-------------------:|
 |  0 | AVpfEf_hLJeJML431ueH | Naturalizer Danya Women N/S Open Toe Synthetic Silver Sandals | Naturalizer | 2018-01-29T04:38:43Z |              55.99 |              55.99 |
 |  1 | AVpi74XfLJeJML43qZAc | MUK LUKS Womens Jane Suede Moccasin                           | MUK LUKS    | 2018-01-03T05:21:54Z |              47    |              35.25 |
@@ -733,12 +711,9 @@ print(tabulate(shoesLight.head(), headers='keys', tablefmt='pipe'))
 |  3 | AVpjXyCc1cnluZ0-V-Gj | MUK LUKS Womens Dawn Suede Scuff Slipper                      | MUK LUKS    | 2018-01-04T11:52:35Z |              24.75 |              24.75 |
 |  4 | AVphGKLPilAPnD_x1Nrm | MUK LUKS Womens Dawn Suede Scuff Slipper                      | MUK LUKS    | 2018-01-18T03:55:18Z |              33    |              30.39 |
 </code></pre>
-
-<pre><code class="language-python">shoesLight['dateUpdated'] = pd.to_datetime(shoesLight['dateUpdated'])
-shoesLight['dateUpdated']
-</code></pre>
-
-<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning: 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shoesLight[<span style="color:#e6db74">&#39;dateUpdated&#39;</span>] <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>to_datetime(shoesLight[<span style="color:#e6db74">&#39;dateUpdated&#39;</span>])
+shoesLight[<span style="color:#e6db74">&#39;dateUpdated&#39;</span>]
+</code></pre></div><pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -812,12 +787,9 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 9999   2018-04-06 21:01:50+00:00
 Name: dateUpdated, Length: 10000, dtype: datetime64[ns, UTC]
 </code></pre>
-
-<pre><code class="language-python">shoesLight['prices.amountAverage'] =  (shoesLight['prices.amountMax'] + shoesLight['prices.amountMin']) / 2
-shoesLight['prices.amountAverage'].head()
-</code></pre>
-
-<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning: 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shoesLight[<span style="color:#e6db74">&#39;prices.amountAverage&#39;</span>] <span style="color:#f92672">=</span>  (shoesLight[<span style="color:#e6db74">&#39;prices.amountMax&#39;</span>] <span style="color:#f92672">+</span> shoesLight[<span style="color:#e6db74">&#39;prices.amountMin&#39;</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
+shoesLight[<span style="color:#e6db74">&#39;prices.amountAverage&#39;</span>]<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -835,11 +807,8 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 4    31.695
 Name: prices.amountAverage, dtype: float64
 </code></pre>
-
-<pre><code class="language-python">shoesLight['prices.amountAverage'].describe()
-</code></pre>
-
-<pre><code>count    10000.000000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shoesLight[<span style="color:#e6db74">&#39;prices.amountAverage&#39;</span>]<span style="color:#f92672">.</span>describe()
+</code></pre></div><pre><code>count    10000.000000
 mean        60.177376
 std         18.786193
 min          5.375000
@@ -849,10 +818,8 @@ min          5.375000
 max        359.950000
 Name: prices.amountAverage, dtype: float64
 </code></pre>
-
-<pre><code class="language-python">
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -897,7 +864,7 @@ Name: prices.amountAverage, dtype: float64
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/8-Pandas-Exercice.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c8-Pandas-Exercice.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

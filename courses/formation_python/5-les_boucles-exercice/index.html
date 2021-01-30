@@ -28,8 +28,8 @@
   
     
   
-  <meta name="description" content="TP : Manipuler une liste contenant les prix de 58 maisons  1- Créer de la liste &quot;prix_de_58_maisons&quot;  prix_de_58_maisons=list(range(125000,700000,10000))
- 2- Combien de maisons ont un prix supérieur ou égal à 300000 euros ? 3- Combien de maisons ont un prix compris entre 250000 et 400000 euros ? 4- Combien de maisons ont un prix qui n’est pas supérieur à 600000 euros ? 5- Combien de maisons ont un prix inférieur à 150000 euros ou supérieur à 650000 euros ?">
+  <meta name="description" content="1- Créer de la liste &quot;prix_de_58_maisons&quot; prix_de_58_maisons=list(range(125000,700000,10000))
+ 2- Combien de maisons ont un prix supérieur ou égal à 300000 euros ?3- Combien de maisons ont un prix compris entre 250000 et 400000 euros ?4- Combien de maisons ont un prix qui n’est pas supérieur à 600000 euros ?5- Combien de maisons ont un prix inférieur à 150000 euros ou supérieur à 650000 euros ? Indice: parcourir la liste avec une boucle, utiliser des instructions de condition if et un compteur pour compter les résultats vrais.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/5-les_boucles-exercice/">
@@ -116,8 +116,8 @@
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/5-les_boucles-exercice/">
   <meta property="og:title" content="5- Les boucles en Python - Exercice | GDueymes">
-  <meta property="og:description" content="TP : Manipuler une liste contenant les prix de 58 maisons  1- Créer de la liste &quot;prix_de_58_maisons&quot;  prix_de_58_maisons=list(range(125000,700000,10000))
- 2- Combien de maisons ont un prix supérieur ou égal à 300000 euros ? 3- Combien de maisons ont un prix compris entre 250000 et 400000 euros ? 4- Combien de maisons ont un prix qui n’est pas supérieur à 600000 euros ? 5- Combien de maisons ont un prix inférieur à 150000 euros ou supérieur à 650000 euros ?"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="1- Créer de la liste &quot;prix_de_58_maisons&quot; prix_de_58_maisons=list(range(125000,700000,10000))
+ 2- Combien de maisons ont un prix supérieur ou égal à 300000 euros ?3- Combien de maisons ont un prix compris entre 250000 et 400000 euros ?4- Combien de maisons ont un prix qui n’est pas supérieur à 600000 euros ?5- Combien de maisons ont un prix inférieur à 150000 euros ou supérieur à 650000 euros ? Indice: parcourir la liste avec une boucle, utiliser des instructions de condition if et un compteur pour compter les résultats vrais."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -578,7 +578,7 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -592,15 +592,11 @@
           <h1>5- Les boucles en Python - Exercice</h1>
 
           <div class="article-style">
-            <p><img src="/img/pylogo.png" alt="image0" /></p>
-
-<h1> TP : Manipuler une liste contenant les prix de 58 maisons</h1>
-
+            <p><img src="/img/pylogo.png" alt="image0"></p>
+<!-- raw HTML omitted -->
 <pre><code>    1- Créer de la liste &quot;prix_de_58_maisons&quot;
 </code></pre>
-
 <p>prix_de_58_maisons=list(range(125000,700000,10000))</p>
-
 <pre><code>    2- Combien de maisons ont un prix supérieur ou égal à 300000 euros ?
 
     3- Combien de maisons ont un prix compris entre 250000 et 400000 euros ?
@@ -609,63 +605,45 @@
 
     5- Combien de maisons ont un prix inférieur à 150000 euros ou supérieur à 650000 euros ?
 </code></pre>
-
 <p>Indice: parcourir la liste avec une boucle, utiliser des instructions de condition if et un compteur pour compter les résultats vrais.</p>
-
 <p>1 Création de la liste &ldquo;prix_de_58_maisons&rdquo;</p>
-
-<pre><code class="language-python">prix_de_58_maisons=list(range(125000,700000,10000))  
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">prix_de_58_maisons<span style="color:#f92672">=</span>list(range(<span style="color:#ae81ff">125000</span>,<span style="color:#ae81ff">700000</span>,<span style="color:#ae81ff">10000</span>))  
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 2. Combien de maisons ont un prix supérieur à 300000 euros ?</span>
+<span style="color:#75715e"># on définit notre compteur</span>
+nombre_maisons<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> prix <span style="color:#f92672">in</span> prix_de_58_maisons:    <span style="color:#75715e"># on va parcours notre liste avec une boucle for </span>
+    <span style="color:#66d9ef">if</span> prix <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">300000</span>:             <span style="color:#75715e"># si notre condition est rencontrée, on incrémente notre compteur </span>
+        nombre_maisons<span style="color:#f92672">=</span>nombre_maisons<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Le nombre de maisons avec un prix supérieur ou égal à 300000 euros est de : </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (nombre_maisons))
+</code></pre></div><pre><code>Le nombre de maisons avec un prix supérieur ou égal à 300000 euros est de : 40
 </code></pre>
-
-<pre><code class="language-python"># 2. Combien de maisons ont un prix supérieur à 300000 euros ?
-# on définit notre compteur
-nombre_maisons=0
-for prix in prix_de_58_maisons:    # on va parcours notre liste avec une boucle for 
-    if prix &gt;= 300000:             # si notre condition est rencontrée, on incrémente notre compteur 
-        nombre_maisons=nombre_maisons+1
-print(&quot;Le nombre de maisons avec un prix supérieur ou égal à 300000 euros est de : %d&quot; % (nombre_maisons))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 2. Combien de maisons ont un prix compris entre 250000 et 400000 euros ?</span>
+<span style="color:#75715e"># on définit notre compteur</span>
+nombre_maisons<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> prix <span style="color:#f92672">in</span> prix_de_58_maisons:  <span style="color:#75715e"># on va parcours notre liste avec une boucle for    </span>
+    <span style="color:#66d9ef">if</span> (prix <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">250000</span>) <span style="color:#f92672">and</span> (prix <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">400000</span>): <span style="color:#75715e"># si notre condition est rencontrée, on incrémente notre compteur</span>
+        nombre_maisons<span style="color:#f92672">=</span>nombre_maisons<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Le nombre de maisons qui ont un prix compris entre 250000 et 400000 euros est de : </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (nombre_maisons))
+</code></pre></div><pre><code>Le nombre de maisons qui ont un prix compris entre 250000 et 400000 euros est de : 15
 </code></pre>
-
-<pre><code>Le nombre de maisons avec un prix supérieur ou égal à 300000 euros est de : 40
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 3. Combien de maisons ont un prix qui n&#39;est pas supérieur à 600000 euros ?</span>
+nombre_maisons<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> prix <span style="color:#f92672">in</span> prix_de_58_maisons:
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span>(prix <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">600000</span>):
+        nombre_maisons<span style="color:#f92672">=</span>nombre_maisons<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Le nombre de maisons qui ont un prix qui n&#39;est pas supérieur à 600000 euros est de : </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (nombre_maisons))
+</code></pre></div><pre><code>Le nombre de maisons qui ont un prix qui n'est pas supérieur à 600000 euros est de : 48
 </code></pre>
-
-<pre><code class="language-python"># 2. Combien de maisons ont un prix compris entre 250000 et 400000 euros ?
-# on définit notre compteur
-nombre_maisons=0
-for prix in prix_de_58_maisons:  # on va parcours notre liste avec une boucle for    
-    if (prix &gt;= 250000) and (prix &lt;= 400000): # si notre condition est rencontrée, on incrémente notre compteur
-        nombre_maisons=nombre_maisons+1
-print(&quot;Le nombre de maisons qui ont un prix compris entre 250000 et 400000 euros est de : %d&quot; % (nombre_maisons))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 4. Combien de maisons ont un prix inférieur à 150000 euros OU supérieur à 650000 euros ?</span>
+nombre_maisons<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> prix <span style="color:#f92672">in</span> prix_de_58_maisons:
+    <span style="color:#66d9ef">if</span> (prix <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">150000</span>) <span style="color:#f92672">or</span> (prix <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">650000</span>):
+        nombre_maisons<span style="color:#f92672">=</span>nombre_maisons<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Le nombre de maisons qui ont un prix inférieur à 150000 euros OU supérieur à 650000 euros est de : </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (nombre_maisons))
+</code></pre></div><pre><code>Le nombre de maisons qui ont un prix inférieur à 150000 euros OU supérieur à 650000 euros est de : 8
 </code></pre>
-
-<pre><code>Le nombre de maisons qui ont un prix compris entre 250000 et 400000 euros est de : 15
-</code></pre>
-
-<pre><code class="language-python"># 3. Combien de maisons ont un prix qui n'est pas supérieur à 600000 euros ?
-nombre_maisons=0
-for prix in prix_de_58_maisons:
-    if not(prix &gt; 600000):
-        nombre_maisons=nombre_maisons+1
-print(&quot;Le nombre de maisons qui ont un prix qui n'est pas supérieur à 600000 euros est de : %d&quot; % (nombre_maisons))
-</code></pre>
-
-<pre><code>Le nombre de maisons qui ont un prix qui n'est pas supérieur à 600000 euros est de : 48
-</code></pre>
-
-<pre><code class="language-python"># 4. Combien de maisons ont un prix inférieur à 150000 euros OU supérieur à 650000 euros ?
-nombre_maisons=0
-for prix in prix_de_58_maisons:
-    if (prix &lt; 150000) or (prix &gt; 650000):
-        nombre_maisons=nombre_maisons+1
-print(&quot;Le nombre de maisons qui ont un prix inférieur à 150000 euros OU supérieur à 650000 euros est de : %d&quot; % (nombre_maisons))
-</code></pre>
-
-<pre><code>Le nombre de maisons qui ont un prix inférieur à 150000 euros OU supérieur à 650000 euros est de : 8
-</code></pre>
-
-<pre><code class="language-python">
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -710,7 +688,7 @@ print(&quot;Le nombre de maisons qui ont un prix inférieur à 150000 euros OU s
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/5-Les_boucles-Exercice.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c5-Les_boucles-Exercice.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

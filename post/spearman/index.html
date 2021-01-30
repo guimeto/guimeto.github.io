@@ -31,7 +31,8 @@
   <meta name="description" content="Netcdf: Interpolation between grids using cKDTree from Scipy library and correlation In this post, we will interpolate a nectcdf file to another netcdf grid and then calculate timeseries spearman correlation between two datasets on same resolution grid.
 To interpolate, we will follow this post
 In this example, we will interpolate Daymet-1km dataset on ERA5-grid.
-We will compute monthly total precipipitation and then compare the two datasets using spearman correlation.">
+We will compute monthly total precipipitation and then compare the two datasets using spearman correlation.
+The Daymet dataset provides gridded estimates of daily weather parameters.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/spearman/">
@@ -120,7 +121,8 @@ We will compute monthly total precipipitation and then compare the two datasets 
   <meta property="og:description" content="Netcdf: Interpolation between grids using cKDTree from Scipy library and correlation In this post, we will interpolate a nectcdf file to another netcdf grid and then calculate timeseries spearman correlation between two datasets on same resolution grid.
 To interpolate, we will follow this post
 In this example, we will interpolate Daymet-1km dataset on ERA5-grid.
-We will compute monthly total precipipitation and then compare the two datasets using spearman correlation."><meta property="og:image" content="/post/spearman/featured.png">
+We will compute monthly total precipipitation and then compare the two datasets using spearman correlation.
+The Daymet dataset provides gridded estimates of daily weather parameters."><meta property="og:image" content="/post/spearman/featured.png">
   <meta property="twitter:image" content="/post/spearman/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -176,7 +178,7 @@ We will compute monthly total precipipitation and then compare the two datasets 
       "url": "/img/icon-512.png"
     }
   },
-  "description": "Netcdf: Interpolation between grids using cKDTree from Scipy library and correlation In this post, we will interpolate a nectcdf file to another netcdf grid and then calculate timeseries spearman correlation between two datasets on same resolution grid.\nTo interpolate, we will follow this post\nIn this example, we will interpolate Daymet-1km dataset on ERA5-grid.\nWe will compute monthly total precipipitation and then compare the two datasets using spearman correlation."
+  "description": "Netcdf: Interpolation between grids using cKDTree from Scipy library and correlation In this post, we will interpolate a nectcdf file to another netcdf grid and then calculate timeseries spearman correlation between two datasets on same resolution grid.\nTo interpolate, we will follow this post\nIn this example, we will interpolate Daymet-1km dataset on ERA5-grid.\nWe will compute monthly total precipipitation and then compare the two datasets using spearman correlation.\nThe Daymet dataset provides gridded estimates of daily weather parameters."
 }
 </script>
 
@@ -540,345 +542,308 @@ We will compute monthly total precipipitation and then compare the two datasets 
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="netcdf-interpolation-between-grids-using-ckdtree-from-scipy-library-and-correlation">Netcdf: Interpolation between grids using cKDTree from Scipy library and correlation</h2>
-
+      <h2 id="netcdf-interpolation-between-grids-using-ckdtree-from-scipy-library-and-correlation">Netcdf: Interpolation between grids using cKDTree from Scipy library and correlation</h2>
 <p>In this post, we will interpolate a nectcdf file to another netcdf grid and then calculate timeseries spearman correlation between two datasets on same resolution grid.</p>
-
-<p>To interpolate, we will follow this <a href="https://www.guillaumedueymes.com/post/netcdf_interpolation/" target="_blank">post</a></p>
-
-<p>In this example, we will interpolate <a href="https://daymet.ornl.gov/" target="_blank">Daymet-1km dataset</a> on <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5" target="_blank">ERA5-grid</a>.</p>
-
+<p>To interpolate, we will follow this <a href="https://www.guillaumedueymes.com/post/netcdf_interpolation/">post</a></p>
+<p>In this example, we will interpolate <a href="https://daymet.ornl.gov/">Daymet-1km dataset</a> on <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5">ERA5-grid</a>.</p>
 <p>We will compute monthly total precipipitation and then compare the two datasets using spearman correlation.</p>
-
 <p>The Daymet dataset provides gridded estimates of daily weather parameters. Seven surface weather parameters are available at a daily time step, 1 km x 1 km spatial resolution, with a North American spatial extent.</p>
-
 <p>ERA5 Reanalyses provide a numerical description, with horizontal resolution of 31 km, of the recent climate (1979-present) by combining models with observations.</p>
+<h3 id="1---lets-import-python-librairies">1-  Let&rsquo;s import Python librairies</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ignore&#39;</span>)
+<span style="color:#f92672">%</span>matplotlib inline
+<span style="color:#75715e">#for Netcdf manipulation</span>
+<span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr
+<span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> netCDF4 <span style="color:#f92672">as</span> nc
 
-<h3 id="1-let-s-import-python-librairies">1-  Let&rsquo;s import Python librairies</h3>
+<span style="color:#75715e">#for array manipulation</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-<pre><code class="language-python">import warnings; warnings.filterwarnings(action='ignore')
-%matplotlib inline
-#for Netcdf manipulation
-import xarray as xr
-from netCDF4 import Dataset
-import netCDF4 as nc
+<span style="color:#75715e">#for plotting</span>
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
 
-#for array manipulation
-import numpy as np
-import pandas as pd
-
-#for plotting
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import matplotlib.pylab as plt
-
-#for interpolation
-from scipy.spatial import cKDTree
-</code></pre>
-
-<h4 id="we-will-only-work-over-july-month-from-1980-to-2019">We will only work over july month from 1980 to 2019:</h4>
-
-<h3 id="2-interpolation-daymet-1km-to-daymet-32km-era5-grid">2 - Interpolation : Daymet-1km to Daymet-32km (ERA5 grid)</h3>
-
+<span style="color:#75715e">#for interpolation</span>
+<span style="color:#f92672">from</span> scipy.spatial <span style="color:#f92672">import</span> cKDTree
+</code></pre></div><h4 id="we-will-only-work-over-july-month-from-1980-to-2019">We will only work over july month from 1980 to 2019:</h4>
+<h3 id="2---interpolation--daymet-1km-to-daymet-32km-era5-grid">2 - Interpolation : Daymet-1km to Daymet-32km (ERA5 grid)</h3>
 <p>We are going to use daily precipitation of Daymet-1km for july. In this analysis, we will use a subset of Daymet-1km and ERA5-32km. Indeed, we will only work over a specific watershed in Canada: Outaouais river&rsquo;s watershed:</p>
-
-<p><img src="attachment:image.png" alt="watershed.png" /></p>
-
+<p><img src="attachment:image.png" alt="watershed.png"></p>
 <p>Here&rsquo;s the script to interpolate:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">path_source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;K:/PROJETS/PROJET_OUTAOUAIS/Daily/prcp/&#39;</span> <span style="color:#75715e"># path with daily precipitation</span>
+<span style="color:#f92672">import</span> gc
+gc<span style="color:#f92672">.</span>collect()
 
-<pre><code class="language-python">path_source = 'K:/PROJETS/PROJET_OUTAOUAIS/Daily/prcp/' # path with daily precipitation
-import gc
-gc.collect()
+variable <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Prcp&#39;</span>
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1980</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2019</span>
 
-variable = 'Prcp'
-yi = 1980
-yf = 2019
+<span style="color:#75715e"># Load target grid to interpolate</span>
+target <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74">&#39;Outaouais_ERA5_Grid.nc&#39;</span>)
+lat_target<span style="color:#f92672">=</span>target<span style="color:#f92672">.</span>latitude
+lon_target<span style="color:#f92672">=</span>target<span style="color:#f92672">.</span>longitude
+lat_target<span style="color:#f92672">.</span>shape
 
-# Load target grid to interpolate
-target = xr.open_dataset('Outaouais_ERA5_Grid.nc')
-lat_target=target.latitude
-lon_target=target.longitude
-lat_target.shape
+lon_target2d, lat_target2d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(lon_target, lat_target)
 
-lon_target2d, lat_target2d = np.meshgrid(lon_target, lat_target)
+<span style="color:#75715e"># Load source file to create cKDTree </span>
+source <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(path_source <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Daymet_v3_prcp_1980_OUTAOUAIS.nc&#39;</span>)
+lat_source <span style="color:#f92672">=</span> source<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]
+lon_source <span style="color:#f92672">=</span> source<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
 
-# Load source file to create cKDTree 
-source = xr.open_dataset(path_source + 'Daymet_v3_prcp_1980_OUTAOUAIS.nc')
-lat_source = source.variables['lat'][:]
-lon_source = source.variables['lon'][:]
-
-# function to convert latlon to xy coordinate system
-def lon_lat_to_cartesian(lon, lat):
-    # WGS 84 reference coordinate system parameters
-    A = 6378.137 # major axis [km]   
-    E2 = 6.69437999014e-3 # eccentricity squared 
+<span style="color:#75715e"># function to convert latlon to xy coordinate system</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lon_lat_to_cartesian</span>(lon, lat):
+    <span style="color:#75715e"># WGS 84 reference coordinate system parameters</span>
+    A <span style="color:#f92672">=</span> <span style="color:#ae81ff">6378.137</span> <span style="color:#75715e"># major axis [km]   </span>
+    E2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">6.69437999014e-3</span> <span style="color:#75715e"># eccentricity squared </span>
     
-    lon_rad = np.radians(lon)
-    lat_rad = np.radians(lat)
-    # convert to cartesian coordinates
-    r_n = A / (np.sqrt(1 - E2 * (np.sin(lat_rad) ** 2)))
-    x = r_n * np.cos(lat_rad) * np.cos(lon_rad)
-    y = r_n * np.cos(lat_rad) * np.sin(lon_rad)
-    z = r_n * (1 - E2) * np.sin(lat_rad)
-    return x,y,z
+    lon_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(lon)
+    lat_rad <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>radians(lat)
+    <span style="color:#75715e"># convert to cartesian coordinates</span>
+    r_n <span style="color:#f92672">=</span> A <span style="color:#f92672">/</span> (np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2 <span style="color:#f92672">*</span> (np<span style="color:#f92672">.</span>sin(lat_rad) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>)))
+    x <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lon_rad)
+    y <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(lat_rad) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lon_rad)
+    z <span style="color:#f92672">=</span> r_n <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> E2) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(lat_rad)
+    <span style="color:#66d9ef">return</span> x,y,z
 
-xs, ys, zs = lon_lat_to_cartesian(lon_source.values.flatten(), lat_source.values.flatten())
-xt, yt, zt = lon_lat_to_cartesian(lon_target2d.flatten(), lat_target2d.flatten())
+xs, ys, zs <span style="color:#f92672">=</span> lon_lat_to_cartesian(lon_source<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten(), lat_source<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten())
+xt, yt, zt <span style="color:#f92672">=</span> lon_lat_to_cartesian(lon_target2d<span style="color:#f92672">.</span>flatten(), lat_target2d<span style="color:#f92672">.</span>flatten())
 
-tree = cKDTree(np.column_stack((xs, ys, zs)))
+tree <span style="color:#f92672">=</span> cKDTree(np<span style="color:#f92672">.</span>column_stack((xs, ys, zs)))
 
-d, inds = tree.query(np.column_stack((xt, yt, zt)), k = 10)
+d, inds <span style="color:#f92672">=</span> tree<span style="color:#f92672">.</span>query(np<span style="color:#f92672">.</span>column_stack((xt, yt, zt)), k <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
 
-# let's define a function to interpolate 
-def interpolate(source, target, d, inds):    
-    nt = source[&quot;time&quot;].shape[0]
-    tmp = []
-    for t in range(0, nt):        
-        w = 1.0 / d**2
-        air_idw = np.sum(w * source.prcp[t].values.flatten()[inds], axis=1) / np.sum(w, axis=1)
-        air_idw.shape = target.shape
-        tmp.append(air_idw)
-    return tmp
+<span style="color:#75715e"># let&#39;s define a function to interpolate </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interpolate</span>(source, target, d, inds):    
+    nt <span style="color:#f92672">=</span> source[<span style="color:#e6db74">&#34;time&#34;</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+    tmp <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, nt):        
+        w <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> d<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+        air_idw <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sum(w <span style="color:#f92672">*</span> source<span style="color:#f92672">.</span>prcp[t]<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>flatten()[inds], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>sum(w, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+        air_idw<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> target<span style="color:#f92672">.</span>shape
+        tmp<span style="color:#f92672">.</span>append(air_idw)
+    <span style="color:#66d9ef">return</span> tmp
 
-# we will make a loop over years and save netcdf files by month
-for year in range(yi,yf+1):
-    source = xr.open_dataset(path_source + 'Daymet_v3_prcp_'+str(year)+'_OUTAOUAIS.nc')
-    air_idw = interpolate(source,lon_target2d, d, inds)
+<span style="color:#75715e"># we will make a loop over years and save netcdf files by month</span>
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+    source <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_dataset(path_source <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Daymet_v3_prcp_&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS.nc&#39;</span>)
+    air_idw <span style="color:#f92672">=</span> interpolate(source,lon_target2d, d, inds)
     
-    data_set = xr.Dataset( coords={'lon': ([ 'lon'], lon_target),
-                                     'lat': (['lat',], lat_target),
-                                     'time': source.time.values})
-    data_set[&quot;prcp&quot;] = (['time','lat', 'lon'],  air_idw)
-    [data_set.sel(time=str(year)+'-'+'{:02d}'.format(i)).to_netcdf(path_source + 'Daymet_v3_' + variable + '_'+str(year)+'_'+'{:02d}'.format(i)+'_OUTAOUAIS_ERA5grid.nc') for i in range(1,13)]
+    data_set <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>Dataset( coords<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;lon&#39;</span>: ([ <span style="color:#e6db74">&#39;lon&#39;</span>], lon_target),
+                                     <span style="color:#e6db74">&#39;lat&#39;</span>: ([<span style="color:#e6db74">&#39;lat&#39;</span>,], lat_target),
+                                     <span style="color:#e6db74">&#39;time&#39;</span>: source<span style="color:#f92672">.</span>time<span style="color:#f92672">.</span>values})
+    data_set[<span style="color:#e6db74">&#34;prcp&#34;</span>] <span style="color:#f92672">=</span> ([<span style="color:#e6db74">&#39;time&#39;</span>,<span style="color:#e6db74">&#39;lat&#39;</span>, <span style="color:#e6db74">&#39;lon&#39;</span>],  air_idw)
+    [data_set<span style="color:#f92672">.</span>sel(time<span style="color:#f92672">=</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(i))<span style="color:#f92672">.</span>to_netcdf(path_source <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Daymet_v3_&#39;</span> <span style="color:#f92672">+</span> variable <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS_ERA5grid.nc&#39;</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">13</span>)]
     
 
-</code></pre>
-
-<h3 id="3-compute-monthly-indices">3 - Compute monthly indices</h3>
-
+</code></pre></div><h3 id="3---compute-monthly-indices">3 - Compute monthly indices</h3>
 <p>We can now open daily files to compute monthly indices.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1990</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2019</span>
+<span style="color:#75715e">#########################################################</span>
+tmin_in <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./Daily/prcp/&#39;</span>
+monthly_out <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./Month_Indice/&#39;</span> 
 
-<pre><code class="language-python">yi = 1990
-yf = 2019
-#########################################################
-tmin_in = './Daily/prcp/'
-monthly_out = './Month_Indice/' 
-
-# Compute monthly indices
-for year in range(yi,yf+1):   # loop over years  
-    for i in range(7,8):      # we just want to work over july (i_month = 7)
-        data_pcp = tmin_in + 'Daymet_v3_Prcp_' + str(year) +'_{:02d}'.format(i) +'_OUTAOUAIS_ERA5grid.nc'
-        ds_pcp = xr.open_mfdataset(data_pcp)         
-        monthly_pcp = ds_pcp.sum('time')     # sum over days to calculate monthly accumulation
-        # we can save our netcdf files
-        monthly_pcp.to_netcdf(monthly_out + 'Daymet_v3_Monthly_PrecTOT_'+str(year) +'{:02d}'.format(i)+'_OUTAOUAIS_ERA5grid.nc',  format='NETCDF4')
+<span style="color:#75715e"># Compute monthly indices</span>
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):   <span style="color:#75715e"># loop over years  </span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>):      <span style="color:#75715e"># we just want to work over july (i_month = 7)</span>
+        data_pcp <span style="color:#f92672">=</span> tmin_in <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Daymet_v3_Prcp_&#39;</span> <span style="color:#f92672">+</span> str(year) <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_{:02d}&#39;</span><span style="color:#f92672">.</span>format(i) <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS_ERA5grid.nc&#39;</span>
+        ds_pcp <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(data_pcp)         
+        monthly_pcp <span style="color:#f92672">=</span> ds_pcp<span style="color:#f92672">.</span>sum(<span style="color:#e6db74">&#39;time&#39;</span>)     <span style="color:#75715e"># sum over days to calculate monthly accumulation</span>
+        <span style="color:#75715e"># we can save our netcdf files</span>
+        monthly_pcp<span style="color:#f92672">.</span>to_netcdf(monthly_out <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Daymet_v3_Monthly_PrecTOT_&#39;</span><span style="color:#f92672">+</span>str(year) <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS_ERA5grid.nc&#39;</span>,  format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;NETCDF4&#39;</span>)
             
-</code></pre>
+</code></pre></div><h3 id="4---apply-watershed-netcdf-mask">4 - Apply watershed netcdf mask</h3>
+<p>We will mask a specific area using a netcdf file. To create a netcdf file using any shapefile, please follow this <a href="https://www.guillaumedueymes.com/post/shapefile_netcdf/">post</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># this function will be use later to create a netcdf file using source attributs</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_file_from_source</span>(src_file, trg_file):
+    src <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>Dataset(src_file)
+    trg <span style="color:#f92672">=</span> nc<span style="color:#f92672">.</span>Dataset(trg_file, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;w&#39;</span>)
 
-<h3 id="4-apply-watershed-netcdf-mask">4 - Apply watershed netcdf mask</h3>
+    <span style="color:#75715e"># Create the dimensions of the file</span>
+    <span style="color:#66d9ef">for</span> name, dim <span style="color:#f92672">in</span> src<span style="color:#f92672">.</span>dimensions<span style="color:#f92672">.</span>items():
+        trg<span style="color:#f92672">.</span>createDimension(name, len(dim) <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> dim<span style="color:#f92672">.</span>isunlimited() <span style="color:#66d9ef">else</span> None)
 
-<p>We will mask a specific area using a netcdf file. To create a netcdf file using any shapefile, please follow this <a href="https://www.guillaumedueymes.com/post/shapefile_netcdf/" target="_blank">post</a></p>
+    <span style="color:#75715e"># Copy the global attributes</span>
+   <span style="color:#75715e"># trg.setncatts({a:src.getncattr(a) for a in src.ncattrs()})</span>
 
-<pre><code class="language-python"># this function will be use later to create a netcdf file using source attributs
-def create_file_from_source(src_file, trg_file):
-    src = nc.Dataset(src_file)
-    trg = nc.Dataset(trg_file, mode='w')
+    <span style="color:#75715e"># Create the variables in the file</span>
+    <span style="color:#66d9ef">for</span> name, var <span style="color:#f92672">in</span> src<span style="color:#f92672">.</span>variables<span style="color:#f92672">.</span>items():
+        trg<span style="color:#f92672">.</span>createVariable(name, var<span style="color:#f92672">.</span>dtype, var<span style="color:#f92672">.</span>dimensions)
 
-    # Create the dimensions of the file
-    for name, dim in src.dimensions.items():
-        trg.createDimension(name, len(dim) if not dim.isunlimited() else None)
+        <span style="color:#75715e"># Copy the variable attributes</span>
+        trg<span style="color:#f92672">.</span>variables[name]<span style="color:#f92672">.</span>setncatts({a:var<span style="color:#f92672">.</span>getncattr(a) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> var<span style="color:#f92672">.</span>ncattrs()})
 
-    # Copy the global attributes
-   # trg.setncatts({a:src.getncattr(a) for a in src.ncattrs()})
-
-    # Create the variables in the file
-    for name, var in src.variables.items():
-        trg.createVariable(name, var.dtype, var.dimensions)
-
-        # Copy the variable attributes
-        trg.variables[name].setncatts({a:var.getncattr(a) for a in var.ncattrs()})
-
-        # Copy the variables values (as 'f4' eventually)
-        if name not in tomask:
-            trg.variables[name][:] = src.variables[name][:]
+        <span style="color:#75715e"># Copy the variables values (as &#39;f4&#39; eventually)</span>
+        <span style="color:#66d9ef">if</span> name <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> tomask:
+            trg<span style="color:#f92672">.</span>variables[name][:] <span style="color:#f92672">=</span> src<span style="color:#f92672">.</span>variables[name][:]
             
-        else:    
-            trg.variables[name][:] = data
+        <span style="color:#66d9ef">else</span>:    
+            trg<span style="color:#f92672">.</span>variables[name][:] <span style="color:#f92672">=</span> data
 
-    # Save the file
-    trg.close()
+    <span style="color:#75715e"># Save the file</span>
+    trg<span style="color:#f92672">.</span>close()
 
-#create 2d grid mask http://meteo.unican.es/work/xarray_seminar/xArray_seminar.html
-tomask = ['prcp']
+<span style="color:#75715e">#create 2d grid mask http://meteo.unican.es/work/xarray_seminar/xArray_seminar.html</span>
+tomask <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;prcp&#39;</span>]
 
-m_f=xr.open_dataset('Outaouais_ERA5_Grid.nc')
-lat2d=m_f.variables['latitude'][:]
-lon2d=m_f.variables['longitude'][:]
-mask = m_f['tp'].values
+m_f<span style="color:#f92672">=</span>xr<span style="color:#f92672">.</span>open_dataset(<span style="color:#e6db74">&#39;Outaouais_ERA5_Grid.nc&#39;</span>)
+lat2d<span style="color:#f92672">=</span>m_f<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;latitude&#39;</span>][:]
+lon2d<span style="color:#f92672">=</span>m_f<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;longitude&#39;</span>][:]
+mask <span style="color:#f92672">=</span> m_f[<span style="color:#e6db74">&#39;tp&#39;</span>]<span style="color:#f92672">.</span>values
 
-for year in range(1990,2020):
-    for month in range(7,8):
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1990</span>,<span style="color:#ae81ff">2020</span>):
+    <span style="color:#66d9ef">for</span> month <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>):
         
-        infile = './Month_Indice/Daymet_v3_Monthly_PrecTOT_'+str(year) +'{:02d}'.format(int(month))+'_OUTAOUAIS_ERA5grid.nc'           
-        outfile = './Month_Indice/Daymet_v3_Monthly_PrecTOT_'+str(year)+&quot;{:02d}&quot;.format(month)+'_OUTAOUAIS_ERA5grid_BV.nc'
+        infile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./Month_Indice/Daymet_v3_Monthly_PrecTOT_&#39;</span><span style="color:#f92672">+</span>str(year) <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;{:02d}&#39;</span><span style="color:#f92672">.</span>format(int(month))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS_ERA5grid.nc&#39;</span>           
+        outfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./Month_Indice/Daymet_v3_Monthly_PrecTOT_&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;{:02d}&#34;</span><span style="color:#f92672">.</span>format(month)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS_ERA5grid_BV.nc&#39;</span>
        
-        nc_Modc=xr.open_dataset(infile)
-        nc_Modc.lon.values
-        nc_Modf=Dataset(infile,'r')
-        data = nc_Modc['prcp'].where(mask &gt;= 0)
+        nc_Modc<span style="color:#f92672">=</span>xr<span style="color:#f92672">.</span>open_dataset(infile)
+        nc_Modc<span style="color:#f92672">.</span>lon<span style="color:#f92672">.</span>values
+        nc_Modf<span style="color:#f92672">=</span>Dataset(infile,<span style="color:#e6db74">&#39;r&#39;</span>)
+        data <span style="color:#f92672">=</span> nc_Modc[<span style="color:#e6db74">&#39;prcp&#39;</span>]<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
         create_file_from_source(infile, outfile)
 
-</code></pre>
+</code></pre></div><h3 id="5---compute-correlation">5 - Compute correlation</h3>
+<p>To compute spearman correlation, we use stats module from <a href="https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.stats.mstats.spearmanr.html/">scipy library</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> scipy <span style="color:#f92672">import</span> stats
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 
-<h3 id="5-compute-correlation">5 - Compute correlation</h3>
-
-<p>To compute spearman correlation, we use stats module from <a href="https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.stats.mstats.spearmanr.html/" target="_blank">scipy library</a></p>
-
-<pre><code class="language-python">from scipy import stats
-import numpy as np
-
-variable = 'Monthly_PrecTOT'
-yi = 1990
-yf = 2020
-out = './Month_Indice/'
-for month in ['07']:  
-    # load ERA5 
-    path_era5 = 'J:/REANALYSES/ERA5/Month_PrecTOT_Outaouais/'
-    file = path_era5 + 'ERA5_Outaouais_Monthly_PrecTOT_CAN_'
-    multi_file = [f'{file}{year}{month}_BV.nc' for year in range(yi,yf,1)]
-    era5_all = xr.concat([xr.open_dataset(f) for f in multi_file], 'day')
+variable <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Monthly_PrecTOT&#39;</span>
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1990</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2020</span>
+out <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./Month_Indice/&#39;</span>
+<span style="color:#66d9ef">for</span> month <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;07&#39;</span>]:  
+    <span style="color:#75715e"># load ERA5 </span>
+    path_era5 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;J:/REANALYSES/ERA5/Month_PrecTOT_Outaouais/&#39;</span>
+    file <span style="color:#f92672">=</span> path_era5 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;ERA5_Outaouais_Monthly_PrecTOT_CAN_&#39;</span>
+    multi_file <span style="color:#f92672">=</span> [f<span style="color:#e6db74">&#39;{file}{year}{month}_BV.nc&#39;</span> <span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf,<span style="color:#ae81ff">1</span>)]
+    era5_all <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>concat([xr<span style="color:#f92672">.</span>open_dataset(f) <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> multi_file], <span style="color:#e6db74">&#39;day&#39;</span>)
     
-    # load daymet
-    path_daymet = 'K:/PROJETS/PROJET_OUTAOUAIS/Month_Indice/'
+    <span style="color:#75715e"># load daymet</span>
+    path_daymet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;K:/PROJETS/PROJET_OUTAOUAIS/Month_Indice/&#39;</span>
     
-    file = path_daymet + 'Daymet_v3_'+variable + '_'
-    multi_file = [f'{file}{year}{month}_OUTAOUAIS_ERA5grid_BV.nc' for year in range(yi,yf,1)]
-    daymet_all = xr.concat([xr.open_dataset(f) for f in multi_file], 'time')
+    file <span style="color:#f92672">=</span> path_daymet <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Daymet_v3_&#39;</span><span style="color:#f92672">+</span>variable <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span>
+    multi_file <span style="color:#f92672">=</span> [f<span style="color:#e6db74">&#39;{file}{year}{month}_OUTAOUAIS_ERA5grid_BV.nc&#39;</span> <span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf,<span style="color:#ae81ff">1</span>)]
+    daymet_all <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>concat([xr<span style="color:#f92672">.</span>open_dataset(f) <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> multi_file], <span style="color:#e6db74">&#39;time&#39;</span>)
     
-    # Spearman correlation between two datasets for each grid point
-    corr_spearman_ERA5 = np.zeros((era5_all['tp'].shape[1],era5_all['tp'].shape[2]),dtype=float)    
-    for ni in range(0,era5_all['tp'].shape[2]):   # loop over longitudes
-        for nj in range(0, era5_all['tp'].shape[1]):  # loop over latitudes
+    <span style="color:#75715e"># Spearman correlation between two datasets for each grid point</span>
+    corr_spearman_ERA5 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((era5_all[<span style="color:#e6db74">&#39;tp&#39;</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>],era5_all[<span style="color:#e6db74">&#39;tp&#39;</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>]),dtype<span style="color:#f92672">=</span>float)    
+    <span style="color:#66d9ef">for</span> ni <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,era5_all[<span style="color:#e6db74">&#39;tp&#39;</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>]):   <span style="color:#75715e"># loop over longitudes</span>
+        <span style="color:#66d9ef">for</span> nj <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, era5_all[<span style="color:#e6db74">&#39;tp&#39;</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):  <span style="color:#75715e"># loop over latitudes</span>
             
-             r, p = stats.spearmanr(era5_all.isel(latitude=[nj], longitude=[ni]).tp.values[:,0,0] ,
-                                   daymet_all.isel(lat=[nj], lon=[ni]).prcp.values[:,0,0] ) 
-             if p &gt;= 0.1 :
-                 corr_spearman_ERA5[nj,ni] = np.nan
-             else:
-                 corr_spearman_ERA5[nj,ni] = r
+             r, p <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>spearmanr(era5_all<span style="color:#f92672">.</span>isel(latitude<span style="color:#f92672">=</span>[nj], longitude<span style="color:#f92672">=</span>[ni])<span style="color:#f92672">.</span>tp<span style="color:#f92672">.</span>values[:,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>] ,
+                                   daymet_all<span style="color:#f92672">.</span>isel(lat<span style="color:#f92672">=</span>[nj], lon<span style="color:#f92672">=</span>[ni])<span style="color:#f92672">.</span>prcp<span style="color:#f92672">.</span>values[:,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>] ) 
+             <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0.1</span> :
+                 corr_spearman_ERA5[nj,ni] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+             <span style="color:#66d9ef">else</span>:
+                 corr_spearman_ERA5[nj,ni] <span style="color:#f92672">=</span> r
                  
-    data_set = xr.Dataset( coords={'lon': ([ 'lon'], era5_all.longitude),
-                                             'lat': (['lat',], era5_all.latitude)})
+    data_set <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>Dataset( coords<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;lon&#39;</span>: ([ <span style="color:#e6db74">&#39;lon&#39;</span>], era5_all<span style="color:#f92672">.</span>longitude),
+                                             <span style="color:#e6db74">&#39;lat&#39;</span>: ([<span style="color:#e6db74">&#39;lat&#39;</span>,], era5_all<span style="color:#f92672">.</span>latitude)})
     
-    data_set[&quot;spearmanr&quot;] = (['lat', 'lon'],  corr_spearman_ERA5)
+    data_set[<span style="color:#e6db74">&#34;spearmanr&#34;</span>] <span style="color:#f92672">=</span> ([<span style="color:#e6db74">&#39;lat&#39;</span>, <span style="color:#e6db74">&#39;lon&#39;</span>],  corr_spearman_ERA5)
         
-    data_set.to_netcdf(out + 'Daymet_v3_spearmann_Correlation_ERA5grid' + variable + '_'+str(yi)+'_'+str(yf)+'_'+month+'_OUTAOUAIS_python.nc')             
+    data_set<span style="color:#f92672">.</span>to_netcdf(out <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Daymet_v3_spearmann_Correlation_ERA5grid&#39;</span> <span style="color:#f92672">+</span> variable <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>str(yi)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>str(yf)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>month<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS_python.nc&#39;</span>)             
              
-</code></pre>
-
-<h3 id="6-plot-correlation">6 - Plot correlation</h3>
-
+</code></pre></div><h3 id="6---plot-correlation">6 - Plot correlation</h3>
 <p>We can now make a quick plot using matplotlib.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> netCDF4 <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> cartopy.crs <span style="color:#f92672">as</span> ccrs
+<span style="color:#f92672">import</span> cartopy.feature <span style="color:#f92672">as</span> cfeature
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> datetime
+<span style="color:#75715e">####https://uoftcoders.github.io/studyGroup/lessons/python/cartography/lesson/</span>
 
-<pre><code class="language-python">from netCDF4 import Dataset
-import matplotlib.pylab as plt
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import numpy as np
-import matplotlib as mpl
-import pandas as pd
-import datetime
-####https://uoftcoders.github.io/studyGroup/lessons/python/cartography/lesson/
+<span style="color:#75715e">## Date à utiliser </span>
 
-## Date à utiliser 
-
-path_in='./Month_Indice/'
-file = 'Daymet_v3_spearmann_Correlation_ERA5gridMonthly_PrecTOT'
-yi = 1990
-yf = 2020
-# lecture du contour du bassin versant 
-BV_border = pd.read_csv('./points_contour_BV.csv', sep=',')
-def plot_background(ax):
-    ax.set_extent([-84,-70,45,48])
-    ax.coastlines(resolution='110m');
-    ax.add_feature(cfeature.OCEAN.with_scale('50m'))      
-    ax.add_feature(cfeature.LAND.with_scale('50m'))       
-    ax.add_feature(cfeature.LAKES.with_scale('50m'))     
-    ax.add_feature(cfeature.BORDERS.with_scale('50m'))    
-    ax.add_feature(cfeature.RIVERS.with_scale('50m'))    
-    coast = cfeature.NaturalEarthFeature(category='physical', scale='10m',    
-                        facecolor='none', name='coastline')
-    ax.add_feature(coast, edgecolor='black')
+path_in<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./Month_Indice/&#39;</span>
+file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Daymet_v3_spearmann_Correlation_ERA5gridMonthly_PrecTOT&#39;</span>
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1990</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2020</span>
+<span style="color:#75715e"># lecture du contour du bassin versant </span>
+BV_border <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./points_contour_BV.csv&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_background</span>(ax):
+    ax<span style="color:#f92672">.</span>set_extent([<span style="color:#f92672">-</span><span style="color:#ae81ff">84</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">70</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">48</span>])
+    ax<span style="color:#f92672">.</span>coastlines(resolution<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;110m&#39;</span>);
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>OCEAN<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))      
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAND<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))       
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>LAKES<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))     
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>BORDERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))    
+    ax<span style="color:#f92672">.</span>add_feature(cfeature<span style="color:#f92672">.</span>RIVERS<span style="color:#f92672">.</span>with_scale(<span style="color:#e6db74">&#39;50m&#39;</span>))    
+    coast <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;physical&#39;</span>, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,    
+                        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coastline&#39;</span>)
+    ax<span style="color:#f92672">.</span>add_feature(coast, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
     
-    states_provinces = cfeature.NaturalEarthFeature(
-        category='cultural',
-        name='admin_1_states_provinces_lines',
-        scale='10m',
-        facecolor='none')
+    states_provinces <span style="color:#f92672">=</span> cfeature<span style="color:#f92672">.</span>NaturalEarthFeature(
+        category<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cultural&#39;</span>,
+        name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;admin_1_states_provinces_lines&#39;</span>,
+        scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10m&#39;</span>,
+        facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
 
-    ax.add_feature(states_provinces, edgecolor='gray')
+    ax<span style="color:#f92672">.</span>add_feature(states_provinces, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
 
    
-    return ax
+    <span style="color:#66d9ef">return</span> ax
 
-for month in ['07']:
+<span style="color:#66d9ef">for</span> month <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;07&#39;</span>]:
         
-    monthstr = datetime.date(1900, int(month), 1).strftime('%B')   
-    filename = path_in + file
+    monthstr <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">1900</span>, int(month), <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%B&#39;</span>)   
+    filename <span style="color:#f92672">=</span> path_in <span style="color:#f92672">+</span> file
     
-    dset=Dataset(filename + '_' + str(yi) + '_' + str(yf) + '_' + month +'_OUTAOUAIS_python.nc')
-    ## Lecture du fichier 
-    var=dset.variables['spearmanr'][:].squeeze()
-    lon=dset.variables['lon'][:]
-    lat=dset.variables['lat'][:]
+    dset<span style="color:#f92672">=</span>Dataset(filename <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> str(yi) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> str(yf) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> month <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_OUTAOUAIS_python.nc&#39;</span>)
+    <span style="color:#75715e">## Lecture du fichier </span>
+    var<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;spearmanr&#39;</span>][:]<span style="color:#f92672">.</span>squeeze()
+    lon<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lon&#39;</span>][:]
+    lat<span style="color:#f92672">=</span>dset<span style="color:#f92672">.</span>variables[<span style="color:#e6db74">&#39;lat&#39;</span>][:]
 
     
-    fig = plt.figure(figsize=(28,16))
-    crs=ccrs.LambertConformal()
-    ax = plt.axes(projection=crs)
+    fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">16</span>))
+    crs<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>LambertConformal()
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span>crs)
     plot_background(ax)
     
-    ## Choisissons une colormap
-    cmap0 = mpl.cm.get_cmap('jet', 11)
-    #cmap0.set_under('w') ## on met en blanc les valeurs inferieures au min de clev
-    #cmap0.set_over('black')
-    levels = np.arange(0,1.1,0.1) 
-    mm = ax.contourf(lon,\
+    <span style="color:#75715e">## Choisissons une colormap</span>
+    cmap0 <span style="color:#f92672">=</span> mpl<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>get_cmap(<span style="color:#e6db74">&#39;jet&#39;</span>, <span style="color:#ae81ff">11</span>)
+    <span style="color:#75715e">#cmap0.set_under(&#39;w&#39;) ## on met en blanc les valeurs inferieures au min de clev</span>
+    <span style="color:#75715e">#cmap0.set_over(&#39;black&#39;)</span>
+    levels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1.1</span>,<span style="color:#ae81ff">0.1</span>) 
+    mm <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>contourf(lon,\
                            lat,\
                            var,\
-                           vmin=0.,\
-                           vmax=1.1, \
-                           transform=ccrs.PlateCarree(),\
-                           cmap=cmap0,
-                           levels=levels)
+                           vmin<span style="color:#f92672">=</span><span style="color:#ae81ff">0.</span>,\
+                           vmax<span style="color:#f92672">=</span><span style="color:#ae81ff">1.1</span>, \
+                           transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(),\
+                           cmap<span style="color:#f92672">=</span>cmap0,
+                           levels<span style="color:#f92672">=</span>levels)
         
-    # ajout du contour du basson versant 
-    colors = ['red']
-    maskBV = ['Outaouais Watershed']                      
-    ax.plot(BV_border.X,BV_border.Y, transform=ccrs.PlateCarree(), color=colors[0], linewidth=2, label=maskBV[0])
-    plt.legend(loc=&quot;best&quot;, markerscale=2., fontsize=20)
-    xticks = np.arange(-150.0,-40.0,20)
-    yticks =np.arange(10,80,10)    
-    fig.canvas.draw()    
+    <span style="color:#75715e"># ajout du contour du basson versant </span>
+    colors <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;red&#39;</span>]
+    maskBV <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Outaouais Watershed&#39;</span>]                      
+    ax<span style="color:#f92672">.</span>plot(BV_border<span style="color:#f92672">.</span>X,BV_border<span style="color:#f92672">.</span>Y, transform<span style="color:#f92672">=</span>ccrs<span style="color:#f92672">.</span>PlateCarree(), color<span style="color:#f92672">=</span>colors[<span style="color:#ae81ff">0</span>], linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, label<span style="color:#f92672">=</span>maskBV[<span style="color:#ae81ff">0</span>])
+    plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;best&#34;</span>, markerscale<span style="color:#f92672">=</span><span style="color:#ae81ff">2.</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+    xticks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span><span style="color:#ae81ff">150.0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">40.0</span>,<span style="color:#ae81ff">20</span>)
+    yticks <span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">10</span>)    
+    fig<span style="color:#f92672">.</span>canvas<span style="color:#f92672">.</span>draw()    
 
-    cbar = plt.colorbar(mm, orientation='horizontal', shrink=0.75, drawedges='True', ticks=np.arange(0., 1.1, .1),extend='both')
-    cbar.set_label(u'\n DAYMET/ERA Correlation - Résolution: 32km', size='medium') # Affichage de la légende de la barre de couleur
-    cbar.ax.tick_params(labelsize=17)  
+    cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(mm, orientation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;horizontal&#39;</span>, shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>, drawedges<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;True&#39;</span>, ticks<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0.</span>, <span style="color:#ae81ff">1.1</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">1</span>),extend<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
+    cbar<span style="color:#f92672">.</span>set_label(<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> DAYMET/ERA Correlation - Résolution: 32km&#39;</span>, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;medium&#39;</span>) <span style="color:#75715e"># Affichage de la légende de la barre de couleur</span>
+    cbar<span style="color:#f92672">.</span>ax<span style="color:#f92672">.</span>tick_params(labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>)  
     
-    string_title=u'Spearman Correlation Monthly total precipitation Daymet/ERA5 \n ' + monthstr + ' reference period 1990-2019\n'
-    plt.title(string_title, size='xx-large')
-    plt.savefig(path_in + 'Spearman_DAYMET_ERA5_PrecTOT_1990-2019_'+str(month)+'_python.png', bbox_inches='tight', pad_inches=0.1)
-    plt.show()  
-    plt.close()
-</code></pre>
-
-<p><img src="output_13_0.png" alt="png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
-
+    string_title<span style="color:#f92672">=</span><span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;Spearman Correlation Monthly total precipitation Daymet/ERA5 </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> &#39;</span> <span style="color:#f92672">+</span> monthstr <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; reference period 1990-2019</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+    plt<span style="color:#f92672">.</span>title(string_title, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xx-large&#39;</span>)
+    plt<span style="color:#f92672">.</span>savefig(path_in <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;Spearman_DAYMET_ERA5_PrecTOT_1990-2019_&#39;</span><span style="color:#f92672">+</span>str(month)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_python.png&#39;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tight&#39;</span>, pad_inches<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+    plt<span style="color:#f92672">.</span>show()  
+    plt<span style="color:#f92672">.</span>close()
+</code></pre></div><p><img src="output_13_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
     </div>
 
     

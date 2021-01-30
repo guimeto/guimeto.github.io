@@ -31,7 +31,7 @@
   <meta name="description" content="Using country shapefiles to create Netcdf mask In this tutorial, we will use shapefiles to create mask over specific countries.
 In order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.
 I will present a simple solution based on open-source Python modules:
- - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities - regionmask: to mask a gridded file according to a shapefile - numpy: for simple array manipulations - geopandas: to open shapefiles - matplotlib: for plotting  1- Import librairies and create aliases.">
+ - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities- regionmask: to mask a gridded file according to a shapefile- numpy: for simple array manipulations- geopandas: to open shapefiles- matplotlib: for plotting 1- Import librairies and create aliases.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/shapefiles_country/">
@@ -120,7 +120,7 @@ I will present a simple solution based on open-source Python modules:
   <meta property="og:description" content="Using country shapefiles to create Netcdf mask In this tutorial, we will use shapefiles to create mask over specific countries.
 In order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.
 I will present a simple solution based on open-source Python modules:
- - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities - regionmask: to mask a gridded file according to a shapefile - numpy: for simple array manipulations - geopandas: to open shapefiles - matplotlib: for plotting  1- Import librairies and create aliases."><meta property="og:image" content="/post/shapefiles_country/featured.png">
+ - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities- regionmask: to mask a gridded file according to a shapefile- numpy: for simple array manipulations- geopandas: to open shapefiles- matplotlib: for plotting 1- Import librairies and create aliases."><meta property="og:image" content="/post/shapefiles_country/featured.png">
   <meta property="twitter:image" content="/post/shapefiles_country/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -176,7 +176,7 @@ I will present a simple solution based on open-source Python modules:
       "url": "/img/icon-512.png"
     }
   },
-  "description": "Using country shapefiles to create Netcdf mask In this tutorial, we will use shapefiles to create mask over specific countries.\nIn order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.\nI will present a simple solution based on open-source Python modules:\n - xarray: for manipulating \u0026amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities - regionmask: to mask a gridded file according to a shapefile - numpy: for simple array manipulations - geopandas: to open shapefiles - matplotlib: for plotting  1- Import librairies and create aliases."
+  "description": "Using country shapefiles to create Netcdf mask In this tutorial, we will use shapefiles to create mask over specific countries.\nIn order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.\nI will present a simple solution based on open-source Python modules:\n - xarray: for manipulating \u0026amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities\r- regionmask: to mask a gridded file according to a shapefile\r- numpy: for simple array manipulations\r- geopandas: to open shapefiles\r- matplotlib: for plotting\r 1- Import librairies and create aliases."
 }
 </script>
 
@@ -540,47 +540,32 @@ I will present a simple solution based on open-source Python modules:
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h3 id="using-country-shapefiles-to-create-netcdf-mask">Using country shapefiles to create Netcdf mask</h3>
-
+      <h3 id="using-country-shapefiles-to-create-netcdf-mask">Using country shapefiles to create Netcdf mask</h3>
 <p>In this tutorial, we will use shapefiles to create mask over specific countries.</p>
-
 <p>In order to work with the whole globe, we will use gridded dataset ERA5 meteorological data.</p>
-
 <p>I will present a simple solution based on open-source Python modules:</p>
-
 <pre><code>    - xarray: for manipulating &amp; reading gridded data, and – very important – operate out-of-memory thanks to its dask capabilities
     - regionmask: to mask a gridded file according to a shapefile
     - numpy: for simple array manipulations
     - geopandas: to open shapefiles
     - matplotlib: for plotting
 </code></pre>
-
-<h3 id="1-import-librairies-and-create-aliases">1-  Import librairies and create aliases.</h3>
-
-<pre><code class="language-python">import xarray as xr 
-import numpy as np
-import regionmask
-import geopandas as gpd
-import pandas as pd
-import matplotlib.pyplot as plt
-import warnings; warnings.filterwarnings(action='ignore')
-%matplotlib inline
-</code></pre>
-
-<h3 id="working-over-countries">Working over countries</h3>
-
-<p>In this example we will focus on countries in Africa. We will use <a href="https://community.esri.com/external-link.jspa?url=http%3A%2F%2Fwww.maplibrary.org%2Flibrary%2Fstacks%2FAfrica%2Findex.htm" target="_blank">shapefiles developped in ESRI format</a>.</p>
-
+<h3 id="1---import-librairies-and-create-aliases">1-  Import librairies and create aliases.</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xarray <span style="color:#f92672">as</span> xr 
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> regionmask
+<span style="color:#f92672">import</span> geopandas <span style="color:#f92672">as</span> gpd
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ignore&#39;</span>)
+<span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><h3 id="working-over-countries">Working over countries</h3>
+<p>In this example we will focus on countries in Africa. We will use <a href="https://community.esri.com/external-link.jspa?url=http%3A%2F%2Fwww.maplibrary.org%2Flibrary%2Fstacks%2FAfrica%2Findex.htm">shapefiles developped in ESRI format</a>.</p>
 <p>After downloaded the shapefile, we must load it using geopandas library:</p>
-
-<pre><code class="language-python">PATH_TO_SHAPEFILE = './Countries/Africa_Countries.shp'
-countries = gpd.read_file(PATH_TO_SHAPEFILE)
-countries.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PATH_TO_SHAPEFILE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./Countries/Africa_Countries.shp&#39;</span>
+countries <span style="color:#f92672">=</span> gpd<span style="color:#f92672">.</span>read_file(PATH_TO_SHAPEFILE)
+countries<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left"></th>
@@ -590,7 +575,6 @@ countries.head()
 <th align="left">geometry</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">0</td>
@@ -599,7 +583,6 @@ countries.head()
 <td align="right">Algeria</td>
 <td align="left">POLYGON ((-5.7636199999979 25.58624999999302, &hellip;</td>
 </tr>
-
 <tr>
 <td align="left">1</td>
 <td align="right">2</td>
@@ -609,32 +592,21 @@ countries.head()
 </tr>
 </tbody>
 </table>
-
-<pre><code class="language-python">countries.shape[0]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">countries<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+</code></pre></div><pre><code>762
 </code></pre>
-
-<pre><code>762
-</code></pre>
-
-<pre><code class="language-python">my_list = list(countries['CODE'])
-my_list_unique = set(list(countries['CODE']))
-indexes = [my_list.index(x) for x in my_list_unique]
-</code></pre>
-
-<p>Shapes are here a GeoDataFrame containing all polygons illustrating the countries boundaries.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_list <span style="color:#f92672">=</span> list(countries[<span style="color:#e6db74">&#39;CODE&#39;</span>])
+my_list_unique <span style="color:#f92672">=</span> set(list(countries[<span style="color:#e6db74">&#39;CODE&#39;</span>]))
+indexes <span style="color:#f92672">=</span> [my_list<span style="color:#f92672">.</span>index(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> my_list_unique]
+</code></pre></div><p>Shapes are here a GeoDataFrame containing all polygons illustrating the countries boundaries.</p>
 <p>Now we can load the ERA5 gridded data. The parameter chunks is very important, it defines how big are the “pieces” of data moved from the disk to the memory. With this value the entire computation on a workstation with 32 GB takes a couple of minutes.</p>
-
 <p>We will load all the temperature files for the year 2018 using Xarray library.</p>
-
-<pre><code class="language-python">model='ERA5_T2m_1h'
-t_in = 'J:/REANALYSES/ERA5/T2m_1h/'        
-data = t_in + model + '_2018*_sfc.nc'
-ds = xr.open_mfdataset(data, chunks = {'time': 10})
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ERA5_T2m_1h&#39;</span>
+t_in <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;J:/REANALYSES/ERA5/T2m_1h/&#39;</span>        
+data <span style="color:#f92672">=</span> t_in <span style="color:#f92672">+</span> model <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_2018*_sfc.nc&#39;</span>
+ds <span style="color:#f92672">=</span> xr<span style="color:#f92672">.</span>open_mfdataset(data, chunks <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;time&#39;</span>: <span style="color:#ae81ff">10</span>})
 ds
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 721, longitude: 1440, time: 8760)
 Coordinates:
   * longitude  (longitude) float32 0.0 0.25 0.5 0.75 ... 359.25 359.5 359.75
@@ -646,14 +618,10 @@ Attributes:
     Conventions:  CF-1.6
     history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
 </code></pre>
-
-<p>The next function <b>assign_coords</b> will convert the longitude from the 0-360 range to -180,180</p>
-
-<pre><code class="language-python">ds = ds.assign_coords(longitude=(((ds.longitude + 180) % 360) - 180)).sortby('longitude')
+<p>The next function <!-- raw HTML omitted -->assign_coords<!-- raw HTML omitted --> will convert the longitude from the 0-360 range to -180,180</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ds <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>assign_coords(longitude<span style="color:#f92672">=</span>(((ds<span style="color:#f92672">.</span>longitude <span style="color:#f92672">+</span> <span style="color:#ae81ff">180</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">360</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">180</span>))<span style="color:#f92672">.</span>sortby(<span style="color:#e6db74">&#39;longitude&#39;</span>)
 ds
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 721, longitude: 1440, time: 8760)
 Coordinates:
   * longitude  (longitude) float32 -180.0 -179.75 -179.5 ... 179.25 179.5 179.75
@@ -665,48 +633,30 @@ Attributes:
     Conventions:  CF-1.6
     history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
 </code></pre>
-
-<pre><code class="language-python">len(list(countries.geometry.values[i] for i in indexes))
-len(list(countries.COUNTRY[indexes]))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(list(countries<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>values[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> indexes))
+len(list(countries<span style="color:#f92672">.</span>COUNTRY[indexes]))
 len(indexes)
+</code></pre></div><pre><code>52
 </code></pre>
-
-<pre><code>52
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>,countries<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])
+np<span style="color:#f92672">.</span>shape(a)
+</code></pre></div><pre><code>(762,)
 </code></pre>
-
-<pre><code class="language-python">a = range(0,countries.shape[0])
-np.shape(a)
-</code></pre>
-
-<pre><code>(762,)
-</code></pre>
-
 <p>Our xarray Dataset contains a single variable (t2m) which is stored as a dask.array. This is the result of loading files with open_mfdataset.</p>
-
-<p>Now we will use regionmask module to create a gridded mask with the
-<a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls" target="_blank">function regions_cls</a>.</p>
-
+<p>Now we will use regionmask module to create a gridded mask with the 
+<a href="https://regionmask.readthedocs.io/en/stable/generated/regionmask.Regions_cls.html#regionmask.Regions_cls">function regions_cls</a>.</p>
 <p>With this function we will create an object able to mask ERA5 gridded data.</p>
-
-<pre><code class="language-python">countries_mask_poly = regionmask.Regions_cls(name = 'COUNTRY', numbers = indexes, names = countries.COUNTRY[indexes], abbrevs = countries.COUNTRY[indexes], outlines = list(countries.geometry.values[i] for i in range(0,countries.shape[0])))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">countries_mask_poly <span style="color:#f92672">=</span> regionmask<span style="color:#f92672">.</span>Regions_cls(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;COUNTRY&#39;</span>, numbers <span style="color:#f92672">=</span> indexes, names <span style="color:#f92672">=</span> countries<span style="color:#f92672">.</span>COUNTRY[indexes], abbrevs <span style="color:#f92672">=</span> countries<span style="color:#f92672">.</span>COUNTRY[indexes], outlines <span style="color:#f92672">=</span> list(countries<span style="color:#f92672">.</span>geometry<span style="color:#f92672">.</span>values[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,countries<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])))
 countries_mask_poly
-</code></pre>
-
-<pre><code>52 'COUNTRY' Regions ()
+</code></pre></div><pre><code>52 'COUNTRY' Regions ()
 Burkina Faso Senegal Botswana Liberia Chad Equatorial Guinea Djibouti Ghana Nigeria Sao Tome and Principe Swaziland Uganda Tanzania Comoros Guinea Algeria Niger Madagascar Burundi Cameroon Mali Zimbabwe Cote d`Ivoire Tunisia Sierra Leone Libya Rwanda Benin Malawi Gabon South Africa Western Sahara Zambia Central African Republic Togo Namibia Gambia Congo-Brazzaville Democratic Republic of Congo Morocco Eritrea Cape Verde Angola Ethiopia Lesotho Egypt Guinea-Bissau Kenya Mozambique Sudan Mauritania Somalia
 </code></pre>
-
 <p>Now we are ready to apply the mask on the gridded dataset xarray ERA5.</p>
-
 <p>We select only the first timestep to speed up the process.</p>
-
 <p>This step could take few minutes because of ERA5 resolution and grid : Dimensions:    (latitude: 721, longitude: 1440)</p>
-
-<pre><code class="language-python">mask = countries_mask_poly.mask(ds.isel(time = 0), lat_name='latitude', lon_name='longitude')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask <span style="color:#f92672">=</span> countries_mask_poly<span style="color:#f92672">.</span>mask(ds<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>), lat_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;latitude&#39;</span>, lon_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;longitude&#39;</span>)
 mask
-</code></pre>
-
-<pre><code>&lt;xarray.DataArray 'region' (latitude: 721, longitude: 1440)&gt;
+</code></pre></div><pre><code>&lt;xarray.DataArray 'region' (latitude: 721, longitude: 1440)&gt;
 array([[nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
@@ -718,70 +668,45 @@ Coordinates:
   * latitude   (latitude) float32 90.0 89.75 89.5 89.25 ... -89.5 -89.75 -90.0
   * longitude  (longitude) float32 -180.0 -179.75 -179.5 ... 179.25 179.5 179.75
 </code></pre>
-
 <p>Mask can be saved (for example as a NetCDF) for a later use.</p>
-
-<pre><code class="language-python">mask.to_netcdf('./mask_Africa_by_countries.nc') 
-</code></pre>
-
-<p>We can use  <a href="https://www.giss.nasa.gov/tools/panoply/" target="_blank">Panoply</a> free software to plot our netcdf file.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74">&#39;./mask_Africa_by_countries.nc&#39;</span>) 
+</code></pre></div><p>We can use  <a href="https://www.giss.nasa.gov/tools/panoply/">Panoply</a> free software to plot our netcdf file.</p>
 <p>Here&rsquo;s a quick visualisation using Matplotlib:</p>
-
-<pre><code class="language-python">plt.figure(figsize=(16,8))
-ax = plt.axes()
-mask.plot(ax = ax)
-countries.plot(ax = ax, alpha = 0.8, facecolor = 'none', lw = 1)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+mask<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
+countries<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>, lw <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xbdf0d68&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xbdf0d68&gt;
-</code></pre>
-
-<p><img src="./output1.png" alt="png" /></p>
-
+<p><img src="./output1.png" alt="png"></p>
 <p>Let&rsquo;s now extract one specific country from our mask. We will for example extract informations only over Algeria.
 Remember, index for Algeria is: 0  .</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask_algeria <span style="color:#f92672">=</span> mask<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> )
+mask_algeria<span style="color:#f92672">.</span>to_netcdf(<span style="color:#e6db74">&#39;./mask_Algeria.nc&#39;</span>) 
 
-<pre><code class="language-python">mask_algeria = mask.where(mask == 0 )
-mask_algeria.to_netcdf('./mask_Algeria.nc') 
-
-plt.figure(figsize=(16,8))
-ax = plt.axes()
-mask_algeria.plot(ax = ax)
-countries.plot(ax = ax, alpha = 0.8, facecolor = 'none', lw = 1)
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+mask_algeria<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
+countries<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>, lw <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7528278&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7528278&gt;
-</code></pre>
-
-<p><img src="./output2.png" alt="png" /></p>
-
-<h3 id="2-extract-time-series">2- Extract time-series</h3>
-
-<p>We can now for each country aggregate the grid cells in the national borders.
+<p><img src="./output2.png" alt="png"></p>
+<h3 id="2--extract-time-series">2- Extract time-series</h3>
+<p>We can now for each country aggregate the grid cells in the national borders. 
 We will first develop two methods to mask our area. Then, we will extract the time series.</p>
-
-<h3 id="method-1">- Method 1:</h3>
-
+<h3 id="--method-1">- Method 1:</h3>
 <p>I will focus on Algeria.</p>
-
-<pre><code class="language-python">ID_COUNTRY = 0
-print(countries.COUNTRY[ID_COUNTRY])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ID_COUNTRY <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">print</span>(countries<span style="color:#f92672">.</span>COUNTRY[ID_COUNTRY])
+</code></pre></div><pre><code>Algeria
 </code></pre>
-
-<pre><code>Algeria
-</code></pre>
-
 <p>As first step, I will save the latitude and longitude vectors because I will use it later. Then, I select the mask points where the value is equal to target value (the ID_COUNTRY code). In the numpy array sel_mask all the values are nan except for the selected ones.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lat <span style="color:#f92672">=</span> mask<span style="color:#f92672">.</span>latitude<span style="color:#f92672">.</span>values
+lon <span style="color:#f92672">=</span> mask<span style="color:#f92672">.</span>longitude<span style="color:#f92672">.</span>values
 
-<pre><code class="language-python">lat = mask.latitude.values
-lon = mask.longitude.values
-
-sel_mask = mask.where(mask == ID_COUNTRY).values
+sel_mask <span style="color:#f92672">=</span> mask<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">==</span> ID_COUNTRY)<span style="color:#f92672">.</span>values
 sel_mask
-</code></pre>
-
-<pre><code>array([[nan, nan, nan, ..., nan, nan, nan],
+</code></pre></div><pre><code>array([[nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan],
        ...,
@@ -789,15 +714,11 @@ sel_mask
        [nan, nan, nan, ..., nan, nan, nan],
        [nan, nan, nan, ..., nan, nan, nan]])
 </code></pre>
-
 <p>To speed-up the process I want to crop the xarray Dataset selecting the smallest box containing the entire mask. To do this I store in id_lon and id_lat the coordinate points where the mask has at least a non-nan value.</p>
-
-<pre><code class="language-python">id_lon = lon[np.where(~np.all(np.isnan(sel_mask), axis=0))]
-id_lat = lat[np.where(~np.all(np.isnan(sel_mask), axis=1))]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">id_lon <span style="color:#f92672">=</span> lon[np<span style="color:#f92672">.</span>where(<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>all(np<span style="color:#f92672">.</span>isnan(sel_mask), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>))]
+id_lat <span style="color:#f92672">=</span> lat[np<span style="color:#f92672">.</span>where(<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>all(np<span style="color:#f92672">.</span>isnan(sel_mask), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))]
 id_lat
-</code></pre>
-
-<pre><code>array([37.  , 36.75, 36.5 , 36.25, 36.  , 35.75, 35.5 , 35.25, 35.  ,
+</code></pre></div><pre><code>array([37.  , 36.75, 36.5 , 36.25, 36.  , 35.75, 35.5 , 35.25, 35.  ,
        34.75, 34.5 , 34.25, 34.  , 33.75, 33.5 , 33.25, 33.  , 32.75,
        32.5 , 32.25, 32.  , 31.75, 31.5 , 31.25, 31.  , 30.75, 30.5 ,
        30.25, 30.  , 29.75, 29.5 , 29.25, 29.  , 28.75, 28.5 , 28.25,
@@ -807,16 +728,10 @@ id_lat
        21.25, 21.  , 20.75, 20.5 , 20.25, 20.  , 19.75, 19.5 , 19.25,
        19.  ], dtype=float32)
 </code></pre>
-
 <p>The Xarray dataset is reduced selecting only the target year and the coordinates containing the target region. Then the dataset is load from the dask array using compute and then filtered using the mask.</p>
-
-<pre><code class="language-python">out_sel1 = ds.sel(latitude = slice(id_lat[0], id_lat[-1]), longitude = slice(id_lon[0], id_lon[-1])).compute().where(mask == ID_COUNTRY)
-</code></pre>
-
-<pre><code class="language-python">out_sel1
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel1 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>sel(latitude <span style="color:#f92672">=</span> slice(id_lat[<span style="color:#ae81ff">0</span>], id_lat[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]), longitude <span style="color:#f92672">=</span> slice(id_lon[<span style="color:#ae81ff">0</span>], id_lon[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]))<span style="color:#f92672">.</span>compute()<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">==</span> ID_COUNTRY)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel1
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 73, longitude: 82, time: 8760)
 Coordinates:
   * latitude   (latitude) float64 37.0 36.75 36.5 36.25 ... 19.5 19.25 19.0
@@ -828,18 +743,11 @@ Attributes:
     Conventions:  CF-1.6
     history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
 </code></pre>
-
-<h3 id="method-2">- Method 2:</h3>
-
+<h3 id="--method-2">- Method 2:</h3>
 <p>We can directly use xarray library to apply netcdf mask with using .where() method and DataArray mask:</p>
-
-<pre><code class="language-python">out_sel2 = ds.where(mask == 0)
-</code></pre>
-
-<pre><code class="language-python">out_sel2
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2 <span style="color:#f92672">=</span> ds<span style="color:#f92672">.</span>where(mask <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">out_sel2
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:    (latitude: 721, longitude: 1440, time: 8760)
 Coordinates:
   * longitude  (longitude) float32 -180.0 -179.75 -179.5 ... 179.25 179.5 179.75
@@ -851,117 +759,76 @@ Attributes:
     Conventions:  CF-1.6
     history:      2019-11-11 13:33:07 GMT by grib_to_netcdf-2.14.0: /opt/ecmw...
 </code></pre>
-
 <p>Quick visualisation, we will display the first step of our DataArray masked.</p>
-
 <p>For out_sel2 array :</p>
-
-<pre><code class="language-python">plt.figure(figsize=(12,8))
-ax = plt.axes()
-out_sel2.t2m.isel(time = 0).plot(ax = ax)
-countries.plot(ax = ax, alpha = 0.8, facecolor = 'none')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">8</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+out_sel2<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
+countries<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xe73e550&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xe73e550&gt;
-</code></pre>
-
-<p><img src="./output3.png" alt="png" /></p>
-
+<p><img src="./output3.png" alt="png"></p>
 <p>For out_sel1 array :</p>
-
-<pre><code class="language-python">plt.figure(figsize=(12,8))
-ax = plt.axes()
-out_sel1.t2m.isel(time = 0).plot(ax = ax)
-countries.plot(ax = ax, alpha = 0.8, facecolor = 'none')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">8</span>))
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+out_sel1<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>isel(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax)
+countries<span style="color:#f92672">.</span>plot(ax <span style="color:#f92672">=</span> ax, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, facecolor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xe8024a8&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xe8024a8&gt;
-</code></pre>
-
-<p><img src="./output4.png" alt="png" /></p>
-
+<p><img src="./output4.png" alt="png"></p>
 <p>Finally we can aggregate by the arithmetic mean using the groupby function to obtain a time-series of national average temperatures.</p>
-
-<pre><code class="language-python">x = out_sel1.groupby('time').mean()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> out_sel1<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;time&#39;</span>)<span style="color:#f92672">.</span>mean()
 x
-</code></pre>
-
-<pre><code>&lt;xarray.Dataset&gt;
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
 Dimensions:  (time: 8760)
 Coordinates:
   * time     (time) datetime64[ns] 2018-01-01 ... 2018-12-31T23:00:00
 Data variables:
     t2m      (time) float32 285.01346 284.65833 283.95526 ... 282.03668 281.461
 </code></pre>
-
 <p>Then we plot the time-series…</p>
-
-<pre><code class="language-python">x.t2m.plot()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0xe9dc518&gt;]
 </code></pre>
-
-<pre><code>[&lt;matplotlib.lines.Line2D at 0xe9dc518&gt;]
-</code></pre>
-
-<p><img src="./output5.png" alt="png" /></p>
-
+<p><img src="./output5.png" alt="png"></p>
 <ul>
-<li><p>Let&rsquo;s resample our dataset by day and then compute a daily mean.</p>
-
-<pre><code class="language-python">x = out_sel1.resample(time = '1D').mean()-273.15
-x
-</code></pre>
-
-<p><xarray.Dataset>
-Dimensions:    (latitude: 73, longitude: 82, time: 365)
-Coordinates:</p>
-
-<ul>
-<li>longitude  (longitude) float64 -8.5 -8.25 -8.0 -7.75 &hellip; 11.25 11.5 11.75</li>
-<li>latitude   (latitude) float64 37.0 36.75 36.5 36.25 &hellip; 19.5 19.25 19.0</li>
-
-<li><p>time       (time) datetime64[ns] 2018-01-01 2018-01-02 &hellip; 2018-12-31
-Data variables:
-t2m        (time, latitude, longitude) float32 nan nan nan &hellip; nan nan nan</p>
-
-<pre><code class="language-python">daily_mean = x.t2m.mean(dim=('longitude','latitude'))
-daily_mean
-</code></pre></li>
+<li>Let&rsquo;s resample our dataset by day and then compute a daily mean.</li>
 </ul>
-
-<p><xarray.DataArray 't2m' (time: 365)>
-array([14.550091, 13.812102, 13.700798, &hellip;, 10.975014, 11.182918, 10.956429],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> out_sel1<span style="color:#f92672">.</span>resample(time <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1D&#39;</span>)<span style="color:#f92672">.</span>mean()<span style="color:#f92672">-</span><span style="color:#ae81ff">273.15</span>
+x
+</code></pre></div><pre><code>&lt;xarray.Dataset&gt;
+Dimensions:    (latitude: 73, longitude: 82, time: 365)
+Coordinates:
+  * longitude  (longitude) float64 -8.5 -8.25 -8.0 -7.75 ... 11.25 11.5 11.75
+  * latitude   (latitude) float64 37.0 36.75 36.5 36.25 ... 19.5 19.25 19.0
+  * time       (time) datetime64[ns] 2018-01-01 2018-01-02 ... 2018-12-31
+Data variables:
+    t2m        (time, latitude, longitude) float32 nan nan nan ... nan nan nan
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">daily_mean <span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>mean(dim<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;longitude&#39;</span>,<span style="color:#e6db74">&#39;latitude&#39;</span>))
+daily_mean
+</code></pre></div><pre><code>&lt;xarray.DataArray 't2m' (time: 365)&gt;
+array([14.550091, 13.812102, 13.700798, ..., 10.975014, 11.182918, 10.956429],
       dtype=float32)
 Coordinates:
-  * time     (time) datetime64[ns] 2018-01-01 2018-01-02 &hellip; 2018-12-31</p>
-
-<pre><code class="language-python">daily_mean.plot()
+  * time     (time) datetime64[ns] 2018-01-01 2018-01-02 ... 2018-12-31
 </code></pre>
-
-<p>[<matplotlib.lines.Line2D at 0xe243f98>]</p></li>
-</ul>
-
-<p><img src="./output6.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">daily_mean<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0xe243f98&gt;]
+</code></pre>
+<p><img src="./output6.png" alt="png"></p>
 <p>And we save it as a csv</p>
-
-<pre><code class="language-python">daily_mean.to_pandas().to_csv('average-temperature-algeria.csv', header = ['t2m'])
-</code></pre>
-
-<h3 id="2-extract-time-series-for-one-specific-localisation">2- Extract time-series for one specific localisation</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">daily_mean<span style="color:#f92672">.</span>to_pandas()<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;average-temperature-algeria.csv&#39;</span>, header <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;t2m&#39;</span>])
+</code></pre></div><h3 id="2--extract-time-series-for-one-specific-localisation">2- Extract time-series for one specific localisation</h3>
 <p>In this example, we eant to extract time-series for Alger:</p>
-
 <p>With:
-      - longitude = 3.04
-      - latitude = 36.75</p>
-
-<pre><code class="language-python">lati = 36.75
-loni = 3.04
-data  = out_sel1.sel(longitude=loni  , latitude=lati  , method='nearest') 
-data.t2m
-</code></pre>
-
-<pre><code>&lt;xarray.DataArray 't2m' (time: 8760)&gt;
+- longitude = 3.04
+- latitude = 36.75</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lati <span style="color:#f92672">=</span> <span style="color:#ae81ff">36.75</span>
+loni <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.04</span>
+data  <span style="color:#f92672">=</span> out_sel1<span style="color:#f92672">.</span>sel(longitude<span style="color:#f92672">=</span>loni  , latitude<span style="color:#f92672">=</span>lati  , method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>) 
+data<span style="color:#f92672">.</span>t2m
+</code></pre></div><pre><code>&lt;xarray.DataArray 't2m' (time: 8760)&gt;
 array([289.91342, 289.63348, 289.2745 , ..., 285.62613, 284.9182 , 284.80624],
       dtype=float32)
 Coordinates:
@@ -972,27 +839,17 @@ Attributes:
     units:      K
     long_name:  2 metre temperature
 </code></pre>
-
-<pre><code class="language-python">data['t2m'] = data['t2m'] - 273.15
-df = data.t2m.to_dataframe()
-fig = plt.figure(figsize=(16,8))
-df['t2m'].plot()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data[<span style="color:#e6db74">&#39;t2m&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;t2m&#39;</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">273.15</span>
+df <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>t2m<span style="color:#f92672">.</span>to_dataframe()
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+df[<span style="color:#e6db74">&#39;t2m&#39;</span>]<span style="color:#f92672">.</span>plot()
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x20773fd0&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x20773fd0&gt;
-</code></pre>
-
-<p><img src="./output7.png" alt="png" /></p>
-
+<p><img src="./output7.png" alt="png"></p>
 <p>Let&rsquo;s plot montlhy temperature distribution for Alger:</p>
-
-<pre><code class="language-python">df['month'] = df.index.strftime(&quot;%b&quot;)
-</code></pre>
-
-<pre><code class="language-python">df.head()
-</code></pre>
-
-<table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#e6db74">&#39;month&#39;</span>] <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%b&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>head()
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left">time</th>
@@ -1002,7 +859,6 @@ df['t2m'].plot()
 <th align="left">month</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">2018-01-01 00:00:00</td>
@@ -1011,7 +867,6 @@ df['t2m'].plot()
 <td align="right">16.7634</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">2018-01-01 01:00:00</td>
 <td align="right">36.75</td>
@@ -1019,7 +874,6 @@ df['t2m'].plot()
 <td align="right">16.4835</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">2018-01-01 02:00:00</td>
 <td align="right">36.75</td>
@@ -1027,7 +881,6 @@ df['t2m'].plot()
 <td align="right">16.1245</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">2018-01-01 03:00:00</td>
 <td align="right">36.75</td>
@@ -1035,7 +888,6 @@ df['t2m'].plot()
 <td align="right">16.197</td>
 <td align="left">Jan</td>
 </tr>
-
 <tr>
 <td align="left">2018-01-01 04:00:00</td>
 <td align="right">36.75</td>
@@ -1045,19 +897,14 @@ df['t2m'].plot()
 </tr>
 </tbody>
 </table>
-
-<pre><code class="language-python">ax = plt.axes()
-sns.boxplot(x=&quot;month&quot;, y=&quot;t2m&quot;, data=df, palette=&quot;Set1&quot;)  
-figure = ax.get_figure()    
-figure.set_size_inches(12, 8) 
-plt.show()
-</code></pre>
-
-<p><img src="./output8.png" alt="png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;month&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;t2m&#34;</span>, data<span style="color:#f92672">=</span>df, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Set1&#34;</span>)  
+figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
+figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>) 
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="./output8.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
     </div>
 
     

@@ -581,21 +581,19 @@ Nous utiliserons le fichier &lsquo;MONTREAL_preacc_1961_2010.dat&rsquo; dans le 
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#objectifs">Objectifs</a></li>
-<li><a href="#projet-2-données-de-précipitation-d-environnement-et-changement-climatique-canada">Projet 2: Données de précipitation d&rsquo;Environnement et Changement Climatique Canada</a></li>
-<li><a href="#1-ouverture-et-lecture-de-nos-séries-de-données">1- Ouverture et lecture de nos séries de données</a></li>
-<li><a href="#2-application-des-indices-de-précipitations">2- Application des indices de précipitations:</a></li>
-<li><a href="#3-filtrer-les-données-directement-sur-notre-dataframe">3- Filtrer les données directement sur notre DataFrame</a></li>
-<li><a href="#4-mise-à-jour-de-notre-dataframe-initial">4- Mise à jour de notre DataFrame initial</a></li>
-<li><a href="#4-visualisation-des-résultats">4- Visualisation des résultats</a>
-<ul>
-<li><a href="#bonus-ajoutez-des-indices-de-corrélation-avec-la-bibliothèque-scipy">Bonus: ajoutez des indices de corrélation avec la bibliothèque scipy</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#objectifs">Objectifs</a></li>
+    <li><a href="#projet-2-données-de-précipitation-denvironnement-et-changement-climatique-canada">Projet 2: Données de précipitation d&rsquo;Environnement et Changement Climatique Canada</a></li>
+    <li><a href="#1--ouverture-et-lecture-de-nos-séries-de-données">1- Ouverture et lecture de nos séries de données</a></li>
+    <li><a href="#2--application-des-indices-de-précipitations">2- Application des indices de précipitations:</a></li>
+    <li><a href="#3--filtrer-les-données-directement-sur-notre-dataframe">3- Filtrer les données directement sur notre DataFrame</a></li>
+    <li><a href="#4--mise-à-jour-de-notre-dataframe-initial">4- Mise à jour de notre DataFrame initial</a></li>
+    <li><a href="#4--visualisation-des-résultats">4- Visualisation des résultats</a>
+      <ul>
+        <li><a href="#bonus-ajoutez-des-indices-de-corrélation-avec-la-bibliothèque-scipy">Bonus: ajoutez des indices de corrélation avec la bibliothèque scipy</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
       
@@ -610,118 +608,58 @@ Nous utiliserons le fichier &lsquo;MONTREAL_preacc_1961_2010.dat&rsquo; dans le 
           <h1>9.2- Projet sur les données de précipitations ECCC</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/formation/pylogo.png" alt="image0" /></p>
-
+            <p><img src="/img/formation/pylogo.png" alt="image0"></p>
 <h2 id="objectifs">Objectifs</h2>
-
-<h2 id="projet-2-données-de-précipitation-d-environnement-et-changement-climatique-canada">Projet 2: Données de précipitation d&rsquo;Environnement et Changement Climatique Canada</h2>
-
+<h2 id="projet-2-données-de-précipitation-denvironnement-et-changement-climatique-canada">Projet 2: Données de précipitation d&rsquo;Environnement et Changement Climatique Canada</h2>
 <p>Nous continuerons de découvrir la fonctionnalité de ces bibliothèques dans un cas pratique en analysant maintenant les données de précipitations quotidiennes enregistrées par les stations ECCC situées à l&rsquo;aéroport de Montréal Trudeau entre la période 1961 et 2010.</p>
-
 <p>Nous utiliserons le fichier &lsquo;MONTREAL_preacc_1961_2010.dat&rsquo; dans le répertoire .data /.</p>
+<h2 id="1--ouverture-et-lecture-de-nos-séries-de-données">1- Ouverture et lecture de nos séries de données</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np 
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#34;ignore&#34;</span>)
 
-<h2 id="1-ouverture-et-lecture-de-nos-séries-de-données">1- Ouverture et lecture de nos séries de données</h2>
+df_Precipitation <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame()
+<span style="color:#75715e"># Ouverture du fichier text  </span>
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./DATA/MONTREAL_preacc_1961_2010.dat&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+     rows <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
+data_EC_Montreal <span style="color:#f92672">=</span> [float(row) <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows<span style="color:#f92672">.</span>split()]  
 
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-import datetime
-from datetime import date
-import numpy as np 
-import warnings
-warnings.filterwarnings(&quot;ignore&quot;)
+<span style="color:#75715e"># We know that the time series begins on January 1, 1961</span>
+<span style="color:#75715e"># and ends on December 31, 2010</span>
+<span style="color:#75715e"># We can rebuild the index of Dataframes</span>
 
-df_Precipitation = pd.DataFrame()
-# Ouverture du fichier text  
-with open('./DATA/MONTREAL_preacc_1961_2010.dat', 'r') as file:
-     rows = file.read()
-data_EC_Montreal = [float(row) for row in rows.split()]  
+start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">1961</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2010</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">31</span>)
+delta<span style="color:#f92672">=</span>(end<span style="color:#f92672">-</span>start) 
+nb_days <span style="color:#f92672">=</span> delta<span style="color:#f92672">.</span>days <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
+rng <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>date_range(start, periods<span style="color:#f92672">=</span>nb_days, freq<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;D&#39;</span>)
 
-# We know that the time series begins on January 1, 1961
-# and ends on December 31, 2010
-# We can rebuild the index of Dataframes
+<span style="color:#75715e"># Create a column from the datetime datatype</span>
+df_Precipitation[<span style="color:#e6db74">&#39;datetime&#39;</span>] <span style="color:#f92672">=</span> rng
+<span style="color:#75715e"># Set the datetime column as the index</span>
+df_Precipitation<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_Precipitation[<span style="color:#e6db74">&#39;datetime&#39;</span>] 
 
-start = date(1961, 1, 1)
-end = date(2010, 12, 31)
-delta=(end-start) 
-nb_days = delta.days + 1 
-rng = pd.date_range(start, periods=nb_days, freq='D')
+<span style="color:#75715e"># Create a column from the numeric score variable</span>
+df_Precipitation[<span style="color:#e6db74">&#39;Precipitation Montreal&#39;</span>] <span style="color:#f92672">=</span> data_EC_Montreal
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_Precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-# Create a column from the datetime datatype
-df_Precipitation['datetime'] = rng
-# Set the datetime column as the index
-df_Precipitation.index = df_Precipitation['datetime'] 
-
-# Create a column from the numeric score variable
-df_Precipitation['Precipitation Montreal'] = data_EC_Montreal
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<pre><code class="language-python">df_Precipitation.head()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>datetime</th>
-      <th>Precipitation Montreal</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-01</th>
-      <td>1961-01-01</td>
-      <td>22.66</td>
-    </tr>
-    <tr>
-      <th>1961-01-02</th>
-      <td>1961-01-02</td>
-      <td>1.05</td>
-    </tr>
-    <tr>
-      <th>1961-01-03</th>
-      <td>1961-01-03</td>
-      <td>1.05</td>
-    </tr>
-    <tr>
-      <th>1961-01-04</th>
-      <td>1961-01-04</td>
-      <td>0.66</td>
-    </tr>
-    <tr>
-      <th>1961-01-05</th>
-      <td>1961-01-05</td>
-      <td>0.00</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(df_Precipitation.head(), headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            | datetime            |   Precipitation Montreal |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(df_Precipitation<span style="color:#f92672">.</span>head(), headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            | datetime            |   Precipitation Montreal |
 |:--------------------|:--------------------|-------------------------:|
 | 1961-01-01 00:00:00 | 1961-01-01 00:00:00 |                    22.66 |
 | 1961-01-02 00:00:00 | 1961-01-02 00:00:00 |                     1.05 |
@@ -729,180 +667,121 @@ print(tabulate(df_Precipitation.head(), headers='keys', tablefmt='pipe'))
 | 1961-01-04 00:00:00 | 1961-01-04 00:00:00 |                     0.66 |
 | 1961-01-05 00:00:00 | 1961-01-05 00:00:00 |                     0    |
 </code></pre>
-
-<h2 id="2-application-des-indices-de-précipitations">2- Application des indices de précipitations:</h2>
-
+<h2 id="2--application-des-indices-de-précipitations">2- Application des indices de précipitations:</h2>
 <ul>
 <li>CDD: calcul du nombre maximum de jours secs consécutifs (Précipitations &lt;1mm)</li>
 <li>CWD: calcul du nombre maximum de jours de pluie consécutifs (Précipitations&gt; 1mm)</li>
 <li>Prcp1: calcul du pourcentage de jours de précipitations (Précipitations&gt; 1mm)</li>
-
-<li><p>SDII: calcul de l&rsquo;intensité moyenne des précipitations pour les jours de pluie (Précipitations&gt; 1mm</p>
-
-<pre><code class="language-python"># calculation of the maximum number of consecutive dry days (inf to 1mm) 
-# on the incoming signal (less than 20% of missing values) 
-def CDD(S):
- import numpy as np
- ind_CDD=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if ((N2/N) &lt; 0.8): 
-     ind_CDD = np.empty(1)
-     ind_CDD = np.nan
- else:
-     temp = 0
-     ind_CDD = 0 
-     j =0
-     while (j &lt; N2):
-         while (j &lt; N2 ) and (S_no_nan[j] &lt; 1.0 ):
-             j += 1
-             temp +=1
-         if ind_CDD &lt; temp:
-             ind_CDD = temp
-         temp = 0
-         j += 1 
- return ind_CDD      
- 
-# calculation of the maximum number of consecutive wet days (sup to 1mm) 
-# on the incoming signal (less than 20% of missing values) 
-def CWD(S):
- import numpy as np
- ind_CWD=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if ((N2/N) &lt; 0.8): 
-     ind_CWD = np.empty(1)
-     ind_CWD = np.nan
- else:
-     temp = 0
-     ind_CWD = 0 
-     j =0
-     while (j &lt; N2):
-         while (j &lt; N2 ) and (S_no_nan[j] &gt; 1.0 ):
-             j += 1
-             temp +=1
-         if ind_CWD &lt; temp:
-             ind_CWD = temp
-         temp = 0
-         j += 1 
- return ind_CWD  
-
-# Calculation of the percentage of precipitation days 
-# on the incoming signal (less than 20% of missing values)
-def Prcp1(S):
- import numpy as np
- ind_Prcp1=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if (N2 == 0):
-     N2=1
-         
- if ((N2/N) &lt; 0.8): 
-     ind_Prcp1 = np.empty(1)
-     ind_Prcp1 = np.nan
- else:
-     ind_Prcp1 = 0
-     for row in S_no_nan:
-         if row &gt;= 1 :
-             ind_Prcp1 += 1 
-                 
-     ind_Prcp1 = 100 * (ind_Prcp1/N2)
- return ind_Prcp1     
-
-# average precipitation intensity for wet days (PR greater than 1mm) (less than 20% missing values)
-
-def SDII(S):
- import numpy as np
- ind_SDII=[]
- S_no_nan = S[~np.isnan(S)]
- N = len(S)
- N2 = len(S_no_nan)
- if ((N2/N) &lt; 0.8): 
-     ind_SDII = np.empty(1)
-     ind_SDII = np.nan
- else:
-     SS = S[S &gt; 1]        
-     ind_SDII = np.nanmean(SS)
- return ind_SDII      
-</code></pre></li>
+<li>SDII: calcul de l&rsquo;intensité moyenne des précipitations pour les jours de pluie (Précipitations&gt; 1mm</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># calculation of the maximum number of consecutive dry days (inf to 1mm) </span>
+<span style="color:#75715e"># on the incoming signal (less than 20% of missing values) </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">CDD</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_CDD<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_CDD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_CDD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+         ind_CDD <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
+         j <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+         <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2):
+             <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2 ) <span style="color:#f92672">and</span> (S_no_nan[j] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span> ):
+                 j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+                 temp <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+             <span style="color:#66d9ef">if</span> ind_CDD <span style="color:#f92672">&lt;</span> temp:
+                 ind_CDD <span style="color:#f92672">=</span> temp
+             temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+             j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+     <span style="color:#66d9ef">return</span> ind_CDD      
+ 
+<span style="color:#75715e"># calculation of the maximum number of consecutive wet days (sup to 1mm) </span>
+<span style="color:#75715e"># on the incoming signal (less than 20% of missing values) </span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">CWD</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_CWD<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_CWD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_CWD <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+         ind_CWD <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
+         j <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+         <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2):
+             <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> N2 ) <span style="color:#f92672">and</span> (S_no_nan[j] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1.0</span> ):
+                 j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+                 temp <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+             <span style="color:#66d9ef">if</span> ind_CWD <span style="color:#f92672">&lt;</span> temp:
+                 ind_CWD <span style="color:#f92672">=</span> temp
+             temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+             j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+     <span style="color:#66d9ef">return</span> ind_CWD  
 
-<p>Les fonctions précédentes permettent de calculer des indices de précipitations sur un signal journalier. Nous voulons appliquer ces fonctions chaque mois.</p>
+<span style="color:#75715e"># Calculation of the percentage of precipitation days </span>
+<span style="color:#75715e"># on the incoming signal (less than 20% of missing values)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Prcp1</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_Prcp1<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> (N2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>):
+         N2<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+         
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_Prcp1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_Prcp1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         ind_Prcp1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+         <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> S_no_nan:
+             <span style="color:#66d9ef">if</span> row <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span> :
+                 ind_Prcp1 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+                 
+         ind_Prcp1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> (ind_Prcp1<span style="color:#f92672">/</span>N2)
+     <span style="color:#66d9ef">return</span> ind_Prcp1     
 
-<p>Nous devons donc travailler avec un sous-ensemble de notre dataframe <b> df_Precipitation </b> groupé par mois.</p>
+<span style="color:#75715e"># average precipitation intensity for wet days (PR greater than 1mm) (less than 20% missing values)</span>
 
-<p>De la même manière que la section précédente sur les températures, nous appliquerons la méthode <b> .resample (&rsquo;M&rsquo;) </b>: &ldquo;M&rdquo; pendant des mois (il est possible ici de travailler à l&rsquo;échelle de la semaine, de la saison ou de l&rsquo;année)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">SDII</span>(S):
+     <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+     ind_SDII<span style="color:#f92672">=</span>[]
+     S_no_nan <span style="color:#f92672">=</span> S[<span style="color:#f92672">~</span>np<span style="color:#f92672">.</span>isnan(S)]
+     N <span style="color:#f92672">=</span> len(S)
+     N2 <span style="color:#f92672">=</span> len(S_no_nan)
+     <span style="color:#66d9ef">if</span> ((N2<span style="color:#f92672">/</span>N) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.8</span>): 
+         ind_SDII <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(<span style="color:#ae81ff">1</span>)
+         ind_SDII <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nan
+     <span style="color:#66d9ef">else</span>:
+         SS <span style="color:#f92672">=</span> S[S <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>]        
+         ind_SDII <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nanmean(SS)
+     <span style="color:#66d9ef">return</span> ind_SDII      
+</code></pre></div><p>Les fonctions précédentes permettent de calculer des indices de précipitations sur un signal journalier. Nous voulons appliquer ces fonctions chaque mois.</p>
+<p>Nous devons donc travailler avec un sous-ensemble de notre dataframe <!-- raw HTML omitted --> df_Precipitation <!-- raw HTML omitted --> groupé par mois.</p>
+<p>De la même manière que la section précédente sur les températures, nous appliquerons la méthode <!-- raw HTML omitted --> .resample (&lsquo;M&rsquo;) <!-- raw HTML omitted -->: &ldquo;M&rdquo; pendant des mois (il est possible ici de travailler à l&rsquo;échelle de la semaine, de la saison ou de l&rsquo;année)
 Pour rappel, à ce stade il n&rsquo;y a pas de calcul, les données sont simplement triées sur une base mensuelle.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_Precipitation_resamp <span style="color:#f92672">=</span> df_Precipitation<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)
+df_Precipitation_resamp<span style="color:#f92672">.</span>count()<span style="color:#f92672">.</span>head()            
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">df_Precipitation_resamp = df_Precipitation.resample('M')
-df_Precipitation_resamp.count().head()            
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>datetime</th>
-      <th>Precipitation Montreal</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>31</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>28</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>31</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>30</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>31</td>
-      <td>31</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(df_Precipitation_resamp.count().head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   datetime |   Precipitation Montreal |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(df_Precipitation_resamp<span style="color:#f92672">.</span>count()<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   datetime |   Precipitation Montreal |
 |:--------------------|-----------:|-------------------------:|
 | 1961-01-31 00:00:00 |         31 |                       31 |
 | 1961-02-28 00:00:00 |         28 |                       28 |
@@ -910,111 +789,27 @@ print(tabulate(df_Precipitation_resamp.count().head() , headers='keys', tablefmt
 | 1961-04-30 00:00:00 |         30 |                       30 |
 | 1961-05-31 00:00:00 |         31 |                       31 |
 </code></pre>
+<p>Nous pouvons maintenant appliquer nos fonctions définies précédemment pour chaque mois de notre DataFrame. Pour cela, nous utiliserons la méthode <!-- raw HTML omitted --> .agg () <!-- raw HTML omitted --> sur notre sous-ensemble groupé par mois.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation <span style="color:#f92672">=</span> df_Precipitation_resamp<span style="color:#f92672">.</span>agg([CDD, CWD, Prcp1, SDII, np<span style="color:#f92672">.</span>sum, np<span style="color:#f92672">.</span>mean])
+indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<p>Nous pouvons maintenant appliquer nos fonctions définies précédemment pour chaque mois de notre DataFrame. Pour cela, nous utiliserons la méthode <b> .agg () </b> sur notre sous-ensemble groupé par mois.</p>
+.dataframe thead tr th {
+    text-align: left;
+}
 
-<pre><code class="language-python">indice_precipitation = df_Precipitation_resamp.agg([CDD, CWD, Prcp1, SDII, np.sum, np.mean])
-indice_precipitation.head()
+.dataframe thead tr:last-of-type th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="6" halign="left">Precipitation Montreal</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>14.0</td>
-      <td>3.0</td>
-      <td>29.032258</td>
-      <td>5.691111</td>
-      <td>55.09</td>
-      <td>1.777097</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>12.0</td>
-      <td>3.0</td>
-      <td>28.571429</td>
-      <td>9.895000</td>
-      <td>80.87</td>
-      <td>2.888214</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>25.806452</td>
-      <td>11.868750</td>
-      <td>97.59</td>
-      <td>3.148065</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>50.000000</td>
-      <td>6.683333</td>
-      <td>102.70</td>
-      <td>3.423333</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>41.935484</td>
-      <td>5.130000</td>
-      <td>70.22</td>
-      <td>2.265161</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   ('Precipitation Montreal', 'CDD') |   ('Precipitation Montreal', 'CWD') |   ('Precipitation Montreal', 'Prcp1') |   ('Precipitation Montreal', 'SDII') |   ('Precipitation Montreal', 'sum') |   ('Precipitation Montreal', 'mean') |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(indice_precipitation<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   ('Precipitation Montreal', 'CDD') |   ('Precipitation Montreal', 'CWD') |   ('Precipitation Montreal', 'Prcp1') |   ('Precipitation Montreal', 'SDII') |   ('Precipitation Montreal', 'sum') |   ('Precipitation Montreal', 'mean') |
 |:--------------------|------------------------------------:|------------------------------------:|--------------------------------------:|-------------------------------------:|------------------------------------:|-------------------------------------:|
 | 1961-01-31 00:00:00 |                                  14 |                                   3 |                               29.0323 |                              5.69111 |                               55.09 |                              1.7771  |
 | 1961-02-28 00:00:00 |                                  12 |                                   3 |                               28.5714 |                              9.895   |                               80.87 |                              2.88821 |
@@ -1022,81 +817,27 @@ print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
 | 1961-04-30 00:00:00 |                                   4 |                                   3 |                               50      |                              6.68333 |                              102.7  |                              3.42333 |
 | 1961-05-31 00:00:00 |                                   5 |                                   3 |                               41.9355 |                              5.13    |                               70.22 |                              2.26516 |
 </code></pre>
-
-<h2 id="3-filtrer-les-données-directement-sur-notre-dataframe">3- Filtrer les données directement sur notre DataFrame</h2>
-
+<h2 id="3--filtrer-les-données-directement-sur-notre-dataframe">3- Filtrer les données directement sur notre DataFrame</h2>
 <ul>
 <li>les données peuvent être filtrées selon une condition sur une colonne.</li>
 </ul>
-
 <p>On n&rsquo;extraira par exemple que les données de précipitations supérieures ou égales à 1 mm.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">SDII2<span style="color:#f92672">=</span>df_Precipitation[df_Precipitation[<span style="color:#e6db74">&#34;Precipitation Montreal&#34;</span>]<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">1.0</span>]
+SDII2<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">SDII2=df_Precipitation[df_Precipitation[&quot;Precipitation Montreal&quot;]&gt;=1.0]
-SDII2.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>datetime</th>
-      <th>Precipitation Montreal</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-01</th>
-      <td>1961-01-01</td>
-      <td>22.66</td>
-    </tr>
-    <tr>
-      <th>1961-01-02</th>
-      <td>1961-01-02</td>
-      <td>1.05</td>
-    </tr>
-    <tr>
-      <th>1961-01-03</th>
-      <td>1961-01-03</td>
-      <td>1.05</td>
-    </tr>
-    <tr>
-      <th>1961-01-06</th>
-      <td>1961-01-06</td>
-      <td>8.65</td>
-    </tr>
-    <tr>
-      <th>1961-01-07</th>
-      <td>1961-01-07</td>
-      <td>4.05</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(SDII2.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            | datetime            |   Precipitation Montreal |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(SDII2<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            | datetime            |   Precipitation Montreal |
 |:--------------------|:--------------------|-------------------------:|
 | 1961-01-01 00:00:00 | 1961-01-01 00:00:00 |                    22.66 |
 | 1961-01-02 00:00:00 | 1961-01-02 00:00:00 |                     1.05 |
@@ -1104,13 +845,9 @@ print(tabulate(SDII2.head() , headers='keys', tablefmt='pipe'))
 | 1961-01-06 00:00:00 | 1961-01-06 00:00:00 |                     8.65 |
 | 1961-01-07 00:00:00 | 1961-01-07 00:00:00 |                     4.05 |
 </code></pre>
-
 <p>Nous avons d&rsquo;abord créé un masque de type booléen sur la colonne «Précipitation Montréal» qui a ensuite été appliqué à notre DataFrame.</p>
-
-<pre><code class="language-python">(df_Precipitation[&quot;Precipitation Montreal&quot;]&gt;1.0).head()
-</code></pre>
-
-<pre><code>datetime
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(df_Precipitation[<span style="color:#e6db74">&#34;Precipitation Montreal&#34;</span>]<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1.0</span>)<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>datetime
 1961-01-01     True
 1961-01-02     True
 1961-01-03     True
@@ -1118,76 +855,27 @@ print(tabulate(SDII2.head() , headers='keys', tablefmt='pipe'))
 1961-01-05    False
 Name: Precipitation Montreal, dtype: bool
 </code></pre>
-
 <p>Nous regroupons ensuite notre DataFrame par mois et nous appliquons une fonction en appelant la méthode .agg ().</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">SDII2 <span style="color:#f92672">=</span> SDII2<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;M&#39;</span>)<span style="color:#f92672">.</span>agg({<span style="color:#e6db74">&#39;SDII2&#39;</span>: <span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>mean()})
+SDII2<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">SDII2 = SDII2.resample('M').agg({'SDII2': lambda x: x.mean()})
-SDII2.head()
+.dataframe thead tr th {
+    text-align: left;
+}
+
+.dataframe thead tr:last-of-type th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th></th>
-      <th>SDII2</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>Precipitation Montreal</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>5.691111</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>9.895000</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>11.868750</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>6.683333</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.130000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(SDII2.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   ('SDII2', 'Precipitation Montreal') |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(SDII2<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   ('SDII2', 'Precipitation Montreal') |
 |:--------------------|--------------------------------------:|
 | 1961-01-31 00:00:00 |                               5.69111 |
 | 1961-02-28 00:00:00 |                               9.895   |
@@ -1195,123 +883,28 @@ print(tabulate(SDII2.head() , headers='keys', tablefmt='pipe'))
 | 1961-04-30 00:00:00 |                               6.68333 |
 | 1961-05-31 00:00:00 |                               5.13    |
 </code></pre>
-
-<h2 id="4-mise-à-jour-de-notre-dataframe-initial">4- Mise à jour de notre DataFrame initial</h2>
-
+<h2 id="4--mise-à-jour-de-notre-dataframe-initial">4- Mise à jour de notre DataFrame initial</h2>
 <p>Nous voulons ajouter à notre DataFrame initial la variable SDII2 précédemment créée.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation[<span style="color:#e6db74">&#34;SDII2&#34;</span>]<span style="color:#f92672">=</span>SDII2[:]<span style="color:#f92672">.</span>values
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">indice_precipitation[&quot;SDII2&quot;]=SDII2[:].values
+.dataframe thead tr th {
+    text-align: left;
+}
+
+.dataframe thead tr:last-of-type th {
+    text-align: right;
+}
 </code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="6" halign="left">Precipitation Montreal</th>
-      <th>SDII2</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-      <th></th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>14.0</td>
-      <td>3.0</td>
-      <td>29.032258</td>
-      <td>5.691111</td>
-      <td>55.09</td>
-      <td>1.777097</td>
-      <td>5.691111</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>12.0</td>
-      <td>3.0</td>
-      <td>28.571429</td>
-      <td>9.895000</td>
-      <td>80.87</td>
-      <td>2.888214</td>
-      <td>9.895000</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>25.806452</td>
-      <td>11.868750</td>
-      <td>97.59</td>
-      <td>3.148065</td>
-      <td>11.868750</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>50.000000</td>
-      <td>6.683333</td>
-      <td>102.70</td>
-      <td>3.423333</td>
-      <td>6.683333</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>41.935484</td>
-      <td>5.130000</td>
-      <td>70.22</td>
-      <td>2.265161</td>
-      <td>5.130000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   ('Precipitation Montreal', 'CDD') |   ('Precipitation Montreal', 'CWD') |   ('Precipitation Montreal', 'Prcp1') |   ('Precipitation Montreal', 'SDII') |   ('Precipitation Montreal', 'sum') |   ('Precipitation Montreal', 'mean') |   ('SDII2', '') |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(indice_precipitation<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   ('Precipitation Montreal', 'CDD') |   ('Precipitation Montreal', 'CWD') |   ('Precipitation Montreal', 'Prcp1') |   ('Precipitation Montreal', 'SDII') |   ('Precipitation Montreal', 'sum') |   ('Precipitation Montreal', 'mean') |   ('SDII2', '') |
 |:--------------------|------------------------------------:|------------------------------------:|--------------------------------------:|-------------------------------------:|------------------------------------:|-------------------------------------:|----------------:|
 | 1961-01-31 00:00:00 |                                  14 |                                   3 |                               29.0323 |                              5.69111 |                               55.09 |                              1.7771  |         5.69111 |
 | 1961-02-28 00:00:00 |                                  12 |                                   3 |                               28.5714 |                              9.895   |                               80.87 |                              2.88821 |         9.895   |
@@ -1319,110 +912,22 @@ print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
 | 1961-04-30 00:00:00 |                                   4 |                                   3 |                               50      |                              6.68333 |                              102.7  |                              3.42333 |         6.68333 |
 | 1961-05-31 00:00:00 |                                   5 |                                   3 |                               41.9355 |                              5.13    |                               70.22 |                              2.26516 |         5.13    |
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>droplevel(<span style="color:#ae81ff">0</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">indice_precipitation.columns = indice_precipitation.columns.droplevel(0)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-      <th></th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>14.0</td>
-      <td>3.0</td>
-      <td>29.032258</td>
-      <td>5.691111</td>
-      <td>55.09</td>
-      <td>1.777097</td>
-      <td>5.691111</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>12.0</td>
-      <td>3.0</td>
-      <td>28.571429</td>
-      <td>9.895000</td>
-      <td>80.87</td>
-      <td>2.888214</td>
-      <td>9.895000</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>25.806452</td>
-      <td>11.868750</td>
-      <td>97.59</td>
-      <td>3.148065</td>
-      <td>11.868750</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>50.000000</td>
-      <td>6.683333</td>
-      <td>102.70</td>
-      <td>3.423333</td>
-      <td>6.683333</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>41.935484</td>
-      <td>5.130000</td>
-      <td>70.22</td>
-      <td>2.265161</td>
-      <td>5.130000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(indice_precipitation<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |
 |:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|
 | 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |
 | 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |
@@ -1430,128 +935,25 @@ print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
 | 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |
 | 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |
 </code></pre>
-
 <p>En utilisant la colonne index datetime, nous voulons créer de nouvelles colonnes avec l&rsquo;année et le mois.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation[<span style="color:#e6db74">&#39;year&#39;</span>]  <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>year
+indice_precipitation[<span style="color:#e6db74">&#39;month&#39;</span>]  <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>month
+indice_precipitation[<span style="color:#e6db74">&#39;month&#39;</span>] <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%b&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">indice_precipitation['year']  = indice_precipitation.index.year
-indice_precipitation['month']  = indice_precipitation.index.month
-indice_precipitation['month'] = indice_precipitation.index.strftime('%b')
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>14.0</td>
-      <td>3.0</td>
-      <td>29.032258</td>
-      <td>5.691111</td>
-      <td>55.09</td>
-      <td>1.777097</td>
-      <td>5.691111</td>
-      <td>1961</td>
-      <td>Jan</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>12.0</td>
-      <td>3.0</td>
-      <td>28.571429</td>
-      <td>9.895000</td>
-      <td>80.87</td>
-      <td>2.888214</td>
-      <td>9.895000</td>
-      <td>1961</td>
-      <td>Feb</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>25.806452</td>
-      <td>11.868750</td>
-      <td>97.59</td>
-      <td>3.148065</td>
-      <td>11.868750</td>
-      <td>1961</td>
-      <td>Mar</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>50.000000</td>
-      <td>6.683333</td>
-      <td>102.70</td>
-      <td>3.423333</td>
-      <td>6.683333</td>
-      <td>1961</td>
-      <td>Apr</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>41.935484</td>
-      <td>5.130000</td>
-      <td>70.22</td>
-      <td>2.265161</td>
-      <td>5.130000</td>
-      <td>1961</td>
-      <td>May</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(indice_precipitation<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
 |:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|-------:|:--------|
 | 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |   1961 | Jan     |
 | 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |   1961 | Feb     |
@@ -1559,141 +961,33 @@ print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
 | 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |   1961 | Apr     |
 | 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |   1961 | May     |
 </code></pre>
-
-<p>Nous voulons sauvegarder notre Dataframe <b> indice_precipitation </b>.</p>
-
-<pre><code class="language-python">indice_precipitation.to_csv('indice_precipitation.csv')
-</code></pre>
-
-<h2 id="4-visualisation-des-résultats">4- Visualisation des résultats</h2>
-
-<p>Nous allons visualiser notre dataframe final <b> index_precipitation </b> avec la bibliothèque Seaborn.</p>
-
-<p><img src="/img/formation/seaborn.png" alt="image0" /></p>
-
-<p>Cependant, nous verrons quelques exemples avec des graphiques multidimensionnels.
-- Boxplot: fonction <b> boxplot () </b></p>
-
+<p>Nous voulons sauvegarder notre Dataframe <!-- raw HTML omitted --> indice_precipitation <!-- raw HTML omitted -->.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;indice_precipitation.csv&#39;</span>)
+</code></pre></div><h2 id="4--visualisation-des-résultats">4- Visualisation des résultats</h2>
+<p>Nous allons visualiser notre dataframe final <!-- raw HTML omitted --> index_precipitation <!-- raw HTML omitted --> avec la bibliothèque Seaborn.</p>
+<p><img src="/img/formation/seaborn.png" alt="image0"></p>
+<p>Cependant, nous verrons quelques exemples avec des graphiques multidimensionnels.</p>
+<ul>
+<li>Boxplot: fonction <!-- raw HTML omitted --> boxplot () <!-- raw HTML omitted --></li>
+</ul>
 <p>Utilisons notre DataFrame de précipitations:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns 
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt 
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">import seaborn as sns 
-import matplotlib.pyplot as plt 
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>14.0</td>
-      <td>3.0</td>
-      <td>29.032258</td>
-      <td>5.691111</td>
-      <td>55.09</td>
-      <td>1.777097</td>
-      <td>5.691111</td>
-      <td>1961</td>
-      <td>Jan</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>12.0</td>
-      <td>3.0</td>
-      <td>28.571429</td>
-      <td>9.895000</td>
-      <td>80.87</td>
-      <td>2.888214</td>
-      <td>9.895000</td>
-      <td>1961</td>
-      <td>Feb</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>25.806452</td>
-      <td>11.868750</td>
-      <td>97.59</td>
-      <td>3.148065</td>
-      <td>11.868750</td>
-      <td>1961</td>
-      <td>Mar</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>50.000000</td>
-      <td>6.683333</td>
-      <td>102.70</td>
-      <td>3.423333</td>
-      <td>6.683333</td>
-      <td>1961</td>
-      <td>Apr</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>41.935484</td>
-      <td>5.130000</td>
-      <td>70.22</td>
-      <td>2.265161</td>
-      <td>5.130000</td>
-      <td>1961</td>
-      <td>May</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(indice_precipitation<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
 |:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|-------:|:--------|
 | 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |   1961 | Jan     |
 | 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |   1961 | Feb     |
@@ -1701,215 +995,92 @@ print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
 | 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |   1961 | Apr     |
 | 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |   1961 | May     |
 </code></pre>
-
 <p>Nous voulons visualiser le nombre de jours avec des précipitations par mois. Nous allons ensuite tracer la variable Prcp1 à partir de notre DataFrame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt 
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;month&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Prcp1&#34;</span>, data<span style="color:#f92672">=</span>indice_precipitation, palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Set1&#34;</span>) 
 
-<pre><code class="language-python">import seaborn as sns
-import matplotlib.pyplot as plt 
-ax = plt.axes()
-sns.boxplot(x=&quot;month&quot;, y=&quot;Prcp1&quot;, data=indice_precipitation, palette=&quot;Set1&quot;) 
+ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Number of days with precipitation in Montreal from 1948 to 2017&#39;</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;%&#39;</span>)
 
-ax.set_title('Number of days with precipitation in Montreal from 1948 to 2017')
-ax.set_ylabel('%')
-
-figure = ax.get_figure()    
-figure.set_size_inches(12, 8) 
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/prec1.png" alt="image0" /></p>
-
+figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
+figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>) 
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/prec1.png" alt="image0"></p>
 <ul>
-<li>Histogramme: fonction <b> barplot () </b></li>
+<li>Histogramme: fonction <!-- raw HTML omitted --> barplot () <!-- raw HTML omitted --></li>
 </ul>
-
 <p>Pour cet exemple, nous allons tracer l&rsquo;accumulation moyenne de la pré-participation par mois, pour ce faire, nous devons utiliser la variable «sum».</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes()
+sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;month&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sum&#34;</span>, data<span style="color:#f92672">=</span>indice_precipitation)
+ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Monthly mean of cumulated precipitation in Montréal from 1948 to 2017&#39;</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;mm&#39;</span>)
 
-<pre><code class="language-python">ax = plt.axes()
-sns.barplot(x=&quot;month&quot;, y=&quot;sum&quot;, data=indice_precipitation)
-ax.set_title('Monthly mean of cumulated precipitation in Montréal from 1948 to 2017')
-ax.set_ylabel('mm')
-
-figure = ax.get_figure()    
-figure.set_size_inches(12, 8) 
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/prec2.png" alt="image0" /></p>
-
+figure <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>get_figure()    
+figure<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>) 
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/prec2.png" alt="image0"></p>
 <ul>
-<li>graphe bivarié: fonction <b> jointplot () </b></li>
+<li>graphe bivarié: fonction <!-- raw HTML omitted --> jointplot () <!-- raw HTML omitted --></li>
 </ul>
-
 <p>Jointplot affiche une relation entre 2 variables (bivariée)</p>
+<p><a href="https://seaborn.pydata.org/generated/seaborn.jointplot.html">https://seaborn.pydata.org/generated/seaborn.jointplot.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Prcp1&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sum&#34;</span>, data<span style="color:#f92672">=</span>indice_precipitation,kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;reg&#39;</span>,
+                   space<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, ratio<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+plt<span style="color:#f92672">.</span>show()
 
-<p><a href="https://seaborn.pydata.org/generated/seaborn.jointplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.jointplot.html</a></p>
-
-<pre><code class="language-python">sns.jointplot(x=&quot;Prcp1&quot;, y=&quot;sum&quot;, data=indice_precipitation,kind='reg',
-                   space=0, height=6, ratio=4)
-plt.show()
-
-# kind = 'kde' 
-# kind=&quot;hex&quot;
-# kind=&quot;reg&quot;
-</code></pre>
-
-<p><img src="/img/formation/prec3.png" alt="image0" /></p>
-
+<span style="color:#75715e"># kind = &#39;kde&#39; </span>
+<span style="color:#75715e"># kind=&#34;hex&#34;</span>
+<span style="color:#75715e"># kind=&#34;reg&#34;</span>
+</code></pre></div><p><img src="/img/formation/prec3.png" alt="image0"></p>
 <ul>
-<li><p>graphe bivarié: fonction <b> pairplot () </b>
-<a href="https://seaborn.pydata.org/generated/seaborn.pairplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.pairplot.html</a></p>
-
-<pre><code class="language-python"># Attributes of interest
-cols = ['CWD', 
-    'SDII', 
-    'sum', 
-    'Prcp1', 
-    'mean']
-
-pp = sns.pairplot(indice_precipitation[cols], 
-              height=1.8, aspect=1.2, markers=&quot;+&quot;,
-              plot_kws=dict(edgecolor=&quot;k&quot;, linewidth=0.5),
-              diag_kws=dict(shade=True), # &quot;diag&quot; adjusts/tunes the diagonal plots
-              diag_kind=&quot;kde&quot;) # use &quot;kde&quot; for diagonal plots
-
-fig = pp.fig 
-fig.subplots_adjust(top=0.93, wspace=0.3)
-fig.suptitle('Indice de précipitation Pairwise Plots', 
-          fontsize=14, fontweight='bold')
-plt.show()
-
-
-
-</code></pre></li>
+<li>graphe bivarié: fonction <!-- raw HTML omitted --> pairplot () <!-- raw HTML omitted -->
+<a href="https://seaborn.pydata.org/generated/seaborn.pairplot.html">https://seaborn.pydata.org/generated/seaborn.pairplot.html</a></li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Attributes of interest</span>
+cols <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;CWD&#39;</span>, 
+        <span style="color:#e6db74">&#39;SDII&#39;</span>, 
+        <span style="color:#e6db74">&#39;sum&#39;</span>, 
+        <span style="color:#e6db74">&#39;Prcp1&#39;</span>, 
+        <span style="color:#e6db74">&#39;mean&#39;</span>]
 
-<p><img src="/img/formation/prec4.png" alt="image0" /></p>
+pp <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>pairplot(indice_precipitation[cols], 
+                  height<span style="color:#f92672">=</span><span style="color:#ae81ff">1.8</span>, aspect<span style="color:#f92672">=</span><span style="color:#ae81ff">1.2</span>, markers<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;+&#34;</span>,
+                  plot_kws<span style="color:#f92672">=</span>dict(edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;k&#34;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>),
+                  diag_kws<span style="color:#f92672">=</span>dict(shade<span style="color:#f92672">=</span>True), <span style="color:#75715e"># &#34;diag&#34; adjusts/tunes the diagonal plots</span>
+                  diag_kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kde&#34;</span>) <span style="color:#75715e"># use &#34;kde&#34; for diagonal plots</span>
 
+fig <span style="color:#f92672">=</span> pp<span style="color:#f92672">.</span>fig 
+fig<span style="color:#f92672">.</span>subplots_adjust(top<span style="color:#f92672">=</span><span style="color:#ae81ff">0.93</span>, wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>)
+fig<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#39;Indice de précipitation Pairwise Plots&#39;</span>, 
+              fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+
+
+</code></pre></div><p><img src="/img/formation/prec4.png" alt="image0"></p>
 <ul>
 <li>Matrice de corrélation:
 La bibliothèque Pandas dispose d&rsquo;une méthode pour calculer les corrélations entre chaque colonne d&rsquo;un DataFrame.</li>
 </ul>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html" target="_blank">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html</a></p>
-
-<pre><code class="language-python">indice_precipitation.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>14.0</td>
-      <td>3.0</td>
-      <td>29.032258</td>
-      <td>5.691111</td>
-      <td>55.09</td>
-      <td>1.777097</td>
-      <td>5.691111</td>
-      <td>1961</td>
-      <td>Jan</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>12.0</td>
-      <td>3.0</td>
-      <td>28.571429</td>
-      <td>9.895000</td>
-      <td>80.87</td>
-      <td>2.888214</td>
-      <td>9.895000</td>
-      <td>1961</td>
-      <td>Feb</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>25.806452</td>
-      <td>11.868750</td>
-      <td>97.59</td>
-      <td>3.148065</td>
-      <td>11.868750</td>
-      <td>1961</td>
-      <td>Mar</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>50.000000</td>
-      <td>6.683333</td>
-      <td>102.70</td>
-      <td>3.423333</td>
-      <td>6.683333</td>
-      <td>1961</td>
-      <td>Apr</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>41.935484</td>
-      <td>5.130000</td>
-      <td>70.22</td>
-      <td>2.265161</td>
-      <td>5.130000</td>
-      <td>1961</td>
-      <td>May</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">
-</code></pre>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(indice_precipitation<span style="color:#f92672">.</span>head() , headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>| datetime            |   CDD |   CWD |   Prcp1 |     SDII |    sum |    mean |          |   year | month   |
 |:--------------------|------:|------:|--------:|---------:|-------:|--------:|---------:|-------:|:--------|
 | 1961-01-31 00:00:00 |    14 |     3 | 29.0323 |  5.69111 |  55.09 | 1.7771  |  5.69111 |   1961 | Jan     |
 | 1961-02-28 00:00:00 |    12 |     3 | 28.5714 |  9.895   |  80.87 | 2.88821 |  9.895   |   1961 | Feb     |
@@ -1917,121 +1088,24 @@ print(tabulate(indice_precipitation.head() , headers='keys', tablefmt='pipe'))
 | 1961-04-30 00:00:00 |     4 |     3 | 50      |  6.68333 | 102.7  | 3.42333 |  6.68333 |   1961 | Apr     |
 | 1961-05-31 00:00:00 |     5 |     3 | 41.9355 |  5.13    |  70.22 | 2.26516 |  5.13    |   1961 | May     |
 </code></pre>
-
 <p>Nous supprimons d&rsquo;abord la colonne «année», puis appliquons la méthode .corr ().</p>
-
-<pre><code class="language-python">indice_precipitation2 = indice_precipitation.drop([&quot;year&quot;], axis=1)
-corr_matrix = indice_precipitation2.corr()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation2 <span style="color:#f92672">=</span> indice_precipitation<span style="color:#f92672">.</span>drop([<span style="color:#e6db74">&#34;year&#34;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+corr_matrix <span style="color:#f92672">=</span> indice_precipitation2<span style="color:#f92672">.</span>corr()
 corr_matrix
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>CDD</th>
-      <td>1.000000</td>
-      <td>-0.288579</td>
-      <td>-0.687758</td>
-      <td>0.025358</td>
-      <td>-0.480416</td>
-      <td>-0.481019</td>
-      <td>0.025172</td>
-    </tr>
-    <tr>
-      <th>CWD</th>
-      <td>-0.288579</td>
-      <td>1.000000</td>
-      <td>0.631665</td>
-      <td>-0.040071</td>
-      <td>0.418940</td>
-      <td>0.417954</td>
-      <td>-0.039654</td>
-    </tr>
-    <tr>
-      <th>Prcp1</th>
-      <td>-0.687758</td>
-      <td>0.631665</td>
-      <td>1.000000</td>
-      <td>-0.064514</td>
-      <td>0.661685</td>
-      <td>0.663935</td>
-      <td>-0.064554</td>
-    </tr>
-    <tr>
-      <th>SDII</th>
-      <td>0.025358</td>
-      <td>-0.040071</td>
-      <td>-0.064514</td>
-      <td>1.000000</td>
-      <td>0.659944</td>
-      <td>0.661113</td>
-      <td>0.999642</td>
-    </tr>
-    <tr>
-      <th>sum</th>
-      <td>-0.480416</td>
-      <td>0.418940</td>
-      <td>0.661685</td>
-      <td>0.659944</td>
-      <td>1.000000</td>
-      <td>0.997694</td>
-      <td>0.660287</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>-0.481019</td>
-      <td>0.417954</td>
-      <td>0.663935</td>
-      <td>0.661113</td>
-      <td>0.997694</td>
-      <td>1.000000</td>
-      <td>0.661422</td>
-    </tr>
-    <tr>
-      <th></th>
-      <td>0.025172</td>
-      <td>-0.039654</td>
-      <td>-0.064554</td>
-      <td>0.999642</td>
-      <td>0.660287</td>
-      <td>0.661422</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(corr_matrix, headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>|       |        CDD |        CWD |      Prcp1 |       SDII |       sum |      mean |            |
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(corr_matrix, headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>|       |        CDD |        CWD |      Prcp1 |       SDII |       sum |      mean |            |
 |:------|-----------:|-----------:|-----------:|-----------:|----------:|----------:|-----------:|
 | CDD   |  1         | -0.288579  | -0.687758  |  0.0253577 | -0.480416 | -0.481019 |  0.0251715 |
 | CWD   | -0.288579  |  1         |  0.631665  | -0.0400715 |  0.41894  |  0.417954 | -0.0396542 |
@@ -2041,210 +1115,100 @@ print(tabulate(corr_matrix, headers='keys', tablefmt='pipe'))
 | mean  | -0.481019  |  0.417954  |  0.663935  |  0.661113  |  0.997694 |  1        |  0.661422  |
 |       |  0.0251715 | -0.0396542 | -0.0645538 |  0.999642  |  0.660287 |  0.661422 |  1         |
 </code></pre>
+<p>Nous pouvons appeler la fonction <!-- raw HTML omitted --> .heatmap () <!-- raw HTML omitted --> pour visualiser notre matrice de corrélation et ainsi faciliter nos interprétations.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, (ax) <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">6</span>))
+hm <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>heatmap(corr_matrix, 
+                 ax<span style="color:#f92672">=</span>ax,           <span style="color:#75715e"># Axes in which to draw the plot, otherwise use the currently-active Axes.</span>
+                 cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;coolwarm&#34;</span>, <span style="color:#75715e"># Color Map.</span>
+                 <span style="color:#75715e">#square=True,    # If True, set the Axes aspect to “equal” so each cell will be square-shaped.</span>
+                 annot<span style="color:#f92672">=</span>True, 
+                 fmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.2f&#39;</span>,       <span style="color:#75715e"># String formatting code to use when adding annotations.</span>
+                 <span style="color:#75715e">#annot_kws={&#34;size&#34;: 14},</span>
+                 linewidths<span style="color:#f92672">=.</span><span style="color:#ae81ff">05</span>)
 
-<p>Nous pouvons appeler la fonction <b> .heatmap () </b> pour visualiser notre matrice de corrélation et ainsi faciliter nos interprétations.</p>
-
-<pre><code class="language-python">fig, (ax) = plt.subplots(1, 1, figsize=(10,6))
-hm = sns.heatmap(corr_matrix, 
-                 ax=ax,           # Axes in which to draw the plot, otherwise use the currently-active Axes.
-                 cmap=&quot;coolwarm&quot;, # Color Map.
-                 #square=True,    # If True, set the Axes aspect to “equal” so each cell will be square-shaped.
-                 annot=True, 
-                 fmt='.2f',       # String formatting code to use when adding annotations.
-                 #annot_kws={&quot;size&quot;: 14},
-                 linewidths=.05)
-
-fig.subplots_adjust(top=0.93)
-fig.suptitle('Correlation Matrix: Precipitation Indices Montreal Station', 
-              fontsize=14, 
-              fontweight='bold')
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/prec5.png" alt="image0" /></p>
-
+fig<span style="color:#f92672">.</span>subplots_adjust(top<span style="color:#f92672">=</span><span style="color:#ae81ff">0.93</span>)
+fig<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#39;Correlation Matrix: Precipitation Indices Montreal Station&#39;</span>, 
+              fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>, 
+              fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/prec5.png" alt="image0"></p>
 <h3 id="bonus-ajoutez-des-indices-de-corrélation-avec-la-bibliothèque-scipy">Bonus: ajoutez des indices de corrélation avec la bibliothèque scipy</h3>
-
-<p>Le module <b> stats </b> de la <b> bibliothèque Scipy </b> possède de nombreuses fonctions statistiques.
-<a href="https://docs.scipy.org/doc/scipy/reference/stats.html" target="_blank">https://docs.scipy.org/doc/scipy/reference/stats.html</a></p>
-
-<pre><code class="language-python">def corr_pearson(x, y, **kws):
-    r, p = stats.pearsonr(x, y)
-    p_stars = ''
-    if p &lt;= 0.05:
-        p_stars = '*'
-    if p &lt;= 0.01:
-        p_stars = '**'
-    if p &lt;= 0.001:
-        p_stars = '***'
-   # r, _ = stats.spearmanr(x, y)
-    ax = plt.gca()   
-    pos = (0, .9) 
-    color2='red'                                                                   
-    ax.annotate(&quot;Pearson = {:.2f}&quot;.format(r) + p_stars,
-                xy=pos, xycoords=ax.transAxes, color=color2, fontweight='bold')
+<p>Le module <!-- raw HTML omitted --> stats <!-- raw HTML omitted --> de la <!-- raw HTML omitted --> bibliothèque Scipy <!-- raw HTML omitted --> possède de nombreuses fonctions statistiques.
+<a href="https://docs.scipy.org/doc/scipy/reference/stats.html">https://docs.scipy.org/doc/scipy/reference/stats.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corr_pearson</span>(x, y, <span style="color:#f92672">**</span>kws):
+    r, p <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>pearsonr(x, y)
+    p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.05</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;*&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.01</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;**&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;***&#39;</span>
+   <span style="color:#75715e"># r, _ = stats.spearmanr(x, y)</span>
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>gca()   
+    pos <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">9</span>) 
+    color2<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>                                                                   
+    ax<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Pearson = {:.2f}&#34;</span><span style="color:#f92672">.</span>format(r) <span style="color:#f92672">+</span> p_stars,
+                xy<span style="color:#f92672">=</span>pos, xycoords<span style="color:#f92672">=</span>ax<span style="color:#f92672">.</span>transAxes, color<span style="color:#f92672">=</span>color2, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
     
 
-def corr_spearman(x, y, **kws):
-    r, p = stats.spearmanr(x, y)
-    p_stars = ''
-    if p &lt;= 0.05:
-        p_stars = '*'
-    if p &lt;= 0.01:
-        p_stars = '**'
-    if p &lt;= 0.001:
-        p_stars = '***'
-   # r, _ = stats.spearmanr(x, y)
-    ax = plt.gca()  
-    pos = (0, .6) 
-    color2='darkgreen' 
-    ax.annotate(&quot;Spearman = {:.2f}&quot;.format(r) + p_stars,
-                xy=pos, xycoords=ax.transAxes, color=color2, fontweight='bold')
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corr_spearman</span>(x, y, <span style="color:#f92672">**</span>kws):
+    r, p <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>spearmanr(x, y)
+    p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.05</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;*&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.01</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;**&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;***&#39;</span>
+   <span style="color:#75715e"># r, _ = stats.spearmanr(x, y)</span>
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>gca()  
+    pos <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">6</span>) 
+    color2<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkgreen&#39;</span> 
+    ax<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Spearman = {:.2f}&#34;</span><span style="color:#f92672">.</span>format(r) <span style="color:#f92672">+</span> p_stars,
+                xy<span style="color:#f92672">=</span>pos, xycoords<span style="color:#f92672">=</span>ax<span style="color:#f92672">.</span>transAxes, color<span style="color:#f92672">=</span>color2, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
 
-def corr_kendall(x, y, **kws):
-    r, p = stats.kendalltau(x, y)
-    p_stars = ''
-    if p &lt;= 0.05:
-        p_stars = '*'
-    if p &lt;= 0.01:
-        p_stars = '**'
-    if p &lt;= 0.001:
-        p_stars = '***'
-   # r, _ = stats.spearmanr(x, y)
-    ax = plt.gca()   
-    pos = (0, .3) 
-    color2='darkorange' 
-    ax.annotate(&quot;Kendall = {:.2f}&quot;.format(r) + p_stars,
-                xy=pos, xycoords=ax.transAxes, color=color2, fontweight='bold')
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corr_kendall</span>(x, y, <span style="color:#f92672">**</span>kws):
+    r, p <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>kendalltau(x, y)
+    p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.05</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;*&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.01</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;**&#39;</span>
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>:
+        p_stars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;***&#39;</span>
+   <span style="color:#75715e"># r, _ = stats.spearmanr(x, y)</span>
+    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>gca()   
+    pos <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">3</span>) 
+    color2<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkorange&#39;</span> 
+    ax<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Kendall = {:.2f}&#34;</span><span style="color:#f92672">.</span>format(r) <span style="color:#f92672">+</span> p_stars,
+                xy<span style="color:#f92672">=</span>pos, xycoords<span style="color:#f92672">=</span>ax<span style="color:#f92672">.</span>transAxes, color<span style="color:#f92672">=</span>color2, fontweight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bold&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_precipitation<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indice_month<span style="color:#f92672">=</span>indice_precipitation[[<span style="color:#e6db74">&#34;CWD&#34;</span>, <span style="color:#e6db74">&#34;SDII&#34;</span>, <span style="color:#e6db74">&#34;sum&#34;</span>, <span style="color:#e6db74">&#34;Prcp1&#34;</span>]]<span style="color:#f92672">.</span>loc[(indice_precipitation[<span style="color:#e6db74">&#34;month&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;Jan&#34;</span>)]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> scipy <span style="color:#f92672">import</span> stats
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns; sns<span style="color:#f92672">.</span>set()
 
-<pre><code class="language-python">indice_precipitation.head()
-</code></pre>
+g <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>PairGrid(indice_month[[<span style="color:#e6db74">&#34;CWD&#34;</span>, <span style="color:#e6db74">&#34;SDII&#34;</span>, <span style="color:#e6db74">&#34;sum&#34;</span>, <span style="color:#e6db74">&#34;Prcp1&#34;</span>]]) 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CDD</th>
-      <th>CWD</th>
-      <th>Prcp1</th>
-      <th>SDII</th>
-      <th>sum</th>
-      <th>mean</th>
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1961-01-31</th>
-      <td>14.0</td>
-      <td>3.0</td>
-      <td>29.032258</td>
-      <td>5.691111</td>
-      <td>55.09</td>
-      <td>1.777097</td>
-      <td>5.691111</td>
-      <td>1961</td>
-      <td>Jan</td>
-    </tr>
-    <tr>
-      <th>1961-02-28</th>
-      <td>12.0</td>
-      <td>3.0</td>
-      <td>28.571429</td>
-      <td>9.895000</td>
-      <td>80.87</td>
-      <td>2.888214</td>
-      <td>9.895000</td>
-      <td>1961</td>
-      <td>Feb</td>
-    </tr>
-    <tr>
-      <th>1961-03-31</th>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>25.806452</td>
-      <td>11.868750</td>
-      <td>97.59</td>
-      <td>3.148065</td>
-      <td>11.868750</td>
-      <td>1961</td>
-      <td>Mar</td>
-    </tr>
-    <tr>
-      <th>1961-04-30</th>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>50.000000</td>
-      <td>6.683333</td>
-      <td>102.70</td>
-      <td>3.423333</td>
-      <td>6.683333</td>
-      <td>1961</td>
-      <td>Apr</td>
-    </tr>
-    <tr>
-      <th>1961-05-31</th>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>41.935484</td>
-      <td>5.130000</td>
-      <td>70.22</td>
-      <td>2.265161</td>
-      <td>5.130000</td>
-      <td>1961</td>
-      <td>May</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">indice_month=indice_precipitation[[&quot;CWD&quot;, &quot;SDII&quot;, &quot;sum&quot;, &quot;Prcp1&quot;]].loc[(indice_precipitation[&quot;month&quot;]==&quot;Jan&quot;)]
-</code></pre>
-
-<pre><code class="language-python">from scipy import stats
-import seaborn as sns; sns.set()
-
-g = sns.PairGrid(indice_month[[&quot;CWD&quot;, &quot;SDII&quot;, &quot;sum&quot;, &quot;Prcp1&quot;]]) 
-
-g.map_upper(corr_pearson) 
-g.map_upper(corr_spearman) 
-g.map_upper(corr_kendall) 
-g.map_lower(sns.regplot) 
-g.map_diag(plt.hist) 
-g.set(alpha=0.5)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/prec6.png" alt="image0" /></p>
+g<span style="color:#f92672">.</span>map_upper(corr_pearson) 
+g<span style="color:#f92672">.</span>map_upper(corr_spearman) 
+g<span style="color:#f92672">.</span>map_upper(corr_kendall) 
+g<span style="color:#f92672">.</span>map_lower(sns<span style="color:#f92672">.</span>regplot) 
+g<span style="color:#f92672">.</span>map_diag(plt<span style="color:#f92672">.</span>hist) 
+g<span style="color:#f92672">.</span>set(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/prec6.png" alt="image0"></p>
 
           </div>
 
@@ -2284,7 +1248,7 @@ plt.show()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/Project2-ECCC_Precipitation.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5cProject2-ECCC_Precipitation.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

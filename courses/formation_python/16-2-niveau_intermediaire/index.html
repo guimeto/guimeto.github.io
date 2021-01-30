@@ -28,8 +28,7 @@
   
     
   
-  <meta name="description" content="- 1: Additionner les chiffres d&rsquo;un nombre 
-nombre = 209812 list(str(nombre)) total = 0 for i in list(str(nombre)): total = total &#43; int(i) print(total)  22  nombre = 209812 somme = sum([int(i) for i in str(nombre)]) print(somme)  22  POINTS IMPORTANTS À RETENIR
+  <meta name="description" content="- 1: Additionner les chiffres d&rsquo;un nombre nombre = 209812 list(str(nombre)) total = 0 for i in list(str(nombre)): total = total &#43; int(i) print(total) 22 nombre = 209812 somme = sum([int(i) for i in str(nombre)]) print(somme) 22 POINTS IMPORTANTS À RETENIR
 Pour boucler sur chaque chiffre d&rsquo;un nombre, on convertit le nombre en chaîne de caractère.
 Pour additionner ensemble tous les nombres contenus dans une liste, on utilise la fonction sum.">
 
@@ -118,8 +117,7 @@ Pour additionner ensemble tous les nombres contenus dans une liste, on utilise l
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/16-2-niveau_intermediaire/">
   <meta property="og:title" content="16.2- Exercices Python - Niveau intermédiaire | GDueymes">
-  <meta property="og:description" content="- 1: Additionner les chiffres d&rsquo;un nombre 
-nombre = 209812 list(str(nombre)) total = 0 for i in list(str(nombre)): total = total &#43; int(i) print(total)  22  nombre = 209812 somme = sum([int(i) for i in str(nombre)]) print(somme)  22  POINTS IMPORTANTS À RETENIR
+  <meta property="og:description" content="- 1: Additionner les chiffres d&rsquo;un nombre nombre = 209812 list(str(nombre)) total = 0 for i in list(str(nombre)): total = total &#43; int(i) print(total) 22 nombre = 209812 somme = sum([int(i) for i in str(nombre)]) print(somme) 22 POINTS IMPORTANTS À RETENIR
 Pour boucler sur chaque chiffre d&rsquo;un nombre, on convertit le nombre en chaîne de caractère.
 Pour additionner ensemble tous les nombres contenus dans une liste, on utilise la fonction sum."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -582,7 +580,7 @@ Pour additionner ensemble tous les nombres contenus dans une liste, on utilise l
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -596,178 +594,118 @@ Pour additionner ensemble tous les nombres contenus dans une liste, on utilise l
           <h1>16.2- Exercices Python - Niveau intermédiaire</h1>
 
           <div class="article-style">
-            <p><b> - 1: Additionner les chiffres d&rsquo;un nombre </b></p>
-
-<pre><code class="language-python">nombre = 209812
+            <p><!-- raw HTML omitted --> - 1: Additionner les chiffres d&rsquo;un nombre <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre <span style="color:#f92672">=</span> <span style="color:#ae81ff">209812</span>
 list(str(nombre))
-total = 0
-for i in list(str(nombre)):
-    total = total + int(i)
-print(total)
+total <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> list(str(nombre)):
+    total <span style="color:#f92672">=</span> total <span style="color:#f92672">+</span> int(i)
+<span style="color:#66d9ef">print</span>(total)
+</code></pre></div><pre><code>22
 </code></pre>
-
-<pre><code>22
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre <span style="color:#f92672">=</span> <span style="color:#ae81ff">209812</span>
+somme <span style="color:#f92672">=</span> sum([int(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> str(nombre)])
+<span style="color:#66d9ef">print</span>(somme)
+</code></pre></div><pre><code>22
 </code></pre>
-
-<pre><code class="language-python">nombre = 209812
-somme = sum([int(i) for i in str(nombre)])
-print(somme)
-</code></pre>
-
-<pre><code>22
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour boucler sur chaque chiffre d&rsquo;un nombre, on convertit le nombre en chaîne de caractère.</p>
-
 <p>Pour additionner ensemble tous les nombres contenus dans une liste, on utilise la fonction sum.</p>
-
-<p><b> - 2: Remplacer un élément d&rsquo;une liste </b></p>
-
-<pre><code class="language-python">liste = [&quot;Pierre&quot;, &quot;Marie&quot;, &quot;Julie&quot;, &quot;Adrien&quot;, &quot;Julie&quot;]
+<p><!-- raw HTML omitted --> - 2: Remplacer un élément d&rsquo;une liste <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">liste <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Pierre&#34;</span>, <span style="color:#e6db74">&#34;Marie&#34;</span>, <span style="color:#e6db74">&#34;Julie&#34;</span>, <span style="color:#e6db74">&#34;Adrien&#34;</span>, <span style="color:#e6db74">&#34;Julie&#34;</span>]
  
-nom_a_chercher = &quot;Julie&quot;
-nouveau_nom = &quot;Julien&quot;
+nom_a_chercher <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Julie&#34;</span>
+nouveau_nom <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Julien&#34;</span>
  
-liste = [x.replace(nom_a_chercher, nouveau_nom) for x in liste]
-print(liste)
+liste <span style="color:#f92672">=</span> [x<span style="color:#f92672">.</span>replace(nom_a_chercher, nouveau_nom) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> liste]
+<span style="color:#66d9ef">print</span>(liste)
+</code></pre></div><pre><code>['Pierre', 'Marie', 'Julien', 'Adrien', 'Julien']
 </code></pre>
-
-<pre><code>['Pierre', 'Marie', 'Julien', 'Adrien', 'Julien']
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour remplacer un mot par un autre, on utilise la fonction replace.</p>
-
-<p><b> - 3: Enlever les doublons d&rsquo;une liste </b></p>
-
-<pre><code class="language-python">nombres = [1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7, 8, 9, 10]
+<p><!-- raw HTML omitted --> - 3: Enlever les doublons d&rsquo;une liste <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombres <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>]
  
-nombres_sans_duplicats = []
+nombres_sans_duplicats <span style="color:#f92672">=</span> []
  
-for i in nombres:
-    if i not in nombres_sans_duplicats:
-        nombres_sans_duplicats.append(i)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> nombres:
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> nombres_sans_duplicats:
+        nombres_sans_duplicats<span style="color:#f92672">.</span>append(i)
  
-print(nombres_sans_duplicats)
+<span style="color:#66d9ef">print</span>(nombres_sans_duplicats)
+</code></pre></div><pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 </code></pre>
-
-<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour vérifier si un élément est déjà présent ou non dans une liste, on utilise la syntaxe i in liste. Si le nombre est déjà dans la liste, cette syntaxe retournera True, si non, False.</p>
-
-<p><b> - 4: Ajouter des éléments à un dictionnaire </b></p>
-
-<pre><code class="language-python">employes = {}
+<p><!-- raw HTML omitted --> - 4: Ajouter des éléments à un dictionnaire <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">employes <span style="color:#f92672">=</span> {}
  
-liste = [10, 2329, 5, &quot;Pierre&quot;, 203, &quot;Marie&quot;, 867, &quot;Adrien&quot;]
+liste <span style="color:#f92672">=</span> [<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2329</span>, <span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#34;Pierre&#34;</span>, <span style="color:#ae81ff">203</span>, <span style="color:#e6db74">&#34;Marie&#34;</span>, <span style="color:#ae81ff">867</span>, <span style="color:#e6db74">&#34;Adrien&#34;</span>]
  
-i = 1
+i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
  
-for element in liste:
-    if not str(element).isdigit():
-        employes[&quot;id-{:02d}&quot;.format(i)] = element
-        i += 1
+<span style="color:#66d9ef">for</span> element <span style="color:#f92672">in</span> liste:
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> str(element)<span style="color:#f92672">.</span>isdigit():
+        employes[<span style="color:#e6db74">&#34;id-{:02d}&#34;</span><span style="color:#f92672">.</span>format(i)] <span style="color:#f92672">=</span> element
+        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
  
-print(employes)
+<span style="color:#66d9ef">print</span>(employes)
+</code></pre></div><pre><code>{'id-01': 'Pierre', 'id-02': 'Marie', 'id-03': 'Adrien'}
 </code></pre>
-
-<pre><code>{'id-01': 'Pierre', 'id-02': 'Marie', 'id-03': 'Adrien'}
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour vérifier si une chaîne de caractère ne contient que des nombres, on utilise la fonction isdigit.</p>
-
 <p>Pour formatter un nombre pour qu&rsquo;il contienne toujours 2 chiffres, on utilise la syntaxe 02d à l&rsquo;intérieur d&rsquo;accolades utilisées pour la fonction format.</p>
-
-<p><b> - 5: Créer un dictionnaire avec les lettres de l&rsquo;alphabet </b></p>
-
-<pre><code class="language-python">import string
+<p><!-- raw HTML omitted --> - 5: Créer un dictionnaire avec les lettres de l&rsquo;alphabet <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
  
-alphabet = string.ascii_lowercase
-indices = range(1, len(alphabet) + 1)
-liste_zip = zip(range(1, len(alphabet) + 1), alphabet)
-resultat = dict(liste_zip)
+alphabet <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_lowercase
+indices <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">1</span>, len(alphabet) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+liste_zip <span style="color:#f92672">=</span> zip(range(<span style="color:#ae81ff">1</span>, len(alphabet) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), alphabet)
+resultat <span style="color:#f92672">=</span> dict(liste_zip)
  
-print(resultat)
+<span style="color:#66d9ef">print</span>(resultat)
+</code></pre></div><pre><code>{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
 </code></pre>
-
-<pre><code>{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
-</code></pre>
-
 <p>EXPLICATION</p>
-
 <p>Dans cet exercice, nous utilisons la fonction zip, pour construire un dictionnaire comprenant les lettres de l&rsquo;alphabet et leur position dans l&rsquo;alphabet.</p>
-
 <p>Pour commencer, nous récupérons toutes les lettres de l&rsquo;alphabet en minuscule, grâce au module string :</p>
-
-<pre><code class="language-python">alphabet = string.ascii_lowercase
-print(alphabet)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">alphabet <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_lowercase
+<span style="color:#66d9ef">print</span>(alphabet)
+</code></pre></div><pre><code>abcdefghijklmnopqrstuvwxyz
 </code></pre>
-
-<pre><code>abcdefghijklmnopqrstuvwxyz
-</code></pre>
-
 <p>Ensuite, on créé une liste qui contient les nombres de 1 à la longueur de l&rsquo;alphabet, grâce à la fonction range et la fonction len :</p>
-
-<pre><code class="language-python">indices = range(1, len(alphabet) + 1)
-print(indices)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indices <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">1</span>, len(alphabet) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">print</span>(indices)
+</code></pre></div><pre><code>range(1, 27)
 </code></pre>
-
-<pre><code>range(1, 27)
-</code></pre>
-
 <p>On utilise ensuite la fonction zip, qui permet de créer une liste de tuples à partir de deux listes (la liste de nombres et les lettres de l&rsquo;alphabet) :</p>
-
-<pre><code class="language-python">liste_zip = zip(range(1, len(alphabet) + 1), alphabet)
-</code></pre>
-
-<p>Il ne nous reste plus qu&rsquo;à utiliser la fonction dict pour convertir cette liste de tuple en dictionnaire.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">liste_zip <span style="color:#f92672">=</span> zip(range(<span style="color:#ae81ff">1</span>, len(alphabet) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), alphabet)
+</code></pre></div><p>Il ne nous reste plus qu&rsquo;à utiliser la fonction dict pour convertir cette liste de tuple en dictionnaire.
 En effet, vous pouvez passer une liste contenant des tuples contenant deux éléments et la fonction dict va utiliser le premier élément comme clé et le deuxième élément comme valeur :</p>
-
-<pre><code class="language-python">resultat = dict(liste_zip)
-print(resultat)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resultat <span style="color:#f92672">=</span> dict(liste_zip)
+<span style="color:#66d9ef">print</span>(resultat)
+</code></pre></div><pre><code>{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
 </code></pre>
-
-<pre><code>{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour créer une liste de tuple à partir de deux listes, on utilise la fonction zip.</p>
-
 <p>Pour créer un dictionnaire à partir d&rsquo;une liste de tuple, on peut utiliser la fonction dict.</p>
-
-<p><b> - 6: Recréer la fonction len </b></p>
-
-<pre><code class="language-python">def longueur(variable):
-    total = 0
-    for i in list(str(variable)):
-        total = total + 1
-    return(total)
+<p><!-- raw HTML omitted --> - 6: Recréer la fonction len <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">longueur</span>(variable):
+    total <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> list(str(variable)):
+        total <span style="color:#f92672">=</span> total <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span>(total)
     
-print(longueur(&quot;bonjour&quot;))
+<span style="color:#66d9ef">print</span>(longueur(<span style="color:#e6db74">&#34;bonjour&#34;</span>))
+</code></pre></div><pre><code>7
 </code></pre>
-
-<pre><code>7
-</code></pre>
-
-<p><b> - 7: Créer un motif avec des print </b></p>
-
-<pre><code class="language-python">n = 8
-symbole = &quot;*&quot;
-nombres = list(range(1, n+1)) + list(range(n-1, 0, -1))
-for i in nombres:
-    print(symbole*i)
-</code></pre>
-
-<pre><code>*
+<p><!-- raw HTML omitted --> - 7: Créer un motif avec des print <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+symbole <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*&#34;</span>
+nombres <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1</span>, n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)) <span style="color:#f92672">+</span> list(range(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> nombres:
+    <span style="color:#66d9ef">print</span>(symbole<span style="color:#f92672">*</span>i)
+</code></pre></div><pre><code>*
 **
 ***
 ****
@@ -783,17 +721,14 @@ for i in nombres:
 **
 *
 </code></pre>
-
-<pre><code class="language-python">symbole = &quot;$&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">symbole <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;$&#34;</span>
  
-taille = 10
+taille <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
  
-for i in range(1, taille + 1):
-    espaces = &quot; &quot; * (taille - i)
-    print(espaces + (symbole + &quot; &quot;) * i)
-</code></pre>
-
-<pre><code>         $ 
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, taille <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+    espaces <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">*</span> (taille <span style="color:#f92672">-</span> i)
+    <span style="color:#66d9ef">print</span>(espaces <span style="color:#f92672">+</span> (symbole <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span>) <span style="color:#f92672">*</span> i)
+</code></pre></div><pre><code>         $ 
         $ $ 
        $ $ $ 
       $ $ $ $ 
@@ -804,12 +739,9 @@ for i in range(1, taille + 1):
  $ $ $ $ $ $ $ $ $ 
 $ $ $ $ $ $ $ $ $ $ 
 </code></pre>
-
-<pre><code class="language-python">for i in range(1,taille+1):
-    print(&quot;{:^{}}&quot;.format((symbole+&quot; &quot;)*i, taille*2))
-</code></pre>
-
-<pre><code>         $          
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,taille<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{:^{}}&#34;</span><span style="color:#f92672">.</span>format((symbole<span style="color:#f92672">+</span><span style="color:#e6db74">&#34; &#34;</span>)<span style="color:#f92672">*</span>i, taille<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>))
+</code></pre></div><pre><code>         $          
         $ $         
        $ $ $        
       $ $ $ $       
@@ -820,26 +752,21 @@ $ $ $ $ $ $ $ $ $ $
  $ $ $ $ $ $ $ $ $  
 $ $ $ $ $ $ $ $ $ $ 
 </code></pre>
-
-<p><b> - 8: Formater un texte avec la fonction format </b></p>
-
-<p><a href="https://www.programiz.com/python-programming/methods/string/format" target="_blank">https://www.programiz.com/python-programming/methods/string/format</a></p>
-
-<pre><code class="language-python">texte = &quot;Bonjour Udemy&quot;
-longueur = len(texte)
+<p><!-- raw HTML omitted --> - 8: Formater un texte avec la fonction format <!-- raw HTML omitted --></p>
+<p><a href="https://www.programiz.com/python-programming/methods/string/format">https://www.programiz.com/python-programming/methods/string/format</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">texte <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Bonjour Udemy&#34;</span>
+longueur <span style="color:#f92672">=</span> len(texte)
  
-symbole1 = &quot;-&quot;
-symbole2 = &quot;|&quot;
+symbole1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>
+symbole2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;|&#34;</span>
  
-print(symbole1*longueur)
+<span style="color:#66d9ef">print</span>(symbole1<span style="color:#f92672">*</span>longueur)
  
-for lettre in texte:
-    print(&quot;{0}{1:^{2}}{0}&quot;.format(symbole2, lettre, longueur - 2))
+<span style="color:#66d9ef">for</span> lettre <span style="color:#f92672">in</span> texte:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{0}{1:^{2}}{0}&#34;</span><span style="color:#f92672">.</span>format(symbole2, lettre, longueur <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>))
  
-print(symbole1*longueur)
-</code></pre>
-
-<pre><code>-------------
+<span style="color:#66d9ef">print</span>(symbole1<span style="color:#f92672">*</span>longueur)
+</code></pre></div><pre><code>-------------
 |     B     |
 |     o     |
 |     n     |
@@ -855,757 +782,554 @@ print(symbole1*longueur)
 |     y     |
 -------------
 </code></pre>
-
 <p>Nous utilisons toute la puissance que nous permet la méthode format avec la syntaxe suivante :</p>
-
-<pre><code class="language-python">print(&quot;{0}{1:^{2}}{0}&quot;.format(symbole2, lettre, longueur - 2))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{0}{1:^{2}}{0}&#34;</span><span style="color:#f92672">.</span>format(symbole2, lettre, longueur <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>))
+</code></pre></div><pre><code>|     y     |
 </code></pre>
-
-<pre><code>|     y     |
-</code></pre>
-
 <p>Tout d&rsquo;abord, nous définissons deux balises au début et à la fin de la chaîne de caractère, représentées par les accolades entourant le 0 : {0}</p>
-
 <p>Cela nous permet d&rsquo;afficher la symbole 2 au début et à la fin.</p>
-
 <p>Puis, nous utilisons la syntaxe suivante : {1:^{2}}</p>
-
 <p>Le 1 signifie que l&rsquo;on insère à l&rsquo;intérieur de cette accolade le 2e argument passé à la méthode format (la variable &lsquo;lettre&rsquo;, donc chaque lettre de notre variable texte, récupérée grâce à la boucle for).</p>
-
 <p>La deuxième partie, avec les deux points et l&rsquo;accent circonflexe, signifie que l&rsquo;on veut ajouter un &lsquo;padding&rsquo; avant et après cette lettre : en gros, python va ajouter autant d&rsquo;espaces que nécessaire avant et après la variable que l&rsquo;on insère dans l&rsquo;accolade, afin que le nombre total de caractère soit égal au nombre passé.
 Ce nombre, on lui passe grâce à l&rsquo;accolade qui contient le 2, signifiant que l&rsquo;on va passer ce nombre comme 3e argument à la méthode format. On passe comme nombre &lsquo;longueur - 2&rsquo;, donc la longueur du texte, minus les 2 symboles que l&rsquo;on place au début et à la fin de la chaîne de caractère (rappelez-vous, les accolades avec le 0) :</p>
-
-<pre><code class="language-python">print(&quot;{0}{1:^{2}}{0}&quot;.format(symbole2, lettre, longueur - 2))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{0}{1:^{2}}{0}&#34;</span><span style="color:#f92672">.</span>format(symbole2, lettre, longueur <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>))
+</code></pre></div><pre><code>|     y     |
 </code></pre>
-
-<pre><code>|     y     |
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Vous pouvez afficher plusieurs fois le même élément dans une chaîne de caractère avec la méthode format, en utilisant plusieurs fois le même indice à l&rsquo;intérieur des accolades.
 Pour faire en sorte qu&rsquo;une chaîne de caractère occupe un nombre précis de caractère, vous pouvez la &lsquo;padder&rsquo; avec des espaces, en utilisant l&rsquo;accent circonflexe à l&rsquo;intérieur de votre chaîne de caractère et la méthode format.</p>
-
-<p><b> - 9: Ajouter un séparateur de milliers à un nombre </b></p>
-
-<pre><code class="language-python">nombre = 52039480394023
-def ajout_separateur(nombre):
-    nombre = str(nombre)[::-1]
-    resultat = &quot;&quot;
+<p><!-- raw HTML omitted --> - 9: Ajouter un séparateur de milliers à un nombre <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre <span style="color:#f92672">=</span> <span style="color:#ae81ff">52039480394023</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ajout_separateur</span>(nombre):
+    nombre <span style="color:#f92672">=</span> str(nombre)[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+    resultat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
  
-    for i, chiffre in enumerate(nombre, 1):
-        chiffre_formatte = chiffre + &quot;,&quot; if i % 3 == 0 and i != len(nombre) else chiffre
-        #print(chiffre_formatte)
-        resultat += chiffre_formatte
+    <span style="color:#66d9ef">for</span> i, chiffre <span style="color:#f92672">in</span> enumerate(nombre, <span style="color:#ae81ff">1</span>):
+        chiffre_formatte <span style="color:#f92672">=</span> chiffre <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> i <span style="color:#f92672">!=</span> len(nombre) <span style="color:#66d9ef">else</span> chiffre
+        <span style="color:#75715e">#print(chiffre_formatte)</span>
+        resultat <span style="color:#f92672">+=</span> chiffre_formatte
  
-    return resultat[::-1]
+    <span style="color:#66d9ef">return</span> resultat[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
  
-print(ajout_separateur(nombre))
+<span style="color:#66d9ef">print</span>(ajout_separateur(nombre))
+</code></pre></div><pre><code>52,039,480,394,023
 </code></pre>
-
-<pre><code>52,039,480,394,023
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour inverser une chaîne de caractère, on peut utiliser la syntaxe [::-1]</p>
-
 <p>On peut passer un deuxième argument à la fonction enumerate pour commencer à un indice autre que 0.</p>
-
 <p>L&rsquo;opérateur modulo permet de réaliser une opération tous les x itérations (car n % n est égal à 0).</p>
+<p><!-- raw HTML omitted --> - 10: Calculer l&rsquo;année de naissance à partir d&rsquo;un âge donné <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+age <span style="color:#f92672">=</span> <span style="color:#ae81ff">25</span>
+mois_de_naissance <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
 
-<p><b> - 10: Calculer l&rsquo;année de naissance à partir d&rsquo;un âge donné </b></p>
+<span style="color:#66d9ef">if</span> datetime<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>month <span style="color:#f92672">&lt;</span> mois_de_naissance:
+    year <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>year <span style="color:#f92672">-</span> age) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> 
+<span style="color:#66d9ef">else</span>:
+    year <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>year <span style="color:#f92672">-</span> age)
+<span style="color:#66d9ef">print</span>(year)
 
-<pre><code class="language-python">from datetime import datetime
-age = 25
-mois_de_naissance = 10
-
-if datetime.today().month &lt; mois_de_naissance:
-    year = (datetime.today().year - age) - 1 
-else:
-    year = (datetime.today().year - age)
-print(year)
-
+</code></pre></div><pre><code>1994
 </code></pre>
-
-<pre><code>1994
-</code></pre>
-
-<pre><code class="language-python">from datetime import datetime
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
  
-age = 25
-mois_de_naissance = 10
+age <span style="color:#f92672">=</span> <span style="color:#ae81ff">25</span>
+mois_de_naissance <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
  
-annee_actuelle = datetime.today().year
-mois_actuel = datetime.today().month
+annee_actuelle <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>year
+mois_actuel <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>month
  
-resultat = annee_actuelle - age - (1 if mois_de_naissance &gt; mois_actuel else 0)
-print(resultat)
+resultat <span style="color:#f92672">=</span> annee_actuelle <span style="color:#f92672">-</span> age <span style="color:#f92672">-</span> (<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> mois_de_naissance <span style="color:#f92672">&gt;</span> mois_actuel <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>)
+<span style="color:#66d9ef">print</span>(resultat)
+</code></pre></div><pre><code>1994
 </code></pre>
+<p><!-- raw HTML omitted --> - 11: Calculer la somme des nombres entre deux nombres <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">somme</span>(a, b):
+    result <span style="color:#f92672">=</span> [] 
+    i <span style="color:#f92672">=</span> a 
+    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;=</span> b:
+        result<span style="color:#f92672">.</span>append(i) 
+        i <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> sum(result)
 
-<pre><code>1994
+<span style="color:#66d9ef">print</span>(somme(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>))
+
+</code></pre></div><pre><code>20
 </code></pre>
-
-<p><b> - 11: Calculer la somme des nombres entre deux nombres </b></p>
-
-<pre><code class="language-python">def somme(a, b):
-    result = [] 
-    i = a 
-    while i &lt;= b:
-        result.append(i) 
-        i +=1
-    return sum(result)
-
-print(somme(2,6))
-
-</code></pre>
-
-<pre><code>20
-</code></pre>
-
-<pre><code class="language-python">def somme(a, b):
-    return sum(range(min(a, b), max(a, b) + 1))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">somme</span>(a, b):
+    <span style="color:#66d9ef">return</span> sum(range(min(a, b), max(a, b) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
  
-print(somme(2, 6))
+<span style="color:#66d9ef">print</span>(somme(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>))
+</code></pre></div><pre><code>20
 </code></pre>
-
-<pre><code>20
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>La fonction range retourne une liste vide si le premier nombre est plus grand que le second.
 Pour récupérer le nombre le plus petit ou le plus grand entre plusieurs nombres, on utilise les fonctions min et max.
 La fonction sum permet d&rsquo;additionner une liste de nombres.</p>
+<p><!-- raw HTML omitted --> - 12: Trier une liste d&rsquo;employés par rapport à leur  position dans l&rsquo;alphabet <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
 
-<p><b> - 12: Trier une liste d&rsquo;employés par rapport à leur  position dans l&rsquo;alphabet </b></p>
+employes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Pierre&#34;</span>,<span style="color:#e6db74">&#34;Marie&#34;</span>,<span style="color:#e6db74">&#34;Julien&#34;</span>,<span style="color:#e6db74">&#34;Astrid&#34;</span>,<span style="color:#e6db74">&#34;Zoé&#34;</span>]
+alphabet <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_lowercase
 
-<pre><code class="language-python">import string
-
-employes = [&quot;Pierre&quot;,&quot;Marie&quot;,&quot;Julien&quot;,&quot;Astrid&quot;,&quot;Zoé&quot;]
-alphabet = string.ascii_lowercase
-
-list1 = list(alphabet)[0:(int(len(alphabet)/2))]
-list2 = list(alphabet)[(int(len(alphabet)/2)):-1]
-employe1 = []
-employe2 = []
-for employe in employes: 
-    if employe[0].lower().split()[0][0] in list1:
-        employe1.append(employe)
-    else:
-        employe2.append(employe)
+list1 <span style="color:#f92672">=</span> list(alphabet)[<span style="color:#ae81ff">0</span>:(int(len(alphabet)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>))]
+list2 <span style="color:#f92672">=</span> list(alphabet)[(int(len(alphabet)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)):<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+employe1 <span style="color:#f92672">=</span> []
+employe2 <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> employe <span style="color:#f92672">in</span> employes: 
+    <span style="color:#66d9ef">if</span> employe[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>lower()<span style="color:#f92672">.</span>split()[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">in</span> list1:
+        employe1<span style="color:#f92672">.</span>append(employe)
+    <span style="color:#66d9ef">else</span>:
+        employe2<span style="color:#f92672">.</span>append(employe)
         
-print('Employés de A à M: ' + ' , '.join(employe1))
-print('Employés de N à Z: ' + ' , '.join(employe2))
-</code></pre>
-
-<pre><code>Employés de A à M: Marie , Julien , Astrid
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Employés de A à M: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; , &#39;</span><span style="color:#f92672">.</span>join(employe1))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Employés de N à Z: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; , &#39;</span><span style="color:#f92672">.</span>join(employe2))
+</code></pre></div><pre><code>Employés de A à M: Marie , Julien , Astrid
 Employés de N à Z: Pierre , Zoé
 </code></pre>
-
-<pre><code class="language-python">import string
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
  
-employes = [&quot;Pierre&quot;, &quot;Marie&quot;, &quot;Julien&quot;, &quot;Astrid&quot;, &quot;Zoé&quot;]
+employes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Pierre&#34;</span>, <span style="color:#e6db74">&#34;Marie&#34;</span>, <span style="color:#e6db74">&#34;Julien&#34;</span>, <span style="color:#e6db74">&#34;Astrid&#34;</span>, <span style="color:#e6db74">&#34;Zoé&#34;</span>]
  
-alphabet = string.ascii_uppercase
-milieu = int(len(alphabet) / 2)
-alphabet_01, alphabet_02 = alphabet[:milieu], alphabet[milieu:]
+alphabet <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_uppercase
+milieu <span style="color:#f92672">=</span> int(len(alphabet) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)
+alphabet_01, alphabet_02 <span style="color:#f92672">=</span> alphabet[:milieu], alphabet[milieu:]
  
-employes_a_m = []
-employes_n_z = []
+employes_a_m <span style="color:#f92672">=</span> []
+employes_n_z <span style="color:#f92672">=</span> []
  
-for employe in employes:
-    premiere_lettre = employe[0].lower()
-    if premiere_lettre in alphabet_01:
-        employes_a_m.append(employe)
-    elif premiere_lettre in alphabet_02:
-        employes_n_z.append(employe)
+<span style="color:#66d9ef">for</span> employe <span style="color:#f92672">in</span> employes:
+    premiere_lettre <span style="color:#f92672">=</span> employe[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>lower()
+    <span style="color:#66d9ef">if</span> premiere_lettre <span style="color:#f92672">in</span> alphabet_01:
+        employes_a_m<span style="color:#f92672">.</span>append(employe)
+    <span style="color:#66d9ef">elif</span> premiere_lettre <span style="color:#f92672">in</span> alphabet_02:
+        employes_n_z<span style="color:#f92672">.</span>append(employe)
         
-print(&quot;Employés de A à M:&quot;, &quot;, &quot;.join(sorted(employes_a_m)))
-print(&quot;Employés de N à Z:&quot;, &quot;, &quot;.join(sorted(employes_n_z)))
-</code></pre>
-
-<pre><code>Employés de A à M: 
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Employés de A à M:&#34;</span>, <span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(sorted(employes_a_m)))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Employés de N à Z:&#34;</span>, <span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(sorted(employes_n_z)))
+</code></pre></div><pre><code>Employés de A à M: 
 Employés de N à Z: 
 </code></pre>
-
-<pre><code class="language-python">import string
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
  
-employes = [&quot;Pierre&quot;, &quot;Marie&quot;, &quot;Julien&quot;, &quot;Astrid&quot;, &quot;Zoé&quot;]
+employes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Pierre&#34;</span>, <span style="color:#e6db74">&#34;Marie&#34;</span>, <span style="color:#e6db74">&#34;Julien&#34;</span>, <span style="color:#e6db74">&#34;Astrid&#34;</span>, <span style="color:#e6db74">&#34;Zoé&#34;</span>]
  
-alphabet = string.ascii_lowercase
-employes_a_m = [e for e in employes if e[0].lower() in alphabet[:13]]
-employes_n_z = [e for e in employes if e[0].lower() in alphabet[13:]]
+alphabet <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_lowercase
+employes_a_m <span style="color:#f92672">=</span> [e <span style="color:#66d9ef">for</span> e <span style="color:#f92672">in</span> employes <span style="color:#66d9ef">if</span> e[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>lower() <span style="color:#f92672">in</span> alphabet[:<span style="color:#ae81ff">13</span>]]
+employes_n_z <span style="color:#f92672">=</span> [e <span style="color:#66d9ef">for</span> e <span style="color:#f92672">in</span> employes <span style="color:#66d9ef">if</span> e[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>lower() <span style="color:#f92672">in</span> alphabet[<span style="color:#ae81ff">13</span>:]]
  
-print(&quot;Employés de A à M:&quot;, &quot;, &quot;.join(sorted(employes_a_m)))
-print(&quot;Employés de N à Z:&quot;, &quot;, &quot;.join(sorted(employes_n_z)))
-</code></pre>
-
-<pre><code>Employés de A à M: Astrid, Julien, Marie
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Employés de A à M:&#34;</span>, <span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(sorted(employes_a_m)))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Employés de N à Z:&#34;</span>, <span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(sorted(employes_n_z)))
+</code></pre></div><pre><code>Employés de A à M: Astrid, Julien, Marie
 Employés de N à Z: Pierre, Zoé
 </code></pre>
+<p><!-- raw HTML omitted --> - 12: Créer une fonction pour remonter dans une strucure de dossiers <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+dossier <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/Users/Thibh/Desktop/Dossier_01/Tutoriel/Udemy&#34;</span>
 
-<p><b> - 12: Créer une fonction pour remonter dans une strucure de dossiers </b></p>
-
-<pre><code class="language-python">import os
-dossier = &quot;/Users/Thibh/Desktop/Dossier_01/Tutoriel/Udemy&quot;
-
-def remonter_dossier(dossier, iterations):
-    i = 0
-    while i &lt; iterations:
-        dossier = os.path.dirname(dossier)
-        i += 1
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">remonter_dossier</span>(dossier, iterations):
+    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> iterations:
+        dossier <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(dossier)
+        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
  
-    return dossier
-print(remonter_dossier(dossier, 3))
+    <span style="color:#66d9ef">return</span> dossier
+<span style="color:#66d9ef">print</span>(remonter_dossier(dossier, <span style="color:#ae81ff">3</span>))
+</code></pre></div><pre><code>/Users/Thibh/Desktop
 </code></pre>
-
-<pre><code>/Users/Thibh/Desktop
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour récupérer le dossier parent d&rsquo;un fichier ou d&rsquo;un dossier, on utilise la fonction os.path.dirname du module os.path.</p>
-
 <p>Pour répéter une opération un nombre défini de fois, on peut utiliser une boucle while.</p>
-
-<p><b> - 13: Changer un chemin relatif en chemin absolu </b></p>
-
-<pre><code class="language-python">import os
-chemin = &quot;/Users/Thibh/Desktop/Dossier_01/../Dossier_02/Udemy&quot;
+<p><!-- raw HTML omitted --> - 13: Changer un chemin relatif en chemin absolu <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+chemin <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/Users/Thibh/Desktop/Dossier_01/../Dossier_02/Udemy&#34;</span>
  
-def normalize_path(chemin):
-    chemin_parts = chemin.split(&quot;/&quot;)
-    while &quot;..&quot; in chemin_parts:
-        index = chemin_parts.index(&quot;..&quot;)
-        chemin_parts.pop(index)
-        chemin_parts.pop(index-1)
-    return os.sep.join(chemin_parts)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalize_path</span>(chemin):
+    chemin_parts <span style="color:#f92672">=</span> chemin<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)
+    <span style="color:#66d9ef">while</span> <span style="color:#e6db74">&#34;..&#34;</span> <span style="color:#f92672">in</span> chemin_parts:
+        index <span style="color:#f92672">=</span> chemin_parts<span style="color:#f92672">.</span>index(<span style="color:#e6db74">&#34;..&#34;</span>)
+        chemin_parts<span style="color:#f92672">.</span>pop(index)
+        chemin_parts<span style="color:#f92672">.</span>pop(index<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">return</span> os<span style="color:#f92672">.</span>sep<span style="color:#f92672">.</span>join(chemin_parts)
  
-a = normalize_path(chemin)
-print(a)
+a <span style="color:#f92672">=</span> normalize_path(chemin)
+<span style="color:#66d9ef">print</span>(a)
+</code></pre></div><pre><code>\Users\Thibh\Desktop\Dossier_02\Udemy
 </code></pre>
-
-<pre><code>\Users\Thibh\Desktop\Dossier_02\Udemy
-</code></pre>
-
-<p><b> - 14: Écrire un fichier </b></p>
-
-<pre><code class="language-python">import os
+<p><!-- raw HTML omitted --> - 14: Écrire un fichier <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
  
-cur_dir = os.path.realpath(os.path.dirname('__file__'))
-fichier = os.path.join(cur_dir, &quot;fichier.txt&quot;)
+cur_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>realpath(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(<span style="color:#e6db74">&#39;__file__&#39;</span>))
+fichier <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(cur_dir, <span style="color:#e6db74">&#34;fichier.txt&#34;</span>)
  
-with open(fichier, &quot;w&quot;) as f:
-    f.write(&quot;Bonjour tout le monde !&quot;)
-</code></pre>
-
-<p><b> - 15: Fixer erreur de variable dans un fichier </b></p>
-
+<span style="color:#66d9ef">with</span> open(fichier, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f:
+    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;Bonjour tout le monde !&#34;</span>)
+</code></pre></div><p><!-- raw HTML omitted --> - 15: Fixer erreur de variable dans un fichier <!-- raw HTML omitted --></p>
 <p>Utilisation du module distutils</p>
-
-<pre><code class="language-python">import os
-import distutils.util
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> distutils.util
  
-cur_dir = os.path.realpath(os.path.dirname('__file__'))
-fichier = os.path.join(cur_dir, &quot;variable.txt&quot;)
+cur_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>realpath(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(<span style="color:#e6db74">&#39;__file__&#39;</span>))
+fichier <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(cur_dir, <span style="color:#e6db74">&#34;variable.txt&#34;</span>)
  
-with open(fichier, &quot;r&quot;) as f:
-    variable = f.read()
+<span style="color:#66d9ef">with</span> open(fichier, <span style="color:#e6db74">&#34;r&#34;</span>) <span style="color:#66d9ef">as</span> f:
+    variable <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
  
-vraie_variable = bool(distutils.util.strtobool(variable))
-if vraie_variable:
-    print(&quot;La variable est un boolean True&quot;)
-else: 
-    print(&quot;La variable est un boolean False&quot;)
+vraie_variable <span style="color:#f92672">=</span> bool(distutils<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>strtobool(variable))
+<span style="color:#66d9ef">if</span> vraie_variable:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;La variable est un boolean True&#34;</span>)
+<span style="color:#66d9ef">else</span>: 
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;La variable est un boolean False&#34;</span>)
+</code></pre></div><pre><code>La variable est un boolean False
 </code></pre>
-
-<pre><code>La variable est un boolean False
-</code></pre>
-
-<p><b> - 15: Trouver les diviseurs d&rsquo;un nombre </b></p>
-
-<pre><code class="language-python">nombre = 50
-liste_nombres = list(range(1, nombre+1))
-diviseurs = []
+<p><!-- raw HTML omitted --> - 15: Trouver les diviseurs d&rsquo;un nombre <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+liste_nombres <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1</span>, nombre<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>))
+diviseurs <span style="color:#f92672">=</span> []
  
-for i in liste_nombres:
-    if nombre % i == 0:
-        diviseurs.append(i)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> liste_nombres:
+    <span style="color:#66d9ef">if</span> nombre <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        diviseurs<span style="color:#f92672">.</span>append(i)
  
-print(diviseurs)   
+<span style="color:#66d9ef">print</span>(diviseurs)   
+</code></pre></div><pre><code>[1, 2, 5, 10, 25, 50]
 </code></pre>
+<p><!-- raw HTML omitted --> - 16: Trouver les nombres divisibles par 7 mais qui ne sont pas des multiples de 3  <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+liste_nombres <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">0</span>, nombre<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>))
+diviseurs <span style="color:#f92672">=</span> []
 
-<pre><code>[1, 2, 5, 10, 25, 50]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> liste_nombres:
+    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;</span> (i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>):
+        diviseurs<span style="color:#f92672">.</span>append(i)
+<span style="color:#66d9ef">print</span>(diviseurs)
+</code></pre></div><pre><code>[7, 14, 28, 35, 49, 56, 70, 77, 91, 98, 112, 119, 133, 140, 154, 161, 175, 182, 196, 203, 217, 224, 238, 245, 259, 266, 280, 287, 301, 308, 322, 329, 343, 350, 364, 371, 385, 392, 406, 413, 427, 434, 448, 455, 469, 476, 490, 497, 511, 518, 532, 539, 553, 560, 574, 581, 595, 602, 616, 623, 637, 644, 658, 665, 679, 686, 700, 707, 721, 728, 742, 749, 763, 770, 784, 791, 805, 812, 826, 833, 847, 854, 868, 875, 889, 896, 910, 917, 931, 938, 952, 959, 973, 980, 994]
 </code></pre>
-
-<p><b> - 16: Trouver les nombres divisibles par 7 mais qui ne sont pas des multiples de 3  </b></p>
-
-<pre><code class="language-python">nombre = 1000
-liste_nombres = list(range(0, nombre+1))
-diviseurs = []
-
-for i in liste_nombres:
-    if (i % 7 == 0) &amp; (i % 3 != 0):
-        diviseurs.append(i)
-print(diviseurs)
-</code></pre>
-
-<pre><code>[7, 14, 28, 35, 49, 56, 70, 77, 91, 98, 112, 119, 133, 140, 154, 161, 175, 182, 196, 203, 217, 224, 238, 245, 259, 266, 280, 287, 301, 308, 322, 329, 343, 350, 364, 371, 385, 392, 406, 413, 427, 434, 448, 455, 469, 476, 490, 497, 511, 518, 532, 539, 553, 560, 574, 581, 595, 602, 616, 623, 637, 644, 658, 665, 679, 686, 700, 707, 721, 728, 742, 749, 763, 770, 784, 791, 805, 812, 826, 833, 847, 854, 868, 875, 889, 896, 910, 917, 931, 938, 952, 959, 973, 980, 994]
-</code></pre>
-
-<p><b> - 17: Calculer la factorielle d&rsquo;un nombre  </b></p>
-
+<p><!-- raw HTML omitted --> - 17: Calculer la factorielle d&rsquo;un nombre  <!-- raw HTML omitted --></p>
 <p>Dans cet exercice, nous cherchons la factorielle d&rsquo;un nombre, dans ce cas-ci le nombre 5.</p>
-
-<pre><code class="language-python">nombre = 5
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nombre <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
  
-if nombre == 0:
-    resultat = 1
-else:
-    resultat = 1
-    for i in range(1, nombre + 1):
-        resultat *= i
+<span style="color:#66d9ef">if</span> nombre <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+    resultat <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">else</span>:
+    resultat <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, nombre <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        resultat <span style="color:#f92672">*=</span> i
  
-print(resultat)
+<span style="color:#66d9ef">print</span>(resultat)
+</code></pre></div><pre><code>120
 </code></pre>
-
-<pre><code>120
-</code></pre>
-
-<p><b> - 18: Trouver un fichier à l&rsquo;intérieur d&rsquo;un dossier </b></p>
-
+<p><!-- raw HTML omitted --> - 18: Trouver un fichier à l&rsquo;intérieur d&rsquo;un dossier <!-- raw HTML omitted --></p>
 <p>module glob pertmet de faire des recherches récursives</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os 
+<span style="color:#f92672">from</span> glob <span style="color:#f92672">import</span> glob
 
-<pre><code class="language-python">import os 
-from glob import glob
+dossier <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:/Utilisateurs/guillaume/Documents&#34;</span>
+fichier_a_trouver <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;fichier.txt&#34;</span>
 
-dossier = &quot;D:/Utilisateurs/guillaume/Documents&quot;
-fichier_a_trouver = &quot;fichier.txt&quot;
-
-fichiers = glob(dossier + &quot;/**&quot;, recursive = True)
-fichiers_trouves = [f for f in fichiers if os.path.split(f)[1] == fichier_a_trouver]
-print(fichiers_trouves)
+fichiers <span style="color:#f92672">=</span> glob(dossier <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/**&#34;</span>, recursive <span style="color:#f92672">=</span> True)
+fichiers_trouves <span style="color:#f92672">=</span> [f <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> fichiers <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>split(f)[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> fichier_a_trouver]
+<span style="color:#66d9ef">print</span>(fichiers_trouves)
+</code></pre></div><pre><code>['D:/Utilisateurs/guillaume/Documents\\GitHub\\Formation_Python\\16_Defis_Python\\fichier.txt', 'D:/Utilisateurs/guillaume/Documents\\GitHub\\Scripts_Python\\Exercices_tuto\\fichier.txt']
 </code></pre>
+<p><!-- raw HTML omitted --> - 19: Créer un programme pour surveiller un dossier <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os 
+<span style="color:#f92672">import</span> time 
 
-<pre><code>['D:/Utilisateurs/guillaume/Documents\\GitHub\\Formation_Python\\16_Defis_Python\\fichier.txt', 'D:/Utilisateurs/guillaume/Documents\\GitHub\\Scripts_Python\\Exercices_tuto\\fichier.txt']
-</code></pre>
+dossier <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:/Utilisateurs/guillaume/Desktop&#34;</span>
+dossier_a_chercher <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;CODES_R&#34;</span>
 
-<p><b> - 19: Créer un programme pour surveiller un dossier </b></p>
-
-<pre><code class="language-python">import os 
-import time 
-
-dossier = &quot;D:/Utilisateurs/guillaume/Desktop&quot;
-dossier_a_chercher = &quot;CODES_R&quot;
-
-attente = input(&quot;Entrez un temps de rafraichissement: &quot;)
-while dossier_a_chercher not in os.listdir(dossier):
-    print(&quot;Dossier introuvable ... &quot;)
-    time.sleep(int(attente))
+attente <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Entrez un temps de rafraichissement: &#34;</span>)
+<span style="color:#66d9ef">while</span> dossier_a_chercher <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(dossier):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Dossier introuvable ... &#34;</span>)
+    time<span style="color:#f92672">.</span>sleep(int(attente))
                
-print(&quot;trouvé&quot;)
-</code></pre>
-
-<pre><code>Entrez un temps de rafraichissement: 10
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;trouvé&#34;</span>)
+</code></pre></div><pre><code>Entrez un temps de rafraichissement: 10
 Dossier introuvable ... 
 Dossier introuvable ... 
 Dossier introuvable ... 
 trouvé
 </code></pre>
+<p><!-- raw HTML omitted --> - 20: Compter le nombre de fichiers et dossiers dans un dossier <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> glob <span style="color:#f92672">import</span> glob
 
-<p><b> - 20: Compter le nombre de fichiers et dossiers dans un dossier </b></p>
-
-<pre><code class="language-python">from glob import glob
-
-dossier = &quot;D:/Utilisateurs/guillaume/Documents&quot;
-fichiers = glob(f&quot;{dossier}/**&quot;, recursive = True)
-print(len(fichiers))
+dossier <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:/Utilisateurs/guillaume/Documents&#34;</span>
+fichiers <span style="color:#f92672">=</span> glob(f<span style="color:#e6db74">&#34;{dossier}/**&#34;</span>, recursive <span style="color:#f92672">=</span> True)
+<span style="color:#66d9ef">print</span>(len(fichiers))
+</code></pre></div><pre><code>17653
 </code></pre>
-
-<pre><code>17653
-</code></pre>
-
-<p><b> - 21: Générer un octet aléatoire </b></p>
-
+<p><!-- raw HTML omitted --> - 21: Générer un octet aléatoire <!-- raw HTML omitted --></p>
 <p>Dans cet exercice, le but était de générer un octet aléatoire. Un octet est composé uniquement des chiffres 0 et 1, et contient 8 chiffres.</p>
-
 <p>Il faut générer une séquence aléatoire de 8 chiffres de 0 à 1.</p>
-
 <p>En Python, pour tout ce qui touche aux fonctions aléatoires, on utilise le module random.</p>
-
 <p>Nous utilisons donc une compréhension de liste pour créer une suite de 8 chiffres aléatoire allant de 0 à 1.</p>
-
 <p>Pour récupérer un nombre aléatoire entre 0 et 1, on utilise la fonction &ldquo;choice&rdquo; du module random. La fonction range(2) nous retourne une liste contenant les nombres 0 et 1, et la fonction choice du module random va choisir un nombre aléatoire entre tous les nombres de la liste (donc soit 0 soit 1).</p>
-
 <p>Vous noterez qu&rsquo;on utilise un nom de variable quelque peu particulier pour la boucle for. En effet, cette boucle sert uniquement à répéter une opération un certains nombre de fois, mais on ne fait aucune utilisation de la variable générée à chaque itération de la boucle for. Par convention, quand on déclare une variable qui n&rsquo;est pas utilisée, on utilise un tiret du bas.</p>
-
-<pre><code class="language-python">import random
-octet = []
-for _ in range(8):
-    octet.append(str(random.choice(range(2))))
-print(&quot;&quot;.join(octet))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
+octet <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>):
+    octet<span style="color:#f92672">.</span>append(str(random<span style="color:#f92672">.</span>choice(range(<span style="color:#ae81ff">2</span>))))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(octet))
+</code></pre></div><pre><code>00111010
 </code></pre>
-
-<pre><code>00111010
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">liste_random <span style="color:#f92672">=</span> [str(random<span style="color:#f92672">.</span>choice(range(<span style="color:#ae81ff">2</span>))) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>)]
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(liste_random))
+</code></pre></div><pre><code>10111000
 </code></pre>
-
-<pre><code class="language-python">liste_random = [str(random.choice(range(2))) for _ in range(8)]
-print(&quot;&quot;.join(liste_random))
+<p><!-- raw HTML omitted --> - 21: Calculer le nombre de jours entre deux dates <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> date
+start <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2014</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">2</span>)
+end <span style="color:#f92672">=</span> date(<span style="color:#ae81ff">2018</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">11</span>)
+nb_days <span style="color:#f92672">=</span> (end <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>days 
+<span style="color:#66d9ef">print</span>(nb_days)
+</code></pre></div><pre><code>1470
 </code></pre>
-
-<pre><code>10111000
-</code></pre>
-
-<p><b> - 21: Calculer le nombre de jours entre deux dates </b></p>
-
-<pre><code class="language-python">from datetime import date
-start = date(2014,7,2)
-end = date(2018,7,11)
-nb_days = (end - start).days 
-print(nb_days)
-</code></pre>
-
-<pre><code>1470
-</code></pre>
-
-<p><b> - 22: Créer un générateur de mot de passe </b></p>
-
+<p><!-- raw HTML omitted --> - 22: Créer un générateur de mot de passe <!-- raw HTML omitted --></p>
 <p>Le but de cet exercice était de générer un mot de passe aléatoire.</p>
-
 <p>Le mot de passe devait être d&rsquo;une longueur définie dans la variable &ldquo;taille&rdquo;.</p>
-
 <p>La première chose à faire était de récupérer toutes les lettres de l&rsquo;alphabet, les nombres et tous les symboles.</p>
-
 <p>Pour récupérer ces informations, nous utilisons le module string.</p>
-
-<pre><code class="language-python">import string
-symboles = string.ascii_letters + string.digits + string.punctuation
-print(symboles)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
+symboles <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_letters <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>punctuation
+<span style="color:#66d9ef">print</span>(symboles)
+</code></pre></div><pre><code>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
 </code></pre>
-
-<pre><code>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
-</code></pre>
-
 <p>On utilise ensuite le module random et la fonction choice comme vu dans un exercice précédent. Cette fonction va nous permettre de sélectionner une lettre aléatoire parmi la chaîne de caractère &ldquo;symboles&rdquo; que nous avons déclaré plus haut.</p>
-
 <p>Pour répéter l&rsquo;opération autant de fois que nécessaire, on utilise une boucle et une compréhension de liste</p>
-
-<pre><code class="language-python">import string
-import random
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
+<span style="color:#f92672">import</span> random
  
-taille = 8
+taille <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
  
-symboles = string.ascii_letters + string.digits + string.punctuation
-mot_de_passe = ''.join(random.choice(symboles) for _ in range(taille))
+symboles <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_letters <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>punctuation
+mot_de_passe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(random<span style="color:#f92672">.</span>choice(symboles) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(taille))
  
-print(mot_de_passe)
+<span style="color:#66d9ef">print</span>(mot_de_passe)
+</code></pre></div><pre><code>Z=)f+KV&quot;
 </code></pre>
-
-<pre><code>Z=)f+KV&quot;
-</code></pre>
-
-<p><b> - 22: Vérifier la validité d&rsquo;un mot de passe </b></p>
-
+<p><!-- raw HTML omitted --> - 22: Vérifier la validité d&rsquo;un mot de passe <!-- raw HTML omitted --></p>
 <p>En partant du code précédent, on doit vérifier sur le mot de passe contient au moins 2 nombres et une majuscule et s&rsquo;il fait au moins 8 caractères.</p>
-
-<pre><code class="language-python">import string
-import random
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
+<span style="color:#f92672">import</span> random
  
-taille = 8
+taille <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
  
-symboles = string.ascii_letters + string.digits + string.punctuation
-mot_de_passe = ''.join(random.choice(symboles) for _ in range(taille))
+symboles <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_letters <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>punctuation
+mot_de_passe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(random<span style="color:#f92672">.</span>choice(symboles) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(taille))
  
-print(mot_de_passe)
+<span style="color:#66d9ef">print</span>(mot_de_passe)
+</code></pre></div><pre><code>z%n{,&amp;tS
 </code></pre>
-
-<pre><code>z%n{,&amp;tS
-</code></pre>
-
-<pre><code class="language-python">import sys
-def Valid_password_numdigit(password):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Valid_password_numdigit</span>(password):
     
-    sufficient_digits = len([n for n in password if n.isdigit()]) &gt;= 2     
-    if not sufficient_digits:
-        print(&quot;Invalid password: Must have at least 2 digits&quot;, file=sys.stderr)
-    return sufficient_digits
+    sufficient_digits <span style="color:#f92672">=</span> len([n <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> password <span style="color:#66d9ef">if</span> n<span style="color:#f92672">.</span>isdigit()]) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span>     
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> sufficient_digits:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Invalid password: Must have at least 2 digits&#34;</span>, file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stderr)
+    <span style="color:#66d9ef">return</span> sufficient_digits
 
-def Valid_password_length(password):
-    correct_length = len(password) &gt;= 8
-    if not correct_length:
-        print(&quot;Invalid password: too short&quot;, file=sys.stderr)
-    return correct_length
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Valid_password_length</span>(password):
+    correct_length <span style="color:#f92672">=</span> len(password) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">8</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> correct_length:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Invalid password: too short&#34;</span>, file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stderr)
+    <span style="color:#66d9ef">return</span> correct_length
 
-def Valid_password_mixed_case(password):
-    letters = set(password)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Valid_password_mixed_case</span>(password):
+    letters <span style="color:#f92672">=</span> set(password)
 
-    lower = any(letter.islower() for letter in letters)
-    upper = any(letter.isupper() for letter in letters)
-    if not upper:
-        print(&quot;Invalid password: No uppercase characters detected&quot;, file=sys.stderr)
+    lower <span style="color:#f92672">=</span> any(letter<span style="color:#f92672">.</span>islower() <span style="color:#66d9ef">for</span> letter <span style="color:#f92672">in</span> letters)
+    upper <span style="color:#f92672">=</span> any(letter<span style="color:#f92672">.</span>isupper() <span style="color:#66d9ef">for</span> letter <span style="color:#f92672">in</span> letters)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> upper:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Invalid password: No uppercase characters detected&#34;</span>, file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stderr)
 
-    if not lower:
-        print(&quot;Invalid password: No lowercase characters detected&quot;, file=sys.stderr)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> lower:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Invalid password: No lowercase characters detected&#34;</span>, file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stderr)
 
-    return lower and upper
+    <span style="color:#66d9ef">return</span> lower <span style="color:#f92672">and</span> upper
 
-def password_checker(password):
-    if Valid_password_length(password) and \
-        Valid_password_mixed_case(password) and \
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">password_checker</span>(password):
+    <span style="color:#66d9ef">if</span> Valid_password_length(password) <span style="color:#f92672">and</span> \
+        Valid_password_mixed_case(password) <span style="color:#f92672">and</span> \
         Valid_password_numdigit(password):
 
-        print(&quot;Congratulations! This password is valid&quot;)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Congratulations! This password is valid&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">password_checker(<span style="color:#e6db74">&#39;tesTTTbverytherbrtby22&#39;</span>)
+</code></pre></div><pre><code>Congratulations! This password is valid
 </code></pre>
-
-<pre><code class="language-python">password_checker('tesTTTbverytherbrtby22')
-</code></pre>
-
-<pre><code>Congratulations! This password is valid
-</code></pre>
-
-<pre><code class="language-python">import string
-import random
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
+<span style="color:#f92672">import</span> random
  
-taille = random.randint(4, 12)
+taille <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">12</span>)
  
-lettres = string.ascii_letters + string.digits + string.punctuation
-mot_de_passe = ''.join(random.choice(lettres) for l in range(taille))
+lettres <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_letters <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>punctuation
+mot_de_passe <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(random<span style="color:#f92672">.</span>choice(lettres) <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> range(taille))
  
-print(mot_de_passe)
+<span style="color:#66d9ef">print</span>(mot_de_passe)
  
-def verificateur_mdp(mdp):
-    if len(mdp) &gt;= 8 and any(l.isupper() for l in mdp) and len([n for n in mdp if n.isdigit()]) &gt;= 2:
-        return True
-    return False
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">verificateur_mdp</span>(mdp):
+    <span style="color:#66d9ef">if</span> len(mdp) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">and</span> any(l<span style="color:#f92672">.</span>isupper() <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> mdp) <span style="color:#f92672">and</span> len([n <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> mdp <span style="color:#66d9ef">if</span> n<span style="color:#f92672">.</span>isdigit()]) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> True
+    <span style="color:#66d9ef">return</span> False
  
-succes = verificateur_mdp(mot_de_passe)
-#check = password_checker(mot_de_passe)
-print(succes)
-</code></pre>
-
-<pre><code>Z}&amp;]PG;Mb
+succes <span style="color:#f92672">=</span> verificateur_mdp(mot_de_passe)
+<span style="color:#75715e">#check = password_checker(mot_de_passe)</span>
+<span style="color:#66d9ef">print</span>(succes)
+</code></pre></div><pre><code>Z}&amp;]PG;Mb
 False
 </code></pre>
-
-<p><b> - 23: Compter le nombre d&rsquo;occurence d&rsquo;un mot dans un texte </b></p>
-
-<pre><code class="language-python">lorem = &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
-lorem = lorem.replace(&quot;,&quot;, &quot;&quot;).replace(&quot;.&quot;, &quot;&quot;)
-mot_to_find = &quot;elit&quot;
-lorem = lorem.lower()
-text = lorem.split(' ')
-count = 0
-for mot in text:
-    if mot == mot_to_find:
-        print('find!')
-        count += 1
-print(count)
-</code></pre>
-
-<pre><code>find!
+<p><!-- raw HTML omitted --> - 23: Compter le nombre d&rsquo;occurence d&rsquo;un mot dans un texte <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lorem <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#34;</span>
+lorem <span style="color:#f92672">=</span> lorem<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;,&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+mot_to_find <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;elit&#34;</span>
+lorem <span style="color:#f92672">=</span> lorem<span style="color:#f92672">.</span>lower()
+text <span style="color:#f92672">=</span> lorem<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> mot <span style="color:#f92672">in</span> text:
+    <span style="color:#66d9ef">if</span> mot <span style="color:#f92672">==</span> mot_to_find:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;find!&#39;</span>)
+        count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(count)
+</code></pre></div><pre><code>find!
 1
 </code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour remplacer un caractère par un autre, ou l&rsquo;effacer, on utilise la fonction replace.</p>
-
 <p>Pour convertir une chaîne de caractère en minuscule, on utilise la fonction lower.</p>
-
 <p>Pour séparer une chaîne de caractère sur les espaces, on utilise la fonction split.</p>
-
 <p>Pour compter le nombre d&rsquo;occurrence d&rsquo;un élément dans une liste, on utilise la fonction count.</p>
-
-<p><b> - 24: Convertir une chaîne de caractères en camelCase </b></p>
-
-<pre><code class="language-python">phrase = &quot;Phrase en camel case&quot;
-phrase_split = phrase.split()
-print(phrase_split)
+<p><!-- raw HTML omitted --> - 24: Convertir une chaîne de caractères en camelCase <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Phrase en camel case&#34;</span>
+phrase_split <span style="color:#f92672">=</span> phrase<span style="color:#f92672">.</span>split()
+<span style="color:#66d9ef">print</span>(phrase_split)
+</code></pre></div><pre><code>['Phrase', 'en', 'camel', 'case']
 </code></pre>
-
-<pre><code>['Phrase', 'en', 'camel', 'case']
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Phrase en camel case&#34;</span>
+phrase_split <span style="color:#f92672">=</span> phrase<span style="color:#f92672">.</span>split()
+ 
+resultat <span style="color:#f92672">=</span> [phrase_split<span style="color:#f92672">.</span>pop(<span style="color:#ae81ff">0</span>)]
+<span style="color:#66d9ef">print</span>(resultat)
+</code></pre></div><pre><code>['Phrase']
 </code></pre>
-
-<pre><code class="language-python">phrase = &quot;Phrase en camel case&quot;
-phrase_split = phrase.split()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Phrase en camel case&#34;</span>
+phrase_split <span style="color:#f92672">=</span> phrase<span style="color:#f92672">.</span>split()
  
-resultat = [phrase_split.pop(0)]
-print(resultat)
+resultat <span style="color:#f92672">=</span> [phrase_split<span style="color:#f92672">.</span>pop(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>lower()]
+
+<span style="color:#66d9ef">for</span> mot <span style="color:#f92672">in</span> phrase_split:
+    resultat<span style="color:#f92672">.</span>append(mot<span style="color:#f92672">.</span>capitalize())
+ 
+resultat_formate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(resultat)
+ 
+<span style="color:#66d9ef">print</span>(resultat_formate)
+</code></pre></div><pre><code>phraseEnCamelCase
 </code></pre>
-
-<pre><code>['Phrase']
-</code></pre>
-
-<pre><code class="language-python">phrase = &quot;Phrase en camel case&quot;
-phrase_split = phrase.split()
+<p><!-- raw HTML omitted --> - 25: Inverser l&rsquo;ordre des mots dans une phrase <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Bonjour tout le monde&#34;</span>
+phrase_split <span style="color:#f92672">=</span> phrase<span style="color:#f92672">.</span>split()
  
-resultat = [phrase_split.pop(0).lower()]
-
-for mot in phrase_split:
-    resultat.append(mot.capitalize())
+resultat <span style="color:#f92672">=</span> []
  
-resultat_formate = &quot;&quot;.join(resultat)
+<span style="color:#66d9ef">for</span> mot <span style="color:#f92672">in</span> reversed(phrase_split):
+    resultat<span style="color:#f92672">.</span>append(mot)
  
-print(resultat_formate)
-</code></pre>
-
-<pre><code>phraseEnCamelCase
-</code></pre>
-
-<p><b> - 25: Inverser l&rsquo;ordre des mots dans une phrase </b></p>
-
-<pre><code class="language-python">phrase = &quot;Bonjour tout le monde&quot;
-phrase_split = phrase.split()
- 
-resultat = []
- 
-for mot in reversed(phrase_split):
-    resultat.append(mot)
- 
-resultat_formate = &quot; &quot;.join(resultat).capitalize()
-print(resultat_formate)
+resultat_formate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join(resultat)<span style="color:#f92672">.</span>capitalize()
+<span style="color:#66d9ef">print</span>(resultat_formate)
                
+</code></pre></div><pre><code>Monde le tout bonjour
 </code></pre>
-
-<pre><code>Monde le tout bonjour
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour inverser une liste, on peut utiliser la fonction reversed ou la syntaxe [::-1]</p>
+<p><!-- raw HTML omitted --> - 26: Vérifier si un élément est un palindrome <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mot <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Un roc cornu&#34;</span>
+mot_lower <span style="color:#f92672">=</span> mot<span style="color:#f92672">.</span>lower()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
 
-<p><b> - 26: Vérifier si un élément est un palindrome </b></p>
-
-<pre><code class="language-python">mot = &quot;Un roc cornu&quot;
-mot_lower = mot.lower().replace(&quot; &quot;, &quot;&quot;)
-
-if mot_lower == mot_lower[::-1]:
-    print(True)
-else:
-    print(False)
+<span style="color:#66d9ef">if</span> mot_lower <span style="color:#f92672">==</span> mot_lower[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
+    <span style="color:#66d9ef">print</span>(True)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(False)
 
 
+</code></pre></div><pre><code>True
 </code></pre>
-
-<pre><code>True
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour enlever tous les espaces d&rsquo;une chaîne de caractère, on peut utiliser la méthode replace.</p>
-
 <p>Pour inverser une chaîne de caractère, on peut utiliser la syntaxe [::-1]</p>
-
-<p><b> - 27: Vérifier si une phrase est un pangramme </b></p>
-
+<p><!-- raw HTML omitted --> - 27: Vérifier si une phrase est un pangramme <!-- raw HTML omitted --></p>
 <p>Un pangramme est une phrase qui contient toutes les lettres de l&rsquo;alphabet au moins une fois.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
+phrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Joyeux, ivre, fatigué, le nez qui pique, Clown Hary skie dans l’ombre&#34;</span>
+phrase_lower <span style="color:#f92672">=</span> phrase<span style="color:#f92672">.</span>lower()
+alphabet <span style="color:#f92672">=</span> list(string<span style="color:#f92672">.</span>ascii_lowercase)
 
-<pre><code class="language-python">import string
-phrase = &quot;Joyeux, ivre, fatigué, le nez qui pique, Clown Hary skie dans l’ombre&quot;
-phrase_lower = phrase.lower()
-alphabet = list(string.ascii_lowercase)
-
-for l in phrase_lower:
-    if l in alphabet:
-        alphabet.remove(l)
+<span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> phrase_lower:
+    <span style="color:#66d9ef">if</span> l <span style="color:#f92672">in</span> alphabet:
+        alphabet<span style="color:#f92672">.</span>remove(l)
  
-if alphabet:
-    print(&quot;La phrase n'est pas un Pangramme&quot;)
-else:
-    print(&quot;La phrase est un Pangramme&quot;)
+<span style="color:#66d9ef">if</span> alphabet:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;La phrase n&#39;est pas un Pangramme&#34;</span>)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;La phrase est un Pangramme&#34;</span>)
+</code></pre></div><pre><code>La phrase est un Pangramme
 </code></pre>
-
-<pre><code>La phrase est un Pangramme
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour récupérer toutes les lettres de l&rsquo;alphabet, on utilise le module string et la constante &ldquo;ascii_lowercase&rdquo;.</p>
-
 <p>Pour enlever un élément d&rsquo;une liste, on utilise la méthode remove.</p>
-
 <p>Une liste vide est évaluée comme False.</p>
-
-<p><b> - 28: Vérificateur de code python</b></p>
-
+<p><!-- raw HTML omitted --> - 28: Vérificateur de code python<!-- raw HTML omitted --></p>
 <p>Vérifier si les parathèses sont bien définies dans un code.</p>
-
-<pre><code class="language-python">code = &quot;print(any(('py' or 'txt') in ext for ext in ['.py', '.obj', '.json'])&quot;
-code.count('(') == code.count(')')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;print(any((&#39;py&#39; or &#39;txt&#39;) in ext for ext in [&#39;.py&#39;, &#39;.obj&#39;, &#39;.json&#39;])&#34;</span>
+code<span style="color:#f92672">.</span>count(<span style="color:#e6db74">&#39;(&#39;</span>) <span style="color:#f92672">==</span> code<span style="color:#f92672">.</span>count(<span style="color:#e6db74">&#39;)&#39;</span>)
+</code></pre></div><pre><code>False
 </code></pre>
+<p><!-- raw HTML omitted --> - 29: Compter le nombre de phrases dans un texte<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lorem <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</span><span style="color:#e6db74">		   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</span><span style="color:#e6db74">		   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</span><span style="color:#e6db74">		   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#34;&#34;&#34;</span>
 
-<pre><code>False
+<span style="color:#66d9ef">print</span>(lorem<span style="color:#f92672">.</span>count(<span style="color:#e6db74">&#34;.&#34;</span>))
+</code></pre></div><pre><code>4
 </code></pre>
-
-<p><b> - 29: Compter le nombre de phrases dans un texte</b></p>
-
-<pre><code class="language-python">lorem = &quot;&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-		   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-		   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-		   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;&quot;
-
-print(lorem.count(&quot;.&quot;))
+<p><!-- raw HTML omitted --> - 30: Compter le nombre d&rsquo;occurence de chaque lettre de l&rsquo;alphabet dans un texte<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
+lorem <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</span><span style="color:#e6db74">		   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</span><span style="color:#e6db74">		   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</span><span style="color:#e6db74">		   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#34;&#34;&#34;</span>
+lorem <span style="color:#f92672">=</span> lorem<span style="color:#f92672">.</span>lower()
+resultat <span style="color:#f92672">=</span> {}
+alphabet <span style="color:#f92672">=</span> list(string<span style="color:#f92672">.</span>ascii_lowercase)
+<span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> alphabet: 
+    resultat[l]<span style="color:#f92672">=</span>lorem<span style="color:#f92672">.</span>count(l)
+<span style="color:#66d9ef">print</span>(resultat)    
+</code></pre></div><pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
 </code></pre>
-
-<pre><code>4
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">alphabet <span style="color:#f92672">=</span> dict([(a, lorem<span style="color:#f92672">.</span>lower()<span style="color:#f92672">.</span>count(a)) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> string<span style="color:#f92672">.</span>ascii_lowercase])
+<span style="color:#66d9ef">print</span>(alphabet)
+</code></pre></div><pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
 </code></pre>
-
-<p><b> - 30: Compter le nombre d&rsquo;occurence de chaque lettre de l&rsquo;alphabet dans un texte</b></p>
-
-<pre><code class="language-python">import string
-lorem = &quot;&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-		   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-		   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-		   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;&quot;
-lorem = lorem.lower()
-resultat = {}
-alphabet = list(string.ascii_lowercase)
-for l in alphabet: 
-    resultat[l]=lorem.count(l)
-print(resultat)    
-</code></pre>
-
-<pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
-</code></pre>
-
-<pre><code class="language-python">alphabet = dict([(a, lorem.lower().count(a)) for a in string.ascii_lowercase])
-print(alphabet)
-</code></pre>
-
-<pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
-</code></pre>
-
-<pre><code class="language-python">import string
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
  
-lorem = &quot;&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;&quot;
+lorem <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#34;&#34;&#34;</span>
  
-alphabet = string.ascii_lowercase
-resultat = dict(zip(alphabet, [0] * len(alphabet)))
+alphabet <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>ascii_lowercase
+resultat <span style="color:#f92672">=</span> dict(zip(alphabet, [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> len(alphabet)))
 
-for lettre in lorem.lower():
-    if resultat.get(lettre) is not None:
-        resultat[lettre] += 1
+<span style="color:#66d9ef">for</span> lettre <span style="color:#f92672">in</span> lorem<span style="color:#f92672">.</span>lower():
+    <span style="color:#66d9ef">if</span> resultat<span style="color:#f92672">.</span>get(lettre) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        resultat[lettre] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
  
-print(resultat)
+<span style="color:#66d9ef">print</span>(resultat)
+</code></pre></div><pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
 </code></pre>
-
-<pre><code>{'a': 29, 'b': 3, 'c': 16, 'd': 19, 'e': 38, 'f': 3, 'g': 3, 'h': 1, 'i': 42, 'j': 0, 'k': 0, 'l': 22, 'm': 17, 'n': 24, 'o': 29, 'p': 11, 'q': 5, 'r': 22, 's': 18, 't': 32, 'u': 29, 'v': 3, 'w': 0, 'x': 3, 'y': 0, 'z': 0}
-</code></pre>
-
 <p>Nous utilisons ci-dessus la fonction zip et la fonction dict pour créer un dictionnaire qui contient chaque lettre de l&rsquo;alphabet comme clé et le nombre 0 comme valeur :</p>
-
-<pre><code class="language-python">resultat = dict(zip(alphabet, [0] * len(alphabet)))
-print(resultat)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">resultat <span style="color:#f92672">=</span> dict(zip(alphabet, [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> len(alphabet)))
+<span style="color:#66d9ef">print</span>(resultat)
+</code></pre></div><pre><code>{'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 0, 'v': 0, 'w': 0, 'x': 0, 'y': 0, 'z': 0}
 </code></pre>
-
-<pre><code>{'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 0, 'v': 0, 'w': 0, 'x': 0, 'y': 0, 'z': 0}
-</code></pre>
-
 <p>Pour créer une liste de tuple à partir de deux listes, on utilise la fonction zip.</p>
-
 <p>Pour créer un dictionnaire à partir d&rsquo;une liste de tuple, on utilise la fonction dict.</p>
-
 <p>Pour récupérer la valeur d&rsquo;une clé dans un dictionnaire sans risquer de faire planter notre script si la clé n&rsquo;existe pas, on utilise la méthode get.</p>
 
           </div>
@@ -1652,7 +1376,7 @@ print(resultat)
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/16-2%20Niveau_intermediaire.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c16-2%20Niveau_intermediaire.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

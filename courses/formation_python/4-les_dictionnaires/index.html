@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Les dictionnaires en Python:  Objectifs  Comprendre ce qu&rsquo;est un dictionnaire Savoir consulter et analyser un dictonnaire Savoir manipuler un dictionnaire créer un dictionnaire multi-propriétés  4- Les dictionnaires Python  Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs Les dictionnaires sont des structures de données non-ordonnées On peut les modifier et les indexer Principe: on peut lier une clef à une valeur Les dictionnaires s&rsquo;écrivent avec des { }  4.">
+  <meta name="description" content="Les dictionnaires en Python:  Comprendre ce qu&rsquo;est un dictionnaire Savoir consulter et analyser un dictonnaire Savoir manipuler un dictionnaire créer un dictionnaire multi-propriétés  4- Les dictionnaires Python  Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs Les dictionnaires sont des structures de données non-ordonnées On peut les modifier et les indexer Principe: on peut lier une clef à une valeur Les dictionnaires s&rsquo;écrivent avec des { }  4.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/4-les_dictionnaires/">
@@ -115,7 +115,7 @@
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/4-les_dictionnaires/">
   <meta property="og:title" content="4- Les dictionnaires en Python - Cours | GDueymes">
-  <meta property="og:description" content="Les dictionnaires en Python:  Objectifs  Comprendre ce qu&rsquo;est un dictionnaire Savoir consulter et analyser un dictonnaire Savoir manipuler un dictionnaire créer un dictionnaire multi-propriétés  4- Les dictionnaires Python  Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs Les dictionnaires sont des structures de données non-ordonnées On peut les modifier et les indexer Principe: on peut lier une clef à une valeur Les dictionnaires s&rsquo;écrivent avec des { }  4."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Les dictionnaires en Python:  Comprendre ce qu&rsquo;est un dictionnaire Savoir consulter et analyser un dictonnaire Savoir manipuler un dictionnaire créer un dictionnaire multi-propriétés  4- Les dictionnaires Python  Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs Les dictionnaires sont des structures de données non-ordonnées On peut les modifier et les indexer Principe: on peut lier une clef à une valeur Les dictionnaires s&rsquo;écrivent avec des { }  4."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -577,17 +577,14 @@
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#les-dictionnaires-en-python">Les dictionnaires en Python:</a></li>
-<li><a href="#4-les-dictionnaires-python">4- Les dictionnaires Python</a></li>
-<li><a href="#4-1-concept-et-déclaration-d-un-dictionnaire-en-python">4.1-Concept et déclaration d&rsquo;un dictionnaire en Python</a></li>
-<li><a href="#4-2-modifier-un-dictionnaire">4.2-Modifier un dictionnaire</a></li>
-<li><a href="#4-3-parcourir-un-dictionnaire">4.3- Parcourir un dictionnaire</a></li>
-<li><a href="#4-4-créer-un-dictionnaire-multi-propriétés">4.4- Créer un dictionnaire multi-propriétés</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#les-dictionnaires-en-python">Les dictionnaires en Python:</a></li>
+    <li><a href="#4--les-dictionnaires-python">4- Les dictionnaires Python</a></li>
+    <li><a href="#41-concept-et-déclaration-dun-dictionnaire-en-python-">4.1-Concept et déclaration d&rsquo;un dictionnaire en Python</a></li>
+    <li><a href="#42-modifier-un-dictionnaire">4.2-Modifier un dictionnaire</a></li>
+    <li><a href="#43--parcourir-un-dictionnaire">4.3- Parcourir un dictionnaire</a></li>
+    <li><a href="#44--créer-un-dictionnaire-multi-propriétés">4.4- Créer un dictionnaire multi-propriétés</a></li>
+  </ul>
 </nav>
 
       
@@ -602,23 +599,16 @@
           <h1>4- Les dictionnaires en Python - Cours</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/pylogo.png" alt="image0" /></p>
-
+            <p><img src="/img/pylogo.png" alt="image0"></p>
 <h2 id="les-dictionnaires-en-python">Les dictionnaires en Python:</h2>
-
-<h2> Objectifs</h2>
-
+<!-- raw HTML omitted -->
 <ul>
 <li>Comprendre ce qu&rsquo;est un dictionnaire</li>
 <li>Savoir consulter et analyser un dictonnaire</li>
 <li>Savoir manipuler un dictionnaire</li>
 <li>créer un dictionnaire multi-propriétés</li>
 </ul>
-
-<h2 id="4-les-dictionnaires-python">4- Les dictionnaires Python</h2>
-
+<h2 id="4--les-dictionnaires-python">4- Les dictionnaires Python</h2>
 <ul>
 <li>Le dictionnaire est une structure où l&rsquo;on stocke des clés associées à des valeurs</li>
 <li>Les dictionnaires sont des structures de données non-ordonnées</li>
@@ -626,211 +616,146 @@
 <li>Principe: on peut lier une clef à une valeur</li>
 <li>Les dictionnaires s&rsquo;écrivent avec des {  }</li>
 </ul>
-
-<h2 id="4-1-concept-et-déclaration-d-un-dictionnaire-en-python">4.1-Concept et déclaration d&rsquo;un dictionnaire en Python</h2>
-
+<h2 id="41-concept-et-déclaration-dun-dictionnaire-en-python-">4.1-Concept et déclaration d&rsquo;un dictionnaire en Python</h2>
 <p>Pour créer un dictionnaire, on écrit tous les éléments en les séparant par des virgules et le tout encadré par des accolades {}.</p>
-
-<pre><code class="language-python">produitsPrix = [['smartphone',1000],['chaussures',100],['console',400]]
-print(produitsPrix[1][1])      
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">produitsPrix <span style="color:#f92672">=</span> [[<span style="color:#e6db74">&#39;smartphone&#39;</span>,<span style="color:#ae81ff">1000</span>],[<span style="color:#e6db74">&#39;chaussures&#39;</span>,<span style="color:#ae81ff">100</span>],[<span style="color:#e6db74">&#39;console&#39;</span>,<span style="color:#ae81ff">400</span>]]
+<span style="color:#66d9ef">print</span>(produitsPrix[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>])      
+</code></pre></div><pre><code>100
 </code></pre>
-
-<pre><code>100
+<p>Et si un des produits est supprimé ? Ou si l&rsquo;ordre est différent la fois suivante ? <!-- raw HTML omitted --> Ce stockage n&rsquo;est pas optimal. Un stockage sous la forme d&rsquo;un dictionnaire est beaucoup plus adapté :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">produitsDict <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;smartphone&#39;</span>:<span style="color:#ae81ff">1000</span>,<span style="color:#e6db74">&#39;chaussures&#39;</span>:<span style="color:#ae81ff">100</span>,<span style="color:#e6db74">&#39;console&#39;</span>:<span style="color:#ae81ff">400</span>}
+<span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'smartphone': 1000, 'chaussures': 100, 'console': 400}
 </code></pre>
-
-<p>Et si un des produits est supprimé ? Ou si l&rsquo;ordre est différent la fois suivante ? <br> Ce stockage n&rsquo;est pas optimal. Un stockage sous la forme d&rsquo;un dictionnaire est beaucoup plus adapté :</p>
-
-<pre><code class="language-python">produitsDict = {'smartphone':1000,'chaussures':100,'console':400}
-print(produitsDict)
-</code></pre>
-
-<pre><code>{'smartphone': 1000, 'chaussures': 100, 'console': 400}
-</code></pre>
-
-<h2 id="4-2-modifier-un-dictionnaire">4.2-Modifier un dictionnaire</h2>
-
+<h2 id="42-modifier-un-dictionnaire">4.2-Modifier un dictionnaire</h2>
 <ul>
-<li><p>Pour <b>ajouter</b> une valeur</p>
-
-<pre><code class="language-python"># Ajouter un nouveau couple ( clef : valeur ) dans un dictionnaire 
-produitsDict[&quot;tele&quot;]=100
-print(produitsDict)
-</code></pre>
-
-<p>{&lsquo;smartphone&rsquo;: 1000, &lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p></li>
-
-<li><p>Pour <b>modifier</b> une valeur avec une clef existant</p>
-
-<pre><code class="language-python"># On peut modifier une valeur dans un dictionnaire avec une clef existante 
-produitsDict[&quot;smartphone&quot;]=999
-print(produitsDict)
-</code></pre>
-
-<p>{&lsquo;smartphone&rsquo;: 999, &lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p>
-
-<pre><code class="language-python"># Un dictionnaire ne peut pas avoir deux fois la même clef, une clef est unique!
-produitsDict[&quot;smartphone&quot;]=888
-print(produitsDict)
-</code></pre>
-
-<p>{&lsquo;smartphone&rsquo;: 888, &lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p></li>
-
-<li><p>Pour <b>supprimer</b> une valeur avec une clef existantE</p>
-
-<pre><code class="language-python"># On peut supprimer une valeur dans un dictionnaire 
-del produitsDict[&quot;smartphone&quot;]
-</code></pre>
-
-<pre><code class="language-python">print(produitsDict)
-</code></pre>
-
-<p>{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}</p>
-
-<pre><code class="language-python">#Supprimer un item
-print(produitsDict)
-produitsDict.pop(&quot;tele&quot;)
-print(produitsDict)
-</code></pre>
-
-<p>{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400, &lsquo;tele&rsquo;: 100}
-{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400}</p>
-
-<pre><code class="language-python">#vider un dictionnaire
-print(produitsDict)
-produitsDict.clear()
-print(produitsDict)
-</code></pre>
-
-<p>{&lsquo;chaussures&rsquo;: 100, &lsquo;console&rsquo;: 400}
-{}</p></li>
+<li>Pour <!-- raw HTML omitted -->ajouter<!-- raw HTML omitted --> une valeur</li>
 </ul>
-
-<h2 id="4-3-parcourir-un-dictionnaire">4.3- Parcourir un dictionnaire</h2>
-
-<p>Une fois le dictionnaire crée, nous pouvons accéder aux éléments en utilisant les clefs.</p>
-
-<pre><code class="language-python">produitsDict = {'smartphone':1000,'chaussures':100,'console':400}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Ajouter un nouveau couple ( clef : valeur ) dans un dictionnaire </span>
+produitsDict[<span style="color:#e6db74">&#34;tele&#34;</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>
+<span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'smartphone': 1000, 'chaussures': 100, 'console': 400, 'tele': 100}
 </code></pre>
-
-<pre><code class="language-python">#trouver la valeur d'un item
-print(produitsDict['console'])
-</code></pre>
-
-<pre><code>400
-</code></pre>
-
 <ul>
-<li><p>On peut parcourir un dictionnaire suivant 3 méthodes utilisant la boucle <b>FOR</b>:</p>
-
+<li>Pour <!-- raw HTML omitted -->modifier<!-- raw HTML omitted --> une valeur avec une clef existant</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># On peut modifier une valeur dans un dictionnaire avec une clef existante </span>
+produitsDict[<span style="color:#e6db74">&#34;smartphone&#34;</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">999</span>
+<span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'smartphone': 999, 'chaussures': 100, 'console': 400, 'tele': 100}
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Un dictionnaire ne peut pas avoir deux fois la même clef, une clef est unique!</span>
+produitsDict[<span style="color:#e6db74">&#34;smartphone&#34;</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">888</span>
+<span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'smartphone': 888, 'chaussures': 100, 'console': 400, 'tele': 100}
+</code></pre>
+<ul>
+<li>Pour <!-- raw HTML omitted -->supprimer<!-- raw HTML omitted --> une valeur avec une clef existantE</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># On peut supprimer une valeur dans un dictionnaire </span>
+<span style="color:#66d9ef">del</span> produitsDict[<span style="color:#e6db74">&#34;smartphone&#34;</span>]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'chaussures': 100, 'console': 400, 'tele': 100}
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Supprimer un item</span>
+<span style="color:#66d9ef">print</span>(produitsDict)
+produitsDict<span style="color:#f92672">.</span>pop(<span style="color:#e6db74">&#34;tele&#34;</span>)
+<span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'chaussures': 100, 'console': 400, 'tele': 100}
+{'chaussures': 100, 'console': 400}
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#vider un dictionnaire</span>
+<span style="color:#66d9ef">print</span>(produitsDict)
+produitsDict<span style="color:#f92672">.</span>clear()
+<span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'chaussures': 100, 'console': 400}
+{}
+</code></pre>
+<h2 id="43--parcourir-un-dictionnaire">4.3- Parcourir un dictionnaire</h2>
+<p>Une fois le dictionnaire crée, nous pouvons accéder aux éléments en utilisant les clefs.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">produitsDict <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;smartphone&#39;</span>:<span style="color:#ae81ff">1000</span>,<span style="color:#e6db74">&#39;chaussures&#39;</span>:<span style="color:#ae81ff">100</span>,<span style="color:#e6db74">&#39;console&#39;</span>:<span style="color:#ae81ff">400</span>}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#trouver la valeur d&#39;un item</span>
+<span style="color:#66d9ef">print</span>(produitsDict[<span style="color:#e6db74">&#39;console&#39;</span>])
+</code></pre></div><pre><code>400
+</code></pre>
+<ul>
+<li>
+<p>On peut parcourir un dictionnaire suivant 3 méthodes utilisant la boucle <!-- raw HTML omitted -->FOR<!-- raw HTML omitted -->:</p>
 <ul>
 <li>par valeur</li>
 <li>par clef</li>
-
-<li><p>par clef + valeur</p>
-
-<pre><code class="language-python"># Pour connaitre les clefs d'un dictionnaire: méthode .keys()
-produitsDict.keys()
-</code></pre></li>
+<li>par clef + valeur</li>
 </ul>
-
-<p>dict_keys([&lsquo;smartphone&rsquo;, &lsquo;chaussures&rsquo;, &lsquo;console&rsquo;])</p>
-
-<pre><code class="language-python"># Pour connaitre les valeurs d'un dictionnaire: méthode .values()
-produitsDict.values()
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pour connaitre les clefs d&#39;un dictionnaire: méthode .keys()</span>
+produitsDict<span style="color:#f92672">.</span>keys()
+</code></pre></div><pre><code>dict_keys(['smartphone', 'chaussures', 'console'])
 </code></pre>
-
-<p>dict_values([1000, 100, 400])</p>
-
-<pre><code class="language-python"># Pour parcourir les clefs d'un dictionnaire 
-for cle in produitsDict.keys():
-print(cle)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pour connaitre les valeurs d&#39;un dictionnaire: méthode .values()</span>
+produitsDict<span style="color:#f92672">.</span>values()
+</code></pre></div><pre><code>dict_values([1000, 100, 400])
 </code></pre>
-
-<p>smartphone
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pour parcourir les clefs d&#39;un dictionnaire </span>
+<span style="color:#66d9ef">for</span> cle <span style="color:#f92672">in</span> produitsDict<span style="color:#f92672">.</span>keys():
+    <span style="color:#66d9ef">print</span>(cle)
+</code></pre></div><pre><code>smartphone
 chaussures
-console</p>
-
-<pre><code class="language-python"># Pour parcourir les valeurs d'un dictionnaire
-for valeur in produitsDict.values():
-print(valeur)
+console
 </code></pre>
-
-<p>1000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pour parcourir les valeurs d&#39;un dictionnaire</span>
+<span style="color:#66d9ef">for</span> valeur <span style="color:#f92672">in</span> produitsDict<span style="color:#f92672">.</span>values():
+    <span style="color:#66d9ef">print</span>(valeur)
+</code></pre></div><pre><code>1000
 100
-400</p>
-
-<pre><code class="language-python"># Pour connaitre les couples clef, valeur: méthode .items()
-produitsDict.items()
+400
 </code></pre>
-
-<p>dict_items([(&lsquo;smartphone&rsquo;, 1000), (&lsquo;chaussures&rsquo;, 100), (&lsquo;console&rsquo;, 400)])</p></li>
-</ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pour connaitre les couples clef, valeur: méthode .items()</span>
+produitsDict<span style="color:#f92672">.</span>items()
+</code></pre></div><pre><code>dict_items([('smartphone', 1000), ('chaussures', 100), ('console', 400)])
+</code></pre>
 <p>Ici on a des listes contenant des tuples.</p>
-
-<pre><code class="language-python"># Pour parcourir les couples clefs,valeurs 
-for cle,valeur in produitsDict.items(): # la boucle for obtient un tuple à chaque itération
-    print(cle,valeur)
-</code></pre>
-
-<pre><code>smartphone 1000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pour parcourir les couples clefs,valeurs </span>
+<span style="color:#66d9ef">for</span> cle,valeur <span style="color:#f92672">in</span> produitsDict<span style="color:#f92672">.</span>items(): <span style="color:#75715e"># la boucle for obtient un tuple à chaque itération</span>
+    <span style="color:#66d9ef">print</span>(cle,valeur)
+</code></pre></div><pre><code>smartphone 1000
 chaussures 100
 console 400
 </code></pre>
-
-<pre><code class="language-python">#vérifier si un item est présent
-print('smartphone' in produitsDict)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#vérifier si un item est présent</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;smartphone&#39;</span> <span style="color:#f92672">in</span> produitsDict)
+</code></pre></div><pre><code>True
 </code></pre>
-
-<pre><code>True
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#vérifier la longueur d&#39;un dictionnaire</span>
+<span style="color:#66d9ef">print</span>(len(produitsDict))
+</code></pre></div><pre><code>3
 </code></pre>
-
-<pre><code class="language-python">#vérifier la longueur d'un dictionnaire
-print(len(produitsDict))
-</code></pre>
-
-<pre><code>3
-</code></pre>
-
-<pre><code class="language-python">#obtenir à nouveau une liste d'items
-print(produitsDict.keys())
-print(list(produitsDict.keys()))
-</code></pre>
-
-<pre><code>dict_keys(['smartphone', 'chaussures', 'console'])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#obtenir à nouveau une liste d&#39;items</span>
+<span style="color:#66d9ef">print</span>(produitsDict<span style="color:#f92672">.</span>keys())
+<span style="color:#66d9ef">print</span>(list(produitsDict<span style="color:#f92672">.</span>keys()))
+</code></pre></div><pre><code>dict_keys(['smartphone', 'chaussures', 'console'])
 ['smartphone', 'chaussures', 'console']
 </code></pre>
-
-<h2 id="4-4-créer-un-dictionnaire-multi-propriétés">4.4- Créer un dictionnaire multi-propriétés</h2>
-
+<h2 id="44--créer-un-dictionnaire-multi-propriétés">4.4- Créer un dictionnaire multi-propriétés</h2>
 <p>En plus du produit, je veux savoir s&rsquo;il est en stock ou non.</p>
-
-<pre><code class="language-python">produitsDictPrix = {'smartphone':1000,'chaussures':100,'console':400}
-produitsDictStock = {'smartphone':True,'chaussures':False,'console':True}
-print(produitsDictPrix)
-print(produitsDictStock)
-</code></pre>
-
-<pre><code>{'smartphone': 1000, 'chaussures': 100, 'console': 400}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">produitsDictPrix <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;smartphone&#39;</span>:<span style="color:#ae81ff">1000</span>,<span style="color:#e6db74">&#39;chaussures&#39;</span>:<span style="color:#ae81ff">100</span>,<span style="color:#e6db74">&#39;console&#39;</span>:<span style="color:#ae81ff">400</span>}
+produitsDictStock <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;smartphone&#39;</span>:True,<span style="color:#e6db74">&#39;chaussures&#39;</span>:False,<span style="color:#e6db74">&#39;console&#39;</span>:True}
+<span style="color:#66d9ef">print</span>(produitsDictPrix)
+<span style="color:#66d9ef">print</span>(produitsDictStock)
+</code></pre></div><pre><code>{'smartphone': 1000, 'chaussures': 100, 'console': 400}
 {'smartphone': True, 'chaussures': False, 'console': True}
 </code></pre>
-
-<pre><code class="language-python">produitsDict = {
-    'smartphone':{'prix':1000,'enStock':True},
-    'chaussures':{'prix':100,'enStock':False},
-    'console':{'prix':400,'enStock':True}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">produitsDict <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;smartphone&#39;</span>:{<span style="color:#e6db74">&#39;prix&#39;</span>:<span style="color:#ae81ff">1000</span>,<span style="color:#e6db74">&#39;enStock&#39;</span>:True},
+    <span style="color:#e6db74">&#39;chaussures&#39;</span>:{<span style="color:#e6db74">&#39;prix&#39;</span>:<span style="color:#ae81ff">100</span>,<span style="color:#e6db74">&#39;enStock&#39;</span>:False},
+    <span style="color:#e6db74">&#39;console&#39;</span>:{<span style="color:#e6db74">&#39;prix&#39;</span>:<span style="color:#ae81ff">400</span>,<span style="color:#e6db74">&#39;enStock&#39;</span>:True}
 }
-print(produitsDict)
+<span style="color:#66d9ef">print</span>(produitsDict)
+</code></pre></div><pre><code>{'smartphone': {'prix': 1000, 'enStock': True}, 'chaussures': {'prix': 100, 'enStock': False}, 'console': {'prix': 400, 'enStock': True}}
 </code></pre>
-
-<pre><code>{'smartphone': {'prix': 1000, 'enStock': True}, 'chaussures': {'prix': 100, 'enStock': False}, 'console': {'prix': 400, 'enStock': True}}
-</code></pre>
-
-<pre><code class="language-python">print(produitsDict['smartphone']['prix'])
-print(produitsDict['console']['enStock'])
-</code></pre>
-
-<pre><code>1000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(produitsDict[<span style="color:#e6db74">&#39;smartphone&#39;</span>][<span style="color:#e6db74">&#39;prix&#39;</span>])
+<span style="color:#66d9ef">print</span>(produitsDict[<span style="color:#e6db74">&#39;console&#39;</span>][<span style="color:#e6db74">&#39;enStock&#39;</span>])
+</code></pre></div><pre><code>1000
 True
 </code></pre>
 
@@ -878,7 +803,7 @@ True
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/4-Les_dictionnaires.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c4-Les_dictionnaires.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

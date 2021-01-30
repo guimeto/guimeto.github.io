@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="7- Utilisation de la librairie Numpy (Numerical Python):  Bibliothèque Python importante en calcul scientifique, cette librairie est appelée dans beaucoup d&rsquo;autres librairies
- Intègre une nouvelle structure de données: les ndarray (N-dimensional array). Ce sont des vecteurs (tableaux à 1 dimension), tableaux à plusieurs dimensions
- Intègre un ensemble de fonctions développées en C. Calcul performant sur les calculs
- Utilisé dans tous les projets de calculs numériques">
+  <meta name="description" content="7- Utilisation de la librairie Numpy (Numerical Python):   Bibliothèque Python importante en calcul scientifique, cette librairie est appelée dans beaucoup d&rsquo;autres librairies
+  Intègre une nouvelle structure de données: les ndarray (N-dimensional array). Ce sont des vecteurs (tableaux à 1 dimension), tableaux à plusieurs dimensions
+  Intègre un ensemble de fonctions développées en C. Calcul performant sur les calculs
+  Utilisé dans tous les projets de calculs numériques">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/7-numpy/">
@@ -118,10 +118,10 @@
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/7-numpy/">
   <meta property="og:title" content="7- La librairie Numpy - Cours | GDueymes">
-  <meta property="og:description" content="7- Utilisation de la librairie Numpy (Numerical Python):  Bibliothèque Python importante en calcul scientifique, cette librairie est appelée dans beaucoup d&rsquo;autres librairies
- Intègre une nouvelle structure de données: les ndarray (N-dimensional array). Ce sont des vecteurs (tableaux à 1 dimension), tableaux à plusieurs dimensions
- Intègre un ensemble de fonctions développées en C. Calcul performant sur les calculs
- Utilisé dans tous les projets de calculs numériques"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="7- Utilisation de la librairie Numpy (Numerical Python):   Bibliothèque Python importante en calcul scientifique, cette librairie est appelée dans beaucoup d&rsquo;autres librairies
+  Intègre une nouvelle structure de données: les ndarray (N-dimensional array). Ce sont des vecteurs (tableaux à 1 dimension), tableaux à plusieurs dimensions
+  Intègre un ensemble de fonctions développées en C. Calcul performant sur les calculs
+  Utilisé dans tous les projets de calculs numériques"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -583,17 +583,14 @@
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#7-utilisation-de-la-librairie-numpy-numerical-python">7- Utilisation de la librairie Numpy  (Numerical Python):</a></li>
-<li><a href="#7-1-création-d-un-tableau-numpy-ou-ndarray">7.1- Création d&rsquo;un tableau Numpy ou ndarray</a></li>
-<li><a href="#7-2-accéder-aux-données-d-un-tableau-numpy-ou-ndarray">7.2- Accéder aux données d&rsquo;un tableau Numpy ou ndarray</a></li>
-<li><a href="#7-3-calculs-mathématiques-et-matriciels-sur-un-tableau-numpy">7.3- Calculs mathématiques et matriciels sur un tableau Numpy:</a></li>
-<li><a href="#7-4-modifier-des-tableaux-numpy">7.4- Modifier des tableaux Numpy:</a></li>
-<li><a href="#7-5-comparaisons-et-masques-sur-un-tableau-numpy">7.5- Comparaisons et masques sur un tableau Numpy:</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#7--utilisation-de-la-librairie-numpy--numerical-python">7- Utilisation de la librairie Numpy  (Numerical Python):</a></li>
+    <li><a href="#71--création-dun-tableau-numpy-ou-ndarray">7.1- Création d&rsquo;un tableau Numpy ou ndarray</a></li>
+    <li><a href="#72--accéder-aux-données-dun-tableau-numpy-ou-ndarray">7.2- Accéder aux données d&rsquo;un tableau Numpy ou ndarray</a></li>
+    <li><a href="#73--calculs-mathématiques-et-matriciels-sur-un-tableau-numpy">7.3- Calculs mathématiques et matriciels sur un tableau Numpy:</a></li>
+    <li><a href="#74--modifier-des-tableaux-numpy">7.4- Modifier des tableaux Numpy:</a></li>
+    <li><a href="#75--comparaisons-et-masques-sur-un-tableau-numpy">7.5- Comparaisons et masques sur un tableau Numpy:</a></li>
+  </ul>
 </nav>
 
       
@@ -608,884 +605,589 @@
           <h1>7- La librairie Numpy - Cours</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/numpy.png" alt="image0" /></p>
-
-<h2 id="7-utilisation-de-la-librairie-numpy-numerical-python">7- Utilisation de la librairie Numpy  (Numerical Python):</h2>
-
+            <p><img src="/img/numpy.png" alt="image0"></p>
+<h2 id="7--utilisation-de-la-librairie-numpy--numerical-python">7- Utilisation de la librairie Numpy  (Numerical Python):</h2>
 <ul>
-<li><p>Bibliothèque Python importante en calcul scientifique, cette librairie est appelée dans beaucoup d&rsquo;autres librairies</p></li>
-
-<li><p>Intègre une nouvelle structure de données: les ndarray (N-dimensional array). Ce sont des vecteurs (tableaux à 1 dimension), tableaux à plusieurs dimensions</p></li>
-
-<li><p>Intègre un ensemble de fonctions développées en C. Calcul performant sur les calculs</p></li>
-
-<li><p>Utilisé dans tous les projets de calculs numériques</p></li>
-
-<li><p>Les ndarray se manipulent comme les listes et les tubles MAIS ne peut contenir qu&rsquo;un seul type de données.</p></li>
+<li>
+<p>Bibliothèque Python importante en calcul scientifique, cette librairie est appelée dans beaucoup d&rsquo;autres librairies</p>
+</li>
+<li>
+<p>Intègre une nouvelle structure de données: les ndarray (N-dimensional array). Ce sont des vecteurs (tableaux à 1 dimension), tableaux à plusieurs dimensions</p>
+</li>
+<li>
+<p>Intègre un ensemble de fonctions développées en C. Calcul performant sur les calculs</p>
+</li>
+<li>
+<p>Utilisé dans tous les projets de calculs numériques</p>
+</li>
+<li>
+<p>Les ndarray se manipulent comme les listes et les tubles MAIS ne peut contenir qu&rsquo;un seul type de données.</p>
+</li>
 </ul>
-
 <p>Nous allons voir comment initialiser des tableaux Numpy de plusieurs façons, accéder aux valeurs dans les tableaux, effectuer des opérations mathématiques et matricielles, et utiliser des tableaux aussi bien pour le masquage que pour les comparaisons.</p>
-
-<h2 id="7-1-création-d-un-tableau-numpy-ou-ndarray">7.1- Création d&rsquo;un tableau Numpy ou ndarray</h2>
-
+<h2 id="71--création-dun-tableau-numpy-ou-ndarray">7.1- Création d&rsquo;un tableau Numpy ou ndarray</h2>
 <p>Plusieurs techniques sont mises à disposition pour créer des tableaux Numpy.</p>
-
 <p>Tout d’abord, vous devez importer Numpy avec le code suivant:</p>
-
-<pre><code class="language-python"># On va importer la librairie Numpy et créer un alias. 
-# Les alias permettent d'alléger l'écriture des codes. 
-import numpy as np
-import warnings
-warnings.filterwarnings(&quot;ignore&quot;)
-</code></pre>
-
-<p>Contrairement à une liste, vous ne pouvez pas créer de tableaux Numpy vides. Vous trouverez ci-dessous plusieurs façons d’initialiser un tableau Numpy en fonction de vos besoins:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># On va importer la librairie Numpy et créer un alias. </span>
+<span style="color:#75715e"># Les alias permettent d&#39;alléger l&#39;écriture des codes. </span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> warnings
+warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#34;ignore&#34;</span>)
+</code></pre></div><p>Contrairement à une liste, vous ne pouvez pas créer de tableaux Numpy vides. Vous trouverez ci-dessous plusieurs façons d’initialiser un tableau Numpy en fonction de vos besoins:</p>
 <ul>
-<li><p>Utilisation de la fonction <b>array()</b> pour créer un tableau Numpy:</p>
-
-<pre><code class="language-python">tableau1 = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])
-tableau1
-</code></pre>
-
-<p>array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,
-       18, 19, 20])</p></li>
+<li>Utilisation de la fonction <!-- raw HTML omitted -->array()<!-- raw HTML omitted --> pour créer un tableau Numpy:</li>
 </ul>
-
-<p>Création d&rsquo;un tableau bi-dimensionnel avec des lignes et des colonnes; on crée une liste de liste. Chaque liste est une ligne du tableau.</p>
-
-<pre><code class="language-python"># Exemple d'un tableau avec 3 lignes et 3 colonnes
-tableau2 = np.array([[1,2,3], [4,5,6]])
-tableau2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">19</span>,<span style="color:#ae81ff">20</span>])
+tableau1
+</code></pre></div><pre><code>array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,
+       18, 19, 20])
 </code></pre>
-
-<pre><code>array([[1, 2, 3],
+<p>Création d&rsquo;un tableau bi-dimensionnel avec des lignes et des colonnes; on crée une liste de liste. Chaque liste est une ligne du tableau.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Exemple d&#39;un tableau avec 3 lignes et 3 colonnes</span>
+tableau2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>]])
+tableau2
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6]])
 </code></pre>
-
-<pre><code class="language-python"># Exemple d'un tableau avec 3 lignes et 3 colonnes
-tableau3 = np.array([[1,2,3], [4,5,6], [7,8,9]])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Exemple d&#39;un tableau avec 3 lignes et 3 colonnes</span>
+tableau3 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>], [<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]])
 tableau3
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 </code></pre>
-
 <ul>
-<li><p>Utilisation de la fonction <b>range()</b> pour créer un tableau Numpy:</p>
-
-<pre><code class="language-python">tableau4 = np.array(range(10)) # tableau avec des chiffres de 0 à 9
+<li>Utilisation de la fonction <!-- raw HTML omitted -->range()<!-- raw HTML omitted --> pour créer un tableau Numpy:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau4 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(range(<span style="color:#ae81ff">10</span>)) <span style="color:#75715e"># tableau avec des chiffres de 0 à 9</span>
 tableau4
+</code></pre></div><pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 </code></pre>
-
-<p>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</p></li>
-
-<li><p>Utilisation de la fonction <b>arange()</b> pour créer un tableau Numpy:</p>
-
-<pre><code class="language-python">np.arange(1, 100, 2)
-</code></pre>
-
-<p>array([ 1,  3,  5,  7,  9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33,
+<ul>
+<li>Utilisation de la fonction <!-- raw HTML omitted -->arange()<!-- raw HTML omitted --> pour créer un tableau Numpy:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>)
+</code></pre></div><pre><code>array([ 1,  3,  5,  7,  9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33,
        35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67,
-       69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99])</p>
-
-<pre><code class="language-python">np.arange(0, 1, 0.1)
+       69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99])
 </code></pre>
-
-<p>array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])</p>
-
-<pre><code class="language-python">np.linspace(0, 100, 11)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.1</span>)
+</code></pre></div><pre><code>array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
 </code></pre>
-
-<p>array([  0.,  10.,  20.,  30.,  40.,  50.,  60.,  70.,  80.,  90., 100.])</p></li>
-
-<li><p>Utilisation de la fonction <b>zeros()</b> pour créer un tableau Numpy avec des zéros:</p>
-
-<pre><code class="language-python">tableau5 = np.zeros((4,3)) # tableau contenant 4 lignes et 3 colonnes de 0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">11</span>)
+</code></pre></div><pre><code>array([  0.,  10.,  20.,  30.,  40.,  50.,  60.,  70.,  80.,  90., 100.])
+</code></pre>
+<ul>
+<li>Utilisation de la fonction <!-- raw HTML omitted -->zeros()<!-- raw HTML omitted --> pour créer un tableau Numpy avec des zéros:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau5 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>)) <span style="color:#75715e"># tableau contenant 4 lignes et 3 colonnes de 0</span>
 tableau5
+</code></pre></div><pre><code>array([[0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.]])
 </code></pre>
-
-<p>array([[0., 0., 0.],
-       [0., 0., 0.],
-       [0., 0., 0.],
-       [0., 0., 0.]])</p></li>
-
-<li><p>Utilisation de la fonction <b>ones()</b> pour créer un tableau Numpy avec des 1:</p>
-
-<pre><code class="language-python">tableau6 = np.ones((4,3)) # tableau contenant 2 lignes 2 colonnes de 1
+<ul>
+<li>Utilisation de la fonction <!-- raw HTML omitted -->ones()<!-- raw HTML omitted --> pour créer un tableau Numpy avec des 1:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau6 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>ones((<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>)) <span style="color:#75715e"># tableau contenant 2 lignes 2 colonnes de 1</span>
 tableau6
+</code></pre></div><pre><code>array([[1., 1., 1.],
+       [1., 1., 1.],
+       [1., 1., 1.],
+       [1., 1., 1.]])
 </code></pre>
-
-<p>array([[1., 1., 1.],
-       [1., 1., 1.],
-       [1., 1., 1.],
-       [1., 1., 1.]])</p></li>
-
-<li><p>Utilisation de la fonction <b>identity()</b> pour créer une matrice Numpy identité:</p>
-
-<pre><code class="language-python">tableau7 = np.identity(4) # Matrice Identité de dimension 4
+<ul>
+<li>Utilisation de la fonction <!-- raw HTML omitted -->identity()<!-- raw HTML omitted --> pour créer une matrice Numpy identité:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau7 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>identity(<span style="color:#ae81ff">4</span>) <span style="color:#75715e"># Matrice Identité de dimension 4</span>
 tableau7
-</code></pre>
-
-<p>array([[1., 0., 0., 0.],
+</code></pre></div><pre><code>array([[1., 0., 0., 0.],
        [0., 1., 0., 0.],
        [0., 0., 1., 0.],
-       [0., 0., 0., 1.]])</p></li>
-
-<li><p>Conversion d&rsquo;une liste en tableau numpy avec la fonction <b>array()</b></p>
-
-<pre><code class="language-python">ma_liste = [0,1,2,3,4,5,6]
+       [0., 0., 0., 1.]])
+</code></pre>
+<ul>
+<li>Conversion d&rsquo;une liste en tableau numpy avec la fonction <!-- raw HTML omitted -->array()<!-- raw HTML omitted --></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ma_liste <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>]
 ma_liste
+</code></pre></div><pre><code>[0, 1, 2, 3, 4, 5, 6]
 </code></pre>
-
-<p>[0, 1, 2, 3, 4, 5, 6]</p>
-
-<pre><code class="language-python">tableau8 = np.array(ma_liste)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau8 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(ma_liste)
 tableau8
+</code></pre></div><pre><code>array([0, 1, 2, 3, 4, 5, 6])
 </code></pre>
-
-<p>array([0, 1, 2, 3, 4, 5, 6])</p></li>
-
-<li><p>Utilisation de la fonction <b>random()</b> pour créer un tableau Numpy  avec des valeurs aléatoires:</p>
-
-<pre><code class="language-python">tableau9 = np.random.randint(100,size=(4,3))  # Exemple création d'un tableau 4*3 random avec valeurs comprises entre 0 et 100 
+<ul>
+<li>Utilisation de la fonction <!-- raw HTML omitted -->random()<!-- raw HTML omitted --> pour créer un tableau Numpy  avec des valeurs aléatoires:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau9 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">100</span>,size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>))  <span style="color:#75715e"># Exemple création d&#39;un tableau 4*3 random avec valeurs comprises entre 0 et 100 </span>
 tableau9
-</code></pre>
-
-<p>array([[81, 80, 96],
+</code></pre></div><pre><code>array([[81, 80, 96],
        [43, 12, 53],
        [53, 83,  5],
-       [73, 73, 31]])</p></li>
-</ul>
-
-<h2 id="7-2-accéder-aux-données-d-un-tableau-numpy-ou-ndarray">7.2- Accéder aux données d&rsquo;un tableau Numpy ou ndarray</h2>
-
-<p>Nous pouvons accéder à un élément individuellement ou à une tranche de valeurs par slicing.</p>
-
-<p>Semblable aux listes, le premier élément est indexé à 0. Par exemple, array1[0,0] indique que nous accédons à la première ligne et à la première colonne.</p>
-
-<p>Le premier nombre du tuple [0,0] indique l’index de la ligne et le deuxième nombre indique l’index de la colonne:</p>
-
-<pre><code class="language-python">mon_tableau = np.array([[1,2,3], [4,5,6], [7,8,9]])
-mon_tableau
+       [73, 73, 31]])
 </code></pre>
-
-<pre><code>array([[1, 2, 3],
+<h2 id="72--accéder-aux-données-dun-tableau-numpy-ou-ndarray">7.2- Accéder aux données d&rsquo;un tableau Numpy ou ndarray</h2>
+<p>Nous pouvons accéder à un élément individuellement ou à une tranche de valeurs par slicing.</p>
+<p>Semblable aux listes, le premier élément est indexé à 0. Par exemple, array1[0,0] indique que nous accédons à la première ligne et à la première colonne.</p>
+<p>Le premier nombre du tuple [0,0] indique l’index de la ligne et le deuxième nombre indique l’index de la colonne:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>], [<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]])
+mon_tableau
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 </code></pre>
-
 <ul>
-<li><p>Voici quelques exemples pour accéder à des éléments individuels d&rsquo;un tableau Numpy:</p>
-
-<pre><code class="language-python">mon_tableau[1,2]     # On veut accéder à l'élément situé à la ligne d'index 1 et la colonne d'index 2 
-                 #  ndarray(row,column) 
-</code></pre>
-
-<p>6</p>
-
-<pre><code class="language-python">mon_tableau[1,-1]    # On veut accéder à l'élément situé à la ligne d'index 1 et à la colonne ayant le dernier index
-</code></pre>
-
-<p>6</p>
-
-<pre><code class="language-python">mon_tableau[0,1]     # On veut accéder à l'élément situé à la ligne d'index 0 et la colonne d'index 1
-</code></pre>
-
-<p>2</p>
-
-<pre><code class="language-python">mon_tableau[1,0]     # On veut accéder à l'élément situé à la ligne d'index 1 et la colonne d'index 0                     
-</code></pre>
-
-<p>4</p></li>
-
-<li><p>Exemples pour accéder à des tranches d&rsquo;un tableau Numpy: <b>Slicing</b></p>
-
-<pre><code class="language-python">mon_tableau[:,0]    # On veut toutes les lignes de la colonne d'index 0 (slicing)
-</code></pre>
-
-<p>array([1, 4, 7])</p>
-
-<pre><code class="language-python">mon_tableau[0,:]    # On veut toutes les colonnes de la ligne d'index 0 (slicing)
-</code></pre>
-
-<p>array([1, 2, 3])</p>
-
-<pre><code class="language-python">mon_tableau[:,0:3:2] # On veut toutes les lignes et les colonnes d'index de 0 à 3 avec pas de 2.
-                 # Donc toutes les lignes et les colonnes 1 et 2 .
-</code></pre>
-
-<p>array([[1, 3],
-       [4, 6],
-       [7, 9]])</p>
-
-<pre><code class="language-python">mon_tableau[:,-1]  # On veut toutes les lignes de la dernière colonne
-</code></pre>
-
-<p>array([3, 6, 9])</p>
-
-<pre><code class="language-python">mon_tableau[:,1:-1] # On veut toutes les lignes entre la colonne d'index 1 et la dernière colonne
-</code></pre>
-
-<p>array([[2],
-       [5],
-       [8]])</p>
-
-<pre><code class="language-python">mon_tableau[2,1:-1] # On veut les valeurs de la ligne d'index 2 entre la colonne d'index 1 et la dernière colonne
-</code></pre>
-
-<p>array([8])</p></li>
+<li>Voici quelques exemples pour accéder à des éléments individuels d&rsquo;un tableau Numpy:</li>
 </ul>
-
-<h2 id="7-3-calculs-mathématiques-et-matriciels-sur-un-tableau-numpy">7.3- Calculs mathématiques et matriciels sur un tableau Numpy:</h2>
-
-<p>Les tableaux Numpy sont très faciles à manipuler: on peut les concaténer, ajouter des valeurs, les multiplier, les transposer avec une seule ligne de code.</p>
-
-<p>Vous trouverez ci-dessous quelques exemples d’opérations arithmétiques et multiplicatives variées avec les tableaux Numpy.</p>
-
-<pre><code class="language-python">array1 = np.arange(9).reshape(3,3)
-array1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>]     <span style="color:#75715e"># On veut accéder à l&#39;élément situé à la ligne d&#39;index 1 et la colonne d&#39;index 2 </span>
+                     <span style="color:#75715e">#  ndarray(row,column) </span>
+</code></pre></div><pre><code>6
 </code></pre>
-
-<pre><code>array([[0, 1, 2],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[<span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]    <span style="color:#75715e"># On veut accéder à l&#39;élément situé à la ligne d&#39;index 1 et à la colonne ayant le dernier index</span>
+</code></pre></div><pre><code>6
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>]     <span style="color:#75715e"># On veut accéder à l&#39;élément situé à la ligne d&#39;index 0 et la colonne d&#39;index 1</span>
+</code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>]     <span style="color:#75715e"># On veut accéder à l&#39;élément situé à la ligne d&#39;index 1 et la colonne d&#39;index 0                     </span>
+</code></pre></div><pre><code>4
+</code></pre>
+<ul>
+<li>Exemples pour accéder à des tranches d&rsquo;un tableau Numpy: <!-- raw HTML omitted -->Slicing<!-- raw HTML omitted --></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[:,<span style="color:#ae81ff">0</span>]    <span style="color:#75715e"># On veut toutes les lignes de la colonne d&#39;index 0 (slicing)</span>
+</code></pre></div><pre><code>array([1, 4, 7])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[<span style="color:#ae81ff">0</span>,:]    <span style="color:#75715e"># On veut toutes les colonnes de la ligne d&#39;index 0 (slicing)</span>
+</code></pre></div><pre><code>array([1, 2, 3])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[:,<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">2</span>] <span style="color:#75715e"># On veut toutes les lignes et les colonnes d&#39;index de 0 à 3 avec pas de 2.</span>
+                     <span style="color:#75715e"># Donc toutes les lignes et les colonnes 1 et 2 .</span>
+</code></pre></div><pre><code>array([[1, 3],
+       [4, 6],
+       [7, 9]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[:,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]  <span style="color:#75715e"># On veut toutes les lignes de la dernière colonne</span>
+</code></pre></div><pre><code>array([3, 6, 9])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[:,<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#75715e"># On veut toutes les lignes entre la colonne d&#39;index 1 et la dernière colonne</span>
+</code></pre></div><pre><code>array([[2],
+       [5],
+       [8]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mon_tableau[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#75715e"># On veut les valeurs de la ligne d&#39;index 2 entre la colonne d&#39;index 1 et la dernière colonne</span>
+</code></pre></div><pre><code>array([8])
+</code></pre>
+<h2 id="73--calculs-mathématiques-et-matriciels-sur-un-tableau-numpy">7.3- Calculs mathématiques et matriciels sur un tableau Numpy:</h2>
+<p>Les tableaux Numpy sont très faciles à manipuler: on peut les concaténer, ajouter des valeurs, les multiplier, les transposer avec une seule ligne de code.</p>
+<p>Vous trouverez ci-dessous quelques exemples d’opérations arithmétiques et multiplicatives variées avec les tableaux Numpy.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">9</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>)
+array1
+</code></pre></div><pre><code>array([[0, 1, 2],
        [3, 4, 5],
        [6, 7, 8]])
 </code></pre>
-
-<pre><code class="language-python">array2 = np.random.randint(50, size=(3,3))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">50</span>, size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>))
 array2
-</code></pre>
-
-<pre><code>array([[28,  8, 34],
+</code></pre></div><pre><code>array([[28,  8, 34],
        [40, 44,  6],
        [23, 41, 40]])
 </code></pre>
-
 <ul>
-<li><p>Opérations arithmétiques de base: addition, soustraction, multiplication, division</p>
-
-<pre><code class="language-python">array1 + 10 # ajouter une valeur à tous les éléments
-</code></pre>
-
-<p>array([[10, 11, 12],
-       [13, 14, 15],
-       [16, 17, 18]])</p>
-
-<pre><code class="language-python">array1 - 10 # soustraire une valeur à tous les éléments
-</code></pre>
-
-<p>array([[-10,  -9,  -8],
-       [ -7,  -6,  -5],
-       [ -4,  -3,  -2]])</p>
-
-<pre><code class="language-python">array1 * 100 # multiplier une valeur à tous les éléments
-</code></pre>
-
-<p>array([[  0, 100, 200],
-       [300, 400, 500],
-       [600, 700, 800]])</p>
-
-<pre><code class="language-python">array1[:,0] * 10 # on multiplie par 10 toutes les lignes de la colonne d'index 0.
-</code></pre>
-
-<p>array([ 0, 30, 60])</p>
-
-<pre><code class="language-python">array1 / 2 # diviser une valeur à tous les éléments
-</code></pre>
-
-<p>array([[0. , 0.5, 1. ],
-       [1.5, 2. , 2.5],
-       [3. , 3.5, 4. ]])</p></li>
-
-<li><p>quelques fonctions et méthodes Numpy applicables sur les tableaux Numpy:</p></li>
+<li>Opérations arithmétiques de base: addition, soustraction, multiplication, division</li>
 </ul>
-
-<p><a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.all.html#numpy.all" title="numpy.all"><code class="xref py py-obj docutils literal"><span class="pre">all</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.any.html#numpy.any" title="numpy.any"><code class="xref py py-obj docutils literal"><span class="pre">any</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.apply_along_axis.html#numpy.apply_along_axis" title="numpy.apply_along_axis"><code class="xref py py-obj docutils literal"><span class="pre">apply_along_axis</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.argmax.html#numpy.argmax" title="numpy.argmax"><code class="xref py py-obj docutils literal"><span class="pre">argmax</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.argmin.html#numpy.argmin" title="numpy.argmin"><code class="xref py py-obj docutils literal"><span class="pre">argmin</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.argsort.html#numpy.argsort" title="numpy.argsort"><code class="xref py py-obj docutils literal"><span class="pre">argsort</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.average.html#numpy.average" title="numpy.average"><code class="xref py py-obj docutils literal"><span class="pre">average</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.bincount.html#numpy.bincount" title="numpy.bincount"><code class="xref py py-obj docutils literal"><span class="pre">bincount</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.ceil.html#numpy.ceil" title="numpy.ceil"><code class="xref py py-obj docutils literal"><span class="pre">ceil</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.clip.html#numpy.clip" title="numpy.clip"><code class="xref py py-obj docutils literal"><span class="pre">clip</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.conj.html#numpy.conj" title="numpy.conj"><code class="xref py py-obj docutils literal"><span class="pre">conj</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.corrcoef.html#numpy.corrcoef" title="numpy.corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">corrcoef</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.cov.html#numpy.cov" title="numpy.cov"><code class="xref py py-obj docutils literal"><span class="pre">cov</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.cross.html#numpy.cross" title="numpy.cross"><code class="xref py py-obj docutils literal"><span class="pre">cross</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.cumprod.html#numpy.cumprod" title="numpy.cumprod"><code class="xref py py-obj docutils literal"><span class="pre">cumprod</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.cumsum.html#numpy.cumsum" title="numpy.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">cumsum</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.diff.html#numpy.diff" title="numpy.diff"><code class="xref py py-obj docutils literal"><span class="pre">diff</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.floor.html#numpy.floor" title="numpy.floor"><code class="xref py py-obj docutils literal"><span class="pre">floor</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.inner.html#numpy.inner" title="numpy.inner"><code class="xref py py-obj docutils literal"><span class="pre">inner</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.lexsort.html#numpy.lexsort" title="numpy.lexsort"><code class="xref py py-obj docutils literal"><span class="pre">lexsort</span></code></a>,
-<a class="reference external" href="https://docs.python.org/dev/library/functions.html#max" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">max</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.maximum.html#numpy.maximum" title="numpy.maximum"><code class="xref py py-obj docutils literal"><span class="pre">maximum</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.mean.html#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.median.html#numpy.median" title="numpy.median"><code class="xref py py-obj docutils literal"><span class="pre">median</span></code></a>,
-<a class="reference external" href="https://docs.python.org/dev/library/functions.html#min" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">min</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.minimum.html#numpy.minimum" title="numpy.minimum"><code class="xref py py-obj docutils literal"><span class="pre">minimum</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.nonzero.html#numpy.nonzero" title="numpy.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">nonzero</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.outer.html#numpy.outer" title="numpy.outer"><code class="xref py py-obj docutils literal"><span class="pre">outer</span></code></a>,
-<a class="reference external" href="https://docs.python.org/dev/library/re.html#module-re" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">re</span></code></a>,
-<a class="reference external" href="https://docs.python.org/dev/library/functions.html#round" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">round</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.std.html#numpy.std" title="numpy.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.trace.html#numpy.trace" title="numpy.trace"><code class="xref py py-obj docutils literal"><span class="pre">trace</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.transpose.html#numpy.transpose" title="numpy.transpose"><code class="xref py py-obj docutils literal"><span class="pre">transpose</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.var.html#numpy.var" title="numpy.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.vdot.html#numpy.vdot" title="numpy.vdot"><code class="xref py py-obj docutils literal"><span class="pre">vdot</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.vectorize.html#numpy.vectorize" title="numpy.vectorize"><code class="xref py py-obj docutils literal"><span class="pre">vectorize</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.where.html#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">where</span></code></a></p>
-
-<pre><code class="language-python">np.add(array1,10) # ajouter une valeur à tous les éléments
-</code></pre>
-
-<pre><code>array([[10, 11, 12],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span> <span style="color:#75715e"># ajouter une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[10, 11, 12],
        [13, 14, 15],
        [16, 17, 18]])
 </code></pre>
-
-<pre><code class="language-python">np.subtract(array1,10) # soustraire une valeur à tous les éléments
-</code></pre>
-
-<pre><code>array([[-10,  -9,  -8],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">10</span> <span style="color:#75715e"># soustraire une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[-10,  -9,  -8],
        [ -7,  -6,  -5],
        [ -4,  -3,  -2]])
 </code></pre>
-
-<pre><code class="language-python">np.multiply(array1,100) # multiplier une valeur à tous les éléments
-</code></pre>
-
-<pre><code>array([[  0, 100, 200],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1 <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># multiplier une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[  0, 100, 200],
        [300, 400, 500],
        [600, 700, 800]])
 </code></pre>
-
-<pre><code class="language-python">np.divide(array1, 2) # diviser une valeur à tous les éléments
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1[:,<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#75715e"># on multiplie par 10 toutes les lignes de la colonne d&#39;index 0.</span>
+</code></pre></div><pre><code>array([ 0, 30, 60])
 </code></pre>
-
-<pre><code>array([[0. , 0.5, 1. ],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1 <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e"># diviser une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[0. , 0.5, 1. ],
        [1.5, 2. , 2.5],
        [3. , 3.5, 4. ]])
 </code></pre>
-
-<pre><code class="language-python">np.mean(array1) # calcul de la moyenne du tableau Numpy à partir de la fonction mean()
-</code></pre>
-
-<pre><code>4.0
-</code></pre>
-
-<pre><code class="language-python">array1.mean()  # calcul de la moyenne du tableau Numpy à partir de la méthode mean()
-</code></pre>
-
-<pre><code>4.0
-</code></pre>
-
-<pre><code class="language-python">array1.min()  # calcul de la valeur minimale du tableau Numpy à partir de la méthode min()
-</code></pre>
-
-<pre><code>0
-</code></pre>
-
-<pre><code class="language-python">array1.max()  # calcul de la valeur maximale du tableau Numpy à partir de la méthode max()
-</code></pre>
-
-<pre><code>8
-</code></pre>
-
-<pre><code class="language-python">np.mean(array1, axis=0)  # si on veut appliquer une fonction uniquement sur les colonnes 
-</code></pre>
-
-<pre><code>array([3., 4., 5.])
-</code></pre>
-
-<pre><code class="language-python">np.mean(array1, axis=1) # si on veut appliquer une fonction uniquement sur les lignes 
-</code></pre>
-
-<pre><code>array([1., 4., 7.])
-</code></pre>
-
 <ul>
-<li><p>Opérations entre plusieurs tableaux</p>
-
-<pre><code class="language-python">(array1 +1) * array2 # multiplication de 2 tableaux
-</code></pre>
-
-<p>array([[ 28,  16, 102],
-       [160, 220,  36],
-       [161, 328, 360]])</p>
-
-<pre><code class="language-python">array1 + array2 # somme de 2 tableaux
-</code></pre>
-
-<p>array([[28,  9, 36],
-       [43, 48, 11],
-       [29, 48, 48]])</p>
-
-<pre><code class="language-python">np.dot(array1, array2) # produit scalaire de 2 tableaux
-</code></pre>
-
-<p>array([[ 86, 126,  86],
-       [359, 405, 326],
-       [632, 684, 566]])</p></li>
+<li>quelques fonctions et méthodes Numpy applicables sur les tableaux Numpy:</li>
 </ul>
-
-<h2 id="7-4-modifier-des-tableaux-numpy">7.4- Modifier des tableaux Numpy:</h2>
-
-<p>Parmi les autres fonctionnalités intéressantes figurent la concaténation, le fractionnement, la transposition (changement d’éléments d’une rangée à l’autre et vice versa) et l’obtention des éléments en diagonale.</p>
-
-<p>a)- Pour manipuler/modifier les dimensions d&rsquo;un tableau Numpy:</p>
-
-<p>La dimension d&rsquo;un tableau est donnée par le nombres d&rsquo;élélements suivant chaque axe.
-On a des méthodes spécifiques et des attributs spécifiques aux ndarray():</p>
-
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%">
-<col width="57%">
-</colgroup>
-<tbody valign="top">
-
-<tr><td><tt class="docutils literal"><span class="pre">ndim</span></tt></td>
-<td>Attribut pour connaitre la dimension d'un tableau Numpy</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">shape</span></tt></td>
-<td>Attribut pour connaitre les dimension d'un tableau Numpy </td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">dtype</span></tt></td>
-<td>Attribut pour connaitre le type de notre array</td>
-</tr>
-<tr><td><tt class="docutils literal"><span class="pre">size</span></tt></td>
-<td>Attibut pour connaitre la taille de notre array</td>
-</tr>
-
-</tbody>
-</table>
-
-<pre><code class="language-python">a = np.floor(10*np.random.random((3,4)))
-print(a, a.shape, a.ndim)
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->all<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->any<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->apply_along_axis<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->argmax<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->argmin<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->argsort<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->average<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->bincount<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->ceil<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->clip<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->conj<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->corrcoef<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->cov<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->cross<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->cumprod<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->cumsum<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->diff<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->dot<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->floor<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->inner<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->lexsort<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->max<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->maximum<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->mean<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->median<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->min<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->minimum<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->nonzero<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->outer<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->re<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->round<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->sort<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->std<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->sum<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->trace<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->transpose<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->var<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->vdot<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->vectorize<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->,
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->where<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>add(array1,<span style="color:#ae81ff">10</span>) <span style="color:#75715e"># ajouter une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[10, 11, 12],
+       [13, 14, 15],
+       [16, 17, 18]])
 </code></pre>
-
-<pre><code>[[2. 5. 1. 0.]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>subtract(array1,<span style="color:#ae81ff">10</span>) <span style="color:#75715e"># soustraire une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[-10,  -9,  -8],
+       [ -7,  -6,  -5],
+       [ -4,  -3,  -2]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>multiply(array1,<span style="color:#ae81ff">100</span>) <span style="color:#75715e"># multiplier une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[  0, 100, 200],
+       [300, 400, 500],
+       [600, 700, 800]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>divide(array1, <span style="color:#ae81ff">2</span>) <span style="color:#75715e"># diviser une valeur à tous les éléments</span>
+</code></pre></div><pre><code>array([[0. , 0.5, 1. ],
+       [1.5, 2. , 2.5],
+       [3. , 3.5, 4. ]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>mean(array1) <span style="color:#75715e"># calcul de la moyenne du tableau Numpy à partir de la fonction mean()</span>
+</code></pre></div><pre><code>4.0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1<span style="color:#f92672">.</span>mean()  <span style="color:#75715e"># calcul de la moyenne du tableau Numpy à partir de la méthode mean()</span>
+</code></pre></div><pre><code>4.0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1<span style="color:#f92672">.</span>min()  <span style="color:#75715e"># calcul de la valeur minimale du tableau Numpy à partir de la méthode min()</span>
+</code></pre></div><pre><code>0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1<span style="color:#f92672">.</span>max()  <span style="color:#75715e"># calcul de la valeur maximale du tableau Numpy à partir de la méthode max()</span>
+</code></pre></div><pre><code>8
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>mean(array1, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)  <span style="color:#75715e"># si on veut appliquer une fonction uniquement sur les colonnes </span>
+</code></pre></div><pre><code>array([3., 4., 5.])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>mean(array1, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># si on veut appliquer une fonction uniquement sur les lignes </span>
+</code></pre></div><pre><code>array([1., 4., 7.])
+</code></pre>
+<ul>
+<li>Opérations entre plusieurs tableaux</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(array1 <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> array2 <span style="color:#75715e"># multiplication de 2 tableaux</span>
+</code></pre></div><pre><code>array([[ 28,  16, 102],
+       [160, 220,  36],
+       [161, 328, 360]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1 <span style="color:#f92672">+</span> array2 <span style="color:#75715e"># somme de 2 tableaux</span>
+</code></pre></div><pre><code>array([[28,  9, 36],
+       [43, 48, 11],
+       [29, 48, 48]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>dot(array1, array2) <span style="color:#75715e"># produit scalaire de 2 tableaux</span>
+</code></pre></div><pre><code>array([[ 86, 126,  86],
+       [359, 405, 326],
+       [632, 684, 566]])
+</code></pre>
+<h2 id="74--modifier-des-tableaux-numpy">7.4- Modifier des tableaux Numpy:</h2>
+<p>Parmi les autres fonctionnalités intéressantes figurent la concaténation, le fractionnement, la transposition (changement d’éléments d’une rangée à l’autre et vice versa) et l’obtention des éléments en diagonale.</p>
+<p>a)- Pour manipuler/modifier les dimensions d&rsquo;un tableau Numpy:</p>
+<p>La dimension d&rsquo;un tableau est donnée par le nombres d&rsquo;élélements suivant chaque axe. 
+On a des méthodes spécifiques et des attributs spécifiques aux ndarray():</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>floor(<span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>random((<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)))
+<span style="color:#66d9ef">print</span>(a, a<span style="color:#f92672">.</span>shape, a<span style="color:#f92672">.</span>ndim)
+</code></pre></div><pre><code>[[2. 5. 1. 0.]
  [5. 0. 0. 1.]
  [7. 7. 5. 0.]] (3, 4) 2
 </code></pre>
-
 <p>Selon nos besoins en programmation, on peut modifier la dimension d&rsquo;un tableau.</p>
-
-<pre><code class="language-python">a.ravel()  # écrit notre tableau sur 1 dimension (flattened) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a<span style="color:#f92672">.</span>ravel()  <span style="color:#75715e"># écrit notre tableau sur 1 dimension (flattened) </span>
+</code></pre></div><pre><code>array([2., 5., 1., 0., 5., 0., 0., 1., 7., 7., 5., 0.])
 </code></pre>
-
-<pre><code>array([2., 5., 1., 0., 5., 0., 0., 1., 7., 7., 5., 0.])
-</code></pre>
-
-<pre><code class="language-python">a.reshape(6,2)  # fonction reshape() pour modifier la dimension de notre tableau
-</code></pre>
-
-<pre><code>array([[2., 5.],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># fonction reshape() pour modifier la dimension de notre tableau</span>
+</code></pre></div><pre><code>array([[2., 5.],
        [1., 0.],
        [5., 0.],
        [0., 1.],
        [7., 7.],
        [5., 0.]])
 </code></pre>
-
-<pre><code class="language-python">a.T  # méthode .T pour calculer la transposée de notre tableau. 
-</code></pre>
-
-<pre><code>array([[2., 5., 7.],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a<span style="color:#f92672">.</span>T  <span style="color:#75715e"># méthode .T pour calculer la transposée de notre tableau. </span>
+</code></pre></div><pre><code>array([[2., 5., 7.],
        [5., 0., 7.],
        [1., 0., 5.],
        [0., 1., 0.]])
 </code></pre>
-
-<pre><code class="language-python">print(a.T.shape, a.shape)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>shape, a<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>(4, 3) (3, 4)
 </code></pre>
-
-<pre><code>(4, 3) (3, 4)
-</code></pre>
-
 <p>La fonction reshape renvoie son argument avec une forme modifiée, alors que la méthode ndarray.resize modifie le tableau lui-même:</p>
-
-<pre><code class="language-python">a.resize((2,6))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a<span style="color:#f92672">.</span>resize((<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>))
 a
-</code></pre>
-
-<pre><code>array([[2., 5., 1., 0., 5., 0.],
+</code></pre></div><pre><code>array([[2., 5., 1., 0., 5., 0.],
        [0., 1., 7., 7., 5., 0.]])
 </code></pre>
-
 <p>Si une dimension est définie à -1 dans une opération de reformage, les autres dimensions sont automatiquement calculées:</p>
-
-<pre><code class="language-python">a.reshape(4,-1)
-</code></pre>
-
-<pre><code>array([[2., 5., 1.],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">4</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>array([[2., 5., 1.],
        [0., 5., 0.],
        [0., 1., 7.],
        [7., 5., 0.]])
 </code></pre>
-
 <p>b)- Travailler et modifier un sous-ensemble d&rsquo;un tableau Numpy:</p>
-
-<pre><code class="language-python">notre_tableau = np.array([[1,2,3], [4,5,6], [7,8,9]])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">notre_tableau <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>], [<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]])
 notre_tableau
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 </code></pre>
-
 <p>On va sélectionner un sous-ensemble de notre tableau en prenant la ligne d&rsquo;index 0 .</p>
-
-<pre><code class="language-python">sous_tableau = notre_tableau[0]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sous_tableau <span style="color:#f92672">=</span> notre_tableau[<span style="color:#ae81ff">0</span>]
 sous_tableau
+</code></pre></div><pre><code>array([1, 2, 3])
 </code></pre>
-
-<pre><code>array([1, 2, 3])
-</code></pre>
-
 <p>On va modifier la première valeur de notre tableau.</p>
-
-<pre><code class="language-python">sous_tableau[0] = 100
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sous_tableau[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
 sous_tableau
+</code></pre></div><pre><code>array([100,   2,   3])
 </code></pre>
-
-<pre><code>array([100,   2,   3])
-</code></pre>
-
 <p>Mais en modifiant notre sous tableau, on se rend compte que nous avons modifié notre_tableau.</p>
-
-<pre><code class="language-python">notre_tableau
-</code></pre>
-
-<pre><code>array([[100,   2,   3],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">notre_tableau
+</code></pre></div><pre><code>array([[100,   2,   3],
        [  4,   5,   6],
        [  7,   8,   9]])
 </code></pre>
-
 <p>Une modification du sous-ensemble entraîne une modification du tableau initial .
 On dit que sous_tableau est une vue de notre tableau. Raison: travailler avec des gros volumes de données.</p>
-
-<p>Si on veut vraiment travailler avec un sous ensemble sans modifier notre tableau d&rsquo;origine, il faut faire une copie avec la fonction <b>copy()</b>.</p>
-
-<pre><code class="language-python">notre_tableau = np.array([[1,2,3], [4,5,6], [7,8,9]])
-sous_tableau=notre_tableau[0].copy()
-sous_tableau[0]=101
+<p>Si on veut vraiment travailler avec un sous ensemble sans modifier notre tableau d&rsquo;origine, il faut faire une copie avec la fonction <!-- raw HTML omitted -->copy()<!-- raw HTML omitted -->.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">notre_tableau <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>], [<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]])
+sous_tableau<span style="color:#f92672">=</span>notre_tableau[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>copy()
+sous_tableau[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">101</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sous_tableau
+</code></pre></div><pre><code>array([101,   2,   3])
 </code></pre>
-
-<pre><code class="language-python">sous_tableau
-</code></pre>
-
-<pre><code>array([101,   2,   3])
-</code></pre>
-
-<pre><code class="language-python">notre_tableau
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">notre_tableau
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 </code></pre>
-
 <p>c)- Pour concatener des tableaux Numpy:</p>
-
-<p><a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.vstack.html#numpy.vstack" title="numpy.vstack"><code class="xref py py-obj docutils literal"><span class="pre">vstack</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.column_stack.html#numpy.column_stack" title="numpy.column_stack"><code class="xref py py-obj docutils literal"><span class="pre">column_stack</span></code></a>,
-<a class="reference internal" href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.concatenate.html#numpy.concatenate" title="numpy.concatenate"><code class="xref py py-obj docutils literal"><span class="pre">concatenate</span></code></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->vstack<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->, 
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->column_stack<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->, 
+<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->concatenate<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <ul>
-<li><p>Pour concatener des tableaux Numpy: fonction <b>concatenate()</b></p>
-
-<pre><code class="language-python">array1=np.array([[1,2,3],[4,5,6],[7,8,9]])
+<li>Pour concatener des tableaux Numpy: fonction <!-- raw HTML omitted -->concatenate()<!-- raw HTML omitted --></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>],[<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>],[<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]])
 array1
-</code></pre>
-
-<p>array([[1, 2, 3],
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
-       [7, 8, 9]])</p>
-
-<pre><code class="language-python">array2=np.array([[2,5,6],[9,10,11],[5,6,9]])
+       [7, 8, 9]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array2<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>],[<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>],[<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">9</span>]])
 array2
-</code></pre>
-
-<p>array([[ 2,  5,  6],
+</code></pre></div><pre><code>array([[ 2,  5,  6],
        [ 9, 10, 11],
-       [ 5,  6,  9]])</p>
-
-<pre><code class="language-python">np.concatenate([array1,array2], axis=0)   # concaténer par lignes  (axis = 0) 
+       [ 5,  6,  9]])
 </code></pre>
-
-<p>array([[ 1,  2,  3],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>concatenate([array1,array2], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)   <span style="color:#75715e"># concaténer par lignes  (axis = 0) </span>
+</code></pre></div><pre><code>array([[ 1,  2,  3],
        [ 4,  5,  6],
        [ 7,  8,  9],
        [ 2,  5,  6],
        [ 9, 10, 11],
-       [ 5,  6,  9]])</p>
-
-<pre><code class="language-python">np.concatenate([array1,array2], axis=1)   # concaténer par colonnes  (axis = 1) 
+       [ 5,  6,  9]])
 </code></pre>
-
-<p>array([[ 1,  2,  3,  2,  5,  6],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>concatenate([array1,array2], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)   <span style="color:#75715e"># concaténer par colonnes  (axis = 1) </span>
+</code></pre></div><pre><code>array([[ 1,  2,  3,  2,  5,  6],
        [ 4,  5,  6,  9, 10, 11],
-       [ 7,  8,  9,  5,  6,  9]])</p></li>
+       [ 7,  8,  9,  5,  6,  9]])
+</code></pre>
+<p>Si on souhaite concatener des tableaux n&rsquo;ayant pas les mêmes dimensions, on ne va pas utiliser 
+la fonction concatenate(), mais:</p>
+<ul>
+<li>la fonction <!-- raw HTML omitted -->vstack()<!-- raw HTML omitted --> pour empiler à la verticale</li>
+<li>la fonction <!-- raw HTML omitted -->hstack()<!-- raw HTML omitted --> pour empliler à l&rsquo;horizontale</li>
 </ul>
-
-<p>Si on souhaite concatener des tableaux n&rsquo;ayant pas les mêmes dimensions, on ne va pas utiliser
-la fonction concatenate(), mais:
-- la fonction <b>vstack()</b> pour empiler à la verticale
-- la fonction <b>hstack()</b> pour empliler à l&rsquo;horizontale</p>
-
-<pre><code class="language-python">array3=np.array([10,20,30]) # Création d'un array() de 1D.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array3<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">30</span>]) <span style="color:#75715e"># Création d&#39;un array() de 1D.</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array3
+</code></pre></div><pre><code>array([10, 20, 30])
 </code></pre>
-
-<pre><code class="language-python">array3
-</code></pre>
-
-<pre><code>array([10, 20, 30])
-</code></pre>
-
-<pre><code class="language-python">array4=np.array([[1,2,3],[4,5,6],[7,8,9]]) # Création d'un array() bi-dimentionnel
-</code></pre>
-
-<pre><code class="language-python">array4
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array4<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>],[<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>],[<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]]) <span style="color:#75715e"># Création d&#39;un array() bi-dimentionnel</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array4
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 </code></pre>
-
-<pre><code class="language-python">#np.concatenate([array3,array4])
-np.vstack([array4,array3])   #  On va concatener à la verticale les deux tableaux 
-</code></pre>
-
-<pre><code>array([[ 1,  2,  3],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#np.concatenate([array3,array4])</span>
+np<span style="color:#f92672">.</span>vstack([array4,array3])   <span style="color:#75715e">#  On va concatener à la verticale les deux tableaux </span>
+</code></pre></div><pre><code>array([[ 1,  2,  3],
        [ 4,  5,  6],
        [ 7,  8,  9],
        [10, 20, 30]])
 </code></pre>
-
-<pre><code class="language-python">array5=np.array([[10],[20],[30]]) # Tableau à 2 dimensions à 2 colonnes
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array5<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">10</span>],[<span style="color:#ae81ff">20</span>],[<span style="color:#ae81ff">30</span>]]) <span style="color:#75715e"># Tableau à 2 dimensions à 2 colonnes</span>
 array5
-</code></pre>
-
-<pre><code>array([[10],
+</code></pre></div><pre><code>array([[10],
        [20],
        [30]])
 </code></pre>
-
-<pre><code class="language-python">np.hstack([array4,array5]) #  On va empiler à l'horizontale les deux tableaux 
-</code></pre>
-
-<pre><code>array([[ 1,  2,  3, 10],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>hstack([array4,array5]) <span style="color:#75715e">#  On va empiler à l&#39;horizontale les deux tableaux </span>
+</code></pre></div><pre><code>array([[ 1,  2,  3, 10],
        [ 4,  5,  6, 20],
        [ 7,  8,  9, 30]])
 </code></pre>
-
-<p>Une autre fonction intéressante à connaitre est la fonction <b>column_stack()</b>.</p>
-
+<p>Une autre fonction intéressante à connaitre est la fonction <!-- raw HTML omitted -->column_stack()<!-- raw HTML omitted -->.</p>
 <p>Cette fonction empile des tableaux 1D sous forme de colonnes dans un tableau 2D. Cela équivaut à hstack uniquement pour les tableaux 2D.</p>
-
-<pre><code class="language-python">a = np.array([4.,2.,1.]) # on utilise un tableau 1 D, que nous souhaitons concaténer avec le tableau 2D array4
-print(a.shape, array4.shape)
-print(a.ndim, array4.ndim)
-</code></pre>
-
-<pre><code>(3,) (3, 3)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">4.</span>,<span style="color:#ae81ff">2.</span>,<span style="color:#ae81ff">1.</span>]) <span style="color:#75715e"># on utilise un tableau 1 D, que nous souhaitons concaténer avec le tableau 2D array4</span>
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>shape, array4<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>ndim, array4<span style="color:#f92672">.</span>ndim)
+</code></pre></div><pre><code>(3,) (3, 3)
 1 2
 </code></pre>
-
-<pre><code class="language-python"># np.hstack([array4,a]) # problème de dimension
-np.column_stack([array4,a])
-</code></pre>
-
-<pre><code>array([[1., 2., 3., 4.],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># np.hstack([array4,a]) # problème de dimension</span>
+np<span style="color:#f92672">.</span>column_stack([array4,a])
+</code></pre></div><pre><code>array([[1., 2., 3., 4.],
        [4., 5., 6., 2.],
        [7., 8., 9., 1.]])
 </code></pre>
-
 <p>d)- Pour découper des tableaux Numpy:</p>
-
-<p>C&rsquo;est le contraire de la concatenation.
+<p>C&rsquo;est le contraire de la concatenation. 
 Nous avons les fonctions split(), hsplit() et vsplit() .</p>
-
-<pre><code class="language-python">array=np.array([15,16,17,12,49,52,12,14,36]) # on crée un array à 1 D. 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">52</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">36</span>]) <span style="color:#75715e"># on crée un array à 1 D. </span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(array) <span style="color:#75715e"># taille de notre array </span>
+</code></pre></div><pre><code>9
 </code></pre>
-
-<pre><code class="language-python">len(array) # taille de notre array 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>split(array,<span style="color:#ae81ff">3</span>) <span style="color:#75715e"># séparer le tableau array en 3 tableaux</span>
+</code></pre></div><pre><code>[array([15, 16, 17]), array([12, 49, 52]), array([12, 14, 36])]
 </code></pre>
-
-<pre><code>9
-</code></pre>
-
-<pre><code class="language-python">np.split(array,3) # séparer le tableau array en 3 tableaux
-</code></pre>
-
-<pre><code>[array([15, 16, 17]), array([12, 49, 52]), array([12, 14, 36])]
-</code></pre>
-
 <p>On peut découper notre tableau avec des points de cassure délimités par les index.</p>
-
-<pre><code class="language-python">np.split(array,[2,6]) # on veut couper notre tableau en 3 tableaux , les chiffres entre [] sont les points de cassures. 
-                      # correspond aux index où on coupe. 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>split(array,[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>]) <span style="color:#75715e"># on veut couper notre tableau en 3 tableaux , les chiffres entre [] sont les points de cassures. </span>
+                      <span style="color:#75715e"># correspond aux index où on coupe. </span>
+</code></pre></div><pre><code>[array([15, 16]), array([17, 12, 49, 52]), array([12, 14, 36])]
 </code></pre>
-
-<pre><code>[array([15, 16]), array([17, 12, 49, 52]), array([12, 14, 36])]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1,array2,array3<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>split(array,[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>]) <span style="color:#75715e"># on peut multi-assigner notre cassure</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(array1,array2,array3)
+</code></pre></div><pre><code>[15 16] [17 12 49 52] [12 14 36]
 </code></pre>
-
-<pre><code class="language-python">array1,array2,array3=np.split(array,[2,6]) # on peut multi-assigner notre cassure
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1,array2,array3,array4<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>split(array,[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">6</span>]) <span style="color:#75715e"># selon le nombre de points de cassure, on a le nombre de tableaux. </span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(array1,array2,array3,array4)
+</code></pre></div><pre><code>[15 16] [17 12] [49 52] [12 14 36]
 </code></pre>
-
-<pre><code class="language-python">print(array1,array2,array3)
-</code></pre>
-
-<pre><code>[15 16] [17 12 49 52] [12 14 36]
-</code></pre>
-
-<pre><code class="language-python">array1,array2,array3,array4=np.split(array,[2,4,6]) # selon le nombre de points de cassure, on a le nombre de tableaux. 
-</code></pre>
-
-<pre><code class="language-python">print(array1,array2,array3,array4)
-</code></pre>
-
-<pre><code>[15 16] [17 12] [49 52] [12 14 36]
-</code></pre>
-
 <p>Pour casser des tableaux à 2 dimensions. on utilise hsplit ou vsplit.</p>
-
-<pre><code class="language-python">array2=np.array([[1,2,3],[4,5,6],[7,8,9]])
-</code></pre>
-
-<pre><code class="language-python">array1,array1bis=np.vsplit(array2, [2]) # on coupe à la verticale au point de cassure de niveau 2 
-print(array1,array1bis)
-</code></pre>
-
-<pre><code>[[1 2 3]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array2<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>],[<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>],[<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1,array1bis<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>vsplit(array2, [<span style="color:#ae81ff">2</span>]) <span style="color:#75715e"># on coupe à la verticale au point de cassure de niveau 2 </span>
+<span style="color:#66d9ef">print</span>(array1,array1bis)
+</code></pre></div><pre><code>[[1 2 3]
  [4 5 6]] [[7 8 9]]
 </code></pre>
-
-<pre><code class="language-python">array2
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array2
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 </code></pre>
-
-<pre><code class="language-python">array1,array1bis=np.hsplit(array2,[2]) # on coupe à l'horizontal au point de cassure de niveau 2 
-print(array1,array1bis)
-</code></pre>
-
-<pre><code>[[1 2]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array1,array1bis<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>hsplit(array2,[<span style="color:#ae81ff">2</span>]) <span style="color:#75715e"># on coupe à l&#39;horizontal au point de cassure de niveau 2 </span>
+<span style="color:#66d9ef">print</span>(array1,array1bis)
+</code></pre></div><pre><code>[[1 2]
  [4 5]
  [7 8]] [[3]
  [6]
  [9]]
 </code></pre>
-
-<p>e)- Pour supprimer des rangées et colonnes des tableaux Numpy: <b>delete()</b></p>
-
-<pre><code class="language-python">array=np.array([[1,2,3],[4,5,6],[7,8,9]])
+<p>e)- Pour supprimer des rangées et colonnes des tableaux Numpy: <!-- raw HTML omitted -->delete()<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>],[<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>],[<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>]])
 array
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 </code></pre>
-
-<pre><code class="language-python">np.delete(array,2,axis=0) # supprime la ligne d'index 2
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>delete(array,<span style="color:#ae81ff">2</span>,axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>) <span style="color:#75715e"># supprime la ligne d&#39;index 2</span>
+</code></pre></div><pre><code>array([[1, 2, 3],
        [4, 5, 6]])
 </code></pre>
-
-<pre><code class="language-python">np.delete(array2,2,axis=1) # supprime la colonne d'index 2
-</code></pre>
-
-<pre><code>array([[1, 2],
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>delete(array2,<span style="color:#ae81ff">2</span>,axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># supprime la colonne d&#39;index 2</span>
+</code></pre></div><pre><code>array([[1, 2],
        [4, 5],
        [7, 8]])
 </code></pre>
-
-<p>f)- Pour calculer la transposer d&rsquo;un tableau Numpy: <b>transpose()</b></p>
-
-<pre><code class="language-python">np.transpose(array)
-</code></pre>
-
-<pre><code>array([[1, 4, 7],
+<p>f)- Pour calculer la transposer d&rsquo;un tableau Numpy: <!-- raw HTML omitted -->transpose()<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>transpose(array)
+</code></pre></div><pre><code>array([[1, 4, 7],
        [2, 5, 8],
        [3, 6, 9]])
 </code></pre>
-
-<p>g)- Pour obtenir les valeurs de la diagonale d&rsquo;un tableau Numpy: <b>diagonal()</b></p>
-
-<pre><code class="language-python">array.diagonal() # obtenir les éléments de la diagonale de array
+<p>g)- Pour obtenir les valeurs de la diagonale d&rsquo;un tableau Numpy: <!-- raw HTML omitted -->diagonal()<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">array<span style="color:#f92672">.</span>diagonal() <span style="color:#75715e"># obtenir les éléments de la diagonale de array</span>
+</code></pre></div><pre><code>array([1, 5, 9])
 </code></pre>
-
-<pre><code>array([1, 5, 9])
-</code></pre>
-
-<h2 id="7-5-comparaisons-et-masques-sur-un-tableau-numpy">7.5- Comparaisons et masques sur un tableau Numpy:</h2>
-
+<h2 id="75--comparaisons-et-masques-sur-un-tableau-numpy">7.5- Comparaisons et masques sur un tableau Numpy:</h2>
 <p>Avec les tableaux Numpy, il est possible d&rsquo;utiliser une matrice booléenne pour filtrer et comparer des tableaux Numpy.</p>
-
-<pre><code class="language-python">tableau = np.random.randint(100,size=(6,6))  # création d'un tableau 4*3 random avec valeurs comprises entre 0 et 100 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">100</span>,size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">6</span>))  <span style="color:#75715e"># création d&#39;un tableau 4*3 random avec valeurs comprises entre 0 et 100 </span>
 tableau
-</code></pre>
-
-<pre><code>array([[75, 94, 60, 30, 13, 61],
+</code></pre></div><pre><code>array([[75, 94, 60, 30, 13, 61],
        [82, 96, 64, 97, 29, 99],
        [76, 19, 73, 74, 11,  5],
        [83, 38, 77, 58, 63, 84],
        [79, 94, 10,  5,  6, 75],
        [40, 53, 22, 67, 44, 56]])
 </code></pre>
-
-<pre><code class="language-python">masque = tableau&gt;50# on génère ici un tableau de la même dimension que notre tableau d'origine mais avec des booléens, comme un masque
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">masque <span style="color:#f92672">=</span> tableau<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">50</span><span style="color:#75715e"># on génère ici un tableau de la même dimension que notre tableau d&#39;origine mais avec des booléens, comme un masque</span>
 masque
-</code></pre>
-
-<pre><code>array([[ True,  True,  True, False, False,  True],
+</code></pre></div><pre><code>array([[ True,  True,  True, False, False,  True],
        [ True,  True,  True,  True, False,  True],
        [ True, False,  True,  True, False, False],
        [ True, False,  True,  True,  True,  True],
        [ True,  True, False, False, False,  True],
        [False,  True, False,  True, False,  True]])
 </code></pre>
-
 <p>Étant tout deux de même dimension, nous pouvons utiliser cette matrice booléenne à notre avantage. Autrement dit, nous pouvons faire du masquage booléen. Avec cette matrice booléenne comme masque, nous pouvons l’utiliser pour sélectionner le sous-ensemble particulier de données qui nous intéresse.</p>
-
-<pre><code class="language-python">tableau[masque] 
-#tableau[tableau&gt;50]  # synthaxe équivalente
-</code></pre>
-
-<pre><code>array([75, 94, 60, 61, 82, 96, 64, 97, 99, 76, 73, 74, 83, 77, 58, 63, 84,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau[masque] 
+<span style="color:#75715e">#tableau[tableau&gt;50]  # synthaxe équivalente</span>
+</code></pre></div><pre><code>array([75, 94, 60, 61, 82, 96, 64, 97, 99, 76, 73, 74, 83, 77, 58, 63, 84,
        79, 94, 75, 53, 67, 56])
 </code></pre>
-
 <p>Nous disposons de nombreux autres opérateurs de comparaison pour comparer deux tableaux tels que == (égalité), != (Non-égalité), &lt;= (inférieur ou égal à). Nous pouvons même combiner deux déclarations booléennes &amp; (pour les conditions “ET”) ou | (pour les conditions “OU”).</p>
-
-<pre><code class="language-python">#tableau[tableau&gt;=50]                 # on souhaite garder uniquement les valeurs supérieures ou égales à  50.
-#tableau[tableau&lt;50]                      # on souhaite garder uniquement les valeurs strictement inférieures à 50.
-#tableau[tableau!=50]                     # on souhaite garder uniquement les valeurs différentes de 50.
-#tableau[tableau==50]                     # on souhaite garder uniquement les valeurs égales 50. 
-#tableau[(tableau &gt;=50) &amp; (tableau &lt;=70)]   # on souhaite garder uniquement les valeurs comprises entre 50 et 70 inclusivement.
-tableau[(tableau&gt;=50) | (tableau&lt;=40)]     # on souhaite garder uniquement les valeurs non comprises entre 40 et 50. 
-</code></pre>
-
-<pre><code>array([75, 94, 60, 30, 13, 61, 82, 96, 64, 97, 29, 99, 76, 19, 73, 74, 11,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#tableau[tableau&gt;=50]                 # on souhaite garder uniquement les valeurs supérieures ou égales à  50.</span>
+<span style="color:#75715e">#tableau[tableau&lt;50]                      # on souhaite garder uniquement les valeurs strictement inférieures à 50.</span>
+<span style="color:#75715e">#tableau[tableau!=50]                     # on souhaite garder uniquement les valeurs différentes de 50.</span>
+<span style="color:#75715e">#tableau[tableau==50]                     # on souhaite garder uniquement les valeurs égales 50. </span>
+<span style="color:#75715e">#tableau[(tableau &gt;=50) &amp; (tableau &lt;=70)]   # on souhaite garder uniquement les valeurs comprises entre 50 et 70 inclusivement.</span>
+tableau[(tableau<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> (tableau<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">40</span>)]     <span style="color:#75715e"># on souhaite garder uniquement les valeurs non comprises entre 40 et 50. </span>
+</code></pre></div><pre><code>array([75, 94, 60, 30, 13, 61, 82, 96, 64, 97, 29, 99, 76, 19, 73, 74, 11,
         5, 83, 38, 77, 58, 63, 84, 79, 94, 10,  5,  6, 75, 40, 53, 22, 67,
        56])
 </code></pre>
@@ -1534,7 +1236,7 @@ tableau[(tableau&gt;=50) | (tableau&lt;=40)]     # on souhaite garder uniquement
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/7-Numpy.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c7-Numpy.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

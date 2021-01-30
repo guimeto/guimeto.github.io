@@ -28,9 +28,10 @@
   
     
   
-  <meta name="description" content="Comprendre le langage SQL   SQL est un langage informatique normalisé servant à exploiter des bases de données relationnelles.
- La partie langage de manipulation des données de SQL permet de rechercher, d&rsquo;ajouter, de modifier ou de supprimer des données dans les bases de données relationnelles.
-  12.1- Connexion en Python à une base de données avec Pandas On va travailler avec une base de données open-source de Kaggle.">
+  <meta name="description" content="SQL est un langage informatique normalisé servant à exploiter des bases de données relationnelles.
+  La partie langage de manipulation des données de SQL permet de rechercher, d&rsquo;ajouter, de modifier ou de supprimer des données dans les bases de données relationnelles.
+  12.1- Connexion en Python à une base de données avec Pandas On va travailler avec une base de données open-source de Kaggle. https://www.kaggle.com/dimarudov/data-analysis-using-sql
+12.1.1- Connexion à la base de données locale import sqlite3 path = &#39;database.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/12-requeter-une-base-sql-cours/">
@@ -117,9 +118,10 @@
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/12-requeter-une-base-sql-cours/">
   <meta property="og:title" content="12- SQL et Python - Cours | GDueymes">
-  <meta property="og:description" content="Comprendre le langage SQL   SQL est un langage informatique normalisé servant à exploiter des bases de données relationnelles.
- La partie langage de manipulation des données de SQL permet de rechercher, d&rsquo;ajouter, de modifier ou de supprimer des données dans les bases de données relationnelles.
-  12.1- Connexion en Python à une base de données avec Pandas On va travailler avec une base de données open-source de Kaggle."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="SQL est un langage informatique normalisé servant à exploiter des bases de données relationnelles.
+  La partie langage de manipulation des données de SQL permet de rechercher, d&rsquo;ajouter, de modifier ou de supprimer des données dans les bases de données relationnelles.
+  12.1- Connexion en Python à une base de données avec Pandas On va travailler avec une base de données open-source de Kaggle. https://www.kaggle.com/dimarudov/data-analysis-using-sql
+12.1.1- Connexion à la base de données locale import sqlite3 path = &#39;database."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -581,49 +583,33 @@
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#12-1-connexion-en-python-à-une-base-de-données-avec-pandas">12.1- Connexion en Python à une base de données avec Pandas</a></li>
-<li><a href="#12-1-1-connexion-à-la-base-de-données-locale">12.1.1- Connexion à la base de données locale</a></li>
-<li><a href="#12-1-2-faire-des-filtres-sur-une-base-de-données">12.1.2- Faire des filtres sur une base de données</a></li>
-<li><a href="#12-1-3-faire-des-calculs-en-sql">12.1.3- Faire des calculs en SQL</a></li>
-<li><a href="#12-1-4-grouper-des-données-group-by-et-les-alias">12.1.4- Grouper des données: Group by et les Alias</a></li>
-<li><a href="#12-1-5-concept-de-clé-primaire-et-étrangère">12.1.5- Concept de clé primaire et étrangère</a></li>
-<li><a href="#12-1-6-faire-des-jointures-en-sql">12.1.6- Faire des jointures en SQL</a></li>
-<li><a href="#12-2-créer-un-curseur-et-exécuter-une-requête-sql-sur-python">12.2- Créer un curseur et exécuter une requête SQL sur Python</a></li>
-<li><a href="#12-2-1-chercher-un-certain-nombre-de-résultats">12.2.1- Chercher un certain nombre de résultats</a></li>
-<li><a href="#12-2-2-stopper-la-connexion-à-la-base-de-données">12.2.2- Stopper la connexion à la base de données</a>
-<ul>
-<li><a href="#cas-pratique">Cas pratique:</a></li>
-<li><a href="#cas-pratique2">Cas pratique2:</a></li>
-</ul></li>
-<li><a href="#12-2-3-calcul-de-statistiques-en-sql">12.2.3- Calcul de statistiques en SQL</a>
-<ul>
-<li>
-<ul>
-<li><a href="#compter-le-nombre-de-lignes-en-sql">Compter le nombre de lignes en SQL</a></li>
-<li><a href="#trouver-les-valeurs-minimales-et-maximales-d-une-colonne-en-sql">Trouver les valeurs minimales et maximales d&rsquo;une colonne en SQL</a></li>
-<li><a href="#calculer-des-sommes-et-des-moyennes-en-sql">Calculer des sommes et des moyennes en SQL</a></li>
-<li><a href="#combiner-des-fonctions-sur-une-seule-requête-en-sql">Combiner des fonctions sur une seule requête en SQL</a></li>
-<li><a href="#associer-les-fonctions-de-calcul-avec-la-condition-where">Associer les fonctions de calcul avec la condition &ldquo; where &ldquo;</a></li>
-<li><a href="#sélectionner-des-éléments-ou-des-données-uniques">Sélectionner des éléments ou des données uniques</a></li>
-<li><a href="#associer-des-fonctions-de-calcul-avec-la-fonction-distinct">Associer des fonctions de calcul avec la fonction DISTINCT</a></li>
-<li><a href="#opérations-mathématiques-en-sql">Opérations mathématiques en SQL</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#opérations-mathématiques-entre-colonnes-sql">Opérations mathématiques entre colonnes  SQL</a>
-<ul>
-<li>
-<ul>
-<li><a href="#statistiques-sur-des-groupes-de-données">Statistiques sur des groupes de données</a></li>
-<li><a href="#renommer-les-colonnes-avec-la-commande-as">Renommer les colonnes avec la commande AS</a></li>
-<li><a href="#colonnes-virtuelles-et-having">Colonnes virtuelles et HAVING</a></li>
-<li><a href="#fonction-round">Fonction ROUND</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#121--connexion-en-python-à-une-base-de-données-avec-pandas">12.1- Connexion en Python à une base de données avec Pandas</a></li>
+    <li><a href="#1211--connexion-à-la-base-de-données-locale">12.1.1- Connexion à la base de données locale</a></li>
+    <li><a href="#1212--faire-des-filtres-sur-une-base-de-données">12.1.2- Faire des filtres sur une base de données</a></li>
+    <li><a href="#1213--faire-des-calculs-en-sql">12.1.3- Faire des calculs en SQL</a></li>
+    <li><a href="#1214--grouper-des-données-group-by-et-les-alias">12.1.4- Grouper des données: Group by et les Alias</a></li>
+    <li><a href="#1215--concept-de-clé-primaire-et-étrangère">12.1.5- Concept de clé primaire et étrangère</a></li>
+    <li><a href="#1216--faire-des-jointures-en-sql">12.1.6- Faire des jointures en SQL</a></li>
+    <li><a href="#122--créer-un-curseur-et-exécuter-une-requête-sql-sur-python">12.2- Créer un curseur et exécuter une requête SQL sur Python</a></li>
+    <li><a href="#1221--chercher-un-certain-nombre-de-résultats">12.2.1- Chercher un certain nombre de résultats</a></li>
+    <li><a href="#1222--stopper-la-connexion-à-la-base-de-données">12.2.2- Stopper la connexion à la base de données</a>
+      <ul>
+        <li><a href="#cas-pratique">Cas pratique:</a></li>
+        <li><a href="#cas-pratique2">Cas pratique2:</a></li>
+      </ul>
+    </li>
+    <li><a href="#1223--calcul-de-statistiques-en-sql">12.2.3- Calcul de statistiques en SQL</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#opérations-mathématiques-entre-colonnes--sql">Opérations mathématiques entre colonnes  SQL</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
       
@@ -638,1243 +624,297 @@
           <h1>12- SQL et Python - Cours</h1>
 
           <div class="article-style">
-            
-
-<h1> Comprendre le langage SQL </h1>
-
+            <!-- raw HTML omitted -->
 <ul>
-<li><p>SQL  est un langage informatique normalisé servant à exploiter des bases de données relationnelles.</p></li>
-
-<li><p>La partie langage de manipulation des données de SQL permet de rechercher, d&rsquo;ajouter, de modifier ou de supprimer des données dans les bases de données relationnelles.</p></li>
+<li>
+<p>SQL  est un langage informatique normalisé servant à exploiter des bases de données relationnelles.</p>
+</li>
+<li>
+<p>La partie langage de manipulation des données de SQL permet de rechercher, d&rsquo;ajouter, de modifier ou de supprimer des données dans les bases de données relationnelles.</p>
+</li>
 </ul>
-
-<p><img src="/img/formation/Python-SQL-1.jpg" alt="image0" /></p>
-
-<h2 id="12-1-connexion-en-python-à-une-base-de-données-avec-pandas">12.1- Connexion en Python à une base de données avec Pandas</h2>
-
+<p><img src="/img/formation/Python-SQL-1.jpg" alt="image0"></p>
+<h2 id="121--connexion-en-python-à-une-base-de-données-avec-pandas">12.1- Connexion en Python à une base de données avec Pandas</h2>
 <p>On va travailler avec une base de données open-source de Kaggle.
-<a href="https://www.kaggle.com/dimarudov/data-analysis-using-sql" target="_blank">https://www.kaggle.com/dimarudov/data-analysis-using-sql</a></p>
-
-<h2 id="12-1-1-connexion-à-la-base-de-données-locale">12.1.1- Connexion à la base de données locale</h2>
-
-<pre><code class="language-python">import sqlite3
-path = 'database.sqlite'
-conn = sqlite3.connect(path) # on crée une connexion 
+<a href="https://www.kaggle.com/dimarudov/data-analysis-using-sql">https://www.kaggle.com/dimarudov/data-analysis-using-sql</a></p>
+<h2 id="1211--connexion-à-la-base-de-données-locale">12.1.1- Connexion à la base de données locale</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;database.sqlite&#39;</span>
+conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(path) <span style="color:#75715e"># on crée une connexion </span>
 conn
+</code></pre></div><pre><code>&lt;sqlite3.Connection at 0x5a61ab0&gt;
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#importer une table complète</span>
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-<pre><code>&lt;sqlite3.Connection at 0x5a61ab0&gt;
+teams <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM Team;&#34;&#34;&#34;</span>, conn)
+teams<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Selectionner certaines colonnes d&#39;une table</span>
+teams <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT team_long_name,team_short_name
+</span><span style="color:#e6db74">                        FROM Team;&#34;&#34;&#34;</span>, conn)
+teams<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">#importer une table complète
-import pandas as pd
-
-teams = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM Team;&quot;&quot;&quot;, conn)
-teams.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Acceder à une autre table</span>
+players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM Player_Attributes;&#34;&#34;&#34;</span>, conn)
+players<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>team_api_id</th>
-      <th>team_fifa_api_id</th>
-      <th>team_long_name</th>
-      <th>team_short_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>9987</td>
-      <td>673.0</td>
-      <td>KRC Genk</td>
-      <td>GEN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>9993</td>
-      <td>675.0</td>
-      <td>Beerschot AC</td>
-      <td>BAC</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>10000</td>
-      <td>15005.0</td>
-      <td>SV Zulte-Waregem</td>
-      <td>ZUL</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>9994</td>
-      <td>2007.0</td>
-      <td>Sporting Lokeren</td>
-      <td>LOK</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>9984</td>
-      <td>1750.0</td>
-      <td>KSV Cercle Brugge</td>
-      <td>CEB</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Selectionner certaines colonnes d'une table
-teams = pd.read_sql(&quot;&quot;&quot;SELECT team_long_name,team_short_name
-                        FROM Team;&quot;&quot;&quot;, conn)
-teams.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>team_long_name</th>
-      <th>team_short_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>KRC Genk</td>
-      <td>GEN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Beerschot AC</td>
-      <td>BAC</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>SV Zulte-Waregem</td>
-      <td>ZUL</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sporting Lokeren</td>
-      <td>LOK</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>KSV Cercle Brugge</td>
-      <td>CEB</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Acceder à une autre table
-players = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM Player_Attributes;&quot;&quot;&quot;, conn)
-players.head()
-</code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>player_fifa_api_id</th>
-      <th>player_api_id</th>
-      <th>date</th>
-      <th>overall_rating</th>
-      <th>potential</th>
-      <th>preferred_foot</th>
-      <th>attacking_work_rate</th>
-      <th>defensive_work_rate</th>
-      <th>crossing</th>
-      <th>...</th>
-      <th>vision</th>
-      <th>penalties</th>
-      <th>marking</th>
-      <th>standing_tackle</th>
-      <th>sliding_tackle</th>
-      <th>gk_diving</th>
-      <th>gk_handling</th>
-      <th>gk_kicking</th>
-      <th>gk_positioning</th>
-      <th>gk_reflexes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>218353</td>
-      <td>505942</td>
-      <td>2016-02-18 00:00:00</td>
-      <td>67.0</td>
-      <td>71.0</td>
-      <td>right</td>
-      <td>medium</td>
-      <td>medium</td>
-      <td>49.0</td>
-      <td>...</td>
-      <td>54.0</td>
-      <td>48.0</td>
-      <td>65.0</td>
-      <td>69.0</td>
-      <td>69.0</td>
-      <td>6.0</td>
-      <td>11.0</td>
-      <td>10.0</td>
-      <td>8.0</td>
-      <td>8.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>218353</td>
-      <td>505942</td>
-      <td>2015-11-19 00:00:00</td>
-      <td>67.0</td>
-      <td>71.0</td>
-      <td>right</td>
-      <td>medium</td>
-      <td>medium</td>
-      <td>49.0</td>
-      <td>...</td>
-      <td>54.0</td>
-      <td>48.0</td>
-      <td>65.0</td>
-      <td>69.0</td>
-      <td>69.0</td>
-      <td>6.0</td>
-      <td>11.0</td>
-      <td>10.0</td>
-      <td>8.0</td>
-      <td>8.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>218353</td>
-      <td>505942</td>
-      <td>2015-09-21 00:00:00</td>
-      <td>62.0</td>
-      <td>66.0</td>
-      <td>right</td>
-      <td>medium</td>
-      <td>medium</td>
-      <td>49.0</td>
-      <td>...</td>
-      <td>54.0</td>
-      <td>48.0</td>
-      <td>65.0</td>
-      <td>66.0</td>
-      <td>69.0</td>
-      <td>6.0</td>
-      <td>11.0</td>
-      <td>10.0</td>
-      <td>8.0</td>
-      <td>8.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>218353</td>
-      <td>505942</td>
-      <td>2015-03-20 00:00:00</td>
-      <td>61.0</td>
-      <td>65.0</td>
-      <td>right</td>
-      <td>medium</td>
-      <td>medium</td>
-      <td>48.0</td>
-      <td>...</td>
-      <td>53.0</td>
-      <td>47.0</td>
-      <td>62.0</td>
-      <td>63.0</td>
-      <td>66.0</td>
-      <td>5.0</td>
-      <td>10.0</td>
-      <td>9.0</td>
-      <td>7.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>218353</td>
-      <td>505942</td>
-      <td>2007-02-22 00:00:00</td>
-      <td>61.0</td>
-      <td>65.0</td>
-      <td>right</td>
-      <td>medium</td>
-      <td>medium</td>
-      <td>48.0</td>
-      <td>...</td>
-      <td>53.0</td>
-      <td>47.0</td>
-      <td>62.0</td>
-      <td>63.0</td>
-      <td>66.0</td>
-      <td>5.0</td>
-      <td>10.0</td>
-      <td>9.0</td>
-      <td>7.0</td>
-      <td>7.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 42 columns</p>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Si aucune documentation sur la base de données:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Afficher toutes les tables d&#39;une base de données</span>
+tables <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM sqlite_master
+</span><span style="color:#e6db74">                        WHERE type=&#39;table&#39;;&#34;&#34;&#34;</span>, conn)
+tables<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">#Afficher toutes les tables d'une base de données
-tables = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM sqlite_master
-                        WHERE type='table';&quot;&quot;&quot;, conn)
-tables.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>type</th>
-      <th>name</th>
-      <th>tbl_name</th>
-      <th>rootpage</th>
-      <th>sql</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>table</td>
-      <td>sqlite_sequence</td>
-      <td>sqlite_sequence</td>
-      <td>4</td>
-      <td>CREATE TABLE sqlite_sequence(name,seq)</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>table</td>
-      <td>Player_Attributes</td>
-      <td>Player_Attributes</td>
-      <td>11</td>
-      <td>CREATE TABLE "Player_Attributes" (\n\t`id`\tIN...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>table</td>
-      <td>Player</td>
-      <td>Player</td>
-      <td>14</td>
-      <td>CREATE TABLE `Player` (\n\t`id`\tINTEGER PRIMA...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>table</td>
-      <td>Match</td>
-      <td>Match</td>
-      <td>18</td>
-      <td>CREATE TABLE `Match` (\n\t`id`\tINTEGER PRIMAR...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>table</td>
-      <td>League</td>
-      <td>League</td>
-      <td>24</td>
-      <td>CREATE TABLE `League` (\n\t`id`\tINTEGER PRIMA...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="12-1-2-faire-des-filtres-sur-une-base-de-données">12.1.2- Faire des filtres sur une base de données</h2>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="1212--faire-des-filtres-sur-une-base-de-données">12.1.2- Faire des filtres sur une base de données</h2>
 <ul>
-<li><p>Appliquer un filtre</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating
-                    FROM Player_Attributes
-                    WHERE overall_rating &gt; 90;&quot;&quot;&quot;, conn)
-players.head()
-</code></pre></li>
+<li>Appliquer un filtre</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        WHERE overall_rating &gt; 90;&#34;&#34;&#34;</span>, conn)
+players<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>6532</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>6533</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>12789</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>12790</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>33331</td>
-      <td>93</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>Appliquer un filtre et mettre une limite sur le nombre de résultats</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating
-                    FROM Player_Attributes
-                    WHERE overall_rating &gt; 90
-                    LIMIT 5;&quot;&quot;&quot;, conn)
+<li>Appliquer un filtre et mettre une limite sur le nombre de résultats</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        WHERE overall_rating &gt; 90
+</span><span style="color:#e6db74">                        LIMIT 5;&#34;&#34;&#34;</span>, conn)
 players
-</code></pre></li>
-</ul>
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>6532</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>6533</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>12789</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>12790</td>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>33331</td>
-      <td>93</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>Appliquer un filtre avec conditions multiples</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating,preferred_foot
-                    FROM Player_Attributes
-                    WHERE overall_rating &gt; 80 and preferred_foot=='left'
-                    LIMIT 5;&quot;&quot;&quot;, conn)
-players
-</code></pre></li>
+<li>Appliquer un filtre avec conditions multiples</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating,preferred_foot
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        WHERE overall_rating &gt; 80 and preferred_foot==&#39;left&#39;
+</span><span style="color:#e6db74">                        LIMIT 5;&#34;&#34;&#34;</span>, conn)
+players
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-      <th>preferred_foot</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1744</td>
-      <td>82</td>
-      <td>left</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1745</td>
-      <td>81</td>
-      <td>left</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1746</td>
-      <td>81</td>
-      <td>left</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3245</td>
-      <td>83</td>
-      <td>left</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3248</td>
-      <td>86</td>
-      <td>left</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>Conditions multiples sans avoir besoin de selectionner les colonnes</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id
-                    FROM Player_Attributes
-                    WHERE overall_rating &gt; 80 and preferred_foot=='left'
-                    LIMIT 5;&quot;&quot;&quot;, conn)
-players
-</code></pre></li>
+<li>Conditions multiples sans avoir besoin de selectionner les colonnes</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        WHERE overall_rating &gt; 80 and preferred_foot==&#39;left&#39;
+</span><span style="color:#e6db74">                        LIMIT 5;&#34;&#34;&#34;</span>, conn)
+players
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1744</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1745</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1746</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3245</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3248</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
 <li>Gérer les priorités dans les conditions</li>
 </ul>
-
 <p>Comme en mathématique avec des parenthèses.</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating,preferred_foot,attacking_work_rate
-                        FROM Player_Attributes
-                        WHERE (preferred_foot=='right') and (overall_rating &gt; 80 or attacking_work_rate=='medium')
-                        LIMIT 5;&quot;&quot;&quot;, conn)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating,preferred_foot,attacking_work_rate
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        WHERE (preferred_foot==&#39;right&#39;) and (overall_rating &gt; 80 or attacking_work_rate==&#39;medium&#39;)
+</span><span style="color:#e6db74">                        LIMIT 5;&#34;&#34;&#34;</span>, conn)
 players
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-      <th>preferred_foot</th>
-      <th>attacking_work_rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>67</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>67</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>62</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>61</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>61</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>Filtre sur une série de valeurs en appliquant une liste:</p>
-
-<pre><code class="language-python">countries = pd.read_sql(&quot;&quot;&quot;SELECT *
-                    FROM Country;&quot;&quot;&quot;, conn)
-countries
-</code></pre></li>
+<li>Filtre sur une série de valeurs en appliquant une liste:</li>
 </ul>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1729</td>
-      <td>England</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4769</td>
-      <td>France</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>7809</td>
-      <td>Germany</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>10257</td>
-      <td>Italy</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>13274</td>
-      <td>Netherlands</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>15722</td>
-      <td>Poland</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>17642</td>
-      <td>Portugal</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>19694</td>
-      <td>Scotland</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>21518</td>
-      <td>Spain</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>24558</td>
-      <td>Switzerland</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">countries = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM Country
-                        WHERE (name IN ('Belgium','France','Portugal')) ;&quot;&quot;&quot;, conn)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">countries <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM Country;&#34;&#34;&#34;</span>, conn)
 countries
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">countries <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM Country
+</span><span style="color:#e6db74">                        WHERE (name IN (&#39;Belgium&#39;,&#39;France&#39;,&#39;Portugal&#39;)) ;&#34;&#34;&#34;</span>, conn)
+countries
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4769</td>
-      <td>France</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>17642</td>
-      <td>Portugal</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>Trier les données : ASC DSC</p>
-
-<pre><code class="language-python">#Changer le tri 
-players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating,preferred_foot,attacking_work_rate
-                    FROM Player_Attributes
-                    ORDER BY overall_rating ASC
-                    LIMIT 5;&quot;&quot;&quot;, conn)
+<li>Trier les données : ASC DSC</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Changer le tri </span>
+players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating,preferred_foot,attacking_work_rate
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        ORDER BY overall_rating ASC
+</span><span style="color:#e6db74">                        LIMIT 5;&#34;&#34;&#34;</span>, conn)
 players
-</code></pre></li>
-</ul>
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-      <th>preferred_foot</th>
-      <th>attacking_work_rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>484</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>984</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1753</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2090</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2483</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Ajout d&rsquo;un filtre sur les valeurs nulles pour les ignorer:</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating,preferred_foot,attacking_work_rate
-                        FROM Player_Attributes
-                        WHERE overall_rating IS NOT NULL
-                        ORDER BY overall_rating ASC
-                        LIMIT 5;&quot;&quot;&quot;, conn)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating,preferred_foot,attacking_work_rate
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        WHERE overall_rating IS NOT NULL
+</span><span style="color:#e6db74">                        ORDER BY overall_rating ASC
+</span><span style="color:#e6db74">                        LIMIT 5;&#34;&#34;&#34;</span>, conn)
 players
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-      <th>preferred_foot</th>
-      <th>attacking_work_rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>57834</td>
-      <td>33</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>57835</td>
-      <td>33</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>76552</td>
-      <td>35</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>76553</td>
-      <td>35</td>
-      <td>right</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>131895</td>
-      <td>35</td>
-      <td>left</td>
-      <td>high</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Changer le tri:</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating,preferred_foot,attacking_work_rate
-                        FROM Player_Attributes
-                        ORDER BY overall_rating DESC
-                        LIMIT 5;&quot;&quot;&quot;, conn)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating,preferred_foot,attacking_work_rate
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        ORDER BY overall_rating DESC
+</span><span style="color:#e6db74">                        LIMIT 5;&#34;&#34;&#34;</span>, conn)
 players
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-      <th>preferred_foot</th>
-      <th>attacking_work_rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>102483</td>
-      <td>94</td>
-      <td>left</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>102484</td>
-      <td>94</td>
-      <td>left</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>102485</td>
-      <td>94</td>
-      <td>left</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>102492</td>
-      <td>94</td>
-      <td>left</td>
-      <td>medium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>102493</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>Faire des doubles tris</p>
-
-<pre><code class="language-python">players = pd.read_sql(&quot;&quot;&quot;SELECT id,overall_rating,preferred_foot,attacking_work_rate,standing_tackle
-                    FROM Player_Attributes
-                    ORDER BY overall_rating DESC,standing_tackle ASC
-                    LIMIT 10;&quot;&quot;&quot;, conn)
-players
-</code></pre></li>
+<li>Faire des doubles tris</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">players <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT id,overall_rating,preferred_foot,attacking_work_rate,standing_tackle
+</span><span style="color:#e6db74">                        FROM Player_Attributes
+</span><span style="color:#e6db74">                        ORDER BY overall_rating DESC,standing_tackle ASC
+</span><span style="color:#e6db74">                        LIMIT 10;&#34;&#34;&#34;</span>, conn)
+players
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>overall_rating</th>
-      <th>preferred_foot</th>
-      <th>attacking_work_rate</th>
-      <th>standing_tackle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>102492</td>
-      <td>94</td>
-      <td>left</td>
-      <td>medium</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>102493</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>102494</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>102495</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>102496</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>102497</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>102498</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>102499</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>102500</td>
-      <td>94</td>
-      <td>left</td>
-      <td>high</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>102483</td>
-      <td>94</td>
-      <td>left</td>
-      <td>medium</td>
-      <td>23</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="12-1-3-faire-des-calculs-en-sql">12.1.3- Faire des calculs en SQL</h2>
-
-<pre><code class="language-python">match = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM match;&quot;&quot;&quot;, conn)
-list(match.columns)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<pre><code>['id',
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="1213--faire-des-calculs-en-sql">12.1.3- Faire des calculs en SQL</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM match;&#34;&#34;&#34;</span>, conn)
+list(match<span style="color:#f92672">.</span>columns)
+</code></pre></div><pre><code>['id',
  'country_id',
  'league_id',
  'season',
@@ -1990,1545 +1030,361 @@ list(match.columns)
  'BSD',
  'BSA']
 </code></pre>
-
 <ul>
-<li><p>Faire une somme sur une colonne:</p>
-
-<pre><code class="language-python">match = pd.read_sql(&quot;&quot;&quot;SELECT SUM(home_team_goal),SUM(away_team_goal)
-                    FROM match;&quot;&quot;&quot;, conn)
-match
-</code></pre></li>
+<li>Faire une somme sur une colonne:</li>
 </ul>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>SUM(home_team_goal)</th>
-      <th>SUM(away_team_goal)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>40127</td>
-      <td>30160</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<ul>
-<li><p>Compter le nombre de lignes</p>
-
-<pre><code class="language-python">match = pd.read_sql(&quot;&quot;&quot;SELECT COUNT(*)
-                    FROM match;&quot;&quot;&quot;, conn)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT SUM(home_team_goal),SUM(away_team_goal)
+</span><span style="color:#e6db74">                        FROM match;&#34;&#34;&#34;</span>, conn)
 match
-</code></pre></li>
-</ul>
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>COUNT(*)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>25979</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#compter nombre de lignes dans une colonne ou dans une table avec filtre
-match = pd.read_sql(&quot;&quot;&quot;SELECT COUNT(*)
-                        FROM match
-                        WHERE home_team_goal &gt; 2;&quot;&quot;&quot;, conn)
-match
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>COUNT(*)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>5344</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Trouver le maximum d'une colonne
-match = pd.read_sql(&quot;&quot;&quot;SELECT MAX(home_team_goal),MAX(away_team_goal)
-                        FROM match;&quot;&quot;&quot;, conn)
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li>Compter le nombre de lignes</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT COUNT(*)
+</span><span style="color:#e6db74">                        FROM match;&#34;&#34;&#34;</span>, conn)
 match
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>MAX(home_team_goal)</th>
-      <th>MAX(away_team_goal)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>10</td>
-      <td>9</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Faire une moyenne
-match = pd.read_sql(&quot;&quot;&quot;SELECT AVG(home_team_goal),AVG(away_team_goal)
-                        FROM match;&quot;&quot;&quot;, conn)
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#compter nombre de lignes dans une colonne ou dans une table avec filtre</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT COUNT(*)
+</span><span style="color:#e6db74">                        FROM match
+</span><span style="color:#e6db74">                        WHERE home_team_goal &gt; 2;&#34;&#34;&#34;</span>, conn)
 match
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AVG(home_team_goal)</th>
-      <th>AVG(away_team_goal)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1.544594</td>
-      <td>1.160938</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="12-1-4-grouper-des-données-group-by-et-les-alias">12.1.4- Grouper des données: Group by et les Alias</h2>
-
-<ul>
-<li><p>Grouper les données via une dimension: par saison ici</p>
-
-<pre><code class="language-python">#Grouper les données via une dimension
-match = pd.read_sql(&quot;&quot;&quot;SELECT season, AVG(home_team_goal),AVG(away_team_goal)
-                    FROM match
-                    GROUP BY season;&quot;&quot;&quot;, conn)
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Trouver le maximum d&#39;une colonne</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT MAX(home_team_goal),MAX(away_team_goal)
+</span><span style="color:#e6db74">                        FROM match;&#34;&#34;&#34;</span>, conn)
 match
-</code></pre></li>
-</ul>
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>season</th>
-      <th>AVG(home_team_goal)</th>
-      <th>AVG(away_team_goal)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2008/2009</td>
-      <td>1.505412</td>
-      <td>1.101924</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2009/2010</td>
-      <td>1.541176</td>
-      <td>1.131269</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2010/2011</td>
-      <td>1.548466</td>
-      <td>1.135276</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2011/2012</td>
-      <td>1.572671</td>
-      <td>1.143789</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2012/2013</td>
-      <td>1.550000</td>
-      <td>1.222699</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2013/2014</td>
-      <td>1.578826</td>
-      <td>1.187995</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2014/2015</td>
-      <td>1.520301</td>
-      <td>1.155489</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2015/2016</td>
-      <td>1.543897</td>
-      <td>1.210764</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<ul>
-<li><p>Renommer les variables avec les alias</p>
-
-<pre><code class="language-python">match = pd.read_sql(&quot;&quot;&quot;SELECT AVG(home_team_goal) AS Moyenne_buts_domicile,AVG(away_team_goal) AS Moyenne_buts_exterieur
-                    FROM match
-                    GROUP BY season;&quot;&quot;&quot;, conn)
-match
-</code></pre></li>
-</ul>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Moyenne_buts_domicile</th>
-      <th>Moyenne_buts_exterieur</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1.505412</td>
-      <td>1.101924</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1.541176</td>
-      <td>1.131269</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1.548466</td>
-      <td>1.135276</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.572671</td>
-      <td>1.143789</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.550000</td>
-      <td>1.222699</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1.578826</td>
-      <td>1.187995</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1.520301</td>
-      <td>1.155489</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1.543897</td>
-      <td>1.210764</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<ul>
-<li><p>Faire des filtres sur des alias</p>
-
-<pre><code class="language-python">#match = pd.read_sql(&quot;&quot;&quot;SELECT season, SUM(home_team_goal) AS Total_buts_domicile,SUM(away_team_goal) AS Total_buts_exterieur
-#                        FROM match
-#                        GROUP BY season
-#                        WHERE Total_buts_domicile &gt; 5000;&quot;&quot;&quot;, conn)
-#match
-</code></pre></li>
-</ul>
-
-<p>En cas de groupe by, on ne peut plus utiliser le filtre WHERE mais HAVING</p>
-
-<pre><code class="language-python">#Faire des filtres sur des alias
-match = pd.read_sql(&quot;&quot;&quot;SELECT season, SUM(home_team_goal) AS Total_buts_domicile,SUM(away_team_goal) AS Total_buts_exterieur
-                        FROM match
-                        GROUP BY season
-                        HAVING Total_buts_domicile &gt; 5000;&quot;&quot;&quot;, conn)
-match
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Faire une moyenne</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT AVG(home_team_goal),AVG(away_team_goal)
+</span><span style="color:#e6db74">                        FROM match;&#34;&#34;&#34;</span>, conn)
+match
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>season</th>
-      <th>Total_buts_domicile</th>
-      <th>Total_buts_exterieur</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2008/2009</td>
-      <td>5007</td>
-      <td>3665</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2010/2011</td>
-      <td>5048</td>
-      <td>3701</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2011/2012</td>
-      <td>5064</td>
-      <td>3683</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2012/2013</td>
-      <td>5053</td>
-      <td>3986</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2014/2015</td>
-      <td>5055</td>
-      <td>3842</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2015/2016</td>
-      <td>5135</td>
-      <td>4027</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="12-1-5-concept-de-clé-primaire-et-étrangère">12.1.5- Concept de clé primaire et étrangère</h2>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="1214--grouper-des-données-group-by-et-les-alias">12.1.4- Grouper des données: Group by et les Alias</h2>
 <ul>
-<li><p>Avoir des infos sur une table</p>
-
-<pre><code class="language-python">infos = pd.read_sql(&quot;&quot;&quot;PRAGMA table_info(match);&quot;&quot;&quot;, conn)
-infos.head()
-</code></pre></li>
+<li>Grouper les données via une dimension: par saison ici</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Grouper les données via une dimension</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT season, AVG(home_team_goal),AVG(away_team_goal)
+</span><span style="color:#e6db74">                        FROM match
+</span><span style="color:#e6db74">                        GROUP BY season;&#34;&#34;&#34;</span>, conn)
+match
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cid</th>
-      <th>name</th>
-      <th>type</th>
-      <th>notnull</th>
-      <th>dflt_value</th>
-      <th>pk</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>id</td>
-      <td>INTEGER</td>
-      <td>0</td>
-      <td>None</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>country_id</td>
-      <td>INTEGER</td>
-      <td>0</td>
-      <td>None</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>league_id</td>
-      <td>INTEGER</td>
-      <td>0</td>
-      <td>None</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>season</td>
-      <td>TEXT</td>
-      <td>0</td>
-      <td>None</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>stage</td>
-      <td>INTEGER</td>
-      <td>0</td>
-      <td>None</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>concept de clé primaire (primary key) et de clé étrangère (foreign key)</p>
-
-<pre><code class="language-python">#concept de clé primaire (primary key) et de clé étrangère (foreign key)
-match = pd.read_sql(&quot;&quot;&quot;SELECT *
-                    FROM match;&quot;&quot;&quot;, conn)
-match.head()
-</code></pre></li>
+<li>Renommer les variables avec les alias</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT AVG(home_team_goal) AS Moyenne_buts_domicile,AVG(away_team_goal) AS Moyenne_buts_exterieur
+</span><span style="color:#e6db74">                        FROM match
+</span><span style="color:#e6db74">                        GROUP BY season;&#34;&#34;&#34;</span>, conn)
+match
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li>Faire des filtres sur des alias</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#match = pd.read_sql(&#34;&#34;&#34;SELECT season, SUM(home_team_goal) AS Total_buts_domicile,SUM(away_team_goal) AS Total_buts_exterieur</span>
+<span style="color:#75715e">#                        FROM match</span>
+<span style="color:#75715e">#                        GROUP BY season</span>
+<span style="color:#75715e">#                        WHERE Total_buts_domicile &gt; 5000;&#34;&#34;&#34;, conn)</span>
+<span style="color:#75715e">#match</span>
+</code></pre></div><p>En cas de groupe by, on ne peut plus utiliser le filtre WHERE mais HAVING</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Faire des filtres sur des alias</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT season, SUM(home_team_goal) AS Total_buts_domicile,SUM(away_team_goal) AS Total_buts_exterieur
+</span><span style="color:#e6db74">                        FROM match
+</span><span style="color:#e6db74">                        GROUP BY season
+</span><span style="color:#e6db74">                        HAVING Total_buts_domicile &gt; 5000;&#34;&#34;&#34;</span>, conn)
+match
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="1215--concept-de-clé-primaire-et-étrangère">12.1.5- Concept de clé primaire et étrangère</h2>
+<ul>
+<li>Avoir des infos sur une table</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">infos <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;PRAGMA table_info(match);&#34;&#34;&#34;</span>, conn)
+infos<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>country_id</th>
-      <th>league_id</th>
-      <th>season</th>
-      <th>stage</th>
-      <th>date</th>
-      <th>match_api_id</th>
-      <th>home_team_api_id</th>
-      <th>away_team_api_id</th>
-      <th>home_team_goal</th>
-      <th>...</th>
-      <th>SJA</th>
-      <th>VCH</th>
-      <th>VCD</th>
-      <th>VCA</th>
-      <th>GBH</th>
-      <th>GBD</th>
-      <th>GBA</th>
-      <th>BSH</th>
-      <th>BSD</th>
-      <th>BSA</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-17 00:00:00</td>
-      <td>492473</td>
-      <td>9987</td>
-      <td>9993</td>
-      <td>1</td>
-      <td>...</td>
-      <td>4.00</td>
-      <td>1.65</td>
-      <td>3.40</td>
-      <td>4.50</td>
-      <td>1.78</td>
-      <td>3.25</td>
-      <td>4.00</td>
-      <td>1.73</td>
-      <td>3.40</td>
-      <td>4.20</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-16 00:00:00</td>
-      <td>492474</td>
-      <td>10000</td>
-      <td>9994</td>
-      <td>0</td>
-      <td>...</td>
-      <td>3.80</td>
-      <td>2.00</td>
-      <td>3.25</td>
-      <td>3.25</td>
-      <td>1.85</td>
-      <td>3.25</td>
-      <td>3.75</td>
-      <td>1.91</td>
-      <td>3.25</td>
-      <td>3.60</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-16 00:00:00</td>
-      <td>492475</td>
-      <td>9984</td>
-      <td>8635</td>
-      <td>0</td>
-      <td>...</td>
-      <td>2.50</td>
-      <td>2.35</td>
-      <td>3.25</td>
-      <td>2.65</td>
-      <td>2.50</td>
-      <td>3.20</td>
-      <td>2.50</td>
-      <td>2.30</td>
-      <td>3.20</td>
-      <td>2.75</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-17 00:00:00</td>
-      <td>492476</td>
-      <td>9991</td>
-      <td>9998</td>
-      <td>5</td>
-      <td>...</td>
-      <td>7.50</td>
-      <td>1.45</td>
-      <td>3.75</td>
-      <td>6.50</td>
-      <td>1.50</td>
-      <td>3.75</td>
-      <td>5.50</td>
-      <td>1.44</td>
-      <td>3.75</td>
-      <td>6.50</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-16 00:00:00</td>
-      <td>492477</td>
-      <td>7947</td>
-      <td>9985</td>
-      <td>1</td>
-      <td>...</td>
-      <td>1.73</td>
-      <td>4.50</td>
-      <td>3.40</td>
-      <td>1.65</td>
-      <td>4.50</td>
-      <td>3.50</td>
-      <td>1.65</td>
-      <td>4.75</td>
-      <td>3.30</td>
-      <td>1.67</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 115 columns</p>
-</div>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li>concept de clé primaire (primary key) et de clé étrangère (foreign key)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#concept de clé primaire (primary key) et de clé étrangère (foreign key)</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM match;&#34;&#34;&#34;</span>, conn)
+match<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">infos = pd.read_sql(&quot;&quot;&quot;PRAGMA table_info(Country);&quot;&quot;&quot;, conn)
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">infos <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;PRAGMA table_info(Country);&#34;&#34;&#34;</span>, conn)
 infos
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cid</th>
-      <th>name</th>
-      <th>type</th>
-      <th>notnull</th>
-      <th>dflt_value</th>
-      <th>pk</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>id</td>
-      <td>INTEGER</td>
-      <td>0</td>
-      <td>None</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>name</td>
-      <td>TEXT</td>
-      <td>0</td>
-      <td>None</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">countries = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM Country ;&quot;&quot;&quot;, conn)
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">countries <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM Country ;&#34;&#34;&#34;</span>, conn)
 countries
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1729</td>
-      <td>England</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4769</td>
-      <td>France</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>7809</td>
-      <td>Germany</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>10257</td>
-      <td>Italy</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>13274</td>
-      <td>Netherlands</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>15722</td>
-      <td>Poland</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>17642</td>
-      <td>Portugal</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>19694</td>
-      <td>Scotland</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>21518</td>
-      <td>Spain</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>24558</td>
-      <td>Switzerland</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<p><img src="/img/formation/foreign.gif" alt="primay_key.PNG" /></p>
-
-<h2 id="12-1-6-faire-des-jointures-en-sql">12.1.6- Faire des jointures en SQL</h2>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><img src="/img/formation/foreign.gif" alt="primay_key.PNG"></p>
+<h2 id="1216--faire-des-jointures-en-sql">12.1.6- Faire des jointures en SQL</h2>
 <pre><code>- utilisation des tables MATCH, COUNTRY et TEAM
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT country.*,* FROM MATCH
+</span><span style="color:#e6db74">                        INNER JOIN country
+</span><span style="color:#e6db74">                        ON match.country_id == country.id;&#34;&#34;&#34;</span>, conn)
+match<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">match = pd.read_sql(&quot;&quot;&quot;SELECT country.*,* FROM MATCH
-                        INNER JOIN country
-                        ON match.country_id == country.id;&quot;&quot;&quot;, conn)
-match.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Selectionner uniquement certaines tables </span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT home_team_api_id,away_team_api_id,home_team_goal,away_team_goal, country.name FROM MATCH
+</span><span style="color:#e6db74">                        INNER JOIN country
+</span><span style="color:#e6db74">                        ON match.country_id == country.id;&#34;&#34;&#34;</span>, conn)
+match<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>id</th>
-      <th>country_id</th>
-      <th>league_id</th>
-      <th>season</th>
-      <th>stage</th>
-      <th>date</th>
-      <th>match_api_id</th>
-      <th>home_team_api_id</th>
-      <th>...</th>
-      <th>VCD</th>
-      <th>VCA</th>
-      <th>GBH</th>
-      <th>GBD</th>
-      <th>GBA</th>
-      <th>BSH</th>
-      <th>BSD</th>
-      <th>BSA</th>
-      <th>id</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Belgium</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-17 00:00:00</td>
-      <td>492473</td>
-      <td>9987</td>
-      <td>...</td>
-      <td>3.40</td>
-      <td>4.50</td>
-      <td>1.78</td>
-      <td>3.25</td>
-      <td>4.00</td>
-      <td>1.73</td>
-      <td>3.40</td>
-      <td>4.20</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>Belgium</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-16 00:00:00</td>
-      <td>492474</td>
-      <td>10000</td>
-      <td>...</td>
-      <td>3.25</td>
-      <td>3.25</td>
-      <td>1.85</td>
-      <td>3.25</td>
-      <td>3.75</td>
-      <td>1.91</td>
-      <td>3.25</td>
-      <td>3.60</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>Belgium</td>
-      <td>3</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-16 00:00:00</td>
-      <td>492475</td>
-      <td>9984</td>
-      <td>...</td>
-      <td>3.25</td>
-      <td>2.65</td>
-      <td>2.50</td>
-      <td>3.20</td>
-      <td>2.50</td>
-      <td>2.30</td>
-      <td>3.20</td>
-      <td>2.75</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>Belgium</td>
-      <td>4</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-17 00:00:00</td>
-      <td>492476</td>
-      <td>9991</td>
-      <td>...</td>
-      <td>3.75</td>
-      <td>6.50</td>
-      <td>1.50</td>
-      <td>3.75</td>
-      <td>5.50</td>
-      <td>1.44</td>
-      <td>3.75</td>
-      <td>6.50</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>Belgium</td>
-      <td>5</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2008/2009</td>
-      <td>1</td>
-      <td>2008-08-16 00:00:00</td>
-      <td>492477</td>
-      <td>7947</td>
-      <td>...</td>
-      <td>3.40</td>
-      <td>1.65</td>
-      <td>4.50</td>
-      <td>3.50</td>
-      <td>1.65</td>
-      <td>4.75</td>
-      <td>3.30</td>
-      <td>1.67</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 119 columns</p>
-</div>
-
-<pre><code class="language-python">#Selectionner uniquement certaines tables 
-match = pd.read_sql(&quot;&quot;&quot;SELECT home_team_api_id,away_team_api_id,home_team_goal,away_team_goal, country.name FROM MATCH
-                        INNER JOIN country
-                        ON match.country_id == country.id;&quot;&quot;&quot;, conn)
-match.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">team <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM team;&#34;&#34;&#34;</span>, conn)
+team<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>home_team_api_id</th>
-      <th>away_team_api_id</th>
-      <th>home_team_goal</th>
-      <th>away_team_goal</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9987</td>
-      <td>9993</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10000</td>
-      <td>9994</td>
-      <td>0</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9984</td>
-      <td>8635</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>9991</td>
-      <td>9998</td>
-      <td>5</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>7947</td>
-      <td>9985</td>
-      <td>1</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">team = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM team;&quot;&quot;&quot;, conn)
-team.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Les jointures multiples</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT team.team_long_name,away_team_api_id,home_team_goal,away_team_goal, country.name FROM MATCH
+</span><span style="color:#e6db74">                        INNER JOIN country ON match.country_id == country.id
+</span><span style="color:#e6db74">                        INNER JOIN team ON match.home_team_api_id == team.team_api_id;&#34;&#34;&#34;</span>, conn)
+match<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>team_api_id</th>
-      <th>team_fifa_api_id</th>
-      <th>team_long_name</th>
-      <th>team_short_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>9987</td>
-      <td>673.0</td>
-      <td>KRC Genk</td>
-      <td>GEN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>9993</td>
-      <td>675.0</td>
-      <td>Beerschot AC</td>
-      <td>BAC</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>10000</td>
-      <td>15005.0</td>
-      <td>SV Zulte-Waregem</td>
-      <td>ZUL</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>9994</td>
-      <td>2007.0</td>
-      <td>Sporting Lokeren</td>
-      <td>LOK</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>9984</td>
-      <td>1750.0</td>
-      <td>KSV Cercle Brugge</td>
-      <td>CEB</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Les jointures multiples
-match = pd.read_sql(&quot;&quot;&quot;SELECT team.team_long_name,away_team_api_id,home_team_goal,away_team_goal, country.name FROM MATCH
-                        INNER JOIN country ON match.country_id == country.id
-                        INNER JOIN team ON match.home_team_api_id == team.team_api_id;&quot;&quot;&quot;, conn)
-match.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Les jointures multiples sur une même table</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT tHome.team_long_name,tAway.team_long_name,home_team_goal,away_team_goal, country.name FROM MATCH
+</span><span style="color:#e6db74">                        INNER JOIN country ON match.country_id == country.id
+</span><span style="color:#e6db74">                        INNER JOIN team tHome ON match.home_team_api_id == tHome.team_api_id
+</span><span style="color:#e6db74">                        INNER JOIN team tAway ON match.away_team_api_id == tAway.team_api_id;&#34;&#34;&#34;</span>, conn)
+match<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>team_long_name</th>
-      <th>away_team_api_id</th>
-      <th>home_team_goal</th>
-      <th>away_team_goal</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>KRC Genk</td>
-      <td>9993</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>SV Zulte-Waregem</td>
-      <td>9994</td>
-      <td>0</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>KSV Cercle Brugge</td>
-      <td>8635</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>KAA Gent</td>
-      <td>9998</td>
-      <td>5</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>FCV Dender EH</td>
-      <td>9985</td>
-      <td>1</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Les jointures multiples sur une même table
-match = pd.read_sql(&quot;&quot;&quot;SELECT tHome.team_long_name,tAway.team_long_name,home_team_goal,away_team_goal, country.name FROM MATCH
-                        INNER JOIN country ON match.country_id == country.id
-                        INNER JOIN team tHome ON match.home_team_api_id == tHome.team_api_id
-                        INNER JOIN team tAway ON match.away_team_api_id == tAway.team_api_id;&quot;&quot;&quot;, conn)
-match.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Les jointures multiples avec Alias</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT tHome.team_long_name AS equipe_domicile,tAway.team_long_name AS equipe_exterieur,home_team_goal,away_team_goal, country.name FROM MATCH
+</span><span style="color:#e6db74">                        INNER JOIN country ON match.country_id == country.id
+</span><span style="color:#e6db74">                        INNER JOIN team AS tHome ON match.home_team_api_id == tHome.team_api_id
+</span><span style="color:#e6db74">                        INNER JOIN team AS tAway ON match.away_team_api_id == tAway.team_api_id;&#34;&#34;&#34;</span>, conn)
+match<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>team_long_name</th>
-      <th>team_long_name</th>
-      <th>home_team_goal</th>
-      <th>away_team_goal</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>KRC Genk</td>
-      <td>Beerschot AC</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>SV Zulte-Waregem</td>
-      <td>Sporting Lokeren</td>
-      <td>0</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>KSV Cercle Brugge</td>
-      <td>RSC Anderlecht</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>KAA Gent</td>
-      <td>RAEC Mons</td>
-      <td>5</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>FCV Dender EH</td>
-      <td>Standard de Liège</td>
-      <td>1</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Les jointures multiples avec Alias
-match = pd.read_sql(&quot;&quot;&quot;SELECT tHome.team_long_name AS equipe_domicile,tAway.team_long_name AS equipe_exterieur,home_team_goal,away_team_goal, country.name FROM MATCH
-                        INNER JOIN country ON match.country_id == country.id
-                        INNER JOIN team AS tHome ON match.home_team_api_id == tHome.team_api_id
-                        INNER JOIN team AS tAway ON match.away_team_api_id == tAway.team_api_id;&quot;&quot;&quot;, conn)
-match.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Les jointures multiples avec filtres</span>
+match <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT tHome.team_long_name AS equipe_domicile,tAway.team_long_name AS equipe_exterieur,home_team_goal,away_team_goal, country.name FROM MATCH
+</span><span style="color:#e6db74">                        INNER JOIN country ON match.country_id == country.id
+</span><span style="color:#e6db74">                        INNER JOIN team AS tHome ON match.home_team_api_id == tHome.team_api_id
+</span><span style="color:#e6db74">                        INNER JOIN team AS tAway ON match.away_team_api_id == tAway.team_api_id
+</span><span style="color:#e6db74">                        WHERE country.name == &#39;France&#39; AND home_team_goal &gt; 2;&#34;&#34;&#34;</span>, conn)
+match<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>equipe_domicile</th>
-      <th>equipe_exterieur</th>
-      <th>home_team_goal</th>
-      <th>away_team_goal</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>KRC Genk</td>
-      <td>Beerschot AC</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>SV Zulte-Waregem</td>
-      <td>Sporting Lokeren</td>
-      <td>0</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>KSV Cercle Brugge</td>
-      <td>RSC Anderlecht</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>KAA Gent</td>
-      <td>RAEC Mons</td>
-      <td>5</td>
-      <td>0</td>
-      <td>Belgium</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>FCV Dender EH</td>
-      <td>Standard de Liège</td>
-      <td>1</td>
-      <td>3</td>
-      <td>Belgium</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">#Les jointures multiples avec filtres
-match = pd.read_sql(&quot;&quot;&quot;SELECT tHome.team_long_name AS equipe_domicile,tAway.team_long_name AS equipe_exterieur,home_team_goal,away_team_goal, country.name FROM MATCH
-                        INNER JOIN country ON match.country_id == country.id
-                        INNER JOIN team AS tHome ON match.home_team_api_id == tHome.team_api_id
-                        INNER JOIN team AS tAway ON match.away_team_api_id == tAway.team_api_id
-                        WHERE country.name == 'France' AND home_team_goal &gt; 2;&quot;&quot;&quot;, conn)
-match.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>equipe_domicile</th>
-      <th>equipe_exterieur</th>
-      <th>home_team_goal</th>
-      <th>away_team_goal</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Olympique Lyonnais</td>
-      <td>Toulouse FC</td>
-      <td>3</td>
-      <td>0</td>
-      <td>France</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Stade Rennais FC</td>
-      <td>Olympique de Marseille</td>
-      <td>4</td>
-      <td>4</td>
-      <td>France</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>FC Lorient</td>
-      <td>FC Nantes</td>
-      <td>3</td>
-      <td>0</td>
-      <td>France</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Girondins de Bordeaux</td>
-      <td>Le Havre AC</td>
-      <td>4</td>
-      <td>0</td>
-      <td>France</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>AS Monaco</td>
-      <td>AS Nancy-Lorraine</td>
-      <td>3</td>
-      <td>1</td>
-      <td>France</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Les autres types de jointures
-<img src="/img/formation/join.png" alt="join.PNG" /></p>
-
-<h2 id="12-2-créer-un-curseur-et-exécuter-une-requête-sql-sur-python">12.2- Créer un curseur et exécuter une requête SQL sur Python</h2>
-
+<img src="/img/formation/join.png" alt="join.PNG"></p>
+<h2 id="122--créer-un-curseur-et-exécuter-une-requête-sql-sur-python">12.2- Créer un curseur et exécuter une requête SQL sur Python</h2>
 <ul>
 <li>permet de se connecter à une base de données</li>
 <li>permet d&rsquo;exécuter une requête auprès de la base de données</li>
 <li>permet d&rsquo;analyser les résultats de la base de données</li>
 <li>permet de convertir les résultats en objets python</li>
-
-<li><p>permet de stocker les résultats en variables locales</p>
-
-<pre><code class="language-python">path = './SQL/jobs.db/jobs.db'
-connexion = sqlite3.connect(path) # connect() on crée une instance sqlite3 qu'on assigne à une variable 'connexion'
+<li>permet de stocker les résultats en variables locales</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(path) <span style="color:#75715e"># connect() on crée une instance sqlite3 qu&#39;on assigne à une variable &#39;connexion&#39;</span>
 connexion
+</code></pre></div><pre><code>&lt;sqlite3.Connection at 0x94923b0&gt;
 </code></pre>
-
-<p><sqlite3.Connection at 0x94923b0></p>
-
-<pre><code class="language-python"># on crée un curseur de la classe cursor()
-cursor = connexion.cursor()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># on crée un curseur de la classe cursor()</span>
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># on crée une requête SQL qu&#39;on assigne à la variable query en tant que chaîne de caractères - string</span>
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select * from recent_grads;&#34;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># execution de la requête SQL située dans la variable query </span>
+<span style="color:#75715e"># le curseur convertit le résultat en tuple() et les stocke dans une variable locale</span>
+cursor<span style="color:#f92672">.</span>execute(query)
+</code></pre></div><pre><code>&lt;sqlite3.Cursor at 0xdcf7810&gt;
 </code></pre>
-
-<pre><code class="language-python"># on crée une requête SQL qu'on assigne à la variable query en tant que chaîne de caractères - string
-query = &quot;select * from recent_grads;&quot;
-</code></pre>
-
-<pre><code class="language-python"># execution de la requête SQL située dans la variable query 
-# le curseur convertit le résultat en tuple() et les stocke dans une variable locale
-cursor.execute(query)
-</code></pre>
-
-<p><sqlite3.Cursor at 0xdcf7810></p>
-
-<pre><code class="language-python"># on va chercher maintenant les résultats de la variable locale sous forme de liste de tuples()
-results = cursor.fetchall()
-</code></pre>
-
-<pre><code class="language-python">results[0]
-</code></pre>
-
-<p>(0,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># on va chercher maintenant les résultats de la variable locale sous forme de liste de tuples()</span>
+results <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">results[<span style="color:#ae81ff">0</span>]
+</code></pre></div><pre><code>(0,
  1,
  2419,
- &lsquo;PETROLEUM ENGINEERING&rsquo;,
- &lsquo;Engineering&rsquo;,
+ 'PETROLEUM ENGINEERING',
+ 'Engineering',
  2339,
  36,
  2057,
@@ -3545,313 +1401,288 @@ results = cursor.fetchall()
  125000,
  1534,
  364,
- 193)</p></li>
-</ul>
-
-<p><b>Exercice:</b></p>
-
+ 193)
+</code></pre>
+<p><!-- raw HTML omitted -->Exercice:<!-- raw HTML omitted --></p>
 <ul>
 <li>Ecrire une requête qui retourne toutes les valeurs de la colonne Major depuis la table recent_grads</li>
 <li>Stocker les résultats (list de tuples) et assigner les à la variable majors.</li>
-
-<li><p>afficher les 5 premiers tuples résultats de la major</p>
-
-<pre><code class="language-python">path = './SQL/jobs.db/jobs.db'
-connexion = sqlite3.connect(path)
-cursor = connexion.cursor()
-query = &quot;select Major from recent_grads;&quot;
-major = cursor.execute(query).fetchall()
-print(major[0:5])
-</code></pre>
-
-<p>[(&lsquo;PETROLEUM ENGINEERING&rsquo;,), (&lsquo;MINING AND MINERAL ENGINEERING&rsquo;,), (&lsquo;METALLURGICAL ENGINEERING&rsquo;,), (&lsquo;NAVAL ARCHITECTURE AND MARINE ENGINEERING&rsquo;,), (&lsquo;CHEMICAL ENGINEERING&rsquo;,)]</p></li>
+<li>afficher les 5 premiers tuples résultats de la major</li>
 </ul>
-
-<h2 id="12-2-1-chercher-un-certain-nombre-de-résultats">12.2.1- Chercher un certain nombre de résultats</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(path)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major from recent_grads;&#34;</span>
+major <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>execute(query)<span style="color:#f92672">.</span>fetchall()
+<span style="color:#66d9ef">print</span>(major[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>])
+</code></pre></div><pre><code>[('PETROLEUM ENGINEERING',), ('MINING AND MINERAL ENGINEERING',), ('METALLURGICAL ENGINEERING',), ('NAVAL ARCHITECTURE AND MARINE ENGINEERING',), ('CHEMICAL ENGINEERING',)]
+</code></pre>
+<h2 id="1221--chercher-un-certain-nombre-de-résultats">12.2.1- Chercher un certain nombre de résultats</h2>
 <ul>
 <li>fetchone(): méthode pour aller chercher un résultat</li>
-
-<li><p>fetchmany(n): méthode pour aller chercher &lsquo;n&rsquo; résultats</p>
-
-<pre><code class="language-python">path = './SQL/jobs.db/jobs.db'
-connexion = sqlite3.connect(path)
-cursor = connexion.cursor()
-query = &quot;select Major, Major_category from recent_grads;&quot;
-cursor.execute(query)
-</code></pre>
-
-<p><sqlite3.Cursor at 0xac60110></p>
-
-<pre><code class="language-python">major1 = cursor.fetchone()
-major2 = cursor.fetchone()
-print(major1)
-print(major2)
-</code></pre>
-
-<p>(&lsquo;PETROLEUM ENGINEERING&rsquo;, &lsquo;Engineering&rsquo;)
-(&lsquo;MINING AND MINERAL ENGINEERING&rsquo;, &lsquo;Engineering&rsquo;)</p>
-
-<pre><code class="language-python">major3 = cursor.fetchmany(5)
-print(major3)
-</code></pre>
-
-<p>[(&lsquo;METALLURGICAL ENGINEERING&rsquo;, &lsquo;Engineering&rsquo;), (&lsquo;NAVAL ARCHITECTURE AND MARINE ENGINEERING&rsquo;, &lsquo;Engineering&rsquo;), (&lsquo;CHEMICAL ENGINEERING&rsquo;, &lsquo;Engineering&rsquo;), (&lsquo;NUCLEAR ENGINEERING&rsquo;, &lsquo;Engineering&rsquo;), (&lsquo;ACTUARIAL SCIENCE&rsquo;, &lsquo;Business&rsquo;)]</p></li>
+<li>fetchmany(n): méthode pour aller chercher &lsquo;n&rsquo; résultats</li>
 </ul>
-
-<h2 id="12-2-2-stopper-la-connexion-à-la-base-de-données">12.2.2- Stopper la connexion à la base de données</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(path)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major, Major_category from recent_grads;&#34;</span>
+cursor<span style="color:#f92672">.</span>execute(query)
+</code></pre></div><pre><code>&lt;sqlite3.Cursor at 0xac60110&gt;
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">major1 <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchone()
+major2 <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchone()
+<span style="color:#66d9ef">print</span>(major1)
+<span style="color:#66d9ef">print</span>(major2)
+</code></pre></div><pre><code>('PETROLEUM ENGINEERING', 'Engineering')
+('MINING AND MINERAL ENGINEERING', 'Engineering')
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">major3 <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchmany(<span style="color:#ae81ff">5</span>)
+<span style="color:#66d9ef">print</span>(major3)
+</code></pre></div><pre><code>[('METALLURGICAL ENGINEERING', 'Engineering'), ('NAVAL ARCHITECTURE AND MARINE ENGINEERING', 'Engineering'), ('CHEMICAL ENGINEERING', 'Engineering'), ('NUCLEAR ENGINEERING', 'Engineering'), ('ACTUARIAL SCIENCE', 'Business')]
+</code></pre>
+<h2 id="1222--stopper-la-connexion-à-la-base-de-données">12.2.2- Stopper la connexion à la base de données</h2>
 <ul>
 <li>méthode close()</li>
 </ul>
-
 <h3 id="cas-pratique">Cas pratique:</h3>
-
 <ul>
 <li>connectez-vous à la base de données jobs2.db</li>
 <li>Ecrire et exécuter une requête qui retourne toutes les majors dans l&rsquo;ordre alphabétique inverse</li>
 <li>Assigner le résultat complet à la variable result</li>
-
-<li><p>Enfin, fermer la connexion à la base de données</p>
-
-<pre><code class="language-python">import sqlite3
-path = './SQL/jobs.db/jobs.db'
-cursor = sqlite3.connect(path).cursor()
-
-query = &quot;select Major from recent_grads order by Major DESC;&quot;
-
-cursor.execute(query)
-result = cursor.fetchall()
-connexion.close()
-result
-</code></pre>
-
-<p>[(&lsquo;ZOOLOGY&rsquo;,),
- (&lsquo;VISUAL AND PERFORMING ARTS&rsquo;,),
- (&lsquo;UNITED STATES HISTORY&rsquo;,),
- (&lsquo;TREATMENT THERAPY PROFESSIONS&rsquo;,),
- (&lsquo;TRANSPORTATION SCIENCES AND TECHNOLOGIES&rsquo;,),
- (&lsquo;THEOLOGY AND RELIGIOUS VOCATIONS&rsquo;,),
- (&lsquo;TEACHER EDUCATION: MULTIPLE LEVELS&rsquo;,),
- (&lsquo;STUDIO ARTS&rsquo;,),
- (&lsquo;STATISTICS AND DECISION SCIENCE&rsquo;,),
- (&lsquo;SPECIAL NEEDS EDUCATION&rsquo;,),
- (&lsquo;SOIL SCIENCE&rsquo;,),
- (&lsquo;SOCIOLOGY&rsquo;,),
- (&lsquo;SOCIAL WORK&rsquo;,),
- (&lsquo;SOCIAL SCIENCE OR HISTORY TEACHER EDUCATION&rsquo;,),
- (&lsquo;SOCIAL PSYCHOLOGY&rsquo;,),
- (&lsquo;SECONDARY TEACHER EDUCATION&rsquo;,),
- (&lsquo;SCIENCE AND COMPUTER TEACHER EDUCATION&rsquo;,),
- (&lsquo;SCHOOL STUDENT COUNSELING&rsquo;,),
- (&lsquo;PUBLIC POLICY&rsquo;,),
- (&lsquo;PUBLIC ADMINISTRATION&rsquo;,),
- (&lsquo;PSYCHOLOGY&rsquo;,),
- (&lsquo;PRE-LAW AND LEGAL STUDIES&rsquo;,),
- (&lsquo;POLITICAL SCIENCE AND GOVERNMENT&rsquo;,),
- (&lsquo;PLANT SCIENCE AND AGRONOMY&rsquo;,),
- (&lsquo;PHYSIOLOGY&rsquo;,),
- (&lsquo;PHYSICS&rsquo;,),
- (&lsquo;PHYSICAL SCIENCES&rsquo;,),
- (&lsquo;PHYSICAL FITNESS PARKS RECREATION AND LEISURE&rsquo;,),
- (&lsquo;PHYSICAL AND HEALTH EDUCATION TEACHING&rsquo;,),
- (&lsquo;PHILOSOPHY AND RELIGIOUS STUDIES&rsquo;,),
- (&lsquo;PHARMACY PHARMACEUTICAL SCIENCES AND ADMINISTRATION&rsquo;,),
- (&lsquo;PHARMACOLOGY&rsquo;,),
- (&lsquo;PETROLEUM ENGINEERING&rsquo;,),
- (&lsquo;OTHER FOREIGN LANGUAGES&rsquo;,),
- (&lsquo;OPERATIONS LOGISTICS AND E-COMMERCE&rsquo;,),
- (&lsquo;OCEANOGRAPHY&rsquo;,),
- (&lsquo;NUTRITION SCIENCES&rsquo;,),
- (&lsquo;NURSING&rsquo;,),
- (&lsquo;NUCLEAR, INDUSTRIAL RADIOLOGY, AND BIOLOGICAL TECHNOLOGIES&rsquo;,),
- (&lsquo;NUCLEAR ENGINEERING&rsquo;,),
- (&lsquo;NEUROSCIENCE&rsquo;,),
- (&lsquo;NAVAL ARCHITECTURE AND MARINE ENGINEERING&rsquo;,),
- (&lsquo;NATURAL RESOURCES MANAGEMENT&rsquo;,),
- (&lsquo;MUSIC&rsquo;,),
- (&lsquo;MULTI/INTERDISCIPLINARY STUDIES&rsquo;,),
- (&lsquo;MULTI-DISCIPLINARY OR GENERAL SCIENCE&rsquo;,),
- (&lsquo;MOLECULAR BIOLOGY&rsquo;,),
- (&lsquo;MISCELLANEOUS SOCIAL SCIENCES&rsquo;,),
- (&lsquo;MISCELLANEOUS PSYCHOLOGY&rsquo;,),
- (&lsquo;MISCELLANEOUS HEALTH MEDICAL PROFESSIONS&rsquo;,),
- (&lsquo;MISCELLANEOUS FINE ARTS&rsquo;,),
- (&lsquo;MISCELLANEOUS ENGINEERING TECHNOLOGIES&rsquo;,),
- (&lsquo;MISCELLANEOUS ENGINEERING&rsquo;,),
- (&lsquo;MISCELLANEOUS EDUCATION&rsquo;,),
- (&lsquo;MISCELLANEOUS BUSINESS &amp; MEDICAL ADMINISTRATION&rsquo;,),
- (&lsquo;MISCELLANEOUS BIOLOGY&rsquo;,),
- (&lsquo;MISCELLANEOUS AGRICULTURE&rsquo;,),
- (&lsquo;MINING AND MINERAL ENGINEERING&rsquo;,),
- (&lsquo;MILITARY TECHNOLOGIES&rsquo;,),
- (&lsquo;MICROBIOLOGY&rsquo;,),
- (&lsquo;METALLURGICAL ENGINEERING&rsquo;,),
- (&lsquo;MEDICAL TECHNOLOGIES TECHNICIANS&rsquo;,),
- (&lsquo;MEDICAL ASSISTING SERVICES&rsquo;,),
- (&lsquo;MECHANICAL ENGINEERING RELATED TECHNOLOGIES&rsquo;,),
- (&lsquo;MECHANICAL ENGINEERING&rsquo;,),
- (&lsquo;MATHEMATICS TEACHER EDUCATION&rsquo;,),
- (&lsquo;MATHEMATICS AND COMPUTER SCIENCE&rsquo;,),
- (&lsquo;MATHEMATICS&rsquo;,),
- (&lsquo;MATERIALS SCIENCE&rsquo;,),
- (&lsquo;MATERIALS ENGINEERING AND MATERIALS SCIENCE&rsquo;,),
- (&lsquo;MASS MEDIA&rsquo;,),
- (&lsquo;MARKETING AND MARKETING RESEARCH&rsquo;,),
- (&lsquo;MANAGEMENT INFORMATION SYSTEMS AND STATISTICS&rsquo;,),
- (&lsquo;LINGUISTICS AND COMPARATIVE LANGUAGE AND LITERATURE&rsquo;,),
- (&lsquo;LIBRARY SCIENCE&rsquo;,),
- (&lsquo;LIBERAL ARTS&rsquo;,),
- (&lsquo;LANGUAGE AND DRAMA EDUCATION&rsquo;,),
- (&lsquo;JOURNALISM&rsquo;,),
- (&lsquo;INTERNATIONAL RELATIONS&rsquo;,),
- (&lsquo;INTERNATIONAL BUSINESS&rsquo;,),
- (&lsquo;INTERDISCIPLINARY SOCIAL SCIENCES&rsquo;,),
- (&lsquo;INTERCULTURAL AND INTERNATIONAL STUDIES&rsquo;,),
- (&lsquo;INFORMATION SCIENCES&rsquo;,),
- (&lsquo;INDUSTRIAL PRODUCTION TECHNOLOGIES&rsquo;,),
- (&lsquo;INDUSTRIAL AND ORGANIZATIONAL PSYCHOLOGY&rsquo;,),
- (&lsquo;INDUSTRIAL AND MANUFACTURING ENGINEERING&rsquo;,),
- (&lsquo;HUMANITIES&rsquo;,),
- (&lsquo;HUMAN SERVICES AND COMMUNITY ORGANIZATION&rsquo;,),
- (&lsquo;HUMAN RESOURCES AND PERSONNEL MANAGEMENT&rsquo;,),
- (&lsquo;HOSPITALITY MANAGEMENT&rsquo;,),
- (&lsquo;HISTORY&rsquo;,),
- (&lsquo;HEALTH AND MEDICAL PREPARATORY PROGRAMS&rsquo;,),
- (&lsquo;HEALTH AND MEDICAL ADMINISTRATIVE SERVICES&rsquo;,),
- (&lsquo;GEOSCIENCES&rsquo;,),
- (&lsquo;GEOLOGY AND EARTH SCIENCE&rsquo;,),
- (&lsquo;GEOLOGICAL AND GEOPHYSICAL ENGINEERING&rsquo;,),
- (&lsquo;GEOGRAPHY&rsquo;,),
- (&lsquo;GENETICS&rsquo;,),
- (&lsquo;GENERAL SOCIAL SCIENCES&rsquo;,),
- (&lsquo;GENERAL MEDICAL AND HEALTH SERVICES&rsquo;,),
- (&lsquo;GENERAL ENGINEERING&rsquo;,),
- (&lsquo;GENERAL EDUCATION&rsquo;,),
- (&lsquo;GENERAL BUSINESS&rsquo;,),
- (&lsquo;GENERAL AGRICULTURE&rsquo;,),
- (&lsquo;FRENCH GERMAN LATIN AND OTHER COMMON FOREIGN LANGUAGE STUDIES&rsquo;,),
- (&lsquo;FORESTRY&rsquo;,),
- (&lsquo;FOOD SCIENCE&rsquo;,),
- (&lsquo;FINE ARTS&rsquo;,),
- (&lsquo;FINANCE&rsquo;,),
- (&lsquo;FILM VIDEO AND PHOTOGRAPHIC ARTS&rsquo;,),
- (&lsquo;FAMILY AND CONSUMER SCIENCES&rsquo;,),
- (&lsquo;ENVIRONMENTAL SCIENCE&rsquo;,),
- (&lsquo;ENVIRONMENTAL ENGINEERING&rsquo;,),
- (&lsquo;ENGLISH LANGUAGE AND LITERATURE&rsquo;,),
- (&lsquo;ENGINEERING TECHNOLOGIES&rsquo;,),
- (&lsquo;ENGINEERING MECHANICS PHYSICS AND SCIENCE&rsquo;,),
- (&lsquo;ENGINEERING AND INDUSTRIAL MANAGEMENT&rsquo;,),
- (&lsquo;ELEMENTARY EDUCATION&rsquo;,),
- (&lsquo;ELECTRICAL, MECHANICAL, AND PRECISION TECHNOLOGIES AND PRODUCTION&rsquo;,),
- (&lsquo;ELECTRICAL ENGINEERING TECHNOLOGY&rsquo;,),
- (&lsquo;ELECTRICAL ENGINEERING&rsquo;,),
- (&lsquo;EDUCATIONAL PSYCHOLOGY&rsquo;,),
- (&lsquo;EDUCATIONAL ADMINISTRATION AND SUPERVISION&rsquo;,),
- (&lsquo;ECONOMICS&rsquo;,),
- (&lsquo;ECOLOGY&rsquo;,),
- (&lsquo;EARLY CHILDHOOD EDUCATION&rsquo;,),
- (&lsquo;DRAMA AND THEATER ARTS&rsquo;,),
- (&lsquo;CRIMINOLOGY&rsquo;,),
- (&lsquo;CRIMINAL JUSTICE AND FIRE PROTECTION&rsquo;,),
- (&lsquo;COURT REPORTING&rsquo;,),
- (&lsquo;COUNSELING PSYCHOLOGY&rsquo;,),
- (&lsquo;COSMETOLOGY SERVICES AND CULINARY ARTS&rsquo;,),
- (&lsquo;CONSTRUCTION SERVICES&rsquo;,),
- (&lsquo;COMPUTER SCIENCE&rsquo;,),
- (&lsquo;COMPUTER PROGRAMMING AND DATA PROCESSING&rsquo;,),
- (&lsquo;COMPUTER NETWORKING AND TELECOMMUNICATIONS&rsquo;,),
- (&lsquo;COMPUTER ENGINEERING&rsquo;,),
- (&lsquo;COMPUTER AND INFORMATION SYSTEMS&rsquo;,),
- (&lsquo;COMPUTER ADMINISTRATION MANAGEMENT AND SECURITY&rsquo;,),
- (&lsquo;COMPOSITION AND RHETORIC&rsquo;,),
- (&lsquo;COMMUNITY AND PUBLIC HEALTH&rsquo;,),
- (&lsquo;COMMUNICATIONS&rsquo;,),
- (&lsquo;COMMUNICATION TECHNOLOGIES&rsquo;,),
- (&lsquo;COMMUNICATION DISORDERS SCIENCES AND SERVICES&rsquo;,),
- (&lsquo;COMMERCIAL ART AND GRAPHIC DESIGN&rsquo;,),
- (&lsquo;COGNITIVE SCIENCE AND BIOPSYCHOLOGY&rsquo;,),
- (&lsquo;CLINICAL PSYCHOLOGY&rsquo;,),
- (&lsquo;CIVIL ENGINEERING&rsquo;,),
- (&lsquo;CHEMISTRY&rsquo;,),
- (&lsquo;CHEMICAL ENGINEERING&rsquo;,),
- (&lsquo;BUSINESS MANAGEMENT AND ADMINISTRATION&rsquo;,),
- (&lsquo;BUSINESS ECONOMICS&rsquo;,),
- (&lsquo;BOTANY&rsquo;,),
- (&lsquo;BIOMEDICAL ENGINEERING&rsquo;,),
- (&lsquo;BIOLOGY&rsquo;,),
- (&lsquo;BIOLOGICAL ENGINEERING&rsquo;,),
- (&lsquo;BIOCHEMICAL SCIENCES&rsquo;,),
- (&lsquo;ATMOSPHERIC SCIENCES AND METEOROLOGY&rsquo;,),
- (&lsquo;ASTRONOMY AND ASTROPHYSICS&rsquo;,),
- (&lsquo;ART HISTORY AND CRITICISM&rsquo;,),
- (&lsquo;ART AND MUSIC EDUCATION&rsquo;,),
- (&lsquo;AREA ETHNIC AND CIVILIZATION STUDIES&rsquo;,),
- (&lsquo;ARCHITECTURE&rsquo;,),
- (&lsquo;ARCHITECTURAL ENGINEERING&rsquo;,),
- (&lsquo;APPLIED MATHEMATICS&rsquo;,),
- (&lsquo;ANTHROPOLOGY AND ARCHEOLOGY&rsquo;,),
- (&lsquo;ANIMAL SCIENCES&rsquo;,),
- (&lsquo;AGRICULTURE PRODUCTION AND MANAGEMENT&rsquo;,),
- (&lsquo;AGRICULTURAL ECONOMICS&rsquo;,),
- (&lsquo;AEROSPACE ENGINEERING&rsquo;,),
- (&lsquo;ADVERTISING AND PUBLIC RELATIONS&rsquo;,),
- (&lsquo;ACTUARIAL SCIENCE&rsquo;,),
- (&lsquo;ACCOUNTING&rsquo;,)]</p></li>
+<li>Enfin, fermer la connexion à la base de données</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>
+cursor <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(path)<span style="color:#f92672">.</span>cursor()
 
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major from recent_grads order by Major DESC;&#34;</span>
+
+cursor<span style="color:#f92672">.</span>execute(query)
+result <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+connexion<span style="color:#f92672">.</span>close()
+result
+</code></pre></div><pre><code>[('ZOOLOGY',),
+ ('VISUAL AND PERFORMING ARTS',),
+ ('UNITED STATES HISTORY',),
+ ('TREATMENT THERAPY PROFESSIONS',),
+ ('TRANSPORTATION SCIENCES AND TECHNOLOGIES',),
+ ('THEOLOGY AND RELIGIOUS VOCATIONS',),
+ ('TEACHER EDUCATION: MULTIPLE LEVELS',),
+ ('STUDIO ARTS',),
+ ('STATISTICS AND DECISION SCIENCE',),
+ ('SPECIAL NEEDS EDUCATION',),
+ ('SOIL SCIENCE',),
+ ('SOCIOLOGY',),
+ ('SOCIAL WORK',),
+ ('SOCIAL SCIENCE OR HISTORY TEACHER EDUCATION',),
+ ('SOCIAL PSYCHOLOGY',),
+ ('SECONDARY TEACHER EDUCATION',),
+ ('SCIENCE AND COMPUTER TEACHER EDUCATION',),
+ ('SCHOOL STUDENT COUNSELING',),
+ ('PUBLIC POLICY',),
+ ('PUBLIC ADMINISTRATION',),
+ ('PSYCHOLOGY',),
+ ('PRE-LAW AND LEGAL STUDIES',),
+ ('POLITICAL SCIENCE AND GOVERNMENT',),
+ ('PLANT SCIENCE AND AGRONOMY',),
+ ('PHYSIOLOGY',),
+ ('PHYSICS',),
+ ('PHYSICAL SCIENCES',),
+ ('PHYSICAL FITNESS PARKS RECREATION AND LEISURE',),
+ ('PHYSICAL AND HEALTH EDUCATION TEACHING',),
+ ('PHILOSOPHY AND RELIGIOUS STUDIES',),
+ ('PHARMACY PHARMACEUTICAL SCIENCES AND ADMINISTRATION',),
+ ('PHARMACOLOGY',),
+ ('PETROLEUM ENGINEERING',),
+ ('OTHER FOREIGN LANGUAGES',),
+ ('OPERATIONS LOGISTICS AND E-COMMERCE',),
+ ('OCEANOGRAPHY',),
+ ('NUTRITION SCIENCES',),
+ ('NURSING',),
+ ('NUCLEAR, INDUSTRIAL RADIOLOGY, AND BIOLOGICAL TECHNOLOGIES',),
+ ('NUCLEAR ENGINEERING',),
+ ('NEUROSCIENCE',),
+ ('NAVAL ARCHITECTURE AND MARINE ENGINEERING',),
+ ('NATURAL RESOURCES MANAGEMENT',),
+ ('MUSIC',),
+ ('MULTI/INTERDISCIPLINARY STUDIES',),
+ ('MULTI-DISCIPLINARY OR GENERAL SCIENCE',),
+ ('MOLECULAR BIOLOGY',),
+ ('MISCELLANEOUS SOCIAL SCIENCES',),
+ ('MISCELLANEOUS PSYCHOLOGY',),
+ ('MISCELLANEOUS HEALTH MEDICAL PROFESSIONS',),
+ ('MISCELLANEOUS FINE ARTS',),
+ ('MISCELLANEOUS ENGINEERING TECHNOLOGIES',),
+ ('MISCELLANEOUS ENGINEERING',),
+ ('MISCELLANEOUS EDUCATION',),
+ ('MISCELLANEOUS BUSINESS &amp; MEDICAL ADMINISTRATION',),
+ ('MISCELLANEOUS BIOLOGY',),
+ ('MISCELLANEOUS AGRICULTURE',),
+ ('MINING AND MINERAL ENGINEERING',),
+ ('MILITARY TECHNOLOGIES',),
+ ('MICROBIOLOGY',),
+ ('METALLURGICAL ENGINEERING',),
+ ('MEDICAL TECHNOLOGIES TECHNICIANS',),
+ ('MEDICAL ASSISTING SERVICES',),
+ ('MECHANICAL ENGINEERING RELATED TECHNOLOGIES',),
+ ('MECHANICAL ENGINEERING',),
+ ('MATHEMATICS TEACHER EDUCATION',),
+ ('MATHEMATICS AND COMPUTER SCIENCE',),
+ ('MATHEMATICS',),
+ ('MATERIALS SCIENCE',),
+ ('MATERIALS ENGINEERING AND MATERIALS SCIENCE',),
+ ('MASS MEDIA',),
+ ('MARKETING AND MARKETING RESEARCH',),
+ ('MANAGEMENT INFORMATION SYSTEMS AND STATISTICS',),
+ ('LINGUISTICS AND COMPARATIVE LANGUAGE AND LITERATURE',),
+ ('LIBRARY SCIENCE',),
+ ('LIBERAL ARTS',),
+ ('LANGUAGE AND DRAMA EDUCATION',),
+ ('JOURNALISM',),
+ ('INTERNATIONAL RELATIONS',),
+ ('INTERNATIONAL BUSINESS',),
+ ('INTERDISCIPLINARY SOCIAL SCIENCES',),
+ ('INTERCULTURAL AND INTERNATIONAL STUDIES',),
+ ('INFORMATION SCIENCES',),
+ ('INDUSTRIAL PRODUCTION TECHNOLOGIES',),
+ ('INDUSTRIAL AND ORGANIZATIONAL PSYCHOLOGY',),
+ ('INDUSTRIAL AND MANUFACTURING ENGINEERING',),
+ ('HUMANITIES',),
+ ('HUMAN SERVICES AND COMMUNITY ORGANIZATION',),
+ ('HUMAN RESOURCES AND PERSONNEL MANAGEMENT',),
+ ('HOSPITALITY MANAGEMENT',),
+ ('HISTORY',),
+ ('HEALTH AND MEDICAL PREPARATORY PROGRAMS',),
+ ('HEALTH AND MEDICAL ADMINISTRATIVE SERVICES',),
+ ('GEOSCIENCES',),
+ ('GEOLOGY AND EARTH SCIENCE',),
+ ('GEOLOGICAL AND GEOPHYSICAL ENGINEERING',),
+ ('GEOGRAPHY',),
+ ('GENETICS',),
+ ('GENERAL SOCIAL SCIENCES',),
+ ('GENERAL MEDICAL AND HEALTH SERVICES',),
+ ('GENERAL ENGINEERING',),
+ ('GENERAL EDUCATION',),
+ ('GENERAL BUSINESS',),
+ ('GENERAL AGRICULTURE',),
+ ('FRENCH GERMAN LATIN AND OTHER COMMON FOREIGN LANGUAGE STUDIES',),
+ ('FORESTRY',),
+ ('FOOD SCIENCE',),
+ ('FINE ARTS',),
+ ('FINANCE',),
+ ('FILM VIDEO AND PHOTOGRAPHIC ARTS',),
+ ('FAMILY AND CONSUMER SCIENCES',),
+ ('ENVIRONMENTAL SCIENCE',),
+ ('ENVIRONMENTAL ENGINEERING',),
+ ('ENGLISH LANGUAGE AND LITERATURE',),
+ ('ENGINEERING TECHNOLOGIES',),
+ ('ENGINEERING MECHANICS PHYSICS AND SCIENCE',),
+ ('ENGINEERING AND INDUSTRIAL MANAGEMENT',),
+ ('ELEMENTARY EDUCATION',),
+ ('ELECTRICAL, MECHANICAL, AND PRECISION TECHNOLOGIES AND PRODUCTION',),
+ ('ELECTRICAL ENGINEERING TECHNOLOGY',),
+ ('ELECTRICAL ENGINEERING',),
+ ('EDUCATIONAL PSYCHOLOGY',),
+ ('EDUCATIONAL ADMINISTRATION AND SUPERVISION',),
+ ('ECONOMICS',),
+ ('ECOLOGY',),
+ ('EARLY CHILDHOOD EDUCATION',),
+ ('DRAMA AND THEATER ARTS',),
+ ('CRIMINOLOGY',),
+ ('CRIMINAL JUSTICE AND FIRE PROTECTION',),
+ ('COURT REPORTING',),
+ ('COUNSELING PSYCHOLOGY',),
+ ('COSMETOLOGY SERVICES AND CULINARY ARTS',),
+ ('CONSTRUCTION SERVICES',),
+ ('COMPUTER SCIENCE',),
+ ('COMPUTER PROGRAMMING AND DATA PROCESSING',),
+ ('COMPUTER NETWORKING AND TELECOMMUNICATIONS',),
+ ('COMPUTER ENGINEERING',),
+ ('COMPUTER AND INFORMATION SYSTEMS',),
+ ('COMPUTER ADMINISTRATION MANAGEMENT AND SECURITY',),
+ ('COMPOSITION AND RHETORIC',),
+ ('COMMUNITY AND PUBLIC HEALTH',),
+ ('COMMUNICATIONS',),
+ ('COMMUNICATION TECHNOLOGIES',),
+ ('COMMUNICATION DISORDERS SCIENCES AND SERVICES',),
+ ('COMMERCIAL ART AND GRAPHIC DESIGN',),
+ ('COGNITIVE SCIENCE AND BIOPSYCHOLOGY',),
+ ('CLINICAL PSYCHOLOGY',),
+ ('CIVIL ENGINEERING',),
+ ('CHEMISTRY',),
+ ('CHEMICAL ENGINEERING',),
+ ('BUSINESS MANAGEMENT AND ADMINISTRATION',),
+ ('BUSINESS ECONOMICS',),
+ ('BOTANY',),
+ ('BIOMEDICAL ENGINEERING',),
+ ('BIOLOGY',),
+ ('BIOLOGICAL ENGINEERING',),
+ ('BIOCHEMICAL SCIENCES',),
+ ('ATMOSPHERIC SCIENCES AND METEOROLOGY',),
+ ('ASTRONOMY AND ASTROPHYSICS',),
+ ('ART HISTORY AND CRITICISM',),
+ ('ART AND MUSIC EDUCATION',),
+ ('AREA ETHNIC AND CIVILIZATION STUDIES',),
+ ('ARCHITECTURE',),
+ ('ARCHITECTURAL ENGINEERING',),
+ ('APPLIED MATHEMATICS',),
+ ('ANTHROPOLOGY AND ARCHEOLOGY',),
+ ('ANIMAL SCIENCES',),
+ ('AGRICULTURE PRODUCTION AND MANAGEMENT',),
+ ('AGRICULTURAL ECONOMICS',),
+ ('AEROSPACE ENGINEERING',),
+ ('ADVERTISING AND PUBLIC RELATIONS',),
+ ('ACTUARIAL SCIENCE',),
+ ('ACCOUNTING',)]
+</code></pre>
 <h3 id="cas-pratique2">Cas pratique2:</h3>
-
 <ul>
-<li><p>base de données factbook.db</p>
+<li>base de données factbook.db</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd 
+<span style="color:#f92672">import</span> sqlite3
+<span style="color:#f92672">import</span> math
+ 
+<span style="color:#75715e"># Connexion à la base de données factbook.db</span>
+path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(path)
 
-<pre><code class="language-python">import pandas as pd 
-import sqlite3
-import math
+<span style="color:#75715e"># Lecture des données de la table facts dans un tableau pandas</span>
+a <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql_query(<span style="color:#e6db74">&#39;SELECT * FROM facts;&#39;</span>, con <span style="color:#f92672">=</span> connexion)
  
-# Connexion à la base de données factbook.db
-path = './SQL/jobs.db/factbook.db'
-connexion = sqlite3.connect(path)
-
-# Lecture des données de la table facts dans un tableau pandas
-a = pd.read_sql_query('SELECT * FROM facts;', con = connexion)
+<span style="color:#75715e"># Calcul théorique:</span>
+<span style="color:#75715e"># N = N0*e**(rt)</span>
+<span style="color:#75715e"># N = population finale</span>
+<span style="color:#75715e"># N0 = population initiale</span>
+<span style="color:#75715e"># e = constante</span>
+<span style="color:#75715e"># r = taux de croissance annuelle</span>
+<span style="color:#75715e"># t = nombre d&#39;années entre l&#39;estimation et l&#39;initiale</span>
+<span style="color:#75715e"># 5000 habitants, taux de croissance t de 4% 2015 --&gt; 2050, donc t = 35</span>
+<span style="color:#75715e"># N = 5000 * e ** (0.04 * 35)</span>
  
-# Calcul théorique:
-# N = N0*e**(rt)
-# N = population finale
-# N0 = population initiale
-# e = constante
-# r = taux de croissance annuelle
-# t = nombre d'années entre l'estimation et l'initiale
-# 5000 habitants, taux de croissance t de 4% 2015 --&gt; 2050, donc t = 35
-# N = 5000 * e ** (0.04 * 35)
+<span style="color:#75715e"># définition de la fonction qui calcule une estimation de la population en 2015 suivant le calcul ci-dessus:</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pop_growth</span>(x):
+ <span style="color:#66d9ef">return</span> x[<span style="color:#e6db74">&#39;population&#39;</span>] <span style="color:#f92672">*</span> math<span style="color:#f92672">.</span>e <span style="color:#f92672">**</span> ((x[<span style="color:#e6db74">&#39;population_growth&#39;</span>]<span style="color:#f92672">/</span><span style="color:#ae81ff">100</span>)<span style="color:#f92672">*</span> <span style="color:#ae81ff">35</span>)
  
-# définition de la fonction qui calcule une estimation de la population en 2015 suivant le calcul ci-dessus:
-def pop_growth(x):
-return x['population'] * math.e ** ((x['population_growth']/100)* 35)
+<span style="color:#75715e"># Application de la fonction pop_growth à chaque pays + création d&#39;une colonne pop_2050 contenant les résultats</span>
+a[<span style="color:#e6db74">&#39;pop_2050&#39;</span>] <span style="color:#f92672">=</span> a<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> row: pop_growth(row), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
  
-# Application de la fonction pop_growth à chaque pays + création d'une colonne pop_2050 contenant les résultats
-a['pop_2050'] = a.apply(lambda row: pop_growth(row), axis=1)
+<span style="color:#75715e"># Suppression des lignes contenant des valeurs manquantes</span>
+a <span style="color:#f92672">=</span> a<span style="color:#f92672">.</span>dropna(axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
  
-# Suppression des lignes contenant des valeurs manquantes
-a = a.dropna(axis = 0)
+<span style="color:#75715e"># On filtre les pays qui ont une surface terrestre &gt; 0 et une population &gt; 0</span>
+a <span style="color:#f92672">=</span> a[(a[<span style="color:#e6db74">&#39;area_land&#39;</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;</span> (a[<span style="color:#e6db74">&#39;population&#39;</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)]
  
-# On filtre les pays qui ont une surface terrestre &gt; 0 et une population &gt; 0
-a = a[(a['area_land'] &gt; 0) &amp; (a['population'] &gt; 0)]
+<span style="color:#75715e"># On trie les pays par population décroissante</span>
+b <span style="color:#f92672">=</span> a<span style="color:#f92672">.</span>sort_values([<span style="color:#e6db74">&#39;pop_2050&#39;</span>], ascending <span style="color:#f92672">=</span> [False])
  
-# On trie les pays par population décroissante
-b = a.sort_values(['pop_2050'], ascending = [False])
+<span style="color:#75715e"># On assigne à la variable b les noms des pays correspondants limités à 10 valeurs</span>
+b <span style="color:#f92672">=</span> b[<span style="color:#e6db74">&#39;name&#39;</span>]<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">9</span>]
  
-# On assigne à la variable b les noms des pays correspondants limités à 10 valeurs
-b = b['name'].iloc[0:9]
- 
-# On affiche le résultat final
+<span style="color:#75715e"># On affiche le résultat final</span>
 b
 
-</code></pre>
-
-<p>76                                 India
+</code></pre></div><pre><code>76                                 India
 36                                 China
 128                              Nigeria
 185                        United States
@@ -3860,1323 +1691,186 @@ b
 13                            Bangladesh
 23                                Brazil
 39     Congo, Democratic Republic of the
-Name: name, dtype: object</p>
-
-<pre><code class="language-python">a
-</code></pre></li>
-</ul>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>code</th>
-      <th>name</th>
-      <th>area</th>
-      <th>area_land</th>
-      <th>area_water</th>
-      <th>population</th>
-      <th>population_growth</th>
-      <th>birth_rate</th>
-      <th>death_rate</th>
-      <th>migration_rate</th>
-      <th>created_at</th>
-      <th>updated_at</th>
-      <th>pop_2050</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>af</td>
-      <td>Afghanistan</td>
-      <td>652230.0</td>
-      <td>652230.0</td>
-      <td>0.0</td>
-      <td>32564342.0</td>
-      <td>2.32</td>
-      <td>38.57</td>
-      <td>13.89</td>
-      <td>1.51</td>
-      <td>2015-11-01 13:19:49.461734</td>
-      <td>2015-11-01 13:19:49.461734</td>
-      <td>7.334819e+07</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>al</td>
-      <td>Albania</td>
-      <td>28748.0</td>
-      <td>27398.0</td>
-      <td>1350.0</td>
-      <td>3029278.0</td>
-      <td>0.30</td>
-      <td>12.92</td>
-      <td>6.58</td>
-      <td>3.30</td>
-      <td>2015-11-01 13:19:54.431082</td>
-      <td>2015-11-01 13:19:54.431082</td>
-      <td>3.364651e+06</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>ag</td>
-      <td>Algeria</td>
-      <td>2381741.0</td>
-      <td>2381741.0</td>
-      <td>0.0</td>
-      <td>39542166.0</td>
-      <td>1.84</td>
-      <td>23.67</td>
-      <td>4.31</td>
-      <td>0.92</td>
-      <td>2015-11-01 13:19:59.961286</td>
-      <td>2015-11-01 13:19:59.961286</td>
-      <td>7.529153e+07</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>an</td>
-      <td>Andorra</td>
-      <td>468.0</td>
-      <td>468.0</td>
-      <td>0.0</td>
-      <td>85580.0</td>
-      <td>0.12</td>
-      <td>8.13</td>
-      <td>6.96</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:20:03.659945</td>
-      <td>2015-11-01 13:20:03.659945</td>
-      <td>8.925091e+04</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>ao</td>
-      <td>Angola</td>
-      <td>1246700.0</td>
-      <td>1246700.0</td>
-      <td>0.0</td>
-      <td>19625353.0</td>
-      <td>2.78</td>
-      <td>38.78</td>
-      <td>11.49</td>
-      <td>0.46</td>
-      <td>2015-11-01 13:20:08.625072</td>
-      <td>2015-11-01 13:20:08.625072</td>
-      <td>5.192614e+07</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>6</td>
-      <td>ac</td>
-      <td>Antigua and Barbuda</td>
-      <td>442.0</td>
-      <td>442.0</td>
-      <td>0.0</td>
-      <td>92436.0</td>
-      <td>1.24</td>
-      <td>15.85</td>
-      <td>5.69</td>
-      <td>2.21</td>
-      <td>2015-11-01 13:20:13.049627</td>
-      <td>2015-11-01 13:20:13.049627</td>
-      <td>1.426675e+05</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>ar</td>
-      <td>Argentina</td>
-      <td>2780400.0</td>
-      <td>2736690.0</td>
-      <td>43710.0</td>
-      <td>43431886.0</td>
-      <td>0.93</td>
-      <td>16.64</td>
-      <td>7.33</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:20:18.233063</td>
-      <td>2015-11-01 13:20:18.233063</td>
-      <td>6.014112e+07</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>am</td>
-      <td>Armenia</td>
-      <td>29743.0</td>
-      <td>28203.0</td>
-      <td>1540.0</td>
-      <td>3056382.0</td>
-      <td>0.15</td>
-      <td>13.61</td>
-      <td>9.34</td>
-      <td>5.80</td>
-      <td>2015-11-01 13:20:23.048753</td>
-      <td>2015-11-01 13:20:23.048753</td>
-      <td>3.221129e+06</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>9</td>
-      <td>as</td>
-      <td>Australia</td>
-      <td>7741220.0</td>
-      <td>7682300.0</td>
-      <td>58920.0</td>
-      <td>22751014.0</td>
-      <td>1.07</td>
-      <td>12.15</td>
-      <td>7.14</td>
-      <td>5.65</td>
-      <td>2015-11-01 13:20:28.186341</td>
-      <td>2015-11-01 13:20:28.186341</td>
-      <td>3.308598e+07</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>10</td>
-      <td>au</td>
-      <td>Austria</td>
-      <td>83871.0</td>
-      <td>82445.0</td>
-      <td>1426.0</td>
-      <td>8665550.0</td>
-      <td>0.55</td>
-      <td>9.41</td>
-      <td>9.42</td>
-      <td>5.56</td>
-      <td>2015-11-01 13:20:33.093597</td>
-      <td>2015-11-01 13:20:33.093597</td>
-      <td>1.050504e+07</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>11</td>
-      <td>aj</td>
-      <td>Azerbaijan</td>
-      <td>86600.0</td>
-      <td>82629.0</td>
-      <td>3971.0</td>
-      <td>9780780.0</td>
-      <td>0.96</td>
-      <td>16.64</td>
-      <td>7.07</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:20:38.210262</td>
-      <td>2015-11-01 13:20:38.210262</td>
-      <td>1.368663e+07</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>12</td>
-      <td>bf</td>
-      <td>Bahamas, The</td>
-      <td>13880.0</td>
-      <td>10010.0</td>
-      <td>3870.0</td>
-      <td>324597.0</td>
-      <td>0.85</td>
-      <td>15.50</td>
-      <td>7.05</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:20:42.754219</td>
-      <td>2015-11-01 13:20:42.754219</td>
-      <td>4.370661e+05</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>13</td>
-      <td>ba</td>
-      <td>Bahrain</td>
-      <td>760.0</td>
-      <td>760.0</td>
-      <td>0.0</td>
-      <td>1346613.0</td>
-      <td>2.41</td>
-      <td>13.66</td>
-      <td>2.69</td>
-      <td>13.09</td>
-      <td>2015-11-01 13:20:47.686896</td>
-      <td>2015-11-01 13:20:47.686896</td>
-      <td>3.130186e+06</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>14</td>
-      <td>bg</td>
-      <td>Bangladesh</td>
-      <td>148460.0</td>
-      <td>130170.0</td>
-      <td>18290.0</td>
-      <td>168957745.0</td>
-      <td>1.60</td>
-      <td>21.14</td>
-      <td>5.61</td>
-      <td>0.46</td>
-      <td>2015-11-01 13:20:52.753843</td>
-      <td>2015-11-01 13:20:52.753843</td>
-      <td>2.957897e+08</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>15</td>
-      <td>bb</td>
-      <td>Barbados</td>
-      <td>430.0</td>
-      <td>430.0</td>
-      <td>0.0</td>
-      <td>290604.0</td>
-      <td>0.31</td>
-      <td>11.87</td>
-      <td>8.44</td>
-      <td>0.30</td>
-      <td>2015-11-01 13:20:57.219984</td>
-      <td>2015-11-01 13:20:57.219984</td>
-      <td>3.239086e+05</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>16</td>
-      <td>bo</td>
-      <td>Belarus</td>
-      <td>207600.0</td>
-      <td>202900.0</td>
-      <td>4700.0</td>
-      <td>9589689.0</td>
-      <td>0.20</td>
-      <td>10.70</td>
-      <td>13.36</td>
-      <td>0.70</td>
-      <td>2015-11-01 13:21:02.382438</td>
-      <td>2015-11-01 13:21:02.382438</td>
-      <td>1.028502e+07</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>17</td>
-      <td>be</td>
-      <td>Belgium</td>
-      <td>30528.0</td>
-      <td>30278.0</td>
-      <td>250.0</td>
-      <td>11323973.0</td>
-      <td>0.76</td>
-      <td>11.41</td>
-      <td>9.63</td>
-      <td>5.87</td>
-      <td>2015-11-01 13:21:07.317024</td>
-      <td>2015-11-01 13:21:07.317024</td>
-      <td>1.477478e+07</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>18</td>
-      <td>bh</td>
-      <td>Belize</td>
-      <td>22966.0</td>
-      <td>22806.0</td>
-      <td>160.0</td>
-      <td>347369.0</td>
-      <td>1.87</td>
-      <td>24.68</td>
-      <td>5.97</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:21:12.255851</td>
-      <td>2015-11-01 13:21:12.255851</td>
-      <td>6.684005e+05</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>19</td>
-      <td>bn</td>
-      <td>Benin</td>
-      <td>112622.0</td>
-      <td>110622.0</td>
-      <td>2000.0</td>
-      <td>10448647.0</td>
-      <td>2.78</td>
-      <td>36.02</td>
-      <td>8.21</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:21:17.437291</td>
-      <td>2015-11-01 13:21:17.437291</td>
-      <td>2.764576e+07</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>20</td>
-      <td>bt</td>
-      <td>Bhutan</td>
-      <td>38394.0</td>
-      <td>38394.0</td>
-      <td>0.0</td>
-      <td>741919.0</td>
-      <td>1.11</td>
-      <td>17.78</td>
-      <td>6.69</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:21:21.942736</td>
-      <td>2015-11-01 13:21:21.942736</td>
-      <td>1.094158e+06</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>21</td>
-      <td>bl</td>
-      <td>Bolivia</td>
-      <td>1098581.0</td>
-      <td>1083301.0</td>
-      <td>15280.0</td>
-      <td>10800882.0</td>
-      <td>1.56</td>
-      <td>22.76</td>
-      <td>6.52</td>
-      <td>0.62</td>
-      <td>2015-11-01 13:21:27.041970</td>
-      <td>2015-11-01 13:21:27.041970</td>
-      <td>1.864593e+07</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>22</td>
-      <td>bk</td>
-      <td>Bosnia and Herzegovina</td>
-      <td>51197.0</td>
-      <td>51187.0</td>
-      <td>10.0</td>
-      <td>3867055.0</td>
-      <td>0.13</td>
-      <td>8.87</td>
-      <td>9.75</td>
-      <td>0.38</td>
-      <td>2015-11-01 13:21:32.191346</td>
-      <td>2015-11-01 13:21:32.191346</td>
-      <td>4.047070e+06</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>23</td>
-      <td>bc</td>
-      <td>Botswana</td>
-      <td>581730.0</td>
-      <td>566730.0</td>
-      <td>15000.0</td>
-      <td>2182719.0</td>
-      <td>1.21</td>
-      <td>20.96</td>
-      <td>13.39</td>
-      <td>4.56</td>
-      <td>2015-11-01 13:21:36.883097</td>
-      <td>2015-11-01 13:21:36.883097</td>
-      <td>3.333662e+06</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>24</td>
-      <td>br</td>
-      <td>Brazil</td>
-      <td>8515770.0</td>
-      <td>8358140.0</td>
-      <td>157630.0</td>
-      <td>204259812.0</td>
-      <td>0.77</td>
-      <td>14.46</td>
-      <td>6.58</td>
-      <td>0.14</td>
-      <td>2015-11-01 13:21:42.799461</td>
-      <td>2015-11-01 13:21:42.799461</td>
-      <td>2.674393e+08</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>25</td>
-      <td>bx</td>
-      <td>Brunei</td>
-      <td>5765.0</td>
-      <td>5265.0</td>
-      <td>500.0</td>
-      <td>429646.0</td>
-      <td>1.62</td>
-      <td>17.32</td>
-      <td>3.52</td>
-      <td>2.43</td>
-      <td>2015-11-01 13:21:47.136638</td>
-      <td>2015-11-01 13:21:47.136638</td>
-      <td>7.574531e+05</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>26</td>
-      <td>bu</td>
-      <td>Bulgaria</td>
-      <td>110879.0</td>
-      <td>108489.0</td>
-      <td>2390.0</td>
-      <td>7186893.0</td>
-      <td>0.58</td>
-      <td>8.92</td>
-      <td>14.44</td>
-      <td>0.29</td>
-      <td>2015-11-01 13:21:52.018824</td>
-      <td>2015-11-01 13:21:52.018824</td>
-      <td>8.804465e+06</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>27</td>
-      <td>uv</td>
-      <td>Burkina Faso</td>
-      <td>274200.0</td>
-      <td>273800.0</td>
-      <td>400.0</td>
-      <td>18931686.0</td>
-      <td>3.03</td>
-      <td>42.03</td>
-      <td>11.72</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:21:56.976083</td>
-      <td>2015-11-01 13:21:56.976083</td>
-      <td>5.467120e+07</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>28</td>
-      <td>bm</td>
-      <td>Burma</td>
-      <td>676578.0</td>
-      <td>653508.0</td>
-      <td>23070.0</td>
-      <td>56320206.0</td>
-      <td>1.01</td>
-      <td>18.39</td>
-      <td>7.96</td>
-      <td>0.28</td>
-      <td>2015-11-01 13:22:03.329538</td>
-      <td>2015-11-01 13:22:03.329538</td>
-      <td>8.020239e+07</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>29</td>
-      <td>by</td>
-      <td>Burundi</td>
-      <td>27830.0</td>
-      <td>25680.0</td>
-      <td>2150.0</td>
-      <td>10742276.0</td>
-      <td>3.28</td>
-      <td>42.01</td>
-      <td>9.27</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:22:08.382756</td>
-      <td>2015-11-01 13:22:08.382756</td>
-      <td>3.385840e+07</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>30</td>
-      <td>cb</td>
-      <td>Cambodia</td>
-      <td>181035.0</td>
-      <td>176515.0</td>
-      <td>4520.0</td>
-      <td>15708756.0</td>
-      <td>1.58</td>
-      <td>23.83</td>
-      <td>7.68</td>
-      <td>0.32</td>
-      <td>2015-11-01 13:22:16.286410</td>
-      <td>2015-11-01 13:22:16.286410</td>
-      <td>2.730905e+07</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>194</th>
-      <td>195</td>
-      <td>zi</td>
-      <td>Zimbabwe</td>
-      <td>390757.0</td>
-      <td>386847.0</td>
-      <td>3910.0</td>
-      <td>14229541.0</td>
-      <td>2.21</td>
-      <td>32.26</td>
-      <td>10.13</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:35:57.711444</td>
-      <td>2015-11-01 13:35:57.711444</td>
-      <td>3.084023e+07</td>
-    </tr>
-    <tr>
-      <th>195</th>
-      <td>196</td>
-      <td>tw</td>
-      <td>Taiwan</td>
-      <td>35980.0</td>
-      <td>32260.0</td>
-      <td>3720.0</td>
-      <td>23415126.0</td>
-      <td>0.23</td>
-      <td>8.47</td>
-      <td>7.11</td>
-      <td>0.89</td>
-      <td>2015-11-01 13:36:02.255373</td>
-      <td>2015-11-01 13:36:02.255373</td>
-      <td>2.537799e+07</td>
-    </tr>
-    <tr>
-      <th>203</th>
-      <td>204</td>
-      <td>hk</td>
-      <td>Hong Kong</td>
-      <td>1108.0</td>
-      <td>1073.0</td>
-      <td>35.0</td>
-      <td>7141106.0</td>
-      <td>0.38</td>
-      <td>9.23</td>
-      <td>7.07</td>
-      <td>1.68</td>
-      <td>2015-11-01 13:36:23.189516</td>
-      <td>2015-11-01 13:36:23.189516</td>
-      <td>8.156928e+06</td>
-    </tr>
-    <tr>
-      <th>204</th>
-      <td>205</td>
-      <td>mc</td>
-      <td>Macau</td>
-      <td>28.0</td>
-      <td>28.0</td>
-      <td>0.0</td>
-      <td>592731.0</td>
-      <td>0.80</td>
-      <td>8.88</td>
-      <td>4.22</td>
-      <td>3.37</td>
-      <td>2015-11-01 13:36:27.392999</td>
-      <td>2015-11-01 13:36:27.392999</td>
-      <td>7.842601e+05</td>
-    </tr>
-    <tr>
-      <th>205</th>
-      <td>206</td>
-      <td>fo</td>
-      <td>Faroe Islands</td>
-      <td>1393.0</td>
-      <td>1393.0</td>
-      <td>0.0</td>
-      <td>50196.0</td>
-      <td>0.51</td>
-      <td>13.77</td>
-      <td>8.71</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:36:31.157109</td>
-      <td>2015-11-01 13:36:31.157109</td>
-      <td>6.000545e+04</td>
-    </tr>
-    <tr>
-      <th>208</th>
-      <td>209</td>
-      <td>fp</td>
-      <td>French Polynesia</td>
-      <td>4167.0</td>
-      <td>3827.0</td>
-      <td>340.0</td>
-      <td>282703.0</td>
-      <td>0.94</td>
-      <td>15.22</td>
-      <td>5.02</td>
-      <td>0.84</td>
-      <td>2015-11-01 13:36:40.733124</td>
-      <td>2015-11-01 13:36:40.733124</td>
-      <td>3.928378e+05</td>
-    </tr>
-    <tr>
-      <th>210</th>
-      <td>211</td>
-      <td>nc</td>
-      <td>New Caledonia</td>
-      <td>18575.0</td>
-      <td>18275.0</td>
-      <td>300.0</td>
-      <td>271615.0</td>
-      <td>1.38</td>
-      <td>15.33</td>
-      <td>5.52</td>
-      <td>4.01</td>
-      <td>2015-11-01 13:36:47.582833</td>
-      <td>2015-11-01 13:36:47.582833</td>
-      <td>4.402689e+05</td>
-    </tr>
-    <tr>
-      <th>213</th>
-      <td>214</td>
-      <td>sb</td>
-      <td>Saint Pierre and Miquelon</td>
-      <td>242.0</td>
-      <td>242.0</td>
-      <td>0.0</td>
-      <td>5657.0</td>
-      <td>1.08</td>
-      <td>7.42</td>
-      <td>9.72</td>
-      <td>8.49</td>
-      <td>2015-11-01 13:36:55.432885</td>
-      <td>2015-11-01 13:36:55.432885</td>
-      <td>8.255616e+03</td>
-    </tr>
-    <tr>
-      <th>214</th>
-      <td>215</td>
-      <td>wf</td>
-      <td>Wallis and Futuna</td>
-      <td>142.0</td>
-      <td>142.0</td>
-      <td>0.0</td>
-      <td>15613.0</td>
-      <td>0.33</td>
-      <td>13.45</td>
-      <td>5.06</td>
-      <td>5.06</td>
-      <td>2015-11-01 13:36:58.489862</td>
-      <td>2015-11-01 13:36:58.489862</td>
-      <td>1.752457e+04</td>
-    </tr>
-    <tr>
-      <th>215</th>
-      <td>216</td>
-      <td>aa</td>
-      <td>Aruba</td>
-      <td>180.0</td>
-      <td>180.0</td>
-      <td>0.0</td>
-      <td>112162.0</td>
-      <td>1.33</td>
-      <td>12.56</td>
-      <td>8.18</td>
-      <td>8.92</td>
-      <td>2015-11-01 13:37:02.407642</td>
-      <td>2015-11-01 13:37:02.407642</td>
-      <td>1.786528e+05</td>
-    </tr>
-    <tr>
-      <th>216</th>
-      <td>217</td>
-      <td>cc</td>
-      <td>Curacao</td>
-      <td>444.0</td>
-      <td>444.0</td>
-      <td>0.0</td>
-      <td>148406.0</td>
-      <td>0.43</td>
-      <td>13.80</td>
-      <td>8.20</td>
-      <td>1.40</td>
-      <td>2015-11-01 13:37:05.782750</td>
-      <td>2015-11-01 13:37:05.782750</td>
-      <td>1.725094e+05</td>
-    </tr>
-    <tr>
-      <th>217</th>
-      <td>218</td>
-      <td>sk</td>
-      <td>Sint Maarten</td>
-      <td>34.0</td>
-      <td>34.0</td>
-      <td>0.0</td>
-      <td>39689.0</td>
-      <td>1.51</td>
-      <td>13.00</td>
-      <td>4.51</td>
-      <td>6.63</td>
-      <td>2015-11-01 13:37:08.571949</td>
-      <td>2015-11-01 13:37:08.571949</td>
-      <td>6.732786e+04</td>
-    </tr>
-    <tr>
-      <th>225</th>
-      <td>226</td>
-      <td>av</td>
-      <td>Anguilla</td>
-      <td>91.0</td>
-      <td>91.0</td>
-      <td>0.0</td>
-      <td>16418.0</td>
-      <td>2.03</td>
-      <td>12.67</td>
-      <td>4.57</td>
-      <td>12.18</td>
-      <td>2015-11-01 13:37:30.034876</td>
-      <td>2015-11-01 13:37:30.034876</td>
-      <td>3.341077e+04</td>
-    </tr>
-    <tr>
-      <th>226</th>
-      <td>227</td>
-      <td>bd</td>
-      <td>Bermuda</td>
-      <td>54.0</td>
-      <td>54.0</td>
-      <td>0.0</td>
-      <td>70196.0</td>
-      <td>0.50</td>
-      <td>11.33</td>
-      <td>8.23</td>
-      <td>1.88</td>
-      <td>2015-11-01 13:37:33.894038</td>
-      <td>2015-11-01 13:37:33.894038</td>
-      <td>8.362072e+04</td>
-    </tr>
-    <tr>
-      <th>228</th>
-      <td>229</td>
-      <td>vi</td>
-      <td>British Virgin Islands</td>
-      <td>151.0</td>
-      <td>151.0</td>
-      <td>0.0</td>
-      <td>33454.0</td>
-      <td>2.32</td>
-      <td>10.91</td>
-      <td>4.99</td>
-      <td>17.28</td>
-      <td>2015-11-01 13:37:39.647840</td>
-      <td>2015-11-01 13:37:39.647840</td>
-      <td>7.535207e+04</td>
-    </tr>
-    <tr>
-      <th>229</th>
-      <td>230</td>
-      <td>cj</td>
-      <td>Cayman Islands</td>
-      <td>264.0</td>
-      <td>264.0</td>
-      <td>0.0</td>
-      <td>56092.0</td>
-      <td>2.10</td>
-      <td>12.11</td>
-      <td>5.53</td>
-      <td>14.40</td>
-      <td>2015-11-01 13:37:43.647884</td>
-      <td>2015-11-01 13:37:43.647884</td>
-      <td>1.169789e+05</td>
-    </tr>
-    <tr>
-      <th>232</th>
-      <td>233</td>
-      <td>gi</td>
-      <td>Gibraltar</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>0.0</td>
-      <td>29258.0</td>
-      <td>0.24</td>
-      <td>14.08</td>
-      <td>8.37</td>
-      <td>3.28</td>
-      <td>2015-11-01 13:37:51.980087</td>
-      <td>2015-11-01 13:37:51.980087</td>
-      <td>3.182185e+04</td>
-    </tr>
-    <tr>
-      <th>233</th>
-      <td>234</td>
-      <td>gk</td>
-      <td>Guernsey</td>
-      <td>78.0</td>
-      <td>78.0</td>
-      <td>0.0</td>
-      <td>66080.0</td>
-      <td>0.34</td>
-      <td>9.84</td>
-      <td>8.78</td>
-      <td>2.32</td>
-      <td>2015-11-01 13:37:55.085750</td>
-      <td>2015-11-01 13:37:55.085750</td>
-      <td>7.443052e+04</td>
-    </tr>
-    <tr>
-      <th>234</th>
-      <td>235</td>
-      <td>je</td>
-      <td>Jersey</td>
-      <td>116.0</td>
-      <td>116.0</td>
-      <td>0.0</td>
-      <td>97294.0</td>
-      <td>0.80</td>
-      <td>11.91</td>
-      <td>7.68</td>
-      <td>3.76</td>
-      <td>2015-11-01 13:37:58.442238</td>
-      <td>2015-11-01 13:37:58.442238</td>
-      <td>1.287326e+05</td>
-    </tr>
-    <tr>
-      <th>235</th>
-      <td>236</td>
-      <td>im</td>
-      <td>Isle of Man</td>
-      <td>572.0</td>
-      <td>572.0</td>
-      <td>0.0</td>
-      <td>87545.0</td>
-      <td>0.76</td>
-      <td>11.10</td>
-      <td>10.06</td>
-      <td>6.56</td>
-      <td>2015-11-01 13:38:01.914270</td>
-      <td>2015-11-01 13:38:01.914270</td>
-      <td>1.142230e+05</td>
-    </tr>
-    <tr>
-      <th>236</th>
-      <td>237</td>
-      <td>mh</td>
-      <td>Montserrat</td>
-      <td>102.0</td>
-      <td>102.0</td>
-      <td>0.0</td>
-      <td>5241.0</td>
-      <td>0.50</td>
-      <td>11.26</td>
-      <td>6.30</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:38:05.670256</td>
-      <td>2015-11-01 13:38:05.670256</td>
-      <td>6.243321e+03</td>
-    </tr>
-    <tr>
-      <th>238</th>
-      <td>239</td>
-      <td>sh</td>
-      <td>Saint Helena, Ascension, and Tristan da Cunha</td>
-      <td>308.0</td>
-      <td>122.0</td>
-      <td>0.0</td>
-      <td>7795.0</td>
-      <td>0.24</td>
-      <td>9.88</td>
-      <td>7.44</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:38:11.767274</td>
-      <td>2015-11-01 13:38:11.767274</td>
-      <td>8.478067e+03</td>
-    </tr>
-    <tr>
-      <th>240</th>
-      <td>241</td>
-      <td>tk</td>
-      <td>Turks and Caicos Islands</td>
-      <td>948.0</td>
-      <td>948.0</td>
-      <td>0.0</td>
-      <td>50280.0</td>
-      <td>2.30</td>
-      <td>16.13</td>
-      <td>3.10</td>
-      <td>9.94</td>
-      <td>2015-11-01 13:38:17.164473</td>
-      <td>2015-11-01 13:38:17.164473</td>
-      <td>1.124611e+05</td>
-    </tr>
-    <tr>
-      <th>241</th>
-      <td>242</td>
-      <td>aq</td>
-      <td>American Samoa</td>
-      <td>199.0</td>
-      <td>199.0</td>
-      <td>0.0</td>
-      <td>54343.0</td>
-      <td>0.30</td>
-      <td>22.89</td>
-      <td>4.75</td>
-      <td>21.13</td>
-      <td>2015-11-01 13:38:20.926072</td>
-      <td>2015-11-01 13:38:20.926072</td>
-      <td>6.035935e+04</td>
-    </tr>
-    <tr>
-      <th>242</th>
-      <td>243</td>
-      <td>gq</td>
-      <td>Guam</td>
-      <td>544.0</td>
-      <td>544.0</td>
-      <td>0.0</td>
-      <td>161785.0</td>
-      <td>0.54</td>
-      <td>16.82</td>
-      <td>5.12</td>
-      <td>6.34</td>
-      <td>2015-11-01 13:38:24.699655</td>
-      <td>2015-11-01 13:38:24.699655</td>
-      <td>1.954429e+05</td>
-    </tr>
-    <tr>
-      <th>244</th>
-      <td>245</td>
-      <td>cq</td>
-      <td>Northern Mariana Islands</td>
-      <td>464.0</td>
-      <td>464.0</td>
-      <td>0.0</td>
-      <td>52344.0</td>
-      <td>2.18</td>
-      <td>18.32</td>
-      <td>3.71</td>
-      <td>7.16</td>
-      <td>2015-11-01 13:38:30.017480</td>
-      <td>2015-11-01 13:38:30.017480</td>
-      <td>1.122622e+05</td>
-    </tr>
-    <tr>
-      <th>245</th>
-      <td>246</td>
-      <td>rq</td>
-      <td>Puerto Rico</td>
-      <td>13791.0</td>
-      <td>8870.0</td>
-      <td>4921.0</td>
-      <td>3598357.0</td>
-      <td>0.60</td>
-      <td>10.86</td>
-      <td>8.67</td>
-      <td>8.15</td>
-      <td>2015-11-01 13:38:34.502065</td>
-      <td>2015-11-01 13:38:34.502065</td>
-      <td>4.439214e+06</td>
-    </tr>
-    <tr>
-      <th>246</th>
-      <td>247</td>
-      <td>vq</td>
-      <td>Virgin Islands</td>
-      <td>1910.0</td>
-      <td>346.0</td>
-      <td>1564.0</td>
-      <td>103574.0</td>
-      <td>0.59</td>
-      <td>10.31</td>
-      <td>8.54</td>
-      <td>7.67</td>
-      <td>2015-11-01 13:38:38.270075</td>
-      <td>2015-11-01 13:38:38.270075</td>
-      <td>1.273305e+05</td>
-    </tr>
-    <tr>
-      <th>250</th>
-      <td>251</td>
-      <td>gz</td>
-      <td>Gaza Strip</td>
-      <td>360.0</td>
-      <td>360.0</td>
-      <td>0.0</td>
-      <td>1869055.0</td>
-      <td>2.81</td>
-      <td>31.11</td>
-      <td>3.04</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:38:48.049460</td>
-      <td>2015-11-01 13:38:48.049460</td>
-      <td>4.997476e+06</td>
-    </tr>
-    <tr>
-      <th>253</th>
-      <td>254</td>
-      <td>we</td>
-      <td>West Bank</td>
-      <td>5860.0</td>
-      <td>5640.0</td>
-      <td>220.0</td>
-      <td>2785366.0</td>
-      <td>1.95</td>
-      <td>22.99</td>
-      <td>3.50</td>
-      <td>0.00</td>
-      <td>2015-11-01 13:38:55.084643</td>
-      <td>2015-11-01 13:38:55.084643</td>
-      <td>5.511734e+06</td>
-    </tr>
-  </tbody>
-</table>
-<p>215 rows × 14 columns</p>
-</div>
-
-<pre><code class="language-python">import sqlite3
-import pandas as pd
- 
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
- 
-# On affiche dans un tableau pandas les sommes des surfaces terrestres et surfaces de l'eau pour chaque pays
-a = pd.read_sql_query('SELECT SUM(area_land), SUM(area_water)FROM facts WHERE area_land != &quot;&quot;;', con = connexion)
- 
- 
-# On affiche le ratio Terre / Mer
-print(a['SUM(area_land)']/a['SUM(area_water)'])
+Name: name, dtype: object
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code>0    28.390657
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+ 
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+ 
+<span style="color:#75715e"># On affiche dans un tableau pandas les sommes des surfaces terrestres et surfaces de l&#39;eau pour chaque pays</span>
+a <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql_query(<span style="color:#e6db74">&#39;SELECT SUM(area_land), SUM(area_water)FROM facts WHERE area_land != &#34;&#34;;&#39;</span>, con <span style="color:#f92672">=</span> connexion)
+ 
+ 
+<span style="color:#75715e"># On affiche le ratio Terre / Mer</span>
+<span style="color:#66d9ef">print</span>(a[<span style="color:#e6db74">&#39;SUM(area_land)&#39;</span>]<span style="color:#f92672">/</span>a[<span style="color:#e6db74">&#39;SUM(area_water)&#39;</span>])
+</code></pre></div><pre><code>0    28.390657
 dtype: float64
 </code></pre>
-
-<h2 id="12-2-3-calcul-de-statistiques-en-sql">12.2.3- Calcul de statistiques en SQL</h2>
-
+<h2 id="1223--calcul-de-statistiques-en-sql">12.2.3- Calcul de statistiques en SQL</h2>
 <ul>
 <li>moyenne</li>
 <li>somme</li>
 <li>Min / Max</li>
 <li>Valeur unique d&rsquo;une colonne</li>
 </ul>
-
 <h4 id="compter-le-nombre-de-lignes-en-sql">Compter le nombre de lignes en SQL</h4>
-
-<pre><code class="language-python"># calcul du nombre de valeurs non nulles
-import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-birth_rate_tuple = connexion.execute('SELECT COUNT(birth_rate)FROM facts;').fetchall()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># calcul du nombre de valeurs non nulles</span>
+<span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+birth_rate_tuple <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;SELECT COUNT(birth_rate)FROM facts;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
 birth_rate_tuple
+</code></pre></div><pre><code>[(228,)]
 </code></pre>
-
-<pre><code>[(228,)]
-</code></pre>
-
-<pre><code class="language-python">birth_rate_count = birth_rate_tuple[0][0] # première valeur du premier tuple
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">birth_rate_count <span style="color:#f92672">=</span> birth_rate_tuple[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#75715e"># première valeur du premier tuple</span>
 birth_rate_count
+</code></pre></div><pre><code>228
 </code></pre>
-
-<pre><code>228
-</code></pre>
-
-<h4 id="trouver-les-valeurs-minimales-et-maximales-d-une-colonne-en-sql">Trouver les valeurs minimales et maximales d&rsquo;une colonne en SQL</h4>
-
+<h4 id="trouver-les-valeurs-minimales-et-maximales-dune-colonne-en-sql">Trouver les valeurs minimales et maximales d&rsquo;une colonne en SQL</h4>
 <ul>
-<li><p>fonctions MIN() et MAX()</p>
-
-<pre><code class="language-python"># calcul des valeurs minimales et maximales
-import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-population_grouwth_tuple = connexion.execute('select min(population_growth) from facts;').fetchall()
-population_grouwth_min = population_grouwth_tuple[0][0]
+<li>fonctions MIN() et MAX()</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># calcul des valeurs minimales et maximales</span>
+<span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+population_grouwth_tuple <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select min(population_growth) from facts;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+population_grouwth_min <span style="color:#f92672">=</span> population_grouwth_tuple[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
 population_grouwth_min
+</code></pre></div><pre><code>0.0
 </code></pre>
-
-<p>0.0</p>
-
-<pre><code class="language-python">population_death_tuple = connexion.execute('select max(death_rate) from facts;').fetchall()
-population_death_max = population_death_tuple[0][0]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">population_death_tuple <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select max(death_rate) from facts;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+population_death_max <span style="color:#f92672">=</span> population_death_tuple[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
 population_death_max
+</code></pre></div><pre><code>14.89
 </code></pre>
-
-<p>14.89</p></li>
-</ul>
-
 <h4 id="calculer-des-sommes-et-des-moyennes-en-sql">Calculer des sommes et des moyennes en SQL</h4>
-
 <ul>
-<li><p>fonctions SUM() et AVG()</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-area_land_sum_tuple = connexion.execute('select sum(area_land) from facts;').fetchall()
-area_land_sum = area_land_sum_tuple[0][0]
-area_land_sum
-</code></pre>
-
-<p>128584834</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-area_water_avg_tuple = connexion.execute('select avg(area_water) from facts;').fetchall()
-area_water_avg = area_water_avg_tuple[0][0]
-area_water_avg
-</code></pre>
-
-<p>19067.59259259259</p>
-
-<pre><code class="language-python">connexion.close()
-</code></pre></li>
+<li>fonctions SUM() et AVG()</li>
 </ul>
-
-<h4 id="combiner-des-fonctions-sur-une-seule-requête-en-sql">Combiner des fonctions sur une seule requête en SQL</h4>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-facts_stats = connexion.execute('select avg(population), sum(population), max(birth_rate) from facts;').fetchall()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+area_land_sum_tuple <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select sum(area_land) from facts;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+area_land_sum <span style="color:#f92672">=</span> area_land_sum_tuple[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+area_land_sum
+</code></pre></div><pre><code>128584834
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+area_water_avg_tuple <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select avg(area_water) from facts;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+area_water_avg <span style="color:#f92672">=</span> area_water_avg_tuple[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+area_water_avg
+</code></pre></div><pre><code>19067.59259259259
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connexion<span style="color:#f92672">.</span>close()
+</code></pre></div><h4 id="combiner-des-fonctions-sur-une-seule-requête-en-sql">Combiner des fonctions sur une seule requête en SQL</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+facts_stats <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select avg(population), sum(population), max(birth_rate) from facts;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
 facts_stats
+</code></pre></div><pre><code>[(62094928.32231405, 15026972654, 45.45)]
 </code></pre>
-
-<pre><code>[(62094928.32231405, 15026972654, 45.45)]
-</code></pre>
-
-<pre><code class="language-python">mean_pop = facts_stats[0][0]
-sum_pop = facts_stats[0][1]
-max_birth_rate =  facts_stats[0][2]
-print(mean_pop)
-print(sum_pop)
-print(max_birth_rate)
-</code></pre>
-
-<pre><code>62094928.32231405
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mean_pop <span style="color:#f92672">=</span> facts_stats[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+sum_pop <span style="color:#f92672">=</span> facts_stats[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>]
+max_birth_rate <span style="color:#f92672">=</span>  facts_stats[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">2</span>]
+<span style="color:#66d9ef">print</span>(mean_pop)
+<span style="color:#66d9ef">print</span>(sum_pop)
+<span style="color:#66d9ef">print</span>(max_birth_rate)
+</code></pre></div><pre><code>62094928.32231405
 15026972654
 45.45
 </code></pre>
-
-<h4 id="associer-les-fonctions-de-calcul-avec-la-condition-where">Associer les fonctions de calcul avec la condition &ldquo; where &ldquo;</h4>
-
+<h4 id="associer-les-fonctions-de-calcul-avec-la-condition--where-">Associer les fonctions de calcul avec la condition &quot; where &quot;</h4>
 <ul>
 <li>WHERE</li>
-
-<li><p>Écrire une requête SQL qui calcule la moyenne de la colonne population_growth pour les pays ayant une population supérieure à 100000000 habitants</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-pop_query = connexion.execute('select avg(population_growth) from facts where (population &gt; 10000000);').fetchall()
-population_growth = pop_query[0][0]
+<li>Écrire une requête SQL qui calcule la moyenne de la colonne population_growth pour les pays ayant une population supérieure à 100000000 habitants</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+pop_query <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select avg(population_growth) from facts where (population &gt; 10000000);&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+population_growth <span style="color:#f92672">=</span> pop_query[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
 population_growth
+</code></pre></div><pre><code>1.4572222222222226
 </code></pre>
-
-<p>1.4572222222222226</p></li>
-</ul>
-
 <h4 id="sélectionner-des-éléments-ou-des-données-uniques">Sélectionner des éléments ou des données uniques</h4>
-
 <ul>
-<li><p>DISTINCT</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-unique_birth_rates = connexion.execute('select distinct birth_rate from facts ;').fetchall()
-</code></pre></li>
+<li>DISTINCT</li>
 </ul>
-
-<h4 id="associer-des-fonctions-de-calcul-avec-la-fonction-distinct">Associer des fonctions de calcul avec la fonction DISTINCT</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+unique_birth_rates <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select distinct birth_rate from facts ;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+</code></pre></div><h4 id="associer-des-fonctions-de-calcul-avec-la-fonction-distinct">Associer des fonctions de calcul avec la fonction DISTINCT</h4>
 <ul>
 <li>Trouver la moyenne des valeurs distinctes de la colonne birth_rate pour lesquelles population est plus grand que 20 00 000</li>
-
-<li><p>Trouver la somme de toutes les valeurs distinctes de la colonne population pour lesquelles area_land est plus grand que 1000000</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-mean_birth_rate = connexion.execute('select avg(distinct birth_rate) from facts where population &gt; 20000000 ;').fetchall()
-mean_birth_rate[0][0]
-</code></pre>
-
-<p>20.43473684210527</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-cournt_population = connexion.execute('select sum(distinct population) from facts where area_land &gt; 1000000 ;').fetchall()
-cournt_population[0][0]
-</code></pre>
-
-<p>4233873015</p></li>
+<li>Trouver la somme de toutes les valeurs distinctes de la colonne population pour lesquelles area_land est plus grand que 1000000</li>
 </ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+mean_birth_rate <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select avg(distinct birth_rate) from facts where population &gt; 20000000 ;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+mean_birth_rate[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+</code></pre></div><pre><code>20.43473684210527
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+cournt_population <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select sum(distinct population) from facts where area_land &gt; 1000000 ;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+cournt_population[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+</code></pre></div><pre><code>4233873015
+</code></pre>
 <h4 id="opérations-mathématiques-en-sql">Opérations mathématiques en SQL</h4>
-
 <ul>
-<li><p>Afficher les valeurs de la colonne population_growth en millions (décimales)</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-population_million = connexion.execute('select  population_growth / 100000000.0 from facts ;').fetchall()
-population_million[0][0]
+<li>Afficher les valeurs de la colonne population_growth en millions (décimales)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+population_million <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select  population_growth / 100000000.0 from facts ;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+population_million[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+</code></pre></div><pre><code>2.32e-08
 </code></pre>
-
-<p>2.32e-08</p></li>
-</ul>
-
-<h2 id="opérations-mathématiques-entre-colonnes-sql">Opérations mathématiques entre colonnes  SQL</h2>
-
+<h2 id="opérations-mathématiques-entre-colonnes--sql">Opérations mathématiques entre colonnes  SQL</h2>
 <ul>
-<li><p>Ecrire une requête SQL qui calcule pour chaque pays le nombre d&rsquo;habitants qu&rsquo;il y aura l&rsquo;année suivante</p>
-
-<pre><code class="language-python">import sqlite3
-connexion = sqlite3.connect('./SQL/jobs.db/factbook.db')
-population_next_year = connexion.execute('select name, ((population_growth + 1) * population) from facts ;').fetchall()
-#population_next_year
-</code></pre></li>
+<li>Ecrire une requête SQL qui calcule pour chaque pays le nombre d&rsquo;habitants qu&rsquo;il y aura l&rsquo;année suivante</li>
 </ul>
-
-<h4 id="statistiques-sur-des-groupes-de-données">Statistiques sur des groupes de données</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlite3
+connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/factbook.db&#39;</span>)
+population_next_year <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select name, ((population_growth + 1) * population) from facts ;&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+<span style="color:#75715e">#population_next_year</span>
+</code></pre></div><h4 id="statistiques-sur-des-groupes-de-données">Statistiques sur des groupes de données</h4>
 <p>-group by: permet de faire des statistiques sur des groupes</p>
-
-<pre><code class="language-python">connexion = sqlite3.connect('./SQL/jobs.db/jobs.db')
-cursor = connexion.cursor()
-query = &quot;select Major_category, sum(Employed) from recent_grads group by major_category;&quot;
-major = cursor.execute(query).fetchall()
-print(major[0:5])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major_category, sum(Employed) from recent_grads group by major_category;&#34;</span>
+major <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>execute(query)<span style="color:#f92672">.</span>fetchall()
+<span style="color:#66d9ef">print</span>(major[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>])
+</code></pre></div><pre><code>[('Agriculture &amp; Natural Resources', 66943), ('Arts', 288114), ('Biology &amp; Life Science', 302797), ('Business', 1088742), ('Communications &amp; Journalism', 330660)]
 </code></pre>
-
-<pre><code>[('Agriculture &amp; Natural Resources', 66943), ('Arts', 288114), ('Biology &amp; Life Science', 302797), ('Business', 1088742), ('Communications &amp; Journalism', 330660)]
-</code></pre>
-
 <ul>
-<li><p>Trouver le pourcentage moyenne de femmes pour chaque catégorie de majors</p>
-
-<pre><code class="language-python">connexion = sqlite3.connect('./SQL/jobs.db/jobs.db')
-cursor = connexion.cursor()
-query = &quot;select Major_category, avg(ShareWomen)*100 from recent_grads group by major_category;&quot;
-femme_pourcentage = cursor.execute(query).fetchall()
-print(femme_pourcentage[0:5])
-</code></pre>
-
-<p>[(&lsquo;Agriculture &amp; Natural Resources&rsquo;, 61.79384232), (&lsquo;Arts&rsquo;, 56.185119574999995), (&lsquo;Biology &amp; Life Science&rsquo;, 58.4518475857143), (&lsquo;Business&rsquo;, 40.50631853076923), (&lsquo;Communications &amp; Journalism&rsquo;, 64.383484025)]</p></li>
+<li>Trouver le pourcentage moyenne de femmes pour chaque catégorie de majors</li>
 </ul>
-
-<h4 id="renommer-les-colonnes-avec-la-commande-as">Renommer les colonnes avec la commande AS</h4>
-
-<pre><code class="language-python">connexion = sqlite3.connect('./SQL/jobs.db/jobs.db')
-cursor = connexion.cursor()
-query = &quot;select Major_category, avg(Employed) / avg(Total) as share_employed from recent_grads group by major_category;&quot;
-new_pourcentage = cursor.execute(query).fetchall()
-new_pourcentage
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major_category, avg(ShareWomen)*100 from recent_grads group by major_category;&#34;</span>
+femme_pourcentage <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>execute(query)<span style="color:#f92672">.</span>fetchall()
+<span style="color:#66d9ef">print</span>(femme_pourcentage[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>])
+</code></pre></div><pre><code>[('Agriculture &amp; Natural Resources', 61.79384232), ('Arts', 56.185119574999995), ('Biology &amp; Life Science', 58.4518475857143), ('Business', 40.50631853076923), ('Communications &amp; Journalism', 64.383484025)]
 </code></pre>
-
-<pre><code>[('Agriculture &amp; Natural Resources', 0.8369862842425075),
+<h4 id="renommer-les-colonnes-avec-la-commande-as">Renommer les colonnes avec la commande AS</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major_category, avg(Employed) / avg(Total) as share_employed from recent_grads group by major_category;&#34;</span>
+new_pourcentage <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>execute(query)<span style="color:#f92672">.</span>fetchall()
+new_pourcentage
+</code></pre></div><pre><code>[('Agriculture &amp; Natural Resources', 0.8369862842425075),
  ('Arts', 0.8067482429367457),
  ('Biology &amp; Life Science', 0.6671565365683841),
  ('Business', 0.8359659576036412),
@@ -5193,136 +1887,63 @@ new_pourcentage
  ('Psychology &amp; Social Work', 0.790724459311403),
  ('Social Science', 0.7575825619001975)]
 </code></pre>
-
 <h4 id="colonnes-virtuelles-et-having">Colonnes virtuelles et HAVING</h4>
-
 <ul>
 <li>si colonne générée par group by et renommée par as , elle n&rsquo;existe pas et on ne peut pas faire un tri avec where dessus</li>
-
-<li><p>pour cela on peut utiliser la commande HAVING: filtrer sur des commandes virtuelles</p>
-
-<pre><code class="language-python">connexion = sqlite3.connect('./SQL/jobs.db/jobs.db')
-cursor = connexion.cursor()
-query = &quot;select Major_category, avg(Employed) / avg(Total) as share_employed from recent_grads group by major_category HAVING share_employed &gt; 0.8;&quot;
-new_pourcentage = cursor.execute(query).fetchall() 
-new_pourcentage
-</code></pre>
-
-<p>[(&lsquo;Agriculture &amp; Natural Resources&rsquo;, 0.8369862842425075),
- (&lsquo;Arts&rsquo;, 0.8067482429367457),
- (&lsquo;Business&rsquo;, 0.8359659576036412),
- (&lsquo;Communications &amp; Journalism&rsquo;, 0.8422291333949735),
- (&lsquo;Education&rsquo;, 0.858190149321534),
- (&lsquo;Health&rsquo;, 0.8033741337996244),
- (&lsquo;Industrial Arts &amp; Consumer Services&rsquo;, 0.8226700668430581),
- (&lsquo;Law &amp; Public Policy&rsquo;, 0.8083994483744353)]</p>
-
-<pre><code class="language-python">connexion = sqlite3.connect('./SQL/jobs.db/jobs.db')
-cursor = connexion.cursor()
-query = &quot;select Major_category, avg(Low_wage_jobs) / avg(Total) as share_low_wage from recent_grads group by major_category HAVING share_low_wage &gt; 0.1;&quot;
-new_pourcentage = cursor.execute(query).fetchall() 
-new_pourcentage
-</code></pre>
-
-<p>[(&lsquo;Arts&rsquo;, 0.16833085991095678),
- (&lsquo;Communications &amp; Journalism&rsquo;, 0.1263241815481876),
- (&lsquo;Humanities &amp; Liberal Arts&rsquo;, 0.13208721344194835),
- (&lsquo;Industrial Arts &amp; Consumer Services&rsquo;, 0.11571334076033978),
- (&lsquo;Law &amp; Public Policy&rsquo;, 0.11568503743572278),
- (&lsquo;Psychology &amp; Social Work&rsquo;, 0.11693384919554187),
- (&lsquo;Social Science&rsquo;, 0.10223297343603174)]</p></li>
+<li>pour cela on peut utiliser la commande HAVING: filtrer sur des commandes virtuelles</li>
 </ul>
-
-<h4 id="fonction-round">Fonction ROUND</h4>
-
-<pre><code class="language-python">connexion = sqlite3.connect('./SQL/jobs.db/jobs.db')
-cursor = connexion.cursor()
-query = &quot;select Major_category, round( avg( Low_wage_jobs) / avg(Total), 2 ) as share_low_wage from recent_grads group by major_category HAVING share_low_wage &gt; 0.1;&quot;
-new_pourcentage = cursor.execute(query).fetchall() 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major_category, avg(Employed) / avg(Total) as share_employed from recent_grads group by major_category HAVING share_employed &gt; 0.8;&#34;</span>
+new_pourcentage <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>execute(query)<span style="color:#f92672">.</span>fetchall() 
 new_pourcentage
-connexion.close()
+</code></pre></div><pre><code>[('Agriculture &amp; Natural Resources', 0.8369862842425075),
+ ('Arts', 0.8067482429367457),
+ ('Business', 0.8359659576036412),
+ ('Communications &amp; Journalism', 0.8422291333949735),
+ ('Education', 0.858190149321534),
+ ('Health', 0.8033741337996244),
+ ('Industrial Arts &amp; Consumer Services', 0.8226700668430581),
+ ('Law &amp; Public Policy', 0.8083994483744353)]
 </code></pre>
-
-<pre><code class="language-python">import pandas as pd
-
-teams = pd.read_sql(&quot;&quot;&quot;SELECT *
-                        FROM Team;&quot;&quot;&quot;, conn)
-teams.head()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major_category, avg(Low_wage_jobs) / avg(Total) as share_low_wage from recent_grads group by major_category HAVING share_low_wage &gt; 0.1;&#34;</span>
+new_pourcentage <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>execute(query)<span style="color:#f92672">.</span>fetchall() 
+new_pourcentage
+</code></pre></div><pre><code>[('Arts', 0.16833085991095678),
+ ('Communications &amp; Journalism', 0.1263241815481876),
+ ('Humanities &amp; Liberal Arts', 0.13208721344194835),
+ ('Industrial Arts &amp; Consumer Services', 0.11571334076033978),
+ ('Law &amp; Public Policy', 0.11568503743572278),
+ ('Psychology &amp; Social Work', 0.11693384919554187),
+ ('Social Science', 0.10223297343603174)]
 </code></pre>
+<h4 id="fonction-round">Fonction ROUND</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connexion <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;./SQL/jobs.db/jobs.db&#39;</span>)
+cursor <span style="color:#f92672">=</span> connexion<span style="color:#f92672">.</span>cursor()
+query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select Major_category, round( avg( Low_wage_jobs) / avg(Total), 2 ) as share_low_wage from recent_grads group by major_category HAVING share_low_wage &gt; 0.1;&#34;</span>
+new_pourcentage <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>execute(query)<span style="color:#f92672">.</span>fetchall() 
+new_pourcentage
+connexion<span style="color:#f92672">.</span>close()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+teams <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;&#34;&#34;SELECT *
+</span><span style="color:#e6db74">                        FROM Team;&#34;&#34;&#34;</span>, conn)
+teams<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>team_api_id</th>
-      <th>team_fifa_api_id</th>
-      <th>team_long_name</th>
-      <th>team_short_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>9987</td>
-      <td>673.0</td>
-      <td>KRC Genk</td>
-      <td>GEN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>9993</td>
-      <td>675.0</td>
-      <td>Beerschot AC</td>
-      <td>BAC</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>10000</td>
-      <td>15005.0</td>
-      <td>SV Zulte-Waregem</td>
-      <td>ZUL</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>9994</td>
-      <td>2007.0</td>
-      <td>Sporting Lokeren</td>
-      <td>LOK</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>9984</td>
-      <td>1750.0</td>
-      <td>KSV Cercle Brugge</td>
-      <td>CEB</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -5367,7 +1988,7 @@ teams.head()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/12%20-%20Requ%c3%aater%20une%20base%20SQL%20-%20cours.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c12%20-%20Requ%c3%aater%20une%20base%20SQL%20-%20cours.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

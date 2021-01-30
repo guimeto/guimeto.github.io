@@ -31,7 +31,7 @@
   <meta name="description" content="﻿
 Scraping web data using Python In this tutorial, we will see how to scrap data from Environment Canada webpage.
 1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.
-import requests import pandas as pd # we download the web page page = requests.get(&quot;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&quot;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page.">
+import requests import pandas as pd # we download the web page page = requests.get(&#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/scrap_eccc/">
@@ -120,7 +120,7 @@ import requests import pandas as pd # we download the web page page = requests.g
   <meta property="og:description" content="﻿
 Scraping web data using Python In this tutorial, we will see how to scrap data from Environment Canada webpage.
 1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.
-import requests import pandas as pd # we download the web page page = requests.get(&quot;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&quot;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."><meta property="og:image" content="/post/scrap_eccc/featured.jpg">
+import requests import pandas as pd # we download the web page page = requests.get(&#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."><meta property="og:image" content="/post/scrap_eccc/featured.jpg">
   <meta property="twitter:image" content="/post/scrap_eccc/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -176,7 +176,7 @@ import requests import pandas as pd # we download the web page page = requests.g
       "url": "/img/icon-512.png"
     }
   },
-  "description": "﻿\nScraping web data using Python In this tutorial, we will see how to scrap data from Environment Canada webpage.\n1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.\nimport requests import pandas as pd # we download the web page page = requests.get(\u0026quot;https://meteo.gc.ca/city/pages/qc-147_metric_e.html\u0026quot;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."
+  "description": "﻿\nScraping web data using Python In this tutorial, we will see how to scrap data from Environment Canada webpage.\n1- Exploring the structure of the ECCC web page We will extract the current weather conditions and weather forecast for Montreal.\nimport requests import pandas as pd # we download the web page page = requests.get(\u0026#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html\u0026#34;) # Using BeautifulSoup to analyze html code from bs4 import BeautifulSoup # we will analyze the previous content with BeautifulSoup soup = BeautifulSoup(page."
 }
 </script>
 
@@ -540,32 +540,23 @@ import requests import pandas as pd # we download the web page page = requests.g
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<p>﻿</p>
-
+      <p>﻿</p>
 <h3 id="scraping-web-data-using-python">Scraping web data using Python</h3>
-
 <p>In this tutorial, we  will see how to scrap data from Environment Canada webpage.</p>
+<h3 id="1--exploring-the-structure-of-the-eccc-web-page">1- Exploring the structure of the ECCC web page</h3>
+<p>We will extract the current weather conditions and weather forecast for <a href="https://meteo.gc.ca/city/pages/qc-147_metric_f.html">Montreal</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#75715e"># we download the web page</span>
+page <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&#34;</span>)
 
-<h3 id="1-exploring-the-structure-of-the-eccc-web-page">1- Exploring the structure of the ECCC web page</h3>
+<span style="color:#75715e"># Using BeautifulSoup to analyze html code</span>
+<span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
 
-<p>We will extract the current weather conditions and weather forecast for <a href="https://meteo.gc.ca/city/pages/qc-147_metric_f.html" target="_blank">Montreal</a>.</p>
-
-<pre><code class="language-python">import requests
-import pandas as pd
-# we download the web page
-page = requests.get(&quot;https://meteo.gc.ca/city/pages/qc-147_metric_e.html&quot;)
-
-# Using BeautifulSoup to analyze html code
-from bs4 import BeautifulSoup
-
-# we will analyze the previous content with BeautifulSoup
-soup = BeautifulSoup(page.content,'html.parser')
-soup.head()
-</code></pre>
-
-<pre><code>[&lt;meta charset=&quot;utf-8&quot;/&gt;,
+<span style="color:#75715e"># we will analyze the previous content with BeautifulSoup</span>
+soup <span style="color:#f92672">=</span> BeautifulSoup(page<span style="color:#f92672">.</span>content,<span style="color:#e6db74">&#39;html.parser&#39;</span>)
+soup<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>[&lt;meta charset=&quot;utf-8&quot;/&gt;,
  &lt;meta content=&quot;width=device-width, initial-scale=1&quot; name=&quot;viewport&quot;/&gt;,
  &lt;meta content=&quot;Environment Canada&quot; name=&quot;dcterms.creator&quot;/&gt;,
  &lt;meta content=&quot;eng&quot; name=&quot;dcterms.language&quot; title=&quot;ISO639-2&quot;/&gt;,
@@ -590,48 +581,32 @@ soup.head()
  &lt;/link&gt;,
  &lt;link href=&quot;/v175/css/wxotemplate/print-sm.css&quot; rel=&quot;stylesheet&quot;/&gt;]
 </code></pre>
-
-<pre><code class="language-python">soup.title
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">soup<span style="color:#f92672">.</span>title
+</code></pre></div><pre><code>&lt;title&gt;Montréal, QC - 7 Day Forecast - Environment Canada&lt;/title&gt;
 </code></pre>
-
-<pre><code>&lt;title&gt;Montréal, QC - 7 Day Forecast - Environment Canada&lt;/title&gt;
-</code></pre>
-
-<h3 id="1-reading-current-conditions">1-  Reading current conditions</h3>
-
+<h3 id="1---reading-current-conditions">1-  Reading current conditions</h3>
 <h4 id="column-1">Column 1</h4>
-
-<pre><code class="language-python">conditions = soup.find(id=&quot;mainContent&quot;)
-col1 = conditions.find_all(class_=&quot;dl-horizontal wxo-conds-col1&quot;)
-today1 = col1[1]
-#print(today1.prettify())
-tmp1  = today1.select(&quot;.mrgn-bttm-0&quot;)
-print(tmp1)
-</code></pre>
-
-<pre><code>[&lt;dd class=&quot;mrgn-bttm-0&quot;&gt;Light Snow and Blowing Snow&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;98.5 &lt;abbr title=&quot;kilopascals&quot;&gt;kPa&lt;/abbr&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">conditions <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mainContent&#34;</span>)
+col1 <span style="color:#f92672">=</span> conditions<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dl-horizontal wxo-conds-col1&#34;</span>)
+today1 <span style="color:#f92672">=</span> col1[<span style="color:#ae81ff">1</span>]
+<span style="color:#75715e">#print(today1.prettify())</span>
+tmp1  <span style="color:#f92672">=</span> today1<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#34;.mrgn-bttm-0&#34;</span>)
+<span style="color:#66d9ef">print</span>(tmp1)
+</code></pre></div><pre><code>[&lt;dd class=&quot;mrgn-bttm-0&quot;&gt;Light Snow and Blowing Snow&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;98.5 &lt;abbr title=&quot;kilopascals&quot;&gt;kPa&lt;/abbr&gt;
 &lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;29.1 inches&lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0&quot;&gt;Falling&lt;/dd&gt;]
 </code></pre>
-
-<pre><code class="language-python">short_desc = [tmp1[0].get_text()]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">short_desc <span style="color:#f92672">=</span> [tmp1[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get_text()]
 short_desc
+</code></pre></div><pre><code>['Light Snow and Blowing Snow']
 </code></pre>
-
-<pre><code>['Light Snow and Blowing Snow']
-</code></pre>
-
-<pre><code class="language-python">pression = [tmp1[1].get_text().replace('\n','')]
-trend =[ tmp1[3].get_text()]
-</code></pre>
-
-<pre><code class="language-python">weather = pd.DataFrame({&quot;short_desc&quot;: short_desc,
-                        &quot;pression&quot;:   pression,
-                        &quot;trend&quot;:   trend,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pression <span style="color:#f92672">=</span> [tmp1[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)]
+trend <span style="color:#f92672">=</span>[ tmp1[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>get_text()]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#34;short_desc&#34;</span>: short_desc,
+                        <span style="color:#e6db74">&#34;pression&#34;</span>:   pression,
+                        <span style="color:#e6db74">&#34;trend&#34;</span>:   trend,
                        })
 weather
-</code></pre>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -640,7 +615,6 @@ weather
 <th align="left">trend</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -650,37 +624,28 @@ weather
 </tr>
 </tbody>
 </table>
-
 <h4 id="column-2">Column 2</h4>
-
-<pre><code class="language-python">col2 = conditions.find_all(class_=&quot;dl-horizontal wxo-conds-col2&quot;)
-today2 = col2[1]
-#print(today2.prettify())
-tmp2  = today2.select(&quot;.mrgn-bttm-0&quot;)
-print(tmp2)
-</code></pre>
-
-<pre><code>[&lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;-6.7°&lt;abbr title=&quot;Celsius&quot;&gt;C&lt;/abbr&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">col2 <span style="color:#f92672">=</span> conditions<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dl-horizontal wxo-conds-col2&#34;</span>)
+today2 <span style="color:#f92672">=</span> col2[<span style="color:#ae81ff">1</span>]
+<span style="color:#75715e">#print(today2.prettify())</span>
+tmp2  <span style="color:#f92672">=</span> today2<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#34;.mrgn-bttm-0&#34;</span>)
+<span style="color:#66d9ef">print</span>(tmp2)
+</code></pre></div><pre><code>[&lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;-6.7°&lt;abbr title=&quot;Celsius&quot;&gt;C&lt;/abbr&gt;
 &lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;19.9°
                     &lt;abbr title=&quot;Fahrenheit&quot;&gt;F&lt;/abbr&gt;
 &lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-metric-hide&quot;&gt;-8.8°&lt;abbr title=&quot;Celsius&quot;&gt;C&lt;/abbr&gt;
 &lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;16.2°&lt;abbr title=&quot;Fahrenheit&quot;&gt;F&lt;/abbr&gt;
 &lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0&quot;&gt;85%&lt;/dd&gt;]
 </code></pre>
-
-<pre><code class="language-python">temperature = [tmp2[0].get_text().replace('\n','')]
-rosee = [tmp2[2].get_text().replace('\n','')]
-humidity = [tmp2[4].get_text().replace('\n','')]
-</code></pre>
-
-<pre><code class="language-python">weather = pd.DataFrame({&quot;temperature&quot;: temperature,
-                        &quot;temperature_rosee&quot;:   rosee,
-                        &quot;humidity&quot;:   humidity,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">temperature <span style="color:#f92672">=</span> [tmp2[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)]
+rosee <span style="color:#f92672">=</span> [tmp2[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)]
+humidity <span style="color:#f92672">=</span> [tmp2[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#34;temperature&#34;</span>: temperature,
+                        <span style="color:#e6db74">&#34;temperature_rosee&#34;</span>:   rosee,
+                        <span style="color:#e6db74">&#34;humidity&#34;</span>:   humidity,
                        })
 weather
-</code></pre>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -689,7 +654,6 @@ weather
 <th align="left">humidity</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -699,17 +663,13 @@ weather
 </tr>
 </tbody>
 </table>
-
 <h4 id="column-3">Column 3</h4>
-
-<pre><code class="language-python">col3 = conditions.find_all(class_=&quot;dl-horizontal wxo-conds-col3&quot;)
-today3 = col3[1]
-#print(today2.prettify())
-tmp3  = today3.select(&quot;.mrgn-bttm-0&quot;)
-print(tmp3)
-</code></pre>
-
-<pre><code>[&lt;dd class=&quot;longContent mrgn-bttm-0 wxo-metric-hide&quot;&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">col3 <span style="color:#f92672">=</span> conditions<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dl-horizontal wxo-conds-col3&#34;</span>)
+today3 <span style="color:#f92672">=</span> col3[<span style="color:#ae81ff">1</span>]
+<span style="color:#75715e">#print(today2.prettify())</span>
+tmp3  <span style="color:#f92672">=</span> today3<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#34;.mrgn-bttm-0&#34;</span>)
+<span style="color:#66d9ef">print</span>(tmp3)
+</code></pre></div><pre><code>[&lt;dd class=&quot;longContent mrgn-bttm-0 wxo-metric-hide&quot;&gt;
 &lt;abbr title=&quot;North&quot;&gt;N&lt;/abbr&gt; 35  &lt;br class=&quot;visible-xs&quot;/&gt;gust 53 &lt;abbr title=&quot;kilometres per hour&quot;&gt;km/h&lt;/abbr&gt;
 &lt;/dd&gt;, &lt;dd class=&quot;longContent mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;
 &lt;abbr title=&quot;North&quot;&gt;N&lt;/abbr&gt; 22  &lt;br class=&quot;visible-xs&quot;/&gt;gust 33 &lt;abbr title=&quot;miles per hour&quot;&gt;mph&lt;/abbr&gt;
@@ -717,24 +677,19 @@ print(tmp3)
 &lt;/dd&gt;, &lt;dd class=&quot;mrgn-bttm-0 wxo-imperial-hide wxo-city-hidden&quot;&gt;0.5 mile
                         &lt;/dd&gt;]
 </code></pre>
-
-<pre><code class="language-python">wind = [tmp3[0].get_text().replace('\n','')]
-visibility = [tmp3[2].get_text().replace('\n','')]
-</code></pre>
-
-<pre><code class="language-python">weather = pd.DataFrame({&quot;short_desc&quot;: short_desc,
-                        &quot;pression&quot;:   pression,
-                        &quot;Trend&quot;:   trend,
-                        &quot;temperature&quot;: temperature,
-                        &quot;temperature_rosee&quot;:   rosee,
-                        &quot;humidity&quot;:   humidity,
-                        &quot;wind&quot;:   wind,
-                        &quot;visibility&quot;:   visibility,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">wind <span style="color:#f92672">=</span> [tmp3[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)]
+visibility <span style="color:#f92672">=</span> [tmp3[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#34;short_desc&#34;</span>: short_desc,
+                        <span style="color:#e6db74">&#34;pression&#34;</span>:   pression,
+                        <span style="color:#e6db74">&#34;Trend&#34;</span>:   trend,
+                        <span style="color:#e6db74">&#34;temperature&#34;</span>: temperature,
+                        <span style="color:#e6db74">&#34;temperature_rosee&#34;</span>:   rosee,
+                        <span style="color:#e6db74">&#34;humidity&#34;</span>:   humidity,
+                        <span style="color:#e6db74">&#34;wind&#34;</span>:   wind,
+                        <span style="color:#e6db74">&#34;visibility&#34;</span>:   visibility,
                        })
 weather
-</code></pre>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -748,7 +703,6 @@ weather
 <th align="right">visibility</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -763,18 +717,12 @@ weather
 </tr>
 </tbody>
 </table>
-
-<pre><code class="language-python">weather.to_csv(&quot;current.csv&quot;, header = True, sep = ',',encoding='utf-8')
-</code></pre>
-
-<h3 id="2-reading-forecasting-values">2-  Reading forecasting values</h3>
-
-<pre><code class="language-python">period_tags = soup.find(id=&quot;mainContent&quot;)
-row1 = period_tags.find_all(class_=&quot;div-row div-row1 div-row-head&quot;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;current.csv&#34;</span>, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;,&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>)
+</code></pre></div><h3 id="2---reading-forecasting-values">2-  Reading forecasting values</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mainContent&#34;</span>)
+row1 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div-row div-row1 div-row-head&#34;</span>)
 row1
-</code></pre>
-
-<pre><code>[&lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;&lt;a href=&quot;/forecast/hourly/qc-147_metric_e.html&quot;&gt;&lt;strong title=&quot;Friday&quot;&gt;Fri&lt;/strong&gt;&lt;br/&gt;7 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;&lt;/a&gt;&lt;/div&gt;,
+</code></pre></div><pre><code>[&lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;&lt;a href=&quot;/forecast/hourly/qc-147_metric_e.html&quot;&gt;&lt;strong title=&quot;Friday&quot;&gt;Fri&lt;/strong&gt;&lt;br/&gt;7 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;&lt;/a&gt;&lt;/div&gt;,
  &lt;div class=&quot;div-row div-row1 div-row-head&quot;&gt;
  &lt;strong title=&quot;Saturday&quot;&gt;Sat&lt;/strong&gt;&lt;br/&gt;8 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
  &lt;/div&gt;,
@@ -794,14 +742,11 @@ row1
  &lt;strong title=&quot;Thursday&quot;&gt;Thu&lt;/strong&gt;&lt;br/&gt;13 &lt;abbr title=&quot;February&quot;&gt;Feb&lt;/abbr&gt;
  &lt;/div&gt;]
 </code></pre>
-
-<pre><code class="language-python">period_tags = soup.find(id=&quot;mainContent&quot;)
-row1 = period_tags.find_all(class_=&quot;div-row div-row1 div-row-head&quot;)
-periods = [pt.get_text().replace('\xa0', ' ').replace('\n','') for pt in row1]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mainContent&#34;</span>)
+row1 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div-row div-row1 div-row-head&#34;</span>)
+periods <span style="color:#f92672">=</span> [pt<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xa0</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39; &#39;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">for</span> pt <span style="color:#f92672">in</span> row1]
 periods
-</code></pre>
-
-<pre><code>['Fri7 Feb',
+</code></pre></div><pre><code>['Fri7 Feb',
  'Sat8 Feb',
  'Sun9 Feb',
  'Mon10 Feb',
@@ -809,26 +754,20 @@ periods
  'Wed12 Feb',
  'Thu13 Feb']
 </code></pre>
-
-<pre><code class="language-python">period_tags = soup.find(id=&quot;mainContent&quot;)
-row2 = period_tags.find_all(class_=&quot;div-row div-row2 div-row-data&quot;)
-row2[1]
-</code></pre>
-
-<pre><code>&lt;div class=&quot;div-row div-row2 div-row-data&quot;&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mainContent&#34;</span>)
+row2 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div-row div-row2 div-row-data&#34;</span>)
+row2[<span style="color:#ae81ff">1</span>]
+</code></pre></div><pre><code>&lt;div class=&quot;div-row div-row2 div-row-data&quot;&gt;
 &lt;img alt=&quot;A mix of sun and cloud&quot; class=&quot;center-block&quot; height=&quot;51&quot; src=&quot;/weathericons/02.gif&quot; width=&quot;60&quot;/&gt;&lt;p class=&quot;mrgn-bttm-0&quot;&gt;&lt;span class=&quot;high wxo-metric-hide&quot; title=&quot;max&quot;&gt;-13°&lt;abbr title=&quot;Celsius&quot;&gt;C&lt;/abbr&gt;&lt;/span&gt;&lt;span class=&quot;high wxo-imperial-hide wxo-city-hidden&quot; title=&quot;max&quot;&gt;9°&lt;abbr title=&quot;Fahrenheit&quot;&gt;F&lt;/abbr&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;mrgn-bttm-0 pop text-center&quot;&gt; &lt;/p&gt;
 &lt;p class=&quot;mrgn-bttm-0&quot;&gt;A mix of sun and cloud&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
-
-<pre><code class="language-python">period_tags = soup.find(id=&quot;mainContent&quot;)
-row2 = period_tags.find_all(class_=&quot;div-row div-row2 div-row-data&quot;)
-temperature_f = [pt.get_text().split('\n')[1][:] for pt in row2]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">period_tags <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mainContent&#34;</span>)
+row2 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div-row div-row2 div-row-data&#34;</span>)
+temperature_f <span style="color:#f92672">=</span> [pt<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#ae81ff">1</span>][:] <span style="color:#66d9ef">for</span> pt <span style="color:#f92672">in</span> row2]
 temperature_f
-</code></pre>
-
-<pre><code>['-5°C23°F',
+</code></pre></div><pre><code>['-5°C23°F',
  '-13°C9°F',
  '-6°C21°F',
  '-3°C27°F',
@@ -836,21 +775,15 @@ temperature_f
  '-6°C21°F',
  '-6°C21°F']
 </code></pre>
-
-<pre><code class="language-python">temperature_2=[]
-for val in enumerate(temperature_f):
-    temperature_2.append(val[1].split('C')[0] + 'C')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">temperature_2<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> val <span style="color:#f92672">in</span> enumerate(temperature_f):
+    temperature_2<span style="color:#f92672">.</span>append(val[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;C&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;C&#39;</span>)
 temperature_2
+</code></pre></div><pre><code>['-5°C', '-13°C', '-6°C', '-3°C', '-2°C', '-6°C', '-6°C']
 </code></pre>
-
-<pre><code>['-5°C', '-13°C', '-6°C', '-3°C', '-2°C', '-6°C', '-6°C']
-</code></pre>
-
-<pre><code class="language-python">conditions_f = [pt.get_text().split('\n')[3] for pt in row2]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">conditions_f <span style="color:#f92672">=</span> [pt<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#ae81ff">3</span>] <span style="color:#66d9ef">for</span> pt <span style="color:#f92672">in</span> row2]
 conditions_f
-</code></pre>
-
-<pre><code>['Snow at times heavy and blowing snow',
+</code></pre></div><pre><code>['Snow at times heavy and blowing snow',
  'A mix of sun and cloud',
  'Sunny',
  'Snow',
@@ -858,16 +791,13 @@ conditions_f
  'A mix of sun and cloud',
  'Chance of flurries']
 </code></pre>
-
-<pre><code class="language-python">weather_f = pd.DataFrame({&quot;Period&quot;: periods,
-                       &quot;temperature_f&quot;: temperature_f,
-                       &quot;conditions_f&quot;:conditions_f,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather_f <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#34;Period&#34;</span>: periods,
+                       <span style="color:#e6db74">&#34;temperature_f&#34;</span>: temperature_f,
+                       <span style="color:#e6db74">&#34;conditions_f&#34;</span>:conditions_f,
                        })
 weather_f
 
-</code></pre>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="right"></th>
@@ -876,7 +806,6 @@ weather_f
 <th align="left">conditions_f</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">0</td>
@@ -884,42 +813,36 @@ weather_f
 <td align="left">-5°C23°F</td>
 <td align="left">Snow at times heavy and blowing snow</td>
 </tr>
-
 <tr>
 <td align="right">1</td>
 <td align="left">Sat8 Feb</td>
 <td align="left">-13°C9°F</td>
 <td align="left">A mix of sun and cloud</td>
 </tr>
-
 <tr>
 <td align="right">2</td>
 <td align="left">Sun9 Feb</td>
 <td align="left">-6°C21°F</td>
 <td align="left">Sunny</td>
 </tr>
-
 <tr>
 <td align="right">3</td>
 <td align="left">Mon10 Feb</td>
 <td align="left">-3°C27°F</td>
 <td align="left">Snow</td>
 </tr>
-
 <tr>
 <td align="right">4</td>
 <td align="left">Tue11 Feb</td>
 <td align="left">-2°C28°F</td>
 <td align="left">Periods of snow</td>
 </tr>
-
 <tr>
 <td align="right">5</td>
 <td align="left">Wed12 Feb</td>
 <td align="left">-6°C21°F</td>
 <td align="left">A mix of sun and cloud</td>
 </tr>
-
 <tr>
 <td align="right">6</td>
 <td align="left">Thu13 Feb</td>
@@ -928,25 +851,19 @@ weather_f
 </tr>
 </tbody>
 </table>
-
-<h3 id="3-download-of-weather-icons-for-the-next-7-days">3- Download of weather icons for the next 7 days</h3>
-
-<pre><code class="language-python">from urllib import request
-row3 = period_tags.find_all(class_=&quot;div-row div-row2 div-row-data&quot;)
-i = 0
-for images in row3:
-    s = images.find('img')
-    f = open(str(i) + '.gif', 'wb')
-    f.write(request.urlopen(&quot;https://meteo.gc.ca/weathericons/&quot;+str(s)[str(s).find('gif')-3:(str(s).find('gif'))-1]+&quot;.gif&quot;).read())
-    f.close() 
-    i += 1 
-</code></pre>
-
-<p><img src="scrap.png" alt="png" /></p>
-
-<pre><code class="language-python">weather_f.to_csv(&quot;forecast.csv&quot;, header = True, sep = ',',encoding='utf-8')
-</code></pre>
-
+<h3 id="3--download-of-weather-icons-for-the-next-7-days">3- Download of weather icons for the next 7 days</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> urllib <span style="color:#f92672">import</span> request
+row3 <span style="color:#f92672">=</span> period_tags<span style="color:#f92672">.</span>find_all(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div-row div-row2 div-row-data&#34;</span>)
+i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> images <span style="color:#f92672">in</span> row3:
+    s <span style="color:#f92672">=</span> images<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;img&#39;</span>)
+    f <span style="color:#f92672">=</span> open(str(i) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.gif&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>)
+    f<span style="color:#f92672">.</span>write(request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74">&#34;https://meteo.gc.ca/weathericons/&#34;</span><span style="color:#f92672">+</span>str(s)[str(s)<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;gif&#39;</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>:(str(s)<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;gif&#39;</span>))<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;.gif&#34;</span>)<span style="color:#f92672">.</span>read())
+    f<span style="color:#f92672">.</span>close() 
+    i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+</code></pre></div><p><img src="scrap.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">weather_f<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;forecast.csv&#34;</span>, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;,&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>)
+</code></pre></div>
     </div>
 
     

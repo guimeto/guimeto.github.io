@@ -28,8 +28,7 @@
   
     
   
-  <meta name="description" content="- 1: Recréer la méthode isdigit 
-import string symboles = string.digits symboles  &#39;0123456789&#39;  def isdigit(nombre): for n in nombre: if n not in symboles: return False return True print(isdigit(&quot;1854274&quot;))  True  def isdigit(variable): for i in variable: if i not in [str(n) for n in range(10)]: return False return True print(isdigit(&quot;1854274&quot;))  True  POINTS IMPORTANTS À RETENIR
+  <meta name="description" content="- 1: Recréer la méthode isdigit import string symboles = string.digits symboles &#39;0123456789&#39; def isdigit(nombre): for n in nombre: if n not in symboles: return False return True print(isdigit(&#34;1854274&#34;)) True def isdigit(variable): for i in variable: if i not in [str(n) for n in range(10)]: return False return True print(isdigit(&#34;1854274&#34;)) True POINTS IMPORTANTS À RETENIR
 Pour créer rapidement et efficacement des listes, on peut utiliser des compréhensions de liste et la fonction range.">
 
   
@@ -117,8 +116,7 @@ Pour créer rapidement et efficacement des listes, on peut utiliser des compréh
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/16-3-niveau-difficile/">
   <meta property="og:title" content="16.3- Exercices Python - Niveau difficile | GDueymes">
-  <meta property="og:description" content="- 1: Recréer la méthode isdigit 
-import string symboles = string.digits symboles  &#39;0123456789&#39;  def isdigit(nombre): for n in nombre: if n not in symboles: return False return True print(isdigit(&quot;1854274&quot;))  True  def isdigit(variable): for i in variable: if i not in [str(n) for n in range(10)]: return False return True print(isdigit(&quot;1854274&quot;))  True  POINTS IMPORTANTS À RETENIR
+  <meta property="og:description" content="- 1: Recréer la méthode isdigit import string symboles = string.digits symboles &#39;0123456789&#39; def isdigit(nombre): for n in nombre: if n not in symboles: return False return True print(isdigit(&#34;1854274&#34;)) True def isdigit(variable): for i in variable: if i not in [str(n) for n in range(10)]: return False return True print(isdigit(&#34;1854274&#34;)) True POINTS IMPORTANTS À RETENIR
 Pour créer rapidement et efficacement des listes, on peut utiliser des compréhensions de liste et la fonction range."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -580,7 +578,7 @@ Pour créer rapidement et efficacement des listes, on peut utiliser des compréh
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -594,114 +592,84 @@ Pour créer rapidement et efficacement des listes, on peut utiliser des compréh
           <h1>16.3- Exercices Python - Niveau difficile</h1>
 
           <div class="article-style">
-            <p><b> - 1: Recréer la méthode isdigit </b></p>
-
-<pre><code class="language-python">import string
+            <p><!-- raw HTML omitted --> - 1: Recréer la méthode isdigit <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
  
-symboles = string.digits
+symboles <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>digits
 symboles
+</code></pre></div><pre><code>'0123456789'
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isdigit</span>(nombre):
+    <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> nombre:
+        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> symboles:
+            <span style="color:#66d9ef">return</span> False
+    <span style="color:#66d9ef">return</span> True
 
-<pre><code>'0123456789'
+<span style="color:#66d9ef">print</span>(isdigit(<span style="color:#e6db74">&#34;1854274&#34;</span>))
+</code></pre></div><pre><code>True
 </code></pre>
-
-<pre><code class="language-python">def isdigit(nombre):
-    for n in nombre:
-        if n not in symboles:
-            return False
-    return True
-
-print(isdigit(&quot;1854274&quot;))
-</code></pre>
-
-<pre><code>True
-</code></pre>
-
-<pre><code class="language-python">def isdigit(variable):
-    for i in variable:
-        if i not in [str(n) for n in range(10)]:
-            return False
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isdigit</span>(variable):
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> variable:
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> [str(n) <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]:
+            <span style="color:#66d9ef">return</span> False
  
-    return True
+    <span style="color:#66d9ef">return</span> True
  
-print(isdigit(&quot;1854274&quot;))
+<span style="color:#66d9ef">print</span>(isdigit(<span style="color:#e6db74">&#34;1854274&#34;</span>))
+</code></pre></div><pre><code>True
 </code></pre>
-
-<pre><code>True
-</code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour créer rapidement et efficacement des listes, on peut utiliser des compréhensions de liste et la fonction range.</p>
-
 <p>Pour vérifier si une variable est présente ou non dans une liste, on utilise &ldquo;in&rdquo; dans une condition : if variable in liste. La condition retournera True si la variable est présente dans la liste et False dans le cas contraire.</p>
-
-<p><b> - 2: Recréer la méthode join </b></p>
-
-<pre><code class="language-python">def join(*args):
-    resultat = &quot;&quot;
+<p><!-- raw HTML omitted --> - 2: Recréer la méthode join <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">join</span>(<span style="color:#f92672">*</span>args):
+    resultat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
     
-    separateur = args[0]
-    elements = args[1:]
+    separateur <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">0</span>]
+    elements <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">1</span>:]
     
-    for element in elements:
-        resultat += element + separateur
+    <span style="color:#66d9ef">for</span> element <span style="color:#f92672">in</span> elements:
+        resultat <span style="color:#f92672">+=</span> element <span style="color:#f92672">+</span> separateur
  
-    return resultat[:-1]
+    <span style="color:#66d9ef">return</span> resultat[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
  
-j = join(&quot;:&quot;, &quot;Bonjour&quot;, &quot;tout&quot;, &quot;le&quot;, &quot;monde&quot;)
-print(j)
+j <span style="color:#f92672">=</span> join(<span style="color:#e6db74">&#34;:&#34;</span>, <span style="color:#e6db74">&#34;Bonjour&#34;</span>, <span style="color:#e6db74">&#34;tout&#34;</span>, <span style="color:#e6db74">&#34;le&#34;</span>, <span style="color:#e6db74">&#34;monde&#34;</span>)
+<span style="color:#66d9ef">print</span>(j)
+</code></pre></div><pre><code>Bonjour:tout:le:monde
 </code></pre>
-
-<pre><code>Bonjour:tout:le:monde
-</code></pre>
-
 <p>Notre fonction join pouvant accepter un nombre indéfini de paramètre, il nous faudra donc utiliser les &ldquo;args&rdquo;:
-<b>def join(*args)</b></p>
-
+<!-- raw HTML omitted -->def join(*args)<!-- raw HTML omitted --></p>
 <p>Cette syntaxe nous permet de passer un nombre indéfini d&rsquo;arguments à notre fonction : ces arguments seront récupérables dans la liste &ldquo;args&rdquo; à l&rsquo;intérieur de notre fonction.</p>
-
 <p>À l&rsquo;intérieur de notre fonction, nous récupérons donc le premier élément de la liste args, qui correspondra au séparateur utilisé pour joindre les arguments suivants :</p>
-
-<pre><code class="language-python">def join(*args):
-    separateur = args[0]
-    elements = args[1:]
-    print(separateur)
-    print(elements)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">join</span>(<span style="color:#f92672">*</span>args):
+    separateur <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">0</span>]
+    elements <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">1</span>:]
+    <span style="color:#66d9ef">print</span>(separateur)
+    <span style="color:#66d9ef">print</span>(elements)
     
-join(&quot;:&quot;, &quot;Bonjour&quot;, &quot;tout&quot;, &quot;le&quot;, &quot;monde&quot;)    
-</code></pre>
-
-<pre><code>:
+join(<span style="color:#e6db74">&#34;:&#34;</span>, <span style="color:#e6db74">&#34;Bonjour&#34;</span>, <span style="color:#e6db74">&#34;tout&#34;</span>, <span style="color:#e6db74">&#34;le&#34;</span>, <span style="color:#e6db74">&#34;monde&#34;</span>)    
+</code></pre></div><pre><code>:
 ('Bonjour', 'tout', 'le', 'monde')
 </code></pre>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour envoyer et récupérer un nombre indéfini d&rsquo;arguments à une fonction, on utilise *args.</p>
-
 <p>Pour récupérer tous les éléments d&rsquo;une liste sauf le premier, on utilise la syntaxe de slice [1:]</p>
-
 <p>Pour récupérer tous les éléments d&rsquo;une liste ou d&rsquo;une chaîne de caractère sauf le dernier, on utilise la syntaxe de slice [:-1]</p>
+<p><!-- raw HTML omitted --> - 3: Créer un code qui crée un dossier par lettre de l&rsquo;alphabet <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
+<span style="color:#f92672">import</span> os 
+<span style="color:#75715e">#help(string)</span>
 
-<p><b> - 3: Créer un code qui crée un dossier par lettre de l&rsquo;alphabet </b></p>
-
-<pre><code class="language-python">import string
-import os 
-#help(string)
-
-for l in string.ascii_uppercase:
-    # define the name of the directory to be created
-    path = l
-    try:  
-        os.mkdir(path)
-    except OSError:  
-        print (&quot;Creation of the directory %s failed&quot; % path)
-    else:  
-        print (&quot;Successfully created the directory %s &quot; % path)
-</code></pre>
-
-<pre><code>Successfully created the directory A 
+<span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> string<span style="color:#f92672">.</span>ascii_uppercase:
+    <span style="color:#75715e"># define the name of the directory to be created</span>
+    path <span style="color:#f92672">=</span> l
+    <span style="color:#66d9ef">try</span>:  
+        os<span style="color:#f92672">.</span>mkdir(path)
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OSError</span>:  
+        <span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;Creation of the directory </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> failed&#34;</span> <span style="color:#f92672">%</span> path)
+    <span style="color:#66d9ef">else</span>:  
+        <span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;Successfully created the directory </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> &#34;</span> <span style="color:#f92672">%</span> path)
+</code></pre></div><pre><code>Successfully created the directory A 
 Successfully created the directory B 
 Successfully created the directory C 
 Successfully created the directory D 
@@ -728,520 +696,386 @@ Successfully created the directory X
 Successfully created the directory Y 
 Successfully created the directory Z 
 </code></pre>
-
-<pre><code class="language-python">import os
-import string
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> string
  
-directory = os.path.dirname('__file__')
-alphabet_dir = os.path.join(directory, &quot;alphabet&quot;)
+directory <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(<span style="color:#e6db74">&#39;__file__&#39;</span>)
+alphabet_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(directory, <span style="color:#e6db74">&#34;alphabet&#34;</span>)
  
-for lettre in string.ascii_uppercase:
-    lettre_dir = os.path.join(alphabet_dir, lettre)
-    if not os.path.isdir(lettre_dir):
-        os.makedirs(lettre_dir)
+<span style="color:#66d9ef">for</span> lettre <span style="color:#f92672">in</span> string<span style="color:#f92672">.</span>ascii_uppercase:
+    lettre_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(alphabet_dir, lettre)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isdir(lettre_dir):
+        os<span style="color:#f92672">.</span>makedirs(lettre_dir)
+</code></pre></div><p><!-- raw HTML omitted --> - 4: Chercher un mot dans des dossiers et sous-dossiers <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">from</span> glob <span style="color:#f92672">import</span> glob
+
+dossier <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:/Utilisateurs/guillaume/Documents/GitHub&#34;</span>
+mot <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Python&#34;</span>
+
+<span style="color:#75715e"># f string + rechercher de maniere récursive </span>
+fichiers <span style="color:#f92672">=</span> glob(f<span style="color:#e6db74">&#34;{dossier}/**/*.txt&#34;</span>, recursive <span style="color:#f92672">=</span> True) 
+
+fichiers_trouves <span style="color:#f92672">=</span> []
+
+<span style="color:#66d9ef">for</span> filename <span style="color:#f92672">in</span> fichiers:
+    <span style="color:#66d9ef">with</span> open(filename, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+        contenu_fichier <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
+        <span style="color:#66d9ef">if</span> mot <span style="color:#f92672">in</span> contenu_fichier:
+            fichiers_trouves<span style="color:#f92672">.</span>append(filename)
+
+<span style="color:#66d9ef">print</span>(fichiers_trouves)
+</code></pre></div><pre><code>['D:/Utilisateurs/guillaume/Documents/GitHub\\uqam_station_website\\ENV\\Lib\\site-packages\\django\\views\\templates\\technical_500.txt']
 </code></pre>
-
-<p><b> - 4: Chercher un mot dans des dossiers et sous-dossiers </b></p>
-
-<pre><code class="language-python">import os
-from glob import glob
-
-dossier = &quot;D:/Utilisateurs/guillaume/Documents/GitHub&quot;
-mot = &quot;Python&quot;
-
-# f string + rechercher de maniere récursive 
-fichiers = glob(f&quot;{dossier}/**/*.txt&quot;, recursive = True) 
-
-fichiers_trouves = []
-
-for filename in fichiers:
-    with open(filename, 'r') as file:
-        contenu_fichier = file.read()
-        if mot in contenu_fichier:
-            fichiers_trouves.append(filename)
-
-print(fichiers_trouves)
-</code></pre>
-
-<pre><code>['D:/Utilisateurs/guillaume/Documents/GitHub\\uqam_station_website\\ENV\\Lib\\site-packages\\django\\views\\templates\\technical_500.txt']
-</code></pre>
-
-<p><b> - 5: réimplanter la méthode <strong>add</strong> </b></p>
-
+<p><!-- raw HTML omitted --> - 5: réimplanter la méthode <strong>add</strong> <!-- raw HTML omitted --></p>
 <p><strong>add</strong> : méthode appellée après l&rsquo;opérateur plus de notre class.</p>
-
-<pre><code class="language-python">class SuperStr(str):
-    def __init__(self, chaine):
-        self.chaine = chaine
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SuperStr</span>(str):
+    <span style="color:#66d9ef">def</span> __init__(self, chaine):
+        self<span style="color:#f92672">.</span>chaine <span style="color:#f92672">=</span> chaine
  
-    def __add__(self, mot):
-        return SuperStr(f&quot;{self.chaine} {mot}&quot;)
+    <span style="color:#66d9ef">def</span> __add__(self, mot):
+        <span style="color:#66d9ef">return</span> SuperStr(f<span style="color:#e6db74">&#34;{self.chaine} {mot}&#34;</span>)
  
-s = SuperStr(&quot;Bonjour&quot;)                      # on déclare une instance de notre instance: qui va hériter de toutes les méthodes
-print(s + &quot;tout&quot; + &quot;le&quot; + &quot;monde&quot;)  
+s <span style="color:#f92672">=</span> SuperStr(<span style="color:#e6db74">&#34;Bonjour&#34;</span>)                      <span style="color:#75715e"># on déclare une instance de notre instance: qui va hériter de toutes les méthodes</span>
+<span style="color:#66d9ef">print</span>(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;tout&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;le&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;monde&#34;</span>)  
+</code></pre></div><pre><code>Bonjour tout le monde
 </code></pre>
-
-<pre><code>Bonjour tout le monde
-</code></pre>
-
-<pre><code class="language-python">class SuperStr(str):
-    def __init__(self, chaine):
-        self.chaine = chaine
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SuperStr</span>(str):
+    <span style="color:#66d9ef">def</span> __init__(self, chaine):
+        self<span style="color:#f92672">.</span>chaine <span style="color:#f92672">=</span> chaine
  
-    def __add__(self, mot):
-        return SuperStr(f&quot;{self.chaine}////{mot}&quot;)
+    <span style="color:#66d9ef">def</span> __add__(self, mot):
+        <span style="color:#66d9ef">return</span> SuperStr(f<span style="color:#e6db74">&#34;{self.chaine}////{mot}&#34;</span>)
  
-s = SuperStr(&quot;Bonjour&quot;)                      # on déclare une instance de notre instance: qui va hériter de toutes les méthodes
-print(s + &quot;tout&quot; + &quot;le&quot; + &quot;monde&quot;)  
+s <span style="color:#f92672">=</span> SuperStr(<span style="color:#e6db74">&#34;Bonjour&#34;</span>)                      <span style="color:#75715e"># on déclare une instance de notre instance: qui va hériter de toutes les méthodes</span>
+<span style="color:#66d9ef">print</span>(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;tout&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;le&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;monde&#34;</span>)  
+</code></pre></div><pre><code>Bonjour////tout////le////monde
 </code></pre>
-
-<pre><code>Bonjour////tout////le////monde
-</code></pre>
-
-<pre><code class="language-python">class SuperStr(str):
-    def __init__(self, chaine):
-        self.chaine = chaine
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SuperStr</span>(str):
+    <span style="color:#66d9ef">def</span> __init__(self, chaine):
+        self<span style="color:#f92672">.</span>chaine <span style="color:#f92672">=</span> chaine
  
-    def __add__(self, mot):
-        return f&quot;{self.chaine}////{mot}&quot;  # f-string chaine de caractère
+    <span style="color:#66d9ef">def</span> __add__(self, mot):
+        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;{self.chaine}////{mot}&#34;</span>  <span style="color:#75715e"># f-string chaine de caractère</span>
  
-s = SuperStr(&quot;Bonjour&quot;)      # on déclare une instance de notre instance: qui va hériter de toutes les méthodes &quot;string&quot;
-print(s + &quot;tout&quot; + &quot;le&quot; + &quot;monde&quot;)  
+s <span style="color:#f92672">=</span> SuperStr(<span style="color:#e6db74">&#34;Bonjour&#34;</span>)      <span style="color:#75715e"># on déclare une instance de notre instance: qui va hériter de toutes les méthodes &#34;string&#34;</span>
+<span style="color:#66d9ef">print</span>(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;tout&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;le&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;monde&#34;</span>)  
+</code></pre></div><pre><code>Bonjour////toutlemonde
 </code></pre>
-
-<pre><code>Bonjour////toutlemonde
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><p>Fonctionnement interne à python: le + va directement lire le <!-- raw HTML omitted -->__ add __<!-- raw HTML omitted --> de la class, on pourrait en effet écrire:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>__add__(<span style="color:#e6db74">&#34;tout&#34;</span>)<span style="color:#f92672">.</span>__add__(<span style="color:#e6db74">&#34;le&#34;</span>)<span style="color:#f92672">.</span>__add__(<span style="color:#e6db74">&#34;monde&#34;</span>))
+</code></pre></div><pre><code>Bonjour////toutlemonde
 </code></pre>
-
-<pre><code class="language-python">
-</code></pre>
-
-<p>Fonctionnement interne à python: le + va directement lire le <b>__ add __</b> de la class, on pourrait en effet écrire:</p>
-
-<pre><code class="language-python">print(s.__add__(&quot;tout&quot;).__add__(&quot;le&quot;).__add__(&quot;monde&quot;))
-</code></pre>
-
-<pre><code>Bonjour////toutlemonde
-</code></pre>
-
-<p><b> - 6: Créer un algorythme de &lsquo;tri à bulles&rsquo;</b></p>
-
-<pre><code class="language-python">def bubble_sort(liste):
-    for i in range(len(liste) - 1, 0, -1):
-        for j in range(i):
-            n_courant = liste[j]
-            n_suivant = liste[j + 1]
-            if n_courant &gt; n_suivant:
-                liste[j] = n_suivant
-                liste[j + 1] = n_courant
+<p><!-- raw HTML omitted --> - 6: Créer un algorythme de &lsquo;tri à bulles'<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bubble_sort</span>(liste):
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(liste) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i):
+            n_courant <span style="color:#f92672">=</span> liste[j]
+            n_suivant <span style="color:#f92672">=</span> liste[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]
+            <span style="color:#66d9ef">if</span> n_courant <span style="color:#f92672">&gt;</span> n_suivant:
+                liste[j] <span style="color:#f92672">=</span> n_suivant
+                liste[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> n_courant
  
-    return liste
+    <span style="color:#66d9ef">return</span> liste
  
-l = [40, 16, 80, 2, 90]
-print(bubble_sort(l))
+l <span style="color:#f92672">=</span> [<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">90</span>]
+<span style="color:#66d9ef">print</span>(bubble_sort(l))
+</code></pre></div><pre><code>[2, 16, 40, 80, 90]
 </code></pre>
-
-<pre><code>[2, 16, 40, 80, 90]
-</code></pre>
-
-<pre><code class="language-python">l = [40, 16, 80, 2, 90]
-</code></pre>
-
-<p><b> - 7: Récupérer un élément dans une liste sans causer d&rsquo;erreur </b></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">l <span style="color:#f92672">=</span> [<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">90</span>]
+</code></pre></div><p><!-- raw HTML omitted --> - 7: Récupérer un élément dans une liste sans causer d&rsquo;erreur <!-- raw HTML omitted --></p>
 <p>Nous alons créer une fonction pour récupérer un élément dans une liste, sans causer d&rsquo;erreur si l&rsquo;indice est en dehors de la liste.</p>
-
 <p>La fonction aura comme premier paramètre la liste dont on veut récupérer un élément et comme deuxième le paramètre de l&rsquo;indice désiré.</p>
-
-<pre><code class="language-python">def recuperer_item(liste, indice):
-    if indice &lt; 0 and abs(indice) &lt;= len(liste):
-        return liste[indice]
-    elif indice &gt; 0 and indice &lt; len(liste): # Dans ce cas-ci, on vérifie si l'indice est égal à 0 et si la liste n'est pas vide
-        return liste[indice]
-    elif indice == 0 and liste:
-        return liste[0]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recuperer_item</span>(liste, indice):
+    <span style="color:#66d9ef">if</span> indice <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> abs(indice) <span style="color:#f92672">&lt;=</span> len(liste):
+        <span style="color:#66d9ef">return</span> liste[indice]
+    <span style="color:#66d9ef">elif</span> indice <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> indice <span style="color:#f92672">&lt;</span> len(liste): <span style="color:#75715e"># Dans ce cas-ci, on vérifie si l&#39;indice est égal à 0 et si la liste n&#39;est pas vide</span>
+        <span style="color:#66d9ef">return</span> liste[indice]
+    <span style="color:#66d9ef">elif</span> indice <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> liste:
+        <span style="color:#66d9ef">return</span> liste[<span style="color:#ae81ff">0</span>]
  
-    return &quot;Index {} hors de la liste&quot;.format(indice)
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Index {} hors de la liste&#34;</span><span style="color:#f92672">.</span>format(indice)
  
-liste = [&quot;Julien&quot;, &quot;Marie&quot;, &quot;Pierre&quot;]
+liste <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Julien&#34;</span>, <span style="color:#e6db74">&#34;Marie&#34;</span>, <span style="color:#e6db74">&#34;Pierre&#34;</span>]
  
-print(recuperer_item(liste, 0))
-print(recuperer_item(liste, 5))
-print(recuperer_item(liste, -13))
-</code></pre>
-
-<pre><code>Julien
+<span style="color:#66d9ef">print</span>(recuperer_item(liste, <span style="color:#ae81ff">0</span>))
+<span style="color:#66d9ef">print</span>(recuperer_item(liste, <span style="color:#ae81ff">5</span>))
+<span style="color:#66d9ef">print</span>(recuperer_item(liste, <span style="color:#f92672">-</span><span style="color:#ae81ff">13</span>))
+</code></pre></div><pre><code>Julien
 Index 5 hors de la liste
 Index -13 hors de la liste
 </code></pre>
-
-<p><b> - 8: Recréer la méthode replace avec une fonction </b></p>
-
-<pre><code class="language-python">def replace(phrase, mot_a_remplacer, nouveau_mot):
-    while mot_a_remplacer in phrase: 
-        debut = phrase.index(mot_a_remplacer)
-        fin = debut + len(mot_a_remplacer)
+<p><!-- raw HTML omitted --> - 8: Recréer la méthode replace avec une fonction <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">replace</span>(phrase, mot_a_remplacer, nouveau_mot):
+    <span style="color:#66d9ef">while</span> mot_a_remplacer <span style="color:#f92672">in</span> phrase: 
+        debut <span style="color:#f92672">=</span> phrase<span style="color:#f92672">.</span>index(mot_a_remplacer)
+        fin <span style="color:#f92672">=</span> debut <span style="color:#f92672">+</span> len(mot_a_remplacer)
         
-        phrase = list(phrase)
-        phrase[debut:fin] = list(nouveau_mot)
-        phrase = &quot;&quot;.join(phrase)
-    return phrase
+        phrase <span style="color:#f92672">=</span> list(phrase)
+        phrase[debut:fin] <span style="color:#f92672">=</span> list(nouveau_mot)
+        phrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(phrase)
+    <span style="color:#66d9ef">return</span> phrase
     
     
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">replace(<span style="color:#e6db74">&#39;mon nom est bond, james bond&#39;</span>, <span style="color:#e6db74">&#39;bond&#39;</span> ,<span style="color:#e6db74">&#39;test&#39;</span>)
+</code></pre></div><pre><code>'mon nom est test, james test'
 </code></pre>
-
-<pre><code class="language-python">replace('mon nom est bond, james bond', 'bond' ,'test')
-</code></pre>
-
-<pre><code>'mon nom est test, james test'
-</code></pre>
-
-<p>On a utilisé deux approches ici:
-- while + slice: pour isoler des parties d&rsquo;une liste
-- methode index: pour récupérer l&rsquo;indice d&rsquo;un mot dans une phrase</p>
-
-<p><b> - 9: Créer une classe personnalisée pour une chaîne de caractère </b></p>
-
+<p>On a utilisé deux approches ici:</p>
+<ul>
+<li>while + slice: pour isoler des parties d&rsquo;une liste</li>
+<li>methode index: pour récupérer l&rsquo;indice d&rsquo;un mot dans une phrase</li>
+</ul>
+<p><!-- raw HTML omitted --> - 9: Créer une classe personnalisée pour une chaîne de caractère <!-- raw HTML omitted --></p>
 <p>L&rsquo;objectif est de créer une classe qui va nous permettre d&rsquo;utiliser des noms de méthodes francisés à la place des métodes de base de python qui sont en anglais.</p>
-
 <p>Les trois méthodes que nous allons recréer sont: upper(), lower() et capitalize()</p>
-
 <p>Pour commencer, nous implémentons la méthode <strong>init</strong>, qui accepte un paramètre &ldquo;texte&rdquo; que nous récupérons par la suite dans la variable texte :</p>
-
-<pre><code class="language-python">class SuperChaine(object):
-    def __init__(self, texte):
-        self.texte = texte
-</code></pre>
-
-<p>Cela nous permettra de modifier cette variable texte dans les méthodes que nous allons maintenant créer.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SuperChaine</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, texte):
+        self<span style="color:#f92672">.</span>texte <span style="color:#f92672">=</span> texte
+</code></pre></div><p>Cela nous permettra de modifier cette variable texte dans les méthodes que nous allons maintenant créer.</p>
 <p>Nous créons donc 3 méthodes : majuscule (pour upper), minuscule (pour lower) et titre (pour capitalize).</p>
-
 <p>Dans chaque méthode, nous retournons la variable texte en majuscule, en minuscule et avec une majuscule :</p>
-
-<pre><code class="language-python">class SuperChaine(object):
-    def __init__(self, texte):
-        self.texte = texte
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SuperChaine</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, texte):
+        self<span style="color:#f92672">.</span>texte <span style="color:#f92672">=</span> texte
         
-    def majuscule(self):
-        return self.texte.upper()
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">majuscule</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>texte<span style="color:#f92672">.</span>upper()
     
-    def minuscule(self):
-        return self.texte.lower()
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minuscule</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>texte<span style="color:#f92672">.</span>lower()
  
-    def titre(self):
-        return self.texte.capitalize()
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">titre</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>texte<span style="color:#f92672">.</span>capitalize()
     
 
     
-chaine = SuperChaine(&quot;UdeMy&quot;)
-print(chaine.majuscule())
-print(chaine.minuscule())
-print(chaine.titre())
-</code></pre>
-
-<pre><code>UDEMY
+chaine <span style="color:#f92672">=</span> SuperChaine(<span style="color:#e6db74">&#34;UdeMy&#34;</span>)
+<span style="color:#66d9ef">print</span>(chaine<span style="color:#f92672">.</span>majuscule())
+<span style="color:#66d9ef">print</span>(chaine<span style="color:#f92672">.</span>minuscule())
+<span style="color:#66d9ef">print</span>(chaine<span style="color:#f92672">.</span>titre())
+</code></pre></div><pre><code>UDEMY
 udemy
 Udemy
 </code></pre>
-
 <p>La seule chose à ne pas oublier dans toutes ces méthodes est de placer comme premier argument le mot &ldquo;self&rdquo;, qui correspond à l&rsquo;instance de la classe.</p>
-
 <ul>
 <li>POINTS IMPORTANTS À RETENIR</li>
 </ul>
-
 <p>Pour initialiser une classe, on utilise la méthode <strong>init</strong>.</p>
-
 <p>Une méthode est une fonction appartenant à une classe : elle est également définie par le mot clé &ldquo;def&rdquo;, prend comme premier argument l&rsquo;instance de la classe avec le mot clé &ldquo;self&rdquo; (par convention) et peut retourner, comme une fonction, un résultat avec le mot clé &ldquo;return&rdquo;.</p>
-
-<p><b> - 10: Créer une fonction pour récupérer la valeur d&rsquo;un dictionnaire </b></p>
-
-<pre><code class="language-python">def get_value(dictionnaire, *args):
-    #print(args)
-    #return
-    args = list(args)
-    default = args.pop(-1)        #   
-    for arg in args:
-        dictionnaire = dictionnaire.get(arg)
-        if not dictionnaire:
-            return default
-    return dictionnaire
+<p><!-- raw HTML omitted --> - 10: Créer une fonction pour récupérer la valeur d&rsquo;un dictionnaire <!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_value</span>(dictionnaire, <span style="color:#f92672">*</span>args):
+    <span style="color:#75715e">#print(args)</span>
+    <span style="color:#75715e">#return</span>
+    args <span style="color:#f92672">=</span> list(args)
+    default <span style="color:#f92672">=</span> args<span style="color:#f92672">.</span>pop(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)        <span style="color:#75715e">#   </span>
+    <span style="color:#66d9ef">for</span> arg <span style="color:#f92672">in</span> args:
+        dictionnaire <span style="color:#f92672">=</span> dictionnaire<span style="color:#f92672">.</span>get(arg)
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> dictionnaire:
+            <span style="color:#66d9ef">return</span> default
+    <span style="color:#66d9ef">return</span> dictionnaire
     
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">d <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;01&#34;</span>: {<span style="color:#e6db74">&#34;identite&#34;</span>: {<span style="color:#e6db74">&#34;prenom&#34;</span>:<span style="color:#e6db74">&#34;Pierre&#34;</span>, <span style="color:#e6db74">&#34;nom&#34;</span>:<span style="color:#e6db74">&#34;Dupont&#34;</span>}}}
+a <span style="color:#f92672">=</span> get_value(d,<span style="color:#e6db74">&#34;01&#34;</span>,<span style="color:#e6db74">&#34;identite&#34;</span>,<span style="color:#e6db74">&#34;prenom&#34;</span>,<span style="color:#e6db74">&#34;valeur inconnue&#34;</span>)
+<span style="color:#66d9ef">print</span>(a)
+</code></pre></div><pre><code>Pierre
 </code></pre>
-
-<pre><code class="language-python">d = {&quot;01&quot;: {&quot;identite&quot;: {&quot;prenom&quot;:&quot;Pierre&quot;, &quot;nom&quot;:&quot;Dupont&quot;}}}
-a = get_value(d,&quot;01&quot;,&quot;identite&quot;,&quot;prenom&quot;,&quot;valeur inconnue&quot;)
-print(a)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">d <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;01&#34;</span>: {<span style="color:#e6db74">&#34;identite&#34;</span>: {<span style="color:#e6db74">&#34;prenom&#34;</span>:<span style="color:#e6db74">&#34;Pierre&#34;</span>, <span style="color:#e6db74">&#34;nom&#34;</span>:<span style="color:#e6db74">&#34;Dupont&#34;</span>}}}
+a <span style="color:#f92672">=</span> get_value(d,<span style="color:#e6db74">&#34;02&#34;</span>,<span style="color:#e6db74">&#34;identite&#34;</span>,<span style="color:#e6db74">&#34;prenom&#34;</span>,<span style="color:#e6db74">&#34;valeur inconnue&#34;</span>)
+<span style="color:#66d9ef">print</span>(a)
+</code></pre></div><pre><code>valeur inconnue
 </code></pre>
-
-<pre><code>Pierre
-</code></pre>
-
-<pre><code class="language-python">d = {&quot;01&quot;: {&quot;identite&quot;: {&quot;prenom&quot;:&quot;Pierre&quot;, &quot;nom&quot;:&quot;Dupont&quot;}}}
-a = get_value(d,&quot;02&quot;,&quot;identite&quot;,&quot;prenom&quot;,&quot;valeur inconnue&quot;)
-print(a)
-</code></pre>
-
-<pre><code>valeur inconnue
-</code></pre>
-
-<p><b> - 11: Créer une classe personnalisée pour une liste </b></p>
-
+<p><!-- raw HTML omitted --> - 11: Créer une classe personnalisée pour une liste <!-- raw HTML omitted --></p>
 <ul>
-<li><p>ne peut pas contenir de nombres ni deux fois le même éléments</p>
-
-<pre><code class="language-python">class CustomListe(list):        # on herite dans notre class de l'objet list : on aura donc les methodes append, extend... 
-def __init__(self, *args):   # dans notre method init: on passe un nombre indefini d'arguments à notre class quand on va l'instancier 
-    self.valeurs = list(args)
-        
-def append(self, value):
-    if isinstance(value, int):
-        print(&quot;Vous ne pouvez pas ajouter de nombre à la liste&quot;)
-        return False
-    
-    if isinstance(value, list):
-        self.valeurs.extend(value)
-            
-    elif isinstance(value, str):
-        self.valeurs.append(value)
- 
-    self.remove_duplicates()
- 
-def remove_duplicates(self):
-    self.valeurs = sorted(list(set(self.valeurs)))  # 1 set ne peut pas contenir de doublons
- 
-
-ma_liste = CustomListe(&quot;Pierre&quot;, &quot;Julien&quot;, &quot;Marie&quot;)
-ma_liste.append(5)
-ma_liste.append(&quot;Pierre&quot;)
-print(ma_liste.valeurs)
-        
-    
-</code></pre>
-
-<p>Vous ne pouvez pas ajouter de nombre à la liste
-[&lsquo;Julien&rsquo;, &lsquo;Marie&rsquo;, &lsquo;Pierre&rsquo;]</p></li>
+<li>ne peut pas contenir de nombres ni deux fois le même éléments</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomListe</span>(list):        <span style="color:#75715e"># on herite dans notre class de l&#39;objet list : on aura donc les methodes append, extend... </span>
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args):   <span style="color:#75715e"># dans notre method init: on passe un nombre indefini d&#39;arguments à notre class quand on va l&#39;instancier </span>
+        self<span style="color:#f92672">.</span>valeurs <span style="color:#f92672">=</span> list(args)
+        
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">append</span>(self, value):
+        <span style="color:#66d9ef">if</span> isinstance(value, int):
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Vous ne pouvez pas ajouter de nombre à la liste&#34;</span>)
+            <span style="color:#66d9ef">return</span> False
+    
+        <span style="color:#66d9ef">if</span> isinstance(value, list):
+            self<span style="color:#f92672">.</span>valeurs<span style="color:#f92672">.</span>extend(value)
+            
+        <span style="color:#66d9ef">elif</span> isinstance(value, str):
+            self<span style="color:#f92672">.</span>valeurs<span style="color:#f92672">.</span>append(value)
+ 
+        self<span style="color:#f92672">.</span>remove_duplicates()
+ 
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">remove_duplicates</span>(self):
+        self<span style="color:#f92672">.</span>valeurs <span style="color:#f92672">=</span> sorted(list(set(self<span style="color:#f92672">.</span>valeurs)))  <span style="color:#75715e"># 1 set ne peut pas contenir de doublons</span>
+ 
 
-<p><b> - 12: Recréer la méthode split </b></p>
-
+ma_liste <span style="color:#f92672">=</span> CustomListe(<span style="color:#e6db74">&#34;Pierre&#34;</span>, <span style="color:#e6db74">&#34;Julien&#34;</span>, <span style="color:#e6db74">&#34;Marie&#34;</span>)
+ma_liste<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">5</span>)
+ma_liste<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;Pierre&#34;</span>)
+<span style="color:#66d9ef">print</span>(ma_liste<span style="color:#f92672">.</span>valeurs)
+        
+    
+</code></pre></div><pre><code>Vous ne pouvez pas ajouter de nombre à la liste
+['Julien', 'Marie', 'Pierre']
+</code></pre>
+<p><!-- raw HTML omitted --> - 12: Recréer la méthode split <!-- raw HTML omitted --></p>
 <ul>
 <li>Nous allons re-créer la méthode split</li>
 </ul>
-
 <p>Notre fonction &ldquo;separateur&rdquo; acceptera deux paramètres : la chaîne de caractère à séparer et l&rsquo;élément sur lequel on sépare cette chaîne de caractère :</p>
-
-<pre><code class="language-python">def separateur(mot, sep):
-    #Nous initialisons ensuite deux variables vides :
-    liste = []
-    mot_courant = &quot;&quot;
-     # Nous avons donc une structure conditionnelle à l'intérieur de la boucle for, 
-     # qui vérifie si la lettre courante est égale ou non au séparateur. 
-     # Si c'est le cas, nous ajoutons la lettre à la variable &quot;mot_courant&quot; :
-    for lettre in mot:
-        if lettre != sep:
-            mot_courant += lettre
-        else:
-            liste.append(mot_courant)
-            mot_courant = &quot;&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">separateur</span>(mot, sep):
+    <span style="color:#75715e">#Nous initialisons ensuite deux variables vides :</span>
+    liste <span style="color:#f92672">=</span> []
+    mot_courant <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+     <span style="color:#75715e"># Nous avons donc une structure conditionnelle à l&#39;intérieur de la boucle for, </span>
+     <span style="color:#75715e"># qui vérifie si la lettre courante est égale ou non au séparateur. </span>
+     <span style="color:#75715e"># Si c&#39;est le cas, nous ajoutons la lettre à la variable &#34;mot_courant&#34; :</span>
+    <span style="color:#66d9ef">for</span> lettre <span style="color:#f92672">in</span> mot:
+        <span style="color:#66d9ef">if</span> lettre <span style="color:#f92672">!=</span> sep:
+            mot_courant <span style="color:#f92672">+=</span> lettre
+        <span style="color:#66d9ef">else</span>:
+            liste<span style="color:#f92672">.</span>append(mot_courant)
+            mot_courant <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
  
-    liste.append(mot_courant)
-    return liste
+    liste<span style="color:#f92672">.</span>append(mot_courant)
+    <span style="color:#66d9ef">return</span> liste
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bonjour-tout-le-monde&#34;</span>
+<span style="color:#66d9ef">print</span>(separateur(phrase, <span style="color:#e6db74">&#34;-&#34;</span>))
+</code></pre></div><pre><code>['bonjour', 'tout', 'le', 'monde']
 </code></pre>
-
-<pre><code class="language-python">phrase = &quot;bonjour-tout-le-monde&quot;
-print(separateur(phrase, &quot;-&quot;))
-</code></pre>
-
-<pre><code>['bonjour', 'tout', 'le', 'monde']
-</code></pre>
-
 <ul>
 <li>POINTS IMPORTANTS À RETENIR</li>
 </ul>
-
 <p>Pour vérifier si une variable est différente d&rsquo;une autre, on utilise la syntaxe !=</p>
-
 <p>Pour vérifier si une variable est égale à une autre, on utilise la syntaxe ==</p>
-
-<p><b> - 13: Créer une classe pour gérer des voitures </b></p>
-
+<p><!-- raw HTML omitted --> - 13: Créer une classe pour gérer des voitures <!-- raw HTML omitted --></p>
 <p>Le print à la fin du script retourne respectivement la marque, le prix et la couleur de la voiture (&ldquo;Lamborghini&rdquo;, 150000 et &ldquo;rouge&rdquo;).</p>
-
 <p>Le but de cet exercice était de créer une classe qui contient trois attributs : la marque, le prix et la couleur de la voiture.</p>
-
 <p>On crée la méthode <strong>init</strong> qui contient trois paramètres (sans compter self):
 class Voiture(object):
-    def <strong>init</strong>(self, marque, prix, couleur):
+def <strong>init</strong>(self, marque, prix, couleur):
 Nous créons ensuite 3 variables (marque, prix et couleur), appartenant à la classe, à partir des arguments passés à la fonction <strong>init</strong> lors de l&rsquo;instanciation de la classe :</p>
-
-<pre><code class="language-python">class Voiture(object):
-    def __init__(self, marque, prix, couleur):
-        self.marque = marque
-        self.prix = prix
-        self.couleur = couleur
-</code></pre>
-
-<pre><code class="language-python">super_voiture = Voiture(&quot;Lamborghini&quot;, 150000, &quot;rouge&quot;)
-print(super_voiture.marque)
-print(super_voiture.prix)
-print(super_voiture.couleur)
-</code></pre>
-
-<pre><code>Lamborghini
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Voiture</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, marque, prix, couleur):
+        self<span style="color:#f92672">.</span>marque <span style="color:#f92672">=</span> marque
+        self<span style="color:#f92672">.</span>prix <span style="color:#f92672">=</span> prix
+        self<span style="color:#f92672">.</span>couleur <span style="color:#f92672">=</span> couleur
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">super_voiture <span style="color:#f92672">=</span> Voiture(<span style="color:#e6db74">&#34;Lamborghini&#34;</span>, <span style="color:#ae81ff">150000</span>, <span style="color:#e6db74">&#34;rouge&#34;</span>)
+<span style="color:#66d9ef">print</span>(super_voiture<span style="color:#f92672">.</span>marque)
+<span style="color:#66d9ef">print</span>(super_voiture<span style="color:#f92672">.</span>prix)
+<span style="color:#66d9ef">print</span>(super_voiture<span style="color:#f92672">.</span>couleur)
+</code></pre></div><pre><code>Lamborghini
 150000
 rouge
 </code></pre>
-
 <ul>
 <li>POINTS IMPORTANTS À RETENIR</li>
 </ul>
-
 <p>La méthode &ldquo;magique&rdquo; appelée lors de l&rsquo;instanciation d&rsquo;une classe est la méthode <strong>init</strong></p>
-
-<dl>
-<dt><b> - 14: Modifier la représentation d&rsquo;une classe</b></dt>
-</dl>
-
+<p><!-- raw HTML omitted --> - 14: Modifier la représentation d&rsquo;une classe<!-- raw HTML omitted --></p>
 <p>:e but de cet exercice est de changer la représentation de notre classe afin de pouvoir faire un print d&rsquo;une instance de notre classe et avoir des informations précises de notre instance.</p>
-
 <p>La méthode pour changer la représentation d&rsquo;une classe est <strong>repr</strong></p>
-
 <p>Ici, il faut modifier la représentation de la classe Voiture, c&rsquo;est à dire ce qui nous est retourné lorsque l&rsquo;on print une instance créé à partir de la classe Voiture.</p>
-
 <p>Il fallait pour ce faire ré-implémenter la méthode spécial <strong>repr</strong> :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Voiture</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, marque, prix, couleur):
+        self<span style="color:#f92672">.</span>marque <span style="color:#f92672">=</span> marque
+        self<span style="color:#f92672">.</span>prix <span style="color:#f92672">=</span> prix
+        self<span style="color:#f92672">.</span>couleur <span style="color:#f92672">=</span> couleur
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Votre voiture est une {} {} et coûte {}$&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>marque<span style="color:#f92672">.</span>capitalize(), self<span style="color:#f92672">.</span>couleur, self<span style="color:#f92672">.</span>prix)
 
-<pre><code class="language-python">class Voiture(object):
-    def __init__(self, marque, prix, couleur):
-        self.marque = marque
-        self.prix = prix
-        self.couleur = couleur
-    def __repr__(self):
-        return &quot;Votre voiture est une {} {} et coûte {}$&quot;.format(self.marque.capitalize(), self.couleur, self.prix)
-
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">super_voiture <span style="color:#f92672">=</span> Voiture(<span style="color:#e6db74">&#34;lamborghini&#34;</span>, <span style="color:#ae81ff">150000</span>, <span style="color:#e6db74">&#34;rouge&#34;</span>)
+<span style="color:#66d9ef">print</span>(super_voiture)
+</code></pre></div><pre><code>Votre voiture est une Lamborghini rouge et coûte 150000$
 </code></pre>
-
-<pre><code class="language-python">super_voiture = Voiture(&quot;lamborghini&quot;, 150000, &quot;rouge&quot;)
-print(super_voiture)
-</code></pre>
-
-<pre><code>Votre voiture est une Lamborghini rouge et coûte 150000$
-</code></pre>
-
-<p><b> - 15: Créer des classes de base avec les classmethod</b></p>
-
-<pre><code class="language-python">class Voiture(object):
-    def __init__(self, marque, prix, couleur):
-        self.marque = marque
-        self.prix = prix
-        self.couleur = couleur
+<p><!-- raw HTML omitted --> - 15: Créer des classes de base avec les classmethod<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Voiture</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, marque, prix, couleur):
+        self<span style="color:#f92672">.</span>marque <span style="color:#f92672">=</span> marque
+        self<span style="color:#f92672">.</span>prix <span style="color:#f92672">=</span> prix
+        self<span style="color:#f92672">.</span>couleur <span style="color:#f92672">=</span> couleur
     
-    @classmethod
-    def lamborghini(cls):
-        return cls(&quot;Lamborghini&quot;, 150000, &quot;rouge&quot;)
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lamborghini</span>(cls):
+        <span style="color:#66d9ef">return</span> cls(<span style="color:#e6db74">&#34;Lamborghini&#34;</span>, <span style="color:#ae81ff">150000</span>, <span style="color:#e6db74">&#34;rouge&#34;</span>)
  
-    @classmethod
-    def porsche(cls):
-        return cls(&quot;Porsche&quot;, 200000, &quot;noire&quot;)
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">porsche</span>(cls):
+        <span style="color:#66d9ef">return</span> cls(<span style="color:#e6db74">&#34;Porsche&#34;</span>, <span style="color:#ae81ff">200000</span>, <span style="color:#e6db74">&#34;noire&#34;</span>)
  
-</code></pre>
-
-<pre><code class="language-python">lamborghini = Voiture.lamborghini()
-print(lamborghini.prix)
-porsche = Voiture.porsche()
-print(porsche.prix)
-</code></pre>
-
-<pre><code>150000
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lamborghini <span style="color:#f92672">=</span> Voiture<span style="color:#f92672">.</span>lamborghini()
+<span style="color:#66d9ef">print</span>(lamborghini<span style="color:#f92672">.</span>prix)
+porsche <span style="color:#f92672">=</span> Voiture<span style="color:#f92672">.</span>porsche()
+<span style="color:#66d9ef">print</span>(porsche<span style="color:#f92672">.</span>prix)
+</code></pre></div><pre><code>150000
 200000
 </code></pre>
-
 <p><strong>EXPLICATION</strong></p>
-
 <p>Dans cet exercice, on continue dans les fonctions avancées de l&rsquo;orienté objet avec les <em>classmethod</em>.</p>
-
 <p>Pour spécifier qu&rsquo;une méthode est une &ldquo;classemethod&rdquo;, on utilise le <strong>décorateur</strong> @classmethod.</p>
-
 <p>Cela nous permet de déclarer deux méthodes, &ldquo;lamborghini&rdquo; et &ldquo;porsche&rdquo;, qui vont nous permettre de créer des instances à partir de notre classe Voiture plus facilement.</p>
-
 <p>Une &ldquo;classmethod&rdquo; a comme premier paramètre, la classe elle-même, qui par convention est appelé &ldquo;cls&rdquo; :</p>
-
 <pre><code>            @classmethod
             def lamborghini(cls):
                 pass
 </code></pre>
-
 <p>À l&rsquo;intérieur de cette méthode &ldquo;lamborghini&rdquo;, nous pouvons donc utiliser &ldquo;cls&rdquo; pour référer à la class Voiture.</p>
-
 <ul>
 <li>POINTS IMPORTANTS À RETENIR</li>
 </ul>
-
 <p>Pour définir une méthode comme &ldquo;classmethod&rdquo; on utilise le décorateur @classmethod.</p>
-
 <p>Par convention, le premier paramètre d&rsquo;une classmethod, représentant la classe, est appelé &ldquo;cls&rdquo;.</p>
-
-<p><b> - 16: Ajouter une propriété à la classe voiture</b></p>
-
+<p><!-- raw HTML omitted --> - 16: Ajouter une propriété à la classe voiture<!-- raw HTML omitted --></p>
 <p>Nous allons ici ajouter une méthode qui repose sur le principe des propriétés des classes et qui nous permettra d&rsquo;accéder au prix en euros.</p>
-
-<pre><code class="language-python">class Voiture(object):
-    def __init__(self, marque, prix, couleur):
-        self.marque = marque
-        self.prix = prix
-        self.couleur = couleur
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Voiture</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, marque, prix, couleur):
+        self<span style="color:#f92672">.</span>marque <span style="color:#f92672">=</span> marque
+        self<span style="color:#f92672">.</span>prix <span style="color:#f92672">=</span> prix
+        self<span style="color:#f92672">.</span>couleur <span style="color:#f92672">=</span> couleur
  
-    @classmethod
-    def lamborghini(cls):
-        return cls(&quot;Lamborghini&quot;, 150000, &quot;rouge&quot;)
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lamborghini</span>(cls):
+        <span style="color:#66d9ef">return</span> cls(<span style="color:#e6db74">&#34;Lamborghini&#34;</span>, <span style="color:#ae81ff">150000</span>, <span style="color:#e6db74">&#34;rouge&#34;</span>)
  
-    @property
-    def prix_euros(self):
-        prix_euros = self.prix * 1.5
-        return round(prix_euros)
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">prix_euros</span>(self):
+        prix_euros <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>prix <span style="color:#f92672">*</span> <span style="color:#ae81ff">1.5</span>
+        <span style="color:#66d9ef">return</span> round(prix_euros)
  
-lamborghini = Voiture.lamborghini()
-print(lamborghini.prix)
-print(lamborghini.prix_euros)
-</code></pre>
-
-<pre><code>150000
+lamborghini <span style="color:#f92672">=</span> Voiture<span style="color:#f92672">.</span>lamborghini()
+<span style="color:#66d9ef">print</span>(lamborghini<span style="color:#f92672">.</span>prix)
+<span style="color:#66d9ef">print</span>(lamborghini<span style="color:#f92672">.</span>prix_euros)
+</code></pre></div><pre><code>150000
 225000
 </code></pre>
-
 <p>Une propriété nous permet d&rsquo;éviter de passer par des méthodes &ldquo;getter&rdquo; et &ldquo;setter&rdquo; (méthodes qui vont nous permettre de modifier et récupérer la valeur d&rsquo;un attribut).
 Dans ce cas-ci, nous n&rsquo;avons pas de propriété &ldquo;setter&rdquo;, juste une propriété qui nous permet de récupérer un attribut modifié de notre classe.</p>
-
 <p>Pour définir une méthode comme une propriété, on utilise le décorateur <strong>@property</strong></p>
-
 <ul>
 <li>POINTS IMPORTANTS À RETENIR</li>
 </ul>
-
 <p>Pour spécifier qu&rsquo;une méthode doit être interprétée comme une propriété, on utilise le décorateur @property.</p>
-
 <p>Pour récupérer la valeur d&rsquo;une propriété, on utilise tout simplement le nom de la méthode définie comme une propriété, sans les parenthèses.</p>
-
 <p>Pour arrondir un nombre, on utilise la fonction round.</p>
+<p><!-- raw HTML omitted --> - 17: Erreur d&rsquo;héritage entre deux classes<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chien</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, race):
+        self<span style="color:#f92672">.</span>race <span style="color:#f92672">=</span> race
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">taille</span>(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">100</span>
 
-<p><b> - 17: Erreur d&rsquo;héritage entre deux classes</b></p>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chihuahua</span>(Chien):
+    <span style="color:#66d9ef">def</span> __init__(self, nom):
+        self<span style="color:#f92672">.</span>nom <span style="color:#f92672">=</span> nom
 
-<pre><code class="language-python">class Chien(object):
-    def __init__(self, race):
-        self.race = race
-    @property
-    def taille(self):
-        return 100
-
-class Chihuahua(Chien):
-    def __init__(self, nom):
-        self.nom = nom
-
-chien = Chihuahua(&quot;Lily&quot;)
-print(chien.race)
-</code></pre>
-
-<pre><code>---------------------------------------------------------------------------
+chien <span style="color:#f92672">=</span> Chihuahua(<span style="color:#e6db74">&#34;Lily&#34;</span>)
+<span style="color:#66d9ef">print</span>(chien<span style="color:#f92672">.</span>race)
+</code></pre></div><pre><code>---------------------------------------------------------------------------
 
 AttributeError                            Traceback (most recent call last)
 
@@ -1253,204 +1087,150 @@ AttributeError                            Traceback (most recent call last)
 
 AttributeError: 'Chihuahua' object has no attribute 'race'
 </code></pre>
-
 <p>Cet exercice touche à l&rsquo;héritage.</p>
-
 <p>Le problème du script de départ était que la classe Chihuahua n&rsquo;appelait jamais le constructeur <strong>init</strong> de la fonction dont elle héritait.</p>
-
 <p>Nous essayions d&rsquo;afficher la race du chien alors qu&rsquo;elle n&rsquo;est pas définie dans la classe Chihuahua, et la classe &ldquo;Chien&rdquo; dont Chihuahua hérite et qui contient l&rsquo;attribut race dans sa méthode <strong>init</strong> n&rsquo;est jamais appelée.</p>
-
 <p>Pour remédier à cela, nous utilisons la fonction &ldquo;super&rdquo; qui nous permet d&rsquo;appeler la méthode <strong>init</strong> de la classe parent de Chihuahua :</p>
-
 <pre><code>    super().__init__(&quot;Chihuahua&quot;)
 </code></pre>
-
 <p>Vous remarquerez que nous profitons de l&rsquo;appel à la méthode <strong>init</strong> pour passer en argument la race du chien (&ldquo;Chihuahua&rdquo;), ce qui permettra donc d&rsquo;afficher la bonne valeur lors du print de la race du chien à la dernière ligne du script.</p>
-
 <p>À la place de la fonction super, on peut explicitement utiliser le nom de la classe parente :</p>
-
 <pre><code>     Chien.__init__(&quot;Chihuahua&quot;)
 </code></pre>
-
 <p>L&rsquo;avantage d&rsquo;utiliser la fonction super est que nous n&rsquo;avons pas besoin de référer directement au nom de la classe parent.
 Ainsi, si nous décidons plus tard de renommer la classe &ldquo;Chien&rdquo; en &ldquo;Chat&rdquo;, notre classe &ldquo;Chihuahua&rdquo; fonctionnera toujours si on utilise super, mais nous retourneras une erreur si on utilise explicitement le nom de la classe &ldquo;Chien&rdquo;.</p>
-
 <p>Il est important de noter également que la syntaxe de la fonction super a été grandement allégée avec Python 3.</p>
-
 <p>Si vous utilisez Python 2, vous devez passer deux arguments à la fonction super : la classe et l&rsquo;instance de la classe :</p>
-
 <pre><code>    super(Chihuahua, self).__init__(&quot;Chihuahua&quot;)
 </code></pre>
-
 <p>La syntaxe est plus lourde et heureusement, avec Python 3, nous pouvons juste utiliser super() sans lui passer d&rsquo;arguments et cela fonctionne sans problème.</p>
-
 <p>POINTS IMPORTANTS À RETENIR</p>
-
 <p>Pour appeler une fonction d&rsquo;une classe parente, on peut utiliser la fonction super.</p>
-
-<pre><code class="language-python">class Chien(object):
-    def __init__(self, race):
-        self.race = race
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chien</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, race):
+        self<span style="color:#f92672">.</span>race <span style="color:#f92672">=</span> race
  
-    @property
-    def taille(self):
-        return 100
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">taille</span>(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">100</span>
  
-class Chihuahua(Chien):
-    def __init__(self, nom):
-        super().__init__(&quot;Chihuahua&quot;)
-        self.nom = nom
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chihuahua</span>(Chien):
+    <span style="color:#66d9ef">def</span> __init__(self, nom):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#e6db74">&#34;Chihuahua&#34;</span>)
+        self<span style="color:#f92672">.</span>nom <span style="color:#f92672">=</span> nom
  
-chien = Chihuahua(&quot;Lily&quot;)
-print(chien.race)
+chien <span style="color:#f92672">=</span> Chihuahua(<span style="color:#e6db74">&#34;Lily&#34;</span>)
+<span style="color:#66d9ef">print</span>(chien<span style="color:#f92672">.</span>race)
+</code></pre></div><pre><code>Chihuahua
 </code></pre>
-
-<pre><code>Chihuahua
-</code></pre>
-
-<p><b> - 18: Créer une classe qui hérite d&rsquo;une autre</b></p>
-
-<pre><code class="language-python">class Voiture(object):
-    def __init__(self):
-        self.couleur = &quot;noire&quot;
-        self.vitesse_max = 200
-        self.prix = 25000
+<p><!-- raw HTML omitted --> - 18: Créer une classe qui hérite d&rsquo;une autre<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Voiture</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>couleur <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;noire&#34;</span>
+        self<span style="color:#f92672">.</span>vitesse_max <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>
+        self<span style="color:#f92672">.</span>prix <span style="color:#f92672">=</span> <span style="color:#ae81ff">25000</span>
  
-    @property
-    def prix_reduit(self):
-        return self.prix * 0.75
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">prix_reduit</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>prix <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.75</span>
  
-    def __repr__(self):
-        return &quot;Je suis une voiture normale&quot;
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Je suis une voiture normale&#34;</span>
  
-class Lamborghini(Voiture):
-    def __init__(self):
-        super().__init__()
-        self.vitesse_max = 300
-        self.prix = 100000
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Lamborghini</span>(Voiture):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        super()<span style="color:#f92672">.</span>__init__()
+        self<span style="color:#f92672">.</span>vitesse_max <span style="color:#f92672">=</span> <span style="color:#ae81ff">300</span>
+        self<span style="color:#f92672">.</span>prix <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span>
  
-    def __repr__(self):
-        return &quot;Je suis une voiture de luxe&quot;
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Je suis une voiture de luxe&#34;</span>
  
-ma_voiture = Lamborghini()
-print(ma_voiture.couleur)
-print(ma_voiture.vitesse_max)
-print(ma_voiture)
-</code></pre>
-
-<pre><code>noire
+ma_voiture <span style="color:#f92672">=</span> Lamborghini()
+<span style="color:#66d9ef">print</span>(ma_voiture<span style="color:#f92672">.</span>couleur)
+<span style="color:#66d9ef">print</span>(ma_voiture<span style="color:#f92672">.</span>vitesse_max)
+<span style="color:#66d9ef">print</span>(ma_voiture)
+</code></pre></div><pre><code>noire
 300
 Je suis une voiture de luxe
 </code></pre>
-
 <p>EXPLICATION</p>
-
 <p>Le but de cet exercice était de créer une classe &ldquo;Lamborghini&rdquo; qui hérite de la classe Voiture et de tous ses attributs.</p>
-
 <p>Pour commencer, il fallait donc créer une classe Lamborghini qui hérite de la classe Voiture :</p>
-
 <pre><code>        class Lamborghini(Voiture):
 </code></pre>
-
 <p><strong>Pour hériter d&rsquo;une classe</strong>, rien de plus simple que d&rsquo;indiquer le nom de la classe dont on veut hériter dans les parenthèse après la définition de la classe.</p>
-
-<p>__Pour pouvoir hériter de tous les attributs définis dans la méthode <strong>init</strong>__ de la classe Voiture, il nous faut appeler cette méthode grâce à la fonction super :</p>
-
+<p><strong>Pour pouvoir hériter de tous les attributs définis dans la méthode <strong>init</strong></strong> de la classe Voiture, il nous faut appeler cette méthode grâce à la fonction super :</p>
 <pre><code>        super().__init__()
 </code></pre>
-
 <p>Nous avons donc ainsi accès dans notre classe Lamborghini aux attributs &ldquo;couleur&rdquo;, &ldquo;vitesse_max&rdquo; et &ldquo;prix&rdquo; définie dans la classe Voiture.</p>
-
 <p>Nous modifions ensuite les valeurs par défaut des attributs &ldquo;vitesse_max&rdquo; et &ldquo;prix&rdquo; (parce qu&rsquo;un Lamborghini, ça va vite et ça coûte cher ^^) :</p>
-
 <pre><code>        self.vitesse_max = 300
         self.prix = 100000
 </code></pre>
-
 <p>Pour finir, nous ré-implémentons la méthode spéciale <strong>repr</strong> pour signifier que la voiture n&rsquo;est pas une voiture normale mais une voiture de luxe :</p>
-
 <pre><code>        def __repr__(self):
             return &quot;Je suis une voiture de luxe&quot;
 </code></pre>
-
 <ul>
 <li>POINTS IMPORTANTS À RETENIR</li>
 </ul>
-
 <p><strong>Pour hériter d&rsquo;une classe</strong>, on indique le nom de la classe dont on veut hériter entre les parenthèses lors de la création de notre classe enfant.</p>
-
 <p><strong>Pour appeler une méthode de la classe parent</strong>, on utilise la fonction super.__</p>
-
-<p><b> - 19: Créer une classe pour manipuler des chemins  </b></p>
-
+<p><!-- raw HTML omitted --> - 19: Créer une classe pour manipuler des chemins  <!-- raw HTML omitted --></p>
 <p>L&rsquo;objectif est de créer une class &lsquo;Path&rsquo; qui va simplifier la manipulation de chemins vers des dossiers ou fichiers sur notre disque dur.</p>
-
-<p>Nous allons créer  3 métohdes et propriétés:
-- Une propriété <strong>ext</strong> pour récupérer l&rsquo;extension du fichier
-- Une propriété <strong>name</strong> pour récupérer le nom du fichier uniquement (donc sans le dossier et sans l&rsquo;extension)
-- Une méthode <strong>dirname</strong> qui va récupérer le dossier parent du chemin actuel. Cette méthode devra retourner un objet Path pour que l&rsquo;on puisse appliquer de nouveau la méthode dirname pour le résultat précédent</p>
-
+<p>Nous allons créer  3 métohdes et propriétés:</p>
+<ul>
+<li>Une propriété <strong>ext</strong> pour récupérer l&rsquo;extension du fichier</li>
+<li>Une propriété <strong>name</strong> pour récupérer le nom du fichier uniquement (donc sans le dossier et sans l&rsquo;extension)</li>
+<li>Une méthode <strong>dirname</strong> qui va récupérer le dossier parent du chemin actuel. Cette méthode devra retourner un objet Path pour que l&rsquo;on puisse appliquer de nouveau la méthode dirname pour le résultat précédent</li>
+</ul>
 <p>Dans cet exercice, on met en pratique beaucoup d&rsquo;éléments que l&rsquo;on a vu dans les exercices précédents, avec les classes, les méthodes et les propriétés.</p>
-
 <p>Le but de cet exercice était de créer une classe &ldquo;Path&rdquo; pour nous aider à manipuler des chemins de dossier.</p>
-
 <p>Avec le module os, si on veut remonter dans une structure de dossier, on peut utiliser la fonction dirname, mais le code ne sera pas très élégant :</p>
-
 <pre><code>        os.path.dirname(os.path.dirname(mon_dossier))
 </code></pre>
-
 <p>Vous conviendrez qu&rsquo;il serait plus pratique de pouvoir faire :</p>
-
 <pre><code>        mon_dossier.dirname().dirname()
 </code></pre>
-
 <p>Ce mécanisme est possible en créant notre propre classe.</p>
-
-<pre><code class="language-python">import os
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
  
-class Path(str):                              # nous allons créer une classe Path qui hérite de la classe &quot;str&quot;
-                                              #  permet d'hériter de toutes les fonctionnalités des chaînes de caractère.
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Path</span>(str):                              <span style="color:#75715e"># nous allons créer une classe Path qui hérite de la classe &#34;str&#34;</span>
+                                              <span style="color:#75715e">#  permet d&#39;hériter de toutes les fonctionnalités des chaînes de caractère.</span>
     
-    @property                                # première propriété pour facilement accéder à l'extension de notre fichier              
-    def ext(self):
-        return os.path.splitext(self)[-1]
- # on utilise la fonction splitext directement sur &quot;self&quot;.
- # En effet, vu que l'on hérite de la classe &quot;str&quot;, self correspond à la chaîne de caractère   
- # que nous passons à notre classe &quot;Path&quot; lors de la création d'une instance.
+    <span style="color:#a6e22e">@property</span>                                <span style="color:#75715e"># première propriété pour facilement accéder à l&#39;extension de notre fichier              </span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ext</span>(self):
+        <span style="color:#66d9ef">return</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>splitext(self)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+ <span style="color:#75715e"># on utilise la fonction splitext directement sur &#34;self&#34;.</span>
+ <span style="color:#75715e"># En effet, vu que l&#39;on hérite de la classe &#34;str&#34;, self correspond à la chaîne de caractère   </span>
+ <span style="color:#75715e"># que nous passons à notre classe &#34;Path&#34; lors de la création d&#39;une instance.</span>
 
- # nous créons une méthode &quot;dirname&quot; qui va nous permettre de récupérer le dossier parent de notre chemin.
- # Nous utilisons logiquement la fonction dirname du module os.path    
-    def dirname(self):
-       # return Path(os.path.dirname(self))
-        return Path(os.path.dirname(self))
- # on ne retourne pas le résultat de la fonction dirname : je retourne un objet &quot;Path&quot;.
- # Cela va nous permettre si nécessaire, de répéter l'opération autant de fois que nécessaire. 
-    @property
-    def name(self):
-        basename = os.path.basename(self)
-        name = os.path.splitext(basename)[0]
-        return name
+ <span style="color:#75715e"># nous créons une méthode &#34;dirname&#34; qui va nous permettre de récupérer le dossier parent de notre chemin.</span>
+ <span style="color:#75715e"># Nous utilisons logiquement la fonction dirname du module os.path    </span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dirname</span>(self):
+       <span style="color:#75715e"># return Path(os.path.dirname(self))</span>
+        <span style="color:#66d9ef">return</span> Path(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(self))
+ <span style="color:#75715e"># on ne retourne pas le résultat de la fonction dirname : je retourne un objet &#34;Path&#34;.</span>
+ <span style="color:#75715e"># Cela va nous permettre si nécessaire, de répéter l&#39;opération autant de fois que nécessaire. </span>
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">name</span>(self):
+        basename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(self)
+        name <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>splitext(basename)[<span style="color:#ae81ff">0</span>]
+        <span style="color:#66d9ef">return</span> name
     
-s = Path(&quot;/Users/thibh/Documents/test.txt&quot;)
-print(s.dirname().dirname())
-print(s.name)
-print(s.ext)
-</code></pre>
-
-<pre><code>/Users/thibh
+s <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#34;/Users/thibh/Documents/test.txt&#34;</span>)
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>dirname()<span style="color:#f92672">.</span>dirname())
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>name)
+<span style="color:#66d9ef">print</span>(s<span style="color:#f92672">.</span>ext)
+</code></pre></div><pre><code>/Users/thibh
 test
 .txt
 </code></pre>
-
-<pre><code class="language-python">
-</code></pre>
-
-<pre><code class="language-python">
-</code></pre>
-
-<pre><code class="language-python">
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -1495,7 +1275,7 @@ test
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/16-3%20Niveau-difficile.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c16-3%20Niveau-difficile.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

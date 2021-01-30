@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="TP : Analyse de données de station 
-Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.
+  <meta name="description" content="Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.
 Ensemble : lecture du fichier contenant les données journalières de précipitation et de température pour la station d&rsquo;Ottawa pour l&rsquo;année 2017
-1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).">
+1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).
+2- Convertir les données de températures en Celcius (T[Celcius] = T[Kelvin] - 273.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/7-numpy-exercice/">
@@ -118,10 +118,10 @@ Ensemble : lecture du fichier contenant les données journalières de précipita
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/7-numpy-exercice/">
   <meta property="og:title" content="7- La librairie Numpy - Exercice | GDueymes">
-  <meta property="og:description" content="TP : Analyse de données de station 
-Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.
+  <meta property="og:description" content="Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.
 Ensemble : lecture du fichier contenant les données journalières de précipitation et de température pour la station d&rsquo;Ottawa pour l&rsquo;année 2017
-1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes)."><meta property="og:image" content="/img/icon-192.png">
+1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).
+2- Convertir les données de températures en Celcius (T[Celcius] = T[Kelvin] - 273."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -582,7 +582,7 @@ Ensemble : lecture du fichier contenant les données journalières de précipita
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -596,65 +596,39 @@ Ensemble : lecture du fichier contenant les données journalières de précipita
           <h1>7- La librairie Numpy - Exercice</h1>
 
           <div class="article-style">
-            <p><img src="/img/pylogo.png" alt="image0" />
-<h1> TP : Analyse de données de station </h1></p>
-
+            <p><img src="/img/pylogo.png" alt="image0"></p>
+<!-- raw HTML omitted -->
 <p>Objectifs: manipuler des données ascii de stations uniquement avec la librairie Numpy.</p>
-
 <p>Ensemble : lecture du fichier contenant les données journalières de précipitation et de température pour la station d&rsquo;Ottawa pour l&rsquo;année 2017</p>
-
 <p>1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).</p>
-
 <p>2- Convertir les données de températures en Celcius (T[Celcius] = T[Kelvin] - 273.15).</p>
-
 <p>3- Combien de journées ont une accumulation supérieure à 25mm ?</p>
-
 <p>4- Quelle température a été enregistrée pour la journée présentant la plus grande accumulation.</p>
-
 <p>5- Calculer le nombre de degrés jours (&gt;0degC) pour l&rsquo;année 2017.</p>
-
 <p>6- Calculer le cumul journalier de précipitation pour l&rsquo;année 2017 et assigner cette variable au tableau cumul_precipitation. Ajouter le tableau cumul_precipitation au tableau.</p>
-
 <p>7- Juste pour l’exercice, splitter (casser) l’array en 2 tableaux, puis les concaténer à nouveau pour obtenir le tableau initial.</p>
-
-<pre><code class="language-python">import numpy as np
-# pour lire un fichier csv avec numpy: appel de la fonction genfromtxt()
-temperature = np.genfromtxt(&quot;./OTTAWA_tasmoy_2017.csv&quot;, dtype=float)
-precipitation = np.genfromtxt(&quot;./OTTAWA_PrecTOT_2017.csv&quot;, dtype=float)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#75715e"># pour lire un fichier csv avec numpy: appel de la fonction genfromtxt()</span>
+temperature <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>genfromtxt(<span style="color:#e6db74">&#34;./OTTAWA_tasmoy_2017.csv&#34;</span>, dtype<span style="color:#f92672">=</span>float)
+precipitation <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>genfromtxt(<span style="color:#e6db74">&#34;./OTTAWA_PrecTOT_2017.csv&#34;</span>, dtype<span style="color:#f92672">=</span>float)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(temperature<span style="color:#f92672">.</span>shape, precipitation<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>(365,) (365,)
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. </span>
+<span style="color:#75715e">#   (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).</span>
 
-<pre><code class="language-python">print(temperature.shape, precipitation.shape)
+tableau <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>column_stack([temperature,precipitation])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#tableau = np.hstack([temperature,precipitation])</span>
+tableau <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>hstack([temperature<span style="color:#f92672">.</span>reshape(len(temperature),<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>),precipitation<span style="color:#f92672">.</span>reshape(len(precipitation),<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(tableau<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>(365, 2)
 </code></pre>
-
-<pre><code>(365,) (365,)
-</code></pre>
-
-<pre><code class="language-python">#1- Créer un tableau Numpy ayant une colonne pour la température et une colonne pour la précipitation. 
-#   (avec deux tableaux Numpy 1D, créer un tableau 2D (365 lignes et 2 colonnes).
-
-tableau = np.column_stack([temperature,precipitation])
-</code></pre>
-
-<pre><code class="language-python">#tableau = np.hstack([temperature,precipitation])
-tableau = np.hstack([temperature.reshape(len(temperature),-1),precipitation.reshape(len(precipitation),-1)])
-</code></pre>
-
-<pre><code class="language-python">print(tableau.shape)
-</code></pre>
-
-<pre><code>(365, 2)
-</code></pre>
-
-<pre><code class="language-python">#2- Convertir les données de températures en Celcius (T[Celcius] = T[Kelvin] - 273.15).
-tableau[:,0]=tableau[:,0]-273.15  # on prend toutes les lignes de la première colonne 
-</code></pre>
-
-<pre><code class="language-python"># 3- Combien de journées ont une accumulation supérieure à 25mm ?
-tableau[tableau[:,1]&gt;=25]    # On filtre toutes les lignes de la 2ème colonne 
-</code></pre>
-
-<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in greater_equal
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#2- Convertir les données de températures en Celcius (T[Celcius] = T[Kelvin] - 273.15).</span>
+tableau[:,<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span>tableau[:,<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">273.15</span>  <span style="color:#75715e"># on prend toutes les lignes de la première colonne </span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 3- Combien de journées ont une accumulation supérieure à 25mm ?</span>
+tableau[tableau[:,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">25</span>]    <span style="color:#75715e"># On filtre toutes les lignes de la 2ème colonne </span>
+</code></pre></div><pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in greater_equal
+  
 
 
 
@@ -671,13 +645,10 @@ array([[-1.8 , 26.57],
        [16.  , 26.04],
        [15.8 , 45.01]])
 </code></pre>
-
-<pre><code class="language-python"># pour connaitre le nombre de jours, on utilise la fonction len()
-len(tableau[tableau[:,1]&gt;=25])  
-</code></pre>
-
-<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in greater_equal
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># pour connaitre le nombre de jours, on utilise la fonction len()</span>
+len(tableau[tableau[:,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">25</span>])  
+</code></pre></div><pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in greater_equal
+  
 
 
 
@@ -685,28 +656,17 @@ len(tableau[tableau[:,1]&gt;=25])
 
 10
 </code></pre>
-
-<pre><code class="language-python"># 4- Quelle température a été enregistrée pour la journée présentant la plus grande accumulation.
-precipitation_max = np.nanmax(tableau[:,1]) # on cherche le maximum d'accumulation avec la fonction max()
-print(precipitation_max)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 4- Quelle température a été enregistrée pour la journée présentant la plus grande accumulation.</span>
+precipitation_max <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nanmax(tableau[:,<span style="color:#ae81ff">1</span>]) <span style="color:#75715e"># on cherche le maximum d&#39;accumulation avec la fonction max()</span>
+<span style="color:#66d9ef">print</span>(precipitation_max)
+</code></pre></div><pre><code>45.01
 </code></pre>
-
-<pre><code>45.01
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tableau[tableau[:,<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> precipitation_max] <span style="color:#75715e"># on cherche sur toutes les lignes de la deuxième colonne celle qui correspond à notre variable precipitation_max</span>
+</code></pre></div><pre><code>array([[15.8 , 45.01]])
 </code></pre>
-
-<pre><code class="language-python">tableau[tableau[:,1] == precipitation_max] # on cherche sur toutes les lignes de la deuxième colonne celle qui correspond à notre variable precipitation_max
-</code></pre>
-
-<pre><code>array([[15.8 , 45.01]])
-</code></pre>
-
-<pre><code class="language-python"># 5- Calculer le nombre de degrés jours (&gt;0degC) pour l'année 2017. 
-</code></pre>
-
-<pre><code class="language-python">sum(tableau[:,1][tableau[:,1]&gt;0])
-</code></pre>
-
-<pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: invalid value encountered in greater
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 5- Calculer le nombre de degrés jours (&gt;0degC) pour l&#39;année 2017. </span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sum(tableau[:,<span style="color:#ae81ff">1</span>][tableau[:,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>])
+</code></pre></div><pre><code>D:\Utilisateurs\guillaume\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: invalid value encountered in greater
   &quot;&quot;&quot;Entry point for launching an IPython kernel.
 
 
@@ -715,28 +675,18 @@ print(precipitation_max)
 
 1328.5300000000002
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 6- Calculer le cumul journalier de précipitation pour l&#39;année 2017</span>
+cumul_precipitation <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>nancumsum(tableau[:,<span style="color:#ae81ff">1</span>])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Ajouter le tableau cumul_precipitation au tableau. </span>
+tableau <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>column_stack([tableau, cumul_precipitation])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 7. spliter (casser) l’array en 3 tableaux, puis concaténer à nouveau pour obtenir le tableau initial.</span>
 
-<pre><code class="language-python"># 6- Calculer le cumul journalier de précipitation pour l'année 2017
-cumul_precipitation = np.nancumsum(tableau[:,1])
-</code></pre>
-
-<pre><code class="language-python"># Ajouter le tableau cumul_precipitation au tableau. 
-tableau = np.column_stack([tableau, cumul_precipitation])
-</code></pre>
-
-<pre><code class="language-python"># 7. spliter (casser) l’array en 3 tableaux, puis concaténer à nouveau pour obtenir le tableau initial.
-
-# on assigne les trois tableaux et on fait une coupure horizontale avec la fonction hsplit()
-temperature2,precipitation2,cumul2 = np.hsplit(tableau, 3)
-</code></pre>
-
-<pre><code class="language-python"># Pour revenir à notre tableau original, on utilise la fonction concatenate avec l'option axis = 1 
-tableau_original=np.concatenate([temperature2+273.15, precipitation2], axis = 1)
-</code></pre>
-
-<pre><code class="language-python">
-</code></pre>
-
+<span style="color:#75715e"># on assigne les trois tableaux et on fait une coupure horizontale avec la fonction hsplit()</span>
+temperature2,precipitation2,cumul2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>hsplit(tableau, <span style="color:#ae81ff">3</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pour revenir à notre tableau original, on utilise la fonction concatenate avec l&#39;option axis = 1 </span>
+tableau_original<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>concatenate([temperature2<span style="color:#f92672">+</span><span style="color:#ae81ff">273.15</span>, precipitation2], axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -781,7 +731,7 @@ tableau_original=np.concatenate([temperature2+273.15, precipitation2], axis = 1)
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/7-Numpy-Exercice.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c7-Numpy-Exercice.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

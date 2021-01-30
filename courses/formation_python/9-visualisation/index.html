@@ -581,16 +581,13 @@ Pour illustrer certaines fonctionnalités du module Python matplotlib."><meta pr
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#objectifs">Objectifs</a></li>
-<li><a href="#1-générer-son-premier-graphique">1- Générer son premier graphique</a></li>
-<li><a href="#matplotlib-subplot">Matplotlib subplot</a></li>
-<li><a href="#b-l-histogramme">b- L&rsquo; histogramme</a></li>
-<li><a href="#4-aller-plus-loin-avec-seaborn">4- Aller plus loin avec Seaborn</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#objectifs">Objectifs</a></li>
+    <li><a href="#1--générer-son-premier-graphique">1- Générer son premier graphique</a></li>
+    <li><a href="#matplotlib-subplot">Matplotlib subplot</a></li>
+    <li><a href="#b--l-histogramme">b- L&rsquo; histogramme</a></li>
+    <li><a href="#4--aller-plus-loin-avec-seaborn">4- Aller plus loin avec Seaborn</a></li>
+  </ul>
 </nav>
 
       
@@ -605,490 +602,230 @@ Pour illustrer certaines fonctionnalités du module Python matplotlib."><meta pr
           <h1>9- La visualisation graphique avec Python - Cours</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/formation/matplotlib.png" alt="image0" /></p>
-
+            <p><img src="/img/formation/matplotlib.png" alt="image0"></p>
 <h2 id="objectifs">Objectifs</h2>
-
 <ul>
 <li>Comment générer des graphiques en Python avec matplotlib</li>
 <li>Gerer plusieurs données dans un même graphique</li>
 <li>Gérer les figures multi-graphiques</li>
 <li>Créer des bar charts, histogrammes, courbes, nuages de points et boites à moustaches</li>
-<li>Utiliser la librairie Seaborn <br><br></li>
+<li>Utiliser la librairie Seaborn <!-- raw HTML omitted --><!-- raw HTML omitted --></li>
 </ul>
-
 <p>La bibliothèque Matplotlib est l&rsquo;une des bibliothèques les plus utilisées pour tracer des données en Python.</p>
-
 <p>De nombreux types de graphiques peuvent être développés avec cette bibliothèque:
-<a href="https://matplotlib.org/gallery/index.html" target="_blank">https://matplotlib.org/gallery/index.html</a></p>
-
+<a href="https://matplotlib.org/gallery/index.html">https://matplotlib.org/gallery/index.html</a></p>
 <p>Pour illustrer certaines fonctionnalités du module Python matplotlib.pyplot (qui fournit un système de traçage similaire à celui de MATLAB), nous utiliserons une base de données de la station UQAM.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd 
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> warnings; warnings<span style="color:#f92672">.</span>filterwarnings(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ignore&#39;</span>)
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
 
-<pre><code class="language-python">import pandas as pd 
-import numpy as np
-import warnings; warnings.filterwarnings(action='ignore')
-import matplotlib.pyplot as plt
+dataframe_UQAM <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./DATA/UQAM_DATA_STATION_2018.csv&#39;</span>)
+dataframe_UQAM[<span style="color:#e6db74">&#39;Date&#39;</span>]<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>to_datetime(dataframe_UQAM[<span style="color:#e6db74">&#39;Date&#39;</span>])
+dataframe_UQAM <span style="color:#f92672">=</span> dataframe_UQAM<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#34;Date&#34;</span>, drop<span style="color:#f92672">=</span>True)
+dataframe_UQAM<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-dataframe_UQAM = pd.read_csv('./DATA/UQAM_DATA_STATION_2018.csv')
-dataframe_UQAM['Date']=pd.to_datetime(dataframe_UQAM['Date'])
-dataframe_UQAM = dataframe_UQAM.set_index(&quot;Date&quot;, drop=True)
-dataframe_UQAM.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Temperature minimale</th>
-      <th>Temperature maximale</th>
-      <th>Temperature moyenne</th>
-      <th>Precipitation totale</th>
-      <th>Dir_wind</th>
-      <th>Mod_wind</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2014-02-01</th>
-      <td>-4.6</td>
-      <td>0.9</td>
-      <td>-1.5</td>
-      <td>0.0</td>
-      <td>244.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>2014-02-02</th>
-      <td>-6.2</td>
-      <td>0.2</td>
-      <td>-3.5</td>
-      <td>0.0</td>
-      <td>163.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>2014-02-03</th>
-      <td>-4.8</td>
-      <td>0.5</td>
-      <td>-1.2</td>
-      <td>0.0</td>
-      <td>255.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>2014-02-04</th>
-      <td>-9.9</td>
-      <td>-4.8</td>
-      <td>-8.0</td>
-      <td>0.0</td>
-      <td>148.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>2014-02-05</th>
-      <td>-9.9</td>
-      <td>-6.3</td>
-      <td>-7.6</td>
-      <td>0.0</td>
-      <td>261.0</td>
-      <td>2.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="1-générer-son-premier-graphique">1- Générer son premier graphique</h2>
-
-<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
-plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'])
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz1.png" alt="png" /></p>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="1--générer-son-premier-graphique">1- Générer son premier graphique</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_to_plot <span style="color:#f92672">=</span> dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz1.png" alt="png"></p>
 <ul>
-<li>Option <b> marqueur </b>:</li>
+<li>Option <!-- raw HTML omitted --> marqueur <!-- raw HTML omitted -->:</li>
 </ul>
-
-<p><a href="https://matplotlib.org/api/markers_api.html" target="_blank">https://matplotlib.org/api/markers_api.html</a></p>
-
+<p><a href="https://matplotlib.org/api/markers_api.html">https://matplotlib.org/api/markers_api.html</a></p>
 <ul>
-<li><p>Option <b> linestyle </b>: supprimer ou non les lignes</p>
-
-<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
-plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'], marker='x', linestyle=&quot;--&quot;)
-plt.show()
-</code></pre></li>
+<li>Option <!-- raw HTML omitted --> linestyle <!-- raw HTML omitted -->: supprimer ou non les lignes</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_to_plot <span style="color:#f92672">=</span> dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_to_plot <span style="color:#f92672">=</span> dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34; L&#39;axe des abscisses&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;L&#39;axe des ordonnées&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Ma deuxième courbe !&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
 
-<p><img src="/img/formation/dataviz2.png" alt="png" /></p>
+</code></pre></div><p><img src="/img/formation/dataviz3.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_to_plot <span style="color:#f92672">=</span> dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature minimale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lightblue&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature maximale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkred&#39;</span>)
 
-<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
-plt.plot(year_to_plot.index,year_to_plot['Temperature moyenne'], marker='x', linestyle=&quot;--&quot;)
-plt.xlabel(&quot; L'axe des abscisses&quot;)
-plt.ylabel(&quot;L'axe des ordonnées&quot;)
-plt.title(&quot;Ma deuxième courbe !&quot;)
-plt.show()
-
-</code></pre>
-
-<p><img src="/img/formation/dataviz3.png" alt="png" /></p>
-
-<pre><code class="language-python">year_to_plot = dataframe_UQAM['2015']
-plt.plot(year_to_plot.index,year_to_plot['Temperature minimale'], color='lightblue')
-plt.plot(year_to_plot.index,year_to_plot['Temperature maximale'], color='darkred')
-
-plt.xlabel(&quot; L'axe des abscisses&quot;)
-plt.ylabel(&quot;L'axe des ordonnées&quot;)
-plt.title(&quot;multi-courbes&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz4.png" alt="png" /></p>
-
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34; L&#39;axe des abscisses&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;L&#39;axe des ordonnées&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;multi-courbes&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz4.png" alt="png"></p>
 <ul>
-<li>Fonction <b> scatter </b>: la fonction vous permet de créer un nuage de points</li>
-
-<li><p>La méthode <b> .rcParams </b> est utilisée pour agrandir la fenêtre graphique</p>
-
-<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]  
-plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'])
-plt.show()
-</code></pre></li>
+<li>Fonction <!-- raw HTML omitted --> scatter <!-- raw HTML omitted -->: la fonction vous permet de créer un nuage de points</li>
+<li>La méthode <!-- raw HTML omitted --> .rcParams <!-- raw HTML omitted --> est utilisée pour agrandir la fenêtre graphique</li>
 </ul>
-
-<p><img src="/img/formation/dataviz5.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]  
+plt<span style="color:#f92672">.</span>scatter(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz5.png" alt="png"></p>
 <ul>
 <li>pour utiliser l&rsquo;option scatter color, python veut une liste d&rsquo;entrée et non un dictionnaire</li>
-
-<li><p>option couleur: c = list ()</p>
-
-<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]
-plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'], c=list(year_to_plot['Temperature moyenne']))
-plt.xlabel(&quot;Temps&quot;)
-plt.ylabel(&quot;Température&quot;)
-plt.title(&quot;Temperature&quot;, y=1.05)
-plt.show()
-</code></pre></li>
+<li>option couleur: c = list ()</li>
 </ul>
-
-<p><img src="/img/formation/dataviz6.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]
+plt<span style="color:#f92672">.</span>scatter(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], c<span style="color:#f92672">=</span>list(year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>]))
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Temps&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Température&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Temperature&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz6.png" alt="png"></p>
 <ul>
 <li>Nous avons utilisé la couleur de dispersion par défaut ()</li>
-<li>avec l&rsquo;option <b> cmap </b>, nous pouvons choisir notre panel de couleurs: <a href="https://matplotlib.org/examples/color/colormaps_reference.html" target="_blank">https://matplotlib.org/examples/color/colormaps_reference.html</a></li>
-<li>on choisira par exemple la palette de couleurs &ldquo;sismique&rdquo; via l&rsquo;option <b> cmap </b></li>
-<li>pour changer la forme et la taille des points: utilisez les options <b> marqueur </b> et <b> s </b></li>
-<li>pour enregistrer un graphe: fonction pyplot: <b> savefig () </b></li>
-<li>Pour ajouter une barre de couleur: fonction <b> colorbar () </b></li>
-
-<li><p>Pour faire pivoter les étiquettes dans x: function <b> xticks () </b></p>
-
-<pre><code class="language-python">plt.rcParams[&quot;figure.figsize&quot;]=[16,9]
-plt.scatter(year_to_plot.index,year_to_plot['Temperature moyenne'], c=list(year_to_plot['Temperature moyenne']),
-        cmap=&quot;seismic&quot;,
-        marker=&quot;D&quot;, 
-        s=100)
-plt.xlabel(&quot;Time&quot;)
-plt.ylabel(&quot;Temperature&quot;)
-plt.title(&quot;Temperature&quot;, y=1.05)
-plt.colorbar()
-plt.xticks(rotation=45)
-plt.show()
-plt.savefig(&quot;figures/my_graph.png&quot;, bbox_inches=&quot;tight&quot;) 
-</code></pre></li>
+<li>avec l&rsquo;option <!-- raw HTML omitted --> cmap <!-- raw HTML omitted -->, nous pouvons choisir notre panel de couleurs: <a href="https://matplotlib.org/examples/color/colormaps_reference.html">https://matplotlib.org/examples/color/colormaps_reference.html</a></li>
+<li>on choisira par exemple la palette de couleurs &ldquo;sismique&rdquo; via l&rsquo;option <!-- raw HTML omitted --> cmap <!-- raw HTML omitted --></li>
+<li>pour changer la forme et la taille des points: utilisez les options <!-- raw HTML omitted --> marqueur <!-- raw HTML omitted --> et <!-- raw HTML omitted --> s <!-- raw HTML omitted --></li>
+<li>pour enregistrer un graphe: fonction pyplot: <!-- raw HTML omitted --> savefig () <!-- raw HTML omitted --></li>
+<li>Pour ajouter une barre de couleur: fonction <!-- raw HTML omitted --> colorbar () <!-- raw HTML omitted --></li>
+<li>Pour faire pivoter les étiquettes dans x: function <!-- raw HTML omitted --> xticks () <!-- raw HTML omitted --></li>
 </ul>
-
-<p><img src="/img/formation/dataviz7.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;figure.figsize&#34;</span>]<span style="color:#f92672">=</span>[<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">9</span>]
+plt<span style="color:#f92672">.</span>scatter(year_to_plot<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], c<span style="color:#f92672">=</span>list(year_to_plot[<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>]),
+            cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;seismic&#34;</span>,
+            marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D&#34;</span>, 
+            s<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Temperature&#34;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Temperature&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1.05</span>)
+plt<span style="color:#f92672">.</span>colorbar()
+plt<span style="color:#f92672">.</span>xticks(rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
+plt<span style="color:#f92672">.</span>show()
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#34;figures/my_graph.png&#34;</span>, bbox_inches<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tight&#34;</span>) 
+</code></pre></div><p><img src="/img/formation/dataviz7.png" alt="png"></p>
 <pre><code>&lt;Figure size 1152x648 with 0 Axes&gt;
 </code></pre>
-
-<h2>2- Figure et multi graph </h2>
-
-<pre><code class="language-python">fig = plt.figure()               # je crée un nouvel espace de création pour mes graphique
-ax = fig.add_subplot(111)        # je crée un nouveau graphique appelé 'ax' et j'indique ses coordonnées
-ax.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
-ax.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
-ax.set_xlabel(&quot; L'axe des abscisses&quot;)
-ax.set_ylabel(&quot;L'axe des ordonnées&quot;)
-ax.set_title(&quot;multi-courbes&quot;)
-plt.xticks(rotation=45)
-plt.show() #c'est plt qui continue d'indiquer l'affichage du graphique
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()               <span style="color:#75715e"># je crée un nouvel espace de création pour mes graphique</span>
+ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)        <span style="color:#75715e"># je crée un nouveau graphique appelé &#39;ax&#39; et j&#39;indique ses coordonnées</span>
+ax<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature minimale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lightblue&#39;</span>) <span style="color:#75715e"># je ne dis plus plt mais ax pour indiquer ce qui est présent</span>
+ax<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature maximale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkgreen&#39;</span>)
+ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#34; L&#39;axe des abscisses&#34;</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#34;L&#39;axe des ordonnées&#34;</span>)
+ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;multi-courbes&#34;</span>)
+plt<span style="color:#f92672">.</span>xticks(rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
+plt<span style="color:#f92672">.</span>show() <span style="color:#75715e">#c&#39;est plt qui continue d&#39;indiquer l&#39;affichage du graphique</span>
 
 
-</code></pre>
-
-<p><img src="/img/formation/dataviz8.png" alt="png" /></p>
-
+</code></pre></div><p><img src="/img/formation/dataviz8.png" alt="png"></p>
 <ul>
-<li><b>Résumé des principaux éléments dans un graphique matplotlib </b></li>
+<li><!-- raw HTML omitted -->Résumé des principaux éléments dans un graphique matplotlib <!-- raw HTML omitted --></li>
 </ul>
+<p><img src="/img/formation/resume_matplotlib.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">121</span>)
+ax2 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">122</span>)
 
-<p><img src="/img/formation/resume_matplotlib.png" alt="png" /></p>
+ax1<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature minimale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lightblue&#39;</span>) <span style="color:#75715e"># je ne dis plus plt mais ax pour indiquer ce qui est présent</span>
+ax2<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature maximale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkgreen&#39;</span>)
 
-<pre><code class="language-python">fig = plt.figure()
-ax1 = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
-
-ax1.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
-ax2.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
-
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz9.png" alt="png" /></p>
-
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz9.png" alt="png"></p>
 <h2 id="matplotlib-subplot">Matplotlib subplot</h2>
-
 <p>Lors de la création d&rsquo;un graphique, matplotlib:</p>
-
 <ul>
 <li>stocke un conteneur pour tous les graphiques</li>
 <li>stocke un conteneur pour que le graphique soit positionné sur une grille</li>
 <li>stocke les symboles visuels sur le graphique</li>
 </ul>
-
 <p>Vous pouvez tracer différentes choses dans la même figure en utilisant la fonction de sous-tracé. Voici un exemple:</p>
-
-<p><img src="/img/formation/subplot.png" alt="SUBPLOT.PNG" /></p>
-
-<pre><code class="language-python">fig = plt.figure()
-ax1 = fig.add_subplot(2,2,1) # up and left 
-ax2 = fig.add_subplot(2,2,2) # up and right 
-ax3 = fig.add_subplot(2,2,3) # down and left 
-ax4 = fig.add_subplot(2,2,4) # down and right
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz10.png" alt="png" /></p>
-
+<p><img src="/img/formation/subplot.png" alt="SUBPLOT.PNG"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>) <span style="color:#75715e"># up and left </span>
+ax2 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>) <span style="color:#75715e"># up and right </span>
+ax3 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>) <span style="color:#75715e"># down and left </span>
+ax4 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>) <span style="color:#75715e"># down and right</span>
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz10.png" alt="png"></p>
 <p>Voici une documentation sur le sous-intrigue:
-<a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" target="_blank">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot</a></p>
+<a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">121</span>)
+ax2 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">122</span>)
+ax1<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature minimale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lightblue&#39;</span>) <span style="color:#75715e"># je ne dis plus plt mais ax pour indiquer ce qui est présent</span>
+ax2<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature maximale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkgreen&#39;</span>)
+ax1<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>)
+ax2<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz11.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">211</span>)
+ax2 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">212</span>)
 
-<pre><code class="language-python">fig = plt.figure(figsize=(10,5))
-ax1 = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
-ax1.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
-ax2.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
-ax1.legend(loc='upper left')
-ax2.legend(loc='upper left')
-plt.show()
-</code></pre>
+ax1<span style="color:#f92672">.</span>plot(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature minimale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lightblue&#39;</span>) <span style="color:#75715e"># je ne dis plus plt mais ax pour indiquer ce qui est présent</span>
+ax2<span style="color:#f92672">.</span>scatter(dataframe_UQAM[<span style="color:#e6db74">&#39;2015&#39;</span>]<span style="color:#f92672">.</span>index,year_to_plot[<span style="color:#e6db74">&#39;Temperature maximale&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;darkgreen&#39;</span>)
 
-<p><img src="/img/formation/dataviz11.png" alt="png" /></p>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(10,5))
-ax1 = fig.add_subplot(211)
-ax2 = fig.add_subplot(212)
-
-ax1.plot(dataframe_UQAM['2015'].index,year_to_plot['Temperature minimale'], color='lightblue') # je ne dis plus plt mais ax pour indiquer ce qui est présent
-ax2.scatter(dataframe_UQAM['2015'].index,year_to_plot['Temperature maximale'], color='darkgreen')
-
-plt.savefig(&quot;foo.png&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz12.png" alt="png" /></p>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(15, 8))
-colors = ['green', 'blue', 'red','orange']
-for i in range(4):
-    ax = fig.add_subplot(2,2,i+1)
-    year = str(2014+i)
-    label=year
-    plt.plot(dataframe_UQAM[year].index,dataframe_UQAM[year]['Temperature moyenne'], c=colors[i], label = label)
-    plt.legend(loc='upper left')
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz13.png" alt="png" /></p>
-
-<p><h2>3- Présentation des principales représentations graphiques </h2>
-<h3> a- Le bar chart </h3></p>
-
+plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#34;foo.png&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz12.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">8</span>))
+colors <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;green&#39;</span>, <span style="color:#e6db74">&#39;blue&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>,<span style="color:#e6db74">&#39;orange&#39;</span>]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>):
+    ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+    year <span style="color:#f92672">=</span> str(<span style="color:#ae81ff">2014</span><span style="color:#f92672">+</span>i)
+    label<span style="color:#f92672">=</span>year
+    plt<span style="color:#f92672">.</span>plot(dataframe_UQAM[year]<span style="color:#f92672">.</span>index,dataframe_UQAM[year][<span style="color:#e6db74">&#39;Temperature moyenne&#39;</span>], c<span style="color:#f92672">=</span>colors[i], label <span style="color:#f92672">=</span> label)
+    plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper left&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz13.png" alt="png"></p>
+<!-- raw HTML omitted -->
 <pre><code>- Exemple 1 : 
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./DATA/train.csv&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;latin-1&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>)
+data<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">import pandas as pd
-data = pd.read_csv('./DATA/train.csv',encoding='latin-1', sep=',')
-data.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PassengerId</th>
-      <th>Survived</th>
-      <th>Pclass</th>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>SibSp</th>
-      <th>Parch</th>
-      <th>Ticket</th>
-      <th>Fare</th>
-      <th>Cabin</th>
-      <th>Embarked</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Braund, Mr. Owen Harris</td>
-      <td>male</td>
-      <td>22.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>A/5 21171</td>
-      <td>7.2500</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
-      <td>female</td>
-      <td>38.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>PC 17599</td>
-      <td>71.2833</td>
-      <td>C85</td>
-      <td>C</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>1</td>
-      <td>3</td>
-      <td>Heikkinen, Miss. Laina</td>
-      <td>female</td>
-      <td>26.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>STON/O2. 3101282</td>
-      <td>7.9250</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
-      <td>female</td>
-      <td>35.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>113803</td>
-      <td>53.1000</td>
-      <td>C123</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Allen, Mr. William Henry</td>
-      <td>male</td>
-      <td>35.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>373450</td>
-      <td>8.0500</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Répartition du nombre de personnes par class:</p>
-
-<pre><code class="language-python">passagersClasses = data['Pclass'].value_counts()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">passagersClasses <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Pclass&#39;</span>]<span style="color:#f92672">.</span>value_counts()
 passagersClasses
-</code></pre>
-
-<pre><code>3    491
+</code></pre></div><pre><code>3    491
 1    216
 2    184
 Name: Pclass, dtype: int64
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
+ax1<span style="color:#f92672">.</span>bar(range(len(passagersClasses)),passagersClasses)   <span style="color:#75715e"># création du graphique</span>
+tick_positions <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>,len(passagersClasses))          <span style="color:#75715e"># définition de la position des échelles sur les axes</span>
+ax1<span style="color:#f92672">.</span>set_xticks(tick_positions)                           <span style="color:#75715e"># ajout des échelles </span>
+ax1<span style="color:#f92672">.</span>set_xticklabels(passagersClasses<span style="color:#f92672">.</span>index, rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>) <span style="color:#75715e"># ajout des labels</span>
 
-<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
-ax1.bar(range(len(passagersClasses)),passagersClasses)   # création du graphique
-tick_positions = range(0,len(passagersClasses))          # définition de la position des échelles sur les axes
-ax1.set_xticks(tick_positions)                           # ajout des échelles 
-ax1.set_xticklabels(passagersClasses.index, rotation=45) # ajout des labels
-
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz14.png" alt="png" /></p>
-
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz14.png" alt="png"></p>
 <pre><code>- Exemple 2 : 
 </code></pre>
-
 <p>Répartition des classes avec un filtre</p>
-
-<pre><code class="language-python">passagersClassesWomen = data['Pclass'][data['Sex'] == 'female'].value_counts()
-print(passagersClassesWomen)
-passagersClassesMen = data['Pclass'][data['Sex'] == 'male'].value_counts()
-print(passagersClassesMen)
-</code></pre>
-
-<pre><code>3    144
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">passagersClassesWomen <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Pclass&#39;</span>][data[<span style="color:#e6db74">&#39;Sex&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;female&#39;</span>]<span style="color:#f92672">.</span>value_counts()
+<span style="color:#66d9ef">print</span>(passagersClassesWomen)
+passagersClassesMen <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Pclass&#39;</span>][data[<span style="color:#e6db74">&#39;Sex&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;male&#39;</span>]<span style="color:#f92672">.</span>value_counts()
+<span style="color:#66d9ef">print</span>(passagersClassesMen)
+</code></pre></div><pre><code>3    144
 1     94
 2     76
 Name: Pclass, dtype: int64
@@ -1097,47 +834,36 @@ Name: Pclass, dtype: int64
 2    108
 Name: Pclass, dtype: int64
 </code></pre>
-
-<pre><code class="language-python">largeurBar = 0.25
-position1W = np.arange(len(passagersClassesWomen))
-position1M = [x + largeurBar for x in position1W]
-print(position1W)
-print(position1M)
-</code></pre>
-
-<pre><code>[0 1 2]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">largeurBar <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.25</span>
+position1W <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(len(passagersClassesWomen))
+position1M <span style="color:#f92672">=</span> [x <span style="color:#f92672">+</span> largeurBar <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> position1W]
+<span style="color:#66d9ef">print</span>(position1W)
+<span style="color:#66d9ef">print</span>(position1M)
+</code></pre></div><pre><code>[0 1 2]
 [0.25, 1.25, 2.25]
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
 
-<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
+ax1<span style="color:#f92672">.</span>bar(position1W,passagersClassesWomen, width<span style="color:#f92672">=</span>largeurBar, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Femmes&#39;</span>)
 
-ax1.bar(position1W,passagersClassesWomen, width=largeurBar, label='Femmes')
+ax1<span style="color:#f92672">.</span>bar(position1M,passagersClassesMen, width<span style="color:#f92672">=</span>largeurBar,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Hommes&#39;</span>)
 
-ax1.bar(position1M,passagersClassesMen, width=largeurBar,label='Hommes')
+tick_positions <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>,len(passagersClasses))
+ax1<span style="color:#f92672">.</span>set_xticks(tick_positions)
+ax1<span style="color:#f92672">.</span>set_xticklabels(passagersClasses<span style="color:#f92672">.</span>index, rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
 
-tick_positions = range(0,len(passagersClasses))
-ax1.set_xticks(tick_positions)
-ax1.set_xticklabels(passagersClasses.index, rotation=45)
-
-plt.legend()
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz15.png" alt="png" /></p>
-
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz15.png" alt="png"></p>
 <pre><code>- Exemple 3 : 
 </code></pre>
-
 <p>Création de bar empilé</p>
-
-<pre><code class="language-python">passagersVieClasses = data['Pclass'][data['Survived'] == 1].value_counts()
-print(passagersVieClasses)
-passagersMortClasses = data['Pclass'][data['Survived'] == 0].value_counts()
-print(passagersMortClasses)
-</code></pre>
-
-<pre><code>1    136
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">passagersVieClasses <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Pclass&#39;</span>][data[<span style="color:#e6db74">&#39;Survived&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>value_counts()
+<span style="color:#66d9ef">print</span>(passagersVieClasses)
+passagersMortClasses <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Pclass&#39;</span>][data[<span style="color:#e6db74">&#39;Survived&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>value_counts()
+<span style="color:#66d9ef">print</span>(passagersMortClasses)
+</code></pre></div><pre><code>1    136
 3    119
 2     87
 Name: Pclass, dtype: int64
@@ -1146,178 +872,116 @@ Name: Pclass, dtype: int64
 1     80
 Name: Pclass, dtype: int64
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">largeurBar <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+position1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(len(passagersVieClasses))
 
-<pre><code class="language-python">largeurBar = 0.5
-position1 = np.arange(len(passagersVieClasses))
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
 
-fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
+ax1<span style="color:#f92672">.</span>bar(position1,passagersVieClasses, width<span style="color:#f92672">=</span>largeurBar, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Vie&#39;</span>)
 
-ax1.bar(position1,passagersVieClasses, width=largeurBar, label='Vie')
+ax1<span style="color:#f92672">.</span>bar(position1,passagersMortClasses, width<span style="color:#f92672">=</span>largeurBar,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;décès&#39;</span>,bottom<span style="color:#f92672">=</span>passagersVieClasses)
 
-ax1.bar(position1,passagersMortClasses, width=largeurBar,label='décès',bottom=passagersVieClasses)
+tick_positions <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>,len(passagersClasses))
+ax1<span style="color:#f92672">.</span>set_xticks(tick_positions)
+ax1<span style="color:#f92672">.</span>set_xticklabels(passagersClasses<span style="color:#f92672">.</span>index, rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
 
-tick_positions = range(0,len(passagersClasses))
-ax1.set_xticks(tick_positions)
-ax1.set_xticklabels(passagersClasses.index, rotation=45)
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz16.png" alt="png"></p>
+<h2 id="b--l-histogramme">b- L&rsquo; histogramme</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
 
-plt.legend()
-plt.show()
-</code></pre>
+ax1<span style="color:#f92672">.</span>hist(data[<span style="color:#e6db74">&#39;Age&#39;</span>]<span style="color:#f92672">.</span>dropna())          <span style="color:#75715e">#on pousse la liste age en supprimant les valeurs manquantes</span>
+ax1<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;repartition de l&#39;age&#34;</span>)
 
-<p><img src="/img/formation/dataviz16.png" alt="png" /></p>
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz17.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
 
-<h2 id="b-l-histogramme">b- L&rsquo; histogramme</h2>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
-
-ax1.hist(data['Age'].dropna())          #on pousse la liste age en supprimant les valeurs manquantes
-ax1.set_title(&quot;repartition de l'age&quot;)
-
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz17.png" alt="png" /></p>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
-
-# on ajoute des filtres 
-ageEnVie = data['Age'][data['Survived'] == 1].dropna()    
-ageDeces = data['Age'][data['Survived'] == 0].dropna()
-# on va pousser deux listes dans notre histogramme
-ax1.hist([ageEnVie,ageDeces],bins=20,stacked=True,density = True)
-ax1.set_title(&quot;Répartition de l'âge en fonction de la survie (en bleu) ou du décès (en orange)&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz18.png" alt="png" /></p>
-
-<h3> c- Le nuage de points </h3>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
-ax1.scatter(data['Age'],data['Fare'])
-ax1.set_title(&quot;Prix du bilet en fonction de l'age&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz19.png" alt="png" /></p>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
-ax1.scatter(data['Age'],data['Fare'])
-ax1.set_title(&quot;Prix du bilet en fonction de l'age&quot;)
-ax1.set_ylim(top=100)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz20.png" alt="png" /></p>
-
-<pre><code class="language-python">fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
-ax1.scatter(data['Pclass'],data['Fare'])
-ax1.set_title(&quot;Prix du bilet en fonction de la classe&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz21.png" alt="png" /></p>
-
-<pre><code class="language-python">from pandas.plotting import scatter_matrix
-scatter_matrix(data[['Survived','Pclass','Age','SibSp','Fare']], figsize=(15,15))
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz22.png" alt="png" /></p>
-
-<h2 id="4-aller-plus-loin-avec-seaborn">4- Aller plus loin avec Seaborn</h2>
-
-<p>Pour compléter et enrichir nos visualiations, une nouvelle bibliothèque Python sera utilisée: <b> Seaborn </b>.</p>
-
+<span style="color:#75715e"># on ajoute des filtres </span>
+ageEnVie <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Age&#39;</span>][data[<span style="color:#e6db74">&#39;Survived&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>dropna()    
+ageDeces <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Age&#39;</span>][data[<span style="color:#e6db74">&#39;Survived&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>dropna()
+<span style="color:#75715e"># on va pousser deux listes dans notre histogramme</span>
+ax1<span style="color:#f92672">.</span>hist([ageEnVie,ageDeces],bins<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>,stacked<span style="color:#f92672">=</span>True,density <span style="color:#f92672">=</span> True)
+ax1<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Répartition de l&#39;âge en fonction de la survie (en bleu) ou du décès (en orange)&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz18.png" alt="png"></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
+ax1<span style="color:#f92672">.</span>scatter(data[<span style="color:#e6db74">&#39;Age&#39;</span>],data[<span style="color:#e6db74">&#39;Fare&#39;</span>])
+ax1<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Prix du bilet en fonction de l&#39;age&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz19.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
+ax1<span style="color:#f92672">.</span>scatter(data[<span style="color:#e6db74">&#39;Age&#39;</span>],data[<span style="color:#e6db74">&#39;Fare&#39;</span>])
+ax1<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Prix du bilet en fonction de l&#39;age&#34;</span>)
+ax1<span style="color:#f92672">.</span>set_ylim(top<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz20.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
+ax1<span style="color:#f92672">.</span>scatter(data[<span style="color:#e6db74">&#39;Pclass&#39;</span>],data[<span style="color:#e6db74">&#39;Fare&#39;</span>])
+ax1<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#34;Prix du bilet en fonction de la classe&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz21.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pandas.plotting <span style="color:#f92672">import</span> scatter_matrix
+scatter_matrix(data[[<span style="color:#e6db74">&#39;Survived&#39;</span>,<span style="color:#e6db74">&#39;Pclass&#39;</span>,<span style="color:#e6db74">&#39;Age&#39;</span>,<span style="color:#e6db74">&#39;SibSp&#39;</span>,<span style="color:#e6db74">&#39;Fare&#39;</span>]], figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">15</span>))
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz22.png" alt="png"></p>
+<h2 id="4--aller-plus-loin-avec-seaborn">4- Aller plus loin avec Seaborn</h2>
+<p>Pour compléter et enrichir nos visualiations, une nouvelle bibliothèque Python sera utilisée: <!-- raw HTML omitted --> Seaborn <!-- raw HTML omitted -->.</p>
 <ul>
 <li>la bibliothèque Seaborn est basée sur matplotlib.</li>
 <li>il permet de dessiner des graphiques plus complexes</li>
 </ul>
-
 <p>Pour plus d&rsquo;informations:</p>
-
-<p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html" target="_blank">https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html</a></p>
-
+<p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html">https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html</a></p>
 <p>Ce lien présente une galerie de types de graphiques à réaliser avec Seaborn:
-<a href="https://seaborn.pydata.org/examples/index.html" target="_blank">https://seaborn.pydata.org/examples/index.html</a></p>
-
-<p><img src = "./figures/seaborn.png" alt = "Seaborn" width = "60%" height = "70%"></p>
-
-<p><a href="https://seaborn.pydata.org/examples/index.html" target="_blank">https://seaborn.pydata.org/examples/index.html</a></p>
-
-<pre><code class="language-python">import seaborn as sns
-sns.distplot(data[&quot;Age&quot;].dropna())
-sns.set()
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz23.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.kdeplot(data[&quot;Age&quot;].dropna(), shade=True)
-sns.set()
-plt.xlabel(&quot;Age&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz24.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.lmplot(x=&quot;Age&quot;, y=&quot;Fare&quot;, hue=&quot;Pclass&quot;, data=data,fit_reg=False)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz25.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.jointplot(&quot;Age&quot;, &quot;Fare&quot;, data=data, kind=&quot;reg&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz26.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.jointplot(&quot;Age&quot;, &quot;Fare&quot;, data=data, kind=&quot;hex&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz27.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.boxplot(x=data[&quot;Age&quot;])
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz28.png" alt="png" /></p>
-
-<p><img src="/img/formation/moustache.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.boxplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz29.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.violinplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz30.png" alt="png" /></p>
-
-<pre><code class="language-python">fig, ax = plt.subplots()
-fig.set_size_inches(12, 8)
-sns.violinplot(x=&quot;Pclass&quot;, y=&quot;Age&quot;, data=data)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz31.png" alt="png" /></p>
-
+<a href="https://seaborn.pydata.org/examples/index.html">https://seaborn.pydata.org/examples/index.html</a></p>
+<!-- raw HTML omitted -->
+<p><a href="https://seaborn.pydata.org/examples/index.html">https://seaborn.pydata.org/examples/index.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+sns<span style="color:#f92672">.</span>distplot(data[<span style="color:#e6db74">&#34;Age&#34;</span>]<span style="color:#f92672">.</span>dropna())
+sns<span style="color:#f92672">.</span>set()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz23.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>kdeplot(data[<span style="color:#e6db74">&#34;Age&#34;</span>]<span style="color:#f92672">.</span>dropna(), shade<span style="color:#f92672">=</span>True)
+sns<span style="color:#f92672">.</span>set()
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Age&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz24.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>lmplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Age&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fare&#34;</span>, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pclass&#34;</span>, data<span style="color:#f92672">=</span>data,fit_reg<span style="color:#f92672">=</span>False)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz25.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(<span style="color:#e6db74">&#34;Age&#34;</span>, <span style="color:#e6db74">&#34;Fare&#34;</span>, data<span style="color:#f92672">=</span>data, kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reg&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz26.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(<span style="color:#e6db74">&#34;Age&#34;</span>, <span style="color:#e6db74">&#34;Fare&#34;</span>, data<span style="color:#f92672">=</span>data, kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hex&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz27.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#34;Age&#34;</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz28.png" alt="png"></p>
+<p><img src="/img/formation/moustache.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pclass&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Age&#34;</span>, data<span style="color:#f92672">=</span>data)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz29.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>violinplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pclass&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Age&#34;</span>, data<span style="color:#f92672">=</span>data)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz30.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+fig<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">8</span>)
+sns<span style="color:#f92672">.</span>violinplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pclass&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Age&#34;</span>, data<span style="color:#f92672">=</span>data)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz31.png" alt="png"></p>
 <p>Afin de mettre en pratique ce que nous venons de voir, une section exercice est proposée. Deux projets complets sur des analyses de stations météorologiques sont également proposées.</p>
-
-<pre><code class="language-python">
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -1362,7 +1026,7 @@ plt.show()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/9-Visualisation.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c9-Visualisation.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

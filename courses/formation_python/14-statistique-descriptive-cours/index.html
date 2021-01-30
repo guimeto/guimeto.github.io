@@ -28,8 +28,7 @@
   
     
   
-  <meta name="description" content="Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.
-import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.head(5)    .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }    Number Digimon Stage Type Attribute Memory Equip Slots Lv 50 HP Lv50 SP Lv50 Atk Lv50 Def Lv50 Int Lv50 Spd     0 1 Kuramon Baby Free Neutral 2 0 590 77 79 69 68 95   1 2 Pabumon Baby Free Neutral 2 0 950 62 76 76 69 68   2 3 Punimon Baby Free Neutral 2 0 870 50 97 87 50 75   3 4 Botamon Baby Free Neutral 2 0 690 68 77 95 76 61   4 5 Poyomon Baby Free Neutral 2 0 540 98 54 59 95 86     1- Les types de variables  Les variables catégorielles (qualitatives)   Il n&rsquo;y a pas de notion d&rsquo;échelle, c&rsquo;est un attribut d&rsquo;un critère">
+  <meta name="description" content="Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.  import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.head(5) .dataframe tbody tr th {vertical-align: top;}.dataframe thead th {text-align: right;} 1- Les types de variables  Les variables catégorielles (qualitatives)   from matplotlib import pyplot as plt import seaborn as sns sns.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/formation_python/14-statistique-descriptive-cours/">
@@ -116,8 +115,7 @@ import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.he
   <meta property="og:site_name" content="GDueymes">
   <meta property="og:url" content="/courses/formation_python/14-statistique-descriptive-cours/">
   <meta property="og:title" content="14- La statistique descriptive - Rappels | GDueymes">
-  <meta property="og:description" content="Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.
-import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.head(5)    .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }    Number Digimon Stage Type Attribute Memory Equip Slots Lv 50 HP Lv50 SP Lv50 Atk Lv50 Def Lv50 Int Lv50 Spd     0 1 Kuramon Baby Free Neutral 2 0 590 77 79 69 68 95   1 2 Pabumon Baby Free Neutral 2 0 950 62 76 76 69 68   2 3 Punimon Baby Free Neutral 2 0 870 50 97 87 50 75   3 4 Botamon Baby Free Neutral 2 0 690 68 77 95 76 61   4 5 Poyomon Baby Free Neutral 2 0 540 98 54 59 95 86     1- Les types de variables  Les variables catégorielles (qualitatives)   Il n&rsquo;y a pas de notion d&rsquo;échelle, c&rsquo;est un attribut d&rsquo;un critère"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.  import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.head(5) .dataframe tbody tr th {vertical-align: top;}.dataframe thead th {text-align: right;} 1- Les types de variables  Les variables catégorielles (qualitatives)   from matplotlib import pyplot as plt import seaborn as sns sns."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -579,15 +577,12 @@ import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.he
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-les-types-de-variables">1- Les types de variables</a></li>
-<li><a href="#2-les-statistiques-de-base">2- Les statistiques de base</a></li>
-<li><a href="#3-la-loi-normale">3- La loi normale</a></li>
-<li><a href="#4-notion-de-correlation-entre-des-variables-et-calcul-du-coefficient-de-correlation">4- Notion de correlation entre des variables et calcul du coefficient de correlation</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1--les-types-de-variables">1- Les types de variables</a></li>
+    <li><a href="#2--les-statistiques-de-base">2- Les statistiques de base</a></li>
+    <li><a href="#3--la-loi-normale">3- La loi normale</a></li>
+    <li><a href="#4--notion-de-correlation-entre-des-variables-et-calcul-du-coefficient-de-correlation">4- Notion de correlation entre des variables et calcul du coefficient de correlation</a></li>
+  </ul>
 </nav>
 
       
@@ -602,213 +597,69 @@ import pandas as pd data = pd.read_csv(&#39;DigiDB_digimonlist.csv&#39;) data.he
           <h1>14- La statistique descriptive - Rappels</h1>
 
           <div class="article-style">
-            
-
-<ul>
-<li><p>Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.</p>
-
-<pre><code class="language-python">import pandas as pd
-
-data = pd.read_csv('DigiDB_digimonlist.csv')
-data.head(5)
-</code></pre></li>
+            <ul>
+<li>Definition wikipedia : L&rsquo;objectif de la statistique descriptive est de décrire, c&rsquo;est-à-dire de résumer ou représenter, par des statistiques, les données disponibles quand elles sont nombreuses.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;DigiDB_digimonlist.csv&#39;</span>)
+data<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">5</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Number</th>
-      <th>Digimon</th>
-      <th>Stage</th>
-      <th>Type</th>
-      <th>Attribute</th>
-      <th>Memory</th>
-      <th>Equip Slots</th>
-      <th>Lv 50 HP</th>
-      <th>Lv50 SP</th>
-      <th>Lv50 Atk</th>
-      <th>Lv50 Def</th>
-      <th>Lv50 Int</th>
-      <th>Lv50 Spd</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Kuramon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>590</td>
-      <td>77</td>
-      <td>79</td>
-      <td>69</td>
-      <td>68</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Pabumon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>950</td>
-      <td>62</td>
-      <td>76</td>
-      <td>76</td>
-      <td>69</td>
-      <td>68</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Punimon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>870</td>
-      <td>50</td>
-      <td>97</td>
-      <td>87</td>
-      <td>50</td>
-      <td>75</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>Botamon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>690</td>
-      <td>68</td>
-      <td>77</td>
-      <td>95</td>
-      <td>76</td>
-      <td>61</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Poyomon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>540</td>
-      <td>98</td>
-      <td>54</td>
-      <td>59</td>
-      <td>95</td>
-      <td>86</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<h2 id="1-les-types-de-variables">1- Les types de variables</h2>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="1--les-types-de-variables">1- Les types de variables</h2>
 <ul>
-<li><p><b>Les variables catégorielles (qualitatives) </b>
-<p> Il n&rsquo;y a pas de notion d&rsquo;échelle, c&rsquo;est un attribut d&rsquo;un critère<br>
-Exemples : [homme,Femme], [première classe, deuxième classe, troisième classe], [Vrai,Faux]<p></p>
-
-<pre><code class="language-python">from matplotlib import pyplot as plt
-import seaborn as sns
-sns.set(style=&quot;darkgrid&quot;)
-sns.countplot(x=&quot;Type&quot;, data=data)
-</code></pre>
-
-<p><matplotlib.axes._subplots.AxesSubplot at 0xaff8a58></p></li>
+<li><!-- raw HTML omitted -->Les variables catégorielles (qualitatives) <!-- raw HTML omitted --></li>
 </ul>
-
-<p><img src="/img/formation/stats/output_3_1.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.countplot(x=&quot;Attribute&quot;, data=data)
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> pyplot <span style="color:#66d9ef">as</span> plt
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+sns<span style="color:#f92672">.</span>set(style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;darkgrid&#34;</span>)
+sns<span style="color:#f92672">.</span>countplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Type&#34;</span>, data<span style="color:#f92672">=</span>data)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xaff8a58&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xb047160&gt;
+<p><img src="/img/formation/stats/output_3_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>countplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Attribute&#34;</span>, data<span style="color:#f92672">=</span>data)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xb047160&gt;
 </code></pre>
-
-<p><img src="/img/formation/stats/output_4_1.png" alt="png" /></p>
-
+<p><img src="/img/formation/stats/output_4_1.png" alt="png"></p>
 <ul>
-<li><b>Les variables quantitatives </b></li>
+<li><!-- raw HTML omitted -->Les variables quantitatives <!-- raw HTML omitted --></li>
 </ul>
-
-<p> A l'inverse, ces variables permettent de mesurer des quantités <br>
-    Il en existe 2 types : Variables quantitatives <b>discrètes</b> et <b>continues</b> </p>
-
-<p><b>Les variables quantitatives discrètes </b>
-<p> C&rsquo;est une variable avec un nombre fini de valeurs <br>
-Exemples : nombre d&rsquo;items, nombre de personnes <p></p>
-
-<pre><code class="language-python">#les variables quantitatives discrètes
-sns.distplot(list(data['Memory']))
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted -->Les variables quantitatives discrètes <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#les variables quantitatives discrètes</span>
+sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Memory&#39;</span>]))
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc094860&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc094860&gt;
+<p><img src="/img/formation/stats/output_6_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]))
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x63b4048&gt;
 </code></pre>
-
-<p><img src="/img/formation/stats/output_6_1.png" alt="png" /></p>
-
-<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
-</code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x63b4048&gt;
-</code></pre>
-
-<p><img src="/img/formation/stats/output_7_1.png" alt="png" /></p>
-
-<p><b>Les variables quantitatives continues </b>
-<p> C&rsquo;est une variable avec une infinité de valeurs <br>
-Exemples : poids, durée <p></p>
-
+<p><img src="/img/formation/stats/output_7_1.png" alt="png"></p>
+<p><!-- raw HTML omitted -->Les variables quantitatives continues <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Pas de variable quantitative continue dans le data set !</p>
-
-<h2 id="2-les-statistiques-de-base">2- Les statistiques de base</h2>
-
-<p><b>Description d&rsquo;une variable continue </b> <br></p>
-
+<h2 id="2--les-statistiques-de-base">2- Les statistiques de base</h2>
+<p><!-- raw HTML omitted -->Description d&rsquo;une variable continue <!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
 <ul>
 <li>La moyenne: Somme des valeurs de la variable divisée par le nombre d&rsquo;individus</li>
 </ul>
-
-<p><img src="/img/formation/stats/theo/moyenne.png" alt="moyenne.PNG" /></p>
-
-<pre><code class="language-python">mean = data['Lv 50 HP'].mean()
-print(mean)
-sns.distplot(list(data['Lv 50 HP']))
-plt.axvline(mean, color='r')
-</code></pre>
-
-<pre><code>1210.8835341365461
+<p><img src="/img/formation/stats/theo/moyenne.png" alt="moyenne.PNG"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mean <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>mean()
+<span style="color:#66d9ef">print</span>(mean)
+sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]))
+plt<span style="color:#f92672">.</span>axvline(mean, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+</code></pre></div><pre><code>1210.8835341365461
 
 
 
@@ -816,55 +667,51 @@ plt.axvline(mean, color='r')
 
 &lt;matplotlib.lines.Line2D at 0x643b5f8&gt;
 </code></pre>
-
-<p><img src="/img/formation/stats/output_11_2.png" alt="png" /></p>
-
+<p><img src="/img/formation/stats/output_11_2.png" alt="png"></p>
 <ul>
-<li><p>La Médiane: valeur centrale qui partage l&rsquo;échantillon en 2 groupes de même effectif: 50 % au-dessus et 50 % en dessous</p>
-
-<pre><code class="language-python">median = data['Lv 50 HP'].median()
-print(median)
-sns.distplot(list(data['Lv 50 HP']))
-plt.axvline(mean, color='r')
-plt.axvline(median, color='g')
-</code></pre>
-
-<p>1180.0</p>
-
-<p><matplotlib.lines.Line2D at 0x64ada58></p></li>
+<li>La Médiane: valeur centrale qui partage l&rsquo;échantillon en 2 groupes de même effectif: 50 % au-dessus et 50 % en dessous</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">median <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>median()
+<span style="color:#66d9ef">print</span>(median)
+sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]))
+plt<span style="color:#f92672">.</span>axvline(mean, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+plt<span style="color:#f92672">.</span>axvline(median, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;g&#39;</span>)
+</code></pre></div><pre><code>1180.0
 
-<p><img src="/img/formation/stats/output_13_2.png" alt="png" /></p>
 
+
+
+
+&lt;matplotlib.lines.Line2D at 0x64ada58&gt;
+</code></pre>
+<p><img src="/img/formation/stats/output_13_2.png" alt="png"></p>
 <ul>
-<li><p>Le mode: C&rsquo;est la valeur la plus fréquente dans le jeu de données</p>
-
-<pre><code class="language-python">mode = data['Lv 50 HP'].mode()
-print(mode)
-sns.distplot(list(data['Lv 50 HP']))
-plt.axvline(mean, color='r')
-plt.axvline(median, color='g')
-plt.axvline(float(mode), color='y')
-</code></pre>
-
-<p>0    1480
-dtype: int64</p>
-
-<p><matplotlib.lines.Line2D at 0xc15f358></p></li>
+<li>Le mode: C&rsquo;est la valeur la plus fréquente dans le jeu de données</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mode <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>mode()
+<span style="color:#66d9ef">print</span>(mode)
+sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]))
+plt<span style="color:#f92672">.</span>axvline(mean, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+plt<span style="color:#f92672">.</span>axvline(median, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;g&#39;</span>)
+plt<span style="color:#f92672">.</span>axvline(float(mode), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>)
+</code></pre></div><pre><code>0    1480
+dtype: int64
 
-<p><img src="/img/formation/stats/output_15_2.png" alt="png" /></p>
 
-<pre><code class="language-python">mode = data['Lv 50 HP'].mode()
-print(mode)
-nbValDif = len(data['Lv 50 HP'].unique())
-sns.distplot(list(data['Lv 50 HP']), bins=nbValDif)
-plt.axvline(mean, color='r')
-plt.axvline(median, color='g')
-plt.axvline(float(mode), color='y')
+
+
+
+&lt;matplotlib.lines.Line2D at 0xc15f358&gt;
 </code></pre>
-
-<pre><code>0    1480
+<p><img src="/img/formation/stats/output_15_2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mode <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>mode()
+<span style="color:#66d9ef">print</span>(mode)
+nbValDif <span style="color:#f92672">=</span> len(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>unique())
+sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]), bins<span style="color:#f92672">=</span>nbValDif)
+plt<span style="color:#f92672">.</span>axvline(mean, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+plt<span style="color:#f92672">.</span>axvline(median, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;g&#39;</span>)
+plt<span style="color:#f92672">.</span>axvline(float(mode), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>)
+</code></pre></div><pre><code>0    1480
 dtype: int64
 
 
@@ -873,15 +720,11 @@ dtype: int64
 
 &lt;matplotlib.lines.Line2D at 0xc2bd4a8&gt;
 </code></pre>
-
-<p><img src="/img/formation/stats/output_16_2.png" alt="png" /></p>
-
-<pre><code class="language-python">mode = data['Type'].mode()
-print(mode)
-sns.countplot(x=&quot;Type&quot;, data=data)
-</code></pre>
-
-<pre><code>0    Virus
+<p><img src="/img/formation/stats/output_16_2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mode <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Type&#39;</span>]<span style="color:#f92672">.</span>mode()
+<span style="color:#66d9ef">print</span>(mode)
+sns<span style="color:#f92672">.</span>countplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Type&#34;</span>, data<span style="color:#f92672">=</span>data)
+</code></pre></div><pre><code>0    Virus
 dtype: object
 
 
@@ -890,143 +733,84 @@ dtype: object
 
 &lt;matplotlib.axes._subplots.AxesSubplot at 0xc365b70&gt;
 </code></pre>
-
-<p><img src="/img/formation/stats/output_17_2.png" alt="png" /></p>
-
+<p><img src="/img/formation/stats/output_17_2.png" alt="png"></p>
 <ul>
 <li>la variance: disparité dans notre jeu de données: moyenne arithmétique des carrés des écarts à la moyenne arithmétique observée</li>
 </ul>
-
-<p><img src="/img/formation/stats/theo/variance.png" alt="image.png" /></p>
-
-<pre><code class="language-python">variance = data['Lv 50 HP'].var()
+<p><img src="/img/formation/stats/theo/variance.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">variance <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>var()
 variance
+</code></pre></div><pre><code>106342.76460681428
 </code></pre>
-
-<pre><code>106342.76460681428
-</code></pre>
-
 <ul>
 <li>L&rsquo;écart type: c&rsquo;est la racine carrée de la variance</li>
 </ul>
-
-<p><img src="/img/formation/stats/theo/ecart.png" alt="image.png" /></p>
-
-<pre><code class="language-python">ecartType = data['Lv 50 HP'].std()
+<p><img src="/img/formation/stats/theo/ecart.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ecartType <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>std()
 ecartType
+</code></pre></div><pre><code>326.1023836263916
 </code></pre>
-
-<pre><code>326.1023836263916
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">variance<span style="color:#f92672">**</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><pre><code>326.1023836263916
 </code></pre>
-
-<pre><code class="language-python">variance**(1/2)
-</code></pre>
-
-<pre><code>326.1023836263916
-</code></pre>
-
 <ul>
 <li>Les quantiles: Dans la même logique que la médiane les quartile vont couper la population en 4 parties contenant le même nombre d&rsquo;observation</li>
 </ul>
-
-<p><img src="/img/formation/stats/theo/quantile1.png" alt="image.png" /></p>
-
-<p><img src="/img/formation/stats/theo/quantile2.png" alt="image.png" /></p>
-
-<pre><code class="language-python">ax = sns.boxplot(x=&quot;Type&quot;, y=&quot;Lv 50 HP&quot;, data=data)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/stats/output_25_0.png" alt="image.png" /></p>
-
-<h2 id="3-la-loi-normale">3- La loi normale</h2>
-
+<p><img src="/img/formation/stats/theo/quantile1.png" alt="image.png"></p>
+<p><img src="/img/formation/stats/theo/quantile2.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ax <span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Type&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Lv 50 HP&#34;</span>, data<span style="color:#f92672">=</span>data)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/stats/output_25_0.png" alt="image.png"></p>
+<h2 id="3--la-loi-normale">3- La loi normale</h2>
 <ul>
-<li><b> Quelques exemples </b></li>
+<li><!-- raw HTML omitted --> Quelques exemples <!-- raw HTML omitted --></li>
 </ul>
-
-<p><img src="/img/formation/stats/theo/normale1.png" alt="image.png" /></p>
-
-<p><img src="/img/formation/stats/theo/normale2.png" alt="image.png" /></p>
-
-<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
+<p><img src="/img/formation/stats/theo/normale1.png" alt="image.png"></p>
+<p><img src="/img/formation/stats/theo/normale2.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]))
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc354d68&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc354d68&gt;
-</code></pre>
-
-<p><img src="/img/formation/stats/output_29_1.png" alt="image.png" /></p>
-
+<p><img src="/img/formation/stats/output_29_1.png" alt="image.png"></p>
 <p>Dans une expérience aléatoire, plus on augmente le nombre d&rsquo;obeservations et plus la répartition va se lisser et se rapprocher de la fonction de gauss.</p>
-
-<p><img src="/img/formation/stats/theo/gauss.png" alt="image.png" /></p>
-
-<p><b><p>Distribution de la fonction de Gauss :</p> </b></p>
-
-<p><img src="/img/formation/stats/theo/distribution.png" alt="image.png" /></p>
-
-<p><img src="/img/formation/stats/theo/distribution2.png" alt="image.png" /></p>
-
-<p><b> Calculer le coéficient d&rsquo;assymétrie (skewness) de sa distribution </b></p>
-
+<p><img src="/img/formation/stats/theo/gauss.png" alt="image.png"></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->Distribution de la fonction de Gauss :<!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<p><img src="/img/formation/stats/theo/distribution.png" alt="image.png"></p>
+<p><img src="/img/formation/stats/theo/distribution2.png" alt="image.png"></p>
+<p><!-- raw HTML omitted --> Calculer le coéficient d&rsquo;assymétrie (skewness) de sa distribution <!-- raw HTML omitted --></p>
 <p>Fait référence à l&rsquo;asymétrie des données. Lorsque les données sont concentrées sur le côté droit de l&rsquo;histogramme, par exemple, nous disons qu&rsquo;elles ont un skew négatif. Lorsque les données sont concentrées à gauche, on dit qu&rsquo;elles ont un skew positif.</p>
-
-<p><img src="/img/formation/stats/theo/skew.png" alt="image.png" /></p>
-
-<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
-data['Lv 50 HP'].skew()
+<p><img src="/img/formation/stats/theo/skew.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]))
+data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>skew()
+</code></pre></div><pre><code>0.1374660716485841
 </code></pre>
-
-<pre><code>0.1374660716485841
+<p><img src="/img/formation/stats/output_35_1.png" alt="image.png"></p>
+<p><!-- raw HTML omitted --> Calculer le coéficient d&rsquo;applatissement d&rsquo;une distribution : Kurtosis <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><img src="/img/formation/stats/theo/kurto.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>distplot(list(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]))
+data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>]<span style="color:#f92672">.</span>kurtosis()
+</code></pre></div><pre><code>-0.5447522937424649
 </code></pre>
-
-<p><img src="/img/formation/stats/output_35_1.png" alt="image.png" /></p>
-
-<p><b> Calculer le coéficient d&rsquo;applatissement d&rsquo;une distribution : Kurtosis </b></p>
-
-<p>Plus la valeur d'aplatissement est élevée, plus le pic est élevé. Plus la valeur de kustose est faible, plus la valeur est étalée.</p>
-
-<p><img src="/img/formation/stats/theo/kurto.png" alt="image.png" /></p>
-
-<pre><code class="language-python">sns.distplot(list(data['Lv 50 HP']))
-data['Lv 50 HP'].kurtosis()
-</code></pre>
-
-<pre><code>-0.5447522937424649
-</code></pre>
-
-<p><img src="/img/formation/stats/output_37_1.png" alt="image.png" /></p>
-
-<h2 id="4-notion-de-correlation-entre-des-variables-et-calcul-du-coefficient-de-correlation">4- Notion de correlation entre des variables et calcul du coefficient de correlation</h2>
-
+<p><img src="/img/formation/stats/output_37_1.png" alt="image.png"></p>
+<h2 id="4--notion-de-correlation-entre-des-variables-et-calcul-du-coefficient-de-correlation">4- Notion de correlation entre des variables et calcul du coefficient de correlation</h2>
 <p>La correlation indique s&rsquo;il y a une liaison entre 2 variables, c&rsquo;est à dire determiner si les variables sont indépendantes ou non.</p>
-
-<p><img src="/img/formation/stats/theo/corr1.png" alt="image.png" /></p>
-
-<p><img src="/img/formation/stats/theo/corr2.png" alt="image.png" /></p>
-
-<p><img src="/img/formation/stats/theo/corr3.png" alt="image.png" /></p>
-
-<p><img src="/img/formation/stats/theo/corr4.png" alt="image.png" /></p>
-
-<p><b> Calcul du coeficient de corrélation (pour 2 variables) </b> <br>
-   - Étape 1 : calculer la covariance</p>
-
-<p><img src="/img/formation/stats/theo/cov1.png" alt="image.png" /></p>
-
+<p><img src="/img/formation/stats/theo/corr1.png" alt="image.png"></p>
+<p><img src="/img/formation/stats/theo/corr2.png" alt="image.png"></p>
+<p><img src="/img/formation/stats/theo/corr3.png" alt="image.png"></p>
+<p><img src="/img/formation/stats/theo/corr4.png" alt="image.png"></p>
+<p><!-- raw HTML omitted --> Calcul du coeficient de corrélation (pour 2 variables) <!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<ul>
+<li>Étape 1 : calculer la covariance</li>
+</ul>
+<p><img src="/img/formation/stats/theo/cov1.png" alt="image.png"></p>
 <ul>
 <li>Étape 2 : calculer le coéficient de corrélation (valeur comprise entre -1 et 1)</li>
 </ul>
-
 <p>Plus le CC est eloigné de 0, plus la corrélation est forte, plus il est proche de 0 plus la corrélation est faible</p>
-
-<p><img src="/img/formation/stats/theo/cov2.png" alt="image.png" /></p>
-
-<pre><code class="language-python">from pandas.plotting import scatter_matrix
-scatter_matrix(data, figsize=(25,25))
-</code></pre>
-
-<pre><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000CA025C0&gt;,
+<p><img src="/img/formation/stats/theo/cov2.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pandas.plotting <span style="color:#f92672">import</span> scatter_matrix
+scatter_matrix(data, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">25</span>,<span style="color:#ae81ff">25</span>))
+</code></pre></div><pre><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000CA025C0&gt;,
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000CA0DDA0&gt;,
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DA0B438&gt;,
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000DA2FDA0&gt;,
@@ -1109,251 +893,53 @@ scatter_matrix(data, figsize=(25,25))
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000E4A0198&gt;]],
       dtype=object)
 </code></pre>
+<p><img src="/img/formation/stats/output_46_1.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(<span style="color:#e6db74">&#34;Lv 50 HP&#34;</span>, <span style="color:#e6db74">&#34;Lv50 SP&#34;</span>, data<span style="color:#f92672">=</span>data)
+data[[<span style="color:#e6db74">&#34;Lv 50 HP&#34;</span>, <span style="color:#e6db74">&#34;Lv50 SP&#34;</span>]]<span style="color:#f92672">.</span>corr()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<p><img src="/img/formation/stats/output_46_1.png" alt="image.png" /></p>
-
-<pre><code class="language-python">sns.jointplot(&quot;Lv 50 HP&quot;, &quot;Lv50 SP&quot;, data=data)
-data[[&quot;Lv 50 HP&quot;, &quot;Lv50 SP&quot;]].corr()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><img src="/img/formation/stats/output_47_1.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(<span style="color:#e6db74">&#34;Lv50 Int&#34;</span>, <span style="color:#e6db74">&#34;Lv50 SP&#34;</span>, data<span style="color:#f92672">=</span>data)
+data[[<span style="color:#e6db74">&#34;Lv50 Int&#34;</span>, <span style="color:#e6db74">&#34;Lv50 SP&#34;</span>]]<span style="color:#f92672">.</span>corr()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Lv 50 HP</th>
-      <th>Lv50 SP</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Lv 50 HP</th>
-      <td>1.000000</td>
-      <td>0.070957</td>
-    </tr>
-    <tr>
-      <th>Lv50 SP</th>
-      <td>0.070957</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<p><img src="/img/formation/stats/output_47_1.png" alt="image.png" /></p>
-
-<pre><code class="language-python">sns.jointplot(&quot;Lv50 Int&quot;, &quot;Lv50 SP&quot;, data=data)
-data[[&quot;Lv50 Int&quot;, &quot;Lv50 SP&quot;]].corr()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><img src="/img/formation/stats/output_48_1.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>corr()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Lv50 Int</th>
-      <th>Lv50 SP</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Lv50 Int</th>
-      <td>1.000000</td>
-      <td>0.895652</td>
-    </tr>
-    <tr>
-      <th>Lv50 SP</th>
-      <td>0.895652</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<p><img src="/img/formation/stats/output_48_1.png" alt="image.png" /></p>
-
-<pre><code class="language-python">data.corr()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Number</th>
-      <th>Memory</th>
-      <th>Equip Slots</th>
-      <th>Lv 50 HP</th>
-      <th>Lv50 SP</th>
-      <th>Lv50 Atk</th>
-      <th>Lv50 Def</th>
-      <th>Lv50 Int</th>
-      <th>Lv50 Spd</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Number</th>
-      <td>1.000000</td>
-      <td>0.923339</td>
-      <td>0.571901</td>
-      <td>0.626166</td>
-      <td>0.608113</td>
-      <td>0.552471</td>
-      <td>0.620177</td>
-      <td>0.560146</td>
-      <td>0.762861</td>
-    </tr>
-    <tr>
-      <th>Memory</th>
-      <td>0.923339</td>
-      <td>1.000000</td>
-      <td>0.355176</td>
-      <td>0.639569</td>
-      <td>0.623400</td>
-      <td>0.608372</td>
-      <td>0.611728</td>
-      <td>0.583956</td>
-      <td>0.797777</td>
-    </tr>
-    <tr>
-      <th>Equip Slots</th>
-      <td>0.571901</td>
-      <td>0.355176</td>
-      <td>1.000000</td>
-      <td>0.392137</td>
-      <td>0.278687</td>
-      <td>0.211450</td>
-      <td>0.466534</td>
-      <td>0.237616</td>
-      <td>0.286558</td>
-    </tr>
-    <tr>
-      <th>Lv 50 HP</th>
-      <td>0.626166</td>
-      <td>0.639569</td>
-      <td>0.392137</td>
-      <td>1.000000</td>
-      <td>0.070957</td>
-      <td>0.605708</td>
-      <td>0.561376</td>
-      <td>0.055314</td>
-      <td>0.317051</td>
-    </tr>
-    <tr>
-      <th>Lv50 SP</th>
-      <td>0.608113</td>
-      <td>0.623400</td>
-      <td>0.278687</td>
-      <td>0.070957</td>
-      <td>1.000000</td>
-      <td>-0.148365</td>
-      <td>0.169960</td>
-      <td>0.895652</td>
-      <td>0.603240</td>
-    </tr>
-    <tr>
-      <th>Lv50 Atk</th>
-      <td>0.552471</td>
-      <td>0.608372</td>
-      <td>0.211450</td>
-      <td>0.605708</td>
-      <td>-0.148365</td>
-      <td>1.000000</td>
-      <td>0.426901</td>
-      <td>-0.186125</td>
-      <td>0.522005</td>
-    </tr>
-    <tr>
-      <th>Lv50 Def</th>
-      <td>0.620177</td>
-      <td>0.611728</td>
-      <td>0.466534</td>
-      <td>0.561376</td>
-      <td>0.169960</td>
-      <td>0.426901</td>
-      <td>1.000000</td>
-      <td>0.182606</td>
-      <td>0.225921</td>
-    </tr>
-    <tr>
-      <th>Lv50 Int</th>
-      <td>0.560146</td>
-      <td>0.583956</td>
-      <td>0.237616</td>
-      <td>0.055314</td>
-      <td>0.895652</td>
-      <td>-0.186125</td>
-      <td>0.182606</td>
-      <td>1.000000</td>
-      <td>0.442214</td>
-    </tr>
-    <tr>
-      <th>Lv50 Spd</th>
-      <td>0.762861</td>
-      <td>0.797777</td>
-      <td>0.286558</td>
-      <td>0.317051</td>
-      <td>0.603240</td>
-      <td>0.522005</td>
-      <td>0.225921</td>
-      <td>0.442214</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">sns.heatmap(data.corr())
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>heatmap(data<span style="color:#f92672">.</span>corr())
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xf386048&gt;
 </code></pre>
-
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0xf386048&gt;
-</code></pre>
-
-<p><img src="/img/formation/stats/output_50_1.png" alt="image.png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
-
+<p><img src="/img/formation/stats/output_50_1.png" alt="image.png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -1398,7 +984,7 @@ data[[&quot;Lv50 Int&quot;, &quot;Lv50 SP&quot;]].corr()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/14%20-%20statistique%20descriptive%20-%20cours.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c14%20-%20statistique%20descriptive%20-%20cours.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

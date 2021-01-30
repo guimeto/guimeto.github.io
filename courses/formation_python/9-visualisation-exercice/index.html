@@ -577,12 +577,9 @@
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#tp-data-visualisation">TP Data visualisation</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#tp-data-visualisation">TP Data visualisation</a></li>
+  </ul>
 </nav>
 
       
@@ -597,167 +594,64 @@
           <h1>9- La visualisation graphique avec Python - Exercice</h1>
 
           <div class="article-style">
-            
+            <h2 id="tp-data-visualisation">TP Data visualisation</h2>
+<p>Digimon, abréviation de &ldquo;monstres numériques&rdquo;, est une franchise qui s&rsquo;articule autour d&rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&rsquo;engager dans le combat avec eux. C&rsquo;est similaire aux Pokémon. <!-- raw HTML omitted --></p>
+<p>Ce fichier contient une liste de tous les Digimon du jeu, avec leur niveau, leur coquille, leur attribut, leur mémoire et le nombre de slots d&rsquo;équipement. Toutes les statistiques (HP, SP, attaque, défense, intelligence et vitesse) sont pour ce Digimon au niveau 50.<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>pour toute la suite de cet exercice vous pouvez prendre pour modèle ce que nous avons fait pendant le cours (si vous êtes perdus). Et pour chaque questions n&rsquo;hesitez pas à écrire vos observations/analyses ! <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<ol>
+<li>
+<p>importez le fichier DigiDB_digimonlist.csv et affichez le header<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>A l&rsquo;aide de la fonction .info() de pandas, vérifiez le type des colonnes et si des valeurs manquent dans certaines d&rsquo;entre elle<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>à l&rsquo;aide de matplotlib, affichez un bar chart du nombre de digimons par niveau (Stage). <!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>faites le même exercice avec les attributs. Il y a plus de valeurs&hellip;adaptez la largeur du graphique pour que cela reste simple à consulter<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>en utilisant sns.distplot, affichez la répartition de la colonne Memory<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>en utiliant sns.kdeplot, affichez uniquement la courbe de répartition de la colonne &lsquo;Lv 50 HP'<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>en utilisant scatter_matrix de Pandas, affichez la répartition et les nuages de point des 6 dernières colonnes du data set<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Il semble y avoir quelque chose d&rsquo;intéréssant entre &lsquo;Lv50 SP&rsquo; et &lsquo;Lv50 Int&rsquo;&hellip;utilisez sns.jointplot pour voir cela plus en détail<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>en utilisant sns.lmplot, ajoutez le niveau des digimons (Stage) sur le nuage de points réalisé en point 8.<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>En utilisant sns.violinplot, visionnez la réparition de &lsquo;Lv 50 HP&rsquo; en fonction du stage du digimon.<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>importez le fichier DigiDB_digimonlist.csv et affichez le header</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;./DATA/DigiDB_digimonlist.csv&#39;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;latin-1&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>)
+data<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<h2 id="tp-data-visualisation">TP Data visualisation</h2>
-
-<p>Digimon, abréviation de &ldquo;monstres numériques&rdquo;, est une franchise qui s&rsquo;articule autour d&rsquo;une mécanique de base qui consiste à capturer, soigner et entraîner les monstres pour ensuite s&rsquo;engager dans le combat avec eux. C&rsquo;est similaire aux Pokémon. <br></p>
-
-<p>Ce fichier contient une liste de tous les Digimon du jeu, avec leur niveau, leur coquille, leur attribut, leur mémoire et le nombre de slots d&rsquo;équipement. Toutes les statistiques (HP, SP, attaque, défense, intelligence et vitesse) sont pour ce Digimon au niveau 50.<br><br></p>
-
-<p>pour toute la suite de cet exercice vous pouvez prendre pour modèle ce que nous avons fait pendant le cours (si vous êtes perdus). Et pour chaque questions n&rsquo;hesitez pas à écrire vos observations/analyses ! <br><br></p>
-
-<p>1) importez le fichier DigiDB_digimonlist.csv et affichez le header<br></p>
-
-<p>2) A l&rsquo;aide de la fonction .info() de pandas, vérifiez le type des colonnes et si des valeurs manquent dans certaines d&rsquo;entre elle<br></p>
-
-<p>3) à l&rsquo;aide de matplotlib, affichez un bar chart du nombre de digimons par niveau (Stage). <br></p>
-
-<p>4) faites le même exercice avec les attributs. Il y a plus de valeurs&hellip;adaptez la largeur du graphique pour que cela reste simple à consulter<br></p>
-
-<p>5) en utilisant sns.distplot, affichez la répartition de la colonne Memory<br></p>
-
-<p>6) en utiliant sns.kdeplot, affichez uniquement la courbe de répartition de la colonne &lsquo;Lv 50 HP&rsquo;<br></p>
-
-<p>7) en utilisant scatter_matrix de Pandas, affichez la répartition et les nuages de point des 6 dernières colonnes du data set<br></p>
-
-<p>8) Il semble y avoir quelque chose d&rsquo;intéréssant entre &lsquo;Lv50 SP&rsquo; et &lsquo;Lv50 Int&rsquo;&hellip;utilisez sns.jointplot pour voir cela plus en détail<br></p>
-
-<p>9) en utilisant sns.lmplot, ajoutez le niveau des digimons (Stage) sur le nuage de points réalisé en point 8.<br></p>
-
-<p>10) En utilisant sns.violinplot, visionnez la réparition de &lsquo;Lv 50 HP&rsquo; en fonction du stage du digimon.<br></p>
-
-<p>1) importez le fichier DigiDB_digimonlist.csv et affichez le header</p>
-
-<pre><code class="language-python">import pandas as pd
-data = pd.read_csv('./DATA/DigiDB_digimonlist.csv',encoding='latin-1', sep=',')
-data.head()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Number</th>
-      <th>Digimon</th>
-      <th>Stage</th>
-      <th>Type</th>
-      <th>Attribute</th>
-      <th>Memory</th>
-      <th>Equip Slots</th>
-      <th>Lv 50 HP</th>
-      <th>Lv50 SP</th>
-      <th>Lv50 Atk</th>
-      <th>Lv50 Def</th>
-      <th>Lv50 Int</th>
-      <th>Lv50 Spd</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Kuramon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>590</td>
-      <td>77</td>
-      <td>79</td>
-      <td>69</td>
-      <td>68</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Pabumon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>950</td>
-      <td>62</td>
-      <td>76</td>
-      <td>76</td>
-      <td>69</td>
-      <td>68</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Punimon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>870</td>
-      <td>50</td>
-      <td>97</td>
-      <td>87</td>
-      <td>50</td>
-      <td>75</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>Botamon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>690</td>
-      <td>68</td>
-      <td>77</td>
-      <td>95</td>
-      <td>76</td>
-      <td>61</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Poyomon</td>
-      <td>Baby</td>
-      <td>Free</td>
-      <td>Neutral</td>
-      <td>2</td>
-      <td>0</td>
-      <td>540</td>
-      <td>98</td>
-      <td>54</td>
-      <td>59</td>
-      <td>95</td>
-      <td>86</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<p>2) A l&rsquo;aide de la fonction .info() de pandas, vérifiez le type des colonnes et si des valeurs manquent dans certaines d&rsquo;entre elle</p>
-
-<pre><code class="language-python">data.info()
-</code></pre>
-
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ol start="2">
+<li>A l&rsquo;aide de la fonction .info() de pandas, vérifiez le type des colonnes et si des valeurs manquent dans certaines d&rsquo;entre elle</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>info()
+</code></pre></div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 249 entries, 0 to 248
 Data columns (total 13 columns):
 Number         249 non-null int64
@@ -776,11 +670,8 @@ Lv50 Spd       249 non-null int64
 dtypes: int64(9), object(4)
 memory usage: 25.4+ KB
 </code></pre>
-
-<pre><code class="language-python">data.isnull().sum()/len(data)
-</code></pre>
-
-<pre><code>Number         0.0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>isnull()<span style="color:#f92672">.</span>sum()<span style="color:#f92672">/</span>len(data)
+</code></pre></div><pre><code>Number         0.0
 Digimon        0.0
 Stage          0.0
 Type           0.0
@@ -795,20 +686,18 @@ Lv50 Int       0.0
 Lv50 Spd       0.0
 dtype: float64
 </code></pre>
-
-<p>3) à l&rsquo;aide de matplotlib, affichez un bar chart du nombre de digimons par niveau (Stage).</p>
-
-<pre><code class="language-python">stages = data['Stage'].value_counts()
-import matplotlib.pyplot as plt
-fig = plt.figure(figsize=(7,5))
-ax1 = fig.add_subplot(111)
-ax1.bar(range(len(stages)),stages)
-tick_positions = range(0,len(stages))
-ax1.set_xticks(tick_positions)
-ax1.set_xticklabels(stages.index, rotation=45)
-</code></pre>
-
-<pre><code>[Text(0, 0, 'Mega'),
+<ol start="3">
+<li>à l&rsquo;aide de matplotlib, affichez un bar chart du nombre de digimons par niveau (Stage).</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stages <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Stage&#39;</span>]<span style="color:#f92672">.</span>value_counts()
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
+ax1<span style="color:#f92672">.</span>bar(range(len(stages)),stages)
+tick_positions <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>,len(stages))
+ax1<span style="color:#f92672">.</span>set_xticks(tick_positions)
+ax1<span style="color:#f92672">.</span>set_xticklabels(stages<span style="color:#f92672">.</span>index, rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
+</code></pre></div><pre><code>[Text(0, 0, 'Mega'),
  Text(0, 0, 'Ultimate'),
  Text(0, 0, 'Champion'),
  Text(0, 0, 'Rookie'),
@@ -817,20 +706,18 @@ ax1.set_xticklabels(stages.index, rotation=45)
  Text(0, 0, 'Baby'),
  Text(0, 0, 'Armor')]
 </code></pre>
+<ol start="4">
+<li>faites le même exercice avec les attributs. Il y a plus de valeurs&hellip;adaptez la largeur du graphique pour que cela reste simple à consulter</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Type <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Attribute&#39;</span>]<span style="color:#f92672">.</span>value_counts()
 
-<p>4) faites le même exercice avec les attributs. Il y a plus de valeurs&hellip;adaptez la largeur du graphique pour que cela reste simple à consulter</p>
-
-<pre><code class="language-python">Type = data['Attribute'].value_counts()
-
-fig = plt.figure(figsize=(12,5))
-ax1 = fig.add_subplot(111)
-ax1.bar(range(len(Type)),Type)
-tick_positions = range(0,len(Type))
-ax1.set_xticks(tick_positions)
-ax1.set_xticklabels(Type.index, rotation=45)
-</code></pre>
-
-<pre><code>[Text(0, 0, 'Dark'),
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">5</span>))
+ax1 <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot(<span style="color:#ae81ff">111</span>)
+ax1<span style="color:#f92672">.</span>bar(range(len(Type)),Type)
+tick_positions <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">0</span>,len(Type))
+ax1<span style="color:#f92672">.</span>set_xticks(tick_positions)
+ax1<span style="color:#f92672">.</span>set_xticklabels(Type<span style="color:#f92672">.</span>index, rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
+</code></pre></div><pre><code>[Text(0, 0, 'Dark'),
  Text(0, 0, 'Fire'),
  Text(0, 0, 'Light'),
  Text(0, 0, 'Neutral'),
@@ -840,35 +727,28 @@ ax1.set_xticklabels(Type.index, rotation=45)
  Text(0, 0, 'Earth'),
  Text(0, 0, 'Wind')]
 </code></pre>
-
-<p><img src="/img/formation/dataviz1_1.png" alt="png" /></p>
-
-<p>5) en utilisant sns.distplot, affichez la répartition de la colonne Memory</p>
-
-<pre><code class="language-python">import seaborn as sns
-sns.distplot(data['Memory'])
-sns.set()
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz1_2.png" alt="png" /></p>
-
-<p>6) en utiliant sns.kdeplot, affichez uniquement la courbe de répartition de la colonne &lsquo;Lv 50 HP&rsquo;</p>
-
-<pre><code class="language-python">sns.kdeplot(data['Lv 50 HP'], shade = True)
-sns.set()
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz1_3.png" alt="png" /></p>
-
-<p>7) en utilisant scatter_matrix de Pandas, affichez la répartition et les nuages de point des 6 dernières colonnes du data set</p>
-
-<pre><code class="language-python">from pandas.plotting import scatter_matrix
-scatter_matrix(data[data.columns[-6:]], figsize=(15,15))
-</code></pre>
-
-<pre><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000D40BC88&gt;,
+<p><img src="/img/formation/dataviz1_1.png" alt="png"></p>
+<ol start="5">
+<li>en utilisant sns.distplot, affichez la répartition de la colonne Memory</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+sns<span style="color:#f92672">.</span>distplot(data[<span style="color:#e6db74">&#39;Memory&#39;</span>])
+sns<span style="color:#f92672">.</span>set()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz1_2.png" alt="png"></p>
+<ol start="6">
+<li>en utiliant sns.kdeplot, affichez uniquement la courbe de répartition de la colonne &lsquo;Lv 50 HP&rsquo;</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>kdeplot(data[<span style="color:#e6db74">&#39;Lv 50 HP&#39;</span>], shade <span style="color:#f92672">=</span> True)
+sns<span style="color:#f92672">.</span>set()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz1_3.png" alt="png"></p>
+<ol start="7">
+<li>en utilisant scatter_matrix de Pandas, affichez la répartition et les nuages de point des 6 dernières colonnes du data set</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pandas.plotting <span style="color:#f92672">import</span> scatter_matrix
+scatter_matrix(data[data<span style="color:#f92672">.</span>columns[<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>:]], figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">15</span>))
+</code></pre></div><pre><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000D40BC88&gt;,
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000D431550&gt;,
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000D456EB8&gt;,
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000D483860&gt;,
@@ -906,38 +786,29 @@ scatter_matrix(data[data.columns[-6:]], figsize=(15,15))
         &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000000D9DE9E8&gt;]],
       dtype=object)
 </code></pre>
-
-<p><img src="/img/formation/dataviz1_4.png" alt="png" /></p>
-
-<p>8) Il semble y avoir quelque chose d&rsquo;intéréssant entre &lsquo;Lv50 SP&rsquo; et &lsquo;Lv50 Int&rsquo;&hellip;utilisez sns.jointplot pour voir cela plus en détail</p>
-
-<pre><code class="language-python">sns.jointplot(&quot;Lv50 SP&quot;, &quot;Lv50 Int&quot;, data=data, kind=&quot;reg&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz1_5.png" alt="png" /></p>
-
-<p>9) en utilisant sns.lmplot, ajoutez le niveau des digimons (Stage) sur le nuage de points réalisé en point 8.</p>
-
-<pre><code class="language-python">sns.lmplot(x=&quot;Lv50 SP&quot;, y= &quot;Lv50 Int&quot;, hue=&quot;Stage&quot;, data=data, fit_reg = False)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz1_6.png" alt="png" /></p>
-
-<p>10) En utilisant sns.violinplot, visionnez la réparition de &lsquo;Lv 50 HP&rsquo; en fonction du stage du digimon.</p>
-
-<pre><code class="language-python">fig, ax = plt.subplots()
-fig.set_size_inches(12,8)
-sns.violinplot(x=&quot;Stage&quot;, y=&quot;Lv 50 HP&quot;, data=data)
-plt.show()
-</code></pre>
-
-<p><img src="/img/formation/dataviz1_7.png" alt="png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
-
+<p><img src="/img/formation/dataviz1_4.png" alt="png"></p>
+<ol start="8">
+<li>Il semble y avoir quelque chose d&rsquo;intéréssant entre &lsquo;Lv50 SP&rsquo; et &lsquo;Lv50 Int&rsquo;&hellip;utilisez sns.jointplot pour voir cela plus en détail</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(<span style="color:#e6db74">&#34;Lv50 SP&#34;</span>, <span style="color:#e6db74">&#34;Lv50 Int&#34;</span>, data<span style="color:#f92672">=</span>data, kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reg&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz1_5.png" alt="png"></p>
+<ol start="9">
+<li>en utilisant sns.lmplot, ajoutez le niveau des digimons (Stage) sur le nuage de points réalisé en point 8.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>lmplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Lv50 SP&#34;</span>, y<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lv50 Int&#34;</span>, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Stage&#34;</span>, data<span style="color:#f92672">=</span>data, fit_reg <span style="color:#f92672">=</span> False)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz1_6.png" alt="png"></p>
+<ol start="10">
+<li>En utilisant sns.violinplot, visionnez la réparition de &lsquo;Lv 50 HP&rsquo; en fonction du stage du digimon.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+fig<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">8</span>)
+sns<span style="color:#f92672">.</span>violinplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Stage&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Lv 50 HP&#34;</span>, data<span style="color:#f92672">=</span>data)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/img/formation/dataviz1_7.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -982,7 +853,7 @@ plt.show()
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/9-Visualisation-Exercice.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c9-Visualisation-Exercice.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

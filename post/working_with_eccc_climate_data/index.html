@@ -32,7 +32,8 @@
 - Extract hourly, daily and monthly climate data from ECCC datamart In this post, we will see how to automatically download all weather data for one station from environment and climate change canada using Python librairies.
 Here&rsquo;s the URL to get historical data.
 We will use a daily updated list of Climate stations in the National Archive available on this link.
-As usual, we import our python librairies:">
+As usual, we import our python librairies:
+import os import wget import numpy as np import shutil import xml.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/working_with_eccc_climate_data/">
@@ -122,7 +123,8 @@ As usual, we import our python librairies:">
 - Extract hourly, daily and monthly climate data from ECCC datamart In this post, we will see how to automatically download all weather data for one station from environment and climate change canada using Python librairies.
 Here&rsquo;s the URL to get historical data.
 We will use a daily updated list of Climate stations in the National Archive available on this link.
-As usual, we import our python librairies:"><meta property="og:image" content="/post/working_with_eccc_climate_data/featured.png">
+As usual, we import our python librairies:
+import os import wget import numpy as np import shutil import xml."><meta property="og:image" content="/post/working_with_eccc_climate_data/featured.png">
   <meta property="twitter:image" content="/post/working_with_eccc_climate_data/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -178,7 +180,7 @@ As usual, we import our python librairies:"><meta property="og:image" content="/
       "url": "/img/icon-512.png"
     }
   },
-  "description": "﻿\n- Extract hourly, daily and monthly climate data from ECCC datamart In this post, we will see how to automatically download all weather data for one station from environment and climate change canada using Python librairies.\nHere\u0026rsquo;s the URL to get historical data.\nWe will use a daily updated list of Climate stations in the National Archive available on this link.\nAs usual, we import our python librairies:"
+  "description": "﻿\n- Extract hourly, daily and monthly climate data from ECCC datamart In this post, we will see how to automatically download all weather data for one station from environment and climate change canada using Python librairies.\nHere\u0026rsquo;s the URL to get historical data.\nWe will use a daily updated list of Climate stations in the National Archive available on this link.\nAs usual, we import our python librairies:\nimport os import wget import numpy as np import shutil import xml."
 }
 </script>
 
@@ -542,35 +544,22 @@ As usual, we import our python librairies:"><meta property="og:image" content="/
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<p>﻿</p>
-
-<h2 id="extract-hourly-daily-and-monthly-climate-data-from-eccc-datamart">- Extract hourly, daily and monthly climate data from ECCC datamart</h2>
-
+      <p>﻿</p>
+<h2 id="--extract-hourly-daily-and-monthly-climate-data-from-eccc-datamart">- Extract hourly, daily and monthly climate data from ECCC datamart</h2>
 <p>In this post, we will see how to automatically download all weather data for one station from environment and climate change canada using Python librairies.</p>
-
-<p>Here&rsquo;s the  <a href="https://climate.weather.gc.ca/" target="_blank">URL</a> to get historical data.</p>
-
-<p>We will use a daily updated list of Climate stations in the National Archive available on this <a href="https://drive.google.com/drive/folders/1WJCDEU34c60IfOnG4rv5EPZ4IhhW9vZH" target="_blank">link</a>.</p>
-
+<p>Here&rsquo;s the  <a href="https://climate.weather.gc.ca/">URL</a> to get historical data.</p>
+<p>We will use a daily updated list of Climate stations in the National Archive available on this <a href="https://drive.google.com/drive/folders/1WJCDEU34c60IfOnG4rv5EPZ4IhhW9vZH">link</a>.</p>
 <p>As usual, we import our python librairies:</p>
-
-<pre><code class="language-python">import os
-import wget
-import numpy as np
-import shutil
-import xml.etree.ElementTree as ET
-import pandas as pd
-</code></pre>
-
-<p>First, we can open and read the list of Climate stations using Pandas:</p>
-
-<pre><code class="language-python">df = pd.read_csv('J:/Donnees_Stations/Donnees_EC/Codes/Station_Inventory_EN.csv', sep=',', skiprows=3)
-df.head()
-</code></pre>
-
-<pre><code>|    | Name                   | Province         |   Climate ID |   Station ID |   WMO ID |   TC ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   Latitude |   Longitude |   Elevation (m) |   First Year |   Last Year |   HLY First Year |   HLY Last Year |   DLY First Year |   DLY Last Year |   MLY First Year |   MLY Last Year |
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> wget
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> shutil
+<span style="color:#f92672">import</span> xml.etree.ElementTree <span style="color:#f92672">as</span> ET
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+</code></pre></div><p>First, we can open and read the list of Climate stations using Pandas:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;J:/Donnees_Stations/Donnees_EC/Codes/Station_Inventory_EN.csv&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>, skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+df<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>|    | Name                   | Province         |   Climate ID |   Station ID |   WMO ID |   TC ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   Latitude |   Longitude |   Elevation (m) |   First Year |   Last Year |   HLY First Year |   HLY Last Year |   DLY First Year |   DLY Last Year |   MLY First Year |   MLY Last Year |
 |---:|:-----------------------|:-----------------|-------------:|-------------:|---------:|--------:|-----------------------------:|------------------------------:|-----------:|------------:|----------------:|-------------:|------------:|-----------------:|----------------:|-----------------:|----------------:|-----------------:|----------------:|
 |  0 | ACTIVE PASS            | BRITISH COLUMBIA |      1010066 |           14 |      nan |     nan |                        48.87 |                       -123.28 |  485200000 | -1231700000 |             4   |         1984 |        1996 |              nan |             nan |             1984 |            1996 |             1984 |            1996 |
 |  1 | ALBERT HEAD            | BRITISH COLUMBIA |      1010235 |           15 |      nan |     nan |                        48.4  |                       -123.48 |  482400000 | -1232900000 |            17   |         1971 |        1995 |              nan |             nan |             1971 |            1995 |             1971 |            1995 |
@@ -578,9 +567,7 @@ df.head()
 |  3 | BEAR CREEK             | BRITISH COLUMBIA |      1010720 |           17 |      nan |     nan |                        48.5  |                       -124    |  483000000 | -1240000000 |           350.5 |         1910 |        1971 |              nan |             nan |             1910 |            1971 |             1910 |            1971 |
 |  4 | BEAVER LAKE            | BRITISH COLUMBIA |      1010774 |           18 |      nan |     nan |                        48.5  |                       -123.35 |  483000000 | -1232100000 |            61   |         1894 |        1952 |              nan |             nan |             1894 |            1952 |             1894 |            1952 |
 </code></pre>
-
 <p>In this Dataframe, we have all informations to select and work with climate stations:</p>
-
 <ul>
 <li>Name : name of the station</li>
 <li>Province:  province of the station</li>
@@ -597,26 +584,18 @@ df.head()
 <li>MLY First Year: first year of monthly record</li>
 <li>MLY Last Year: last year of monthly record</li>
 </ul>
-
 <p>We can easily create 3 dataframes to distinguish hourly, daily and monthly datasets:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_hourly <span style="color:#f92672">=</span> df[[<span style="color:#e6db74">&#39;Name&#39;</span>, <span style="color:#e6db74">&#39;Province&#39;</span>,<span style="color:#e6db74">&#39;Climate ID&#39;</span>,<span style="color:#e6db74">&#39;Station ID&#39;</span>,<span style="color:#e6db74">&#39;Latitude (Decimal Degrees)&#39;</span>,
+              <span style="color:#e6db74">&#39;Longitude (Decimal Degrees)&#39;</span>,<span style="color:#e6db74">&#39;HLY First Year&#39;</span>,<span style="color:#e6db74">&#39;HLY Last Year&#39;</span>]]<span style="color:#f92672">.</span>dropna()
 
-<pre><code class="language-python">df_hourly = df[['Name', 'Province','Climate ID','Station ID','Latitude (Decimal Degrees)',
-              'Longitude (Decimal Degrees)','HLY First Year','HLY Last Year']].dropna()
+df_daily <span style="color:#f92672">=</span> df[[<span style="color:#e6db74">&#39;Name&#39;</span>, <span style="color:#e6db74">&#39;Province&#39;</span>,<span style="color:#e6db74">&#39;Climate ID&#39;</span>,<span style="color:#e6db74">&#39;Station ID&#39;</span>,<span style="color:#e6db74">&#39;Latitude (Decimal Degrees)&#39;</span>,
+              <span style="color:#e6db74">&#39;Longitude (Decimal Degrees)&#39;</span>,<span style="color:#e6db74">&#39;DLY First Year&#39;</span>,<span style="color:#e6db74">&#39;DLY Last Year&#39;</span>]]<span style="color:#f92672">.</span>dropna()
 
-df_daily = df[['Name', 'Province','Climate ID','Station ID','Latitude (Decimal Degrees)',
-              'Longitude (Decimal Degrees)','DLY First Year','DLY Last Year']].dropna()
-
-df_monthly = df[['Name', 'Province','Climate ID','Station ID','Latitude (Decimal Degrees)',
-              'Longitude (Decimal Degrees)','MLY First Year','MLY Last Year']].dropna()
-</code></pre>
-
-<p>We will use wget python command to download data using a specific path:</p>
-
-<pre><code class="language-python">wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=1')
-</code></pre>
-
-<p>With:</p>
-
+df_monthly <span style="color:#f92672">=</span> df[[<span style="color:#e6db74">&#39;Name&#39;</span>, <span style="color:#e6db74">&#39;Province&#39;</span>,<span style="color:#e6db74">&#39;Climate ID&#39;</span>,<span style="color:#e6db74">&#39;Station ID&#39;</span>,<span style="color:#e6db74">&#39;Latitude (Decimal Degrees)&#39;</span>,
+              <span style="color:#e6db74">&#39;Longitude (Decimal Degrees)&#39;</span>,<span style="color:#e6db74">&#39;MLY First Year&#39;</span>,<span style="color:#e6db74">&#39;MLY Last Year&#39;</span>]]<span style="color:#f92672">.</span>dropna()
+</code></pre></div><p>We will use wget python command to download data using a specific path:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=01&amp;Day=14&amp;timeframe=1&#39;</span>)
+</code></pre></div><p>With:</p>
 <table>
 <thead>
 <tr>
@@ -624,51 +603,40 @@ df_monthly = df[['Name', 'Province','Climate ID','Station ID','Latitude (Decimal
 <th align="right"></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">year</td>
 <td align="right">year of the record</td>
 </tr>
-
 <tr>
 <td align="right">month</td>
 <td align="right">month of the record</td>
 </tr>
-
 <tr>
 <td align="right">format</td>
 <td align="right">[csv</td>
 </tr>
-
 <tr>
 <td align="right">timeframe = 1</td>
 <td align="right">for hourly data</td>
 </tr>
-
 <tr>
 <td align="right">timeframe = 2</td>
 <td align="right">for daily data</td>
 </tr>
-
 <tr>
 <td align="right">timeframe = 3</td>
 <td align="right">for monthly data</td>
 </tr>
 </tbody>
 </table>
-
 <pre><code>- Day: the value of the &quot;day&quot; variable is not used and can be an arbitrary value
 - For another station, change the value of the variable stationID
 - For the data in XML format, change the value of the variable format to xml in the URL.
 </code></pre>
-
-<h3 id="1-working-with-hourly-data">1- Working with hourly data:</h3>
-
-<pre><code class="language-python">df_hourly.head()
-</code></pre>
-
-<pre><code>|    | Name              | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   HLY First Year |   HLY Last Year |
+<h3 id="1--working-with-hourly-data">1- Working with hourly data:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_hourly<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>|    | Name              | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   HLY First Year |   HLY Last Year |
 |---:|:------------------|:-----------------|-------------:|-------------:|-----------------------------:|------------------------------:|-----------------:|----------------:|
 | 28 | DISCOVERY ISLAND  | BRITISH COLUMBIA |      1012475 |        27226 |                        48.42 |                       -123.23 |             1997 |            2020 |
 | 39 | ESQUIMALT HARBOUR | BRITISH COLUMBIA |      1012710 |           52 |                        48.43 |                       -123.44 |             1994 |            2020 |
@@ -676,120 +644,87 @@ df_monthly = df[['Name', 'Province','Climate ID','Station ID','Latitude (Decimal
 | 53 | MALAHAT           | BRITISH COLUMBIA |      1014818 |        10730 |                        48.58 |                       -123.58 |             1991 |            1992 |
 | 54 | MALAHAT           | BRITISH COLUMBIA |      1014820 |           65 |                        48.57 |                       -123.53 |             1994 |            2020 |
 </code></pre>
-
 <p>We want to extract hourly observations from DISCOVERY ISLAND in 2019. So we will select id_stat = 27226, year = 2019 and timeframe = 1 .</p>
-
-<h3 id="we-want-to-work-in-csv-format">- We want to work in csv format.</h3>
-
-<pre><code class="language-python">id_stat = 27226
-year = 2019
-wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=1')
+<h3 id="--we-want-to-work-in-csv-format">- We want to work in csv format.</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">id_stat <span style="color:#f92672">=</span> <span style="color:#ae81ff">27226</span>
+year <span style="color:#f92672">=</span> <span style="color:#ae81ff">2019</span>
+wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=csv&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=01&amp;Day=14&amp;timeframe=1&#39;</span>)
+</code></pre></div><pre><code>'en_climate_hourly_BC_1012475_001-2019_P1H.csv'
 </code></pre>
-
-<pre><code>'en_climate_hourly_BC_1012475_001-2019_P1H.csv'
-</code></pre>
-
-<pre><code class="language-python">df = pd.read_csv('en_climate_hourly_BC_1012475_001-2019_P1H.csv', sep=',', skiprows=0)
-df.head(2)
-</code></pre>
-
-<pre><code>|    |   Longitude (x) |   Latitude (y) | Station Name     |   Climate ID | Date/Time        |   Year |   Month |   Day | Time   |   Temp (°C) |   Temp Flag |   Dew Point Temp (°C) |   Dew Point Temp Flag |   Rel Hum (%) |   Rel Hum Flag |   Wind Dir (10s deg) |   Wind Dir Flag |   Wind Spd (km/h) |   Wind Spd Flag |   Visibility (km) |   Visibility Flag |   Stn Press (kPa) |   Stn Press Flag |   Hmdx |   Hmdx Flag |   Wind Chill |   Wind Chill Flag |   Weather |
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;en_climate_hourly_BC_1012475_001-2019_P1H.csv&#39;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>, skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+df<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">2</span>)
+</code></pre></div><pre><code>|    |   Longitude (x) |   Latitude (y) | Station Name     |   Climate ID | Date/Time        |   Year |   Month |   Day | Time   |   Temp (°C) |   Temp Flag |   Dew Point Temp (°C) |   Dew Point Temp Flag |   Rel Hum (%) |   Rel Hum Flag |   Wind Dir (10s deg) |   Wind Dir Flag |   Wind Spd (km/h) |   Wind Spd Flag |   Visibility (km) |   Visibility Flag |   Stn Press (kPa) |   Stn Press Flag |   Hmdx |   Hmdx Flag |   Wind Chill |   Wind Chill Flag |   Weather |
 |---:|----------------:|---------------:|:-----------------|-------------:|:-----------------|-------:|--------:|------:|:-------|------------:|------------:|----------------------:|----------------------:|--------------:|---------------:|---------------------:|----------------:|------------------:|----------------:|------------------:|------------------:|------------------:|-----------------:|-------:|------------:|-------------:|------------------:|----------:|
 |  0 |         -123.23 |          48.42 | DISCOVERY ISLAND |      1012475 | 2019-01-01 00:00 |   2019 |       1 |     1 | 00:00  |         5.2 |         nan |                   0.7 |                   nan |            73 |            nan |                   17 |             nan |                 5 |             nan |               nan |               nan |            102.87 |              nan |    nan |         nan |          nan |               nan |       nan |
 |  1 |         -123.23 |          48.42 | DISCOVERY ISLAND |      1012475 | 2019-01-01 01:00 |   2019 |       1 |     1 | 01:00  |         5.2 |         nan |                   0.7 |                   nan |            72 |            nan |                   17 |             nan |                 5 |             nan |               nan |               nan |            102.87 |              nan |    nan |         nan |          nan |               nan |       nan |
 </code></pre>
-
-<pre><code class="language-python">url_template = &quot;http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=csv&amp;stationID=5415&amp;Year={year}&amp;Month={month}&amp;timeframe=1&amp;submit=Download+Data&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url_template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=csv&amp;stationID=5415&amp;Year={year}&amp;Month={month}&amp;timeframe=1&amp;submit=Download+Data&#34;</span>
 url_template
+</code></pre></div><pre><code>'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=csv&amp;stationID=5415&amp;Year={year}&amp;Month={month}&amp;timeframe=1&amp;submit=Download+Data'
 </code></pre>
+<h3 id="--if-we-work-in-xml-format">- If we work in xml format:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=01&amp;Day=14&amp;timeframe=1&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
+os<span style="color:#f92672">.</span>remove(tmp_file)
+root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()
+</code></pre></div><p>Here is the structure of xml file and informations we could find in &lsquo;stationinformation&rsquo; child:</p>
+<p><img src="image1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stationsinfo<span style="color:#f92672">=</span>root<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;stationinformation&#39;</span>)
 
-<pre><code>'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=csv&amp;stationID=5415&amp;Year={year}&amp;Month={month}&amp;timeframe=1&amp;submit=Download+Data'
+stationsinfo[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#39;latitude&#39;</span>, stationsinfo[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#39;longitude&#39;</span>, stationsinfo[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">.</span>text
+<span style="color:#75715e">###############################################################</span>
+<span style="color:#75715e">######### stationsinfo[0].text : station name</span>
+<span style="color:#75715e">######### stationsinfo[1].text : province</span>
+<span style="color:#75715e">######### stationsinfo[2].text : provider</span>
+<span style="color:#75715e">######### stationsinfo[3].text : latitude  </span>
+<span style="color:#75715e">######### stationsinfo[4].text : longitude</span>
+</code></pre></div><pre><code>('DISCOVERY ISLAND', 'latitude', '48.42', 'longitude', '-123.23')
 </code></pre>
-
-<h3 id="if-we-work-in-xml-format">- If we work in xml format:</h3>
-
-<pre><code class="language-python">tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=1')
-</code></pre>
-
-<pre><code class="language-python">tree=ET.parse(tmp_file)
-os.remove(tmp_file)
-root=tree.getroot()
-</code></pre>
-
-<p>Here is the structure of xml file and informations we could find in &lsquo;stationinformation&rsquo; child:</p>
-
-<p><img src="image1.png" alt="png" /></p>
-
-<pre><code class="language-python">stationsinfo=root.find('stationinformation')
-
-stationsinfo[0].text, 'latitude', stationsinfo[3].text, 'longitude', stationsinfo[4].text
-###############################################################
-######### stationsinfo[0].text : station name
-######### stationsinfo[1].text : province
-######### stationsinfo[2].text : provider
-######### stationsinfo[3].text : latitude  
-######### stationsinfo[4].text : longitude
-</code></pre>
-
-<pre><code>('DISCOVERY ISLAND', 'latitude', '48.42', 'longitude', '-123.23')
-</code></pre>
-
 <p>Climate records are available in &lsquo;station data&rsquo; child:</p>
-
-<p><img src="image2.png" alt="png" />
+<p><img src="image2.png" alt="png">
 Let&rsquo;s extract Temperature data for one year:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stationsdata <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;.//stationdata&#39;</span>)
+result <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span>  stationdata <span style="color:#f92672">in</span> stationsdata    :<span style="color:#75715e"># loop over hourly values or child </span>
+    champs<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;temp&#39;</span>) 
+    tmp<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(result,<span style="color:#e6db74">&#34;float&#34;</span>)  
+    result<span style="color:#f92672">.</span>append(champs<span style="color:#f92672">.</span>text)   
+    tmp<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(result,<span style="color:#e6db74">&#34;float&#34;</span>)   
+</code></pre></div><p>To loop over years available for this station:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">id_stat <span style="color:#f92672">=</span> <span style="color:#ae81ff">27226</span>
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">2015</span>
+yf <span style="color:#f92672">=</span><span style="color:#ae81ff">2020</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):    <span style="color:#75715e">### loop over years</span>
+    <span style="color:#66d9ef">for</span> month <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">13</span>):
+        tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=&#39;</span><span style="color:#f92672">+</span>str(month)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Day=14&amp;timeframe=1&#39;</span>)
+        tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
+        os<span style="color:#f92672">.</span>remove(tmp_file)
+        root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()       
+        stationsdata <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;.//stationdata&#39;</span>)
+        temperature <span style="color:#f92672">=</span> []  
+        date  <span style="color:#f92672">=</span> []
+        data  <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">for</span>  stationdata <span style="color:#f92672">in</span> stationsdata: 
+            date<span style="color:#f92672">.</span>append(stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;year&#39;</span>]<span style="color:#f92672">+</span>
+                        <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+</span>stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;month&#39;</span>]<span style="color:#f92672">+</span>
+                        <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+</span>stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;day&#39;</span>]<span style="color:#f92672">+</span> 
+                        <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">+</span>stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;hour&#39;</span>]<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;:00&#39;</span>)                  
+            champs<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;temp&#39;</span>)
+            tmp <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(champs<span style="color:#f92672">.</span>text,<span style="color:#e6db74">&#34;float&#34;</span>)
+            <span style="color:#66d9ef">if</span>  tmp <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;nan&#39;</span>:
+                temperature<span style="color:#f92672">.</span>append(np<span style="color:#f92672">.</span>nan)
+            <span style="color:#66d9ef">else</span>:   
+                temperature<span style="color:#f92672">.</span>append(tmp)   <span style="color:#75715e">#  loop over days in one year</span>
 
-<pre><code class="language-python">stationsdata = root.findall('.//stationdata')
-result = []
-for  stationdata in stationsdata    :# loop over hourly values or child 
-    champs=stationdata.find('temp') 
-    tmp=np.array(result,&quot;float&quot;)  
-    result.append(champs.text)   
-    tmp=np.array(result,&quot;float&quot;)   
-</code></pre>
-
-<p>To loop over years available for this station:</p>
-
-<pre><code class="language-python">id_stat = 27226
-yi = 2015
-yf =2020
-</code></pre>
-
-<pre><code class="language-python">dataset = []
-for year in range(yi,yf+1):    ### loop over years
-    for month in range(1,13):
-        tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month='+str(month)+'&amp;Day=14&amp;timeframe=1')
-        tree=ET.parse(tmp_file)
-        os.remove(tmp_file)
-        root=tree.getroot()       
-        stationsdata = root.findall('.//stationdata')
-        temperature = []  
-        date  = []
-        data  = []
-        for  stationdata in stationsdata: 
-            date.append(stationdata.attrib['year']+
-                        '-'+stationdata.attrib['month']+
-                        '-'+stationdata.attrib['day']+ 
-                        ' '+stationdata.attrib['hour']+':00')                  
-            champs=stationdata.find('temp')
-            tmp = np.array(champs.text,&quot;float&quot;)
-            if  tmp == 'nan':
-                temperature.append(np.nan)
-            else:   
-                temperature.append(tmp)   #  loop over days in one year
-
-        data = {'date':date, 
-                'air_temperature':temperature} 
-        data = pd.DataFrame(data)
-        dataset.append(data)
-dataset = pd.concat(dataset)
-</code></pre>
-
-<pre><code class="language-python">from tabulate import tabulate
-print(tabulate(dataset.head(), headers='keys', tablefmt='pipe'))
-</code></pre>
-
-<pre><code>|    | date          |   air_temperature |
+        data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;date&#39;</span>:date, 
+                <span style="color:#e6db74">&#39;air_temperature&#39;</span>:temperature} 
+        data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+        dataset<span style="color:#f92672">.</span>append(data)
+dataset <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(dataset)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tabulate <span style="color:#f92672">import</span> tabulate
+<span style="color:#66d9ef">print</span>(tabulate(dataset<span style="color:#f92672">.</span>head(), headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;keys&#39;</span>, tablefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pipe&#39;</span>))
+</code></pre></div><pre><code>|    | date          |   air_temperature |
 |---:|:--------------|------------------:|
 |  0 | 2015-1-1 0:00 |               3   |
 |  1 | 2015-1-1 1:00 |               2.9 |
@@ -797,43 +732,25 @@ print(tabulate(dataset.head(), headers='keys', tablefmt='pipe'))
 |  3 | 2015-1-1 3:00 |               3.1 |
 |  4 | 2015-1-1 4:00 |               3.1 |
 </code></pre>
-
 <p>To save our dataframe into csv format:</p>
-
-<pre><code class="language-python">dataset.to_csv(&quot;./Hourly_dataset.csv&quot;, index = False, header = True, sep = ',')
-</code></pre>
-
-<p>We Can make  quick plot using  plotly.express:</p>
-
-<pre><code class="language-python">import plotly.express as px
-import plotly
-fig = px.line(dataset, x='date', y='air_temperature')
-fig.update_layout(title_text='Hourly temperature record',
-                  xaxis_rangeslider_visible=True)
-</code></pre>
-
-<p><img src="file1.png" alt="png" />
-Follow this <a href="http://www.guillaumedueymes.com/Plotly_plots/file1.html" target="_blank">link</a> for interactive plot:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;./Hourly_dataset.csv&#34;</span>, index <span style="color:#f92672">=</span> False, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;,&#39;</span>)
+</code></pre></div><p>We Can make  quick plot using  plotly.express:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> plotly.express <span style="color:#f92672">as</span> px
+<span style="color:#f92672">import</span> plotly
+fig <span style="color:#f92672">=</span> px<span style="color:#f92672">.</span>line(dataset, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;date&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;air_temperature&#39;</span>)
+fig<span style="color:#f92672">.</span>update_layout(title_text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Hourly temperature record&#39;</span>,
+                  xaxis_rangeslider_visible<span style="color:#f92672">=</span>True)
+</code></pre></div><p><img src="file1.png" alt="png">
+Follow this <a href="http://www.guillaumedueymes.com/Plotly_plots/file1.html">link</a> for interactive plot:</p>
 <p>To save our file in html:</p>
-
-<pre><code class="language-python">import plotly.io as pio
-pio.write_html(fig, file = 'file1.html', auto_open = True)
-</code></pre>
-
-<p>To save our file in png:</p>
-
-<pre><code class="language-python">fig.write_image(&quot;file1.png&quot;)
-</code></pre>
-
-<h3 id="2-working-with-daily-data">2- Working with daily data:</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> plotly.io <span style="color:#f92672">as</span> pio
+pio<span style="color:#f92672">.</span>write_html(fig, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;file1.html&#39;</span>, auto_open <span style="color:#f92672">=</span> True)
+</code></pre></div><p>To save our file in png:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig<span style="color:#f92672">.</span>write_image(<span style="color:#e6db74">&#34;file1.png&#34;</span>)
+</code></pre></div><h3 id="2--working-with-daily-data">2- Working with daily data:</h3>
 <p>We will do the same job with daily mean temperature for one Climate station:</p>
-
-<pre><code class="language-python">df_daily.head()
-</code></pre>
-
-<pre><code>|    | Name                   | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   DLY First Year |   DLY Last Year |
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_daily<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>|    | Name                   | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   DLY First Year |   DLY Last Year |
 |---:|:-----------------------|:-----------------|-------------:|-------------:|-----------------------------:|------------------------------:|-----------------:|----------------:|
 |  0 | ACTIVE PASS            | BRITISH COLUMBIA |      1010066 |           14 |                        48.87 |                       -123.28 |             1984 |            1996 |
 |  1 | ALBERT HEAD            | BRITISH COLUMBIA |      1010235 |           15 |                        48.4  |                       -123.48 |             1971 |            1995 |
@@ -841,68 +758,51 @@ pio.write_html(fig, file = 'file1.html', auto_open = True)
 |  3 | BEAR CREEK             | BRITISH COLUMBIA |      1010720 |           17 |                        48.5  |                       -124    |             1910 |            1971 |
 |  4 | BEAVER LAKE            | BRITISH COLUMBIA |      1010774 |           18 |                        48.5  |                       -123.35 |             1894 |            1952 |
 </code></pre>
-
-<pre><code class="language-python">tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=2')
-tree=ET.parse(tmp_file)
-os.remove(tmp_file)
-root=tree.getroot()
-</code></pre>
-
-<p>Here is the structure of xml file and informations we could find in &lsquo;stationinformation&rsquo; child:</p>
-
-<p><img src="image1.png" alt="png" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=01&amp;Day=14&amp;timeframe=2&#39;</span>)
+tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
+os<span style="color:#f92672">.</span>remove(tmp_file)
+root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()
+</code></pre></div><p>Here is the structure of xml file and informations we could find in &lsquo;stationinformation&rsquo; child:</p>
+<p><img src="image1.png" alt="png"></p>
 <p>Climate records are available in &lsquo;station data&rsquo; child:</p>
-
-<p><img src="image3.png" alt="png" /></p>
-
-<pre><code class="language-python">url_template = 'http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=2'
+<p><img src="image3.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url_template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=01&amp;Day=14&amp;timeframe=2&#39;</span>
 url_template
+</code></pre></div><pre><code>'http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=5415&amp;Year=2020&amp;Month=01&amp;Day=14&amp;timeframe=2'
 </code></pre>
-
-<pre><code>'http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=5415&amp;Year=2020&amp;Month=01&amp;Day=14&amp;timeframe=2'
-</code></pre>
-
 <p>We want to extract 4 specific years for Climate station with ID=27226:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">id_stat <span style="color:#f92672">=</span> <span style="color:#ae81ff">27226</span>
+df_daily[df_daily[<span style="color:#e6db74">&#39;Station ID&#39;</span>] <span style="color:#f92672">==</span> id_stat][<span style="color:#e6db74">&#39;DLY First Year&#39;</span>]
+yi <span style="color:#f92672">=</span> <span style="color:#ae81ff">2015</span>
+yf <span style="color:#f92672">=</span> <span style="color:#ae81ff">2020</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(yi,yf<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):    <span style="color:#75715e">### loop over years</span>
+        tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=1&amp;Day=14&amp;timeframe=2&#39;</span>)
+        tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
+        os<span style="color:#f92672">.</span>remove(tmp_file)
+        root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()       
+        stationsdata <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;.//stationdata&#39;</span>)
+        temperature <span style="color:#f92672">=</span> []  
+        date  <span style="color:#f92672">=</span> []
+        data  <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">for</span>  stationdata <span style="color:#f92672">in</span> stationsdata: 
+            date<span style="color:#f92672">.</span>append(stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;year&#39;</span>]<span style="color:#f92672">+</span>
+                        <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+</span>stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;month&#39;</span>]<span style="color:#f92672">+</span>
+                        <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+</span>stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;day&#39;</span>])                  
+            champs<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;meantemp&#39;</span>)
+            tmp <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(champs<span style="color:#f92672">.</span>text,<span style="color:#e6db74">&#34;float&#34;</span>)
+            <span style="color:#66d9ef">if</span>  tmp <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;nan&#39;</span>:
+                temperature<span style="color:#f92672">.</span>append(np<span style="color:#f92672">.</span>nan)
+            <span style="color:#66d9ef">else</span>:   
+                temperature<span style="color:#f92672">.</span>append(tmp)   <span style="color:#75715e">#  loop over days in one year</span>
 
-<pre><code class="language-python">id_stat = 27226
-df_daily[df_daily['Station ID'] == id_stat]['DLY First Year']
-yi = 2015
-yf = 2020
-</code></pre>
-
-<pre><code class="language-python">dataset = []
-for year in range(yi,yf+1):    ### loop over years
-        tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=1&amp;Day=14&amp;timeframe=2')
-        tree=ET.parse(tmp_file)
-        os.remove(tmp_file)
-        root=tree.getroot()       
-        stationsdata = root.findall('.//stationdata')
-        temperature = []  
-        date  = []
-        data  = []
-        for  stationdata in stationsdata: 
-            date.append(stationdata.attrib['year']+
-                        '-'+stationdata.attrib['month']+
-                        '-'+stationdata.attrib['day'])                  
-            champs=stationdata.find('meantemp')
-            tmp = np.array(champs.text,&quot;float&quot;)
-            if  tmp == 'nan':
-                temperature.append(np.nan)
-            else:   
-                temperature.append(tmp)   #  loop over days in one year
-
-        data = {'date':date, 
-                'temperature':temperature} 
-        data = pd.DataFrame(data)
-        dataset.append(data)
-dataset = pd.concat(dataset)
-</code></pre>
-
-<pre><code class="language-python">dataset.head()
-</code></pre>
-
-<pre><code>|    | date     |   temperature |
+        data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;date&#39;</span>:date, 
+                <span style="color:#e6db74">&#39;temperature&#39;</span>:temperature} 
+        data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+        dataset<span style="color:#f92672">.</span>append(data)
+dataset <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(dataset)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>|    | date     |   temperature |
 |---:|:---------|--------------:|
 |  0 | 2015-1-1 |           nan |
 |  1 | 2015-1-2 |           nan |
@@ -910,34 +810,21 @@ dataset = pd.concat(dataset)
 |  3 | 2015-1-4 |           nan |
 |  4 | 2015-1-5 |           nan |
 </code></pre>
-
 <p>We Can make  quick plot using  plotly.express:</p>
-
-<pre><code class="language-python">import plotly.express as px
-fig = px.line(dataset, x='date', y='temperature')
-fig.update_layout(title_text='Time Series with Rangeslider',
-                  xaxis_rangeslider_visible=True)
-</code></pre>
-
-<p><img src="file2.png" alt="png" />
-Follow this <a href="http://www.guillaumedueymes.com/Plotly_plots/file2.html" target="_blank">link</a> for interactive plot:</p>
-
-<pre><code class="language-python">dataset.to_csv(&quot;./Daily_dataset.csv&quot;, index = False, header = True, sep = ',')
-</code></pre>
-
-<pre><code class="language-python">import plotly.io as pio
-pio.write_html(fig, file = 'file2.html', auto_open = True)
-fig.write_image(&quot;file2.png&quot;)
-</code></pre>
-
-<h3 id="3-working-with-monthly-data">3- Working with monthly data:</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> plotly.express <span style="color:#f92672">as</span> px
+fig <span style="color:#f92672">=</span> px<span style="color:#f92672">.</span>line(dataset, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;date&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;temperature&#39;</span>)
+fig<span style="color:#f92672">.</span>update_layout(title_text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Time Series with Rangeslider&#39;</span>,
+                  xaxis_rangeslider_visible<span style="color:#f92672">=</span>True)
+</code></pre></div><p><img src="file2.png" alt="png">
+Follow this <a href="http://www.guillaumedueymes.com/Plotly_plots/file2.html">link</a> for interactive plot:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;./Daily_dataset.csv&#34;</span>, index <span style="color:#f92672">=</span> False, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;,&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> plotly.io <span style="color:#f92672">as</span> pio
+pio<span style="color:#f92672">.</span>write_html(fig, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;file2.html&#39;</span>, auto_open <span style="color:#f92672">=</span> True)
+fig<span style="color:#f92672">.</span>write_image(<span style="color:#e6db74">&#34;file2.png&#34;</span>)
+</code></pre></div><h3 id="3--working-with-monthly-data">3- Working with monthly data:</h3>
 <p>We will do the same job with monthly total precipitation for one Climate station:</p>
-
-<pre><code class="language-python">df_monthly.head()
-</code></pre>
-
-<pre><code>|    | Name                   | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   MLY First Year |   MLY Last Year |
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_monthly<span style="color:#f92672">.</span>head()
+</code></pre></div><pre><code>|    | Name                   | Province         |   Climate ID |   Station ID |   Latitude (Decimal Degrees) |   Longitude (Decimal Degrees) |   MLY First Year |   MLY Last Year |
 |---:|:-----------------------|:-----------------|-------------:|-------------:|-----------------------------:|------------------------------:|-----------------:|----------------:|
 |  0 | ACTIVE PASS            | BRITISH COLUMBIA |      1010066 |           14 |                        48.87 |                       -123.28 |             1984 |            1996 |
 |  1 | ALBERT HEAD            | BRITISH COLUMBIA |      1010235 |           15 |                        48.4  |                       -123.48 |             1971 |            1995 |
@@ -945,89 +832,74 @@ fig.write_image(&quot;file2.png&quot;)
 |  3 | BEAR CREEK             | BRITISH COLUMBIA |      1010720 |           17 |                        48.5  |                       -124    |             1910 |            1971 |
 |  4 | BEAVER LAKE            | BRITISH COLUMBIA |      1010774 |           18 |                        48.5  |                       -123.35 |             1894 |            1952 |
 </code></pre>
-
-<pre><code class="language-python">tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=3')
-url_template = 'http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year='+str(year)+'&amp;Month=01&amp;Day=14&amp;timeframe=3'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=01&amp;Day=14&amp;timeframe=3&#39;</span>)
+url_template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Month=01&amp;Day=14&amp;timeframe=3&#39;</span>
 url_template
-tree=ET.parse(tmp_file)
-os.remove(tmp_file)
-root=tree.getroot()
+tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
+os<span style="color:#f92672">.</span>remove(tmp_file)
+root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()
 url_template
+</code></pre></div><pre><code>'http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=27226&amp;Year=2020&amp;Month=01&amp;Day=14&amp;timeframe=3'
 </code></pre>
-
-<pre><code>'http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=27226&amp;Year=2020&amp;Month=01&amp;Day=14&amp;timeframe=3'
-</code></pre>
-
 <p>Climate records are available in &lsquo;station data&rsquo; child:</p>
-
-<p><img src="image4.png" alt="png" /></p>
-
+<p><img src="image4.png" alt="png"></p>
 <p>We want to dowload monthly total precipitation for Climate station with ID=5415.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">id_stat <span style="color:#f92672">=</span> <span style="color:#ae81ff">5415</span>
+df_monthly[df_monthly[<span style="color:#e6db74">&#39;Station ID&#39;</span>] <span style="color:#f92672">==</span> id_stat][<span style="color:#e6db74">&#39;MLY First Year&#39;</span>]
+yi <span style="color:#f92672">=</span> int(df_monthly[df_monthly[<span style="color:#e6db74">&#39;Station ID&#39;</span>] <span style="color:#f92672">==</span> id_stat][<span style="color:#e6db74">&#39;MLY First Year&#39;</span>]<span style="color:#f92672">.</span>values)
+yf <span style="color:#f92672">=</span> int(df_monthly[df_monthly[<span style="color:#e6db74">&#39;Station ID&#39;</span>] <span style="color:#f92672">==</span> id_stat][<span style="color:#e6db74">&#39;MLY Last Year&#39;</span>]<span style="color:#f92672">.</span>values)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset <span style="color:#f92672">=</span> []
 
-<pre><code class="language-python">id_stat = 5415
-df_monthly[df_monthly['Station ID'] == id_stat]['MLY First Year']
-yi = int(df_monthly[df_monthly['Station ID'] == id_stat]['MLY First Year'].values)
-yf = int(df_monthly[df_monthly['Station ID'] == id_stat]['MLY Last Year'].values)
-</code></pre>
+tmp_file <span style="color:#f92672">=</span> wget<span style="color:#f92672">.</span>download(<span style="color:#e6db74">&#39;http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID=&#39;</span><span style="color:#f92672">+</span>str(int(id_stat))<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;Year=2020&amp;Month=1&amp;Day=14&amp;timeframe=3&#39;</span>)
+tree<span style="color:#f92672">=</span>ET<span style="color:#f92672">.</span>parse(tmp_file)
+os<span style="color:#f92672">.</span>remove(tmp_file)
+root<span style="color:#f92672">=</span>tree<span style="color:#f92672">.</span>getroot()       
+stationsdata <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;.//stationdata&#39;</span>)
+totprecip <span style="color:#f92672">=</span> []  
+date  <span style="color:#f92672">=</span> []
+data  <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span>  stationdata <span style="color:#f92672">in</span> stationsdata: 
+    date<span style="color:#f92672">.</span>append(stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;year&#39;</span>]<span style="color:#f92672">+</span>
+                        <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+</span>stationdata<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;month&#39;</span>])                  
+    champs<span style="color:#f92672">=</span>stationdata<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;totprecip&#39;</span>)
+    tmp <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(champs<span style="color:#f92672">.</span>text,<span style="color:#e6db74">&#34;float&#34;</span>)
+    <span style="color:#66d9ef">if</span>  tmp <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;nan&#39;</span>:
+        totprecip<span style="color:#f92672">.</span>append(np<span style="color:#f92672">.</span>nan)
+    <span style="color:#66d9ef">else</span>:   
+        totprecip<span style="color:#f92672">.</span>append(tmp)   <span style="color:#75715e">#  loop over days in one year</span>
 
-<pre><code class="language-python">dataset = []
-
-tmp_file = wget.download('http://climate.weather.gc.ca/climate_data/bulk_data_e.html?format=xml&amp;stationID='+str(int(id_stat))+'&amp;Year=2020&amp;Month=1&amp;Day=14&amp;timeframe=3')
-tree=ET.parse(tmp_file)
-os.remove(tmp_file)
-root=tree.getroot()       
-stationsdata = root.findall('.//stationdata')
-totprecip = []  
-date  = []
-data  = []
-for  stationdata in stationsdata: 
-    date.append(stationdata.attrib['year']+
-                        '-'+stationdata.attrib['month'])                  
-    champs=stationdata.find('totprecip')
-    tmp = np.array(champs.text,&quot;float&quot;)
-    if  tmp == 'nan':
-        totprecip.append(np.nan)
-    else:   
-        totprecip.append(tmp)   #  loop over days in one year
-
-    data = {'date':date, 
-                'totprecip':totprecip} 
-    data = pd.DataFrame(data)
-    dataset.append(data)
-dataset = pd.concat(dataset)
-dataset = dataset.drop_duplicates('date',keep='last')
-dataset['date']  = pd.to_datetime(dataset['date'], format='%Y-%m')
-</code></pre>
-
-<pre><code class="language-python">import plotly.graph_objects as go
-fig = go.Figure(data=[
-    go.Bar(name='totprecip1', 
-           x=dataset[dataset['date'].dt.month == 7]['date'], 
-           y=dataset[dataset['date'].dt.month == 7]['totprecip'])    
+    data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;date&#39;</span>:date, 
+                <span style="color:#e6db74">&#39;totprecip&#39;</span>:totprecip} 
+    data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+    dataset<span style="color:#f92672">.</span>append(data)
+dataset <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(dataset)
+dataset <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>drop_duplicates(<span style="color:#e6db74">&#39;date&#39;</span>,keep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;last&#39;</span>)
+dataset[<span style="color:#e6db74">&#39;date&#39;</span>]  <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>to_datetime(dataset[<span style="color:#e6db74">&#39;date&#39;</span>], format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%Y-%m&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> plotly.graph_objects <span style="color:#f92672">as</span> go
+fig <span style="color:#f92672">=</span> go<span style="color:#f92672">.</span>Figure(data<span style="color:#f92672">=</span>[
+    go<span style="color:#f92672">.</span>Bar(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;totprecip1&#39;</span>, 
+           x<span style="color:#f92672">=</span>dataset[dataset[<span style="color:#e6db74">&#39;date&#39;</span>]<span style="color:#f92672">.</span>dt<span style="color:#f92672">.</span>month <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span>][<span style="color:#e6db74">&#39;date&#39;</span>], 
+           y<span style="color:#f92672">=</span>dataset[dataset[<span style="color:#e6db74">&#39;date&#39;</span>]<span style="color:#f92672">.</span>dt<span style="color:#f92672">.</span>month <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span>][<span style="color:#e6db74">&#39;totprecip&#39;</span>])    
 ])
-fig.update_layout(
-    title='July monthly precipitation',
-    xaxis_tickfont_size=14,
-    yaxis=dict(
-        title='Total precipitation (mm)',
-        titlefont_size=16,
-        tickfont_size=14,
+fig<span style="color:#f92672">.</span>update_layout(
+    title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;July monthly precipitation&#39;</span>,
+    xaxis_tickfont_size<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>,
+    yaxis<span style="color:#f92672">=</span>dict(
+        title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Total precipitation (mm)&#39;</span>,
+        titlefont_size<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>,
+        tickfont_size<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>,
     ),
-    barmode='group',
-    bargap=0.15, # gap between bars of adjacent location coordinates.
-    bargroupgap=0.1 # gap between bars of the same location coordinate.
+    barmode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;group&#39;</span>,
+    bargap<span style="color:#f92672">=</span><span style="color:#ae81ff">0.15</span>, <span style="color:#75715e"># gap between bars of adjacent location coordinates.</span>
+    bargroupgap<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span> <span style="color:#75715e"># gap between bars of the same location coordinate.</span>
 )
-</code></pre>
-
-<p><img src="file3.png" alt="png" />
-Follow this <a href="http://www.guillaumedueymes.com/Plotly_plots/file3.html" target="_blank">link</a> for interactive plot.</p>
-
-<pre><code class="language-python">dataset[dataset['date'].dt.month == 7].to_csv(&quot;./Monthly_dataset.csv&quot;, index = False, header = True, sep = ',')
-import plotly.io as pio
-pio.write_html(fig, file = 'file2.html', auto_open = True)
-fig.write_image(&quot;file2.png&quot;)
-</code></pre>
-
+</code></pre></div><p><img src="file3.png" alt="png">
+Follow this <a href="http://www.guillaumedueymes.com/Plotly_plots/file3.html">link</a> for interactive plot.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset[dataset[<span style="color:#e6db74">&#39;date&#39;</span>]<span style="color:#f92672">.</span>dt<span style="color:#f92672">.</span>month <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span>]<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;./Monthly_dataset.csv&#34;</span>, index <span style="color:#f92672">=</span> False, header <span style="color:#f92672">=</span> True, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;,&#39;</span>)
+<span style="color:#f92672">import</span> plotly.io <span style="color:#f92672">as</span> pio
+pio<span style="color:#f92672">.</span>write_html(fig, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;file2.html&#39;</span>, auto_open <span style="color:#f92672">=</span> True)
+fig<span style="color:#f92672">.</span>write_image(<span style="color:#e6db74">&#34;file2.png&#34;</span>)
+</code></pre></div>
     </div>
 
     

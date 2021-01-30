@@ -583,35 +583,34 @@ Voici un exemple d&rsquo;usage d&rsquo;expressions régulières, ce code illustr
       </ul>
 
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#13-1-trouver-des-caractères">13.1- Trouver des caractères</a></li>
-<li><a href="#13-1-1-les-caractères-génériques">13.1.1- Les caractères génériques</a></li>
-<li><a href="#13-1-2-rechercher-le-debut-ou-fin-d-une-chaine-de-caractères">13.1.2-  Rechercher le debut ou fin d&rsquo;une chaine de caractères</a></li>
-<li><a href="#13-1-3-la-fonction-match-tester-une-chaîne-de-caractères">13.1.3- La fonction match(), tester une chaîne de caractères:</a></li>
-<li><a href="#13-1-4-la-fonction-search-chercher-une-chaîne-de-caractères">13.1.4- La fonction search(), chercher une chaîne de caractères:</a></li>
-<li><a href="#13-1-5-la-fonction-split">13.1.5- La fonction split():</a></li>
-<li><a href="#13-1-6-la-fonction-sub">13.1.6- La fonction sub():</a></li>
-<li><a href="#13-1-7-mises-en-pratique-1">13.1.7-  Mises en pratique 1</a>
-<ul>
-<li><a href="#a-vérifier-la-validité-des-numéros-de-téléphone-à-l-aide-d-une-expression-régulière">a: vérifier la validité des numéros de téléphone à l&rsquo;aide d&rsquo;une expression régulière:</a></li>
-<li><a href="#b-vérifier-la-validité-d-une-liste-d-adresses-courriel">b: vérifier la validité d&rsquo;une liste d&rsquo;adresses courriel:</a></li>
-</ul></li>
-<li><a href="#13-1-8-mises-en-pratique-2">13.1.8-  Mises en pratique 2</a>
-<ul>
-<li><a href="#a-lecture-d-un-fichier-de-commentaires">a: Lecture d&rsquo;un fichier de commentaires:</a></li>
-<li><a href="#b-compter-les-correspondances">b: Compter les correspondances:</a></li>
-<li><a href="#c-lettres-minuscules-et-majuscules">c: Lettres minuscules et majuscules</a></li>
-<li><a href="#d-ignorer-les-caractères-spéciaux">d: Ignorer les caractères spéciaux:</a></li>
-<li><a href="#e-améliorer-notre-regexx">e: Améliorer notre regexx:</a></li>
-<li><a href="#f-combiner-plusieurs-regex">f: Combiner plusieurs regex:</a></li>
-<li><a href="#f-modifications-des-chaînes-dans-notre-regex">f: modifications des chaînes dans notre regex:</a></li>
-<li><a href="#g-trouver-les-années-avec-4-chiffres-dans-notre-document">g: Trouver les années avec 4 chiffres dans notre document:</a></li>
-<li><a href="#h-extraire-toutes-les-années-de-notre-document">h: Extraire toutes les années de notre document:</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#131--trouver-des-caractères">13.1- Trouver des caractères</a></li>
+    <li><a href="#1311--les-caractères-génériques">13.1.1- Les caractères génériques</a></li>
+    <li><a href="#1312---rechercher-le-debut-ou-fin-dune-chaine-de-caractères">13.1.2-  Rechercher le debut ou fin d&rsquo;une chaine de caractères</a></li>
+    <li><a href="#1313--la-fonction-match-tester-une-chaîne-de-caractères">13.1.3- La fonction match(), tester une chaîne de caractères:</a></li>
+    <li><a href="#1314--la-fonction-search-chercher-une-chaîne-de-caractères">13.1.4- La fonction search(), chercher une chaîne de caractères:</a></li>
+    <li><a href="#1315--la-fonction-split">13.1.5- La fonction split():</a></li>
+    <li><a href="#1316--la-fonction-sub">13.1.6- La fonction sub():</a></li>
+    <li><a href="#1317---mises-en-pratique-1">13.1.7-  Mises en pratique 1</a>
+      <ul>
+        <li><a href="#a-vérifier-la-validité-des-numéros-de-téléphone-à-laide-dune-expression-régulière">a: vérifier la validité des numéros de téléphone à l&rsquo;aide d&rsquo;une expression régulière:</a></li>
+        <li><a href="#b-vérifier-la-validité-dune-liste-dadresses-courriel">b: vérifier la validité d&rsquo;une liste d&rsquo;adresses courriel:</a></li>
+      </ul>
+    </li>
+    <li><a href="#1318---mises-en-pratique-2">13.1.8-  Mises en pratique 2</a>
+      <ul>
+        <li><a href="#a-lecture-dun-fichier-de-commentaires">a: Lecture d&rsquo;un fichier de commentaires:</a></li>
+        <li><a href="#b-compter-les-correspondances">b: Compter les correspondances:</a></li>
+        <li><a href="#c-lettres-minuscules-et-majuscules">c: Lettres minuscules et majuscules</a></li>
+        <li><a href="#d-ignorer-les-caractères-spéciaux">d: Ignorer les caractères spéciaux:</a></li>
+        <li><a href="#e-améliorer-notre-regexx">e: Améliorer notre regexx:</a></li>
+        <li><a href="#f-combiner-plusieurs-regex">f: Combiner plusieurs regex:</a></li>
+        <li><a href="#f-modifications-des-chaînes-dans-notre-regex">f: modifications des chaînes dans notre regex:</a></li>
+        <li><a href="#g-trouver-les-années-avec-4-chiffres-dans-notre-document">g: Trouver les années avec 4 chiffres dans notre document:</a></li>
+        <li><a href="#h-extraire-toutes-les-années-de-notre-document">h: Extraire toutes les années de notre document:</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
       
@@ -626,467 +625,367 @@ Voici un exemple d&rsquo;usage d&rsquo;expressions régulières, ce code illustr
           <h1>13- Regex et Python - Cours</h1>
 
           <div class="article-style">
-            
-
-<p><img src="/img/formation/regex.jpg" alt="image0" /></p>
-
+            <p><img src="/img/formation/regex.jpg" alt="image0"></p>
 <p>Les expressions régulières  (de l&rsquo;anglais regex Regular Expression) constituent un système très puissant et très rapide pour faire des recherches dans des chaînes de caractères. C&rsquo;est une sorte de fonctionnalité Rechercher/Remplacer très poussée.</p>
-
 <p>Pour tester nos expressions régulières: Regex101.com</p>
-
-<p>En Python, les expressions régulières se font avec un package nommé <b>re</b>.</p>
-
+<p>En Python, les expressions régulières se font avec un package nommé <!-- raw HTML omitted -->re<!-- raw HTML omitted -->.</p>
 <p>Voici un exemple d&rsquo;usage d&rsquo;expressions régulières, ce code illustre un cas où l&rsquo;on chercherait à tester la présence d&rsquo;une adresse email :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code class="language-python">import re
+chaine <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;guillaume.d@gmail.com&#34;</span>
 
-chaine = &quot;guillaume.d@gmail.com&quot;
+<span style="color:#75715e"># on vérifie qu&#39;il y a bien le signe @ et on vérifie que l&#39;adresse se termine par .fr ou .com</span>
+regexp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;(^[a-z0-9._-]+@[a-z0-9._-]+\.[(com|fr)]+)&#34;</span>
 
-# on vérifie qu'il y a bien le signe @ et on vérifie que l'adresse se termine par .fr ou .com
-regexp = &quot;(^[a-z0-9._-]+@[a-z0-9._-]+\.[(com|fr)]+)&quot;
-
-if re.match(regexp, chaine) is not None :
+<span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(regexp, chaine) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None :
     
-    print(&quot;Vrai&quot;)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Vrai&#34;</span>)
 
-else:
+<span style="color:#66d9ef">else</span>:
     
-    print(&quot;Faux&quot;)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Faux&#34;</span>)
+</code></pre></div><pre><code>Vrai
 </code></pre>
-
-<pre><code>Vrai
-</code></pre>
-
 <p>Voici un autre exemple, voici une expression régulière pour déterminer si un numéro de téléphone francais est valide:</p>
-
 <ul>
-<li><p><sup class="footnote-ref" id="fnref:0"><a href="#fn:0">1</a></sup>{1}[1-7]{1}(-[0-9]{2}){4}$</p>
+<li>^[0]{1}[1-7]{1}(-[0-9]{2}){4}$</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code class="language-python">import re
+numero <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;02-98-07-48-56&#34;</span>
 
-numero = &quot;02-98-07-48-56&quot;
+regexp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^[0]{1}[1-7]{1}(-[0-9]{2}){4}$&#34;</span>
 
-regexp = &quot;^[0]{1}[1-7]{1}(-[0-9]{2}){4}$&quot;
-
-if re.match(regexp, numero) is not None :
+<span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(regexp, numero) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None :
     
-print(&quot;Vrai&quot;)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Vrai&#34;</span>)
 
-else:
+<span style="color:#66d9ef">else</span>:
     
-print(&quot;Faux&quot;)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Faux&#34;</span>)
+</code></pre></div><pre><code>Vrai
 </code></pre>
-
-<p>Vrai</p></li>
-</ul>
-
 <p>Nous allons voir comment utiliser ces regex :</p>
-
-<h2 id="13-1-trouver-des-caractères">13.1- Trouver des caractères</h2>
-
-<h2 id="13-1-1-les-caractères-génériques">13.1.1- Les caractères génériques</h2>
-
+<h2 id="131--trouver-des-caractères">13.1- Trouver des caractères</h2>
+<h2 id="1311--les-caractères-génériques">13.1.1- Les caractères génériques</h2>
 <p>Dans les regex, il est important de savoir ce que l&rsquo;on doit aller chercher et combien de fois.</p>
-
 <ul>
-<li><p><b>Chercher les caractères que nous voulons:</b></p></li>
-
-<li><p>. : Le point correspond à tous les caractères possibles</p></li>
-
-<li><p>\ : Utilisé pour supprimer la signification spéciale du caractère qui le suit (discuté ci-dessous)</p></li>
-
-<li><p>[A-F] : Correspond à une liste de caractères possibles: tous les éléments entre A et F</p></li>
-
-<li><p>^: le contraire de ce que l&rsquo;on veut</p></li>
-
-<li><p>$: Correspond à la fin</p></li>
-
-<li><p>(python|c++): chercher l&rsquo;un ou l&rsquo;autre</p></li>
-
-<li><p>(): Joindre un groupe de requête re()</p></li>
-
-<li><p>\d : chercher Uniquement des chiffres. Équivalent à [0-9]</p></li>
-
-<li><p>\D : chercher tout sauf des chiffres. Équivalent à [^0-9]</p></li>
-
-<li><p>\s : chercher Un espace</p></li>
-
-<li><p>\w : chercher un caractère alphanumérique. Équivalent à [a-zA-Z0-9_]</p></li>
-
-<li><p>\W :Tout sauf un caractère alphanumérique. Équivalent à [^a-zA-Z0-9_].</p></li>
+<li>
+<p><!-- raw HTML omitted -->Chercher les caractères que nous voulons:<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>. : Le point correspond à tous les caractères possibles</p>
+</li>
+<li>
+<p>\ : Utilisé pour supprimer la signification spéciale du caractère qui le suit (discuté ci-dessous)</p>
+</li>
+<li>
+<p>[A-F] : Correspond à une liste de caractères possibles: tous les éléments entre A et F</p>
+</li>
+<li>
+<p>^: le contraire de ce que l&rsquo;on veut</p>
+</li>
+<li>
+<p>$: Correspond à la fin</p>
+</li>
+<li>
+<p>(python|c++):	chercher l&rsquo;un ou l&rsquo;autre</p>
+</li>
+<li>
+<p>(): Joindre un groupe de requête re()</p>
+</li>
+<li>
+<p>\d : chercher Uniquement des chiffres. Équivalent à [0-9]</p>
+</li>
+<li>
+<p>\D : chercher tout sauf des chiffres. Équivalent à [^0-9]</p>
+</li>
+<li>
+<p>\s : chercher Un espace</p>
+</li>
+<li>
+<p>\w : chercher un caractère alphanumérique. Équivalent à [a-zA-Z0-9_]</p>
+</li>
+<li>
+<p>\W :Tout sauf un caractère alphanumérique. Équivalent à [^a-zA-Z0-9_].</p>
+</li>
 </ul>
-
-<p><b> - Pour compter des caractères: </b></p>
-
+<p><!-- raw HTML omitted --> - Pour compter des caractères: <!-- raw HTML omitted --></p>
 <ul>
 <li>? : 0 ou 1 fois</li>
-<li>&lsquo;*&rsquo;   : 0 à l&rsquo;infini</li>
-<li>&rsquo;+&rsquo;   : de 1 à l&rsquo;infini</li>
+<li>&lsquo;*&rsquo;	: 0 à l&rsquo;infini</li>
+<li>&lsquo;+&rsquo;	: de 1 à l&rsquo;infini</li>
 <li>{3} : exactement 3</li>
 <li>{3,} : de 3 à l&rsquo;infini</li>
 <li>{,3} : de 0 à 3 fois</li>
 <li>{3,6} : de 3 à 6 fois</li>
 </ul>
-
-<h2 id="13-1-2-rechercher-le-debut-ou-fin-d-une-chaine-de-caractères">13.1.2-  Rechercher le debut ou fin d&rsquo;une chaine de caractères</h2>
-
+<h2 id="1312---rechercher-le-debut-ou-fin-dune-chaine-de-caractères">13.1.2-  Rechercher le debut ou fin d&rsquo;une chaine de caractères</h2>
 <ul>
-<li>&rsquo;^&rsquo; pour le debut d&rsquo;une chaine</li>
-
-<li><p>&rsquo;$&rsquo; pour les fins de chaines</p>
-
-<pre><code class="language-python">import re
-
-strings = [&quot;il est sur le feu&quot;]
-
-bad_string = &quot;un feu de paille&quot;
-regexp = &quot;(f.u)$&quot;
-
-for string in strings:
-if re.match(regexp, string) is not None :
-
-    print(&quot;Vrai pour: &quot; + string)
-
-else:
-
-    print(&quot;Faux pour: &quot;+ string)
-    
-</code></pre>
-
-<p>Faux pour: il est sur le feu</p>
-
-<pre><code class="language-python">import re
-
-strings = [&quot;il est sur le feu&quot;,&quot;fou&quot;]
-
-bad_string = &quot;un feu de paille&quot;
-regexp = &quot;^(f.u)&quot;
-for string in strings: 
-if re.match(regexp, string) is not None :
-
-    print(&quot;Vrai&quot;)
-
-else:
-
-    print(&quot;Faux&quot;)
-</code></pre>
-
-<p>Faux
-Vrai</p></li>
+<li>&lsquo;^&rsquo; pour le debut d&rsquo;une chaine</li>
+<li>&lsquo;$&rsquo; pour les fins de chaines</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<h2 id="13-1-3-la-fonction-match-tester-une-chaîne-de-caractères">13.1.3- La fonction match(), tester une chaîne de caractères:</h2>
+strings <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;il est sur le feu&#34;</span>]
 
-<pre><code class="language-python"># Pourquoi on met un 'r'
-print('\tBonjour')
-print(r'\tBonjour')
+bad_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;un feu de paille&#34;</span>
+regexp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;(f.u)$&#34;</span>
+
+<span style="color:#66d9ef">for</span> string <span style="color:#f92672">in</span> strings:
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(regexp, string) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None :
+
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Vrai pour: &#34;</span> <span style="color:#f92672">+</span> string)
+
+    <span style="color:#66d9ef">else</span>:
+
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Faux pour: &#34;</span><span style="color:#f92672">+</span> string)
+    
+</code></pre></div><pre><code>Faux pour: il est sur le feu
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code>    Bonjour
+strings <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;il est sur le feu&#34;</span>,<span style="color:#e6db74">&#34;fou&#34;</span>]
+
+bad_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;un feu de paille&#34;</span>
+regexp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^(f.u)&#34;</span>
+<span style="color:#66d9ef">for</span> string <span style="color:#f92672">in</span> strings: 
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(regexp, string) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None :
+
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Vrai&#34;</span>)
+
+    <span style="color:#66d9ef">else</span>:
+
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Faux&#34;</span>)
+</code></pre></div><pre><code>Faux
+Vrai
+</code></pre>
+<h2 id="1313--la-fonction-match-tester-une-chaîne-de-caractères">13.1.3- La fonction match(), tester une chaîne de caractères:</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pourquoi on met un &#39;r&#39;</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Bonjour&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\tBonjour&#39;</span>)
+</code></pre></div><pre><code>    Bonjour
 \tBonjour
 </code></pre>
-
 <ul>
-<li><p><b>match()</b> évalue la correspondance entre une expression régulière et une chaîne de caractères en partant du <b> bébut </b> de la chaîne.</p>
-
-<pre><code class="language-python">a = re.match(r'.', 'Pierre Dupont') # chercher n'importe quel caractère une seule fois
-print(a)
-</code></pre>
-
-<p><re.Match object; span=(0, 1), match='P'></p>
-
-<pre><code class="language-python">a = re.match(r'.', 'Pierre Dupont')
-print(a.group())
-</code></pre>
-
-<p>P</p>
-
-<pre><code class="language-python">a = re.match(r'.+', 'Pierre Dupont') # chercher n'importe quel caractère à l'infini
-print(a.group())
-</code></pre>
-
-<p>Pierre Dupont</p></li>
+<li><!-- raw HTML omitted -->match()<!-- raw HTML omitted --> évalue la correspondance entre une expression régulière et une chaîne de caractères en partant du <!-- raw HTML omitted --> bébut <!-- raw HTML omitted --> de la chaîne.</li>
 </ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont&#39;</span>) <span style="color:#75715e"># chercher n&#39;importe quel caractère une seule fois</span>
+<span style="color:#66d9ef">print</span>(a)
+</code></pre></div><pre><code>&lt;re.Match object; span=(0, 1), match='P'&gt;
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont&#39;</span>)
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group())
+</code></pre></div><pre><code>P
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;.+&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont&#39;</span>) <span style="color:#75715e"># chercher n&#39;importe quel caractère à l&#39;infini</span>
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group())
+</code></pre></div><pre><code>Pierre Dupont
+</code></pre>
 <p>On peut créer différent groupe avec la méthode groupe:</p>
-
-<pre><code class="language-python">a = re.match(r'(\w+)\s(\w+)', 'Pierre Dupont')
-print(a.group(0)) # entièreté du match 
-print(a.group(1)) # premier groupe 
-print(a.group(2)) # deuxième groupe 
-</code></pre>
-
-<pre><code>Pierre Dupont
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\w+)\s(\w+)&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont&#39;</span>)
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">0</span>)) <span style="color:#75715e"># entièreté du match </span>
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)) <span style="color:#75715e"># premier groupe </span>
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># deuxième groupe </span>
+</code></pre></div><pre><code>Pierre Dupont
 Pierre
 Dupont
 </code></pre>
-
-<pre><code class="language-python">a = re.match(r'(\w+)(\s)(\w+)', 'Pierre Dupont')
-print(a.group(0)) # entièreté du match 
-print(a.group(1)) # premier groupe  
-print(a.group(2)) # deuxième groupe
-print(a.group(3)) # troisième groupe
-</code></pre>
-
-<pre><code>Pierre Dupont
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\w+)(\s)(\w+)&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont&#39;</span>)
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">0</span>)) <span style="color:#75715e"># entièreté du match </span>
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)) <span style="color:#75715e"># premier groupe  </span>
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># deuxième groupe</span>
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">3</span>)) <span style="color:#75715e"># troisième groupe</span>
+</code></pre></div><pre><code>Pierre Dupont
 Pierre
-
+ 
 Dupont
 </code></pre>
-
 <p>On peut nommer les groupes au lieu de mettre des indexs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(?P&lt;prenom&gt;\w+) (?P&lt;nom&gt;\w+)&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont&#39;</span>)
 
-<pre><code class="language-python">a = re.match(r'(?P&lt;prenom&gt;\w+) (?P&lt;nom&gt;\w+)', 'Pierre Dupont')
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#e6db74">&#39;prenom&#39;</span>))
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group(<span style="color:#e6db74">&#39;nom&#39;</span>))
 
-print(a.group('prenom'))
-print(a.group('nom'))
-
-print(a.groups())
-print(a.groupdict())
-</code></pre>
-
-<pre><code>Pierre
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>groups())
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>groupdict())
+</code></pre></div><pre><code>Pierre
 Dupont
 ('Pierre', 'Dupont')
 {'prenom': 'Pierre', 'nom': 'Dupont'}
 </code></pre>
-
-<p><b>- Exercices: </b></p>
-
+<p><!-- raw HTML omitted -->- Exercices: <!-- raw HTML omitted --></p>
 <p>Pour chaque question, indiquez si le match est valide ou non et ce qu&rsquo;il retourne.</p>
-
 <ul>
-<li><p>1 re.match(r&rsquo;[a-z]+\d{2}&lsquo;, &lsquo;item01&rsquo;)</p></li>
-
-<li><p>2 re.match(r&rsquo;[a-zA-Z]+\s\w+&lsquo;, &lsquo;Pierre Dupont&rsquo;)</p></li>
-
-<li><p>3 re.match(r&rsquo;\s+&lsquo;, &lsquo;pierre dupont&rsquo;)</p></li>
-
-<li><p>4 re.match(r&rsquo;\w+&lsquo;, &lsquo;pierre dupont&rsquo;)</p></li>
-
-<li><p>5 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre-dupont&rsquo;)</p></li>
-
-<li><p>6 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre/dupont&rsquo;)</p></li>
-
-<li><p>7 re.match(r&rsquo;\w+([-+=]+)&lsquo;, &lsquo;pierre/dupont&rsquo;)</p></li>
+<li>
+<p>1 re.match(r&rsquo;[a-z]+\d{2}', &lsquo;item01&rsquo;)</p>
+</li>
+<li>
+<p>2 re.match(r&rsquo;[a-zA-Z]+\s\w+&rsquo;, &lsquo;Pierre Dupont&rsquo;)</p>
+</li>
+<li>
+<p>3 re.match(r&rsquo;\s+&rsquo;, &lsquo;pierre dupont&rsquo;)</p>
+</li>
+<li>
+<p>4 re.match(r&rsquo;\w+&rsquo;, &lsquo;pierre dupont&rsquo;)</p>
+</li>
+<li>
+<p>5 re.match(r&rsquo;\w+([-+=]?)', &lsquo;pierre-dupont&rsquo;)</p>
+</li>
+<li>
+<p>6 re.match(r&rsquo;\w+([-+=]?)', &lsquo;pierre/dupont&rsquo;)</p>
+</li>
+<li>
+<p>7 re.match(r&rsquo;\w+([-+=]+)', &lsquo;pierre/dupont&rsquo;)</p>
+</li>
 </ul>
-
-<p><b>- Correction: </b></p>
-
+<p><!-- raw HTML omitted -->- Correction: <!-- raw HTML omitted --></p>
 <ul>
-<li>1 re.match(r&rsquo;[a-z]+\d{2}&lsquo;, &lsquo;item01&rsquo;)</li>
+<li>1 re.match(r&rsquo;[a-z]+\d{2}', &lsquo;item01&rsquo;)</li>
 </ul>
-
 <p>Match valide : retourne &lsquo;item01&rsquo;</p>
-
 <ul>
-<li>2 re.match(r&rsquo;[a-zA-Z]+\s\w+&lsquo;, &lsquo;Pierre Dupont&rsquo;)</li>
+<li>2 re.match(r&rsquo;[a-zA-Z]+\s\w+&rsquo;, &lsquo;Pierre Dupont&rsquo;)</li>
 </ul>
-
 <p>Match valide : retourne &lsquo;Pierre Dupont&rsquo;</p>
-
 <ul>
-<li>3 re.match(r&rsquo;\s+&lsquo;, &lsquo;pierre dupont&rsquo;)</li>
+<li>3 re.match(r&rsquo;\s+&rsquo;, &lsquo;pierre dupont&rsquo;)</li>
 </ul>
-
 <p>Match invalide : on cherche un espace au début de la chaîne de caractère, mais elle commence par une lettre.</p>
-
 <ul>
-<li>4 re.match(r&rsquo;\w+&lsquo;, &lsquo;pierre dupont&rsquo;)</li>
+<li>4 re.match(r&rsquo;\w+&rsquo;, &lsquo;pierre dupont&rsquo;)</li>
 </ul>
-
 <p>Match valide : retourne &lsquo;pierre&rsquo;</p>
-
 <ul>
-<li>5 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre-dupont&rsquo;)</li>
+<li>5 re.match(r&rsquo;\w+([-+=]?)', &lsquo;pierre-dupont&rsquo;)</li>
 </ul>
-
 <p>Match valide : retourne &lsquo;pierre-&rsquo;</p>
-
 <ul>
-<li>6 re.match(r&rsquo;\w+([-+=]?)&lsquo;, &lsquo;pierre/dupont&rsquo;)</li>
+<li>6 re.match(r&rsquo;\w+([-+=]?)', &lsquo;pierre/dupont&rsquo;)</li>
 </ul>
-
 <p>Match valide : retourne &lsquo;pierre&rsquo;</p>
-
 <ul>
-<li>7 re.match(r&rsquo;\w+([-+=]+)&lsquo;, &lsquo;pierre/dupont&rsquo;)</li>
+<li>7 re.match(r&rsquo;\w+([-+=]+)', &lsquo;pierre/dupont&rsquo;)</li>
 </ul>
-
 <p>Match invalide : le + cherche si les caractères -, + ou = sont présents au moins une fois ou plus dans la chaîne de caractère. Aucun de ses éléments ne se retrouve dans la chaîne de caractère au moins une fois et donc le match n&rsquo;est pas valide.</p>
-
-<h2 id="13-1-4-la-fonction-search-chercher-une-chaîne-de-caractères">13.1.4- La fonction search(), chercher une chaîne de caractères:</h2>
-
-<pre><code class="language-python">a = re.search(r'\+', 'Pierre Dupont + Paul Martin')
-print(a.group())
+<h2 id="1314--la-fonction-search-chercher-une-chaîne-de-caractères">13.1.4- La fonction search(), chercher une chaîne de caractères:</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\+&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont + Paul Martin&#39;</span>)
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group())
+</code></pre></div><pre><code>+
 </code></pre>
-
-<pre><code>+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\s&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont + Paul Martin&#39;</span>)
+<span style="color:#66d9ef">print</span>(a)
+</code></pre></div><pre><code>&lt;re.Match object; span=(6, 7), match=' '&gt;
 </code></pre>
-
-<pre><code class="language-python">a = re.search(r'\s', 'Pierre Dupont + Paul Martin')
-print(a)
-</code></pre>
-
-<pre><code>&lt;re.Match object; span=(6, 7), match=' '&gt;
-</code></pre>
-
-<pre><code class="language-python">a = re.search(r'\+ Paul Martin', 'Pierre Dupont + Paul Martin')
-print(a.group())
-print(a)
-</code></pre>
-
-<pre><code>+ Paul Martin
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\+ Paul Martin&#39;</span>, <span style="color:#e6db74">&#39;Pierre Dupont + Paul Martin&#39;</span>)
+<span style="color:#66d9ef">print</span>(a<span style="color:#f92672">.</span>group())
+<span style="color:#66d9ef">print</span>(a)
+</code></pre></div><pre><code>+ Paul Martin
 &lt;re.Match object; span=(14, 27), match='+ Paul Martin'&gt;
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code class="language-python">import re
+a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;f.&#34;</span>,<span style="color:#e6db74">&#34;kung fu&#34;</span>)
 
-a = re.search(&quot;f.&quot;,&quot;kung fu&quot;)
-
-if a is not None:
-    print(&quot;trouvé&quot;)
-    print(a)
+<span style="color:#66d9ef">if</span> a <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;trouvé&#34;</span>)
+    <span style="color:#66d9ef">print</span>(a)
     
-else:
-    print(&quot;Aucune correspondance&quot;)
-</code></pre>
-
-<pre><code>trouvé
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Aucune correspondance&#34;</span>)
+</code></pre></div><pre><code>trouvé
 &lt;re.Match object; span=(5, 7), match='fu'&gt;
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;baton&#34;</span>,<span style="color:#e6db74">&#34;kung fu&#34;</span>)
 
-<pre><code class="language-python">import re
-a = re.search(&quot;baton&quot;,&quot;kung fu&quot;)
-
-if a is not None:
-    print(&quot;trouvé&quot;)
-else:
-    print(&quot;Aucune correspondance&quot;)
+<span style="color:#66d9ef">if</span> a <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;trouvé&#34;</span>)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Aucune correspondance&#34;</span>)
     
+</code></pre></div><pre><code>Aucune correspondance
 </code></pre>
+<h2 id="1315--la-fonction-split">13.1.5- La fonction split():</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code>Aucune correspondance
+texte <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;item01 | item02 - item03 - item04 | item05&#39;</span>
+
+a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>split(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39; \| | - &#39;</span> , texte)
+<span style="color:#66d9ef">print</span>(a)
+</code></pre></div><pre><code>['item01', 'item02', 'item03', 'item04', 'item05']
 </code></pre>
-
-<h2 id="13-1-5-la-fonction-split">13.1.5- La fonction split():</h2>
-
-<pre><code class="language-python">import re
-
-texte = 'item01 | item02 - item03 - item04 | item05'
-
-a = re.split(r' \| | - ' , texte)
-print(a)
-</code></pre>
-
-<pre><code>['item01', 'item02', 'item03', 'item04', 'item05']
-</code></pre>
-
-<h2 id="13-1-6-la-fonction-sub">13.1.6- La fonction sub():</h2>
-
+<h2 id="1316--la-fonction-sub">13.1.6- La fonction sub():</h2>
 <p>Cette fonction su() permet de modifier des chaines de caractères avec regex.</p>
-
-<pre><code class="language-python">re.sub('yo','hello','yo world!')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#39;yo&#39;</span>,<span style="color:#e6db74">&#39;hello&#39;</span>,<span style="color:#e6db74">&#39;yo world!&#39;</span>)
+</code></pre></div><pre><code>'hello world!'
 </code></pre>
-
-<pre><code>'hello world!'
-</code></pre>
-
-<h2 id="13-1-7-mises-en-pratique-1">13.1.7-  Mises en pratique 1</h2>
-
-<h3 id="a-vérifier-la-validité-des-numéros-de-téléphone-à-l-aide-d-une-expression-régulière">a: vérifier la validité des numéros de téléphone à l&rsquo;aide d&rsquo;une expression régulière:</h3>
-
+<h2 id="1317---mises-en-pratique-1">13.1.7-  Mises en pratique 1</h2>
+<h3 id="a-vérifier-la-validité-des-numéros-de-téléphone-à-laide-dune-expression-régulière">a: vérifier la validité des numéros de téléphone à l&rsquo;aide d&rsquo;une expression régulière:</h3>
 <p>Un numéro valide en France doit être composée d&rsquo;une suite de 5 nombres avec 2 chiffres. La première série de nombres doit être comprise entre 01 et 07.</p>
-
 <p>Cela donne donc 0A-XX-XX-XX-XX où A est un nombre compris entre 1 et 7 et X un nombre compris entre 0 et 9.</p>
-
 <p>Les numéros suivants sont donc valides :</p>
-
 <p>01-23-65-32-45</p>
-
 <p>07-35-88-99-23</p>
-
 <p>03-45-23-90-00</p>
-
 <p>Et les numéros suivants invalides :</p>
-
 <p>00-12-53-62-43 (commence par 00)</p>
-
 <p>08-14-62-32-99 (commence par 08)</p>
-
 <p>03-24-12-64 (seulement 4 séquences de deux chiffres)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code class="language-python">import re
+numeros_de_telephone <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;06-71-45-34-23&#39;</span>,
+                        <span style="color:#e6db74">&#39;02-12-33-75-12&#39;</span>,
+                        <span style="color:#e6db74">&#39;00-23-14-52-44&#39;</span>,
+                        <span style="color:#e6db74">&#39;514-235-0293&#39;</span>,
+                        <span style="color:#e6db74">&#39;03-52-31-56-34&#39;</span>]
 
-numeros_de_telephone = ['06-71-45-34-23',
-                        '02-12-33-75-12',
-                        '00-23-14-52-44',
-                        '514-235-0293',
-                        '03-52-31-56-34']
-
-for tel in numeros_de_telephone:
-    match = re.search(r'0{1}[1-7]{1}(-[0-9]{2}){4}', tel)
-    print('Le numero {} est {}'.format(tel, 'valide' if match else 'invalide'))
-</code></pre>
-
-<pre><code>Le numero 06-71-45-34-23 est valide
+<span style="color:#66d9ef">for</span> tel <span style="color:#f92672">in</span> numeros_de_telephone:
+    match <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;0{1}[1-7]{1}(-[0-9]{2}){4}&#39;</span>, tel)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Le numero {} est {}&#39;</span><span style="color:#f92672">.</span>format(tel, <span style="color:#e6db74">&#39;valide&#39;</span> <span style="color:#66d9ef">if</span> match <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;invalide&#39;</span>))
+</code></pre></div><pre><code>Le numero 06-71-45-34-23 est valide
 Le numero 02-12-33-75-12 est valide
 Le numero 00-23-14-52-44 est invalide
 Le numero 514-235-0293 est invalide
 Le numero 03-52-31-56-34 est valide
 </code></pre>
-
-<h3 id="b-vérifier-la-validité-d-une-liste-d-adresses-courriel">b: vérifier la validité d&rsquo;une liste d&rsquo;adresses courriel:</h3>
-
+<h3 id="b-vérifier-la-validité-dune-liste-dadresses-courriel">b: vérifier la validité d&rsquo;une liste d&rsquo;adresses courriel:</h3>
 <p>Le but de cet exercice est de vérifier si les adresses emails contenues dans la liste sont valides ou non.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code class="language-python">import re
+adresses_mail <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;christian_martin@gmail.com&#39;</span>,
+                 <span style="color:#e6db74">&#39;JaiOublieLarobasegmail.com&#39;</span>,
+                 <span style="color:#e6db74">&#39;MarieHutchinson03523@yahoo.co.uk&#39;</span>,
+                 <span style="color:#e6db74">&#39;UnEaDreSSeMail!38BIZarre@unSiTeBizarre.com&#39;</span>,
+                 <span style="color:#e6db74">&#39;ceciNestPasUneDresseMail&#39;</span>]
 
-adresses_mail = ['christian_martin@gmail.com',
-                 'JaiOublieLarobasegmail.com',
-                 'MarieHutchinson03523@yahoo.co.uk',
-                 'UnEaDreSSeMail!38BIZarre@unSiTeBizarre.com',
-                 'ceciNestPasUneDresseMail']
-
-for mail in adresses_mail:
-    adresse_valide = re.search(r'.+@[a-zA-Z0-9-]+\.[a-zA-Z-.]+', mail)
-    print(&quot;L'adresse {} est {}&quot;.format(mail, 'valide' if adresse_valide else 'invalide'))
-</code></pre>
-
-<pre><code>L'adresse christian_martin@gmail.com est valide
+<span style="color:#66d9ef">for</span> mail <span style="color:#f92672">in</span> adresses_mail:
+    adresse_valide <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;.+@[a-zA-Z0-9-]+\.[a-zA-Z-.]+&#39;</span>, mail)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;L&#39;adresse {} est {}&#34;</span><span style="color:#f92672">.</span>format(mail, <span style="color:#e6db74">&#39;valide&#39;</span> <span style="color:#66d9ef">if</span> adresse_valide <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;invalide&#39;</span>))
+</code></pre></div><pre><code>L'adresse christian_martin@gmail.com est valide
 L'adresse JaiOublieLarobasegmail.com est invalide
 L'adresse MarieHutchinson03523@yahoo.co.uk est valide
 L'adresse UnEaDreSSeMail!38BIZarre@unSiTeBizarre.com est valide
 L'adresse ceciNestPasUneDresseMail est invalide
 </code></pre>
-
-<h2 id="13-1-8-mises-en-pratique-2">13.1.8-  Mises en pratique 2</h2>
-
-<h3 id="a-lecture-d-un-fichier-de-commentaires">a: Lecture d&rsquo;un fichier de commentaires:</h3>
-
-<pre><code class="language-python">import csv
-f = open(&quot;askreddit-2015.csv&quot;, encoding='utf-8')
-csvreader=csv.reader(f)
-posts=list(csvreader)
-posts[0:2]
-</code></pre>
-
-<pre><code>[['Title', 'Score', 'Time', 'Gold', 'NumComs'],
+<h2 id="1318---mises-en-pratique-2">13.1.8-  Mises en pratique 2</h2>
+<h3 id="a-lecture-dun-fichier-de-commentaires">a: Lecture d&rsquo;un fichier de commentaires:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> csv
+f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;askreddit-2015.csv&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>)
+csvreader<span style="color:#f92672">=</span>csv<span style="color:#f92672">.</span>reader(f)
+posts<span style="color:#f92672">=</span>list(csvreader)
+posts[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">2</span>]
+</code></pre></div><pre><code>[['Title', 'Score', 'Time', 'Gold', 'NumComs'],
  ['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?',
   '11510',
   '1433213314.0',
   '1',
   '26195']]
 </code></pre>
-
-<pre><code class="language-python">posts = posts[1:] # pour retirer l'entête
-</code></pre>
-
-<pre><code class="language-python">for post in posts[:10]:
-    print(post)
-</code></pre>
-
-<pre><code>['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?', '11510', '1433213314.0', '1', '26195']
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">posts <span style="color:#f92672">=</span> posts[<span style="color:#ae81ff">1</span>:] <span style="color:#75715e"># pour retirer l&#39;entête</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> post <span style="color:#f92672">in</span> posts[:<span style="color:#ae81ff">10</span>]:
+    <span style="color:#66d9ef">print</span>(post)
+</code></pre></div><pre><code>['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?', '11510', '1433213314.0', '1', '26195']
 [&quot;What's your favorite video that is 10 seconds or less?&quot;, '8656', '1434205517.0', '4', '8479']
 ['What are some interesting tests you can take to find out about yourself?', '8480', '1443409636.0', '1', '4055']
 [&quot;PhD's of Reddit. What is a dumbed down summary of your thesis?&quot;, '7927', '1440188623.0', '0', '13201']
@@ -1097,206 +996,158 @@ posts[0:2]
 ['What would the person who named Walkie Talkies have named other items?', '7501', '1447904351.0', '4', '6720']
 [&quot;People who grew up in a different socioeconomic class as your significant others, what are the notable differences you've noticed and how does it affect your relationship (if at all)?&quot;, '7419', '1440358069.0', '0', '8603']
 </code></pre>
-
 <h3 id="b-compter-les-correspondances">b: Compter les correspondances:</h3>
-
 <p>Dans notre dataset, on va compter le nombre de fois que l&rsquo;on trouve cette expression: &ldquo;of Reddit&rdquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re 
 
-<pre><code class="language-python">import re 
-
-regex = &quot;of Reddit&quot;
-of_reddit_count=0
-for post in posts:
-    if re.search(regex,post[0]) is not None:
-        of_reddit_count +=1 
+regex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;of Reddit&#34;</span>
+of_reddit_count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> post <span style="color:#f92672">in</span> posts:
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(regex,post[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        of_reddit_count <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span> 
         
-print(of_reddit_count)
+<span style="color:#66d9ef">print</span>(of_reddit_count)
+</code></pre></div><pre><code>76
 </code></pre>
-
-<pre><code>76
-</code></pre>
-
 <h3 id="c-lettres-minuscules-et-majuscules">c: Lettres minuscules et majuscules</h3>
-
 <p>Les crochets permettent de matcher à la fois avec les lettres minuscules et les majuscules</p>
-
 <p>Donc si on veut aller chercher toutes les occurences de &lsquo;of reddit&rsquo; et &lsquo;of Reddit&rsquo;dans notre exemple précédent:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re 
 
-<pre><code class="language-python">import re 
-
-regex = &quot;of [Rr]eddit&quot;
-of_reddit_count=0
-for post in posts:
-    if re.search(regex,post[0]) is not None:
-        of_reddit_count +=1 
+regex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;of [Rr]eddit&#34;</span>
+of_reddit_count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> post <span style="color:#f92672">in</span> posts:
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(regex,post[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        of_reddit_count <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span> 
         
-print(of_reddit_count)
+<span style="color:#66d9ef">print</span>(of_reddit_count)
+</code></pre></div><pre><code>102
 </code></pre>
-
-<pre><code>102
-</code></pre>
-
 <h3 id="d-ignorer-les-caractères-spéciaux">d: Ignorer les caractères spéciaux:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#[Serious]</span>
+regex<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;[Serious]&#34;</span>
+regex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\.$&#34;</span> <span style="color:#75715e"># pour avoir que les fins de phrases</span>
 
-<pre><code class="language-python">#[Serious]
-regex=&quot;[Serious]&quot;
-regex = &quot;\.$&quot; # pour avoir que les fins de phrases
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
+<span style="color:#75715e"># utilisation de \ pour ignorer les &#39;[&#39; (crochets) dans notre regex  </span>
+regex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\[Serious\]&#34;</span>
+serious_count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> post <span style="color:#f92672">in</span> posts:
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(regex,post[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        serious_count <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span> 
+<span style="color:#66d9ef">print</span>(serious_count)
+</code></pre></div><pre><code>69
 </code></pre>
-
-<pre><code class="language-python">import re
-
-# utilisation de \ pour ignorer les '[' (crochets) dans notre regex  
-regex = &quot;\[Serious\]&quot;
-serious_count=0
-for post in posts:
-    if re.search(regex,post[0]) is not None:
-        serious_count +=1 
-print(serious_count)
-</code></pre>
-
-<pre><code>69
-</code></pre>
-
 <h3 id="e-améliorer-notre-regexx">e: Améliorer notre regexx:</h3>
-
-<p>Dans notre fichierm on doit aller chercher les tags avec les expressions:
-- (Serious) , (serious), [Serious], [serious]</p>
-
-<pre><code class="language-python">import re
-serious_count=0
-for post in posts:
-    if re.search(&quot;[\[\(][Ss]erious[\]\)]&quot;,post[0]) is not None:
-        serious_count +=1        
-print(serious_count)
+<p>Dans notre fichierm on doit aller chercher les tags avec les expressions:</p>
+<ul>
+<li>(Serious) , (serious), [Serious], [serious]</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+serious_count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> post <span style="color:#f92672">in</span> posts:
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;[\[\(][Ss]erious[\]\)]&#34;</span>,post[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        serious_count <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>        
+<span style="color:#66d9ef">print</span>(serious_count)
+</code></pre></div><pre><code>80
 </code></pre>
-
-<pre><code>80
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+serious_count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> post <span style="color:#f92672">in</span> posts:
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;\([Ss]erious\)&#34;</span>,post[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        serious_count <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;\[[Ss]erious\]&#34;</span>,post[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        serious_count <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(serious_count)
+</code></pre></div><pre><code>80
 </code></pre>
-
-<pre><code class="language-python">import re
-serious_count=0
-for post in posts:
-    if re.search(&quot;\([Ss]erious\)&quot;,post[0]) is not None:
-        serious_count +=1
-    if re.search(&quot;\[[Ss]erious\]&quot;,post[0]) is not None:
-        serious_count +=1
-print(serious_count)
-</code></pre>
-
-<pre><code>80
-</code></pre>
-
 <h3 id="f-combiner-plusieurs-regex">f: Combiner plusieurs regex:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
-<pre><code class="language-python">import re
+serious_start_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+serious_end_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+serious_count_final <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 
-serious_start_count = 0
-serious_end_count = 0
-serious_count_final = 0
-
-for row in posts:
-    if re.search(&quot;^[\(\[][Ss]erious[\)\]]&quot;,row[0]) is not None:  # pour les tags serious au début
-        serious_start_count += 1
-    if re.search(&quot;[\(\[][Ss]erious[\)\]]$&quot;,row[0]) is not None: # pour les tags serious à la fin
-        serious_end_count += 1 
-    if re.search(&quot;^[\(\[][Ss]erious[\)\]] | [\(\[][Ss]erious[\)\]]$&quot;,row[0]) is not None:   # pour les tags serious pour les deux
-        serious_count_final  += 1 
-print(serious_start_count)
-print(serious_end_count)
-print(serious_count_final)
-</code></pre>
-
-<pre><code>69
+<span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> posts:
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;^[\(\[][Ss]erious[\)\]]&#34;</span>,row[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:  <span style="color:#75715e"># pour les tags serious au début</span>
+        serious_start_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;[\(\[][Ss]erious[\)\]]$&#34;</span>,row[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None: <span style="color:#75715e"># pour les tags serious à la fin</span>
+        serious_end_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;^[\(\[][Ss]erious[\)\]] | [\(\[][Ss]erious[\)\]]$&#34;</span>,row[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:   <span style="color:#75715e"># pour les tags serious pour les deux</span>
+        serious_count_final  <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+<span style="color:#66d9ef">print</span>(serious_start_count)
+<span style="color:#66d9ef">print</span>(serious_end_count)
+<span style="color:#66d9ef">print</span>(serious_count_final)
+</code></pre></div><pre><code>69
 11
 73
 </code></pre>
-
 <h3 id="f-modifications-des-chaînes-dans-notre-regex">f: modifications des chaînes dans notre regex:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re 
 
-<pre><code class="language-python">import re 
+posts_new <span style="color:#f92672">=</span> []
 
-posts_new = []
-
-for post in posts:
-    post[0] = re.sub(&quot;[\[\(][Ss]erious[\]\)]&quot;,&quot;[Serious]&quot; , post[0])
-    posts_new.append(post)
+<span style="color:#66d9ef">for</span> post <span style="color:#f92672">in</span> posts:
+    post[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;[\[\(][Ss]erious[\]\)]&#34;</span>,<span style="color:#e6db74">&#34;[Serious]&#34;</span> , post[<span style="color:#ae81ff">0</span>])
+    posts_new<span style="color:#f92672">.</span>append(post)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(posts_new[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">10</span>])
+</code></pre></div><pre><code>[['Title', 'Score', 'Time', 'Gold', 'NumComs'], ['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?', '11510', '1433213314.0', '1', '26195'], [&quot;What's your favorite video that is 10 seconds or less?&quot;, '8656', '1434205517.0', '4', '8479'], ['What are some interesting tests you can take to find out about yourself?', '8480', '1443409636.0', '1', '4055'], [&quot;PhD's of Reddit. What is a dumbed down summary of your thesis?&quot;, '7927', '1440188623.0', '0', '13201'], ['What is cool to be good at, yet uncool to be REALLY good at?', '7711', '1440082910.0', '0', '20325'], ['[Serious] Redditors currently in a relationship, besides dinner and a movie, what are your favorite activities for date night?', '7598', '1439993280.0', '2', '5389'], [&quot;Parents of Reddit, what's something that your kid has done that you pretended to be angry about but secretly impressed or amused you?&quot;, '7553', '1439161809.0', '0', '11520'], ['What is a good subreddit to binge read the All Time Top Posts of?', '7498', '1438822288.0', '0', '2780'], ['What would the person who named Walkie Talkies have named other items?', '7501', '1447904351.0', '4', '6720']]
 </code></pre>
-
-<pre><code class="language-python">print(posts_new[0:10])
-</code></pre>
-
-<pre><code>[['Title', 'Score', 'Time', 'Gold', 'NumComs'], ['What\'s your internet &quot;white whale&quot;, something you\'ve been searching for years to find with no luck?', '11510', '1433213314.0', '1', '26195'], [&quot;What's your favorite video that is 10 seconds or less?&quot;, '8656', '1434205517.0', '4', '8479'], ['What are some interesting tests you can take to find out about yourself?', '8480', '1443409636.0', '1', '4055'], [&quot;PhD's of Reddit. What is a dumbed down summary of your thesis?&quot;, '7927', '1440188623.0', '0', '13201'], ['What is cool to be good at, yet uncool to be REALLY good at?', '7711', '1440082910.0', '0', '20325'], ['[Serious] Redditors currently in a relationship, besides dinner and a movie, what are your favorite activities for date night?', '7598', '1439993280.0', '2', '5389'], [&quot;Parents of Reddit, what's something that your kid has done that you pretended to be angry about but secretly impressed or amused you?&quot;, '7553', '1439161809.0', '0', '11520'], ['What is a good subreddit to binge read the All Time Top Posts of?', '7498', '1438822288.0', '0', '2780'], ['What would the person who named Walkie Talkies have named other items?', '7501', '1447904351.0', '4', '6720']]
-</code></pre>
-
 <h3 id="g-trouver-les-années-avec-4-chiffres-dans-notre-document">g: Trouver les années avec 4 chiffres dans notre document:</h3>
-
 <ul>
-<li>[0-9] rechercher les chiffres en 0 et 9</li>
+<li>
+<p>[0-9] rechercher les chiffres en 0 et 9</p>
+</li>
+<li>
+<p>[a-z] [A-Z] rechercher les lettres entre a et z et entre A et Z</p>
+</li>
+<li>
+<p>[1-2][0-9][0-9][0-9] pour rechercher les années</p>
+</li>
+<li>
+<p>[1-2][0-9]{3} : accolades pour faire des répétitions</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_strings <span style="color:#f92672">=</span> []
 
-<li><p>[a-z] [A-Z] rechercher les lettres entre a et z et entre A et Z</p></li>
-
-<li><p>[1-2][0-9][0-9][0-9] pour rechercher les années</p></li>
-
-<li><p>[1-2][0-9]{3} : accolades pour faire des répétitions</p>
-
-<pre><code class="language-python">year_strings = []
-
-for row in posts: 
-a = re.search(&quot;[1-2][0-9]{3}&quot;,row[0])
-if a  is not None:
-    year_strings.append(a.group())       
+<span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> posts: 
+    a <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;[1-2][0-9]{3}&#34;</span>,row[<span style="color:#ae81ff">0</span>])
+    <span style="color:#66d9ef">if</span> a  <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        year_strings<span style="color:#f92672">.</span>append(a<span style="color:#f92672">.</span>group())       
 year_strings
+</code></pre></div><pre><code>['2000',
+ '1990',
+ '2015',
+ '2014',
+ '1000',
+ '1500',
+ '2015',
+ '2016',
+ '1000',
+ '2016',
+ '2115',
+ '1000',
+ '2015',
+ '2014',
+ '1000',
+ '2001']
 </code></pre>
-
-<p>[&lsquo;2000&rsquo;,
- &lsquo;1990&rsquo;,
- &lsquo;2015&rsquo;,
- &lsquo;2014&rsquo;,
- &lsquo;1000&rsquo;,
- &lsquo;1500&rsquo;,
- &lsquo;2015&rsquo;,
- &lsquo;2016&rsquo;,
- &lsquo;1000&rsquo;,
- &lsquo;2016&rsquo;,
- &lsquo;2115&rsquo;,
- &lsquo;1000&rsquo;,
- &lsquo;2015&rsquo;,
- &lsquo;2014&rsquo;,
- &lsquo;1000&rsquo;,
- &lsquo;2001&rsquo;]</p></li>
-</ul>
-
 <h3 id="h-extraire-toutes-les-années-de-notre-document">h: Extraire toutes les années de notre document:</h3>
-
 <ul>
-<li><p>on peut utiliser la fonction findall() du module re()</p>
-
-<pre><code class="language-python"># findall()
-re.findall(&quot;[a-z]&quot;,&quot;abc123&quot;)
-</code></pre>
-
-<p>[&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;]</p>
-
-<pre><code class="language-python">year_strings='On est déjà en 2017, une année de plus que 2016 et de moins que 2018'
-years=re.findall(&quot;[1-2][0-9]{3}&quot;,year_strings)
-print(years)
-</code></pre>
-
-<p>[&lsquo;2017&rsquo;, &lsquo;2016&rsquo;, &lsquo;2018&rsquo;]</p>
-
-<pre><code class="language-python">
-</code></pre></li>
+<li>on peut utiliser la fonction findall() du module re()</li>
 </ul>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:0">0 <a class="footnote-return" href="#fnref:0"><sup>^</sup></a></li>
-</ol>
-</div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># findall()</span>
+re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#34;[a-z]&#34;</span>,<span style="color:#e6db74">&#34;abc123&#34;</span>)
+</code></pre></div><pre><code>['a', 'b', 'c']
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year_strings<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;On est déjà en 2017, une année de plus que 2016 et de moins que 2018&#39;</span>
+years<span style="color:#f92672">=</span>re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#34;[1-2][0-9]{3}&#34;</span>,year_strings)
+<span style="color:#66d9ef">print</span>(years)
+</code></pre></div><pre><code>['2017', '2016', '2018']
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
           </div>
 
           
@@ -1341,7 +1192,7 @@ print(years)
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/Formation_Python/13-%20Regex%20-%20cours.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cFormation_Python%5c13-%20Regex%20-%20cours.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>
