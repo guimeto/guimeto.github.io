@@ -13,11 +13,11 @@
     </image>
     
     <item>
-      <title>Mann_Kendall</title>
+      <title>Apply Mann-Kendall tests over operational meteorological sensors</title>
       <link>/post/mann_kendall/</link>
       <pubDate>Fri, 29 Jan 2021 10:52:17 -0500</pubDate>
       <guid>/post/mann_kendall/</guid>
-      <description>&lt;h2 id=&#34;netcdf-interpolation-between-grids-using-ckdtree-from-scipy-library&#34;&gt;Netcdf: Interpolation between grids using cKDTree from Scipy library&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;compute-correlation-trends-using-pymannkell-package&#34;&gt;Compute correlation trends using pyMannKell package&lt;/h2&gt;
 &lt;p&gt;In this post, we will see how to use pyMannKendall package functions on meteorological stations&amp;rsquo; time series.&lt;/p&gt;
 &lt;p&gt;We will use in this example daily temperature data from the second generation homogenized dataset of Environment and Climate Change Canada developed by Vincent et al. 2012.&lt;/p&gt;
 &lt;p&gt;We will directly work with monthly indices of daily mean temperature.&lt;/p&gt;
