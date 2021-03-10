@@ -5,12 +5,384 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Feb 2021 10:41:40 -0500</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 10 Mar 2021 15:02:28 -0500</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Extreme_Temperature</title>
+      <link>/post/extreme_temperature/</link>
+      <pubDate>Wed, 10 Mar 2021 15:02:28 -0500</pubDate>
+      <guid>/post/extreme_temperature/</guid>
+      <description>&lt;h2 id=&#34;compute-extreme-temperature-indices&#34;&gt;Compute extreme temperature indices&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;evaluation-of-extreme-indices&#34;&gt;Evaluation of extreme indices&lt;/h3&gt;
+&lt;p&gt;In order to provide some insight into changes in extreme climate events (e.g., dry or wet spells or
+cold/warm spells, etc.), a set of descriptive indices of extremes could be developed.&lt;/p&gt;
+&lt;p&gt;These indices are helpful for monitoring climate change itself and can be used as benchmarks for evaluating
+climate change scenarios (see the STARDEX project, 2004; Gachon et al., 2005).
+The indices describe particular characteristics of extremes, including frequency, amplitude/intensity and
+persistence/duration.&lt;/p&gt;
+&lt;p&gt;In the present post, some air temperature indices describe cold/warm events (ex. Tmax10pb and Tmin10pb/Tmax90p and Tmin90p,), the frost season length, the frost/thaw cycle, or the growing season length (GSL).
+The GSL is defined as the number of days between the last and first frost (within an approximately 5°C range), calculated on an annual basis, and describes a period roughly between May and October. Other temperature indices are based on a distribution based, period-fixed, thresholds, such as the 10th and 90th percentiles of daily minimum and maximum temperature.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;datasets-used&#34;&gt;Datasets used&lt;/h3&gt;
+&lt;p&gt;We will compute these extreme temperature indices using daily temperature data from the second generation homogenized dataset of Environment and Climate Change Canada developed by Vincent et al. 2012.&lt;/p&gt;
+&lt;p&gt;We will first load and clean precipitation timeseries folowing this post:  &lt;a href=&#34;https://www.guillaumedueymes.com/post/eccc_temp/&#34;&gt;https://www.guillaumedueymes.com/post/eccc_temp/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1---lets-import-python-librairies&#34;&gt;1-  Let&amp;rsquo;s import Python librairies&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; datetime &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; date
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; calendar
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; dateutil.relativedelta &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; relativedelta
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; warnings
+warnings&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filterwarnings(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ignore&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will first work with one station from this document:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;dataframe &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_excel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;./Homog_Temperature_Stations.xls&amp;#34;&lt;/span&gt;, skiprows &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;station &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dataframe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+station
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Prov                   BC
+Nom de station    AGASSIZ
+stnid             1100120
+année déb.           1893
+mois déb.               1
+année fin.           2018
+mois fin.               9
+lat (deg)           49.25
+long (deg)        -121.77
+élév (m)               15
+stns jointes            n
+RCS                     n
+%Miss                 1.6
+Name: 0, dtype: object
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2---loading-source-file&#34;&gt;2 - Loading source file&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s load time serie ofr AGASSIZ&amp;rsquo;s station and clean the data. We will load daily temperature from 1981 to 2017:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;stnid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1100120&amp;#39;&lt;/span&gt;   
+path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;F:/DATA/Donnees_Stations/2nd_generation_V2019/Homog_daily_mean_temp_v2019&amp;#39;&lt;/span&gt;
+varin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dm&amp;#39;&lt;/span&gt;  
+f1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(path&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(varin)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;str(stnid)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.txt&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;)
+f2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;./tmp.txt&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; line &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; f1:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; word &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; line:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; word &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;M&amp;#39;&lt;/span&gt;:
+                f2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(word&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;M&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;))
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; word &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;:
+                f2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(word&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;))                    
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                f2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(word)
+f1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+f2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()      
+df_station &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;./tmp.txt&amp;#39;&lt;/span&gt;, delim_whitespace&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True, skiprows &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;))
+df_station&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;columns &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Month&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D1&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D2&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D3&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D4&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D5&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D6&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D7&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D8&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D9&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D10&amp;#39;&lt;/span&gt;,
+                                  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D11&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D12&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D13&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D14&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D15&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D16&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D17&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D18&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D19&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D20&amp;#39;&lt;/span&gt;,
+                                  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D21&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D22&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D23&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D24&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D25&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D26&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D27&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D28&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D29&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D30&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D31&amp;#39;&lt;/span&gt;]
+     
+&lt;span style=&#34;color:#75715e&#34;&gt;#os.remove(&amp;#34;./tmp.txt&amp;#34;)&lt;/span&gt;
+   
+   &lt;span style=&#34;color:#75715e&#34;&gt;# nettoyage des valeurs manquantes &lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:  
+    df_station &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df_station&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;E&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;}, regex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+       &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;: 
+    df_station &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df_station&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;}, regex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+       &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:     
+    df_station &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df_station&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-9999.9&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;}, regex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+       &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:     
+    df_station &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df_station&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace({&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9999.9&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;}, regex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+       &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;    
+    
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; col &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt;  df_station&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;columns[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:]:
+       df_station[col] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numeric(df_station[col], errors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;coerce&amp;#39;&lt;/span&gt;)  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;We will clean this dataset in order to only have daly values timeserie:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;yearmin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1980&lt;/span&gt;                               
+yearmax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt;                                   
+m_start &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  df_station[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Month&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(df_station[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; yearmin)]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;min()
+m_end   &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  df_station[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Month&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(df_station[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; yearmax)]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;max()
+d_end &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; calendar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;monthrange(yearmax, m_end)[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]                     
+
+tmp_tt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [ ] 
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; year &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(yearmin,yearmax&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):    &lt;span style=&#34;color:#75715e&#34;&gt;### Loop over years&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; month &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;):
+        df &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        last_day &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; calendar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;monthrange(year, month)[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] 
+        tmin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df_station&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loc[(df_station[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Year&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; year) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; (df_station[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Month&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; month)]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:last_day&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values
+           
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(tmin) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty((calendar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;monthrange(year,month)[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]))
+            a[:] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+            df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(a)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame(tmin&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T)
+               
+        start &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; date(year, month, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+        end &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;   date(year, month, last_day)
+        delta&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start) 
+        nb_days &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; delta&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;days &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; 
+        rng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date_range(start, periods&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nb_days, freq&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D&amp;#39;&lt;/span&gt;)          
+        df[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; rng
+        df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;]
+        tmp_tt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(df)
+           
+tmp_tt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat(tmp_tt) 
+tmoy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;: tmp_tt[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;], &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmoy&amp;#39;&lt;/span&gt;: tmp_tt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]}, columns &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmoy&amp;#39;&lt;/span&gt;]) 
+tmoy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tmoy[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;]
+tmoy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tmoy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;drop([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;datetime&amp;#34;&lt;/span&gt;], axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Quick plot:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rcParams[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;figure.figsize&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;]        
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(tmoy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index, tmoy[:],  label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Temerature Station&amp;#39;&lt;/span&gt;, linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, c&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Daily mean temperature: from &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(yearmin, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; et &amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(yearmax, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y&amp;#39;&lt;/span&gt;), fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;, weight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;semibold&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Time&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;, weight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;semibold&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Celcius&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;, weight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;semibold&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_13_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3---compute-monthly-extreme-temperature-indices&#34;&gt;3 - Compute monthly extreme temperature indices&lt;/h2&gt;
+&lt;p&gt;We will compute  extreme temperature indices presented in previous table.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Tmax90p&lt;/span&gt;(S):
+     &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+     ind_tmax90p&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+     S_no_nan &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; S[&lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isnan(S)]
+     N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S)
+     N2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S_no_nan)
+&lt;span style=&#34;color:#75715e&#34;&gt;# Nom: 90eme centile de la temperature maximale quotidienne&lt;/span&gt;
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ((N2&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;N) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;): 
+             ind_tmax90p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+             ind_tmax90p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:    
+            s_sorted &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort(S_no_nan)
+     &lt;span style=&#34;color:#75715e&#34;&gt;#  La formule de Blom&amp;#39;s pour le calculer de la probabilite empirique afin dobtenir m(=rang ou index de la matrice) &lt;/span&gt;
+            m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (N2&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.25&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.9&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;) 
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;remainder(m,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                m_floor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;floor(m)
+                m_ceil&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ceil(m)
+                slope&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(s_sorted[int(m_ceil)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;s_sorted[int(m_floor)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(m_ceil&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;m_floor)
+                ind_tmax90p&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;s_sorted[int(m_floor)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;slope&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(m&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;m_floor)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: 
+                ind_tmax90p&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;s_sorted[int(m)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;];
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+         ind_tmax90p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+         ind_tmax90p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ind_tmax90p
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Tmin10p&lt;/span&gt;(S):
+     &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+     ind_tmin10p&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+     S_no_nan &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; S[&lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isnan(S)]
+     N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S)
+     N2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S_no_nan)
+&lt;span style=&#34;color:#75715e&#34;&gt;# Nom: 90eme centile de la temperature maximale quotidienne&lt;/span&gt;
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ((N2&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;N) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;): 
+             ind_tmin10p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+             ind_tmin10p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:    
+            s_sorted &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort(S_no_nan)
+     &lt;span style=&#34;color:#75715e&#34;&gt;#  La formule de Blom&amp;#39;s pour le calculer de la probabilite empirique afin dobtenir m(=rang ou index de la matrice) &lt;/span&gt;
+            m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (N2&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.25&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;) 
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;  np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;remainder(m,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                m_floor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;floor(m)
+                m_ceil&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ceil(m)
+                slope&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(s_sorted[int(m_ceil)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;s_sorted[int(m_floor)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(m_ceil&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;m_floor)
+                ind_tmin10p&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;s_sorted[int(m_floor)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;slope&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(m&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;m_floor)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: 
+                ind_tmin10p&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;s_sorted[int(m)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;];
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+         ind_tmin10p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+         ind_tmin10p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ind_tmin10p            
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DGJ&lt;/span&gt;(S):
+     &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+     temp_ref &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+     ind_DGJ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+     S_no_nan &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; S[&lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isnan(S)]
+     N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S)
+     N2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S_no_nan)
+&lt;span style=&#34;color:#75715e&#34;&gt;# Nom: Calcul du DGJ par rapport à une température de référence temp_ref&lt;/span&gt;
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ((N2&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;N) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;): 
+         ind_DGJ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+         ind_DGJ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:    
+         SS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; S[S &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; temp_ref]        
+         ind_DGJ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nansum(SS)  
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ind_DGJ  
+    
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;GSL&lt;/span&gt;(s):
+    N&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(s)
+    i&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    B_1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+    B_2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;(i&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (s[i]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;):
+            B_1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        
+        i&lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    g&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;212&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;(g&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):       
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(s[g]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[g&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[g&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[g&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[g&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[g&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; ):
+            B_2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;g&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;      
+        g&lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;  
+         
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(B_1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;B_2):
+        gsl&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        gsl&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;B_2&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;B_1
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; gsl
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MOY&lt;/span&gt;(S):
+     &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+     ind_moy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+     S_no_nan &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; S[&lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isnan(S)]
+     N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S)
+     N2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(S_no_nan)
+&lt;span style=&#34;color:#75715e&#34;&gt;# Nom: 90eme centile de la temperature maximale quotidienne&lt;/span&gt;
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:         
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ((N2&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;N) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;): 
+             ind_moy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+             ind_moy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:    
+             ind_moy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nanmean(S_no_nan)  
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+         ind_moy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+         ind_moy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan
+     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ind_moy      
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can put all this fonctions in a common module, it will be easier to load an apply functions:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Indices_Temperatures
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;list_indices &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmax90p&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmin10p&amp;#39;&lt;/span&gt;]   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;resamp_temp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ind &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; list_indices:   
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ind &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MOY&amp;#39;&lt;/span&gt;:
+       indice &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MOY  
+       indice_out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MOY&amp;#39;&lt;/span&gt;     
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; ind &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmax90p&amp;#39;&lt;/span&gt;:
+       indice &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Tmax90p
+       indice_out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmax90p&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; ind &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmin10p&amp;#39;&lt;/span&gt;:
+       indice &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Tmin10p
+       indice_out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmin10p&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; ind &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DGJ&amp;#39;&lt;/span&gt;:
+       indice &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DGJ
+       indice_out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DGJ&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; ind &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;GSL&amp;#39;&lt;/span&gt;:
+       indice &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;GSL
+       indice_out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;GSL&amp;#39;&lt;/span&gt;         
+    resamp_temp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(tmoy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;resample(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;M&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;agg([indice]))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;monthly_indices &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat(resamp_temp, axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+monthly_indices&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;columns &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; monthly_indices&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;columns&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;droplevel(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;ul&gt;
+&lt;li&gt;We now can make some quick plots:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pylab &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rcParams[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;figure.figsize&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;]        
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(monthly_indices&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index, monthly_indices[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmax90p&amp;#39;&lt;/span&gt;],  label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;90th percentile of daily mean temperature&amp;#39;&lt;/span&gt;, linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, c&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(monthly_indices&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index, monthly_indices[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tmin10p&amp;#39;&lt;/span&gt;],  label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;10th percentile of daily mean temperature&amp;#39;&lt;/span&gt;, linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, c&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Monthly indices: from &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(yearmin, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; et &amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(yearmax, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y&amp;#39;&lt;/span&gt;), fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;, weight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;semibold&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Time&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;, weight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;semibold&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Celcius&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;, weight&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;semibold&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend()
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_23_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; seaborn &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; sns
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt 
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+sns&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;boxplot(x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;monthly_indices&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month, y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Tmax90p&amp;#34;&lt;/span&gt;, data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;monthly_indices, palette&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Set1&amp;#34;&lt;/span&gt;) 
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;90th percentile of daily mean temperature in AGASSIZ from 1980 to 2017&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Celcius&amp;#39;&lt;/span&gt;)
+
+figure &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_figure()    
+figure&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_size_inches(&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;) 
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_24_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4---compute-saisonal-extreme-precipitation-indices&#34;&gt;4 - Compute saisonal extreme precipitation indices&lt;/h2&gt;
+&lt;p&gt;In this section, we will compute seasonal mean temperature for each year from 1981 to 2017 using Indices_Temperatures.MOY fonction.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#################################### Calcul des indices saisonniers  &lt;/span&gt;
+djf &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+mam &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+son&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+jja&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+incr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; date(&lt;span style=&#34;color:#ae81ff&#34;&gt;1981&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+end &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; incr &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; end:
+    current_year &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(incr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;year)
+    last_year &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(incr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;year&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+        dec &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tmoy[last_year][np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;in1d(tmoy[last_year]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month, [&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;])]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+        rng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date_range(last_year, periods&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt;, freq&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D&amp;#39;&lt;/span&gt;)
+        dec &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;: rng, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;variable&amp;#39;&lt;/span&gt;: [np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nan]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt;}, columns &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;datetime&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;variable&amp;#39;&lt;/span&gt;]) 
+                
+    j_f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tmoy[current_year][np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;in1d(tmoy[current_year]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])]
+            
+    djf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MOY(dec&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(j_f)))            
+    mam&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MOY((tmoy[current_year][np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;in1d(tmoy[current_year]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month, [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])])))
+    jja&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MOY((tmoy[current_year][np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;in1d(tmoy[current_year]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month, [&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;])])))
+    son&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MOY((tmoy[current_year][np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;in1d(tmoy[current_year]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month, [&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;])])))            
+    
+    incr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; incr &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; relativedelta(years&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;TIME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1981&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    TIME&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(y)
+df_season &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Date&amp;#39;&lt;/span&gt;: TIME,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Winter&amp;#39;&lt;/span&gt;: djf, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Spring&amp;#39;&lt;/span&gt;:mam, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Summer&amp;#39;&lt;/span&gt;:jja, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Autumn&amp;#39;&lt;/span&gt;:son}, 
+                         columns &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Date&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Winter&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Spring&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Summer&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Autumn&amp;#39;&lt;/span&gt;]) 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df_season&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_index(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Date&amp;#34;&lt;/span&gt;, inplace &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;df_season[[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Winter&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Spring&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Summer&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Autumn&amp;#34;&lt;/span&gt;]]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(kind&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;line&amp;#34;&lt;/span&gt;)
+ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; Season mean temperature / season: Agassiz&amp;#34;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Celcius&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Time&amp;#39;&lt;/span&gt;) 
+figure &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_figure()    
+figure&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_size_inches(&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;) 
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_29_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5---compute-annual-extreme-temperature-indices&#34;&gt;5 - Compute annual extreme temperature indices&lt;/h2&gt;
+&lt;p&gt;In this last exemple, we will compute the growing season length (GSL) for each year in our Agassiz&amp;rsquo;s daily mean temperature time serie. The GSL is defined as the number of days between the last and first frost for each year.&lt;/p&gt;
+&lt;p&gt;We will call Indices_Temperatures.GSL fonction.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;annual &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+df_annual &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+incr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; date(&lt;span style=&#34;color:#ae81ff&#34;&gt;1980&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+end &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; incr &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; end:
+    current_year &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(incr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;year)
+    annual&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(Indices_Temperatures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;GSL(tmoy[current_year]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values))         
+    incr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; incr &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; relativedelta(years&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;TIME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1980&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    TIME&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(y) 
+df_annual &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Date&amp;#39;&lt;/span&gt;: TIME,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Growing season length&amp;#39;&lt;/span&gt;: annual}, columns &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Date&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Growing season length&amp;#39;&lt;/span&gt;]) 
+df_annual&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; df_annual[df_annual &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axes()
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Date&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Growing season length&amp;#39;&lt;/span&gt;, data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;df_annual, marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;o&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mediumvioletred&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Annual growing season length in AGASSIZ from 1980 to 2017&amp;#39;&lt;/span&gt;)
+ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Number of days&amp;#39;&lt;/span&gt;)
+figure &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_figure()    
+figure&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_size_inches(&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;) 
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;output_35_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Compute Extreme Precipitation Indices using Python</title>
